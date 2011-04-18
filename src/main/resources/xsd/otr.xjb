@@ -6,7 +6,7 @@
 
    	<jxb:bindings schemaLocation="otr.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="de.hekit.otr.data.jaxb"/>
+            <jxb:package name="net.sf.otrcutmp4.data.jaxb"/>
         </jxb:schemaBindings>
     </jxb:bindings>
         
