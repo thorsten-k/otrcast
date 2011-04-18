@@ -1,7 +1,6 @@
 package net.sf.otrcutmp4;
 
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
@@ -18,7 +17,6 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 public class HqAviToMp4
 {
