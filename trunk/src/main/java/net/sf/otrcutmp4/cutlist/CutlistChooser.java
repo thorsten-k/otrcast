@@ -37,7 +37,10 @@ public class CutlistChooser
 		logger.info("\tMultiple selections (e.g. '1,3') result in multiple output files");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			chooseCutlist(vf);
+			if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList())
+			{
+				chooseCutlist(vf);
+			}
 		}
 		return vFiles;
 	}

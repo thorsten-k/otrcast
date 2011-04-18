@@ -1,14 +1,13 @@
 package net.sf.otrcutmp4.test;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 import junit.framework.TestCase;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.batch.CutGenerator;
+import net.sf.otrcutmp4.batch.RenameGenerator;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
@@ -34,9 +33,9 @@ public class TestBatchProcessor extends TestCase
 		assertEquals(CutGenerator.getSecond(12342.1),"12342.10");
 	}
 	
-	public void batchGenerator() throws FileNotFoundException
+	public void cutGenerator() throws FileNotFoundException
 	{
-		String xmlIn = config.getString("xml.test.3.avi");
+		String xmlIn = config.getString("xml.test.cut.3");
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
@@ -44,16 +43,14 @@ public class TestBatchProcessor extends TestCase
 		test.create(vFiles);
 	}
 	
-	public void path()
+	public void renameGenerator() throws FileNotFoundException
 	{
-		File fFixed = new File(".");
-		File fRelative = new File(".","target/x1.txt");
+		String xmlIn = config.getString("xml.test.rename.3");
+		logger.debug("Loading from file: "+xmlIn);
+		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		RelativePathFactory rpf = new RelativePathFactory();
-		
-		logger.debug("Current: "+fFixed.getAbsolutePath());
-		logger.debug("Absolute: "+fRelative.getAbsolutePath());
-		logger.debug("Relative: "+rpf.relativate(fFixed.getAbsolutePath(), fRelative.getAbsolutePath()));
+		RenameGenerator test = new RenameGenerator(config);
+		test.create(vFiles);
 	}
 	
 	public void setConfig(Configuration config) {this.config = config;}
@@ -70,7 +67,9 @@ public class TestBatchProcessor extends TestCase
 		
 		TestBatchProcessor test = new TestBatchProcessor();
 		test.setConfig(config);
-//		test.batchGenerator();
+		
 		test.testBatchSecond();
+		
+		test.renameGenerator();
 	}
 }

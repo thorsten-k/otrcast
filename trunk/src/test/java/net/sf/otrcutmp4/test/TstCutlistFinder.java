@@ -40,9 +40,9 @@ public class TstCutlistFinder
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
 	}
 	
-	public void chooseCl() throws FileNotFoundException, InterruptedException
+	public void chooseCl(String type) throws FileNotFoundException, InterruptedException
 	{
-		String xmlIn = config.getString("xml.test.2.avi");
+		String xmlIn = config.getString("xml.test."+type+".2");
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
@@ -50,7 +50,7 @@ public class TstCutlistFinder
 		vFiles = chooser.chooseCutlists(vFiles);
 		JaxbUtil.debug(this.getClass(),vFiles);
 		
-		String xmlOut = config.getString("xml.test.3.avi");
+		String xmlOut = config.getString("xml.test."+type+".3");
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
 	}
 	
@@ -66,7 +66,8 @@ public class TstCutlistFinder
 		
 		TstCutlistFinder test = new TstCutlistFinder(config);
 //		test.findCl("cut");
-		test.findCl("rename");
-//		test.chooseCl();
+//		test.findCl("rename");
+//		test.chooseCl("cut");
+		test.chooseCl("rename");
 	}
 }
