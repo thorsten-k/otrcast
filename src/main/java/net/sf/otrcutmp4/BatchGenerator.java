@@ -2,9 +2,13 @@ package net.sf.otrcutmp4;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
+import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
+import net.sf.exlp.util.os.shell.ShellCmdCopy;
+import net.sf.exlp.util.os.shell.ShellCmdRm;
 import net.sf.otrcutmp4.data.jaxb.Cut;
 import net.sf.otrcutmp4.data.jaxb.CutList;
 import net.sf.otrcutmp4.data.jaxb.CutListsSelected;
@@ -21,13 +25,19 @@ public class BatchGenerator
 	
 	private File dirHqAvi,dirTmp,dirHqMp4,dirTools,dirBat;
 	private ExlpTxtWriter txt;
-	private DecimalFormat df;
+	private static DecimalFormat df;
 	
 	private String cmdMp4Box,cmdLame,cmdFfmpeg, cmdFaac;
 	private RelativePathFactory rpf;
 	
+	private ShellCmdCopy shellCopy;
+	private ShellCmdRm shellRm;
+	
 	public BatchGenerator(Configuration config)
 	{
+		shellCopy = new ShellCmdCopy();
+		shellRm = new ShellCmdRm();
+		
 		dirHqAvi = new File(config.getString(OtrConfig.dirHqAvi));
 		dirTmp = new File(config.getString(OtrConfig.dirTmp));
 		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));
@@ -39,7 +49,6 @@ public class BatchGenerator
 		logger.debug("Creating Batch in "+dirBat.getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
-		df = new DecimalFormat("0");
 		rpf = new RelativePathFactory();
 		
 		cmdMp4Box = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolMp4Box)));
@@ -68,6 +77,8 @@ public class BatchGenerator
 		
 		txt.add("echo Processing: "+vf.getAvi().getValue());
 		txt.add("");
+		try {txt.add(shellRm.rmDir(rpf.relativate(dirBat, dirTmp), true));}
+		catch (ExlpUnsupportedOsException e) {logger.error(e);}
 		rawExtract(vf);
 		aac();
 		createMp4(sMp4);
@@ -112,7 +123,21 @@ public class BatchGenerator
 		if(cl.isSetFileName()){fileName=cl.getFileName().getValue();}
 		
 		StringBuffer sb = new StringBuffer();
-		if(cl.getCut().size()>0)
+		if(cl.getCut().size()==1)
+		{
+			String sFrom = rpf.relativate(dirBat, new File(dirTmp,index+"-1.mp4"));
+			String sTo = rpf.relativate(dirBat, new File(dirHqMp4,fileName+".mp4"));
+			
+			try {txt.add(shellCopy.copyFile(sFrom, sTo));}
+			catch (ExlpUnsupportedOsException e)
+			{
+				logger.error(e);
+				logger.error("File was not copied! ");
+				logger.error("\tFrom: "+sFrom);
+				logger.error("\tTo  : "+sTo);
+			}
+		}
+		else if(cl.getCut().size()>1)
 		{
 			sb.append(cmdMp4Box).append(" ");
 			sb.append(rpf.relativate(dirBat, new File(dirTmp,index+"-1.mp4")));
@@ -136,8 +161,16 @@ public class BatchGenerator
 		{
 			if(cut.isSetInclude())
 			{
-				String sCut = rpf.relativate(dirBat, new File(dirTmp,index+"-"+counter+".mp4"));
-				txt.add(cmdFfmpeg+" -ss "+df.format(cut.getStart())+" -t "+df.format(cut.getDuration())+" -i "+sMp4+" -vcodec copy -acodec copy "+sCut);
+				StringBuffer sb = new StringBuffer();
+				sb.append(cmdFfmpeg);
+				sb.append(" -ss ").append(getSecond(cut.getStart()));
+				sb.append(" -t ").append(getSecond(cut.getDuration()));
+				sb.append(" -i "+sMp4);
+				sb.append(" -vcodec copy");
+				sb.append(" -acodec copy");
+				sb.append(" ").append(rpf.relativate(dirBat, new File(dirTmp,index+"-"+counter+".mp4")));
+				
+				txt.add(sb.toString());
 				counter++;
 			}
 		}
@@ -145,7 +178,7 @@ public class BatchGenerator
 	
 	private void createMp4(String sMp4)
 	{
-		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
+		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw_video.h264"));
 		String sAac = rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
 		
 		txt.add(cmdMp4Box+" -add "+sH264+" -add "+sAac+" "+sMp4);
@@ -155,9 +188,20 @@ public class BatchGenerator
 	{
 		String sIn = rpf.relativate(dirBat, new File(dirHqAvi,vf.getAvi().getValue()));
 		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
-		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
+		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw.mp3"));
 		
 		txt.add(cmdMp4Box+" -aviraw video "+sIn+" -out "+sH264);
 		txt.add(cmdMp4Box+" -aviraw audio "+sIn+" -out "+sMp3);
+	}
+	
+	public static synchronized String getSecond(double d)
+	{
+		if(df==null)
+		{
+			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+			dfs.setDecimalSeparator('.');
+			df = new DecimalFormat("0.00",dfs);
+		}
+		return df.format(d);
 	}
 }
