@@ -1,0 +1,71 @@
+package net.sf.otrcutmp4.test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.cutlist.CutlistChooser;
+import net.sf.otrcutmp4.cutlist.CutlistFinder;
+import net.sf.otrcutmp4.data.jaxb.VideoFiles;
+
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+public class TstCutlistFinder
+{ 
+	static Log logger = LogFactory.getLog(TstCutlistFinder.class);
+	
+	private Configuration config;
+	
+	public TstCutlistFinder(Configuration config)
+	{
+		this.config=config;
+	} 
+	
+	public void findCl() throws FileNotFoundException
+	{
+		String xmlIn = config.getString("xml.test.1.avi");
+		logger.debug("Loading from file: "+xmlIn);
+		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
+		
+		CutlistFinder finder = new CutlistFinder();
+		vFiles = finder.searchCutlist(vFiles);
+		JaxbUtil.debug(this.getClass(),vFiles);
+		
+		String xmlOut = config.getString("xml.test.2.avi");
+		JaxbUtil.save(new File(xmlOut), vFiles, true);
+	}
+	
+	public void chooseCl() throws FileNotFoundException, InterruptedException
+	{
+		String xmlIn = config.getString("xml.test.2.avi");
+		logger.debug("Loading from file: "+xmlIn);
+		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
+		
+		CutlistChooser chooser = new CutlistChooser();
+		vFiles = chooser.chooseCutlists(vFiles);
+		JaxbUtil.debug(this.getClass(),vFiles);
+		
+		String xmlOut = config.getString("xml.test.3.avi");
+		JaxbUtil.save(new File(xmlOut), vFiles, true);
+	}
+	
+	public static void main(String args[]) throws Exception
+	{
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("src/test/resources/config");
+			loggerInit.init();
+		
+		ConfigLoader.add("src/test/resources/properties/user.otr.properties");
+		ConfigLoader.add("src/test/resources/properties/user.properties");
+		Configuration config = ConfigLoader.init();
+		
+		TstCutlistFinder test = new TstCutlistFinder(config);
+//		test.findCl();
+		test.chooseCl();
+	}
+}
