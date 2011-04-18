@@ -13,9 +13,14 @@
 		<level value="DEBUG"/>
 		<appender-ref ref="A1"/>
 	</logger>
+	
+	<logger name="net.sf.otrcutmp4" additivity="false">
+		<level value="DEBUG"/>
+		<appender-ref ref="A1"/>
+	</logger>
     
 	<root>
-		<priority value="DEBUG" />
+		<priority value="INFO" />
 		<appender-ref ref="A1" />
 	</root>
 

@@ -29,13 +29,24 @@ public class AviProcessor
 		VideoFiles result = new VideoFiles();
 		for(File f : dirHqAvi.listFiles())
 		{
-			Avi avi = new Avi();
-			avi.setValue(f.getName());
+			String fileName = f.getName();
+			int index = fileName.lastIndexOf(".avi");
+			if(index>0)
+			{
+				Avi avi = new Avi();
+				avi.setValue(f.getName());
+				
+				VideoFile vf = new VideoFile();
+				vf.setAvi(avi);
+				
+				result.getVideoFile().add(vf);
+			}
+			else
+			{
+				logger.warn("File "+f.getName()+" is not a .avi-file. Ignoring");
+			}
 			
-			VideoFile vf = new VideoFile();
-			vf.setAvi(avi);
 			
-			result.getVideoFile().add(vf);
 		}
 		
 		StringBuffer sb = new StringBuffer();

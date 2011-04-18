@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import junit.framework.TestCase;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.RelativePathFactory;
@@ -14,16 +15,23 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
-public class TstBatchProcessor
+public class TestBatchProcessor extends TestCase
 { 
-	static Log logger = LogFactory.getLog(TstBatchProcessor.class);
+	static Log logger = LogFactory.getLog(TestBatchProcessor.class);
 	
 	private Configuration config;
-	
-	public TstBatchProcessor(Configuration config)
+
+	public TestBatchProcessor()
 	{
-		this.config=config;
+	}
+	
+	public void testBatchSecond()
+	{		
+		assertEquals(BatchGenerator.getSecond(123.999),"124.00");
+		assertEquals(BatchGenerator.getSecond(123),"123.00");
+		assertEquals(BatchGenerator.getSecond(2.0),"2.00");
+		assertEquals(BatchGenerator.getSecond(2.1),"2.10");
+		assertEquals(BatchGenerator.getSecond(12342.1),"12342.10");
 	}
 	
 	public void batchGenerator() throws FileNotFoundException
@@ -48,6 +56,8 @@ public class TstBatchProcessor
 		logger.debug("Relative: "+rpf.relativate(fFixed.getAbsolutePath(), fRelative.getAbsolutePath()));
 	}
 	
+	public void setConfig(Configuration config) {this.config = config;}
+	
 	public static void main(String args[]) throws Exception
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
@@ -58,8 +68,9 @@ public class TstBatchProcessor
 		ConfigLoader.add("src/test/resources/properties/user.properties");
 		Configuration config = ConfigLoader.init();
 		
-		TstBatchProcessor test = new TstBatchProcessor(config);
+		TestBatchProcessor test = new TestBatchProcessor();
+		test.setConfig(config);
 //		test.batchGenerator();
-		test.path();
+		test.testBatchSecond();
 	}
 }

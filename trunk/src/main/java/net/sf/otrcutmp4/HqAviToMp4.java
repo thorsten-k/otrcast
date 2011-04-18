@@ -41,8 +41,9 @@ public class HqAviToMp4
         String configFile = line.getOptionValue("config",OtrConfig.otrConfigName);
         
         if(line.hasOption("help")) {printHelp();}
- //       initLogger("log4j.debug.xml");
-        initLogger("log4j.xml");
+        
+        if(line.hasOption("debug")) {initLogger("log4j.debug.xml");}
+        else{initLogger("log4j.xml");}      
         
         if(line.hasOption("createConfig")){otrConfig.createDefault(configFile);}
         
@@ -71,6 +72,7 @@ public class HqAviToMp4
 		Option oHelp = new Option("help", "Print this message" );
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
+		Option oDebug = new Option("debug", "Debug output");
 		
 		Option oConfig  = OptionBuilder.withArgName("FILENAME")
 						  .hasArg()
@@ -79,6 +81,7 @@ public class HqAviToMp4
 		
 		Options options = new Options();
 		options.addOption(oHelp);
+		options.addOption(oDebug);
 		options.addOption(oCreate);
 		options.addOption(oDir);
 		options.addOption(oConfig);
