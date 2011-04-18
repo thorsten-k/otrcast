@@ -157,12 +157,6 @@ public class BatchGenerator
 		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
 		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
 		
-		logger.warn("***");
-		logger.warn("Base: "+dirBat.getAbsolutePath());
-		logger.warn("Absolute: "+(new File(dirHqAvi,vf.getAvi().getValue())).getAbsolutePath());
-		logger.warn("Relative: "+sIn);
-		logger.warn("***");
-		
 		txt.add(cmdMp4Box+" -aviraw video "+sIn+" -out "+sH264);
 		txt.add(cmdMp4Box+" -aviraw audio "+sIn+" -out "+sMp3);
 	}

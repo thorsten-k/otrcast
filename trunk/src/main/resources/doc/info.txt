@@ -11,3 +11,23 @@ git-96\ffmpeg -ss 186 5 -t 1249 -i "test.mp4" -vcodec copy -acodec copy 1.mp4
 
 MP4Box.exe 1.mp4 -cat 2.mp4 -cat 3.mp4 -out result.mp4
 
+
+Tool: MP4Box
+URL: http://gpac.wp.institut-telecom.fr/mp4box/
+Binaray: http://www.rarewares.org/mp3-lame-bundle.php
+Version: 0.4.6 rev2735 
+
+Tool: Lame
+URL: http://lame.sourceforge.net
+Binary: http://www.rarewares.org/mp3-lame-bundle.php
+Version: 3.98.4
+
+Tools: Freeware Advanced Audio Coder
+URL: http://www.audiocoding.com
+Binary:http://www.rarewares.org/aac-encoders.php
+Version: 1.28
+
+Tool: ffmpeg
+URL: http://www.ffmpeg.org/
+Binary: http://hawkeye.arrozcru.org/
+Version: FFmpeg git-c967860 32-bit Static
