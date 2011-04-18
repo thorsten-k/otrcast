@@ -1,12 +1,7 @@
 package net.sf.otrcutmp4.test;
 
-import java.io.File;
-
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.AviProcessor;
-import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.FilenameUtils;
