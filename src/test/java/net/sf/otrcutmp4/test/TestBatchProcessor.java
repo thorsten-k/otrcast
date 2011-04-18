@@ -8,7 +8,7 @@ import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.BatchGenerator;
+import net.sf.otrcutmp4.batch.CutGenerator;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
@@ -27,11 +27,11 @@ public class TestBatchProcessor extends TestCase
 	
 	public void testBatchSecond()
 	{		
-		assertEquals(BatchGenerator.getSecond(123.999),"124.00");
-		assertEquals(BatchGenerator.getSecond(123),"123.00");
-		assertEquals(BatchGenerator.getSecond(2.0),"2.00");
-		assertEquals(BatchGenerator.getSecond(2.1),"2.10");
-		assertEquals(BatchGenerator.getSecond(12342.1),"12342.10");
+		assertEquals(CutGenerator.getSecond(123.999),"124.00");
+		assertEquals(CutGenerator.getSecond(123),"123.00");
+		assertEquals(CutGenerator.getSecond(2.0),"2.00");
+		assertEquals(CutGenerator.getSecond(2.1),"2.10");
+		assertEquals(CutGenerator.getSecond(12342.1),"12342.10");
 	}
 	
 	public void batchGenerator() throws FileNotFoundException
@@ -40,7 +40,7 @@ public class TestBatchProcessor extends TestCase
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		BatchGenerator test = new BatchGenerator(config);
+		CutGenerator test = new CutGenerator(config);
 		test.create(vFiles);
 	}
 	

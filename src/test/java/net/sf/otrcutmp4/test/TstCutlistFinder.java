@@ -24,11 +24,11 @@ public class TstCutlistFinder
 	public TstCutlistFinder(Configuration config)
 	{
 		this.config=config;
-	} 
+	}
 	
-	public void findCl() throws FileNotFoundException
+	public void findCl(String type) throws FileNotFoundException
 	{
-		String xmlIn = config.getString("xml.test.1.avi");
+		String xmlIn = config.getString("xml.test."+type+".1");
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
@@ -36,7 +36,7 @@ public class TstCutlistFinder
 		vFiles = finder.searchCutlist(vFiles);
 		JaxbUtil.debug(this.getClass(),vFiles);
 		
-		String xmlOut = config.getString("xml.test.2.avi");
+		String xmlOut = config.getString("xml.test."+type+".2");
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
 	}
 	
@@ -65,7 +65,8 @@ public class TstCutlistFinder
 		Configuration config = ConfigLoader.init();
 		
 		TstCutlistFinder test = new TstCutlistFinder(config);
-//		test.findCl();
-		test.chooseCl();
+//		test.findCl("cut");
+		test.findCl("rename");
+//		test.chooseCl();
 	}
 }

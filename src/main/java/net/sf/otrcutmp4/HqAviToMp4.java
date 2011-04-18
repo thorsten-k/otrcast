@@ -1,10 +1,16 @@
 package net.sf.otrcutmp4;
 
+import java.io.File;
+
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.batch.CutGenerator;
 import net.sf.otrcutmp4.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 import net.sf.otrcutmp4.exception.OtrConfigurationException;
+import net.sf.otrcutmp4.util.SrcDirProcessor;
+import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -53,15 +59,25 @@ public class HqAviToMp4
         otrConfig.checkDirs(config);
         otrConfig.checkTools(config);
         
-        AviProcessor aviProcessor = new AviProcessor(config);
+        
+        SrcDirProcessor aviProcessor = new SrcDirProcessor();
         CutlistFinder clFinder = new CutlistFinder();
         CutlistChooser clChooser = new CutlistChooser();
-        BatchGenerator batch = new BatchGenerator(config);
         
-        VideoFiles vFiles = aviProcessor.readFiles();
-        vFiles = clFinder.searchCutlist(vFiles);
-        vFiles = clChooser.chooseCutlists(vFiles);
-        batch.create(vFiles);
+        
+        if(line.hasOption("cut"))
+        {
+        	CutGenerator batch = new CutGenerator(config);
+        	
+        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+            vFiles = clFinder.searchCutlist(vFiles);
+            vFiles = clChooser.chooseCutlists(vFiles);
+            batch.create(vFiles);
+        }
+        if(line.hasOption("rename"))
+        {
+        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4);
+        }
         
         logger.info("... finished.");
 	}
@@ -74,6 +90,9 @@ public class HqAviToMp4
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
 		Option oDebug = new Option("debug", "Debug output");
 		
+		Option oCut = new Option("cut", "Convert AVI to MP4 and apply cutlist");
+		Option oRename = new Option("rename", "Rename downloaded HQ.MP4.cut with cutlist filename");
+		
 		Option oConfig  = OptionBuilder.withArgName("FILENAME")
 						  .hasArg()
 						  .withDescription( "Use configuration file FILENAME (optional, default is "+OtrConfig.otrConfigName+")")
@@ -82,6 +101,8 @@ public class HqAviToMp4
 		Options options = new Options();
 		options.addOption(oHelp);
 		options.addOption(oDebug);
+		options.addOption(oCut);
+		options.addOption(oRename);
 		options.addOption(oCreate);
 		options.addOption(oDir);
 		options.addOption(oConfig);

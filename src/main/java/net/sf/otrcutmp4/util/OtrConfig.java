@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4;
+package net.sf.otrcutmp4.util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class OtrConfig
 	public static final String dirBat = "dir.bat";
 	public static final String dirTools = "dir.tools";
 	public static final String dirCutlists = "dir.cutlists";
+	public static final String dirMp4Rename = "dir.mp4.rename";
 	
 	public static final String toolMp4Box = "tool.mp4box";
 	public static final String toolLame = "tool.lame";
@@ -50,6 +51,7 @@ public class OtrConfig
 		lDirectotries.add(dirBat);
 		lDirectotries.add(dirTools);
 		lDirectotries.add(dirCutlists);
+		lDirectotries.add(dirMp4Rename);
 	}
 	
 	private void initToolList()
@@ -87,6 +89,7 @@ public class OtrConfig
 				config.setProperty(dirBat, ".");
 				config.setProperty(dirBat, "OtrCutMp4.Tools");
 				config.setProperty(dirCutlists, "Cutlists");
+				config.setProperty(dirMp4Rename, "Mp4.Cut.Rename");
 				
 				config.setProperty(toolMp4Box, "MP4Box.exe");
 				config.setProperty(toolLame, "lame.exe");

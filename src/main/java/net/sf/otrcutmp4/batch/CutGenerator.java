@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4;
+package net.sf.otrcutmp4.batch;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -14,14 +14,15 @@ import net.sf.otrcutmp4.data.jaxb.CutList;
 import net.sf.otrcutmp4.data.jaxb.CutListsSelected;
 import net.sf.otrcutmp4.data.jaxb.VideoFile;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
+import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class BatchGenerator
+public class CutGenerator
 {
-	static Log logger = LogFactory.getLog(BatchGenerator.class);
+	static Log logger = LogFactory.getLog(CutGenerator.class);
 	
 	private File dirHqAvi,dirTmp,dirHqMp4,dirTools,dirBat;
 	private ExlpTxtWriter txt;
@@ -33,7 +34,7 @@ public class BatchGenerator
 	private ShellCmdCopy shellCopy;
 	private ShellCmdRm shellRm;
 	
-	public BatchGenerator(Configuration config)
+	public CutGenerator(Configuration config)
 	{
 		shellCopy = new ShellCmdCopy();
 		shellRm = new ShellCmdRm();
@@ -75,7 +76,7 @@ public class BatchGenerator
 	{
 		String sMp4 = rpf.relativate(dirBat, new File(dirTmp,"mp4.mp4"));
 		
-		txt.add("echo Processing: "+vf.getAvi().getValue());
+		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
 		try {txt.add(shellRm.rmDir(rpf.relativate(dirBat, dirTmp), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error(e);}
@@ -119,7 +120,7 @@ public class BatchGenerator
 	
 	private void mergeMp4(int index, CutList cl, VideoFile vf)
 	{
-		String fileName = vf.getAvi().getValue();
+		String fileName = vf.getFileName().getValue();
 		if(cl.isSetFileName()){fileName=cl.getFileName().getValue();}
 		
 		StringBuffer sb = new StringBuffer();
@@ -186,7 +187,7 @@ public class BatchGenerator
 	
 	private void rawExtract(VideoFile vf)
 	{
-		String sIn = rpf.relativate(dirBat, new File(dirHqAvi,vf.getAvi().getValue()));
+		String sIn = rpf.relativate(dirBat, new File(dirHqAvi,vf.getFileName().getValue()));
 		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
 		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw.mp3"));
 		
