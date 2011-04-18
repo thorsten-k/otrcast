@@ -1,0 +1,13 @@
+echo Extracting raw audio and video streams
+Tools\MP4Box\MP4Box -aviraw video "HQ-in\%%i" -out "Tools\out.h264"
+Tools\MP4Box\MP4Box -aviraw audio "HQ-in\%%i" -out "Tools\out.mp3"
+
+echo Converting audio to AAC
+Tools\lame --decode "Tools\out_audio.mp3" - | Tools\faac --mpeg-vers 4 -b 192 -o "Tools\out_audio.aac" -
+
+Tools\MP4Box\MP4Box -add "Tools\out_video.h264" -add "Tools\out_audio.aac" "HQ-mp4\%%i.mp4"
+
+git-96\ffmpeg -ss 186 5 -t 1249 -i "test.mp4" -vcodec copy -acodec copy 1.mp4
+
+MP4Box.exe 1.mp4 -cat 2.mp4 -cat 3.mp4 -out result.mp4
+
