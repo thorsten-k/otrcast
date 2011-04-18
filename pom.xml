@@ -67,6 +67,27 @@
       	   		<type>jar</type>
       	   		<scope>compile</scope>
       	   	</dependency>
+      	   	<dependency>
+      	   		<groupId>javax.xml.bind</groupId>
+      	   		<artifactId>jaxb-api</artifactId>
+      	   		<version>2.2.2</version>
+      	   		<type>jar</type>
+      	   		<scope>test</scope>
+      	   	</dependency>
+      	   	<dependency>
+      	   		<groupId>com.sun.xml.bind</groupId>
+      	   		<artifactId>jaxb-impl</artifactId>
+      	   		<version>2.2.2</version>
+      	   		<type>jar</type>
+      	   		<scope>test</scope>
+      	   	</dependency>
+      	   	<dependency>
+      	   		<groupId>com.sun.xml.bind</groupId>
+      	   		<artifactId>jaxb-xjc</artifactId>
+      	   		<version>2.2.2</version>
+      	   		<type>jar</type>
+      	   		<scope>test</scope>
+      	   	</dependency>
   </dependencies>
   
   <description>otrcutmp4 is a utility for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
