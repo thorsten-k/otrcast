@@ -95,7 +95,11 @@ public class CutlistChooser
 	
 	private CutList loadCutlist(int i, CutList clChosen)
 	{
-		logger.info("Trying to download "+i);
+		String http = "http://cutlist.at/getfile.php?id="+clChosen.getId();
+		
+		logger.info("Trying to download selection "+i);
+		logger.debug("\t"+http);
+		
 //		EhResultContainer leh = new EhResultContainer();
 //		LogParser lp = new XmlParser(leh);
 	
@@ -103,7 +107,7 @@ public class CutlistChooser
 		LogParser lp = new CutlistParser(leh);
 		
 		LogListener ll = new LogListenerHttp(lp);
-		ll.processSingle("http://cutlist.at/getfile.php?id="+clChosen.getId());
+		ll.processSingle(http);
 		
 		JaxbEvent event = (JaxbEvent)leh.getSingleResult();
 		CutList cl = (CutList)event.getObject();

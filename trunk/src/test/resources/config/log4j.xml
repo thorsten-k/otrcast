@@ -8,11 +8,6 @@
 			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%5p] %C{1}-%L: %m%n" />
 	    </layout>
 	</appender>
-    
-	<logger name="de.hekit.otr" additivity="false">
-		<level value="DEBUG"/>
-		<appender-ref ref="A1"/>
-	</logger>
 	
 	<logger name="net.sf.exlp" additivity="false">
 		<level value="DEBUG"/>
@@ -20,7 +15,7 @@
 	</logger>
     
 	<root>
-		<priority value="INFO" />
+		<priority value="DEBUG" />
 		<appender-ref ref="A1" />
 	</root>
 

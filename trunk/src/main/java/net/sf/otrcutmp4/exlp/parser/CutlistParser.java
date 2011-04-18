@@ -16,7 +16,6 @@ import net.sf.otrcutmp4.data.jaxb.FileName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 public class CutlistParser extends AbstractLogParser implements LogParser  
 {
 	static Log logger = LogFactory.getLog(CutlistParser.class);
@@ -35,6 +34,7 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 		pattern.add(Pattern.compile("^ApplyToFile=(.*)"));
 		pattern.add(Pattern.compile("^OriginalFileSizeBytes=(.*)"));
 		pattern.add(Pattern.compile("^FramesPerSecond=(.*)"));
+		pattern.add(Pattern.compile("^DisplayAspectRatio=(.*)"));
 		pattern.add(Pattern.compile("^IntendedCutApplicationName=(.*)"));
 		pattern.add(Pattern.compile("^IntendedCutApplication=(.*)"));
 		pattern.add(Pattern.compile("^IntendedCutApplicationVersion=(.*)"));
@@ -43,7 +43,7 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 		pattern.add(Pattern.compile("^VDSmartRenderingCodecVersion=(.*)"));
 		pattern.add(Pattern.compile("^NoOfCuts=(.*)"));
 		
-		pattern.add(Pattern.compile("^\\[Info\\]")); //15
+		pattern.add(Pattern.compile("^\\[Info\\]")); //16
 		pattern.add(Pattern.compile("^Author=(.*)"));
 		pattern.add(Pattern.compile("^RatingByAuthor=(.*)"));
 		pattern.add(Pattern.compile("^EPGError=(.*)"));
@@ -57,7 +57,7 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 		pattern.add(Pattern.compile("^SuggestedMovieName=(.*)"));
 		pattern.add(Pattern.compile("^UserComment=(.*)"));
 			
-		pattern.add(Pattern.compile("^\\[Cut(\\d*)\\]")); //28
+		pattern.add(Pattern.compile("^\\[Cut(\\d*)\\]")); //29
 		pattern.add(Pattern.compile("^Start=(.*)"));
 		pattern.add(Pattern.compile("^StartFrame=(.*)"));
 		pattern.add(Pattern.compile("^Duration=(.*)"));
@@ -79,10 +79,10 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 				switch(i)
 				{
 					case 0: general();break;
-					case 26: name(m);break;
-					case 28: cut(m);break;
-					case 29: cutStart(m);break;
-					case 31: cutDuration(m);break;
+					case 27: name(m);break;
+					case 29: cut(m);break;
+					case 30: cutStart(m);break;
+					case 32: cutDuration(m);break;
 				}
 				i=pattern.size();
 				unknownPattern=false;

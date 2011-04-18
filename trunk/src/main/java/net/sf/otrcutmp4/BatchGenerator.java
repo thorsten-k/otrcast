@@ -12,16 +12,14 @@ import net.sf.otrcutmp4.data.jaxb.VideoFile;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 public class BatchGenerator
 {
 	static Log logger = LogFactory.getLog(BatchGenerator.class);
 	
-	private File dirHqAvi,dirTmp,dirHqMp4,dirCur;
+	private File dirHqAvi,dirTmp,dirHqMp4,dirTools,dirBat;
 	private ExlpTxtWriter txt;
 	private DecimalFormat df;
 	
@@ -33,19 +31,21 @@ public class BatchGenerator
 		dirHqAvi = new File(config.getString(OtrConfig.dirHqAvi));
 		dirTmp = new File(config.getString(OtrConfig.dirTmp));
 		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));
-		dirCur = new File(".");
+		dirTools = new File(config.getString(OtrConfig.dirTools));
+		dirBat = new File(config.getString(OtrConfig.dirBat));
+
 		
 		logger.debug("");
-		logger.debug("Creating Batch in "+dirCur.getAbsolutePath());
+		logger.debug("Creating Batch in "+dirBat.getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
 		df = new DecimalFormat("0");
 		rpf = new RelativePathFactory();
 		
-		cmdMp4Box = rpf.relativate(dirCur, new File(dirCur,"Tools/MP4Box/MP4Box"));
-		cmdLame = rpf.relativate(dirCur, new File(dirCur,"Tools/lame"));
-		cmdFfmpeg = rpf.relativate(dirCur, new File(dirCur,"Tools/git-96/ffmpeg"));
-		cmdFaac = rpf.relativate(dirCur, new File(dirCur,"Tools/faac"));
+		cmdMp4Box = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolMp4Box)));
+		cmdLame = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolLame)));
+		cmdFfmpeg = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
+		cmdFaac = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFaac)));
 	}
 	
 	public void create(VideoFiles vFiles)
@@ -55,12 +55,16 @@ public class BatchGenerator
 			 crateForVideo(vf);
 		 }
 		 txt.debug();
-		 txt.writeFile(".", "bat.bat");
+
+		 File f = new File(dirBat, "bat.bat");
+		 txt.writeFile(f);
+		 logger.info("");
+		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
 	}
 	
 	private void crateForVideo(VideoFile vf)
 	{
-		String sMp4 = rpf.relativate(dirCur, new File(dirTmp,"mp4.mp4"));
+		String sMp4 = rpf.relativate(dirBat, new File(dirTmp,"mp4.mp4"));
 		
 		txt.add("echo Processing: "+vf.getAvi().getValue());
 		txt.add("");
@@ -75,8 +79,8 @@ public class BatchGenerator
 	
 	private void aac()
 	{
-		String sMp3 = rpf.relativate(dirCur, new File(dirTmp,"raw_audio.mp3"));
-		String sAac = rpf.relativate(dirCur, new File(dirTmp,"aac.aac"));
+		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw_audio.mp3"));
+		String sAac = rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
 		txt.add(cmdLame+" --decode "+sMp3+" - | "+cmdFaac+" --mpeg-vers 4 -b 192 -o "+sAac+" -");
 	}
 	
@@ -111,16 +115,16 @@ public class BatchGenerator
 		if(cl.getCut().size()>0)
 		{
 			sb.append(cmdMp4Box).append(" ");
-			sb.append(rpf.relativate(dirCur, new File(dirTmp,index+"-1.mp4")));
+			sb.append(rpf.relativate(dirBat, new File(dirTmp,index+"-1.mp4")));
 			sb.append(" ");
 			for(int i=2;i<=cl.getCut().size();i++)
 			{
 				sb.append("-cat ");
-				sb.append(rpf.relativate(dirCur, new File(dirTmp,index+"-"+i+".mp4")));
+				sb.append(rpf.relativate(dirBat, new File(dirTmp,index+"-"+i+".mp4")));
 				sb.append(" ");
 			}
 			sb.append("-out ");
-			sb.append(rpf.relativate(dirCur, new File(dirHqMp4,fileName+".mp4")));
+			sb.append(rpf.relativate(dirBat, new File(dirHqMp4,fileName+".mp4")));
 			txt.add(sb.toString());
 		}
 	}
@@ -132,27 +136,32 @@ public class BatchGenerator
 		{
 			if(cut.isSetInclude())
 			{
-				String sCut = rpf.relativate(dirCur, new File(dirTmp,index+"-"+counter+".mp4"));
+				String sCut = rpf.relativate(dirBat, new File(dirTmp,index+"-"+counter+".mp4"));
 				txt.add(cmdFfmpeg+" -ss "+df.format(cut.getStart())+" -t "+df.format(cut.getDuration())+" -i "+sMp4+" -vcodec copy -acodec copy "+sCut);
 				counter++;
 			}
-			
 		}
 	}
 	
 	private void createMp4(String sMp4)
 	{
-		String sH264 = rpf.relativate(dirCur, new File(dirTmp,"raw.h264"));
-		String sAac = rpf.relativate(dirCur, new File(dirTmp,"aac.aac"));
+		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
+		String sAac = rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
 		
 		txt.add(cmdMp4Box+" -add "+sH264+" -add "+sAac+" "+sMp4);
 	}
 	
 	private void rawExtract(VideoFile vf)
 	{
-		String sIn = rpf.relativate(dirCur, new File(dirHqAvi,vf.getAvi().getValue()));
-		String sH264 = rpf.relativate(dirCur, new File(dirTmp,"raw.h264"));
-		String sMp3 = rpf.relativate(dirCur, new File(dirTmp,"raw.h264"));
+		String sIn = rpf.relativate(dirBat, new File(dirHqAvi,vf.getAvi().getValue()));
+		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
+		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
+		
+		logger.warn("***");
+		logger.warn("Base: "+dirBat.getAbsolutePath());
+		logger.warn("Absolute: "+(new File(dirHqAvi,vf.getAvi().getValue())).getAbsolutePath());
+		logger.warn("Relative: "+sIn);
+		logger.warn("***");
 		
 		txt.add(cmdMp4Box+" -aviraw video "+sIn+" -out "+sH264);
 		txt.add(cmdMp4Box+" -aviraw audio "+sIn+" -out "+sMp3);

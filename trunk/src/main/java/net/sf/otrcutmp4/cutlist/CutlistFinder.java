@@ -35,6 +35,7 @@ public class CutlistFinder
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)
 	{
+		logger.info(" ");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
 			searchCutlist(vf);
@@ -48,7 +49,6 @@ public class CutlistFinder
 		
 		fileName = fileName.substring(0, fileName.lastIndexOf(".avi"));
 		
-		logger.info(" ");
 		logger.info("Searching for "+fileName);
 		
 		EhResultContainer leh = new EhResultContainer();

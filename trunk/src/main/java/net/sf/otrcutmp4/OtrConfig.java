@@ -24,17 +24,41 @@ public class OtrConfig
 	public static final String dirHqAvi = "dir.hq.avi";
 	public static final String dirHqMp4 = "dir.hq.mp4";
 	public static final String dirTmp = "dir.tmp";
+	public static final String dirBat = "dir.bat";
+	public static final String dirTools = "dir.tools";
 	public static final String dirCutlists = "dir.cutlists";
 	
-	private List<String> lDirectotries;
+	public static final String toolMp4Box = "tool.mp4box";
+	public static final String toolLame = "tool.lame";
+	public static final String toolFfmpeg = "tool.ffmpeg";
+	public static final String toolFaac = "tool.faac";
+	
+	private List<String> lDirectotries,lTools;
 	
 	public OtrConfig()
+	{
+		initDirectoryList();
+		initToolList();
+	}
+	
+	private void initDirectoryList()
 	{
 		lDirectotries = new ArrayList<String>();
 		lDirectotries.add(dirHqAvi);
 		lDirectotries.add(dirHqMp4);
 		lDirectotries.add(dirTmp);
+		lDirectotries.add(dirBat);
+		lDirectotries.add(dirTools);
 		lDirectotries.add(dirCutlists);
+	}
+	
+	private void initToolList()
+	{
+		lTools = new ArrayList<String>();
+		lTools.add(toolMp4Box);
+		lTools.add(toolLame);
+		lTools.add(toolFfmpeg);
+		lTools.add(toolFaac);
 	}
 	
 	public void createDefault(String configFile)
@@ -52,7 +76,7 @@ public class OtrConfig
 				StringBuffer sb = new StringBuffer();
 				sb.append("Don't use a backslash \\ in your path!").append(SystemUtils.LINE_SEPARATOR);
 				sb.append("I'm too lazy to parse this stupid windows stuff out ...").append(SystemUtils.LINE_SEPARATOR);
-				sb.append("C:\\\\test\\tmp will simply be C://test/test").append(SystemUtils.LINE_SEPARATOR);
+				sb.append("C:\\\\test\\tmp will simply be C:/test/tmp").append(SystemUtils.LINE_SEPARATOR);
 				
 				PropertiesConfiguration config = new PropertiesConfiguration(f);
 				config.setHeader(sb.toString());
@@ -60,8 +84,14 @@ public class OtrConfig
 				config.setProperty(dirHqAvi, "HQ.avi");
 				config.setProperty(dirHqMp4, "HQ.mp4");
 				config.setProperty(dirTmp, "tmp");
+				config.setProperty(dirBat, ".");
+				config.setProperty(dirBat, "OtrCutMp4.Tools");
 				config.setProperty(dirCutlists, "Cutlists");
 				
+				config.setProperty(toolMp4Box, "MP4Box.exe");
+				config.setProperty(toolLame, "lame.exe");
+				config.setProperty(toolFfmpeg, "ffmpeg.exe");
+				config.setProperty(toolFaac, "faac.exe");
 				config.save();
 			}
 			catch (ConfigurationException e) {logger.error(e);}
@@ -82,11 +112,13 @@ public class OtrConfig
 		return config;
 	}
 	
-	public void createDirs(Configuration config)
+	public void createDirs(Configuration config) throws OtrConfigurationException
 	{
-		for(String dirName : lDirectotries)
+		for(String dirKey : lDirectotries)
 		{
-			createDir(config.getString(dirName));
+			String dirName = config.getString(dirKey);
+			if(dirName!=null){createDir(dirName);}
+			else {throw new OtrConfigurationException("Entry in properties file missing : "+dirKey);}
 		}
 	}
 	
@@ -111,9 +143,12 @@ public class OtrConfig
 	
 	public void checkDirs(Configuration config) throws OtrConfigurationException
 	{
-		for(String dirName : lDirectotries)
+		for(String dirKey : lDirectotries)
 		{
-			checkDir(dirName, config.getString(dirName));
+			String dirName = config.getString(dirKey);
+			if(dirName!=null){checkDir(dirKey, dirName);}
+			else {throw new OtrConfigurationException("Entry in properties file missing : "+dirKey);}
+			;
 		}
 	}
 	
@@ -128,6 +163,27 @@ public class OtrConfig
 		else if(!f.isDirectory())
 		{
 			throw new OtrConfigurationException("File already exists. But it should be a directory: "+FilenameUtils.normalize(f.getAbsolutePath()));
+		}
+	}
+	
+	public void checkTools(Configuration config) throws OtrConfigurationException
+	{
+		File dirTools = new File(config.getString(OtrConfig.dirTools));
+		for(String toolKey : lTools)
+		{
+			String toolName = config.getString(toolKey);
+			if(toolName!=null){checkTool(dirTools,toolKey,toolName);}
+			else {throw new OtrConfigurationException("Entry in properties file. Missing Key: "+toolKey);}
+		}
+	}
+	
+	private void checkTool(File dirTools, String toolKey, String toolName) throws OtrConfigurationException
+	{
+		File f = new File(dirTools,toolName);
+		
+		if(!f.exists())
+		{
+			throw new OtrConfigurationException("Tool ("+toolKey+") does not exist! "+FilenameUtils.normalize(f.getAbsolutePath()));
 		}
 	}
 }
