@@ -66,7 +66,7 @@ public class CutGenerator
 		 }
 		 txt.debug();
 
-		 File f = new File(dirBat, "bat.bat");
+		 File f = new File(dirBat, "cut.bat");
 		 txt.writeFile(f);
 		 logger.info("");
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));

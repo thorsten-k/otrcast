@@ -3,14 +3,14 @@ package net.sf.otrcutmp4;
 import java.io.File;
 
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.batch.CutGenerator;
+import net.sf.otrcutmp4.batch.RenameGenerator;
 import net.sf.otrcutmp4.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 import net.sf.otrcutmp4.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.util.SrcDirProcessor;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.SrcDirProcessor;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -76,7 +76,20 @@ public class HqAviToMp4
         }
         if(line.hasOption("rename"))
         {
-        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4);
+        	RenameGenerator batch = new RenameGenerator(config);
+        	
+        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
+            vFiles = clFinder.searchCutlist(vFiles);
+            vFiles = clChooser.chooseCutlists(vFiles);
+            batch.create(vFiles);
+        }
+        
+        if(!line.hasOption("rename")
+        		&& !line.hasOption("cut")
+        		&& !line.hasOption("createDirs")
+        		&& !line.hasOption("createConfig"))
+        {
+        	printHelp();
         }
         
         logger.info("... finished.");
