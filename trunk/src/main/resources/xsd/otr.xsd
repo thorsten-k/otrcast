@@ -22,7 +22,8 @@
     <xsd:element name="videoFile">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="otr:avi" maxOccurs="1"/>
+                <xsd:element ref="otr:fileId" maxOccurs="1"/>
+                <xsd:element ref="otr:fileName" maxOccurs="1"/>
                 <xsd:element ref="otr:cutListsAvailable" maxOccurs="1"/>
                 <xsd:element ref="otr:cutListsSelected" maxOccurs="1"/>
             </xsd:sequence>
@@ -64,7 +65,7 @@
             <xsd:attribute name="duration" type="xsd:double"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="avi">
+    <xsd:element name="fileId">
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string"/>

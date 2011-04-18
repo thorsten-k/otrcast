@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.cutlist;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.event.impl.JDomEvent;
@@ -45,20 +46,21 @@ public class CutlistFinder
 	
 	private void searchCutlist(VideoFile vf)
 	{
-		String fileName = vf.getAvi().getValue();
-		
-		fileName = fileName.substring(0, fileName.lastIndexOf(".avi"));
-		
-		logger.info("Searching for "+fileName);
+		logger.info("Searching for "+vf.getFileId().getValue());
+		String sUrl = "http://cutlist.at/getxml.php?name="+vf.getFileId().getValue();
 		
 		EhResultContainer leh = new EhResultContainer();
 		LogParser lp = new XmlParser(leh);
 		
 		LogListener ll = new LogListenerHttp(lp);
-		ll.processMulti("http://cutlist.at/getxml.php?name="+fileName);
+		ll.processMulti(sUrl);
 		
-		Document doc = ((JDomEvent)leh.getSingleResult()).getDoc();
-		vf.setCutListsAvailable(getAvailableCutLists(doc));
+		try
+		{
+			Document doc = ((JDomEvent)leh.getSingleResult()).getDoc();
+			vf.setCutListsAvailable(getAvailableCutLists(doc));
+		}
+		catch (NoSuchElementException e){logger.error("No cutlist found. URL: "+sUrl);}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -69,12 +71,11 @@ public class CutlistFinder
 		{
 			try
 			{
-				XPath xpath = XPath.newInstance( "/files/cutlist" );
+				XPath xpath = XPath.newInstance("/files/cutlist");
 				List<Object> lCl= xpath.selectNodes(doc);
 				for(Object cl : lCl)
 				{
 					Element e = (Element)cl;
-//					JDomUtil.debug(e);
 					cls.getCutList().add(getCutList(e));
 				}
 			}
