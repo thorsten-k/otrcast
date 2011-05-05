@@ -5,7 +5,7 @@ import java.io.File;
 import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-import net.sf.exlp.util.os.shell.ShellCmdCopy;
+import net.sf.exlp.util.os.shell.ShellCmdMove;
 import net.sf.otrcutmp4.data.jaxb.CutList;
 import net.sf.otrcutmp4.data.jaxb.VideoFile;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
@@ -24,11 +24,11 @@ public class RenameGenerator
 	
 	private RelativePathFactory rpf;
 	
-	private ShellCmdCopy shellCopy;
+	private ShellCmdMove shellMove;
 	
 	public RenameGenerator(Configuration config)
 	{
-		shellCopy = new ShellCmdCopy();
+		shellMove = new ShellCmdMove();
 		
 		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));
 		dirBat = new File(config.getString(OtrConfig.dirBat));
@@ -48,7 +48,7 @@ public class RenameGenerator
 			 crateForVideo(vf);
 		 }
 
-		 File f = new File(dirBat, "rename.bat");
+		 File f = new File(dirBat, "otrRename.bat");
 		 txt.writeFile(f);
 		 logger.info("");
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
@@ -56,10 +56,10 @@ public class RenameGenerator
 	
 	private void crateForVideo(VideoFile vf)
 	{	
-		txt.add("echo Processing: "+vf.getFileName().getValue());
 		String sOriginal = rpf.relativate(dirBat, new File(dirMp4Rename,vf.getFileName().getValue()));
 		if(vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
 		{
+			txt.add("echo Processing: "+vf.getFileName().getValue());
 			for(CutList cl : vf.getCutListsSelected().getCutList())
 			{
 				cutList(cl, sOriginal);
@@ -71,7 +71,7 @@ public class RenameGenerator
 	{
 		String sTo = rpf.relativate(dirBat, new File(dirHqMp4,cl.getFileName().getValue()+".mp4"));
 		
-		try {txt.add(shellCopy.copyFile(sOriginal, sTo));}
+		try {txt.add(shellMove.moveFile(sOriginal, sTo));}
 		catch (ExlpUnsupportedOsException e)
 		{
 			logger.error(e);

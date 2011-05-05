@@ -47,7 +47,15 @@ public class TstCutlistFinder
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
 		CutlistChooser chooser = new CutlistChooser();
-		vFiles = chooser.chooseCutlists(vFiles);
+		
+		if(type.equals("rename"))
+		{
+			chooser.setRenameOutput();
+			vFiles = chooser.chooseFileRename(vFiles);
+		}
+		else{logger.warn("No output specified. Do this in test class");}
+		
+		
 		JaxbUtil.debug(this.getClass(),vFiles);
 		
 		String xmlOut = config.getString("xml.test."+type+".3");

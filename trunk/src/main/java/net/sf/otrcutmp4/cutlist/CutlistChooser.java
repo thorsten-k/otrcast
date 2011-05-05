@@ -23,10 +23,22 @@ import org.apache.commons.logging.LogFactory;
 public class CutlistChooser
 {
 	static Log logger = LogFactory.getLog(CutlistChooser.class);
-		
+	
+	private boolean showAuthor, showRanking, showComment, showFile;
+
 	public CutlistChooser()
 	{
-
+		showAuthor = true;
+		showRanking = true;
+		showComment = true;
+		showFile = true;
+	}
+	
+	public void setRenameOutput()
+	{
+		 setShowAuthor(false);
+         setShowRanking(false);
+         setShowComment(false);
 	}
 
 	public VideoFiles chooseCutlists(VideoFiles vFiles)
@@ -35,17 +47,34 @@ public class CutlistChooser
 		logger.info("Choose cutlist for "+vFiles.getVideoFile().size()+" files");
 		logger.info("\tYou can select a single cutlist e.g. with '1'");
 		logger.info("\tMultiple selections (e.g. '1,3') result in multiple output files");
+		logger.info("\tIgnore the file by pressing ENTER");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
 			if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList())
 			{
-				chooseCutlist(vf);
+				chooseCutlist(vf,true);
 			}
 		}
 		return vFiles;
 	}
 	
-	private void chooseCutlist(VideoFile vf)
+	public VideoFiles chooseFileRename(VideoFiles vFiles)
+	{
+		logger.info("");
+		logger.info("Choose file renames for "+vFiles.getVideoFile().size()+" files");
+		logger.info("\tYou have to choose a single name e.g. with '1'");
+		logger.info("\tIgnore the file by pressing ENTER");
+		for(VideoFile vf : vFiles.getVideoFile())
+		{
+			if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList())
+			{
+				chooseCutlist(vf,false);
+			}
+		}
+		return vFiles;
+	}
+	
+	private void chooseCutlist(VideoFile vf,boolean loadCutlist)
 	{
 		logger.info("");
 		logger.info(vf.getFileId().getValue());
@@ -59,29 +88,71 @@ public class CutlistChooser
 		String line = sc.nextLine();
 		String[] tokens = line.split( "," );
 		
-		List<Integer> selectedIndexes = new ArrayList<Integer>();
-		for(String token : tokens)
+		if(line.length()>0)
 		{
-			selectedIndexes.add(Integer.parseInt(token));
-		}	
-		
-		vf.setCutListsSelected(loadCutlists(selectedIndexes, vf.getCutListsAvailable()));
+			List<Integer> selectedIndexes = new ArrayList<Integer>();
+			for(String token : tokens)
+			{
+				selectedIndexes.add(Integer.parseInt(token));
+			}	
+			
+			if(loadCutlist)
+			{
+				vf.setCutListsSelected(loadCutlists(selectedIndexes, vf.getCutListsAvailable()));
+			}
+			else
+			{
+				if(selectedIndexes.size()==1)
+				{
+					CutListsSelected clSelected = new CutListsSelected();
+					clSelected.getCutList().add(vf.getCutListsAvailable().getCutList().get(selectedIndexes.get(0)));
+					vf.setCutListsSelected(clSelected);
+				}
+				else
+				{
+					logger.warn("You have to chosse only one cutlist");
+				}
+			}
+		}
 	}
 	
 	private void askCutlist(int i, VideoFile vf, CutList cl)
 	{
-		StringBuffer sb = new StringBuffer();
-		sb.append(i).append("\t");
-		sb.append("Author: ").append(cl.getAuthor().getValue());
+		boolean printedNumber=false;
+		if(showAuthor)
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append(i);printedNumber=true;
+			sb.append("\tAuthor: ").append(cl.getAuthor().getValue());
+			logger.info(sb.toString());
+		}
 		
-		sb.append(", Rating: ");
-		if(cl.isSetRating()){sb.append(cl.getRating());}
-		else {sb.append("n/a");}
+		if(showRanking)
+		{
+			StringBuffer sb = new StringBuffer();
+			if(!printedNumber){sb.append(i);printedNumber=true;}
+			sb.append("\tRating: ");
+			if(cl.isSetRating()){sb.append(cl.getRating());}
+			else {sb.append("n/a");}
+			sb.append(" (rated ").append(cl.getRatingCount()).append(" times)");
+			logger.info(sb.toString());
+		}
 		
-		sb.append(" (rated ").append(cl.getRatingCount()).append(" times)");
-		logger.info(sb.toString());
-		if(cl.isSetComment()){logger.info("\tComment: "+cl.getComment().getValue());}
-		if(cl.isSetFileName()){logger.info("\tFile: "+cl.getFileName().getValue());}
+		if(showComment && cl.isSetComment())
+		{
+			StringBuffer sb = new StringBuffer();
+			if(!printedNumber){sb.append(i);printedNumber=true;}
+			sb.append("\tComment: "+cl.getComment().getValue());
+			logger.info(sb.toString());
+		}
+		
+		if(showFile && cl.isSetFileName())
+		{
+			StringBuffer sb = new StringBuffer();
+			if(!printedNumber){sb.append(i);printedNumber=true;}
+			sb.append("\tFile: "+cl.getFileName().getValue());
+			logger.info(sb.toString());
+		}
 	}
 	
 	private CutListsSelected loadCutlists(List<Integer> selected, CutListsAvailable clAvailable)
@@ -117,4 +188,16 @@ public class CutlistChooser
 		
 		return cl;
 	}
+	
+	public boolean isShowAuthor() {return showAuthor;}
+	public void setShowAuthor(boolean showAuthor) {this.showAuthor = showAuthor;}
+
+	public boolean isShowComment() {return showComment;}
+	public void setShowComment(boolean showComment) {this.showComment = showComment;}
+
+	public boolean isShowFile() {return showFile;}
+	public void setShowFile(boolean showFile) {this.showFile = showFile;}
+	
+	public boolean isShowRanking() {return showRanking;}
+	public void setShowRanking(boolean showRanking) {this.showRanking = showRanking;}
 }

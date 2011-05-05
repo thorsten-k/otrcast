@@ -64,7 +64,6 @@ public class HqAviToMp4
         CutlistFinder clFinder = new CutlistFinder();
         CutlistChooser clChooser = new CutlistChooser();
         
-        
         if(line.hasOption("cut"))
         {
         	CutGenerator batch = new CutGenerator(config);
@@ -80,7 +79,9 @@ public class HqAviToMp4
         	
         	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);
-            vFiles = clChooser.chooseCutlists(vFiles);
+            clChooser.setRenameOutput();
+            vFiles = clChooser.chooseFileRename(vFiles);
+            
             batch.create(vFiles);
         }
         
