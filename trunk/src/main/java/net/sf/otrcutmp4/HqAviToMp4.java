@@ -28,6 +28,9 @@ public class HqAviToMp4
 {
 	static Log logger = LogFactory.getLog(HqAviToMp4.class);
 	
+	public static enum Quality {HQ,HD}
+	public static enum Audio {Mp3,Ac3}
+	
 	public static final String exeName = "CutHqAviToMp4";
 	private Options options;
 	private OtrConfig otrConfig;
@@ -58,17 +61,38 @@ public class HqAviToMp4
         if(line.hasOption("createDirs")){otrConfig.createDirs(config);}
         otrConfig.checkDirs(config);
         otrConfig.checkTools(config);
-        
-        
+         
         SrcDirProcessor aviProcessor = new SrcDirProcessor();
         CutlistFinder clFinder = new CutlistFinder();
         CutlistChooser clChooser = new CutlistChooser();
         
-        if(line.hasOption("cut"))
+        Audio audio = Audio.Mp3;
+        if(line.hasOption("ac3") && !line.hasOption("hd"))
         {
-        	CutGenerator batch = new CutGenerator(config);
+        	logger.warn("ac3 is not allowed for HQ");
+        	printHelp();
+        }
+        if(line.hasOption("ac3"))
+        {
+        	logger.warn("Remember, this option is EXPERIMENTAL");
+        	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error(e);}
+        	audio = Audio.Ac3;
+        }
+        
+        if(line.hasOption("hq"))
+        {
+        	CutGenerator batch = new CutGenerator(config,Quality.HQ,Audio.Mp3);
         	
         	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+            vFiles = clFinder.searchCutlist(vFiles);
+            vFiles = clChooser.chooseCutlists(vFiles);
+            batch.create(vFiles);
+        }
+        if(line.hasOption("hd"))
+        {
+        	CutGenerator batch = new CutGenerator(config,Quality.HD,audio);
+        	
+        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHdAvi)),SrcDirProcessor.VideType.avi); 
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles);
@@ -86,7 +110,8 @@ public class HqAviToMp4
         }
         
         if(!line.hasOption("rename")
-        		&& !line.hasOption("cut")
+        		&& !line.hasOption("hq")
+        		&& !line.hasOption("hd")
         		&& !line.hasOption("createDirs")
         		&& !line.hasOption("createConfig"))
         {
@@ -104,7 +129,9 @@ public class HqAviToMp4
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
 		Option oDebug = new Option("debug", "Debug output");
 		
-		Option oCut = new Option("cut", "Convert AVI to MP4 and apply cutlist");
+		Option oHQ = new Option("hq", "Convert HQ.AVI to MP4 and apply cutlist");
+		Option oHD = new Option("hd", "Convert HD.AVI to MP4 and apply cutlist");
+		Option oAc3 = new Option("ac3", "Use Ac3 Audio for HD (experimental)");
 		Option oRename = new Option("rename", "Rename downloaded HQ.MP4.cut with cutlist filename");
 		
 		Option oConfig  = OptionBuilder.withArgName("FILENAME")
@@ -115,7 +142,9 @@ public class HqAviToMp4
 		Options options = new Options();
 		options.addOption(oHelp);
 		options.addOption(oDebug);
-		options.addOption(oCut);
+		options.addOption(oHQ);
+		options.addOption(oHD);
+		options.addOption(oAc3);
 		options.addOption(oRename);
 		options.addOption(oCreate);
 		options.addOption(oDir);

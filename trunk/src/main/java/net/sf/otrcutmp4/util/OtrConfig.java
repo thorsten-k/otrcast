@@ -22,6 +22,8 @@ public class OtrConfig
 	public static String otrConfigName = "properties.txt";
 		
 	public static final String dirHqAvi = "dir.hq.avi";
+	public static final String dirHdAc3 = "dir.hd.ac3";
+	public static final String dirHdAvi = "dir.hd.avi";
 	public static final String dirHqMp4 = "dir.hq.mp4";
 	public static final String dirTmp = "dir.tmp";
 	public static final String dirBat = "dir.bat";
@@ -46,6 +48,8 @@ public class OtrConfig
 	{
 		lDirectotries = new ArrayList<String>();
 		lDirectotries.add(dirHqAvi);
+		lDirectotries.add(dirHdAvi);
+		lDirectotries.add(dirHdAc3);
 		lDirectotries.add(dirHqMp4);
 		lDirectotries.add(dirTmp);
 		lDirectotries.add(dirBat);
@@ -84,6 +88,8 @@ public class OtrConfig
 				config.setHeader(sb.toString());
 				
 				config.setProperty(dirHqAvi, "HQ.avi");
+				config.setProperty(dirHdAvi, "HD.avi");
+				config.setProperty(dirHdAvi, "HD.ac3");
 				config.setProperty(dirHqMp4, "HQ.mp4");
 				config.setProperty(dirTmp, "tmp");
 				config.setProperty(dirBat, ".");

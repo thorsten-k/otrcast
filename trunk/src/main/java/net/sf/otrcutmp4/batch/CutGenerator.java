@@ -9,6 +9,9 @@ import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.os.shell.ShellCmdRm;
+import net.sf.otrcutmp4.HqAviToMp4;
+import net.sf.otrcutmp4.batch.audio.Ac3ToAac;
+import net.sf.otrcutmp4.batch.audio.Mp3ToAac;
 import net.sf.otrcutmp4.data.jaxb.Cut;
 import net.sf.otrcutmp4.data.jaxb.CutList;
 import net.sf.otrcutmp4.data.jaxb.CutListsSelected;
@@ -24,27 +27,42 @@ public class CutGenerator
 {
 	static Log logger = LogFactory.getLog(CutGenerator.class);
 	
-	private File dirHqAvi,dirTmp,dirHqMp4,dirTools,dirBat;
+	private File dirAvi,dirAc3,dirTmp,dirHqMp4,dirTools,dirBat;
 	private ExlpTxtWriter txt;
 	private static DecimalFormat df;
 	
-	private String cmdMp4Box,cmdLame,cmdFfmpeg, cmdFaac;
+	private HqAviToMp4.Quality quality;
+	private HqAviToMp4.Audio audio;
+	
+	private String cmdMp4Box,cmdFfmpeg;
 	private RelativePathFactory rpf;
 	
 	private ShellCmdCopy shellCopy;
 	private ShellCmdRm shellRm;
 	
-	public CutGenerator(Configuration config)
+	private Mp3ToAac mp3ToAac;
+	private Ac3ToAac ac3ToAac;
+	
+	public CutGenerator(Configuration config, HqAviToMp4.Quality quality, HqAviToMp4.Audio audio)
 	{
+		this.quality=quality;
+		this.audio=audio;
 		shellCopy = new ShellCmdCopy();
 		shellRm = new ShellCmdRm();
 		
-		dirHqAvi = new File(config.getString(OtrConfig.dirHqAvi));
+		switch(quality)
+		{
+			case HQ: dirAvi = new File(config.getString(OtrConfig.dirHqAvi));break;
+			case HD: dirAvi = new File(config.getString(OtrConfig.dirHdAvi));break;
+		}
+		
 		dirTmp = new File(config.getString(OtrConfig.dirTmp));
 		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));
 		dirTools = new File(config.getString(OtrConfig.dirTools));
 		dirBat = new File(config.getString(OtrConfig.dirBat));
 
+		mp3ToAac = new Mp3ToAac(config,dirTools,dirBat,dirTmp);
+		ac3ToAac = new Ac3ToAac(config);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+dirBat.getAbsolutePath());
@@ -53,9 +71,7 @@ public class CutGenerator
 		rpf = new RelativePathFactory();
 		
 		cmdMp4Box = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolMp4Box)));
-		cmdLame = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolLame)));
 		cmdFfmpeg = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
-		cmdFaac = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFaac)));
 	}
 	
 	public void create(VideoFiles vFiles)
@@ -81,21 +97,20 @@ public class CutGenerator
 		try {txt.add(shellRm.rmDir(rpf.relativate(dirBat, dirTmp), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error(e);}
 		rawExtract(vf);
-		aac();
-		createMp4(sMp4);
+		
+		switch(audio)
+		{
+			case Mp3: txt.add(mp3ToAac.convert());break;
+			case Ac3: txt.add(ac3ToAac.convert(vf.getFileName().getValue()));break;
+		}
+		
+		createMp4(vf.getFileName().getValue(),sMp4);
 		cutList(vf.getCutListsSelected(),sMp4);
 		mergeMp4(vf.getCutListsSelected(),vf);
 		txt.add("");
 		txt.add("");
 	}
-	
-	private void aac()
-	{
-		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw_audio.mp3"));
-		String sAac = rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
-		txt.add(cmdLame+" --decode "+sMp3+" - | "+cmdFaac+" --mpeg-vers 4 -b 192 -o "+sAac+" -");
-	}
-	
+		
 	private void cutList(CutListsSelected clSelected, String fMp4)
 	{
 		txt.add("");
@@ -121,7 +136,7 @@ public class CutGenerator
 	private void mergeMp4(int index, CutList cl, VideoFile vf)
 	{
 		String fileName = vf.getFileName().getValue();
-		if(cl.isSetFileName()){fileName=cl.getFileName().getValue();}
+		if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
 		
 		StringBuffer sb = new StringBuffer();
 		if(cl.getCut().size()==1)
@@ -141,6 +156,7 @@ public class CutGenerator
 		else if(cl.getCut().size()>1)
 		{
 			sb.append(cmdMp4Box).append(" ");
+			switch(quality){case HD: sb.append("-fps 50 ");break;}
 			sb.append(rpf.relativate(dirBat, new File(dirTmp,index+"-1.mp4")));
 			sb.append(" ");
 			for(int i=2;i<=cl.getCut().size();i++)
@@ -177,22 +193,44 @@ public class CutGenerator
 		}
 	}
 	
-	private void createMp4(String sMp4)
+	private void createMp4(String vfName, String sMp4)
 	{
 		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw_video.h264"));
-		String sAac = rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
-		
-		txt.add(cmdMp4Box+" -add "+sH264+" -add "+sAac+" "+sMp4);
+		String sAudio=rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
+
+		StringBuffer sb = new StringBuffer();
+		sb.append(cmdMp4Box).append(" ");
+		switch(quality){case HD: sb.append("-fps 50 ");break;}
+		sb.append(" -add "+sH264+" -add "+sAudio+" "+sMp4);
+		txt.add(sb.toString());
 	}
 	
 	private void rawExtract(VideoFile vf)
 	{
-		String sIn = rpf.relativate(dirBat, new File(dirHqAvi,vf.getFileName().getValue()));
+		String sIn = rpf.relativate(dirBat, new File(dirAvi,vf.getFileName().getValue()));
 		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw.h264"));
 		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw.mp3"));
 		
-		txt.add(cmdMp4Box+" -aviraw video "+sIn+" -out "+sH264);
-		txt.add(cmdMp4Box+" -aviraw audio "+sIn+" -out "+sMp3);
+		StringBuffer sbVideo = new StringBuffer();
+		StringBuffer sbAudio = new StringBuffer();
+		
+		sbVideo.append(cmdMp4Box).append(" ");
+		sbAudio.append(cmdMp4Box).append(" ");
+		
+		switch(quality)
+		{
+			case HD: sbVideo.append("-fps 50 ");sbAudio.append("-fps 50 ");break;
+		}
+		
+		sbVideo.append("-aviraw video "+sIn+" -out "+sH264);
+		sbAudio.append("-aviraw audio "+sIn+" -out "+sMp3);
+		
+		txt.add(sbVideo.toString());
+		
+		switch(audio)
+		{
+			case Mp3: txt.add(sbAudio.toString());;break;
+		}
 	}
 	
 	public static synchronized String getSecond(double d)
