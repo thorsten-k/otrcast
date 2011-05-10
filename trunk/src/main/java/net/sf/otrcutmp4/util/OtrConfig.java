@@ -89,11 +89,11 @@ public class OtrConfig
 				
 				config.setProperty(dirHqAvi, "HQ.avi");
 				config.setProperty(dirHdAvi, "HD.avi");
-				config.setProperty(dirHdAvi, "HD.ac3");
-				config.setProperty(dirHqMp4, "HQ.mp4");
+				config.setProperty(dirHdAc3, "HD.ac3");
+				config.setProperty(dirHqMp4, "MP4");
 				config.setProperty(dirTmp, "tmp");
 				config.setProperty(dirBat, ".");
-				config.setProperty(dirBat, "OtrCutMp4.Tools");
+				config.setProperty(dirTools, "OtrCutMp4.Tools");
 				config.setProperty(dirCutlists, "Cutlists");
 				config.setProperty(dirMp4Rename, "Mp4.Cut.Rename");
 				

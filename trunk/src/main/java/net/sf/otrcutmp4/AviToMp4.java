@@ -75,6 +75,7 @@ public class AviToMp4
         if(line.hasOption("ac3"))
         {
         	logger.warn("Remember, the option ac3 is EXPERIMENTAL");
+        	logger.warn("http://otrcutmp4.sourceforge.net/future.html");
         	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error(e);}
         	audio = Audio.Ac3;
         }
