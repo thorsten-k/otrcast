@@ -6,9 +6,12 @@ import junit.framework.TestCase;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.HqAviToMp4.Audio;
+import net.sf.otrcutmp4.HqAviToMp4.Quality;
 import net.sf.otrcutmp4.batch.CutGenerator;
 import net.sf.otrcutmp4.batch.RenameGenerator;
 import net.sf.otrcutmp4.data.jaxb.VideoFiles;
+import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -39,7 +42,7 @@ public class TestBatchProcessor extends TestCase
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutGenerator test = new CutGenerator(config);
+		CutGenerator test = new CutGenerator(config,Quality.HQ,Audio.Mp3);
 		test.create(vFiles);
 	}
 	
