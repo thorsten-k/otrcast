@@ -9,7 +9,7 @@ import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.os.shell.ShellCmdRm;
-import net.sf.otrcutmp4.HqAviToMp4;
+import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.batch.audio.Mp3ToAac;
 import net.sf.otrcutmp4.data.jaxb.Cut;
@@ -27,12 +27,12 @@ public class CutGenerator
 {
 	static Log logger = LogFactory.getLog(CutGenerator.class);
 	
-	private File dirAvi,dirAc3,dirTmp,dirHqMp4,dirTools,dirBat;
+	private File dirAvi,dirTmp,dirHqMp4,dirTools,dirBat;
 	private ExlpTxtWriter txt;
 	private static DecimalFormat df;
 	
-	private HqAviToMp4.Quality quality;
-	private HqAviToMp4.Audio audio;
+	private AviToMp4.Quality quality;
+	private AviToMp4.Audio audio;
 	
 	private String cmdMp4Box,cmdFfmpeg;
 	private RelativePathFactory rpf;
@@ -43,7 +43,7 @@ public class CutGenerator
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
 	
-	public CutGenerator(Configuration config, HqAviToMp4.Quality quality, HqAviToMp4.Audio audio)
+	public CutGenerator(Configuration config, AviToMp4.Quality quality, AviToMp4.Audio audio)
 	{
 		this.quality=quality;
 		this.audio=audio;
@@ -101,7 +101,7 @@ public class CutGenerator
 		switch(audio)
 		{
 			case Mp3: txt.add(mp3ToAac.convert());break;
-			case Ac3: txt.add(ac3ToAac.convert(vf.getFileName().getValue()));break;
+			case Ac3: txt.add(ac3ToAac.convert(vf.getFileId().getValue()));break;
 		}
 		
 		createMp4(vf.getFileName().getValue(),sMp4);

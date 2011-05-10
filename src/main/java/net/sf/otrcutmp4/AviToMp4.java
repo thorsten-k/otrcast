@@ -24,9 +24,9 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class HqAviToMp4
+public class AviToMp4
 {
-	static Log logger = LogFactory.getLog(HqAviToMp4.class);
+	static Log logger = LogFactory.getLog(AviToMp4.class);
 	
 	public static enum Quality {HQ,HD}
 	public static enum Audio {Mp3,Ac3}
@@ -35,7 +35,7 @@ public class HqAviToMp4
 	private Options options;
 	private OtrConfig otrConfig;
 	
-	public HqAviToMp4()
+	public AviToMp4()
 	{
 		otrConfig = new OtrConfig();
 	}
@@ -74,7 +74,7 @@ public class HqAviToMp4
         }
         if(line.hasOption("ac3"))
         {
-        	logger.warn("Remember, this option is EXPERIMENTAL");
+        	logger.warn("Remember, the option ac3 is EXPERIMENTAL");
         	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error(e);}
         	audio = Audio.Ac3;
         }
@@ -171,7 +171,7 @@ public class HqAviToMp4
 	
 	public static void main(String args[])
 	{		
-		HqAviToMp4 hqToMp4 = new HqAviToMp4();	
+		AviToMp4 hqToMp4 = new AviToMp4();	
 		try {hqToMp4.parseArguments(args);}
 		catch (ParseException e) {logger.error(e.getMessage());hqToMp4.printHelp();}
 		catch (OtrConfigurationException e) {logger.error(e.getMessage());hqToMp4.printHelp();}

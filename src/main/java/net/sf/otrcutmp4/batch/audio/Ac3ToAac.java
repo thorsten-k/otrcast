@@ -21,9 +21,9 @@ public class Ac3ToAac
 		dirAc3 = new File(config.getString(OtrConfig.dirHdAc3));
 		dirBat = new File(config.getString(OtrConfig.dirBat));
 		
-		cmdFfmpeg = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
-		
 		rpf = new RelativePathFactory();
+		
+		cmdFfmpeg = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
 	}
 	
 	public String convert(String vName)
@@ -34,8 +34,10 @@ public class Ac3ToAac
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append(cmdFfmpeg);
-		sb.append("  -i ").append(sAc3);
-		sb.append(" -vn -r 30000/1001 -acodec libfaac -ac 6 -ar 48000 -ab 448k");
+		sb.append(" -i ").append(sAc3);
+		sb.append(" -vn -r 30000/1001");
+		sb.append(" -acodec aac -strict experimental");
+		sb.append(" -ac 6 -ar 48000 -ab 448k");
 		sb.append(" ").append(sAac);
 		
 		return sb.toString();
