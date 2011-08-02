@@ -34,7 +34,7 @@ public class Mp3ToAac
 		sb.append(cmdLame);
 		sb.append(" --decode ").append(sMp3);
 		sb.append(" - | ");
-		sb.append(cmdFaac+" --mpeg-vers 4 -b 192");
+		sb.append(cmdFaac+" --mpeg-vers 4 -b 192 ");
 		sb.append("-o "+sAac+" -");
 		
 		return sb.toString();
