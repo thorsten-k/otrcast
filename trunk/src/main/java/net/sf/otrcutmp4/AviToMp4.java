@@ -165,7 +165,7 @@ public class AviToMp4
 	{
 		LoggerInit loggerInit = new LoggerInit(logConfig);	
 		loggerInit.addAltPath("src/main/resources/config");
-		loggerInit.addAltPath("config");
+		loggerInit.addAltPath("otrcutmp4");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
 	}
