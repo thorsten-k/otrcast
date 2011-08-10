@@ -9,6 +9,7 @@ import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.os.shell.ShellCmdRm;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.batch.audio.Mp3ToAac;
@@ -90,29 +91,39 @@ public class CutGenerator
 	
 	private void crateForVideo(VideoFile vf)
 	{
-		String sMp4 = rpf.relativate(dirBat, new File(dirTmp,"mp4.mp4"));
-		
-		txt.add("echo Processing: "+vf.getFileName().getValue());
-		txt.add("");
-		try {txt.add(shellRm.rmDir(rpf.relativate(dirBat, dirTmp), true));}
-		catch (ExlpUnsupportedOsException e) {logger.error(e);}
-		rawExtract(vf);
-		
-		switch(audio)
+		if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList()
+				&& vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
 		{
-			case Mp3: txt.add(mp3ToAac.convert());break;
-			case Ac3: txt.add(ac3ToAac.convert(vf.getFileId().getValue()));break;
+			String sMp4 = rpf.relativate(dirBat, new File(dirTmp,"mp4.mp4"));
+			
+			txt.add("echo Processing: "+vf.getFileName().getValue());
+			txt.add("");
+			try {txt.add(shellRm.rmDir(rpf.relativate(dirBat, dirTmp), true));}
+			catch (ExlpUnsupportedOsException e) {logger.error(e);}
+			rawExtract(vf);
+			
+			switch(audio)
+			{
+				case Mp3: txt.add(mp3ToAac.convert());break;
+				case Ac3: txt.add(ac3ToAac.convert(vf.getFileId().getValue()));break;
+			}
+			
+			createMp4(vf.getFileName().getValue(),sMp4);
+			cutList(vf.getCutListsSelected(),sMp4);
+			mergeMp4(vf.getCutListsSelected(),vf);
+			txt.add("");
+			txt.add("");
 		}
-		
-		createMp4(vf.getFileName().getValue(),sMp4);
-		cutList(vf.getCutListsSelected(),sMp4);
-		mergeMp4(vf.getCutListsSelected(),vf);
-		txt.add("");
-		txt.add("");
+		else
+		{
+			txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
+			txt.add("");
+		}
 	}
 		
 	private void cutList(CutListsSelected clSelected, String fMp4)
 	{
+		JaxbUtil.debug(clSelected);
 		txt.add("");
 		int counter=1;
 		for(CutList cl : clSelected.getCutList())
