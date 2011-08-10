@@ -9,7 +9,6 @@ import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.os.shell.ShellCmdRm;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.batch.audio.Mp3ToAac;
@@ -123,7 +122,6 @@ public class CutGenerator
 		
 	private void cutList(CutListsSelected clSelected, String fMp4)
 	{
-		JaxbUtil.debug(clSelected);
 		txt.add("");
 		int counter=1;
 		for(CutList cl : clSelected.getCutList())

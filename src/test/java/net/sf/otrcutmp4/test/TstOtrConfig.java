@@ -3,11 +3,9 @@ package net.sf.otrcutmp4.test;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 public class TstOtrConfig
 {
@@ -21,7 +19,7 @@ public class TstOtrConfig
 		
 		ConfigLoader.add("src/test/resources/properties/user.properties");
 		ConfigLoader.add("src/test/resources/properties/user.otr.properties");
-		Configuration config = ConfigLoader.init();	
+		ConfigLoader.init();	
 				
 		String s = "c:\\TstAviProcessor.java";
 		logger.debug(s);
