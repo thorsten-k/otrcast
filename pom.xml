@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>     
+	
+	<groupId>net.sf.otrcutmp4</groupId>
+  <artifactId>otrcutmp4</artifactId>
+  <version>0.1.3</version>
+  <name>OTR AVI cut to MP4</name>
+  <packaging>pom</packaging>
+    
+	<description>otrcutmp4 is a utility for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
+	<url>https://sourceforge.net/projects/otrcutmp4/</url>
+
+    <properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
+	</properties>
+
+	<prerequisites>
+		<maven>2.0.9</maven>
+	</prerequisites>
+
+	
+	<issueManagement>
+	</issueManagement>
+
+	<modules>
+		<module>client</module>
+		<module>xml</module>
+	</modules>
+ 
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+
+  	<repositories>
+		<repository>
+			<id>sonatype.snapshot</id>
+			<name>Sonatype Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+	</repositories>
+
+</project>
