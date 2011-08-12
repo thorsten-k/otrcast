@@ -12,11 +12,11 @@ import net.sf.exlp.util.os.shell.ShellCmdRm;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.batch.audio.Mp3ToAac;
-import net.sf.otrcutmp4.data.jaxb.Cut;
-import net.sf.otrcutmp4.data.jaxb.CutList;
-import net.sf.otrcutmp4.data.jaxb.CutListsSelected;
-import net.sf.otrcutmp4.data.jaxb.VideoFile;
-import net.sf.otrcutmp4.data.jaxb.VideoFiles;
+import net.sf.otrcutmp4.model.xml.Cut;
+import net.sf.otrcutmp4.model.xml.CutList;
+import net.sf.otrcutmp4.model.xml.CutListsSelected;
+import net.sf.otrcutmp4.model.xml.VideoFile;
+import net.sf.otrcutmp4.model.xml.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;

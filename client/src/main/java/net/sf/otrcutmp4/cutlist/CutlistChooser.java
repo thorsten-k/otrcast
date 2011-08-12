@@ -9,12 +9,12 @@ import net.sf.exlp.event.impl.JaxbEvent;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerHttp;
 import net.sf.exlp.parser.LogParser;
-import net.sf.otrcutmp4.data.jaxb.CutList;
-import net.sf.otrcutmp4.data.jaxb.CutListsAvailable;
-import net.sf.otrcutmp4.data.jaxb.CutListsSelected;
-import net.sf.otrcutmp4.data.jaxb.VideoFile;
-import net.sf.otrcutmp4.data.jaxb.VideoFiles;
 import net.sf.otrcutmp4.exlp.parser.CutlistParser;
+import net.sf.otrcutmp4.model.xml.CutList;
+import net.sf.otrcutmp4.model.xml.CutListsAvailable;
+import net.sf.otrcutmp4.model.xml.CutListsSelected;
+import net.sf.otrcutmp4.model.xml.VideoFile;
+import net.sf.otrcutmp4.model.xml.VideoFiles;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

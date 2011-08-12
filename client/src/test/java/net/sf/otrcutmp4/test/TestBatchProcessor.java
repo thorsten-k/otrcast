@@ -10,7 +10,7 @@ import net.sf.otrcutmp4.AviToMp4.Audio;
 import net.sf.otrcutmp4.AviToMp4.Quality;
 import net.sf.otrcutmp4.batch.CutGenerator;
 import net.sf.otrcutmp4.batch.RenameGenerator;
-import net.sf.otrcutmp4.data.jaxb.VideoFiles;
+import net.sf.otrcutmp4.model.xml.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;

@@ -4,9 +4,9 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:com.fnf="http://www.fnf.com/xes">
 
-   	<jxb:bindings schemaLocation="otr.xsd" node="/xsd:schema">
+   	<jxb:bindings schemaLocation="../resources/xsd/otr.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="net.sf.otrcutmp4.data.jaxb"/>
+            <jxb:package name="net.sf.otrcutmp4.model.xml"/>
         </jxb:schemaBindings>
     </jxb:bindings>
         
