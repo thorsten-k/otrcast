@@ -2,10 +2,10 @@ package net.sf.otrcutmp4.util;
 
 import java.io.File;
 
-import net.sf.otrcutmp4.data.jaxb.FileId;
-import net.sf.otrcutmp4.data.jaxb.FileName;
-import net.sf.otrcutmp4.data.jaxb.VideoFile;
-import net.sf.otrcutmp4.data.jaxb.VideoFiles;
+import net.sf.otrcutmp4.model.xml.FileId;
+import net.sf.otrcutmp4.model.xml.FileName;
+import net.sf.otrcutmp4.model.xml.VideoFile;
+import net.sf.otrcutmp4.model.xml.VideoFiles;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

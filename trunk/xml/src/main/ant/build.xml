@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<project name="OTR"  basedir="../../../..">
+<project name="OTR-XML"  basedir="../../..">
 
 	<property name="src.dir" location="${basedir}/src/main/java" />
 	<property name="rsrc.dir" location="${basedir}/src/main/resources" />
@@ -26,7 +26,7 @@
 			<arg value="-extension"/>
 			<arg value="${xsd.dir}/otr.xsd"/>
 			<arg value="-d"/><arg value="${src.dir}"/>
-			<arg value="-b"/><arg value="${xsd.dir}/otr.xjb"/>
+			<arg value="-b"/><arg value="${rsrc.dir}/../ant/otr.xjb"/>
 			<classpath>
 				<pathelement location="${jaxb-api.lib}"/>
 				<pathelement location="${jaxb-impl.lib}"/>

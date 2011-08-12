@@ -9,9 +9,9 @@ import net.sf.exlp.event.impl.JaxbEvent;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.otrcutmp4.data.jaxb.Cut;
-import net.sf.otrcutmp4.data.jaxb.CutList;
-import net.sf.otrcutmp4.data.jaxb.FileName;
+import net.sf.otrcutmp4.model.xml.Cut;
+import net.sf.otrcutmp4.model.xml.CutList;
+import net.sf.otrcutmp4.model.xml.FileName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
