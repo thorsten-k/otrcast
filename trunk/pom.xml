@@ -28,6 +28,7 @@
 	<modules>
 		<module>client</module>
 		<module>xml</module>
+		<module>util</module>
 	</modules>
  
 	<dependencyManagement>
