@@ -6,7 +6,7 @@
 //
 
 
-package net.sf.otrcutmp4.model.xml;
+package net.sf.otrcutmp4.model.xml.cut;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "cutList"
 })
-@XmlRootElement(name = "cutListsSelected")
-public class CutListsSelected
+@XmlRootElement(name = "cutListsAvailable")
+public class CutListsAvailable
     implements Serializable
 {
 

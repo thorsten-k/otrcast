@@ -8,7 +8,7 @@ import net.sf.otrcutmp4.batch.RenameGenerator;
 import net.sf.otrcutmp4.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.model.xml.VideoFiles;
+import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.SrcDirProcessor;
 

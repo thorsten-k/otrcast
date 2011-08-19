@@ -6,7 +6,7 @@
 //
 
 
-package net.sf.otrcutmp4.model.xml;
+package net.sf.otrcutmp4.model.xml.cut;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

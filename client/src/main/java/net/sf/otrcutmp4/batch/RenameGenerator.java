@@ -6,9 +6,9 @@ import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdMove;
-import net.sf.otrcutmp4.model.xml.CutList;
-import net.sf.otrcutmp4.model.xml.VideoFile;
-import net.sf.otrcutmp4.model.xml.VideoFiles;
+import net.sf.otrcutmp4.model.xml.cut.CutList;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;
