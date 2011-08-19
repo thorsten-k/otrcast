@@ -1,0 +1,23 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net/series"
+    xmlns:s="http://otrcutmp4.sf.net/series"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:element name="series">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="season">
+        <xsd:complexType>
+            <xsd:attribute name="nr" type="xsd:int"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="episode">
+        <xsd:complexType>
+            <xsd:attribute name="nr" type="xsd:int"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

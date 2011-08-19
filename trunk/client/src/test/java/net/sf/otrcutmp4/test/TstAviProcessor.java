@@ -5,7 +5,7 @@ import java.io.File;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.VideoFiles;
+import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.SrcDirProcessor;
 import net.sf.otrcutmp4.util.OtrConfig;
 

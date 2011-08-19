@@ -1,12 +1,14 @@
 <xsd:schema targetNamespace="http://otr.hekit.de"
     xmlns:otr="http://otr.hekit.de"
     xmlns:u="http://otrcutmp4.sf.net/user"
+    xmlns:s="http://otrcutmp4.sf.net/series"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     elementFormDefault="qualified" attributeFormDefault="unqualified"
     jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
     <xsd:import namespace="http://otrcutmp4.sf.net/user" schemaLocation="otr/user.xsd"/>
+    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="otr/series.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>
             <jaxb:globalBindings generateIsSetMethod="true">

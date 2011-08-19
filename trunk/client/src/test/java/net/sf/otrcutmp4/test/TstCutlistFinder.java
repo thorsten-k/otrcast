@@ -8,7 +8,7 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.cutlist.CutlistFinder;
-import net.sf.otrcutmp4.model.xml.VideoFiles;
+import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;

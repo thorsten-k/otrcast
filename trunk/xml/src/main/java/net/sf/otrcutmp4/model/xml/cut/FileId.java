@@ -6,7 +6,7 @@
 //
 
 
-package net.sf.otrcutmp4.model.xml;
+package net.sf.otrcutmp4.model.xml.cut;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -36,8 +36,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "author")
-public class Author
+@XmlRootElement(name = "fileId")
+public class FileId
     implements Serializable
 {
 
