@@ -1,12 +1,14 @@
-<xsd:schema targetNamespace="http://otr.hekit.de"
-    xmlns:otr="http://otr.hekit.de"
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net"
+    xmlns:otr="http://otrcutmp4.sf.net"
     xmlns:u="http://otrcutmp4.sf.net/user"
+    xmlns:c="http://otrcutmp4.sf.net/cut"
     xmlns:s="http://otrcutmp4.sf.net/series"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     elementFormDefault="qualified" attributeFormDefault="unqualified"
     jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+    <xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="otr/cut.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/user" schemaLocation="otr/user.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="otr/series.xsd"/>
     <xsd:annotation>
@@ -16,92 +18,4 @@
             </jaxb:globalBindings>
         </xsd:appinfo>
     </xsd:annotation>
-    <xsd:element name="videoFiles">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="otr:videoFile" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="videoFile">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="otr:fileId" maxOccurs="1"/>
-                <xsd:element ref="otr:fileName" maxOccurs="1"/>
-                <xsd:element ref="otr:cutListsAvailable" maxOccurs="1"/>
-                <xsd:element ref="otr:cutListsSelected" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="cutListsAvailable">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="otr:cutList" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="cutListsSelected">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="otr:cutList" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="cutList">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="otr:name" maxOccurs="1"/>
-                <xsd:element ref="otr:comment" maxOccurs="1"/>
-                <xsd:element ref="otr:author" maxOccurs="1"/>
-                <xsd:element ref="otr:cut" maxOccurs="unbounded"/>
-                <xsd:element ref="otr:fileName" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:string"/>
-            <xsd:attribute name="rating" type="xsd:double"/>
-            <xsd:attribute name="ratingCount" type="xsd:int"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="cut">
-        <xsd:complexType>
-            <xsd:attribute name="id" type="xsd:string"/>
-            <xsd:attribute name="include" type="xsd:boolean"/>
-            <xsd:attribute name="start" type="xsd:double"/>
-            <xsd:attribute name="duration" type="xsd:double"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="fileId">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string"/>
-            </xsd:simpleContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="name">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string"/>
-            </xsd:simpleContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="comment">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string"/>
-            </xsd:simpleContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="author">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string"/>
-            </xsd:simpleContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="fileName">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string"/>
-            </xsd:simpleContent>
-        </xsd:complexType>
-    </xsd:element>
 </xsd:schema>
