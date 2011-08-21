@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.web.rest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.model.xml.user.User;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
@@ -34,7 +35,7 @@ public class TstRestSeries
 		logger.debug("Response: "+s);
 	}
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws ExlpConfigurationException
 	{
 		OtrClientTstBootstrap.init();
 		TstRestSeries rest = new TstRestSeries();
