@@ -5,6 +5,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.model.xml.user.User;
+import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,13 +30,13 @@ public class TstRestSeries
 	
 	public void test()
 	{
-		String s = gae.path("rest").path("series/resolve/xx").get(String.class);
+		String s = gae.path("rest").path("series/resolve/xx7").get(String.class);
 		logger.debug("Response: "+s);
 	}
 	
 	public static void main(String[] args)
 	{
-		OtrCutMp4Bootstrap.initLogger();
+		OtrClientTstBootstrap.init();
 		TstRestSeries rest = new TstRestSeries();
 		rest.test();
 
