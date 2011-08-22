@@ -33,4 +33,21 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="tags">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:tag" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tag">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:otrId" maxOccurs="1"/>
+                <xsd:element ref="s:episode" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="withBegin" type="xsd:boolean"/>
+            <xsd:attribute name="withEnd" type="xsd:boolean"/>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

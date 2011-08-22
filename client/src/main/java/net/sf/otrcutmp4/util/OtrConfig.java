@@ -14,7 +14,6 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 public class OtrConfig
 {
 	static Log logger = LogFactory.getLog(OtrConfig.class);
@@ -35,6 +34,8 @@ public class OtrConfig
 	public static final String toolLame = "tool.lame";
 	public static final String toolFfmpeg = "tool.ffmpeg";
 	public static final String toolFaac = "tool.faac";
+	
+	public static final String urlOtrSeries = "url.otrseries";
 	
 	private List<String> lDirectotries,lTools;
 	
