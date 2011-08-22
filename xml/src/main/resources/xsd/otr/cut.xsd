@@ -1,8 +1,10 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/cut"
     xmlns:c="http://otrcutmp4.sf.net/cut"
+    xmlns:s="http://otrcutmp4.sf.net/series"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
     <xsd:element name="videoFiles">
         <xsd:complexType>
             <xsd:sequence>
@@ -13,7 +15,7 @@
     <xsd:element name="videoFile">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="c:fileId" maxOccurs="1"/>
+                <xsd:element ref="s:otrId" maxOccurs="1"/>
                 <xsd:element ref="c:fileName" maxOccurs="1"/>
                 <xsd:element ref="c:cutListsAvailable" maxOccurs="1"/>
                 <xsd:element ref="c:cutListsSelected" maxOccurs="1"/>
@@ -54,13 +56,6 @@
             <xsd:attribute name="include" type="xsd:boolean"/>
             <xsd:attribute name="start" type="xsd:double"/>
             <xsd:attribute name="duration" type="xsd:double"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="fileId">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string"/>
-            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="name">

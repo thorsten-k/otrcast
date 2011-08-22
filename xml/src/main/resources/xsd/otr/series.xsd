@@ -10,14 +10,27 @@
     </xsd:element>
     <xsd:element name="season">
         <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:series" maxOccurs="unbounded"/>
+            </xsd:sequence>
             <xsd:attribute name="nr" type="xsd:int"/>
             <xsd:attribute name="name" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="episode">
         <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:season" maxOccurs="unbounded"/>
+            </xsd:sequence>
             <xsd:attribute name="nr" type="xsd:int"/>
             <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="otrId">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string"/>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

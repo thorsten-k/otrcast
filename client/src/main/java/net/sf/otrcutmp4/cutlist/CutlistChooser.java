@@ -77,7 +77,7 @@ public class CutlistChooser
 	private void chooseCutlist(VideoFile vf,boolean loadCutlist)
 	{
 		logger.info("");
-		logger.info(vf.getFileId().getValue());
+		logger.info(vf.getOtrId().getValue());
 		for(int i=0;i<vf.getCutListsAvailable().getCutList().size();i++)
 		{
 			CutList cl = vf.getCutListsAvailable().getCutList().get(i);
