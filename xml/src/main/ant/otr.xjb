@@ -6,7 +6,7 @@
 
    	<jxb:bindings schemaLocation="../resources/xsd/otr.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="net.sf.otrcutmp4.model.xml"/>
+            <jxb:package name="net.sf.otrcutmp4.model.xml.otr"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

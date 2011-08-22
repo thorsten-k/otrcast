@@ -1,11 +1,14 @@
 package net.sf.otrcutmp4.web.rest;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
-import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
-import net.sf.otrcutmp4.model.xml.user.User;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.model.xml.otr.Otr;
+import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
 import org.apache.commons.logging.Log;
@@ -29,17 +32,45 @@ public class TstRestSeries
 		gae = client.resource(UriBuilder.fromUri("http://otr-series.appspot.com").build());
 	}
 	
-	public void test()
+	public void all()
 	{
-		String s = gae.path("rest").path("series/resolve/xx7").get(String.class);
-		logger.debug("Response: "+s);
+		Otr otr = gae.path("rest").path("series/all").get(Otr.class);
+		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
+	}
+	
+	public void addSeries()
+	{
+		Series series = new Series();
+		series.setName("Tatort");
+		
+		Series response = gae.path("rest").path("series/addSeries").post(Series.class, series);
+		JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
+	}
+	
+	public void addEpisode()
+	{
+		Series series = new Series();
+		series.setId(1);
+		
+		Season season = new Season();
+		season.setSeries(series);
+		season.setNr(1);
+		
+		Episode episode = new Episode();
+		episode.setName("Test");
+		episode.setNr(1);
+		episode.setSeason(season);
+		
+		Series response = gae.path("rest").path("series/addEpisode").post(Series.class, episode);
+		JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
 	}
 	
 	public static void main(String[] args) throws ExlpConfigurationException
 	{
 		OtrClientTstBootstrap.init();
 		TstRestSeries rest = new TstRestSeries();
-		rest.test();
-
+		rest.all();
+		rest.addSeries();
+		rest.addEpisode();
 	}
 }
