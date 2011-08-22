@@ -46,8 +46,10 @@ public class CutlistFinder
 	
 	private void searchCutlist(VideoFile vf)
 	{
-		logger.info("Searching for "+vf.getOtrId().getValue());
-		String sUrl = "http://cutlist.at/getxml.php?name="+vf.getOtrId().getValue();
+		StringBuffer sb = new StringBuffer();
+		sb.append(vf.getOtrId().getName()).append(".").append(vf.getOtrId().getType());
+		logger.info("Searching for "+sb);
+		String sUrl = "http://cutlist.at/getxml.php?name="+sb;
 		
 		EhResultContainer leh = new EhResultContainer();
 		LogParser lp = new XmlParser(leh);

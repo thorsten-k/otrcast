@@ -3,7 +3,9 @@ package net.sf.otrcutmp4.web.rest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
+import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.user.User;
 
 import org.apache.commons.logging.Log;
@@ -14,13 +16,13 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class TstGaeRest
+public class TstRestUser
 {
-	static Log logger = LogFactory.getLog(TstGaeRest.class);
+	static Log logger = LogFactory.getLog(TstRestUser.class);
 	
 	private WebResource gae;
 	
-	public TstGaeRest()
+	public TstRestUser()
 	{	
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
@@ -32,13 +34,14 @@ public class TstGaeRest
 		User user = new User();
 		user.setEmail("t.kisner@web.de");
 		
-		gae.path("rest").path("user/register").post(user);
+		user = gae.path("rest").path("user/register").post(User.class, user);
+		JaxbUtil.debug2(this.getClass(), user, new OtrCutNsPrefixMapper());
 	}
 	
 	public static void main(String[] args)
 	{
 //		OtrCutMp4Bootstrap.initLogger();
-		TstGaeRest rest = new TstGaeRest();
+		TstRestUser rest = new TstRestUser();
 		rest.test();
 
 	}
