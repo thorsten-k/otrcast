@@ -104,7 +104,7 @@ public class CutGenerator
 			switch(audio)
 			{
 				case Mp3: txt.add(mp3ToAac.convert());break;
-				case Ac3: txt.add(ac3ToAac.convert(vf.getOtrId().getValue()));break;
+				case Ac3: txt.add(ac3ToAac.convert(vf.getOtrId().getName()+"."+vf.getOtrId().getType()));break;
 			}
 			
 			createMp4(vf.getFileName().getValue(),sMp4);

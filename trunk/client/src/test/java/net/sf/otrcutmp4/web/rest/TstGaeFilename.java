@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.web.rest;
 
 import java.io.File;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
@@ -45,9 +46,11 @@ public class TstGaeFilename
 		JaxbUtil.debug2(this.getClass(), vFiles, new OtrCutNsPrefixMapper());
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			String id = vf.getOtrId().getValue();
-			Tags tags = gae.path("rest").path("series/tags/"+id).get(Tags.class);
+			String id = vf.getOtrId().getName()+"."+vf.getOtrId().getType();
+			
+			Tags tags = gae.path("rest").path("series/tags/"+id).accept(MediaType.APPLICATION_XML).get(Tags.class);
 			logger.debug(id+" Response: "+tags.getTag().size());
+			
 		}
 	}
 	

@@ -12,6 +12,9 @@ import org.apache.commons.logging.LogFactory;
 
 public class SrcDirProcessor
 {
+	private static final String typeAvi = "mpg.HQ.avi";
+	private static final String typeMp4 = "mpg.cut.mp4";
+	
 	public static enum VideType {avi,mp4}
 	
 	static Log logger = LogFactory.getLog(SrcDirProcessor.class);
@@ -85,7 +88,8 @@ public class SrcDirProcessor
 		OtrId fId = new OtrId();
 		
 		String fileName = fName.getValue();
-		fId.setValue(fileName.substring(0, fileName.lastIndexOf(".avi")));
+		fId.setName(fileName.substring(0, fileName.lastIndexOf("."+typeAvi)));
+		fId.setType(typeAvi);
 		
 		return fId;
 	}
@@ -96,9 +100,9 @@ public class SrcDirProcessor
 		
 		String fileName = fName.getValue();
 		int indexFrom = fileName.indexOf("_")+1;
-		int indexTo = fileName.lastIndexOf(".cut.mp4");
-		fId.setValue(fileName.substring(indexFrom, indexTo));
-		
+		int indexTo = fileName.lastIndexOf("."+typeMp4);
+		fId.setName(fileName.substring(indexFrom, indexTo));
+		fId.setType(typeMp4);
 		return fId;
 	}
 }
