@@ -7,6 +7,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.SeriesTagger;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
@@ -30,10 +31,13 @@ public class TstGaeFilename
 	
 	private WebResource gae;
 	private Configuration config;
+	private SeriesTagger tagger;
 	
 	public TstGaeFilename(Configuration config)
 	{	
 		this.config=config;
+		tagger = new SeriesTagger(config);
+		
 		ClientConfig cc = new DefaultClientConfig();
 		Client client = Client.create(cc);
 		gae = client.resource(UriBuilder.fromUri(config.getString(OtrConfig.urlOtrSeries)).build());
@@ -46,11 +50,11 @@ public class TstGaeFilename
 		JaxbUtil.debug2(this.getClass(), vFiles, new OtrCutNsPrefixMapper());
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			String id = vf.getOtrId().getName()+"."+vf.getOtrId().getType();
+			String id = vf.getOtrId().getName();
 			
 			Tags tags = gae.path("rest").path("series/tags/"+id).accept(MediaType.APPLICATION_XML).get(Tags.class);
-			logger.debug(id+" Response: "+tags.getTag().size());
 			
+			logger.debug(id+" Response: "+tags.getTag().size());
 		}
 	}
 	

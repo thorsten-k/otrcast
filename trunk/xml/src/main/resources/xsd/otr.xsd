@@ -18,4 +18,11 @@
             </jaxb:globalBindings>
         </xsd:appinfo>
     </xsd:annotation>
+    <xsd:element name="otr">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:series" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
