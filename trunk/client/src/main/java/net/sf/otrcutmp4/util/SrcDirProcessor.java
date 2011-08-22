@@ -2,10 +2,10 @@ package net.sf.otrcutmp4.util;
 
 import java.io.File;
 
-import net.sf.otrcutmp4.model.xml.cut.FileId;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.OtrId;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,8 +49,8 @@ public class SrcDirProcessor
 				fName.setValue(f.getName());
 				vf.setFileName(fName);
 				
-				FileId fId = getFileId(fName);
-				vf.setFileId(fId);
+				OtrId fId = getFileId(fName);
+				vf.setOtrId(fId);
 				
 				result.getVideoFile().add(vf);
 			}
@@ -69,9 +69,9 @@ public class SrcDirProcessor
 		return result;
 	}
 	
-	private FileId getFileId(FileName fName)
+	private OtrId getFileId(FileName fName)
 	{
-		FileId fId = null;
+		OtrId fId = null;
 		switch(vType)
 		{
 			case avi: fId=getAviId(fName);break;
@@ -80,9 +80,9 @@ public class SrcDirProcessor
 		return fId;
 	}
 	
-	private FileId getAviId(FileName fName)
+	private OtrId getAviId(FileName fName)
 	{
-		FileId fId = new FileId();
+		OtrId fId = new OtrId();
 		
 		String fileName = fName.getValue();
 		fId.setValue(fileName.substring(0, fileName.lastIndexOf(".avi")));
@@ -90,9 +90,9 @@ public class SrcDirProcessor
 		return fId;
 	}
 	
-	private FileId getMp4Id(FileName fName)
+	private OtrId getMp4Id(FileName fName)
 	{
-		FileId fId = new FileId();
+		OtrId fId = new OtrId();
 		
 		String fileName = fName.getValue();
 		int indexFrom = fileName.indexOf("_")+1;

@@ -8,6 +8,7 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.SrcDirProcessor;
@@ -40,12 +41,12 @@ public class TstGaeFilename
 	{
 		SrcDirProcessor aviProcessor = new SrcDirProcessor();
 		VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi);
+		JaxbUtil.debug2(this.getClass(), vFiles, new OtrCutNsPrefixMapper());
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			String id = vf.getFileId().getValue();
+			String id = vf.getOtrId().getValue();
 			String s = gae.path("rest").path("series/resolve/"+id).get(String.class);
 			logger.debug(id+" Response: "+s);
-			
 		}
 	}
 	
@@ -54,6 +55,5 @@ public class TstGaeFilename
 		Configuration config = OtrClientTstBootstrap.init();
 		TstGaeFilename rest = new TstGaeFilename(config);
 		rest.test();
-
 	}
 }
