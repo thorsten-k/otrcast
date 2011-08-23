@@ -3,8 +3,21 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:element name="category">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:series" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="series">
         <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:category" maxOccurs="1"/>
+                <xsd:element ref="s:season" maxOccurs="unbounded"/>
+            </xsd:sequence>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="id" type="xsd:long"/>
         </xsd:complexType>
@@ -13,6 +26,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="s:series" maxOccurs="1"/>
+                <xsd:element ref="s:episode" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="nr" type="xsd:int"/>
             <xsd:attribute name="name" type="xsd:string"/>
