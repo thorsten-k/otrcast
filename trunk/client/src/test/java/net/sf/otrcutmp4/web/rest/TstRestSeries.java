@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4.web.rest;
 
+import java.io.FileNotFoundException;
+
 import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
@@ -11,8 +13,10 @@ import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.jaxb.Category;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -23,13 +27,15 @@ public class TstRestSeries
 {
 	static Log logger = LogFactory.getLog(TstRestSeries.class);
 	
+	private Configuration config;
 	private WebResource gae;
 	
-	public TstRestSeries()
+	public TstRestSeries(Configuration config)
 	{	
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		gae = client.resource(UriBuilder.fromUri("http://otr-series.appspot.com").build());
+		this.config=config;
+		ClientConfig cc = new DefaultClientConfig();
+		Client client = Client.create(cc);
+		gae = client.resource(UriBuilder.fromUri(config.getString(OtrClientTstBootstrap.cfgUrlGae)).build());
 	}
 	
 	public void all()
@@ -45,6 +51,13 @@ public class TstRestSeries
 		
 		Series response = gae.path("rest").path("series/addSeries").post(Series.class, series);
 		JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
+	}
+	
+	public void addCategories() throws FileNotFoundException
+	{	
+		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrClientTstBootstrap.cfgXmlCategories), Otr.class);
+			
+		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
 	}
 	
 	public void addEpisode()
@@ -65,12 +78,14 @@ public class TstRestSeries
 		JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
 	}
 	
-	public static void main(String[] args) throws ExlpConfigurationException
+	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException
 	{
-		OtrClientTstBootstrap.init();
-		TstRestSeries rest = new TstRestSeries();
-		rest.all();
-		rest.addSeries();
-		rest.addEpisode();
+		Configuration config = OtrClientTstBootstrap.init();
+		TstRestSeries rest = new TstRestSeries(config);
+//		rest.all();
+//		rest.addSeries();
+//		rest.addEpisode();
+		
+		rest.addCategories();
 	}
 }

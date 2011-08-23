@@ -22,6 +22,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="s:series" maxOccurs="unbounded"/>
+                <xsd:element ref="s:category" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

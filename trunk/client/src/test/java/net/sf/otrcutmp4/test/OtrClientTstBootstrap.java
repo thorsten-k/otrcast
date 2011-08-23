@@ -6,11 +6,18 @@ import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class OtrClientTstBootstrap
 {
+	static Log logger = LogFactory.getLog(OtrClientTstBootstrap.class);
+	
 	private static final String appCode="otrcutmp4-client";
 	private static final String confCode="test";
+	
+	public static final String cfgUrlGae = "url.otrseries";
+	public static final String cfgXmlCategories = "xml.categories";
 	
 	public static Configuration init() throws ExlpConfigurationException
 	{
