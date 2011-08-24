@@ -8,6 +8,7 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.otr.Otr;
+import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -16,7 +17,6 @@ import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.data.jaxb.Category;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -56,7 +56,10 @@ public class TstRestSeries
 	public void addCategories() throws FileNotFoundException
 	{	
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrClientTstBootstrap.cfgXmlCategories), Otr.class);
-			
+		for(Category category : otr.getCategory())
+		{
+			category = gae.path("rest").path("series/addCategory").post(Category.class, category);
+		}
 		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
 	}
 	
