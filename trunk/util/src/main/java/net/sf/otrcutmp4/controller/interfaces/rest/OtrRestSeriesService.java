@@ -9,13 +9,13 @@ import net.sf.otrcutmp4.model.xml.series.Tags;
 
 public interface OtrRestSeriesService
 {
-	public Tags getTags(String fileName);
-	
+	public Tags getTags(String otrId);
 	public Tag tag(long episodeId, String otrName);
 	
+	public Otr allSeries();
 	public Series series(long seriesId);
 	
-	public Otr allSeries();
+	
 	
 	public Category addCategory(Category category);
 	public Series addSeries(Series series);
