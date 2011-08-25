@@ -66,6 +66,26 @@ public class AviToMp4
         CutlistFinder clFinder = new CutlistFinder();
         CutlistChooser clChooser = new CutlistChooser();
         
+        VideoFiles vFiles = null;
+        
+        if(line.hasOption("hq"))
+        {
+        	vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+        }
+        else if(line.hasOption("hd"))
+        {
+        	aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHdAvi)),SrcDirProcessor.VideType.avi); 
+        }
+        
+        if(line.hasOption("tag"))
+        {
+        	if(vFiles!=null)
+        	{
+        		
+        	}
+        	return;
+        }
+        
         Audio audio = Audio.Mp3;
         if(line.hasOption("ac3") && !line.hasOption("hd"))
         {
@@ -84,7 +104,7 @@ public class AviToMp4
         {
         	CutGenerator batch = new CutGenerator(config,Quality.HQ,Audio.Mp3);
         	
-        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+        	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles);
@@ -93,7 +113,6 @@ public class AviToMp4
         {
         	CutGenerator batch = new CutGenerator(config,Quality.HD,audio);
         	
-        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHdAvi)),SrcDirProcessor.VideType.avi); 
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles);
@@ -102,7 +121,7 @@ public class AviToMp4
         {
         	RenameGenerator batch = new RenameGenerator(config);
         	
-        	VideoFiles vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
+        	vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);
             clChooser.setRenameOutput();
             vFiles = clChooser.chooseFileRename(vFiles);
