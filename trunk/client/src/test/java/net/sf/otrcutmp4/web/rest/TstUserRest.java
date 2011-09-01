@@ -16,13 +16,13 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class TstRestUser
+public class TstUserRest
 {
-	static Log logger = LogFactory.getLog(TstRestUser.class);
+	static Log logger = LogFactory.getLog(TstUserRest.class);
 	
 	private WebResource gae;
 	
-	public TstRestUser()
+	public TstUserRest()
 	{	
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
@@ -41,7 +41,7 @@ public class TstRestUser
 	public static void main(String[] args)
 	{
 //		OtrCutMp4Bootstrap.initLogger();
-		TstRestUser rest = new TstRestUser();
+		TstUserRest rest = new TstUserRest();
 		rest.test();
 
 	}
