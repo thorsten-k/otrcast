@@ -7,7 +7,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.series.Tag;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 
-public interface OtrRestSeriesService
+public interface OtrSeriesRestService
 {
 	public Tags getTags(String otrId);
 	public Tag tag(long episodeId, String otrName);

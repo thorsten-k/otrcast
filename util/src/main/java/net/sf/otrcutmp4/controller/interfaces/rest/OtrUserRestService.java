@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.interfaces.rest;
 
 import net.sf.otrcutmp4.model.xml.user.User;
 
-public interface OtrRestUserService
+public interface OtrUserRestService
 {
 	public User register(User user);
 }

@@ -14,7 +14,7 @@ import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.util.OtrBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -41,7 +41,7 @@ public class RestSeedData
 		
 		ClientConfig cc = new DefaultClientConfig();
 		Client client = Client.create(cc);
-		gae = client.resource(UriBuilder.fromUri(config.getString(OtrClientTstBootstrap.cfgUrlGae)).build());
+		gae = client.resource(UriBuilder.fromUri(config.getString(OtrBootstrap.cfgUrlGae)).build());
 	}
 	
 	public void all()
@@ -52,7 +52,7 @@ public class RestSeedData
 		
 	public void addCategories() throws FileNotFoundException
 	{	
-		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrClientTstBootstrap.cfgXmlCategories), Otr.class);
+		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlCategories), Otr.class);
 		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
 		for(Category category : otr.getCategory())
 		{
@@ -62,7 +62,7 @@ public class RestSeedData
 	
 	public void addSeries() throws FileNotFoundException
 	{
-		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrClientTstBootstrap.cfgXmlSeries), Otr.class);
+		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlSeries), Otr.class);
 		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
 		for(Series series : otr.getSeries())
 		{
@@ -73,7 +73,7 @@ public class RestSeedData
 	
 	public void addEpisode() throws FileNotFoundException
 	{
-		File dirEpisodes = new File(config.getString(OtrClientTstBootstrap.cfgXmlEpisodes));
+		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
 		for(File f : dirEpisodes.listFiles())
 		{
 			Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
@@ -97,7 +97,7 @@ public class RestSeedData
 	
 	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrBootstrap.init();
 		RestSeedData rest = new RestSeedData(config);
 //		rest.all();
 		

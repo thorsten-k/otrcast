@@ -3,14 +3,14 @@ package net.sf.otrcutmp4.controller.rest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
-import net.sf.otrcutmp4.controller.interfaces.rest.OtrRestSeriesService;
+import net.sf.otrcutmp4.controller.interfaces.rest.OtrSeriesRestService;
 import net.sf.otrcutmp4.model.xml.otr.Otr;
 import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.series.Tag;
 import net.sf.otrcutmp4.model.xml.series.Tags;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.util.OtrBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -21,7 +21,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class RestSeriesClient implements OtrRestSeriesService
+public class RestSeriesClient implements OtrSeriesRestService
 {
 	static Log logger = LogFactory.getLog(RestSeriesClient.class);
 	
@@ -31,7 +31,7 @@ public class RestSeriesClient implements OtrRestSeriesService
 	{	
 		ClientConfig cc = new DefaultClientConfig();
 		Client client = Client.create(cc);
-		gae = client.resource(UriBuilder.fromUri(config.getString(OtrClientTstBootstrap.cfgUrlGae)).build());
+		gae = client.resource(UriBuilder.fromUri(config.getString(OtrBootstrap.cfgUrlGae)).build());
 	}
 	
 	@Override
