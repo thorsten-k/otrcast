@@ -1,14 +1,13 @@
-package net.sf.otrcutmp4.test;
+package net.sf.otrcutmp4.controller.cutlist;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.io.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.cutlist.CutlistChooser;
-import net.sf.otrcutmp4.cutlist.CutlistFinder;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -20,24 +19,26 @@ public class TstCutlistFinder
 	static Log logger = LogFactory.getLog(TstCutlistFinder.class);
 	
 	private Configuration config;
+	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstCutlistFinder(Configuration config)
 	{
 		this.config=config;
+		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
-	public void findCl(String type) throws FileNotFoundException
+	public void findCl() throws FileNotFoundException
 	{
-		String xmlIn = config.getString("xml.test."+type+".1");
+		String xmlIn = config.getString("test.xml.aviprocessor.cut");
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
 		CutlistFinder finder = new CutlistFinder();
 		vFiles = finder.searchCutlist(vFiles);
-		JaxbUtil.debug(this.getClass(),vFiles);
+		JaxbUtil.debug2(this.getClass(), vFiles, nsPrefixMapper);
 		
-		String xmlOut = config.getString("xml.test."+type+".2");
-		JaxbUtil.save(new File(xmlOut), vFiles, true);
+		String xmlOut = config.getString("test.xml.cutlistfinder");
+		JaxbUtil.save(new File(xmlOut), vFiles, nsPrefixMapper, true);
 	}
 	
 	public void chooseCl(String type) throws FileNotFoundException, InterruptedException
@@ -64,18 +65,12 @@ public class TstCutlistFinder
 	
 	public static void main(String args[]) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();
-		
-		ConfigLoader.add("src/test/resources/properties/user.otr.properties");
-		ConfigLoader.add("src/test/resources/properties/user.properties");
-		Configuration config = ConfigLoader.init();
+		Configuration config = OtrClientTstBootstrap.init();
 		
 		TstCutlistFinder test = new TstCutlistFinder(config);
-//		test.findCl("cut");
+		test.findCl();
 //		test.findCl("rename");
 //		test.chooseCl("cut");
-		test.chooseCl("rename");
+//		test.chooseCl("rename");
 	}
 }

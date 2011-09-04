@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.cutlist;
+package net.sf.otrcutmp4.controller.cutlist;
 
 import java.util.List;
 import java.util.NoSuchElementException;

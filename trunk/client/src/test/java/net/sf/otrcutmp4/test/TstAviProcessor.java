@@ -2,12 +2,15 @@ package net.sf.otrcutmp4.test;
 
 import java.io.File;
 
-import net.sf.exlp.util.io.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
+import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.util.SrcDirProcessor;
+import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.view.cli.CliView;
+import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -19,26 +22,30 @@ public class TstAviProcessor
 	static Log logger = LogFactory.getLog(TstAviProcessor.class);
 	
 	private Configuration config;
+	private ViewInterface view;
+	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstAviProcessor(Configuration config)
 	{
 		this.config=config;
+		view = new CliView();
+		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
 	public void cut()
 	{
-		SrcDirProcessor test = new SrcDirProcessor();
+		SrcDirProcessor test = new SrcDirProcessor(view);
 		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+		JaxbUtil.debug2(this.getClass(), videoFiles, nsPrefixMapper);
 		
-		JaxbUtil.debug(TstAviProcessor.class,videoFiles);
-		String xmlFile = config.getString("xml.test.cut.1");
+		String xmlFile = config.getString("test.xml.aviprocessor.cut");
 		logger.debug("Saving to file: "+xmlFile);
-		JaxbUtil.save(new File(xmlFile), videoFiles, true);
+		JaxbUtil.save(new File(xmlFile), videoFiles, nsPrefixMapper, true);
 	}
 	
 	public void rename()
 	{
-		SrcDirProcessor test = new SrcDirProcessor();
+		SrcDirProcessor test = new SrcDirProcessor(view);
 		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
 		
 		JaxbUtil.debug(TstAviProcessor.class,videoFiles);
@@ -47,18 +54,12 @@ public class TstAviProcessor
 		JaxbUtil.save(new File(xmlFile), videoFiles, true);
 	}
 	
-	public static void main(String args[])
+	public static void main(String args[]) throws ExlpConfigurationException
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();
-		
-		ConfigLoader.add("src/test/resources/properties/user.properties");
-		ConfigLoader.add("src/test/resources/properties/user.otr.properties");
-		Configuration config = ConfigLoader.init();	
+		Configuration config = OtrClientTstBootstrap.init();
 				
 		TstAviProcessor test = new TstAviProcessor(config);
 		test.cut();
-		test.rename();
+//		test.rename();
 	}
 }
