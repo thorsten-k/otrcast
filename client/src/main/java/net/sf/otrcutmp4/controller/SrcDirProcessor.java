@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.util;
+package net.sf.otrcutmp4.controller;
 
 import java.io.File;
 
@@ -6,6 +6,7 @@ import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.OtrId;
+import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,12 +20,14 @@ public class SrcDirProcessor
 	
 	static Log logger = LogFactory.getLog(SrcDirProcessor.class);
 	
+	private ViewInterface view;
+	
 	private File srcDir;
 	private VideType vType;
 	
-	public SrcDirProcessor()
+	public SrcDirProcessor(ViewInterface view)
 	{
-		
+		this.view=view;
 	}
 	
 	public VideoFiles readFiles(File srcDir, VideType vType)
@@ -32,13 +35,13 @@ public class SrcDirProcessor
 		this.srcDir = srcDir;
 		this.vType=vType;
 		
-		logger.debug("");
-		logger.debug("Searching "+vType+" files in "+srcDir.getAbsolutePath());
+		
 		return readFiles();
 	}
 	
 	public VideoFiles readFiles()
 	{
+		view.readFilesInDir(srcDir);
 		VideoFiles result = new VideoFiles();
 		for(File f : srcDir.listFiles())
 		{

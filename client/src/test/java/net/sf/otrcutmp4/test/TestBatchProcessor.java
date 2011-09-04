@@ -8,8 +8,8 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Audio;
 import net.sf.otrcutmp4.AviToMp4.Quality;
-import net.sf.otrcutmp4.batch.CutGenerator;
-import net.sf.otrcutmp4.batch.RenameGenerator;
+import net.sf.otrcutmp4.controller.batch.CutGenerator;
+import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;

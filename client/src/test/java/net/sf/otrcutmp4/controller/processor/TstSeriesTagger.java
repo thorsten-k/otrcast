@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
-import net.sf.otrcutmp4.util.SrcDirProcessor;
+import net.sf.otrcutmp4.view.cli.CliView;
+import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -20,16 +22,18 @@ public class TstSeriesTagger
 {
 	static Log logger = LogFactory.getLog(TstSeriesTagger.class);
 	
+	private ViewInterface view;
 	private SeriesTagger tagger;
 	private VideoFiles vFiles;
 	private RestSeriesClient rest;
 	
 	public TstSeriesTagger(Configuration config)
 	{	
+		view = new CliView();
 		tagger = new SeriesTagger(config);
 		rest = new RestSeriesClient(config);
 		
-		SrcDirProcessor dirProcessor = new SrcDirProcessor();
+		SrcDirProcessor dirProcessor = new SrcDirProcessor(view);
 		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
 	}
 	

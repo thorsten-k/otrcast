@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.batch.audio;
+package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
 
