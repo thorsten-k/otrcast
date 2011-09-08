@@ -6,7 +6,7 @@
 //
 
 
-package net.sf.otrcutmp4.model.xml.otr;
+package net.sf.otrcutmp4.model.xml.container;
 
 import java.io.Serializable;
 import java.util.ArrayList;

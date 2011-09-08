@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
+import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
-import net.sf.otrcutmp4.model.xml.otr.Otr;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
