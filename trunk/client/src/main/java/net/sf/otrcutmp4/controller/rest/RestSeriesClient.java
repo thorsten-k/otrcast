@@ -4,7 +4,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import net.sf.otrcutmp4.controller.interfaces.rest.OtrSeriesRestService;
-import net.sf.otrcutmp4.model.xml.otr.Otr;
+import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Series;
