@@ -42,7 +42,7 @@ public class TstSeriesTagger
 //		JaxbUtil.debug2(this.getClass(), vFiles, new OtrCutNsPrefixMapper());
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			String id = vf.getOtrId().getName();
+			String id = vf.getOtrId().getKey();
 			Tags tags = rest.getTags(id);
 			logger.debug(id+" Response: "+tags.getTag().size());
 			if(tags.getTag().size()==0)

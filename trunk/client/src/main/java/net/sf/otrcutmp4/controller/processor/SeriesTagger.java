@@ -31,7 +31,7 @@ public class SeriesTagger
 	
 	public void tag(VideoFile vf)
 	{
-		logger.debug("Tagging "+vf.getOtrId().getName());
+		logger.debug("Tagging "+vf.getOtrId().getKey());
 		
 		Series series = getSeries();
 //		JaxbUtil.debug(series);
@@ -39,7 +39,7 @@ public class SeriesTagger
 		if(episode!=null)
 		{
 //			JaxbUtil.debug(episode);
-			Tag tag = rest.tag(episode.getId(), vf.getOtrId().getName());
+			Tag tag = rest.tag(episode.getId(), vf.getOtrId().getKey());
 			JaxbUtil.debug(tag);
 		}
 

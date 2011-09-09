@@ -5,7 +5,8 @@ import java.io.File;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.model.xml.series.OtrId;
+import net.sf.otrcutmp4.model.xml.otr.Format;
+import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.logging.Log;
@@ -91,8 +92,11 @@ public class SrcDirProcessor
 		OtrId fId = new OtrId();
 		
 		String fileName = fName.getValue();
-		fId.setName(fileName.substring(0, fileName.lastIndexOf("."+typeAvi)));
-		fId.setType(typeAvi);
+		fId.setKey(fileName.substring(0, fileName.lastIndexOf("."+typeAvi)));
+		
+		Format format = new Format();
+		format.setType(typeAvi);
+		fId.setFormat(format);
 		
 		return fId;
 	}
@@ -104,8 +108,12 @@ public class SrcDirProcessor
 		String fileName = fName.getValue();
 		int indexFrom = fileName.indexOf("_")+1;
 		int indexTo = fileName.lastIndexOf("."+typeMp4);
-		fId.setName(fileName.substring(indexFrom, indexTo));
-		fId.setType(typeMp4);
+		fId.setKey(fileName.substring(indexFrom, indexTo));
+		
+		Format format = new Format();
+		format.setType(typeMp4);
+		fId.setFormat(format);
+		
 		return fId;
 	}
 }
