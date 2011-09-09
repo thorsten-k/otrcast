@@ -1,10 +1,12 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/cut"
     xmlns:c="http://otrcutmp4.sf.net/cut"
     xmlns:s="http://otrcutmp4.sf.net/series"
+    xmlns:o="http://otrcutmp4.sf.net/otr"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
     <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
+    <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr.xsd"/>
     <xsd:element name="videoFiles">
         <xsd:complexType>
             <xsd:sequence>
@@ -15,7 +17,7 @@
     <xsd:element name="videoFile">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="s:otrId" maxOccurs="1"/>
+                <xsd:element ref="o:otrId" maxOccurs="1"/>
                 <xsd:element ref="c:fileName" maxOccurs="1"/>
                 <xsd:element ref="c:cutListsAvailable" maxOccurs="1"/>
                 <xsd:element ref="c:cutListsSelected" maxOccurs="1"/>

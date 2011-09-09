@@ -1,0 +1,31 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net/otr"
+    xmlns:o="http://otrcutmp4.sf.net/otr"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:element name="recording">
+        <xsd:complexType>
+        	<xsd:sequence>
+                <xsd:element ref="o:format" maxOccurs="unbounded"/>
+                <xsd:element ref="o:otrId" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="otrId">
+        <xsd:complexType>
+        	<xsd:sequence>
+                <xsd:element ref="o:format" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="key" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="format">
+        <xsd:complexType>
+        	<xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+            <xsd:attribute name="image" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

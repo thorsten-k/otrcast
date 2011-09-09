@@ -6,7 +6,7 @@
 //
 
 
-package net.sf.otrcutmp4.model.xml.series;
+package net.sf.otrcutmp4.model.xml.otr;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the net.sf.otrcutmp4.model.xml.series package. 
+ * generated in the net.sf.otrcutmp4.model.xml.otr package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,58 +30,34 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.otrcutmp4.model.xml.series
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.otrcutmp4.model.xml.otr
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link Series }
+     * Create an instance of {@link OtrId }
      * 
      */
-    public Series createSeries() {
-        return new Series();
+    public OtrId createOtrId() {
+        return new OtrId();
     }
 
     /**
-     * Create an instance of {@link Category }
+     * Create an instance of {@link Format }
      * 
      */
-    public Category createCategory() {
-        return new Category();
+    public Format createFormat() {
+        return new Format();
     }
 
     /**
-     * Create an instance of {@link Season }
+     * Create an instance of {@link Recording }
      * 
      */
-    public Season createSeason() {
-        return new Season();
-    }
-
-    /**
-     * Create an instance of {@link Episode }
-     * 
-     */
-    public Episode createEpisode() {
-        return new Episode();
-    }
-
-    /**
-     * Create an instance of {@link Tags }
-     * 
-     */
-    public Tags createTags() {
-        return new Tags();
-    }
-
-    /**
-     * Create an instance of {@link Tag }
-     * 
-     */
-    public Tag createTag() {
-        return new Tag();
+    public Recording createRecording() {
+        return new Recording();
     }
 
 }
