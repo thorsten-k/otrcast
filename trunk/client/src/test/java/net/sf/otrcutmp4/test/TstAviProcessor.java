@@ -56,7 +56,7 @@ public class TstAviProcessor
 	
 	public static void main(String args[]) throws ExlpConfigurationException
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrUtilTstBootstrap.init();
 				
 		TstAviProcessor test = new TstAviProcessor(config);
 		test.cut();

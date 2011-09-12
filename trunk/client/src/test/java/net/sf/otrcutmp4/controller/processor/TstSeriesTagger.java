@@ -9,7 +9,7 @@ import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Tags;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliView;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
@@ -54,7 +54,7 @@ public class TstSeriesTagger
 	
 	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrUtilTstBootstrap.init();
 		TstSeriesTagger rest = new TstSeriesTagger(config);
 		rest.tag();	
 	}

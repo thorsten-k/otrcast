@@ -10,7 +10,7 @@ import net.sf.exlp.listener.impl.LogListenerFile;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.otrcutmp4.exlp.parser.CutlistParser;
+import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
