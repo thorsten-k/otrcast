@@ -6,8 +6,9 @@
     <xsd:element name="recording">
         <xsd:complexType>
         	<xsd:sequence>
-                <xsd:element ref="o:format" maxOccurs="unbounded"/>
                 <xsd:element ref="o:otrId" maxOccurs="1"/>
+                <xsd:element ref="o:format" maxOccurs="1"/>
+                <xsd:element ref="o:link" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
         </xsd:complexType>
@@ -16,6 +17,7 @@
         <xsd:complexType>
         	<xsd:sequence>
                 <xsd:element ref="o:format" maxOccurs="1"/>
+                <xsd:element ref="o:recording" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="key" type="xsd:string"/>
@@ -26,6 +28,29 @@
         	<xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="type" type="xsd:string"/>
             <xsd:attribute name="image" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="link">
+        <xsd:complexType>
+        	<xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="url" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="download">
+        <xsd:complexType>
+			<xsd:sequence>
+                <xsd:element ref="o:recording" maxOccurs="unbounded"/>
+                <xsd:element ref="o:otrId" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        	<xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="linklist">
+        <xsd:complexType>
+			<xsd:sequence>
+                <xsd:element ref="o:download" maxOccurs="unbounded"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
