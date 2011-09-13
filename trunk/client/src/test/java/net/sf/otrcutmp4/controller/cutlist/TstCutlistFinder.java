@@ -7,7 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -65,7 +65,7 @@ public class TstCutlistFinder
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrUtilTstBootstrap.init();
+		Configuration config = OtrClientTstBootstrap.init();
 		
 		TstCutlistFinder test = new TstCutlistFinder(config);
 		test.findCl();

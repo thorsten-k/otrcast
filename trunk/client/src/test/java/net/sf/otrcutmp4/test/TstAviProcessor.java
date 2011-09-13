@@ -16,7 +16,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 public class TstAviProcessor
 {
 	static Log logger = LogFactory.getLog(TstAviProcessor.class);
@@ -56,7 +55,7 @@ public class TstAviProcessor
 	
 	public static void main(String args[]) throws ExlpConfigurationException
 	{
-		Configuration config = OtrUtilTstBootstrap.init();
+		Configuration config = OtrClientTstBootstrap.init();
 				
 		TstAviProcessor test = new TstAviProcessor(config);
 		test.cut();

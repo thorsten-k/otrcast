@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class OtrClientTstBootstrap
 {
-	static Log logger = LogFactory.getLog(OtrUtilTstBootstrap.class);
+	static Log logger = LogFactory.getLog(OtrClientTstBootstrap.class);
 	
 	private static final String confCode="test";
 	
