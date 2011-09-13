@@ -11,7 +11,8 @@ public class OtrCutNsPrefixMapper extends NamespacePrefixMapper implements NsPre
     	if("http://otrcutmp4.sf.net".equals(namespaceUri) ){return "otr";}
         if("http://otrcutmp4.sf.net/series".equals(namespaceUri) ){return "s";}
         if("http://otrcutmp4.sf.net/cut".equals(namespaceUri) ){return "c";}
-  
+        if("http://otrcutmp4.sf.net/otr".equals(namespaceUri) ){return "o";}
+        
         return suggestion;
     }
 

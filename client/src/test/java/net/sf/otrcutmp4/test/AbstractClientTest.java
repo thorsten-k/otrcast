@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 
 public abstract class AbstractClientTest
 {
-	static Log logger = LogFactory.getLog(AbstractUtilTest.class);	
+	static Log logger = LogFactory.getLog(AbstractClientTest.class);	
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	

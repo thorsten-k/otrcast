@@ -7,9 +7,12 @@ import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.interfaces.rest.OtrAdminRestService;
+import net.sf.otrcutmp4.controller.rest.AdminRestClient;
 import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
@@ -29,7 +32,8 @@ public class RestSeedData
 {
 	static Log logger = LogFactory.getLog(RestSeedData.class);
 	
-	private RestSeriesClient rest;
+	private RestSeriesClient restSeries;
+	private OtrAdminRestService restAdmin;
 	private Configuration config;
 	private WebResource gae;
 	
@@ -37,7 +41,8 @@ public class RestSeedData
 	{	
 		this.config=config;
 		
-		rest = new RestSeriesClient(config);
+		restSeries = new RestSeriesClient(config);
+		restAdmin = new AdminRestClient(config.getString(OtrBootstrap.cfgUrlGae));
 		
 		ClientConfig cc = new DefaultClientConfig();
 		Client client = Client.create(cc);
@@ -46,7 +51,7 @@ public class RestSeedData
 	
 	public void all()
 	{
-		Otr otr = rest.allSeries();
+		Otr otr = restSeries.allSeries();
 		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
 	}
 		
@@ -71,6 +76,17 @@ public class RestSeedData
 		}
 	}
 	
+	public void addFormats() throws FileNotFoundException
+	{
+		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlFormats), Otr.class);
+		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
+		for(Format format : otr.getFormat())
+		{
+			Format response = restAdmin.addFormat(format);
+			JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
+		}
+	}
+	
 	public void addEpisode() throws FileNotFoundException
 	{
 		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
@@ -88,8 +104,8 @@ public class RestSeedData
 				for(Episode episode : season.getEpisode())
 				{
 					episode.setSeason(seasonId);
-					JaxbUtil.debug(episode);
-					rest.addEpisode(episode);
+					JaxbUtil.debug2(this.getClass(), episode, new OtrCutNsPrefixMapper());
+					restSeries.addEpisode(episode);
 				}
 			}
 		}
@@ -103,6 +119,7 @@ public class RestSeedData
 		
 //		rest.addCategories();
 //		rest.addSeries();
-		rest.addEpisode();
+//		rest.addEpisode();
+		rest.addFormats();
 	}
 }
