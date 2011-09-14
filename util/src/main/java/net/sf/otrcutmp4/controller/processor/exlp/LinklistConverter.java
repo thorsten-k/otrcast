@@ -3,31 +3,40 @@ package net.sf.otrcutmp4.controller.processor.exlp;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerString;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.event.DownloadEvent;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
+import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
+import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
 
 public class LinklistConverter
 {
+	static Log logger = LogFactory.getLog(LinklistConverter.class);
+	
 	public LinklistConverter()
 	{
 		
 	}
 	
-	public Linklist convert(String sLL)
+	public Linklist convert(String sLinkList)
 	{
 		Linklist xml = new Linklist();
 		
-		Linklist xmlParse = parse(sLL);
+		Linklist xmlParse = parse(sLinkList);
 		for(Download xmlDlParse : xmlParse.getDownload())
 		{
 			xml.getDownload().add(convertDownload(xmlDlParse));
@@ -38,32 +47,42 @@ public class LinklistConverter
 	
 	private Download convertDownload(Download xmlParse)
 	{
-		Map<String,OtrId> ids = new Hashtable<String,OtrId>();
+		Download download = new Download();
+		download.setType(xmlParse.getType());
 		
 		for(Recording r : xmlParse.getRecording())
 		{
-			String key = r.getOtrId().getKey();
-			if(!ids.containsKey(key))
+			String keyId = r.getOtrId().getKey();
+			String keyQuality = r.getOtrId().getFormat().getQuality().getType();
+			
+			OtrId otrId=null;
+			try {otrId = OtrXpath.getOtrIdByKey(download, keyId);}
+			catch (ExlpXpathNotUniqueException e) {logger.error(e);}
+			catch (ExlpXpathNotFoundException e)
 			{
-				OtrId otrId = new OtrId();
-				otrId.setKey(key);
-				ids.put(key, otrId);
+				otrId = new OtrId();
+				otrId.setKey(keyId);
+				download.getOtrId().add(otrId);
+			}
+			
+			Quality quality=null;
+			try {quality = OtrXpath.getQualityByKey(otrId, keyQuality);}
+			catch (ExlpXpathNotUniqueException e) {logger.error(e);}
+			catch (ExlpXpathNotFoundException e)
+			{
+				quality = new Quality();
+				quality.setType(keyQuality);
+				otrId.getQuality().add(quality);
 			}
 			
 			Recording rNew = new Recording();
 			rNew.setFormat(r.getOtrId().getFormat());
+			rNew.getFormat().setQuality(null);
 			rNew.setLink(r.getLink());
-			ids.get(key).getRecording().add(rNew);
+			quality.getRecording().add(rNew);
 		}
-		
-		Download xml = new Download();
-		xml.setType(xmlParse.getType());
-		for(OtrId v :ids.values())
-		{
-			xml.getOtrId().add(v);
-		}
-		
-		return xml;
+	
+		return download;
 	}
 	
 	private Linklist parse(String sLL)

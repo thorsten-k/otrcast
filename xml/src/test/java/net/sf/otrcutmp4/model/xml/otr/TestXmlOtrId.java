@@ -11,42 +11,42 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestXmlDownload extends AbstractXmlOtrTest
+public class TestXmlOtrId extends AbstractXmlOtrTest
 {
-	static Log logger = LogFactory.getLog(TestXmlDownload.class);
+	static Log logger = LogFactory.getLog(TestXmlOtrId.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"download.xml");
+		fXml = new File(rootDir,"otrId.xml");
 	}
     
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	Download test = createDownload(true);
-    	Download ref = (Download)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Download.class);
+    	OtrId test = createOtrId(true);
+    	OtrId ref = (OtrId)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), OtrId.class);
     	assertJaxbEquals(ref, test);
     }
  
     public void save()
     {
     	logger.debug("Saving Reference XML");
-    	Download xml = createDownload(true);
+    	OtrId xml = createOtrId(true);
     	JaxbUtil.debug2(this.getClass(),xml, nsPrefixMapper);
     	JaxbUtil.save(fXml, xml, nsPrefixMapper, true);
     }
     
-    public static Download createDownload(){return createDownload(false);}
-    public static Download createDownload(boolean withChilds)
+    public static OtrId createOtrId(){return createOtrId(false);}
+    public static OtrId createOtrId(boolean withChilds)
     {
-    	Download xml = new Download();
+    	OtrId xml = new OtrId();
     	xml.setId(1);
-    	xml.setType("myType");
+    	xml.setKey("myKey");
     	
     	if(withChilds)
     	{
-    		xml.getOtrId().add(TestXmlOtrId.createOtrId());
+    		xml.getQuality().add(TestXmlQuality.createQuality());
     	}
     	
     	return xml;
@@ -58,9 +58,9 @@ public class TestXmlDownload extends AbstractXmlOtrTest
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();		
 			
-		TestXmlDownload.initPrefixMapper();
-		TestXmlDownload.initFiles();	
-		TestXmlDownload test = new TestXmlDownload();
+		TestXmlOtrId.initPrefixMapper();
+		TestXmlOtrId.initFiles();	
+		TestXmlOtrId test = new TestXmlOtrId();
 		test.save();
     }
 }
