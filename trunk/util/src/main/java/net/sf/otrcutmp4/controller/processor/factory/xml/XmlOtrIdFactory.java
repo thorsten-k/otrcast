@@ -2,12 +2,17 @@ package net.sf.otrcutmp4.controller.processor.factory.xml;
 
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class XmlOtrIdFactory
 {	
+	static Log logger = LogFactory.getLog(XmlOtrIdFactory.class);
+	
 	private static final String tag = ".mpg.";
 	
 	public static OtrId create(String fileId)
-	{
+	{		
 		OtrId xml = new OtrId();
 		
 		int mpgIndex = fileId.indexOf(tag);

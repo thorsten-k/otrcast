@@ -5,6 +5,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import net.sf.otrcutmp4.controller.interfaces.rest.OtrAdminRestService;
 import net.sf.otrcutmp4.model.xml.otr.Format;
+import net.sf.otrcutmp4.model.xml.otr.Quality;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,5 +32,11 @@ public class AdminRestClient implements OtrAdminRestService
 	public Format addFormat(Format format)
 	{
 		return gae.path("rest").path("admin/addFormat").accept(MediaType.APPLICATION_XML).post(Format.class,format);
+	}
+	
+	@Override
+	public Quality addQuality(Quality quality)
+	{
+		return gae.path("rest").path("admin/addQuality").accept(MediaType.APPLICATION_XML).post(Quality.class,quality);
 	}
 }

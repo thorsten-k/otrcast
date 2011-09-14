@@ -9,6 +9,8 @@
 package net.sf.otrcutmp4.model.xml.otr;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,11 +29,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}quality"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}recording" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="otrkey" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="cut" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="image" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -44,22 +44,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "quality"
+    "recording"
 })
-@XmlRootElement(name = "format")
-public class Format
+@XmlRootElement(name = "quality")
+public class Quality
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected Quality quality;
+    protected List<Recording> recording;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "otrkey")
-    protected Boolean otrkey;
-    @XmlAttribute(name = "cut")
-    protected Boolean cut;
     @XmlAttribute(name = "type")
     protected String type;
     @XmlAttribute(name = "name")
@@ -68,31 +64,40 @@ public class Format
     protected String image;
 
     /**
-     * Gets the value of the quality property.
+     * Gets the value of the recording property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Quality }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the recording property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRecording().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Recording }
+     * 
+     * 
      */
-    public Quality getQuality() {
-        return quality;
+    public List<Recording> getRecording() {
+        if (recording == null) {
+            recording = new ArrayList<Recording>();
+        }
+        return this.recording;
     }
 
-    /**
-     * Sets the value of the quality property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Quality }
-     *     
-     */
-    public void setQuality(Quality value) {
-        this.quality = value;
+    public boolean isSetRecording() {
+        return ((this.recording!= null)&&(!this.recording.isEmpty()));
     }
 
-    public boolean isSetQuality() {
-        return (this.quality!= null);
+    public void unsetRecording() {
+        this.recording = null;
     }
 
     /**
@@ -125,70 +130,6 @@ public class Format
 
     public void unsetId() {
         this.id = null;
-    }
-
-    /**
-     * Gets the value of the otrkey property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isOtrkey() {
-        return otrkey;
-    }
-
-    /**
-     * Sets the value of the otrkey property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setOtrkey(boolean value) {
-        this.otrkey = value;
-    }
-
-    public boolean isSetOtrkey() {
-        return (this.otrkey!= null);
-    }
-
-    public void unsetOtrkey() {
-        this.otrkey = null;
-    }
-
-    /**
-     * Gets the value of the cut property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isCut() {
-        return cut;
-    }
-
-    /**
-     * Sets the value of the cut property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setCut(boolean value) {
-        this.cut = value;
-    }
-
-    public boolean isSetCut() {
-        return (this.cut!= null);
-    }
-
-    public void unsetCut() {
-        this.cut = null;
     }
 
     /**

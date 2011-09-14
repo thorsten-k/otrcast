@@ -11,43 +11,40 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestXmlDownload extends AbstractXmlOtrTest
+public class TestXmlQuality extends AbstractXmlOtrTest
 {
-	static Log logger = LogFactory.getLog(TestXmlDownload.class);
+	static Log logger = LogFactory.getLog(TestXmlQuality.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"download.xml");
+		fXml = new File(rootDir,"quality.xml");
 	}
     
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	Download test = createDownload(true);
-    	Download ref = (Download)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Download.class);
+    	Quality test = createQuality(true);
+    	Quality ref = (Quality)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Quality.class);
     	assertJaxbEquals(ref, test);
     }
  
     public void save()
     {
     	logger.debug("Saving Reference XML");
-    	Download xml = createDownload(true);
+    	Quality xml = createQuality(true);
     	JaxbUtil.debug2(this.getClass(),xml, nsPrefixMapper);
     	JaxbUtil.save(fXml, xml, nsPrefixMapper, true);
     }
     
-    public static Download createDownload(){return createDownload(false);}
-    public static Download createDownload(boolean withChilds)
+    public static Quality createQuality(){return createQuality(false);}
+    public static Quality createQuality(boolean withChilds)
     {
-    	Download xml = new Download();
+    	Quality xml = new Quality();
     	xml.setId(1);
     	xml.setType("myType");
-    	
-    	if(withChilds)
-    	{
-    		xml.getOtrId().add(TestXmlOtrId.createOtrId());
-    	}
+    	xml.setImage("myImage");
+    	xml.setName("myName");
     	
     	return xml;
     }
@@ -58,9 +55,9 @@ public class TestXmlDownload extends AbstractXmlOtrTest
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();		
 			
-		TestXmlDownload.initPrefixMapper();
-		TestXmlDownload.initFiles();	
-		TestXmlDownload test = new TestXmlDownload();
+		TestXmlQuality.initPrefixMapper();
+		TestXmlQuality.initFiles();	
+		TestXmlQuality test = new TestXmlQuality();
 		test.save();
     }
 }

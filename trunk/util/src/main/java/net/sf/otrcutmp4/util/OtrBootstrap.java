@@ -21,6 +21,7 @@ public class OtrBootstrap
 	public static final String cfgXmlSeries = "xml.series";
 	public static final String cfgXmlEpisodes = "xml.episodes";
 	public static final String cfgXmlFormats = "xml.formats";
+	public static final String cfgXmlQuality = "xml.quality";
 	
 	public static Configuration init() throws ExlpConfigurationException
 	{

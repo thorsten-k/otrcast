@@ -13,6 +13,7 @@ import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.otr.Format;
+import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
@@ -87,6 +88,17 @@ public class RestSeedData
 		}
 	}
 	
+	public void addQualities() throws FileNotFoundException
+	{
+		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlQuality), Otr.class);
+		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
+		for(Quality quality : otr.getQuality())
+		{
+			Quality response = restAdmin.addQuality(quality);
+			JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
+		}
+	}
+	
 	public void addEpisode() throws FileNotFoundException
 	{
 		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
@@ -120,6 +132,7 @@ public class RestSeedData
 //		rest.addCategories();
 //		rest.addSeries();
 //		rest.addEpisode();
-		rest.addFormats();
+//		rest.addFormats();
+		rest.addQualities();
 	}
 }

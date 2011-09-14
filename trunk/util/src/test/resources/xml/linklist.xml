@@ -1,233 +1,269 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<linklist xmlns="http://otrcutmp4.sf.net/otr">
-    <download type="NORMAL DOWNLOAD">
-        <otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
-            <recording>
-                <format type="avi"/>
-                <link url="http://81.95.11.21/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi"/>
-                <link url="http://81.95.11.8/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi.otrkey"/>
-                <link url="http://81.95.11.8/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4"/>
-                <link url="http://81.95.11.25/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4.otrkey"/>
-                <link url="http://81.95.11.25/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="flv"/>
-                <link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-        </otrId>
-        <otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
-            <recording>
-                <format type="cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="flv"/>
-                <link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi"/>
-                <link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4"/>
-                <link url="http://81.95.11.24/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4.otrkey"/>
-                <link url="http://81.95.11.24/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi"/>
-                <link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-        </otrId>
-    </download>
-    <download type="PRIORISIERTER DOWNLOAD">
-        <otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
-            <recording>
-                <format type="avi"/>
-                <link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi"/>
-                <link url="http://81.95.11.8/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi.otrkey"/>
-                <link url="http://81.95.11.8/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4"/>
-                <link url="http://81.95.11.25/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4.otrkey"/>
-                <link url="http://81.95.11.25/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="flv"/>
-                <link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-        </otrId>
-        <otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
-            <recording>
-                <format type="cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="flv"/>
-                <link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi"/>
-                <link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4"/>
-                <link url="http://81.95.11.24/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4.otrkey"/>
-                <link url="http://81.95.11.24/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi"/>
-                <link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-        </otrId>
-    </download>
-    <download type="BEZAHLTER DOWNLOAD">
-        <otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
-            <recording>
-                <format type="avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi"/>
-                <link url="http://81.95.11.8/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi.otrkey"/>
-                <link url="http://81.95.11.8/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4"/>
-                <link url="http://81.95.11.25/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4.otrkey"/>
-                <link url="http://81.95.11.25/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="flv"/>
-                <link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-        </otrId>
-        <otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
-            <recording>
-                <format type="cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.cut.mp4"/>
-                <link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="flv"/>
-                <link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi.otrkey"/>
-                <link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="avi"/>
-                <link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4"/>
-                <link url="http://81.95.11.24/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="mp4.otrkey"/>
-                <link url="http://81.95.11.24/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-            <recording>
-                <format type="HQ.avi"/>
-                <link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
-            </recording>
-        </otrId>
-    </download>
-</linklist>
+<o:linklist xmlns:o="http://otrcutmp4.sf.net/otr">
+    <o:download type="NORMAL DOWNLOAD">
+        <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
+            <o:quality type="MP4">
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.24/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.24/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="HQ">
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="DivX">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="flv"/>
+                    <o:link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+        </o:otrId>
+        <o:otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
+            <o:quality type="DivX">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="flv"/>
+                    <o:link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="HQ">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.8/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.8/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="MP4">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.25/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.25/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+        </o:otrId>
+    </o:download>
+    <o:download type="PRIORISIERTER DOWNLOAD">
+        <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
+            <o:quality type="MP4">
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.24/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.24/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="HQ">
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="DivX">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="flv"/>
+                    <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+        </o:otrId>
+        <o:otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
+            <o:quality type="DivX">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="flv"/>
+                    <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="HQ">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.8/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.8/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="MP4">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.25/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.25/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+        </o:otrId>
+    </o:download>
+    <o:download type="BEZAHLTER DOWNLOAD">
+        <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
+            <o:quality type="MP4">
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.24/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.24/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="HQ">
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="DivX">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="flv"/>
+                    <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+        </o:otrId>
+        <o:otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
+            <o:quality type="DivX">
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.21/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="flv"/>
+                    <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="HQ">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.8/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="avi"/>
+                    <o:link url="http://81.95.11.8/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+            <o:quality type="MP4">
+                <o:recording>
+                    <o:format otrkey="false" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.25/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="true" cut="false" type="mp4"/>
+                    <o:link url="http://81.95.11.25/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+                <o:recording>
+                    <o:format otrkey="false" cut="true" type="mp4"/>
+                    <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                </o:recording>
+            </o:quality>
+        </o:otrId>
+    </o:download>
+</o:linklist>
