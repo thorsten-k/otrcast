@@ -15,9 +15,9 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestLinkProcessor extends AbstractUtilTest
+public class TestLinklistConverter extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestLinkProcessor.class);
+	static Log logger = LogFactory.getLog(TestLinklistConverter.class);
 	
 	private static File fXml;
 	private static String sourceLinklist;
@@ -50,10 +50,10 @@ public class TestLinkProcessor extends AbstractUtilTest
     {
 		OtrUtilTstBootstrap.init();		
 			
-		TestLinkProcessor.initPrefixMapper();
-		TestLinkProcessor.initFiles();
+		TestLinklistConverter.initPrefixMapper();
+		TestLinklistConverter.initFiles();
 	
-		TestLinkProcessor test = new TestLinkProcessor();
+		TestLinklistConverter test = new TestLinklistConverter();
 		test.save();
     }
 }
