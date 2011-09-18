@@ -1,11 +1,5 @@
 package net.sf.otrcutmp4.controller.processor.exlp;
 
-import java.util.Hashtable;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.listener.LogListener;
@@ -13,7 +7,6 @@ import net.sf.exlp.listener.impl.LogListenerString;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.event.DownloadEvent;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;
 import net.sf.otrcutmp4.model.xml.otr.Download;
@@ -22,6 +15,9 @@ import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class LinklistConverter
 {

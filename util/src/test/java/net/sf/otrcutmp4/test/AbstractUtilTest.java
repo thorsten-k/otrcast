@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.test;
 
 import java.util.Date;
+import java.util.Random;
 
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
@@ -18,11 +19,13 @@ public abstract class AbstractUtilTest
 	static Log logger = LogFactory.getLog(AbstractUtilTest.class);	
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
+	protected static Random rnd;
 	
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
 		nsPrefixMapper = new OtrCutNsPrefixMapper();
+		rnd = new Random();
 	}
 	
 	@BeforeClass
