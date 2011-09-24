@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.processor.factory.xml;
+package net.sf.otrcutmp4.controller.factory.xml;
 
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 

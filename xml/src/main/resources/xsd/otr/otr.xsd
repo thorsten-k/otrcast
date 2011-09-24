@@ -11,7 +11,7 @@
                 <xsd:element ref="o:otrId" maxOccurs="1"/>
                 <xsd:element ref="o:format" maxOccurs="1"/>
                 <xsd:element ref="o:link" maxOccurs="1"/>
-                <xsd:element ref="c:cut" maxOccurs="1"/>
+                <xsd:element ref="c:cutList" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
         </xsd:complexType>

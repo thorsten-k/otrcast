@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.processor.factory.xml;
+package net.sf.otrcutmp4.controller.factory.xml;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
