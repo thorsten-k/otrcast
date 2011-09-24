@@ -1,7 +1,9 @@
-package net.sf.otrcutmp4.controller.processor.factory.xml;
+package net.sf.otrcutmp4.controller.factory.xml;
 
 import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlFormatFactory;
+import net.sf.otrcutmp4.controller.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
