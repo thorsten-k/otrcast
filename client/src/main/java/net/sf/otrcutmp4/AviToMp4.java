@@ -32,10 +32,15 @@ public class AviToMp4
 	
 	public static enum Quality {HQ,HD}
 	public static enum Audio {Mp3,Ac3}
+	public static enum Profile {P0,P1}
 	
 	public static final String exeName = "CutHqAviToMp4";
+	
+	private Option oHelp,oDebug,oProfile;
 	private Options options;
 	private OtrConfig otrConfig;
+	
+	private Profile profile;
 	
 	public AviToMp4()
 	{
@@ -51,10 +56,25 @@ public class AviToMp4
 	    
         String configFile = line.getOptionValue("config",OtrConfig.otrConfigName);
         
-        if(line.hasOption("help")) {printHelp();}
+        if(line.hasOption(oHelp.getOpt())) {printHelp();}
         
-        if(line.hasOption("debug")) {initLogger("log4j.debug.xml");}
-        else{initLogger("log4j.xml");}      
+        if(line.hasOption(oDebug.getOpt())) {initLogger("log4j.debug.xml");}
+        else{initLogger("log4j.xml");}
+        
+        if(line.hasOption(oProfile.getOpt()))
+        {
+        	try {profile = Profile.valueOf(line.getOptionValue(oProfile.getOpt()));}
+        	catch (IllegalArgumentException e)
+        	{
+        		logger.warn("Profie "+line.getOptionValue(oProfile.getOpt())+" not available");
+        		printHelp();
+        	}
+        }
+        else
+        {
+        	profile = Profile.P0;
+        }
+        logger.debug("Using Profile :"+profile);
         
         if(line.hasOption("createConfig")){otrConfig.createDefault(configFile);}
         
@@ -148,10 +168,11 @@ public class AviToMp4
 	@SuppressWarnings("static-access")
 	private Options createOptions()
 	{
-		Option oHelp = new Option("help", "Print this message" );
+		oHelp = new Option("help", "Print this message" );
+		oDebug = new Option("debug", "Debug output");
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
-		Option oDebug = new Option("debug", "Debug output");
+		
 		
 		Option oHQ = new Option("hq", "Convert HQ.AVI to MP4 and apply cutlist");
 		Option oHD = new Option("hd", "Convert HD.AVI to MP4 and apply cutlist");
@@ -161,7 +182,19 @@ public class AviToMp4
 		Option oConfig  = OptionBuilder.withArgName("FILENAME")
 						  .hasArg()
 						  .withDescription( "Use configuration file FILENAME (optional, default is "+OtrConfig.otrConfigName+")")
-						  .create("config"); 
+						  .create("config");
+		
+		StringBuffer sb = new StringBuffer();
+		for(int i=1;i<Profile.values().length;i++)
+		{
+			{sb.append(Profile.values()[i].toString()).append(", ");}
+		}
+		sb.delete(sb.length()-2, sb.length());
+		
+		oProfile  = OptionBuilder.withArgName("PROFILE")
+				  .hasArg()
+				  .withDescription("Use (optional) experimental PROFILE: "+sb.toString())
+				  .create("profile"); 
 		
 		Options options = new Options();
 		options.addOption(oHelp);
@@ -173,6 +206,7 @@ public class AviToMp4
 		options.addOption(oCreate);
 		options.addOption(oDir);
 		options.addOption(oConfig);
+		options.addOption(oProfile);
 		
 		return options;
 	}
@@ -187,7 +221,7 @@ public class AviToMp4
 	private void initLogger(String logConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(logConfig);	
-		loggerInit.addAltPath("src/main/resources/config");
+		loggerInit.addAltPath("src/main/resources/otrcutmp4");
 		loggerInit.addAltPath("otrcutmp4");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
