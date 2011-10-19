@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>     
 	
 	<groupId>net.sf.otrcutmp4</groupId>
-  <artifactId>otrcutmp4</artifactId>
-  <version>0.2.0</version>
-  <name>OTR AVI cut to MP4</name>
-  <packaging>pom</packaging>
+	<artifactId>otrcutmp4</artifactId>
+	<version>0.1.4</version>
+	<name>OTR AVI cut to MP4</name>
+	<packaging>pom</packaging>
     
 	<description>otrcutmp4 is a utility for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
 	<url>https://sourceforge.net/projects/otrcutmp4/</url>
@@ -15,6 +15,7 @@
     <properties>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
+    	<otrcutmp4.version>0.1.4</otrcutmp4.version>
 	</properties>
 
 	<prerequisites>

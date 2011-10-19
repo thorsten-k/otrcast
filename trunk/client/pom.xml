@@ -4,7 +4,7 @@
 	<parent>
     	<groupId>net.sf.otrcutmp4</groupId>
 		  <artifactId>otrcutmp4</artifactId>
-  		<version>0.2.0</version>
+  		<version>0.1.4</version>
       <relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -80,15 +80,15 @@
       	   		<scope>test</scope>
       	   	</dependency>
       	   	<dependency>
-  <groupId>com.googlecode.mp4parser</groupId> 
-  <artifactId>isoparser</artifactId> 
-  <version>1.0-beta-3</version> 
-  <scope>test</scope>
-</dependency> 
+				<groupId>com.googlecode.mp4parser</groupId> 
+				<artifactId>isoparser</artifactId> 
+				<version>1.0-beta-3</version> 
+				<scope>test</scope>
+			</dependency> 
       	   	<dependency>
       	   		<groupId>net.sf.otrcutmp4</groupId>
       	   		<artifactId>otrcutmp4-xml</artifactId>
-      	   		<version>0.2.0</version>
+      	   		<version>${otrcutmp4.version}</version>
       	   		<type>jar</type>
       	   		<scope>compile</scope>
       	   		<exclusions>
