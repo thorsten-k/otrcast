@@ -113,7 +113,7 @@
       	   	<dependency>
       	   		<groupId>net.sf.otrcutmp4</groupId>
       	   		<artifactId>otrcutmp4-util</artifactId>
-      	   		<version>0.2.0</version>
+      	   		<version>${otrcutmp4.version}</version>
       	   		<type>jar</type>
       	   		<scope>compile</scope>
       	   	</dependency>

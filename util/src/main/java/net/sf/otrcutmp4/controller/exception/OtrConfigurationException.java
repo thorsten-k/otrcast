@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.exception;
+package net.sf.otrcutmp4.controller.exception;
 
 public class OtrConfigurationException extends Exception 
 { 

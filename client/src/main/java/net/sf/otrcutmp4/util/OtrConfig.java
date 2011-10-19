@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.otrcutmp4.exception.OtrConfigurationException;
+import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;

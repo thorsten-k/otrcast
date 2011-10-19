@@ -8,7 +8,8 @@ import net.sf.otrcutmp4.controller.batch.CutGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
-import net.sf.otrcutmp4.exception.OtrConfigurationException;
+import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
+import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliView;
@@ -47,7 +48,7 @@ public class AviToMp4
 		otrConfig = new OtrConfig();
 	}
 	
-	public void parseArguments(String args[]) throws ParseException, OtrConfigurationException
+	public void parseArguments(String args[]) throws ParseException, OtrConfigurationException, OtrInternalErrorException
 	{
 		options = createOptions();
 		CommandLineParser parser = new PosixParser();
@@ -126,8 +127,7 @@ public class AviToMp4
         
         if(line.hasOption("hq"))
         {
-        	CutGenerator batch = new CutGenerator(config,Quality.HQ,Audio.Mp3);
-        	
+        	CutGenerator batch = new CutGenerator(config,Quality.HQ,Audio.Mp3,profile);
         	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
@@ -135,7 +135,7 @@ public class AviToMp4
         }
         if(line.hasOption("hd"))
         {
-        	CutGenerator batch = new CutGenerator(config,Quality.HD,audio);
+        	CutGenerator batch = new CutGenerator(config,Quality.HD,audio,profile);
         	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
@@ -227,7 +227,7 @@ public class AviToMp4
 		loggerInit.init();
 	}
 	
-	public static void main(String args[])
+	public static void main(String args[]) throws OtrInternalErrorException
 	{		
 		AviToMp4 hqToMp4 = new AviToMp4();	
 		try {hqToMp4.parseArguments(args);}
