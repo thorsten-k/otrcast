@@ -71,7 +71,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -fflags genpts -y");
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
-		sb.append(" --acodec libfaac -ac 2 -ab 128k");
+		sb.append(" -acodec libvo_aacenc");
 		sb.append(" ").append(rpf.relativate(dirBat, new File(dirTmp,index+"-"+counter+".mp4")));
 		return sb.toString();
 	}
