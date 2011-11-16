@@ -32,21 +32,18 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
 			<artifactId>otrcutmp4-xml</artifactId>
-			<version>${project.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-core</artifactId>
-			<version>${exlp.version}</version>
 		</dependency>
 	</dependencies>
 </project>

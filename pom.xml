@@ -40,6 +40,20 @@
 		<maven>2.0.9</maven>
 	</prerequisites>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${compiler-source.version}</source>
+					<target>${compiler-target.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	
 	<issueManagement>
 	</issueManagement>
@@ -52,6 +66,61 @@
  
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+   	   			<artifactId>jaxb-api</artifactId>
+   	   			<version>2.2.2</version>
+   	   		</dependency>
+   	   		<dependency>
+   	   			<groupId>com.sun.xml.bind</groupId>
+   	   			<artifactId>jaxb-impl</artifactId>
+   	   			<version>2.2.2</version>
+   	   		</dependency>
+   	   		<dependency>
+   	   			<groupId>com.sun.xml.bind</groupId>
+   	   			<artifactId>jaxb-xjc</artifactId>
+   	   			<version>2.2.2</version>
+   	   		</dependency>
+   	   		<dependency>
+      			<groupId>commons-logging</groupId>
+      			<artifactId>commons-logging</artifactId>
+      			<version>${commons-logging.version}</version>
+      		</dependency>
+   	 		<dependency>
+   	   			<groupId>net.sf.ahtutils</groupId>
+   	   			<artifactId>ahtutils-xml</artifactId>
+   	   			<version>0.2.0</version>
+   	   		</dependency>
+   	   		<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.exlp</groupId>
+				<artifactId>exlp-util</artifactId>
+				<version>${exlp.version}</version>
+			</dependency>
+			<dependency>
+   	   			<groupId>net.sf.exlp</groupId>
+   	   			<artifactId>exlp-xml</artifactId>
+   	   			<version>${exlp.version}</version>
+   	   		</dependency>
+			<dependency>
+				<groupId>org.openfuxml</groupId>
+				<artifactId>ofx-xml</artifactId>
+				<version>${ofx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.otrcutmp4</groupId>
+				<artifactId>otrcutmp4-xml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.exlp</groupId>
+				<artifactId>exlp-core</artifactId>
+				<version>${exlp.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
