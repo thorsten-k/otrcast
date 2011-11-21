@@ -16,7 +16,6 @@
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
     	<jaxb.version>2.2.2</jaxb.version>
-    	<exlp.version>0.1.3</exlp.version>
     	<commons-logging.version>1.1.1</commons-logging.version>
     	<commons-io.version>2.0.1</commons-io.version>
     	<commons-cli.version>1.2</commons-cli.version>
@@ -24,8 +23,7 @@
     	<commons-jxpath.version>1.3</commons-jxpath.version>
     	<junit.version>4.10</junit.version>
     	<jaxen.version>1.1.1</jaxen.version>
-    	<ahtutils.version>0.2.0-SNAPSHOT</ahtutils.version>
-    	<ofx.version>1.3.0-SNAPSHOT</ofx.version>
+    	<ahtutils.version>0.2.0</ahtutils.version>
     	<jersey.version>1.8</jersey.version>
     	<isoparser.version>1.0-beta-3</isoparser.version>
     	<log4j.version>1.2.16</log4j.version>
@@ -134,17 +132,22 @@
 			<dependency>
 				<groupId>net.sf.exlp</groupId>
 				<artifactId>exlp-util</artifactId>
-				<version>${exlp.version}</version>
+				<version>0.1.3</version>
 			</dependency>
 			<dependency>
    	   			<groupId>net.sf.exlp</groupId>
    	   			<artifactId>exlp-xml</artifactId>
-   	   			<version>${exlp.version}</version>
+   	   			<version>0.1.3</version>
    	   		</dependency>
+   	   		<dependency>
+				<groupId>net.sf.exlp</groupId>
+				<artifactId>exlp-core</artifactId>
+				<version>0.1.3</version>
+			</dependency>
 			<dependency>
 				<groupId>org.openfuxml</groupId>
 				<artifactId>ofx-xml</artifactId>
-				<version>${ofx.version}</version>
+				<version>1.3.0</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.otrcutmp4</groupId>
@@ -156,11 +159,6 @@
  				<artifactId>otrcutmp4-util</artifactId>
      			<version>${project.version}</version>
 	 		</dependency>
-			<dependency>
-				<groupId>net.sf.exlp</groupId>
-				<artifactId>exlp-core</artifactId>
-				<version>${exlp.version}</version>
-			</dependency>
 			<dependency>
    				<groupId>jaxen</groupId>
       			<artifactId>jaxen</artifactId>
