@@ -21,7 +21,7 @@ public class Ac3ToAac
 		dirAc3 = new File(config.getString(OtrConfig.dirHdAc3));
 		dirBat = new File(config.getString(OtrConfig.dirBat));
 		
-		rpf = new RelativePathFactory();
+		rpf = new RelativePathFactory(true,false);
 		
 		cmdFfmpeg = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
 	}

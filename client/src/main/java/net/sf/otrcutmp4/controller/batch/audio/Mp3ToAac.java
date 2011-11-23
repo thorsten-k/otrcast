@@ -18,7 +18,7 @@ public class Mp3ToAac
 	{
 		this.dirBat=dirBat;
 		this.dirTmp=dirTmp;
-		rpf = new RelativePathFactory();
+		rpf = new RelativePathFactory(true,false);
 		
 		cmdLame = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolLame)));
 		cmdFaac = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFaac)));

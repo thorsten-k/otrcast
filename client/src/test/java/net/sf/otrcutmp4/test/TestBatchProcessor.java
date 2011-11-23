@@ -62,13 +62,7 @@ public class TestBatchProcessor extends TestCase
 	
 	public static void main(String args[]) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();
-		
-		ConfigLoader.add("src/test/resources/properties/user.otr.properties");
-		ConfigLoader.add("src/test/resources/properties/user.properties");
-		Configuration config = ConfigLoader.init();
+		Configuration config = OtrClientTstBootstrap.init();
 		
 		TestBatchProcessor test = new TestBatchProcessor();
 		test.setConfig(config);
