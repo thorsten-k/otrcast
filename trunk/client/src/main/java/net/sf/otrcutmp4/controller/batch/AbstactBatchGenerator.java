@@ -28,7 +28,7 @@ public class AbstactBatchGenerator
 	public AbstactBatchGenerator(Configuration config)
 	{
 		this.config=config;
-		rpf = new RelativePathFactory();
+		rpf = new RelativePathFactory(true,false);
 		
 		dirTmp = new File(config.getString(OtrConfig.dirTmp));
 		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));

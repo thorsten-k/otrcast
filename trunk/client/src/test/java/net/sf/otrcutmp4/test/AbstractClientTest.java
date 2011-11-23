@@ -33,9 +33,9 @@ public abstract class AbstractClientTest
 		loggerInit.init();
     }
 	
-	protected void assertJaxbEquals(Object ref, Object test)
+	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals(JaxbUtil.toString(ref),JaxbUtil.toString(test));
+		Assert.assertEquals(JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
 	protected static Date getDefaultDate()

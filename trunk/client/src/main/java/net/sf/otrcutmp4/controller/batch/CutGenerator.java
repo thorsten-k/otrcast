@@ -196,8 +196,6 @@ public class CutGenerator extends AbstactBatchGenerator
 		}
 	}
 	
-	
-	
 	private void createMp4(String vfName, String sMp4)
 	{
 		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw_video.h264"));
@@ -208,7 +206,5 @@ public class CutGenerator extends AbstactBatchGenerator
 		switch(quality){case HD: sb.append("-fps 50 ");break;}
 		sb.append(" -add "+sH264+" -add "+sAudio+" "+sMp4);
 		txt.add(sb.toString());
-	}
-	
-	
+	}	
 }
