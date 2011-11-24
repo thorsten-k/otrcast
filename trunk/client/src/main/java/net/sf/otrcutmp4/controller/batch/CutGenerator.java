@@ -64,7 +64,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		
 	}
 	
-	public void create(VideoFiles vFiles, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile)
+	public void create(VideoFiles vFiles, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
 		 for(VideoFile vf : vFiles.getVideoFile())
 		 {
@@ -88,7 +88,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
 	}
 	
-	private void crateForVideo(VideoFile vf, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile)
+	private void crateForVideo(VideoFile vf, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
@@ -98,15 +98,15 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 		switch(profile)
 		{
-			case P0: extract(vf,quality,audio,profile);cut(vf,profile);merge(vf,quality);break;
-			case P1: cut(vf,profile);merge(vf,quality);break;
+			case P0: extract(vf,quality,audio,profile);cut(vf,quality,profile);merge(vf,quality);break;
+			case P1: cut(vf,quality,profile);merge(vf,quality);break;
 		}	
 		
 		txt.add("");
 		txt.add("");
 	}
 	
-	private void extract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile)
+	private void extract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
 		String sMp4 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));
 				
@@ -119,13 +119,13 @@ public class CutGenerator extends AbstactBatchGenerator
 		createMp4(vf.getFileName().getValue(),sMp4,quality);
 	}
 	
-	private void cut(VideoFile vf,AviToMp4.Profile profile)
+	private void cut(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
 		String inVideo=null;
 		switch(profile)
 		{
 			case P0: inVideo = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));break;
-			case P1: inVideo = rpf.relativate(new File(dirAvi,vf.getFileName().getValue()));break;
+			case P1: inVideo = rpf.relativate(new File(getAviDir(quality),vf.getFileName().getValue()));break;
 		}
 		 
 		videoCutter.applyCutList(vf.getCutListsSelected(),inVideo,profile);
