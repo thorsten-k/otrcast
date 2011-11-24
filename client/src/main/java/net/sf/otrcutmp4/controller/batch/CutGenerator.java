@@ -19,7 +19,6 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -43,7 +42,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		shellRm = new ShellCmdRm();
 		
 		mp3ToAac = new Mp3ToAac(otrConfig);
-		ac3ToAac = new Ac3ToAac(config);
+		ac3ToAac = new Ac3ToAac(otrConfig);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+otrConfig.getDir(Dir.BAT).getAbsolutePath());
@@ -128,7 +127,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		switch(audio)
 		{
 			case Mp3: txt.add(mp3ToAac.create());break;
-			case Ac3: txt.add(ac3ToAac.convert(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()));break;
+			case Ac3: txt.add(ac3ToAac.create(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()));break;
 		}
 		createMp4(vf.getFileName().getValue(),sMp4);
 	}
