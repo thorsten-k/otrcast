@@ -9,12 +9,13 @@ import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 public class AbstactBatchGenerator
 {
 	protected Configuration config;
 	
-	protected File dirAvi,dirTmp,dirHqMp4,dirTools,dirBat;
+	protected File fTmp,dirAvi,dirHqMp4,dirTools;
 
 	protected AviToMp4.Quality quality;
 	protected AviToMp4.Audio audio;
@@ -24,16 +25,17 @@ public class AbstactBatchGenerator
 	protected ExlpTxtWriter txt;
 		
 	protected String cmdMp4Box,cmdFfmpeg;
+	protected OtrConfig otrConfig;
 	
-	public AbstactBatchGenerator(Configuration config)
+	public AbstactBatchGenerator(OtrConfig otrConfig)
 	{
-		this.config=config;
-		rpf = new RelativePathFactory(true,false);
+		this.otrConfig=otrConfig;
+		this.config=otrConfig.getConfig();
+		rpf = new RelativePathFactory(otrConfig.getDir(Dir.BAT),RelativePathFactory.PathSeparator.CURRENT,true);
 		
-		dirTmp = new File(config.getString(OtrConfig.dirTmp));
-		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));
+		fTmp = otrConfig.getDir(Dir.TMP);
+		dirHqMp4 = new File(config.getString(OtrConfig.dirMp4));
 		dirTools = new File(config.getString(OtrConfig.dirTools));
-		dirBat = new File(config.getString(OtrConfig.dirBat));
 	}
 	
 	public void init(AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
@@ -50,8 +52,8 @@ public class AbstactBatchGenerator
 		
 		if(txt==null){throw new OtrInternalErrorException("txt not set");}
 		
-		cmdMp4Box = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolMp4Box)));
-		cmdFfmpeg = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
+		cmdMp4Box = rpf.relativate(new File(dirTools,config.getString(OtrConfig.toolMp4Box)));
+		cmdFfmpeg = rpf.relativate(new File(dirTools,config.getString(OtrConfig.toolFfmpeg)));
 	}
 	
 	protected void setTxt(ExlpTxtWriter txt) {this.txt = txt;}

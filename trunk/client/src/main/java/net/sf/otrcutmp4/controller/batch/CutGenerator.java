@@ -16,6 +16,8 @@ import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -34,29 +36,29 @@ public class CutGenerator extends AbstactBatchGenerator
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
 	
-	public CutGenerator(Configuration config, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
+	public CutGenerator(OtrConfig otrConfig, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
-		super(config);
+		super(otrConfig);
 		shellCopy = new ShellCmdCopy();
 		shellRm = new ShellCmdRm();
 		
-		mp3ToAac = new Mp3ToAac(config,dirTools,dirBat,dirTmp);
+		mp3ToAac = new Mp3ToAac(otrConfig,dirTools);
 		ac3ToAac = new Ac3ToAac(config);
 		
 		logger.debug("");
-		logger.debug("Creating Batch in "+dirBat.getAbsolutePath());
+		logger.debug("Creating Batch in "+otrConfig.getDir(Dir.BAT).getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
 		
 		init(quality,audio,profile);
-		initChilds();
+		initChilds(otrConfig);
 	}
 	
-	private void initChilds() throws OtrInternalErrorException
+	private void initChilds(OtrConfig otrConfig) throws OtrInternalErrorException
 	{
 		try
 		{
-			rawExtract = new RawExtract(config);
+			rawExtract = new RawExtract(otrConfig);
 			rawExtract.setTxt(txt);
 			rawExtract.init(quality,audio,profile);
 		}
@@ -66,7 +68,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		}
 		try
 		{
-			videoCutter = new VideoCutter(config);
+			videoCutter = new VideoCutter(otrConfig);
 			videoCutter.setTxt(txt);
 			videoCutter.init(quality,audio,profile);
 		}
@@ -95,7 +97,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		 }
 		 txt.debug();
 
-		 File f = new File(dirBat, "cut.bat");
+		 File f = new File("cut.bat");
 		 txt.writeFile(f);
 		 logger.info("");
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
@@ -105,7 +107,8 @@ public class CutGenerator extends AbstactBatchGenerator
 	{
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
-		try {txt.add(shellRm.rmDir(rpf.relativate(dirBat, dirTmp), true));}
+		
+		try {txt.add(shellRm.rmDir(rpf.relativate(fTmp), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error(e);}
 	
 		switch(profile)
@@ -120,11 +123,11 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 	private void extract(VideoFile vf)
 	{
-		String sMp4 = rpf.relativate(dirBat, new File(dirTmp,"mp4.mp4"));
+		String sMp4 = rpf.relativate(new File(fTmp,"mp4.mp4"));
 		rawExtract.rawExtract(vf);
 		switch(audio)
 		{
-			case Mp3: txt.add(mp3ToAac.convert());break;
+			case Mp3: txt.add(mp3ToAac.create());break;
 			case Ac3: txt.add(ac3ToAac.convert(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()));break;
 		}
 		createMp4(vf.getFileName().getValue(),sMp4);
@@ -135,8 +138,8 @@ public class CutGenerator extends AbstactBatchGenerator
 		String inVideo=null;
 		switch(profile)
 		{
-			case P0: inVideo = rpf.relativate(dirBat, new File(dirTmp,"mp4.mp4"));break;
-			case P1: inVideo = rpf.relativate(dirBat, new File(dirAvi,vf.getFileName().getValue()));break;
+			case P0: inVideo = rpf.relativate(new File(fTmp,"mp4.mp4"));break;
+			case P1: inVideo = rpf.relativate(new File(dirAvi,vf.getFileName().getValue()));break;
 		}
 		 
 		videoCutter.applyCutList(vf.getCutListsSelected(),inVideo);
@@ -166,8 +169,8 @@ public class CutGenerator extends AbstactBatchGenerator
 		StringBuffer sb = new StringBuffer();
 		if(cl.getCut().size()==1)
 		{
-			String sFrom = rpf.relativate(dirBat, new File(dirTmp,index+"-1.mp4"));
-			String sTo = rpf.relativate(dirBat, new File(dirHqMp4,fileName+".mp4"));
+			String sFrom = rpf.relativate(new File(fTmp,index+"-1.mp4"));
+			String sTo = rpf.relativate(new File(dirHqMp4,fileName+".mp4"));
 			
 			try {txt.add(shellCopy.copyFile(sFrom, sTo));}
 			catch (ExlpUnsupportedOsException e)
@@ -182,24 +185,24 @@ public class CutGenerator extends AbstactBatchGenerator
 		{
 			sb.append(cmdMp4Box).append(" ");
 			switch(quality){case HD: sb.append("-fps 50 ");break;}
-			sb.append(rpf.relativate(dirBat, new File(dirTmp,index+"-1.mp4")));
+			sb.append(rpf.relativate(new File(fTmp,index+"-1.mp4")));
 			sb.append(" ");
 			for(int i=2;i<=cl.getCut().size();i++)
 			{
 				sb.append("-cat ");
-				sb.append(rpf.relativate(dirBat, new File(dirTmp,index+"-"+i+".mp4")));
+				sb.append(rpf.relativate(new File(fTmp,index+"-"+i+".mp4")));
 				sb.append(" ");
 			}
 			sb.append("-out ");
-			sb.append(rpf.relativate(dirBat, new File(dirHqMp4,fileName+".mp4")));
+			sb.append(rpf.relativate(new File(dirHqMp4,fileName+".mp4")));
 			txt.add(sb.toString());
 		}
 	}
 	
 	private void createMp4(String vfName, String sMp4)
 	{
-		String sH264 = rpf.relativate(dirBat, new File(dirTmp,"raw_video.h264"));
-		String sAudio=rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
+		String sH264 = rpf.relativate(new File(fTmp,"raw_video.h264"));
+		String sAudio=rpf.relativate(new File(fTmp,"aac.aac"));
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");

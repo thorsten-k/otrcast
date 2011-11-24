@@ -45,7 +45,7 @@ public class TstAviProcessor
 	public void rename()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
+		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirRename)),SrcDirProcessor.VideType.mp4); 
 		
 		JaxbUtil.debug(TstAviProcessor.class,videoFiles);
 		String xmlFile = config.getString("xml.test.rename.1");

@@ -44,7 +44,7 @@ public class TestBatchProcessor extends TestCase
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutGenerator test = new CutGenerator(config,Quality.HQ,Audio.Mp3,Profile.P0);
+		CutGenerator test = new CutGenerator(null,Quality.HQ,Audio.Mp3,Profile.P0);
 		test.create(vFiles);
 	}
 	
