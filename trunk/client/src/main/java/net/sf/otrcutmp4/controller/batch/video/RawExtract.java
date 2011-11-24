@@ -18,9 +18,9 @@ public class RawExtract extends AbstactBatchGenerator
 {	
 	static Log logger = LogFactory.getLog(RawExtract.class);
 	
-	public RawExtract(OtrConfig otrConfig)
+	public RawExtract(OtrConfig cfg)
 	{
-		super(otrConfig);
+		super(cfg);
 	}
 	
 	public List<String> rawExtract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio) throws OtrInternalErrorException
@@ -28,8 +28,8 @@ public class RawExtract extends AbstactBatchGenerator
 		List<String> result = new ArrayList<String>();
 		
 		String inAvi = rpf.relativate(new File(getAviDir(quality),vf.getFileName().getValue()));		
-		String outH264 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP), "raw.h264"));
-		String outMp3 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP), "raw.mp3"));
+		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.h264"));
+		String outMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.mp3"));
 		
 		StringBuffer sbVideo = new StringBuffer();
 		StringBuffer sbAudio = new StringBuffer();

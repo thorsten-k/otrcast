@@ -35,33 +35,25 @@ public class CutGenerator extends AbstactBatchGenerator
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
 	
-	public CutGenerator(OtrConfig otrConfig) throws OtrInternalErrorException
+	public CutGenerator(OtrConfig cfg) throws OtrInternalErrorException
 	{
-		super(otrConfig);
+		super(cfg);
 		shellCopy = new ShellCmdCopy();
 		shellRm = new ShellCmdRm();
 		
-		mp3ToAac = new Mp3ToAac(otrConfig);
-		ac3ToAac = new Ac3ToAac(otrConfig);
+		mp3ToAac = new Mp3ToAac(cfg);
+		ac3ToAac = new Ac3ToAac(cfg);
 		
 		logger.debug("");
-		logger.debug("Creating Batch in "+otrConfig.getDir(Dir.BAT).getAbsolutePath());
+		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT).getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
 		
-		initChilds(otrConfig);
-	}
-	
-	private void initChilds(OtrConfig otrConfig) throws OtrInternalErrorException
-	{
+		rawExtract = new RawExtract(cfg);
+		rawExtract.setTxt(txt);
 
-			rawExtract = new RawExtract(otrConfig);
-			rawExtract.setTxt(txt);
-
-			videoCutter = new VideoCutter(otrConfig);
-			videoCutter.setTxt(txt);
-
-		
+		videoCutter = new VideoCutter(cfg);
+		videoCutter.setTxt(txt);
 	}
 	
 	public void create(VideoFiles vFiles, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
@@ -93,7 +85,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
 		
-		try {txt.add(shellRm.rmDir(rpf.relativate(otrConfig.getDir(Dir.TMP)), true));}
+		try {txt.add(shellRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error(e);}
 	
 		switch(profile)
@@ -108,7 +100,7 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 	private void extract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
-		String sMp4 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));
+		String sMp4 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));
 				
 		txt.add(rawExtract.rawExtract(vf,quality,audio));
 		switch(audio)
@@ -124,7 +116,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		String inVideo=null;
 		switch(profile)
 		{
-			case P0: inVideo = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));break;
+			case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));break;
 			case P1: inVideo = rpf.relativate(new File(getAviDir(quality),vf.getFileName().getValue()));break;
 		}
 		 
@@ -155,8 +147,8 @@ public class CutGenerator extends AbstactBatchGenerator
 		StringBuffer sb = new StringBuffer();
 		if(cl.getCut().size()==1)
 		{
-			String sFrom = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),index+"-1.mp4"));
-			String sTo = rpf.relativate(new File(dirHqMp4,fileName+".mp4"));
+			String sFrom = rpf.relativate(new File(cfg.getDir(Dir.TMP),index+"-1.mp4"));
+			String sTo = rpf.relativate(new File(cfg.getDir(Dir.MP4),fileName+".mp4"));
 			
 			try {txt.add(shellCopy.copyFile(sFrom, sTo));}
 			catch (ExlpUnsupportedOsException e)
@@ -171,24 +163,24 @@ public class CutGenerator extends AbstactBatchGenerator
 		{
 			sb.append(cmdMp4Box).append(" ");
 			switch(quality){case HD: sb.append("-fps 50 ");break;}
-			sb.append(rpf.relativate(new File(otrConfig.getDir(Dir.TMP),index+"-1.mp4")));
+			sb.append(rpf.relativate(new File(cfg.getDir(Dir.TMP),index+"-1.mp4")));
 			sb.append(" ");
 			for(int i=2;i<=cl.getCut().size();i++)
 			{
 				sb.append("-cat ");
-				sb.append(rpf.relativate(new File(otrConfig.getDir(Dir.TMP),index+"-"+i+".mp4")));
+				sb.append(rpf.relativate(new File(cfg.getDir(Dir.TMP),index+"-"+i+".mp4")));
 				sb.append(" ");
 			}
 			sb.append("-out ");
-			sb.append(rpf.relativate(new File(dirHqMp4,fileName+".mp4")));
+			sb.append(rpf.relativate(new File(cfg.getDir(Dir.MP4),fileName+".mp4")));
 			txt.add(sb.toString());
 		}
 	}
 	
 	private void createMp4(String vfName, String sMp4,AviToMp4.Quality quality)
 	{
-		String sH264 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"raw_video.h264"));
-		String sAudio=rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"aac.aac"));
+		String sH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"raw_video.h264"));
+		String sAudio=rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");

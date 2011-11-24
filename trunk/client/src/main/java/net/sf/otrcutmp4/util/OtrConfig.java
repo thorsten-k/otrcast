@@ -20,8 +20,8 @@ public class OtrConfig
 {
 	static Log logger = LogFactory.getLog(OtrConfig.class);
 	
-	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3};
-	public static enum Tool{LAME};
+	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4};
+	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC};
 	public static enum Audio{FAAC};
 	
 	public static String otrConfigName = "properties.txt";
@@ -68,7 +68,7 @@ public class OtrConfig
 		lDirectotries.add(dirHqAvi);mapDir.put(Dir.HQAVI, dirHqAvi);
 		lDirectotries.add(dirHdAvi);mapDir.put(Dir.HDAVI, dirHdAvi);
 		lDirectotries.add(dirHdAc3);mapDir.put(Dir.AC3, dirHdAc3);
-		lDirectotries.add(dirMp4);
+		lDirectotries.add(dirMp4);mapDir.put(Dir.MP4, dirMp4);
 		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
 		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
 		lDirectotries.add(dirTools);mapDir.put(Dir.TOOLS, dirTools);
@@ -80,10 +80,10 @@ public class OtrConfig
 	{
 		mapTool = new Hashtable<Tool,String>();
 		lTools = new ArrayList<String>();
-		lTools.add(toolMp4Box);
+		lTools.add(toolMp4Box);mapTool.put(Tool.MP4BOX, toolMp4Box);
 		lTools.add(toolLame);mapTool.put(Tool.LAME, toolLame);
-		lTools.add(toolFfmpeg);
-		lTools.add(toolFaac);
+		lTools.add(toolFfmpeg);mapTool.put(Tool.FFMPEG, toolFfmpeg);
+		lTools.add(toolFaac);mapTool.put(Tool.FAAC, toolFaac);
 	}
 	
 	private void initParameterList()
