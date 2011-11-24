@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
@@ -22,18 +23,18 @@ public class VideoCutter extends AbstactBatchGenerator
 		super(otrConfig);
 	}
 	
-	public void applyCutList(CutListsSelected clSelected, String inVideo)
+	public void applyCutList(CutListsSelected clSelected, String inVideo, AviToMp4.Profile profile)
 	{
 		txt.add("");
 		int counter=1;
 		for(CutList cl : clSelected.getCutList())
 		{
-			cutList(counter, cl, inVideo);
+			cutList(counter, cl, inVideo, profile);
 			counter++;
 		}
 	}
 	
-	private void cutList(int index, CutList cl, String inVideo)
+	private void cutList(int index, CutList cl, String inVideo,AviToMp4.Profile profile)
 	{
 		int counter = 1;
 		for(Cut cut : cl.getCut())
@@ -60,7 +61,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
 		sb.append(" -acodec copy");
-		sb.append(" ").append(getRalative(otrConfig.getDir(Dir.TMP), index+"-"+counter+".mp4"));
+		sb.append(" ").append(rpf.relativate(new File(otrConfig.getDir(Dir.TMP), index+"-"+counter+".mp4")));
 		return sb.toString();
 	}
 	
@@ -74,7 +75,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
 		sb.append(" -acodec libvo_aacenc");
-		sb.append(" ").append(getRalative(otrConfig.getDir(Dir.TMP), index+"-"+counter+".mp4"));
+		sb.append(" ").append(rpf.relativate(new File(otrConfig.getDir(Dir.TMP), index+"-"+counter+".mp4")));
 		return sb.toString();
 	}
 	

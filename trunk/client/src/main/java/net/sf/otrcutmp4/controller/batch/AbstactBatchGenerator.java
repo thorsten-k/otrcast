@@ -20,10 +20,6 @@ public class AbstactBatchGenerator
 	protected Configuration config;
 	
 	protected File dirAvi,dirHqMp4;
-
-	protected AviToMp4.Quality quality;
-	protected AviToMp4.Audio audio;
-	protected AviToMp4.Profile profile;
 	
 	protected RelativePathFactory rpf;
 	protected ExlpTxtWriter txt;
@@ -53,10 +49,6 @@ public class AbstactBatchGenerator
 	
 	public void init(AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
-		this.quality=quality;
-		this.audio=audio;
-		this.profile=profile;
-		
 		switch(quality)
 		{
 			case HQ: dirAvi = new File(config.getString(OtrConfig.dirHqAvi));break;
@@ -67,9 +59,4 @@ public class AbstactBatchGenerator
 	}
 	
 	protected void setTxt(ExlpTxtWriter txt) {this.txt = txt;}
-	
-	protected String getRalative(File base, String file)
-	{
-		return rpf.relativate(new File(base,"raw_audio.mp3"));
-	}
 }

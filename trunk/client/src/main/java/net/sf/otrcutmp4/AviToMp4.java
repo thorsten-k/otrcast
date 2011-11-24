@@ -124,19 +124,19 @@ public class AviToMp4
         
         if(line.hasOption("hq"))
         {
-        	CutGenerator batch = new CutGenerator(otrConfig,Quality.HQ,Audio.Mp3,profile);
+        	CutGenerator batch = new CutGenerator(otrConfig);
         	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
-            batch.create(vFiles);
+            batch.create(vFiles,Quality.HQ,Audio.Mp3,profile);
         }
         if(line.hasOption("hd"))
         {
-        	CutGenerator batch = new CutGenerator(otrConfig,Quality.HD,audio,profile);
+        	CutGenerator batch = new CutGenerator(otrConfig);
         	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
-            batch.create(vFiles);
+            batch.create(vFiles,Quality.HD,audio,profile);
         }
         if(line.hasOption("rename"))
         {

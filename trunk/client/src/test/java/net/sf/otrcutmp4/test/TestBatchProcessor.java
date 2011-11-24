@@ -3,8 +3,6 @@ package net.sf.otrcutmp4.test;
 import java.io.FileNotFoundException;
 
 import junit.framework.TestCase;
-import net.sf.exlp.util.io.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Audio;
 import net.sf.otrcutmp4.AviToMp4.Profile;
@@ -44,8 +42,8 @@ public class TestBatchProcessor extends TestCase
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutGenerator test = new CutGenerator(null,Quality.HQ,Audio.Mp3,Profile.P0);
-		test.create(vFiles);
+		CutGenerator test = new CutGenerator(null);
+		test.create(vFiles,Quality.HQ,Audio.Mp3,Profile.P0);
 	}
 	
 	public void renameGenerator() throws FileNotFoundException
