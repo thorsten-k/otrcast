@@ -12,25 +12,27 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestMp3ToAac extends AbstractClientTest
+public class TestAc3ToAac extends AbstractClientTest
 { 
-	static Log logger = LogFactory.getLog(TestMp3ToAac.class);
+	static Log logger = LogFactory.getLog(TestAc3ToAac.class);
 	
-	private Mp3ToAac mp3ToAac;
+	private Ac3ToAac ac3ToAac;
+	private String testFile;
 	
 	@Before
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		mp3ToAac = new  Mp3ToAac(tC.getOtrConfig());
+		ac3ToAac = new  Ac3ToAac(tC.getOtrConfig());
+		testFile = "myTest";
 	}
 	
 	@Test
 	public void checkFail() throws OtrConfigurationException
 	{
-		String actual = mp3ToAac.create();
+		String actual = ac3ToAac.create(testFile);
 		logger.debug(actual);
-		String expected = "dir.tools/tool.lame --decode dir.tmp/raw_audio.mp3 - | dir.tools/tool.faac --mpeg-vers 4 -b "+TestOtrConfig.faacKbit+" -o dir.tmp/raw_audio.mp3 -";
+		String expected = "dir.tools/tool.ffmpeg -i dir.hd.ac3/"+testFile+".ac3 -vn -r 30000/1001 -acodec aac -strict experimental -ac 6 -ar 48000 -ab 448k dir.tmp/aac.aac";
 		Assert.assertEquals(expected, actual);
 	}
 

@@ -20,7 +20,7 @@ public class OtrConfig
 {
 	static Log logger = LogFactory.getLog(OtrConfig.class);
 	
-	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS};
+	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3};
 	public static enum Tool{LAME};
 	public static enum Audio{FAAC};
 	
@@ -67,7 +67,7 @@ public class OtrConfig
 		lDirectotries = new ArrayList<String>();
 		lDirectotries.add(dirHqAvi);mapDir.put(Dir.HQAVI, dirHqAvi);
 		lDirectotries.add(dirHdAvi);mapDir.put(Dir.HDAVI, dirHdAvi);
-		lDirectotries.add(dirHdAc3);
+		lDirectotries.add(dirHdAc3);mapDir.put(Dir.AC3, dirHdAc3);
 		lDirectotries.add(dirMp4);
 		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
 		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
