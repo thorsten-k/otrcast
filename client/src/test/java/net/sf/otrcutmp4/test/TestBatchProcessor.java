@@ -27,14 +27,7 @@ public class TestBatchProcessor extends TestCase
 	{
 	}
 	
-	public void testBatchSecond()
-	{		
-		assertEquals(VideoCutter.getSecond(123.999),"124.00");
-		assertEquals(VideoCutter.getSecond(123),"123.00");
-		assertEquals(VideoCutter.getSecond(2.0),"2.00");
-		assertEquals(VideoCutter.getSecond(2.1),"2.10");
-		assertEquals(VideoCutter.getSecond(12342.1),"12342.10");
-	}
+	
 	
 	public void cutGenerator() throws FileNotFoundException, OtrInternalErrorException
 	{
@@ -64,8 +57,6 @@ public class TestBatchProcessor extends TestCase
 		
 		TestBatchProcessor test = new TestBatchProcessor();
 		test.setConfig(config);
-		
-		test.testBatchSecond();
 		
 		test.renameGenerator();
 	}
