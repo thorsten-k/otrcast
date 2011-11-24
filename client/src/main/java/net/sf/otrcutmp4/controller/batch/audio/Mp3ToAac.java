@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4.controller.batch.audio;
 
+import java.io.File;
+
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.util.OtrConfig;
@@ -20,8 +22,8 @@ public class Mp3ToAac extends AbstactBatchGenerator
 	
 	public String create()
 	{
-		String sMp3 = getRalative(otrConfig.getDir(Dir.TMP), "raw_audio.mp3");
-		String sAac = getRalative(otrConfig.getDir(Dir.TMP), "aac.aac");
+		String sMp3 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP), "raw_audio.mp3"));
+		String sAac = rpf.relativate(new File(otrConfig.getDir(Dir.TMP), "aac.aac"));
 		
 		StringBuffer sb = new StringBuffer();
 		

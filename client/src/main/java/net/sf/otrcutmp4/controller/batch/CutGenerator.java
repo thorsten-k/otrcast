@@ -35,7 +35,7 @@ public class CutGenerator extends AbstactBatchGenerator
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
 	
-	public CutGenerator(OtrConfig otrConfig, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
+	public CutGenerator(OtrConfig otrConfig) throws OtrInternalErrorException
 	{
 		super(otrConfig);
 		shellCopy = new ShellCmdCopy();
@@ -49,36 +49,22 @@ public class CutGenerator extends AbstactBatchGenerator
 		
 		txt = new ExlpTxtWriter();
 		
-		init(quality,audio,profile);
 		initChilds(otrConfig);
 	}
 	
 	private void initChilds(OtrConfig otrConfig) throws OtrInternalErrorException
 	{
-		try
-		{
+
 			rawExtract = new RawExtract(otrConfig);
 			rawExtract.setTxt(txt);
-			rawExtract.init(quality,audio,profile);
-		}
-		catch (OtrInternalErrorException e)
-		{
-			throw new OtrInternalErrorException(e.getMessage()+" while initalizing "+RawExtract.class.getSimpleName());
-		}
-		try
-		{
+
 			videoCutter = new VideoCutter(otrConfig);
 			videoCutter.setTxt(txt);
-			videoCutter.init(quality,audio,profile);
-		}
-		catch (OtrInternalErrorException e)
-		{
-			throw new OtrInternalErrorException(e.getMessage()+" while initalizing "+VideoCutter.class.getSimpleName());
-		}
+
 		
 	}
 	
-	public void create(VideoFiles vFiles)
+	public void create(VideoFiles vFiles, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile)
 	{
 		 for(VideoFile vf : vFiles.getVideoFile())
 		 {
@@ -86,7 +72,7 @@ public class CutGenerator extends AbstactBatchGenerator
 				&& vf.getCutListsAvailable().isSetCutList()
 				&& vf.isSetCutListsSelected()
 				&& vf.getCutListsSelected().isSetCutList())
-			{crateForVideo(vf);}
+			{crateForVideo(vf,quality,audio,profile);}
 			else
 			{
 				txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
@@ -102,7 +88,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
 	}
 	
-	private void crateForVideo(VideoFile vf)
+	private void crateForVideo(VideoFile vf, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile)
 	{
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
@@ -112,27 +98,28 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 		switch(profile)
 		{
-			case P0: extract(vf);cut(vf);merge(vf);break;
-			case P1: cut(vf);merge(vf);break;
+			case P0: extract(vf,quality,audio,profile);cut(vf,profile);merge(vf,quality);break;
+			case P1: cut(vf,profile);merge(vf,quality);break;
 		}	
 		
 		txt.add("");
 		txt.add("");
 	}
 	
-	private void extract(VideoFile vf)
+	private void extract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile)
 	{
 		String sMp4 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));
-		rawExtract.rawExtract(vf);
+				
+		txt.add(rawExtract.rawExtract(vf,quality,audio));
 		switch(audio)
 		{
 			case Mp3: txt.add(mp3ToAac.create());break;
 			case Ac3: txt.add(ac3ToAac.create(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()));break;
 		}
-		createMp4(vf.getFileName().getValue(),sMp4);
+		createMp4(vf.getFileName().getValue(),sMp4,quality);
 	}
 	
-	private void cut(VideoFile vf)
+	private void cut(VideoFile vf,AviToMp4.Profile profile)
 	{
 		String inVideo=null;
 		switch(profile)
@@ -141,26 +128,26 @@ public class CutGenerator extends AbstactBatchGenerator
 			case P1: inVideo = rpf.relativate(new File(dirAvi,vf.getFileName().getValue()));break;
 		}
 		 
-		videoCutter.applyCutList(vf.getCutListsSelected(),inVideo);
+		videoCutter.applyCutList(vf.getCutListsSelected(),inVideo,profile);
 	}
 	
-	private void merge(VideoFile vf)
+	private void merge(VideoFile vf,AviToMp4.Quality quality)
 	{
-		mergeMp4(vf.getCutListsSelected(),vf);
+		mergeMp4(vf.getCutListsSelected(),vf,quality);
 	}
 	
-	private void mergeMp4(CutListsSelected clSelected, VideoFile vf)
+	private void mergeMp4(CutListsSelected clSelected, VideoFile vf,AviToMp4.Quality quality)
 	{
 		txt.add("");
 		int counter=1;
 		for(CutList cl : clSelected.getCutList())
 		{
-			mergeMp4(counter,cl,vf);
+			mergeMp4(counter,cl,vf,quality);
 			counter++;
 		}
 	}
 	
-	private void mergeMp4(int index, CutList cl, VideoFile vf)
+	private void mergeMp4(int index, CutList cl, VideoFile vf,AviToMp4.Quality quality)
 	{
 		String fileName = vf.getFileName().getValue();
 		if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
@@ -198,7 +185,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		}
 	}
 	
-	private void createMp4(String vfName, String sMp4)
+	private void createMp4(String vfName, String sMp4,AviToMp4.Quality quality)
 	{
 		String sH264 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"raw_video.h264"));
 		String sAudio=rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"aac.aac"));
