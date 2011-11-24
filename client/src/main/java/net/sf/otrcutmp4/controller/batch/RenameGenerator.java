@@ -10,32 +10,33 @@ import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class RenameGenerator
+public class RenameGenerator extends AbstactBatchGenerator
 {
 	static Log logger = LogFactory.getLog(RenameGenerator.class);
 	
-	private File dirHqMp4,dirBat,dirMp4Rename;
+	private File dirHqMp4,dirMp4Rename;
 	private ExlpTxtWriter txt;
 	
 	private RelativePathFactory rpf;
 	
 	private ShellCmdMove shellMove;
 	
-	public RenameGenerator(Configuration config)
+	public RenameGenerator(OtrConfig cfg, Configuration config)
 	{
+		super(cfg);
 		shellMove = new ShellCmdMove();
 		
 		dirHqMp4 = new File(config.getString(OtrConfig.dirMp4));
-		dirBat = new File(config.getString(OtrConfig.dirBat));
 		dirMp4Rename = new File(config.getString(OtrConfig.dirRename));
 		
 		logger.debug("");
-		logger.debug("Creating Batch in "+dirBat.getAbsolutePath());
+		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT));
 		
 		txt = new ExlpTxtWriter();
 		rpf = new RelativePathFactory(RelativePathFactory.PathSeparator.CURRENT,true);
@@ -48,7 +49,7 @@ public class RenameGenerator
 			 crateForVideo(vf);
 		 }
 
-		 File f = new File(dirBat, "otrRename.bat");
+		 File f = new File(cfg.getDir(Dir.BAT), "otrRename.bat");
 		 txt.writeFile(f);
 		 logger.info("");
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
@@ -56,7 +57,7 @@ public class RenameGenerator
 	
 	private void crateForVideo(VideoFile vf)
 	{	
-		String sOriginal = rpf.relativate(dirBat, new File(dirMp4Rename,vf.getFileName().getValue()));
+		String sOriginal = rpf.relativate(cfg.getDir(Dir.BAT), new File(dirMp4Rename,vf.getFileName().getValue()));
 		if(vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
 		{
 			txt.add("echo Processing: "+vf.getFileName().getValue());
@@ -69,7 +70,7 @@ public class RenameGenerator
 	
 	private void cutList(CutList cl, String sOriginal)
 	{
-		String sTo = rpf.relativate(dirBat, new File(dirHqMp4,cl.getFileName().getValue()+".mp4"));
+		String sTo = rpf.relativate(cfg.getDir(Dir.BAT), new File(dirHqMp4,cl.getFileName().getValue()+".mp4"));
 		
 		try {txt.add(shellMove.moveFile(sOriginal, sTo));}
 		catch (ExlpUnsupportedOsException e)

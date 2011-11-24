@@ -15,8 +15,8 @@ public class Ac3ToAac extends AbstactBatchGenerator
 	
 	public String create(String vName)
 	{
-		String sAc3 = rpf.relativate(new File(otrConfig.getDir(Dir.AC3),vName+".ac3"));
-		String sAac = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"aac.aac"));
+		String sAc3 = rpf.relativate(new File(cfg.getDir(Dir.AC3),vName+".ac3"));
+		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
 		
 		StringBuffer sb = new StringBuffer();
 		

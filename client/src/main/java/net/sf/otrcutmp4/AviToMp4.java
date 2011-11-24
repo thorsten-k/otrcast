@@ -140,7 +140,7 @@ public class AviToMp4
         }
         if(line.hasOption("rename"))
         {
-        	RenameGenerator batch = new RenameGenerator(otrConfig.getConfig());
+        	RenameGenerator batch = new RenameGenerator(otrConfig,otrConfig.getConfig());
         	
         	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.RENAME),SrcDirProcessor.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);

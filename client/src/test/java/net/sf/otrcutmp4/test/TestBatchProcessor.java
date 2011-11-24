@@ -52,7 +52,7 @@ public class TestBatchProcessor extends TestCase
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		RenameGenerator test = new RenameGenerator(config);
+		RenameGenerator test = new RenameGenerator(null,config);
 		test.create(vFiles);
 	}
 	

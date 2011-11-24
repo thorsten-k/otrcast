@@ -22,15 +22,15 @@ public class Mp3ToAac extends AbstactBatchGenerator
 	
 	public String create()
 	{
-		String sMp3 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP), "raw_audio.mp3"));
-		String sAac = rpf.relativate(new File(otrConfig.getDir(Dir.TMP), "aac.aac"));
+		String sMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw_audio.mp3"));
+		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP), "aac.aac"));
 		
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append(cmdLame);
 		sb.append(" --decode ").append(sMp3);
 		sb.append(" - | ");
-		sb.append(cmdFaac+" --mpeg-vers 4 -b "+otrConfig.getAudio(Audio.FAAC));
+		sb.append(cmdFaac+" --mpeg-vers 4 -b "+cfg.getAudio(Audio.FAAC));
 		sb.append(" -o "+sAac+" -");
 		
 		return sb.toString();
