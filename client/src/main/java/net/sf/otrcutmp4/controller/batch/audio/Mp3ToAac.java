@@ -2,32 +2,32 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
 
-import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
+import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.util.OtrConfig;
 
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-public class Mp3ToAac
+public class Mp3ToAac extends AbstactBatchGenerator
 {
-	private RelativePathFactory rpf;
-	private File dirBat,dirTmp;
+	static Log logger = LogFactory.getLog(RenameGenerator.class);
 	
 	private String cmdLame, cmdFaac;
 	
-	public Mp3ToAac(Configuration config, File dirTools, File dirBat, File dirTmp)
+	public Mp3ToAac(OtrConfig otrConfig, File dirTools)
 	{
-		this.dirBat=dirBat;
-		this.dirTmp=dirTmp;
-		rpf = new RelativePathFactory(true,false);
+		super(otrConfig);
 		
-		cmdLame = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolLame)));
-		cmdFaac = rpf.relativate(dirBat, new File(dirTools,config.getString(OtrConfig.toolFaac)));
+		cmdLame = rpf.relativate(new File(dirTools,config.getString(OtrConfig.toolLame)));
+		cmdFaac = rpf.relativate(new File(dirTools,config.getString(OtrConfig.toolFaac)));
 	}
 	
-	public String convert()
+	public String create()
 	{
-		String sMp3 = rpf.relativate(dirBat, new File(dirTmp,"raw_audio.mp3"));
-		String sAac = rpf.relativate(dirBat, new File(dirTmp,"aac.aac"));
+		
+		String sMp3 = rpf.relativate(new File(fTmp,"raw_audio.mp3"));
+		String sAac = rpf.relativate(new File(fTmp,"aac.aac"));
 		
 		StringBuffer sb = new StringBuffer();
 		

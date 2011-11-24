@@ -132,17 +132,17 @@
 			<dependency>
 				<groupId>net.sf.exlp</groupId>
 				<artifactId>exlp-util</artifactId>
-				<version>0.1.3</version>
+				<version>0.1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
    	   			<groupId>net.sf.exlp</groupId>
    	   			<artifactId>exlp-xml</artifactId>
-   	   			<version>0.1.3</version>
+   	   			<version>0.1.4-SNAPSHOT</version>
    	   		</dependency>
    	   		<dependency>
 				<groupId>net.sf.exlp</groupId>
 				<artifactId>exlp-core</artifactId>
-				<version>0.1.3</version>
+				<version>0.1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.openfuxml</groupId>

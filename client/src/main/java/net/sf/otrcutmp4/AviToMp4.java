@@ -1,7 +1,5 @@
 package net.sf.otrcutmp4;
 
-import java.io.File;
-
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.batch.CutGenerator;
@@ -12,6 +10,7 @@ import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliView;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
@@ -23,7 +22,6 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -79,11 +77,10 @@ public class AviToMp4
         
         if(line.hasOption("createConfig")){otrConfig.createDefault(configFile);}
         
-        Configuration config = otrConfig.readConfig(configFile);
+        otrConfig.readConfig(configFile);
         
-        if(line.hasOption("createDirs")){otrConfig.createDirs(config);}
-        otrConfig.checkDirs(config);
-        otrConfig.checkTools(config);
+        if(line.hasOption("createDirs")){otrConfig.createDirs();}
+        otrConfig.checkConfigSettings();
          
         ViewInterface view = new CliView();
         
@@ -95,11 +92,11 @@ public class AviToMp4
         
         if(line.hasOption("hq"))
         {
-        	vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.HQAVI),SrcDirProcessor.VideType.avi); 
         }
         else if(line.hasOption("hd"))
         {
-        	aviProcessor.readFiles(new File(config.getString(OtrConfig.dirHdAvi)),SrcDirProcessor.VideType.avi); 
+        	aviProcessor.readFiles(otrConfig.getDir(Dir.HDAVI),SrcDirProcessor.VideType.avi); 
         }
         
         if(line.hasOption("tag"))
@@ -127,7 +124,7 @@ public class AviToMp4
         
         if(line.hasOption("hq"))
         {
-        	CutGenerator batch = new CutGenerator(config,Quality.HQ,Audio.Mp3,profile);
+        	CutGenerator batch = new CutGenerator(otrConfig,Quality.HQ,Audio.Mp3,profile);
         	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
@@ -135,7 +132,7 @@ public class AviToMp4
         }
         if(line.hasOption("hd"))
         {
-        	CutGenerator batch = new CutGenerator(config,Quality.HD,audio,profile);
+        	CutGenerator batch = new CutGenerator(otrConfig,Quality.HD,audio,profile);
         	
             vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
@@ -143,9 +140,9 @@ public class AviToMp4
         }
         if(line.hasOption("rename"))
         {
-        	RenameGenerator batch = new RenameGenerator(config);
+        	RenameGenerator batch = new RenameGenerator(otrConfig.getConfig());
         	
-        	vFiles = aviProcessor.readFiles(new File(config.getString(OtrConfig.dirMp4Rename)),SrcDirProcessor.VideType.mp4); 
+        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.RENAME),SrcDirProcessor.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);
             clChooser.setRenameOutput();
             vFiles = clChooser.chooseFileRename(vFiles);

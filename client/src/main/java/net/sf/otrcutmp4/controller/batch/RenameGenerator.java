@@ -30,15 +30,15 @@ public class RenameGenerator
 	{
 		shellMove = new ShellCmdMove();
 		
-		dirHqMp4 = new File(config.getString(OtrConfig.dirHqMp4));
+		dirHqMp4 = new File(config.getString(OtrConfig.dirMp4));
 		dirBat = new File(config.getString(OtrConfig.dirBat));
-		dirMp4Rename = new File(config.getString(OtrConfig.dirMp4Rename));
+		dirMp4Rename = new File(config.getString(OtrConfig.dirRename));
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+dirBat.getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
-		rpf = new RelativePathFactory();
+		rpf = new RelativePathFactory(RelativePathFactory.PathSeparator.CURRENT,true);
 	}
 	
 	public void create(VideoFiles vFiles)

@@ -2,7 +2,9 @@ package net.sf.otrcutmp4.util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 
@@ -18,17 +20,20 @@ public class OtrConfig
 {
 	static Log logger = LogFactory.getLog(OtrConfig.class);
 	
+	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME};
+	public static enum Tool{LAME}
+	
 	public static String otrConfigName = "properties.txt";
 		
 	public static final String dirHqAvi = "dir.hq.avi";
 	public static final String dirHdAc3 = "dir.hd.ac3";
 	public static final String dirHdAvi = "dir.hd.avi";
-	public static final String dirHqMp4 = "dir.hq.mp4";
+	public static final String dirMp4 = "dir.mp4";
 	public static final String dirTmp = "dir.tmp";
 	public static final String dirBat = "dir.bat";
 	public static final String dirTools = "dir.tools";
 	public static final String dirCutlists = "dir.cutlists";
-	public static final String dirMp4Rename = "dir.mp4.rename";
+	public static final String dirRename = "dir.rename";
 	
 	public static final String toolMp4Box = "tool.mp4box";
 	public static final String toolLame = "tool.lame";
@@ -37,33 +42,40 @@ public class OtrConfig
 	
 	public static final String urlOtrSeries = "url.otrseries";
 	
+	private Map<Dir,String> mapDir;
+	private Map<Tool,String> mapTool;
 	private List<String> lDirectotries,lTools;
+	private Configuration config;
 	
-	public OtrConfig()
+	public OtrConfig(){this(null);}
+	public OtrConfig(Configuration config)
 	{
+		this.config=config;
 		initDirectoryList();
 		initToolList();
 	}
 	
 	private void initDirectoryList()
 	{
+		mapDir = new Hashtable<Dir,String>();
 		lDirectotries = new ArrayList<String>();
-		lDirectotries.add(dirHqAvi);
-		lDirectotries.add(dirHdAvi);
+		lDirectotries.add(dirHqAvi);mapDir.put(Dir.HQAVI, dirHqAvi);
+		lDirectotries.add(dirHdAvi);mapDir.put(Dir.HDAVI, dirHdAvi);
 		lDirectotries.add(dirHdAc3);
-		lDirectotries.add(dirHqMp4);
-		lDirectotries.add(dirTmp);
-		lDirectotries.add(dirBat);
+		lDirectotries.add(dirMp4);
+		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
+		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
 		lDirectotries.add(dirTools);
-		lDirectotries.add(dirCutlists);
-		lDirectotries.add(dirMp4Rename);
+//		lDirectotries.add(dirCutlists);
+		lDirectotries.add(dirRename);mapDir.put(Dir.RENAME, dirRename);
 	}
 	
 	private void initToolList()
 	{
+		mapTool = new Hashtable<Tool,String>();
 		lTools = new ArrayList<String>();
 		lTools.add(toolMp4Box);
-		lTools.add(toolLame);
+		lTools.add(toolLame);mapTool.put(Tool.LAME, toolLame);
 		lTools.add(toolFfmpeg);
 		lTools.add(toolFaac);
 	}
@@ -91,12 +103,12 @@ public class OtrConfig
 				config.setProperty(dirHqAvi, "HQ.avi");
 				config.setProperty(dirHdAvi, "HD.avi");
 				config.setProperty(dirHdAc3, "HD.ac3");
-				config.setProperty(dirHqMp4, "MP4");
+				config.setProperty(dirMp4, "MP4");
 				config.setProperty(dirTmp, "tmp");
 				config.setProperty(dirBat, ".");
 				config.setProperty(dirTools, "OtrCutMp4.Tools");
-				config.setProperty(dirCutlists, "Cutlists");
-				config.setProperty(dirMp4Rename, "Mp4.Cut.Rename");
+//				config.setProperty(dirCutlists, "Cutlists");
+				config.setProperty(dirRename, "Mp4.Rename");
 				
 				config.setProperty(toolMp4Box, "MP4Box.exe");
 				config.setProperty(toolLame, "lame.exe");
@@ -108,9 +120,9 @@ public class OtrConfig
 		}
 	}
 	
-	public Configuration readConfig(String configFile) throws OtrConfigurationException
+	public void readConfig(String configFile) throws OtrConfigurationException
 	{
-		Configuration config = null;
+		config = null;
 		
 		File f = new File(configFile);
 		if(!f.exists()){throw new OtrConfigurationException("Configuration file does not exist: "+f.getAbsolutePath());}
@@ -118,11 +130,9 @@ public class OtrConfig
 		
 		try{config = new PropertiesConfiguration(configFile);}
 		catch (ConfigurationException e) {throw new OtrConfigurationException(e.getMessage());}
-		
-		return config;
 	}
 	
-	public void createDirs(Configuration config) throws OtrConfigurationException
+	public void createDirs() throws OtrConfigurationException
 	{
 		for(String dirKey : lDirectotries)
 		{
@@ -151,14 +161,19 @@ public class OtrConfig
 		}
 	}
 	
-	public void checkDirs(Configuration config) throws OtrConfigurationException
+	public void checkConfigSettings() throws OtrConfigurationException
+	{
+		checkDirs();
+		checkTools();
+	}
+	
+	private void checkDirs() throws OtrConfigurationException
 	{
 		for(String dirKey : lDirectotries)
 		{
 			String dirName = config.getString(dirKey);
 			if(dirName!=null){checkDir(dirKey, dirName);}
 			else {throw new OtrConfigurationException("Entry in properties file missing : "+dirKey);}
-			;
 		}
 	}
 	
@@ -176,7 +191,7 @@ public class OtrConfig
 		}
 	}
 	
-	public void checkTools(Configuration config) throws OtrConfigurationException
+	private void checkTools() throws OtrConfigurationException
 	{
 		File dirTools = new File(config.getString(OtrConfig.dirTools));
 		for(String toolKey : lTools)
@@ -196,4 +211,18 @@ public class OtrConfig
 			throw new OtrConfigurationException("Tool ("+toolKey+") does not exist! "+FilenameUtils.normalize(f.getAbsolutePath()));
 		}
 	}
+	
+	public File getDir(Dir dir)
+	{
+		if(config==null){logger.error("Throw");}
+		return new File(config.getString(mapDir.get(dir)));
+	}
+	
+	public String getTool(Tool tool)
+	{
+		if(config==null){logger.error("Throw");}
+		return config.getString(mapTool.get(tool));
+	}
+	
+	@Deprecated public Configuration getConfig(){return config;}
 }
