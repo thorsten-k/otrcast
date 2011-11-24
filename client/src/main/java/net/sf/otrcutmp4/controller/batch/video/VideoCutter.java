@@ -9,6 +9,7 @@ import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 import org.apache.commons.configuration.Configuration;
 
@@ -59,7 +60,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
 		sb.append(" -acodec copy");
-		sb.append(" ").append(rpf.relativate(new File(fTmp,index+"-"+counter+".mp4")));
+		sb.append(" ").append(getRalative(otrConfig.getDir(Dir.TMP), index+"-"+counter+".mp4"));
 		return sb.toString();
 	}
 	
@@ -73,7 +74,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
 		sb.append(" -acodec libvo_aacenc");
-		sb.append(" ").append(rpf.relativate(new File(fTmp,index+"-"+counter+".mp4")));
+		sb.append(" ").append(getRalative(otrConfig.getDir(Dir.TMP), index+"-"+counter+".mp4"));
 		return sb.toString();
 	}
 	
