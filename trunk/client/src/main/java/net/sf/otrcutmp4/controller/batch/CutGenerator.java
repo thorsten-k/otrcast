@@ -42,7 +42,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		shellCopy = new ShellCmdCopy();
 		shellRm = new ShellCmdRm();
 		
-		mp3ToAac = new Mp3ToAac(otrConfig,dirTools);
+		mp3ToAac = new Mp3ToAac(otrConfig);
 		ac3ToAac = new Ac3ToAac(config);
 		
 		logger.debug("");
@@ -108,7 +108,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
 		
-		try {txt.add(shellRm.rmDir(rpf.relativate(fTmp), true));}
+		try {txt.add(shellRm.rmDir(rpf.relativate(otrConfig.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error(e);}
 	
 		switch(profile)
@@ -123,7 +123,7 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 	private void extract(VideoFile vf)
 	{
-		String sMp4 = rpf.relativate(new File(fTmp,"mp4.mp4"));
+		String sMp4 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));
 		rawExtract.rawExtract(vf);
 		switch(audio)
 		{
@@ -138,7 +138,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		String inVideo=null;
 		switch(profile)
 		{
-			case P0: inVideo = rpf.relativate(new File(fTmp,"mp4.mp4"));break;
+			case P0: inVideo = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"mp4.mp4"));break;
 			case P1: inVideo = rpf.relativate(new File(dirAvi,vf.getFileName().getValue()));break;
 		}
 		 
@@ -169,7 +169,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		StringBuffer sb = new StringBuffer();
 		if(cl.getCut().size()==1)
 		{
-			String sFrom = rpf.relativate(new File(fTmp,index+"-1.mp4"));
+			String sFrom = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),index+"-1.mp4"));
 			String sTo = rpf.relativate(new File(dirHqMp4,fileName+".mp4"));
 			
 			try {txt.add(shellCopy.copyFile(sFrom, sTo));}
@@ -185,12 +185,12 @@ public class CutGenerator extends AbstactBatchGenerator
 		{
 			sb.append(cmdMp4Box).append(" ");
 			switch(quality){case HD: sb.append("-fps 50 ");break;}
-			sb.append(rpf.relativate(new File(fTmp,index+"-1.mp4")));
+			sb.append(rpf.relativate(new File(otrConfig.getDir(Dir.TMP),index+"-1.mp4")));
 			sb.append(" ");
 			for(int i=2;i<=cl.getCut().size();i++)
 			{
 				sb.append("-cat ");
-				sb.append(rpf.relativate(new File(fTmp,index+"-"+i+".mp4")));
+				sb.append(rpf.relativate(new File(otrConfig.getDir(Dir.TMP),index+"-"+i+".mp4")));
 				sb.append(" ");
 			}
 			sb.append("-out ");
@@ -201,8 +201,8 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 	private void createMp4(String vfName, String sMp4)
 	{
-		String sH264 = rpf.relativate(new File(fTmp,"raw_video.h264"));
-		String sAudio=rpf.relativate(new File(fTmp,"aac.aac"));
+		String sH264 = rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"raw_video.h264"));
+		String sAudio=rpf.relativate(new File(otrConfig.getDir(Dir.TMP),"aac.aac"));
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");

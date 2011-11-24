@@ -5,6 +5,7 @@ import java.io.File;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 public class RawExtract extends AbstactBatchGenerator
 {	
@@ -16,8 +17,8 @@ public class RawExtract extends AbstactBatchGenerator
 	public void rawExtract(VideoFile vf)
 	{
 		String sIn = rpf.relativate(new File(dirAvi,vf.getFileName().getValue()));
-		String sH264 = rpf.relativate(new File(fTmp,"raw.h264"));
-		String sMp3 = rpf.relativate(new File(fTmp,"raw.mp3"));
+		String sH264 = getRalative(otrConfig.getDir(Dir.TMP), "raw.h264");
+		String sMp3 = getRalative(otrConfig.getDir(Dir.TMP), "raw.mp3");
 		
 		StringBuffer sbVideo = new StringBuffer();
 		StringBuffer sbAudio = new StringBuffer();

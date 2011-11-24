@@ -16,9 +16,12 @@ import org.junit.Test;
 
 public class TestOtrConfig extends AbstractClientTest
 { 
+	public static final String faacKbit = "196";
+	
 	static Log logger = LogFactory.getLog(TestOtrConfig.class);
 	
 	private OtrConfig otrConfig;
+
 	private static File fRoot,fHqAvi,fHdAvi,fHdAc3,fMp4,fTmp,fBat,fTools,fRename;
 	private static File tMp4Box,tLame,tFfmpeg,tFaac;
 	
@@ -39,7 +42,7 @@ public class TestOtrConfig extends AbstractClientTest
 		fHdAc3 = new File(fRoot,OtrConfig.dirHdAc3);fHdAc3.mkdirs();
 		fMp4 = new File(fRoot,OtrConfig.dirMp4);fMp4.mkdirs();
 		fTmp = new File(fRoot,OtrConfig.dirTmp);fTmp.mkdirs();
-		fBat = new File(fRoot,OtrConfig.dirBat);fBat.mkdirs();
+		fBat = fRoot;fBat.mkdirs();
 		fTools = new File(fRoot,OtrConfig.dirTools);fTools.mkdirs();
 		fRename = new File(fRoot,OtrConfig.dirRename);fRename.mkdirs();
 		
@@ -68,9 +71,12 @@ public class TestOtrConfig extends AbstractClientTest
 		config.addProperty(OtrConfig.toolFfmpeg, tFfmpeg.getName());
 		config.addProperty(OtrConfig.toolFaac, tFaac.getName());
 		
+		config.addProperty(OtrConfig.paraAudioFaac, faacKbit);
+		
 		otrConfig = new OtrConfig(config);
 	}
 	
+	public OtrConfig getOtrConfig() {return otrConfig;}
 	
 	@Test(expected=OtrConfigurationException.class)
 	public void checkFail() throws OtrConfigurationException

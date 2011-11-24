@@ -20,8 +20,9 @@ public class OtrConfig
 {
 	static Log logger = LogFactory.getLog(OtrConfig.class);
 	
-	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME};
-	public static enum Tool{LAME}
+	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS};
+	public static enum Tool{LAME};
+	public static enum Audio{FAAC};
 	
 	public static String otrConfigName = "properties.txt";
 		
@@ -40,10 +41,14 @@ public class OtrConfig
 	public static final String toolFfmpeg = "tool.ffmpeg";
 	public static final String toolFaac = "tool.faac";
 	
+	public static final String paraAudioFaac = "audio.faac.kbit";
+	
 	public static final String urlOtrSeries = "url.otrseries";
 	
 	private Map<Dir,String> mapDir;
 	private Map<Tool,String> mapTool;
+	private Map<Audio,String> mapAudio;
+	
 	private List<String> lDirectotries,lTools;
 	private Configuration config;
 	
@@ -53,6 +58,7 @@ public class OtrConfig
 		this.config=config;
 		initDirectoryList();
 		initToolList();
+		initParameterList();
 	}
 	
 	private void initDirectoryList()
@@ -65,7 +71,7 @@ public class OtrConfig
 		lDirectotries.add(dirMp4);
 		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
 		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
-		lDirectotries.add(dirTools);
+		lDirectotries.add(dirTools);mapDir.put(Dir.TOOLS, dirTools);
 //		lDirectotries.add(dirCutlists);
 		lDirectotries.add(dirRename);mapDir.put(Dir.RENAME, dirRename);
 	}
@@ -78,6 +84,12 @@ public class OtrConfig
 		lTools.add(toolLame);mapTool.put(Tool.LAME, toolLame);
 		lTools.add(toolFfmpeg);
 		lTools.add(toolFaac);
+	}
+	
+	private void initParameterList()
+	{
+		mapAudio = new Hashtable<Audio,String>();
+		mapAudio.put(Audio.FAAC, paraAudioFaac);
 	}
 	
 	public void createDefault(String configFile)
@@ -114,6 +126,8 @@ public class OtrConfig
 				config.setProperty(toolLame, "lame.exe");
 				config.setProperty(toolFfmpeg, "ffmpeg.exe");
 				config.setProperty(toolFaac, "faac.exe");
+				
+				config.setProperty(paraAudioFaac, "192");
 				config.save();
 			}
 			catch (ConfigurationException e) {logger.error(e);}
@@ -165,6 +179,7 @@ public class OtrConfig
 	{
 		checkDirs();
 		checkTools();
+		checkParameter();
 	}
 	
 	private void checkDirs() throws OtrConfigurationException
@@ -212,6 +227,15 @@ public class OtrConfig
 		}
 	}
 	
+	private void checkParameter() throws OtrConfigurationException
+	{
+		for(Audio audio : Audio.values())
+		{
+			String value = config.getString(mapAudio.get(audio));
+			if(value==null){throw new OtrConfigurationException("Entry in properties file. Missing Key: "+mapAudio.get(audio));}
+		}
+	}
+	
 	public File getDir(Dir dir)
 	{
 		if(config==null){logger.error("Throw");}
@@ -224,5 +248,10 @@ public class OtrConfig
 		return config.getString(mapTool.get(tool));
 	}
 	
+	public String getAudio(Audio audio)
+	{
+		if(config==null){logger.error("Throw");}
+		return config.getString(mapAudio.get(audio));
+	}
 	@Deprecated public Configuration getConfig(){return config;}
 }
