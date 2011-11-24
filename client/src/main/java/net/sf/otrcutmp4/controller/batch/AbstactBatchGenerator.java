@@ -19,7 +19,7 @@ public class AbstactBatchGenerator
 	
 	protected Configuration config;
 	
-	protected File dirAvi,dirHqMp4;
+	protected File dirHqMp4;
 	
 	protected RelativePathFactory rpf;
 	protected ExlpTxtWriter txt;
@@ -47,15 +47,14 @@ public class AbstactBatchGenerator
 		cmdFaac = rpf.relativate(new File(otrConfig.getDir(Dir.TOOLS),config.getString(OtrConfig.toolFaac)));
 	}
 	
-	public void init(AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
+	protected File getAviDir(AviToMp4.Quality quality) throws OtrInternalErrorException
 	{
 		switch(quality)
 		{
-			case HQ: dirAvi = new File(config.getString(OtrConfig.dirHqAvi));break;
-			case HD: dirAvi = new File(config.getString(OtrConfig.dirHdAvi));break;
+			case HQ: return otrConfig.getDir(Dir.HQAVI);
+			case HD: return otrConfig.getDir(Dir.HDAVI);
 		}
-		
-		if(txt==null){throw new OtrInternalErrorException("txt not set");}
+		throw new OtrInternalErrorException("No valid AVI Dir requested: quality="+quality);
 	}
 	
 	protected void setTxt(ExlpTxtWriter txt) {this.txt = txt;}

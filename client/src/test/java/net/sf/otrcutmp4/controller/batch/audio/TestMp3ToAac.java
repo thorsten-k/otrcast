@@ -30,7 +30,7 @@ public class TestMp3ToAac extends AbstractClientTest
 	{
 		String actual = mp3ToAac.create();
 		logger.debug(actual);
-		String expected = "dir.tools/tool.lame --decode dir.tmp/raw_audio.mp3 - | dir.tools/tool.faac --mpeg-vers 4 -b "+TestOtrConfig.faacKbit+" -o dir.tmp/raw_audio.mp3 -";
+		String expected = "dir.tools/tool.lame --decode dir.tmp/raw_audio.mp3 - | dir.tools/tool.faac --mpeg-vers 4 -b "+TestOtrConfig.faacKbit+" -o dir.tmp/aac.aac -";
 		Assert.assertEquals(expected, actual);
 	}
 
