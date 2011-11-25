@@ -13,6 +13,7 @@
 	<url>https://sourceforge.net/projects/otrcutmp4/</url>
 
     <properties>
+    	<my.build.directory>target</my.build.directory>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
     	<jaxb.version>2.2.2</jaxb.version>
@@ -176,5 +177,26 @@
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 	</repositories>
+	
+	<distributionManagement>
+		<repository>
+			<id>aht-releases</id>
+			<name>Internal Releases</name>
+			<url>https://www.aht-group.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>aht-snapshots</id>
+			<name>Internal Snapshots</name>
+			<url>https://www.aht-group.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
+	<profiles>
+    	<profile>
+       		<id>ram</id>
+       		<build>
+       			<directory>${my.build.directory}</directory>
+       		</build>
+   		</profile>
+	</profiles>
 </project>
