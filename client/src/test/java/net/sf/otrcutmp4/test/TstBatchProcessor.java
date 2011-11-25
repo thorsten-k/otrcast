@@ -17,13 +17,13 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class TestBatchProcessor extends TestCase
+public class TstBatchProcessor extends TestCase
 { 
-	static Log logger = LogFactory.getLog(TestBatchProcessor.class);
+	static Log logger = LogFactory.getLog(TstBatchProcessor.class);
 	
 	private Configuration config;
 
-	public TestBatchProcessor()
+	public TstBatchProcessor()
 	{
 	}
 	
@@ -55,7 +55,7 @@ public class TestBatchProcessor extends TestCase
 	{
 		Configuration config = OtrClientTstBootstrap.init();
 		
-		TestBatchProcessor test = new TestBatchProcessor();
+		TstBatchProcessor test = new TstBatchProcessor();
 		test.setConfig(config);
 		
 		test.renameGenerator();
