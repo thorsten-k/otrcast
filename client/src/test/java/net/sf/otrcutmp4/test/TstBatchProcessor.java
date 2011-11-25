@@ -2,14 +2,12 @@ package net.sf.otrcutmp4.test;
 
 import java.io.FileNotFoundException;
 
-import junit.framework.TestCase;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Audio;
 import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.AviToMp4.Quality;
 import net.sf.otrcutmp4.controller.batch.CutGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
-import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
@@ -17,7 +15,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class TstBatchProcessor extends TestCase
+public class TstBatchProcessor
 { 
 	static Log logger = LogFactory.getLog(TstBatchProcessor.class);
 	
@@ -26,7 +24,6 @@ public class TstBatchProcessor extends TestCase
 	public TstBatchProcessor()
 	{
 	}
-	
 	
 	
 	public void cutGenerator() throws FileNotFoundException, OtrInternalErrorException
