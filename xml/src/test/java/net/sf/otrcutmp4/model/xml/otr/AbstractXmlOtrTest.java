@@ -4,12 +4,12 @@ import java.io.File;
 
 import net.sf.otrcutmp4.test.AbstractXmlTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractXmlOtrTest extends AbstractXmlTest
 {
-	static Log logger = LogFactory.getLog(AbstractXmlOtrTest.class);	
+	final static Logger logger = LoggerFactory.getLogger(AbstractXmlOtrTest.class);
 	
 	protected static final String rootDir = "src/test/resources/data/xml/otr";
 	protected static File fXml;

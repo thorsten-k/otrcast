@@ -7,15 +7,15 @@ import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
 import net.sf.otrcutmp4.test.AbstractXmlTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestXPathOtrQuality extends AbstractXmlTest
 {
-	static Log logger = LogFactory.getLog(TestXPathOtrQuality.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXPathOtrQuality.class);
     
 	private OtrId otrId;
 	private final String typeOk = "myType";

@@ -10,12 +10,12 @@ import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OtrXpath
 {
-	static Log logger = LogFactory.getLog(OtrXpath.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrXpath.class);
 	
 	public static synchronized Download getDownload(List<Download> list, String type) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{

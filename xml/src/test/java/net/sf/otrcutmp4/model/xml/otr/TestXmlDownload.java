@@ -6,14 +6,14 @@ import java.io.FileNotFoundException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestXmlDownload extends AbstractXmlOtrTest
 {
-	static Log logger = LogFactory.getLog(TestXmlDownload.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlDownload.class);
 	
 	@BeforeClass
 	public static void initFiles()

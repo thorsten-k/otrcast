@@ -15,6 +15,11 @@
 	
 	<dependencies>
 		<dependency>
+      		<groupId>commons-logging</groupId>
+      		<artifactId>commons-logging</artifactId>
+      		<type>jar</type>
+      	</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<type>jar</type>
