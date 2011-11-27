@@ -13,12 +13,12 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OtrConfig
 {
-	static Log logger = LogFactory.getLog(OtrConfig.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
 	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC};
@@ -130,7 +130,7 @@ public class OtrConfig
 				config.setProperty(paraAudioFaac, "192");
 				config.save();
 			}
-			catch (ConfigurationException e) {logger.error(e);}
+			catch (ConfigurationException e) {logger.error("",e);}
 		}
 	}
 	

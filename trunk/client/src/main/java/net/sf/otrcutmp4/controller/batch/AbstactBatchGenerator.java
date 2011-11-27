@@ -10,12 +10,12 @@ import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Tool;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AbstactBatchGenerator
 {
-	static Log logger = LogFactory.getLog(AbstactBatchGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstactBatchGenerator.class);
 	
 	protected RelativePathFactory rpf;
 	protected ExlpTxtWriter txt;

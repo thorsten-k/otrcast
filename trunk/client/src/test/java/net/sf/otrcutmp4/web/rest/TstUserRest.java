@@ -1,15 +1,13 @@
 package net.sf.otrcutmp4.web.rest;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.user.User;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -18,7 +16,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class TstUserRest
 {
-	static Log logger = LogFactory.getLog(TstUserRest.class);
+	final static Logger logger = LoggerFactory.getLogger(TstUserRest.class);
 	
 	private WebResource gae;
 	

@@ -10,13 +10,12 @@ import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstCutlistFinder
 { 
-	static Log logger = LogFactory.getLog(TstCutlistFinder.class);
+	final static Logger logger = LoggerFactory.getLogger(TstCutlistFinder.class);
 	
 	private Configuration config;
 	private NsPrefixMapperInterface nsPrefixMapper;

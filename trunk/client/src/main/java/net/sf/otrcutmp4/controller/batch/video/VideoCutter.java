@@ -12,8 +12,13 @@ import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class VideoCutter extends AbstactBatchGenerator
 {	
+	final static Logger logger = LoggerFactory.getLogger(VideoCutter.class);
+	
 	private static DecimalFormat df;
 	
 	public VideoCutter(OtrConfig cfg)

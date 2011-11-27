@@ -2,15 +2,14 @@ package net.sf.otrcutmp4.view.cli;
 
 import java.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CliView implements ViewInterface
 {
-	static Log logger = LogFactory.getLog(SrcDirProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(CliView.class);
 	
 	@Override
 	public void readFilesInDir(File srcDir)

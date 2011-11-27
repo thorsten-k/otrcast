@@ -9,15 +9,15 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestVideoCutter extends AbstractClientTest
 { 
-	static Log logger = LogFactory.getLog(TestVideoCutter.class);
+	final static Logger logger = LoggerFactory.getLogger(TestVideoCutter.class);
 	
 	private RawExtract rawExtract;
 	private String testFile;

@@ -15,12 +15,12 @@ import net.sf.otrcutmp4.view.cli.CliView;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstSeriesTagger
 {
-	static Log logger = LogFactory.getLog(TstSeriesTagger.class);
+	final static Logger logger = LoggerFactory.getLogger(TstSeriesTagger.class);
 	
 	private ViewInterface view;
 	private SeriesTagger tagger;

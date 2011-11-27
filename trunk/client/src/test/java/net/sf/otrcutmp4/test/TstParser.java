@@ -13,13 +13,12 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstParser
 {
-	static Log logger = LogFactory.getLog(TstParser.class);
+	final static Logger logger = LoggerFactory.getLogger(TstParser.class);
 	
 	private Configuration config;
 	
@@ -50,7 +49,7 @@ public class TstParser
 		
 		Pattern p = Pattern.compile(sPattern);
 		Matcher m = p.matcher(sTest);
-		logger.debug(m.matches());
+		logger.debug("matches:"+m.matches());
 		if(m.matches())
 		{
 			logger.debug("Group Count "+m.groupCount());

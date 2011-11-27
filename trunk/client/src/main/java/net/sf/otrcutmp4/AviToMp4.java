@@ -22,12 +22,12 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AviToMp4
 {
-	static Log logger = LogFactory.getLog(AviToMp4.class);
+	final static Logger logger = LoggerFactory.getLogger(AviToMp4.class);
 	
 	public static enum Quality {HQ,HD}
 	public static enum Audio {Mp3,Ac3}
@@ -118,7 +118,7 @@ public class AviToMp4
         {
         	logger.warn("Remember, the option ac3 is EXPERIMENTAL");
         	logger.warn("http://otrcutmp4.sourceforge.net/future.html");
-        	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error(e);}
+        	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error("",e);}
         	audio = Audio.Ac3;
         }
         

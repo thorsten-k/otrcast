@@ -17,17 +17,16 @@ import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CutlistFinder
 {
-	static Log logger = LogFactory.getLog(CutlistFinder.class);
+	final static Logger logger = LoggerFactory.getLogger(CutlistFinder.class);
 		
 	public CutlistFinder()
 	{
@@ -81,7 +80,7 @@ public class CutlistFinder
 					cls.getCutList().add(getCutList(e));
 				}
 			}
-			catch (JDOMException e) {logger.error(e);}
+			catch (JDOMException e) {logger.error("",e);}
 		}
 		return cls;
 	}

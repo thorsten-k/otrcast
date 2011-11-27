@@ -19,12 +19,12 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CutGenerator extends AbstactBatchGenerator
 {
-	static Log logger = LogFactory.getLog(CutGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(CutGenerator.class);
 	
 	private RawExtract rawExtract;
 	private VideoCutter videoCutter;
@@ -86,7 +86,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		txt.add("");
 		
 		try {txt.add(shellRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
-		catch (ExlpUnsupportedOsException e) {logger.error(e);}
+		catch (ExlpUnsupportedOsException e) {logger.error("",e);}
 	
 		switch(profile)
 		{
@@ -153,7 +153,7 @@ public class CutGenerator extends AbstactBatchGenerator
 			try {txt.add(shellCopy.copyFile(sFrom, sTo));}
 			catch (ExlpUnsupportedOsException e)
 			{
-				logger.error(e);
+				logger.error("",e);
 				logger.error("File was not copied! ");
 				logger.error("\tFrom: "+sFrom);
 				logger.error("\tTo  : "+sTo);

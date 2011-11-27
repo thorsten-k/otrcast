@@ -7,8 +7,8 @@ import net.sf.otrcutmp4.controller.interfaces.rest.OtrAdminRestService;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -17,7 +17,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class AdminRestClient implements OtrAdminRestService
 {
-	static Log logger = LogFactory.getLog(AdminRestClient.class);
+	final static Logger logger = LoggerFactory.getLogger(AdminRestClient.class);
 	
 	private WebResource gae;
 	
