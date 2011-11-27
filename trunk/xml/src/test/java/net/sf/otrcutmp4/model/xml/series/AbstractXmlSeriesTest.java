@@ -4,12 +4,12 @@ import java.io.File;
 
 import net.sf.otrcutmp4.test.AbstractXmlTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractXmlSeriesTest extends AbstractXmlTest
 {
-	static Log logger = LogFactory.getLog(AbstractXmlSeriesTest.class);	
+	final static Logger logger = LoggerFactory.getLogger(AbstractXmlSeriesTest.class);
 	
 	protected static final String rootDir = "src/test/resources/data/xml/series";
 	protected static File fXml;
