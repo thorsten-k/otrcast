@@ -3,8 +3,8 @@ package net.sf.otrcutmp4.test;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.coremedia.iso.IsoBufferWrapper;
 import com.coremedia.iso.IsoFile;
@@ -14,10 +14,9 @@ import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 
-
 public class TstMp4Parser
 {
-	static Log logger = LogFactory.getLog(TstMp4Parser.class);
+	final static Logger logger = LoggerFactory.getLogger(TstMp4Parser.class);
 	
 	public static void main(String[] args) throws IOException
 	{

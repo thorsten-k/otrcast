@@ -14,12 +14,12 @@ import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.series.Tag;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SeriesTagger
 {
-	static Log logger = LogFactory.getLog(SeriesTagger.class);
+	final static Logger logger = LoggerFactory.getLogger(SeriesTagger.class);
 	
 	private RestSeriesClient rest;
 	

@@ -8,14 +8,14 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractClientTest
 {
-	static Log logger = LogFactory.getLog(AbstractClientTest.class);	
+	final static Logger logger = LoggerFactory.getLogger(AbstractClientTest.class);
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	

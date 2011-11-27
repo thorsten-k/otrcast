@@ -16,13 +16,12 @@ import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CutlistChooser
 {
-	static Log logger = LogFactory.getLog(CutlistChooser.class);
+	final static Logger logger = LoggerFactory.getLogger(CutlistChooser.class);
 	
 	private boolean showAuthor, showRanking, showComment, showFile;
 

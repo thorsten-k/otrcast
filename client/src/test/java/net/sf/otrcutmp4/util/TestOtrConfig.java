@@ -8,17 +8,17 @@ import net.sf.otrcutmp4.test.AbstractClientTest;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestOtrConfig extends AbstractClientTest
 { 
-	public static final String faacKbit = "196";
+	final static Logger logger = LoggerFactory.getLogger(TestOtrConfig.class);
 	
-	static Log logger = LogFactory.getLog(TestOtrConfig.class);
+	public static final String faacKbit = "196";
 	
 	private OtrConfig otrConfig;
 

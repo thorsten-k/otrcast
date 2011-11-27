@@ -7,8 +7,8 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -17,7 +17,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class CutRestClient implements OtrCutRestService
 {
-	static Log logger = LogFactory.getLog(CutRestClient.class);
+	final static Logger logger = LoggerFactory.getLogger(CutRestClient.class);
 	
 	private WebResource gae;
 	

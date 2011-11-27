@@ -6,15 +6,15 @@ import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestAc3ToAac extends AbstractClientTest
 { 
-	static Log logger = LogFactory.getLog(TestAc3ToAac.class);
+	final static Logger logger = LoggerFactory.getLogger(TestAc3ToAac.class);
 	
 	private Ac3ToAac ac3ToAac;
 	private String testFile;

@@ -13,12 +13,12 @@ import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RenameGenerator extends AbstactBatchGenerator
 {
-	static Log logger = LogFactory.getLog(RenameGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(RenameGenerator.class);
 	
 	private File dirHqMp4,dirMp4Rename;
 	private ExlpTxtWriter txt;
@@ -75,7 +75,7 @@ public class RenameGenerator extends AbstactBatchGenerator
 		try {txt.add(shellMove.moveFile(sOriginal, sTo));}
 		catch (ExlpUnsupportedOsException e)
 		{
-			logger.error(e);
+			logger.error("",e);
 			logger.error("File was not copied! ");
 			logger.error("\tFrom: "+sOriginal);
 			logger.error("\tTo  : "+sTo);

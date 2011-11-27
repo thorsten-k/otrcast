@@ -12,19 +12,18 @@ import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstBatchProcessor
 { 
-	static Log logger = LogFactory.getLog(TstBatchProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TstBatchProcessor.class);
 	
 	private Configuration config;
 
 	public TstBatchProcessor()
 	{
 	}
-	
 	
 	public void cutGenerator() throws FileNotFoundException, OtrInternalErrorException
 	{

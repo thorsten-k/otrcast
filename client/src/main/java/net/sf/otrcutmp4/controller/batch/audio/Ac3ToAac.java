@@ -6,8 +6,13 @@ import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Ac3ToAac extends AbstactBatchGenerator
 {	
+	final static Logger logger = LoggerFactory.getLogger(Ac3ToAac.class);
+	
 	public Ac3ToAac(OtrConfig otrConfig)
 	{
 		super(otrConfig);

@@ -11,12 +11,12 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RawExtract extends AbstactBatchGenerator
 {	
-	static Log logger = LogFactory.getLog(RawExtract.class);
+	final static Logger logger = LoggerFactory.getLogger(RawExtract.class);
 	
 	public RawExtract(OtrConfig cfg)
 	{

@@ -9,17 +9,17 @@ import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SrcDirProcessor
 {
+	final static Logger logger = LoggerFactory.getLogger(SrcDirProcessor.class);
+	
 	private static final String typeAvi = "mpg.HQ.avi";
 	private static final String typeMp4 = "mpg.cut.mp4";
 	
 	public static enum VideType {avi,mp4}
-	
-	static Log logger = LogFactory.getLog(SrcDirProcessor.class);
 	
 	private ViewInterface view;
 	
