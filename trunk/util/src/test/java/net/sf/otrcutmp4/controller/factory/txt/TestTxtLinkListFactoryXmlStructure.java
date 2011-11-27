@@ -1,19 +1,18 @@
 package net.sf.otrcutmp4.controller.factory.txt;
 
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.controller.factory.txt.TxtLinkListFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestTxtLinkListFactoryXmlStructure extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestTxtLinkListFactoryXmlStructure.class);
+	final static Logger logger = LoggerFactory.getLogger(TestTxtLinkListFactoryXmlStructure.class);
 	
 	private Recording recording;
 	

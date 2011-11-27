@@ -7,14 +7,14 @@ import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestTxtLinkListFactorySuffix extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestTxtLinkListFactorySuffix.class);
+	final static Logger logger = LoggerFactory.getLogger(TestTxtLinkListFactorySuffix.class);
 	
 	private Format format;
 	private Quality quality;

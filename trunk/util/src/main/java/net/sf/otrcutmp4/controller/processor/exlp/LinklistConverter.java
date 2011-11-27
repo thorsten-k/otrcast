@@ -16,12 +16,12 @@ import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LinklistConverter
 {
-	static Log logger = LogFactory.getLog(LinklistConverter.class);
+	final static Logger logger = LoggerFactory.getLogger(LinklistConverter.class);
 	
 	public LinklistConverter()
 	{
@@ -53,7 +53,7 @@ public class LinklistConverter
 			
 			OtrId otrId=null;
 			try {otrId = OtrXpath.getOtrIdByKey(download, keyId);}
-			catch (ExlpXpathNotUniqueException e) {logger.error(e);}
+			catch (ExlpXpathNotUniqueException e) {logger.error("",e);}
 			catch (ExlpXpathNotFoundException e)
 			{
 				otrId = new OtrId();
@@ -63,7 +63,7 @@ public class LinklistConverter
 			
 			Quality quality=null;
 			try {quality = OtrXpath.getQualityByKey(otrId, keyQuality);}
-			catch (ExlpXpathNotUniqueException e) {logger.error(e);}
+			catch (ExlpXpathNotUniqueException e) {logger.error("",e);}
 			catch (ExlpXpathNotFoundException e)
 			{
 				quality = new Quality();

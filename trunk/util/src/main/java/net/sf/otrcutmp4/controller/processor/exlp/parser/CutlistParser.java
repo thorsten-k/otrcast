@@ -13,12 +13,12 @@ import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CutlistParser extends AbstractLogParser implements LogParser  
 {
-	static Log logger = LogFactory.getLog(CutlistParser.class);
+	final static Logger logger = LoggerFactory.getLogger(CutlistParser.class);
 	
 	private CutList cl;
 	private Cut cut;

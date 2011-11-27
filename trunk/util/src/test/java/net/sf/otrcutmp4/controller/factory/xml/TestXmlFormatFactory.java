@@ -2,19 +2,17 @@ package net.sf.otrcutmp4.controller.factory.xml;
 
 import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
-import net.sf.otrcutmp4.controller.factory.xml.XmlFormatFactory;
-import net.sf.otrcutmp4.controller.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestXmlFormatFactory extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestXmlFormatFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlFormatFactory.class);
 	
 	private String suffix;
 	

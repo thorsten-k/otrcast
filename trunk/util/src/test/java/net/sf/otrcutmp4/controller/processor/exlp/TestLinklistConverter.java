@@ -10,14 +10,14 @@ import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestLinklistConverter extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestLinklistConverter.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLinklistConverter.class);
 	
 	private static File fXml;
 	private static String sourceLinklist;

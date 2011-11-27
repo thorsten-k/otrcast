@@ -3,14 +3,14 @@ package net.sf.otrcutmp4.controller.processor;
 import junit.framework.Assert;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestLinklistProcessor extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestLinklistProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLinklistProcessor.class);
 	
 	private LinklistProcessor llP;
 	

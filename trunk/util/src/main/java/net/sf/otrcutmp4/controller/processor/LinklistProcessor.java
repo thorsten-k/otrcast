@@ -3,12 +3,12 @@ package net.sf.otrcutmp4.controller.processor;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LinklistProcessor
 {
-	static Log logger = LogFactory.getLog(LinklistProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(LinklistProcessor.class);
 	
 	private Map<String,Map<String,Boolean>> processSelector;	
 

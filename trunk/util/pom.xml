@@ -14,11 +14,11 @@
     <name>OTR AVI cut to MP4: Util</name>
 	
 	<dependencies>
-		<dependency>
+	<!-- 	<dependency>
       		<groupId>commons-logging</groupId>
       		<artifactId>commons-logging</artifactId>
       		<type>jar</type>
-      	</dependency>
+      	</dependency>  -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

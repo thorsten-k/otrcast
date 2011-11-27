@@ -9,12 +9,12 @@ import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TxtLinkListFactory
 {
-	static Log logger = LogFactory.getLog(TxtLinkListFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TxtLinkListFactory.class);
 	
 	public TxtLinkListFactory()
 	{

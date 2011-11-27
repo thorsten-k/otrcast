@@ -2,12 +2,12 @@ package net.sf.otrcutmp4.controller.factory.xml;
 
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XmlQualityFactory
 {	
-	static Log logger = LogFactory.getLog(XmlOtrIdFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlOtrIdFactory.class);
 		
 	public static final String qMobile = "MP4";
 	public static final String qDivX = "DivX";
