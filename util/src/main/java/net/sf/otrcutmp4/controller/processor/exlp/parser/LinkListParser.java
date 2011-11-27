@@ -13,16 +13,16 @@ import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.Link;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LinkListParser extends AbstractLogParser implements LogParser  
 {
+	final static Logger logger = LoggerFactory.getLogger(LinkListParser.class);
+	
 	private static final String secNormal = "NORMAL DOWNLOAD";
 	private static final String secPrio = "PRIORISIERTER DOWNLOAD";
 	private static final String secPay = "BEZAHLTER DOWNLOAD";
-	
-	static Log logger = LogFactory.getLog(LinkListParser.class);
 
 	private Download download;
 	private int uCounter;

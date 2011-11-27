@@ -7,12 +7,12 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OtrUtilTstBootstrap
 {
-	static Log logger = LogFactory.getLog(OtrUtilTstBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrUtilTstBootstrap.class);
 	
 	private static final String confCode="test";
 	

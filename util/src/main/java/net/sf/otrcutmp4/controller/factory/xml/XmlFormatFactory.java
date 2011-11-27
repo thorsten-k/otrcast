@@ -1,13 +1,13 @@
 package net.sf.otrcutmp4.controller.factory.xml;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.otrcutmp4.model.xml.otr.Format;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XmlFormatFactory
 {	
-	static Log logger = LogFactory.getLog(XmlOtrIdFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlFormatFactory.class);
 		
 	public static Format create(String format)
 	{

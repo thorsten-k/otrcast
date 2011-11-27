@@ -4,12 +4,12 @@ import net.sf.exlp.event.AbstractEvent;
 import net.sf.exlp.event.LogEvent;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DownloadEvent extends AbstractEvent implements LogEvent
 {
-	static Log logger = LogFactory.getLog(DownloadEvent.class);
+	final static Logger logger = LoggerFactory.getLogger(DownloadEvent.class);
 	static final long serialVersionUID=1;
 	
 	private Download download;

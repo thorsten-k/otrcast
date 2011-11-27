@@ -10,15 +10,15 @@ import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestTxtLinkListFactory extends AbstractUtilTest
 {
-	static Log logger = LogFactory.getLog(TestTxtLinkListFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestTxtLinkListFactorySuffix.class);
 	
 	private static final String refUrl = "http://81.95.11.21/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff";
 	private static final String refKey = "Hangover_11.09.04_20-15_pro7_135_TVOON_DE";

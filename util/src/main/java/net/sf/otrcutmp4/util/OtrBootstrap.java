@@ -6,12 +6,12 @@ import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OtrBootstrap
 {
-	static Log logger = LogFactory.getLog(OtrBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrBootstrap.class);
 	
 	public static final String appCode="otrcutmp4-client";
 	private static final String confCode="test";
