@@ -29,17 +29,12 @@ public class CutGenerator extends AbstactBatchGenerator
 	private RawExtract rawExtract;
 	private VideoCutter videoCutter;
 	
-	private ShellCmdCopy shellCopy;
-	private ShellCmdRm shellRm;
-	
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
 	
 	public CutGenerator(OtrConfig cfg) throws OtrInternalErrorException
 	{
 		super(cfg);
-		shellCopy = new ShellCmdCopy();
-		shellRm = new ShellCmdRm();
 		
 		mp3ToAac = new Mp3ToAac(cfg);
 		ac3ToAac = new Ac3ToAac(cfg);
@@ -85,7 +80,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
 		
-		try {txt.add(shellRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
+		try {txt.add(ShellCmdRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error("",e);}
 	
 		switch(profile)
@@ -150,7 +145,7 @@ public class CutGenerator extends AbstactBatchGenerator
 			String sFrom = rpf.relativate(new File(cfg.getDir(Dir.TMP),index+"-1.mp4"));
 			String sTo = rpf.relativate(new File(cfg.getDir(Dir.MP4),fileName+".mp4"));
 			
-			try {txt.add(shellCopy.copyFile(sFrom, sTo));}
+			try {txt.add(ShellCmdCopy.copyFile(sFrom, sTo));}
 			catch (ExlpUnsupportedOsException e)
 			{
 				logger.error("",e);
