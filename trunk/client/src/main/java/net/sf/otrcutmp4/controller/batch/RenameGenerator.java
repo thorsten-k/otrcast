@@ -25,12 +25,9 @@ public class RenameGenerator extends AbstactBatchGenerator
 	
 	private RelativePathFactory rpf;
 	
-	private ShellCmdMove shellMove;
-	
 	public RenameGenerator(OtrConfig cfg, Configuration config)
 	{
 		super(cfg);
-		shellMove = new ShellCmdMove();
 		
 		dirHqMp4 = new File(config.getString(OtrConfig.dirMp4));
 		dirMp4Rename = new File(config.getString(OtrConfig.dirRename));
@@ -72,7 +69,7 @@ public class RenameGenerator extends AbstactBatchGenerator
 	{
 		String sTo = rpf.relativate(cfg.getDir(Dir.BAT), new File(dirHqMp4,cl.getFileName().getValue()+".mp4"));
 		
-		try {txt.add(shellMove.moveFile(sOriginal, sTo));}
+		try {txt.add(ShellCmdMove.moveFile(sOriginal, sTo));}
 		catch (ExlpUnsupportedOsException e)
 		{
 			logger.error("",e);
