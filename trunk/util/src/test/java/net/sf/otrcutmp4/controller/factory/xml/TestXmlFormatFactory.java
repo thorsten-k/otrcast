@@ -16,6 +16,8 @@ public class TestXmlFormatFactory extends AbstractUtilTest
 	
 	private String suffix;
 	
+//	@Rule public IgnoreOtherRule test = new IgnoreOtherRule("testHdAc3Key");
+	
 	//HD
     @Test public void testHdAc3Key()
     {
