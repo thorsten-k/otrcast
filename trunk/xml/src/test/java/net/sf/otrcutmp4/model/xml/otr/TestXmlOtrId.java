@@ -3,8 +3,8 @@ package net.sf.otrcutmp4.model.xml.otr;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,21 +24,13 @@ public class TestXmlOtrId extends AbstractXmlOtrTest
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	OtrId test = createOtrId(true);
-    	OtrId ref = (OtrId)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), OtrId.class);
+    	OtrId test = create();
+    	OtrId ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), OtrId.class);
     	assertJaxbEquals(ref, test);
     }
- 
-    public void save()
-    {
-    	logger.debug("Saving Reference XML");
-    	OtrId xml = createOtrId(true);
-    	JaxbUtil.debug2(this.getClass(),xml, nsPrefixMapper);
-    	JaxbUtil.save(fXml, xml, nsPrefixMapper, true);
-    }
     
-    public static OtrId createOtrId(){return createOtrId(false);}
-    public static OtrId createOtrId(boolean withChilds)
+    private static OtrId create(){return create(true);}
+    public static OtrId create(boolean withChilds)
     {
     	OtrId xml = new OtrId();
     	xml.setId(1);
@@ -46,19 +38,18 @@ public class TestXmlOtrId extends AbstractXmlOtrTest
     	
     	if(withChilds)
     	{
-    		xml.getQuality().add(TestXmlQuality.createQuality());
+    		xml.getQuality().add(TestXmlQuality.create(false));
     	}
     	
     	return xml;
     }
+    
+    public void save() {save(create(), fXml);}
 	
 	public static void main(String[] args)
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();		
+		OtrXmlTstBootstrap.init();
 			
-		TestXmlOtrId.initPrefixMapper();
 		TestXmlOtrId.initFiles();	
 		TestXmlOtrId test = new TestXmlOtrId();
 		test.save();

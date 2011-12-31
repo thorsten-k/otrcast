@@ -2,12 +2,12 @@ package net.sf.otrcutmp4.model.xml.otr;
 
 import java.io.File;
 
-import net.sf.otrcutmp4.test.AbstractXmlTest;
+import net.sf.otrcutmp4.test.AbstractOtrXmlTest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractXmlOtrTest extends AbstractXmlTest
+public abstract class AbstractXmlOtrTest extends AbstractOtrXmlTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractXmlOtrTest.class);
 	

@@ -3,8 +3,8 @@ package net.sf.otrcutmp4.model.xml.series;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,21 +24,13 @@ public class TestXmlEpisode extends AbstractXmlSeriesTest
     @Test
     public void testEpisode() throws FileNotFoundException
     {
-    	Episode test = createEpisode(true);
+    	Episode test = create(true);
     	Episode ref = (Episode)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Episode.class);
     	assertJaxbEquals(ref, test);
     }
- 
-    public void save()
-    {
-    	logger.debug("Saving Reference XML");
-    	Episode xml = createEpisode(true);
-    	JaxbUtil.debug2(this.getClass(),xml, nsPrefixMapper);
-    	JaxbUtil.save(fXml, xml, nsPrefixMapper, true);
-    }
-    
-    public static Episode createEpisode(){return createEpisode(false);}
-    public static Episode createEpisode(boolean withChilds)
+     
+    public static Episode create(){return create(false);}
+    public static Episode create(boolean withChilds)
     {
     	Episode xml = new Episode();
     	xml.setId(1);
@@ -52,14 +44,13 @@ public class TestXmlEpisode extends AbstractXmlSeriesTest
     	
     	return xml;
     }
+    
+    public void save() {save(create(), fXml);}
 	
 	public static void main(String[] args)
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();		
-			
-		TestXmlEpisode.initPrefixMapper();
+		OtrXmlTstBootstrap.init();
+		
 		TestXmlEpisode.initFiles();	
 		TestXmlEpisode test = new TestXmlEpisode();
 		test.save();

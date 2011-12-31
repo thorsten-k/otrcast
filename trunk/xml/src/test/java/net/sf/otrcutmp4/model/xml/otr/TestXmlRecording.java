@@ -11,34 +11,34 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlDownload extends AbstractXmlOtrTest
+public class TestXmlRecording extends AbstractXmlOtrTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlDownload.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlRecording.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"download.xml");
+		fXml = new File(rootDir,"recording.xml");
 	}
     
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	Download test = create();
-    	Download ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Download.class);
-    	assertJaxbEquals(ref, test);
+    	Recording actual = create(true);
+    	Recording expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Recording.class);
+    	assertJaxbEquals(expected, actual);
     }
     
-    private static Download create(){return create(true);}
-    public static Download create(boolean withChilds)
+    private static Recording create(){return create(true);}
+    public static Recording create(boolean withChilds)
     {
-    	Download xml = new Download();
+    	Recording xml = new Recording();
     	xml.setId(1);
-    	xml.setType("myType");
     	
     	if(withChilds)
     	{
-    		xml.getOtrId().add(TestXmlOtrId.create(false));
+    		//TODO fields missing
+    		xml.setOtrId(TestXmlOtrId.create(false));
     	}
     	
     	return xml;
@@ -50,8 +50,8 @@ public class TestXmlDownload extends AbstractXmlOtrTest
     {
 		OtrXmlTstBootstrap.init();
 			
-		TestXmlDownload.initFiles();	
-		TestXmlDownload test = new TestXmlDownload();
+		TestXmlRecording.initFiles();	
+		TestXmlRecording test = new TestXmlRecording();
 		test.save();
     }
 }
