@@ -24,6 +24,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
 	private static final String refKey = "Hangover_11.09.04_20-15_pro7_135_TVOON_DE";
 			
 	private Recording recording;
+	private TxtLinkListFactory txtLinkFactory;
 	
 	public static TestTxtLinkListFactory factory()
     {
@@ -36,6 +37,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
 	public void init()
 	{
 		recording = createXml();
+		txtLinkFactory = new TxtLinkListFactory();
 	}
 	
 	@Test
@@ -46,7 +48,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
 		expected.append(refKey);
 		expected.append(".mpg.HQ.avi");
 		
-    	String test = TxtLinkListFactory.createOtrDownload(recording);
+    	String test = txtLinkFactory.createOtrDownload(recording);
     	Assert.assertEquals(expected.toString(),test);
     }
 	
@@ -64,7 +66,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
     	recording.getFormat().setCut(true);recording.getFormat().setType("mp4");
     	recording.setCutList(cl);
 		
-    	String test = TxtLinkListFactory.createOtrDownload(recording);
+    	String test = txtLinkFactory.createOtrDownload(recording);
     	Assert.assertEquals(expected.toString(),test);
     }
 	
@@ -78,7 +80,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
 		
 		recording.getFormat().setOtrkey(true);
 		
-    	String test = TxtLinkListFactory.createOtrDownload(recording);
+    	String test = txtLinkFactory.createOtrDownload(recording);
     	Assert.assertEquals(expected.toString(),test);
     }
  

@@ -3,8 +3,8 @@ package net.sf.otrcutmp4.model.xml.otr;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,38 +24,32 @@ public class TestXmlLinkList extends AbstractXmlOtrTest
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	Linklist test = createLinkList(true);
-    	Linklist ref = (Linklist)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Linklist.class);
+    	Linklist test = create();
+    	Linklist ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Linklist.class);
     	assertJaxbEquals(ref, test);
     }
- 
-    public void save()
-    {
-    	logger.debug("Saving Reference XML");
-    	Linklist xml = createLinkList(true);
-    	JaxbUtil.debug2(this.getClass(),xml, nsPrefixMapper);
-    	JaxbUtil.save(fXml, xml, nsPrefixMapper, true);
-    }
     
-    public static Linklist createLinkList(){return createLinkList(false);}
-    public static Linklist createLinkList(boolean withChilds)
+    private static Linklist create(){return create(true);}
+    public static Linklist create(boolean withChilds)
     {
     	Linklist xml = new Linklist();
     	
     	if(withChilds)
     	{
-    		xml.getDownload().add(TestXmlDownload.createDownload(false));
+    		xml.getDownload().add(TestXmlDownload.create(false));
+    		xml.getDownload().add(TestXmlDownload.create(false));
+    		xml.getRecording().add(TestXmlRecording.create(false));
+    		xml.getRecording().add(TestXmlRecording.create(false));
     	}
     	return xml;
     }
+    
+    public void save() {save(create(), fXml);}
 	
 	public static void main(String[] args)
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();		
+		OtrXmlTstBootstrap.init();	
 			
-		TestXmlLinkList.initPrefixMapper();
 		TestXmlLinkList.initFiles();	
 		TestXmlLinkList test = new TestXmlLinkList();
 		test.save();

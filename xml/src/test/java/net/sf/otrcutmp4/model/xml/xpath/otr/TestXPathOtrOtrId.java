@@ -5,7 +5,7 @@ import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
-import net.sf.otrcutmp4.test.AbstractXmlTest;
+import net.sf.otrcutmp4.test.AbstractOtrXmlTest;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXPathOtrOtrId extends AbstractXmlTest
+public class TestXPathOtrOtrId extends AbstractOtrXmlTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXPathOtrOtrId.class);
     

@@ -40,9 +40,9 @@ public class TestLinklistProcessor extends AbstractUtilTest
     	llP.process(ref, otrKey, qualityType, formatType, cut, key);
     	
     	String accessKey = LinklistProcessor.createAccessKey(qualityType, formatType, cut, key);
-    	boolean test = llP.getProcessSelector().get(otrKey).get(accessKey);
+    	boolean actual = llP.getProcessSelector().get(otrKey).get(accessKey);
     	
-    	Assert.assertEquals(ref, test);
+    	Assert.assertEquals(ref, actual);
     }
  
 }

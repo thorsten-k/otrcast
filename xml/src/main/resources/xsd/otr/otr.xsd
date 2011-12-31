@@ -70,6 +70,7 @@
         <xsd:complexType>
 			<xsd:sequence>
                 <xsd:element ref="o:download" maxOccurs="unbounded"/>
+                <xsd:element ref="o:recording" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

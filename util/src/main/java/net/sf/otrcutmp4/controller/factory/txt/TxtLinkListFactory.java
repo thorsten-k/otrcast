@@ -28,7 +28,7 @@ public class TxtLinkListFactory
 		return result;
 	}
 	
-	public static String createOtrDownload(Recording recording) throws OtrProcessingException
+	public String createOtrDownload(Recording recording) throws OtrProcessingException
 	{
 		checkXmlStructure(recording);
 		
@@ -41,7 +41,7 @@ public class TxtLinkListFactory
 		return sb.toString();
 	}
 	
-	protected static void checkXmlStructure(Recording recording) throws OtrProcessingException
+	protected void checkXmlStructure(Recording recording) throws OtrProcessingException
 	{
 		if(!recording.isSetFormat()){throw new OtrProcessingException("format not available");}
 		if(!recording.getFormat().isSetType()){throw new OtrProcessingException("format @type not available");}
