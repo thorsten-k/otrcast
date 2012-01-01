@@ -38,8 +38,10 @@ public class TestXmlRecording extends AbstractXmlOtrTest
     	
     	if(withChilds)
     	{
-    		xml.setCutList(TestXmlCutList.create(false));
     		xml.setOtrId(TestXmlOtrId.create(false));
+    		xml.setFormat(TestXmlFormat.create(false));
+    		xml.setCutList(TestXmlCutList.create(false));
+    		xml.setLink(TestXmlLink.create(false));
     	}
     	
     	return xml;

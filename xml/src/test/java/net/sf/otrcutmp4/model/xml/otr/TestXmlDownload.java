@@ -39,6 +39,9 @@ public class TestXmlDownload extends AbstractXmlOtrTest
     	if(withChilds)
     	{
     		xml.getOtrId().add(TestXmlOtrId.create(false));
+    		xml.getOtrId().add(TestXmlOtrId.create(false));
+    		xml.getRecording().add(TestXmlRecording.create(false));
+    		xml.getRecording().add(TestXmlRecording.create(false));
     	}
     	
     	return xml;

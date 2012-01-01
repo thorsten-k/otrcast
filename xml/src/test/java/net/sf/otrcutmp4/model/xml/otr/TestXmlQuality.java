@@ -38,6 +38,12 @@ public class TestXmlQuality extends AbstractXmlOtrTest
     	xml.setImage("myImage");
     	xml.setName("myName");
     	
+    	if(withChilds)
+    	{
+    		xml.getRecording().add(TestXmlRecording.create(false));
+    		xml.getRecording().add(TestXmlRecording.create(false));
+    	}
+    	
     	return xml;
     }
     

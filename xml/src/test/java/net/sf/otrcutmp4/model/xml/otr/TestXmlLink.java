@@ -11,38 +11,30 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlOtrId extends AbstractXmlOtrTest
+public class TestXmlLink extends AbstractXmlOtrTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlOtrId.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"otrId.xml");
+		fXml = new File(rootDir,"link.xml");
 	}
     
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	OtrId test = create();
-    	OtrId ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), OtrId.class);
+    	Link test = create();
+    	Link ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Link.class);
     	assertJaxbEquals(ref, test);
     }
     
-    private static OtrId create(){return create(true);}
-    public static OtrId create(boolean withChilds)
+    private static Link create(){return create(true);}
+    public static Link create(boolean withChilds)
     {
-    	OtrId xml = new OtrId();
-    	xml.setId(1);
-    	xml.setKey("myKey");
-    	
-    	if(withChilds)
-    	{
-    		xml.getQuality().add(TestXmlQuality.create(false));
-    		xml.getQuality().add(TestXmlQuality.create(false));
-    		xml.setFormat(TestXmlFormat.create(false));
-    	}
-    	
+    	Link xml = new Link();
+    	xml.setId(123);
+    	xml.setUrl("myUrl");
     	return xml;
     }
     
@@ -50,10 +42,10 @@ public class TestXmlOtrId extends AbstractXmlOtrTest
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTstBootstrap.init();	
 			
-		TestXmlOtrId.initFiles();	
-		TestXmlOtrId test = new TestXmlOtrId();
+		TestXmlLink.initFiles();	
+		TestXmlLink test = new TestXmlLink();
 		test.save();
     }
 }
