@@ -8,7 +8,7 @@ import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.controller.rest.CutRestClient;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
-import net.sf.otrcutmp4.util.OtrBootstrap;
+import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ public class TstCutRest
 	
 	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException
 	{
-		Configuration config = OtrBootstrap.init();
+		Configuration config = OtrClientTstBootstrap.init();
 		TstCutRest test = new TstCutRest(config);
 		test.upload();
 	}
