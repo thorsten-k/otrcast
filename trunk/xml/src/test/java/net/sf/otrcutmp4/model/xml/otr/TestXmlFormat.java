@@ -11,36 +11,38 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlOtrId extends AbstractXmlOtrTest
+public class TestXmlFormat extends AbstractXmlOtrTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlOtrId.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlFormat.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"otrId.xml");
+		fXml = new File(rootDir,"format.xml");
 	}
     
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	OtrId test = create();
-    	OtrId ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), OtrId.class);
+    	Format test = create();
+    	Format ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Format.class);
     	assertJaxbEquals(ref, test);
     }
     
-    private static OtrId create(){return create(true);}
-    public static OtrId create(boolean withChilds)
+    private static Format create(){return create(true);}
+    public static Format create(boolean withChilds)
     {
-    	OtrId xml = new OtrId();
+    	Format xml = new Format();
     	xml.setId(1);
-    	xml.setKey("myKey");
+    	xml.setCut(true);
+    	xml.setImage("myImage");
+    	xml.setName("myName");
+    	xml.setOtrkey(true);
+    	xml.setType("myType");
     	
     	if(withChilds)
     	{
-    		xml.getQuality().add(TestXmlQuality.create(false));
-    		xml.getQuality().add(TestXmlQuality.create(false));
-    		xml.setFormat(TestXmlFormat.create(false));
+    		xml.setQuality(TestXmlQuality.create(false));
     	}
     	
     	return xml;
@@ -52,8 +54,8 @@ public class TestXmlOtrId extends AbstractXmlOtrTest
     {
 		OtrXmlTstBootstrap.init();
 			
-		TestXmlOtrId.initFiles();	
-		TestXmlOtrId test = new TestXmlOtrId();
+		TestXmlFormat.initFiles();	
+		TestXmlFormat test = new TestXmlFormat();
 		test.save();
     }
 }
