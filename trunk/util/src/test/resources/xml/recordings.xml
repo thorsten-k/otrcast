@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<o:linklist xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut">
+	<o:recording>
+    	<o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE"/>
+        <o:format otrkey="false" cut="true" type="mp4">
+        	<o:quality type="MP4"/>
+        </o:format>
+        <c:cutList id="75504"/>
+        <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+    </o:recording>
+    <o:recording>
+    	<o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE"/>
+        <o:format otrkey="false" cut="false" type="mp4">
+        	<o:quality type="MP4"/>
+        </o:format>
+        <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+    </o:recording>
+</o:linklist>
