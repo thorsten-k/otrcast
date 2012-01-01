@@ -1,6 +1,5 @@
 package net.sf.otrcutmp4.controller.factory.txt;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import net.sf.otrcutmp4.test.AbstractUtilTest;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,20 +31,12 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
 	private Recording recording;
 	private TxtLinkListFactory txtLinkFactory;
 	
-	private static File fXml,fTxt;
-	
 	public static TestTxtLinkListFactory factory()
     {
 		TestTxtLinkListFactory factory = new TestTxtLinkListFactory();
 		TestTxtLinkListFactory.initPrefixMapper();
     	return factory;
     }
-	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File("xml/recordings.xml");
-	}
 	
 	@Before
 	public void init()
@@ -133,6 +123,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
     {
     	Linklist xml = JaxbUtil.loadJAXB("xml/recordings.xml", Linklist.class);
     	List<String> actual = txtLinkFactory.create(xml);
-    	JaxbUtil.debug(xml);
+    	JaxbUtil.debug(this.getClass(),xml);
+    	for(String s : actual){logger.debug(s);}
     }
  }
