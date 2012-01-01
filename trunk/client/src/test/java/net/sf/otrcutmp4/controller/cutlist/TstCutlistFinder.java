@@ -5,9 +5,12 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
+import net.sf.otrcutmp4.controller.cutlist.chooser.CutlistChooserProcessing;
+import net.sf.otrcutmp4.controller.cutlist.chooser.NoopCutlistChooserController;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.view.noop.NoopCutlistChooserView;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -46,7 +49,7 @@ public class TstCutlistFinder
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutlistChooser chooser = new CutlistChooser();
+		CutlistChooserProcessing chooser = new CutlistChooserProcessing(new NoopCutlistChooserView(),new NoopCutlistChooserController());
 		
 		if(type.equals("rename"))
 		{

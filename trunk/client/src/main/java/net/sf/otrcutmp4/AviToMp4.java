@@ -4,15 +4,21 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.batch.CutGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
-import net.sf.otrcutmp4.controller.cutlist.CutlistChooser;
 import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
+import net.sf.otrcutmp4.controller.cutlist.chooser.CliCutlistChooserController;
+import net.sf.otrcutmp4.controller.cutlist.chooser.ControllerCutlistChooser;
+import net.sf.otrcutmp4.controller.cutlist.chooser.CutlistChooserProcessing;
+import net.sf.otrcutmp4.controller.cutlist.chooser.NoopCutlistChooserController;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
+import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliView;
+import net.sf.otrcutmp4.view.interfaces.ViewCutlistChooser;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
+import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -35,7 +41,7 @@ public class AviToMp4
 	
 	public static final String exeName = "CutHqAviToMp4";
 	
-	private Option oHelp,oDebug,oProfile;
+	private Option oHelp,oDebug,oProfile,oWeb;
 	private Options options;
 	private OtrConfig otrConfig;
 	
@@ -86,7 +92,6 @@ public class AviToMp4
         
         SrcDirProcessor aviProcessor = new SrcDirProcessor(view);
         CutlistFinder clFinder = new CutlistFinder();
-        CutlistChooser clChooser = new CutlistChooser();
         
         VideoFiles vFiles = null;
         
@@ -122,32 +127,45 @@ public class AviToMp4
         	audio = Audio.Ac3;
         }
         
+        vFiles = clFinder.searchCutlist(vFiles);
+        
+        
+        ViewCutlistChooser viewCutlistChooser = null;
+        ControllerCutlistChooser controllerCutlistChooser = null;
+        if(line.hasOption(oWeb.getOpt()))
+        {
+        	viewCutlistChooser = new WebCutlistChooserView();
+        	controllerCutlistChooser = new NoopCutlistChooserController();
+        }
+        else
+        {
+        	viewCutlistChooser = new CliCutlistChooserView();
+        	controllerCutlistChooser = new CliCutlistChooserController();
+        }
+        
+        CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
+        CutGenerator batch = new CutGenerator(otrConfig);
         if(line.hasOption("hq"))
         {
-        	CutGenerator batch = new CutGenerator(otrConfig);
-        	
-            vFiles = clFinder.searchCutlist(vFiles);
             vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles,Quality.HQ,Audio.Mp3,profile);
         }
         if(line.hasOption("hd"))
         {
-        	CutGenerator batch = new CutGenerator(otrConfig);
-        	
-            vFiles = clFinder.searchCutlist(vFiles);
-            vFiles = clChooser.chooseCutlists(vFiles);
+        	vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles,Quality.HD,audio,profile);
         }
+        
         if(line.hasOption("rename"))
         {
-        	RenameGenerator batch = new RenameGenerator(otrConfig);
+        	RenameGenerator batchRen = new RenameGenerator(otrConfig);
         	
         	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.RENAME),SrcDirProcessor.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);
             clChooser.setRenameOutput();
             vFiles = clChooser.chooseFileRename(vFiles);
             
-            batch.create(vFiles);
+            batchRen.create(vFiles);
         }
         
         if(!line.hasOption("rename")
@@ -167,6 +185,7 @@ public class AviToMp4
 	{
 		oHelp = new Option("help", "Print this message" );
 		oDebug = new Option("debug", "Debug output");
+		oWeb = new Option("web", "Web GUI Interface");
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
 		
@@ -196,6 +215,7 @@ public class AviToMp4
 		Options options = new Options();
 		options.addOption(oHelp);
 		options.addOption(oDebug);
+		options.addOption(oWeb);
 		options.addOption(oHQ);
 		options.addOption(oHD);
 		options.addOption(oAc3);
