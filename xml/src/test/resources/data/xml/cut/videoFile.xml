@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<c:videoFile xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut">
+    <o:otrId id="1" key="myKey"/>
+    <c:fileName>myFile.mp4</c:fileName>
+    <c:cutListsAvailable/>
+    <c:cutListsSelected/>
+</c:videoFile>
