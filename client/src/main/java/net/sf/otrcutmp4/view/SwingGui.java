@@ -14,10 +14,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import net.sf.otrcutmp4.view.swing.TabCut;
-
 public class SwingGui extends JPanel
 {
+	private static final long serialVersionUID = 1L;
+
 	public SwingGui()
 	{
         super(new GridLayout(1, 1));
@@ -42,9 +42,6 @@ public class SwingGui extends JPanel
         JComponent panel4 = makeTextPanel(
                 "Panel #4 (has a preferred size of 410 x 50).");
         panel4.setPreferredSize(new Dimension(410, 50));
-        
-        TabCut tabCut = new TabCut(tabbedPane);
-       
         
         //Add the tabbed pane to this panel.
         add(tabbedPane);

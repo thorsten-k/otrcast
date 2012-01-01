@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unused")
 public class TestVideoCutter extends AbstractClientTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestVideoCutter.class);

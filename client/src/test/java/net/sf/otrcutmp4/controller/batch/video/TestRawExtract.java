@@ -22,7 +22,6 @@ public class TestRawExtract extends AbstractClientTest
 	final static Logger logger = LoggerFactory.getLogger(TestRawExtract.class);
 	
 	private RawExtract rawExtract;
-	private String testFile;
 	
 	private VideoFile vf;
 	
@@ -31,7 +30,6 @@ public class TestRawExtract extends AbstractClientTest
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
 		rawExtract = new  RawExtract(tC.getOtrConfig());
-		testFile = "myTest";
 		
 		FileName fn = new FileName();
 		fn.setValue("my.file.avi");

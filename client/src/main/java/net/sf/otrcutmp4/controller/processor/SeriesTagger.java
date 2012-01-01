@@ -40,7 +40,7 @@ public class SeriesTagger
 		{
 //			JaxbUtil.debug(episode);
 			Tag tag = rest.tag(episode.getId(), vf.getOtrId().getKey());
-			JaxbUtil.debug(tag);
+			JaxbUtil.debug(this.getClass(),tag);
 		}
 
 	}

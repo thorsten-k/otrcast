@@ -12,7 +12,6 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
-import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,12 +24,12 @@ public class RenameGenerator extends AbstactBatchGenerator
 	
 	private RelativePathFactory rpf;
 	
-	public RenameGenerator(OtrConfig cfg, Configuration config)
+	public RenameGenerator(OtrConfig cfg)
 	{
 		super(cfg);
 		
-		dirHqMp4 = new File(config.getString(OtrConfig.dirMp4));
-		dirMp4Rename = new File(config.getString(OtrConfig.dirRename));
+		dirHqMp4 = cfg.getDir(Dir.MP4);
+		dirMp4Rename = cfg.getDir(Dir.RENAME);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT));

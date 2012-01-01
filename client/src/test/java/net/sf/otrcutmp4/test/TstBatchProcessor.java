@@ -41,7 +41,7 @@ public class TstBatchProcessor
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		RenameGenerator test = new RenameGenerator(null,config);
+		RenameGenerator test = new RenameGenerator(null);
 		test.create(vFiles);
 	}
 	
