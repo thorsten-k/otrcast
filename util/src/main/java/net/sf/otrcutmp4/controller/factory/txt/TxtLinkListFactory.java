@@ -6,6 +6,7 @@ import java.util.List;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.model.xml.otr.Format;
+import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 
@@ -21,10 +22,13 @@ public class TxtLinkListFactory
 		
 	}
 	
-	public List<String> create(String sLinkList)
+	public List<String> create(Linklist xmlLinklist) throws OtrProcessingException
 	{
 		List<String> result = new ArrayList<String>();
-		
+		for(Recording recording : xmlLinklist.getRecording())
+		{
+			result.add(createOtrDownload(recording));
+		}
 		return result;
 	}
 	

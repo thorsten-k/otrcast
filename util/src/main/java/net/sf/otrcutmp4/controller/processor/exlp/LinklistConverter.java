@@ -73,6 +73,7 @@ public class LinklistConverter
 			
 			Recording rNew = new Recording();
 			rNew.setFormat(r.getOtrId().getFormat());
+			if(rNew.getFormat().isCut()){rNew.setCutList(r.getCutList());}
 			rNew.getFormat().setQuality(null);
 			rNew.setLink(r.getLink());
 			quality.getRecording().add(rNew);

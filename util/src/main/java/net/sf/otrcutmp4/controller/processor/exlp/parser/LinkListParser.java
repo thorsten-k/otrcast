@@ -7,8 +7,10 @@ import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.processor.exlp.event.DownloadEvent;
+import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.Link;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
@@ -88,14 +90,17 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 		Link link = new Link();
 		link.setUrl(s.substring(0, lastSlashIndex));
 		
+		Recording r = new Recording();
 		String fileId = s.substring(lastSlashIndex+1, s.length());
 		if(fileId.contains("cut.mp4"))
 		{
+			CutList cl = new CutList();
 			int cutIndex = fileId.indexOf("_");
+			cl.setId(fileId.substring(0,cutIndex));
+			r.setCutList(cl);
 			fileId = fileId.substring(cutIndex+1, fileId.length());
 		}
 		
-		Recording r = new Recording();
 		r.setLink(link);
 		r.setOtrId(XmlOtrIdFactory.create(fileId));
 		download.getRecording().add(r);

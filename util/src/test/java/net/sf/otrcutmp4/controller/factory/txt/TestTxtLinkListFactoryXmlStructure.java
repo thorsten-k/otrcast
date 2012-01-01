@@ -105,6 +105,7 @@ public class TestTxtLinkListFactoryXmlStructure extends AbstractUtilTest
     public void missingCutlist() throws OtrProcessingException
     {
     	recording.getFormat().setCut(true);
+    	recording.setCutList(null);
     	txtLinkFactory.checkXmlStructure(recording);
     }
     

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<o:linklist xmlns:o="http://otrcutmp4.sf.net/otr">
+<o:linklist xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut">
     <o:download type="NORMAL DOWNLOAD">
         <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
             <o:quality type="MP4">
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="16285"/>
                 </o:recording>
                 <o:recording>
                     <o:format otrkey="false" cut="false" type="mp4"/>
@@ -20,6 +21,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/1/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="16285"/>
                 </o:recording>
                 <o:recording>
                     <o:format otrkey="true" cut="false" type="avi"/>
@@ -72,6 +74,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="75504"/>
                 </o:recording>
             </o:quality>
             <o:quality type="MP4">
@@ -86,6 +89,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/1/5326131/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="75504"/>
                 </o:recording>
             </o:quality>
         </o:otrId>
@@ -96,6 +100,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="16285"/>
                 </o:recording>
                 <o:recording>
                     <o:format otrkey="false" cut="false" type="mp4"/>
@@ -110,6 +115,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="16285"/>
                 </o:recording>
                 <o:recording>
                     <o:format otrkey="true" cut="false" type="avi"/>
@@ -162,6 +168,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="75504"/>
                 </o:recording>
             </o:quality>
             <o:quality type="MP4">
@@ -176,6 +183,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/2/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="75504"/>
                 </o:recording>
             </o:quality>
         </o:otrId>
@@ -186,6 +194,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="16285"/>
                 </o:recording>
                 <o:recording>
                     <o:format otrkey="false" cut="false" type="mp4"/>
@@ -200,6 +209,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="16285"/>
                 </o:recording>
                 <o:recording>
                     <o:format otrkey="true" cut="false" type="avi"/>
@@ -248,6 +258,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="75504"/>
                 </o:recording>
             </o:quality>
             <o:quality type="MP4">
@@ -262,6 +273,7 @@
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
                     <o:link url="http://81.95.11.23/download/1234567/3/5465768/424fb8a0c689832dc60379f9b89787ff"/>
+                    <c:cutList id="75504"/>
                 </o:recording>
             </o:quality>
         </o:otrId>
