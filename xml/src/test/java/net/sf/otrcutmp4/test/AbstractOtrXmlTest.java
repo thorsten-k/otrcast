@@ -24,7 +24,7 @@ public abstract class AbstractOtrXmlTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/config");
+		loggerInit.addAltPath("config.otrcutmp4-xml.test");
 		loggerInit.init();
     }
 	

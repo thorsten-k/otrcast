@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.cut.TestXmlCutList;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -37,7 +38,7 @@ public class TestXmlRecording extends AbstractXmlOtrTest
     	
     	if(withChilds)
     	{
-    		//TODO fields missing
+    		xml.setCutList(TestXmlCutList.create(false));
     		xml.setOtrId(TestXmlOtrId.create(false));
     	}
     	
