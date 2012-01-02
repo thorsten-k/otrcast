@@ -4,19 +4,19 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.batch.CutGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
+import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
-import net.sf.otrcutmp4.controller.cutlist.chooser.CliCutlistChooserController;
-import net.sf.otrcutmp4.controller.cutlist.chooser.ControllerCutlistChooser;
-import net.sf.otrcutmp4.controller.cutlist.chooser.CutlistChooserProcessing;
-import net.sf.otrcutmp4.controller.cutlist.chooser.NoopCutlistChooserController;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
+import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
+import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
+import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliView;
-import net.sf.otrcutmp4.view.interfaces.ViewCutlistChooser;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
 
@@ -131,28 +131,28 @@ public class AviToMp4
         
         
         ViewCutlistChooser viewCutlistChooser = null;
-        ControllerCutlistChooser controllerCutlistChooser = null;
+        CutlistChooser controllerCutlistChooser = null;
         if(line.hasOption(oWeb.getOpt()))
         {
         	viewCutlistChooser = new WebCutlistChooserView();
-        	controllerCutlistChooser = new NoopCutlistChooserController();
+        	controllerCutlistChooser = new WebCutlistChooserController(viewCutlistChooser,otrConfig);
         }
         else
         {
         	viewCutlistChooser = new CliCutlistChooserView();
-        	controllerCutlistChooser = new CliCutlistChooserController();
+        	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
         }
+        
+        vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
         
         CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
         CutGenerator batch = new CutGenerator(otrConfig);
         if(line.hasOption("hq"))
         {
-            vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles,Quality.HQ,Audio.Mp3,profile);
         }
         if(line.hasOption("hd"))
         {
-        	vFiles = clChooser.chooseCutlists(vFiles);
             batch.create(vFiles,Quality.HD,audio,profile);
         }
         

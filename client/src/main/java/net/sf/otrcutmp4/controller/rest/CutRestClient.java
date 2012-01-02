@@ -2,11 +2,11 @@ package net.sf.otrcutmp4.controller.rest;
 
 import javax.ws.rs.core.UriBuilder;
 
-import net.sf.otrcutmp4.controller.interfaces.rest.OtrCutRestService;
+import net.sf.otrcutmp4.interfaces.rest.OtrCutRestService;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.util.OtrBootstrap;
+import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Url;
 
-import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,11 +21,11 @@ public class CutRestClient implements OtrCutRestService
 	
 	private WebResource gae;
 	
-	public CutRestClient(Configuration config)
+	public CutRestClient(OtrConfig otrConfig)
 	{	
 		ClientConfig cc = new DefaultClientConfig();
 		Client client = Client.create(cc);
-		gae = client.resource(UriBuilder.fromUri(config.getString(OtrBootstrap.cfgUrlGae)).build());
+		gae = client.resource(UriBuilder.fromUri(otrConfig.getUrl(Url.GAE)).build());
 	}
 	
 	@Override

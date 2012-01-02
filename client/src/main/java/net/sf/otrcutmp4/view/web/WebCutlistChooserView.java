@@ -1,9 +1,9 @@
 package net.sf.otrcutmp4.view.web;
 
+import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.view.interfaces.ViewCutlistChooser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,13 @@ public class WebCutlistChooserView implements ViewCutlistChooser
 	
 	@Override public void welcome(VideoFiles vFiles)
 	{
-		logger.info("The Videofiles will be transmitted to GoogleAppEngine");
+		logger.info("The Web GUI will be prepared");
+	}
+	
+	@Override
+	public void finished(String s)
+	{
+		logger.info("GUI available at http://otr-series.appspot.com/client with tolken '"+s+"'");
 	}
 
 	@Override
@@ -28,5 +34,7 @@ public class WebCutlistChooserView implements ViewCutlistChooser
 	{
 		logger.trace("nothing to do here");
 	}
+
+
 
 }

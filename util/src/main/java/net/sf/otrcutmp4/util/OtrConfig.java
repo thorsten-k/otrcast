@@ -23,6 +23,7 @@ public class OtrConfig
 	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC};
 	public static enum Audio{FAAC};
+	public static enum Url{GAE};
 	
 	public static String otrConfigName = "properties.txt";
 		
@@ -48,6 +49,7 @@ public class OtrConfig
 	private Map<Dir,String> mapDir;
 	private Map<Tool,String> mapTool;
 	private Map<Audio,String> mapAudio;
+	private Map<Url,String> mapUrl;
 	
 	private List<String> lDirectotries,lTools;
 	private Configuration config;
@@ -59,6 +61,7 @@ public class OtrConfig
 		initDirectoryList();
 		initToolList();
 		initParameterList();
+		initUrlList();
 	}
 	
 	private void initDirectoryList()
@@ -90,6 +93,12 @@ public class OtrConfig
 	{
 		mapAudio = new Hashtable<Audio,String>();
 		mapAudio.put(Audio.FAAC, paraAudioFaac);
+	}
+	
+	private void initUrlList()
+	{
+		mapUrl = new Hashtable<Url,String>();
+		mapUrl.put(Url.GAE, urlOtrSeries);
 	}
 	
 	public void createDefault(String configFile)
@@ -253,5 +262,10 @@ public class OtrConfig
 		if(config==null){logger.error("Throw");}
 		return config.getString(mapAudio.get(audio));
 	}
-	@Deprecated public Configuration getConfig(){return config;}
+
+	public String getUrl(Url url)
+	{
+		if(config==null){logger.error("Throw");}
+		return config.getString(mapUrl.get(url));
+	}
 }
