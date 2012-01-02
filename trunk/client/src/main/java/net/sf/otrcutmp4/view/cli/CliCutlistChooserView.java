@@ -1,9 +1,9 @@
 package net.sf.otrcutmp4.view.cli;
 
+import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.view.interfaces.ViewCutlistChooser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +66,12 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 			sb.append("\tFile: "+cl.getFileName().getValue());
 			logger.info(sb.toString());
 		}
+	}
+
+	@Override
+	public void finished(String s)
+	{
+		logger.info("Selection finished");
 	}
 
 }

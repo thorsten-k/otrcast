@@ -7,9 +7,9 @@ import javax.ws.rs.core.UriBuilder;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.interfaces.rest.OtrAdminRestService;
 import net.sf.otrcutmp4.controller.rest.AdminRestClient;
 import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
+import net.sf.otrcutmp4.interfaces.rest.OtrAdminRestService;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.otr.Format;

@@ -5,6 +5,7 @@ import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.util.OtrBootstrap;
+import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -25,5 +26,12 @@ public class OtrClientTstBootstrap
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,confCode).getAbsolutePath());
 		Configuration config = ConfigLoader.init();
 		return config;
+	}
+	
+	public static OtrConfig initOtr() throws ExlpConfigurationException
+	{
+		Configuration config = init();
+		OtrConfig otrConfig = new OtrConfig(config);
+		return otrConfig;
 	}
 }

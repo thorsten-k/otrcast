@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.interfaces.rest;
+package net.sf.otrcutmp4.interfaces.rest;
 
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;

@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
-import net.sf.otrcutmp4.controller.cutlist.chooser.CutlistChooserProcessing;
-import net.sf.otrcutmp4.controller.cutlist.chooser.NoopCutlistChooserController;
+import net.sf.otrcutmp4.controller.noop.NoopCutlistChooserController;
+import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;

@@ -9,6 +9,7 @@ import net.sf.otrcutmp4.controller.rest.CutRestClient;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -22,10 +23,9 @@ public class TstCutRest
 	private Configuration config;
 	private NsPrefixMapperInterface nsPrefixMapper;
 	
-	public TstCutRest(Configuration config)
+	public TstCutRest(OtrConfig otrConfig)
 	{	
-		this.config=config;
-		rest = new CutRestClient(config);
+		rest = new CutRestClient(otrConfig);
 		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
@@ -40,8 +40,8 @@ public class TstCutRest
 	
 	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException
 	{
-		Configuration config = OtrClientTstBootstrap.init();
-		TstCutRest test = new TstCutRest(config);
+		OtrConfig otrConfig = OtrClientTstBootstrap.initOtr();
+		TstCutRest test = new TstCutRest(otrConfig);
 		test.upload();
 	}
 }
