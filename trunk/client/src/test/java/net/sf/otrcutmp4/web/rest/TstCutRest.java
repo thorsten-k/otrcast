@@ -11,7 +11,6 @@ import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 
-import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,19 +18,20 @@ public class TstCutRest
 {
 	final static Logger logger = LoggerFactory.getLogger(TstCutRest.class);
 	
+	private OtrConfig otrConfig;
 	private CutRestClient rest;
-	private Configuration config;
 	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstCutRest(OtrConfig otrConfig)
 	{	
+		this.otrConfig=otrConfig;
 		rest = new CutRestClient(otrConfig);
 		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
 	public void upload() throws FileNotFoundException
 	{
-		String xmlIn = config.getString("test.xml.cutlistfinder");
+		String xmlIn = otrConfig.getKey("test.xml.cutlistfinder");
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		JaxbUtil.debug2(this.getClass(), vFiles, nsPrefixMapper);
 		String s = rest.request(vFiles);
