@@ -268,4 +268,9 @@ public class OtrConfig
 		if(config==null){logger.error("Throw");}
 		return config.getString(mapUrl.get(url));
 	}
+	
+	public String getKey(String key)
+	{
+		return config.getString(key); 
+	}
 }
