@@ -11,45 +11,42 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlSeries extends AbstractXmlSeriesTest
+public class TestXmlMovie extends AbstractXmlSeriesTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlSeries.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlMovie.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"series.xml");
+		fXml = new File(rootDir,"movie.xml");
 	}
     
     @Test
     public void testAclContainer() throws FileNotFoundException
     {
-    	Series test = create(true);
-    	Series ref = (Series)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Series.class);
+    	Movie test = create();
+    	Movie ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Movie.class);
     	assertJaxbEquals(ref, test);
     }
     
-    public static Series create(boolean withChilds)
+    private static Movie create(){return create(true);}
+    public static Movie create(boolean withChilds)
     {
-    	Series xml = new Series();
+    	Movie xml = new Movie();
+    	xml.setId(123);
     	xml.setName("Test Name");
-    	
-    	if(withChilds)
-    	{
-    		xml.getSeason().add(TestXmlSeason.create(false));
-    	}
     	
     	return xml;
     }
     
-    public void save() {save(create(true), fXml);}
+    public void save() {save(create(), fXml);}
 	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
 		
-		TestXmlSeries.initFiles();	
-		TestXmlSeries test = new TestXmlSeries();
+		TestXmlMovie.initFiles();	
+		TestXmlMovie test = new TestXmlMovie();
 		test.save();
     }
 }
