@@ -46,6 +46,7 @@
                 <xsd:element ref="c:author" maxOccurs="1"/>
                 <xsd:element ref="c:cut" maxOccurs="unbounded"/>
                 <xsd:element ref="c:fileName" maxOccurs="1"/>
+                <xsd:element ref="s:video" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="rating" type="xsd:double"/>

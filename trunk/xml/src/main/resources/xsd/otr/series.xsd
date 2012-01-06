@@ -5,6 +5,20 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
     <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr.xsd"/>
+    <xsd:element name="video">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:episode" maxOccurs="1"/>
+                <xsd:element ref="s:movie" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="movie">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="category">
         <xsd:complexType>
             <xsd:sequence>

@@ -29,7 +29,6 @@ public class TestXmlSeason extends AbstractXmlSeriesTest
     	assertJaxbEquals(ref, test);
     }
     
-    public static Season create(){return create(false);}
     public static Season create(boolean withChilds)
     {
     	Season xml = new Season();
@@ -37,13 +36,13 @@ public class TestXmlSeason extends AbstractXmlSeriesTest
     	
     	if(withChilds)
     	{
-    		xml.getEpisode().add(TestXmlEpisode.create());
+    		xml.getEpisode().add(TestXmlEpisode.create(false));
     	}
     	
     	return xml;
     }
 	
-    public void save() {save(create(), fXml);}
+    public void save() {save(create(true), fXml);}
     
 	public static void main(String[] args)
     {

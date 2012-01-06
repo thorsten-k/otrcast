@@ -30,6 +30,24 @@
 	</build>
   
 	<dependencies>
+		<dependency>
+			<groupId>net.sf.otrcutmp4</groupId>
+			<artifactId>otrcutmp4-util</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.otrcutmp4</groupId>
+			<artifactId>otrcutmp4-xml</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jaxen</artifactId>
+					<groupId>jaxen</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
       	<dependency>
 	   		<groupId>log4j</groupId>
 	   		<artifactId>log4j</artifactId>
@@ -87,18 +105,6 @@
 			<artifactId>isoparser</artifactId> 
 			<scope>test</scope>
 		</dependency> 
-    	<dependency>
-      		<groupId>net.sf.otrcutmp4</groupId>
-      	 	<artifactId>otrcutmp4-xml</artifactId>
-     		<type>jar</type>
-  			<scope>compile</scope>
-      	 	<exclusions>
-      	   		<exclusion>
-      	   			<artifactId>jaxen</artifactId>
-      	   			<groupId>jaxen</groupId>
-      	   		</exclusion>
-      		</exclusions>
-   		</dependency>
  		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
@@ -109,12 +115,7 @@
   	   		<type>jar</type>
   	   		<scope>compile</scope>
    	  	</dependency>
-	   	<dependency>
-	   		<groupId>net.sf.otrcutmp4</groupId>
- 			<artifactId>otrcutmp4-util</artifactId>
- 			<type>jar</type>
- 			<scope>compile</scope>
-	 	</dependency>
+
 	  	<dependency>
    			<groupId>jaxen</groupId>
       		<artifactId>jaxen</artifactId>
