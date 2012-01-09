@@ -42,10 +42,7 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 			{
 				chooseCutlist(i,vf,true);
 			}
-			
-		}
-		loadCurlists(vFiles);
-		
+		}		
 		return vFiles;
 	}
 	
@@ -81,9 +78,7 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 			{
 				for(Integer id : selectedIndexes)
 				{
-					CutList cl = new CutList();
-					cl.setId(clAvailable.getCutList().get(id).getId());
-					clSelected.getCutList().add(cl);
+					clSelected.getCutList().add(clAvailable.getCutList().get(id));
 				}
 			}
 			else
@@ -108,26 +103,25 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		{
 			if(vf.isSetCutListsSelected())
 			{
-				vf.setCutListsSelected(loadCurlists(vf.getCutListsSelected()));
+				loadCurlists(vf.getCutListsSelected());
 			}
 		}
 	}
 	
-	private CutListsSelected loadCurlists(CutListsSelected clSelected)
+	private void loadCurlists(CutListsSelected clSelected)
 	{
-		CutListsSelected clLoaded = new CutListsSelected();
 		for(CutList cl : clSelected.getCutList())
 		{		
-			clLoaded.getCutList().add(loadCutlist(cl.getId()));
+			CutList loaded = loadCutlist(cl.getId());
+			cl.getCut().addAll(loaded.getCut());
 		}
-		return clLoaded;
 	}
 	
 	private CutList loadCutlist(String id)
 	{
 		String http = "http://cutlist.at/getfile.php?id="+id;
 		
-		logger.info("Trying to download cutlists");
+		logger.info("Trying to download cutlist "+id);
 		logger.debug("\t"+http);
 	
 		EhResultContainer leh = new EhResultContainer();

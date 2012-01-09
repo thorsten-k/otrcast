@@ -31,7 +31,12 @@ public class CutRestClient implements OtrCutRestService
 	@Override
 	public String request(VideoFiles cutRequest)
 	{
-		String s = gae.path("rest").path("cut/request").post(String.class,cutRequest);
-		return s;
+		return gae.path("rest").path("cut/request").post(String.class,cutRequest);
+	}
+
+	@Override
+	public VideoFiles processed(String token)
+	{
+		return gae.path("rest").path("cut/processed/"+token).get(VideoFiles.class);
 	}
 }

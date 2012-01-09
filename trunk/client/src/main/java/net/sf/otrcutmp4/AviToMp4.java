@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.batch.CutGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
@@ -12,6 +13,7 @@ import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
@@ -144,6 +146,9 @@ public class AviToMp4
         }
         
         vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
+        controllerCutlistChooser.loadCurlists(vFiles);
+        for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}
+        JaxbUtil.debug(vFiles);
         
         CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
         CutGenerator batch = new CutGenerator(otrConfig);
