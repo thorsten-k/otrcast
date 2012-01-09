@@ -15,6 +15,7 @@ public class NoopCutlistChooserView implements ViewCutlistChooser
 	@Override public void welcome(VideoFiles vFiles){}
 	@Override public void showCutlistInfo(int i, CutList cl, boolean showAuthor,boolean showRanking, boolean showComment, boolean showFile) {}
 	@Override public void showFileInfo(int index, VideoFile vFile) {}
-	@Override public void finished(String s) {}
+	@Override public void srcFolderProcessed(String s) {}
+	@Override public void cutlistsSelected() {}
 
 }

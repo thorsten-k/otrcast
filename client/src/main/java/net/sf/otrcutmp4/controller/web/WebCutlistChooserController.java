@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.controller.web;
 
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.rest.CutRestClient;
@@ -32,8 +33,15 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 	public VideoFiles chooseCutlists(VideoFiles vFiles)
 	{
 		view.welcome(vFiles);
-		String s = rest.request(vFiles);
-		view.finished(s);
+		String token = rest.request(vFiles);
+		view.srcFolderProcessed(token);
+		
+		System.out.println("Press Any Key To Continue...");
+        new java.util.Scanner(System.in).nextLine();
+		
+		vFiles = rest.processed(token);
+		view.cutlistsSelected();
+
 		return vFiles;
 	}
 	

@@ -18,7 +18,7 @@ public class WebCutlistChooserView implements ViewCutlistChooser
 	}
 	
 	@Override
-	public void finished(String s)
+	public void srcFolderProcessed(String s)
 	{
 		logger.info("GUI available at http://otr-series.appspot.com/client with tolken '"+s+"'");
 	}
@@ -33,6 +33,12 @@ public class WebCutlistChooserView implements ViewCutlistChooser
 	public void showFileInfo(int index,VideoFile vFile)
 	{
 		logger.trace("nothing to do here");
+	}
+
+	@Override
+	public void cutlistsSelected()
+	{
+		logger.info("Cutlists selected");
 	}
 
 

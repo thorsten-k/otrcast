@@ -5,7 +5,7 @@
 	
 	<groupId>net.sf.otrcutmp4</groupId>
 	<artifactId>otrcutmp4</artifactId>
-	<version>0.1.4-SNAPSHOT</version>
+	<version>0.1.6-SNAPSHOT</version>
 	<name>OTR AVI cut to MP4</name>
 	<packaging>pom</packaging>
     
@@ -89,12 +89,12 @@
 			<dependency>
 				<groupId>net.sf.otrcutmp4</groupId>
 				<artifactId>otrcutmp4-xml</artifactId>
-				<version>0.1.4-SNAPSHOT</version>
+				<version>0.1.6-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.otrcutmp4</groupId>
 				<artifactId>otrcutmp4-util</artifactId>
-				<version>0.1.4-SNAPSHOT</version>
+				<version>0.1.6-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.xml.bind</groupId>

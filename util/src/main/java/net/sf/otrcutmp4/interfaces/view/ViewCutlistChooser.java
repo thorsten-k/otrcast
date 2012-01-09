@@ -7,7 +7,8 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 public interface ViewCutlistChooser
 {
 	void welcome(VideoFiles vFiles);
-	void finished(String s);
+	void srcFolderProcessed(String s);
 	void showFileInfo(int index, VideoFile vFile);
 	void showCutlistInfo(int i, CutList cl, boolean showAuthor, boolean showRanking, boolean showComment, boolean showFile);
+	void cutlistsSelected();
 }

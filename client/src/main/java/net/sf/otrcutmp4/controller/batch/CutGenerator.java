@@ -16,6 +16,7 @@ import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
@@ -55,16 +56,15 @@ public class CutGenerator extends AbstactBatchGenerator
 	{
 		 for(VideoFile vf : vFiles.getVideoFile())
 		 {
-			 if(vf.isSetCutListsAvailable()
-				&& vf.getCutListsAvailable().isSetCutList()
-				&& vf.isSetCutListsSelected()
-				&& vf.getCutListsSelected().isSetCutList())
-			{crateForVideo(vf,quality,audio,profile);}
-			else
-			{
-				txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
-				txt.add("");
-			}
+			 if(vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
+			 {
+				 crateForVideo(vf,quality,audio,profile);
+			 }
+			 else
+			 {
+				 txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
+				 txt.add("");
+			 }
 			 
 		 }
 		 txt.debug();
@@ -136,8 +136,18 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 	private void mergeMp4(int index, CutList cl, VideoFile vf,AviToMp4.Quality quality)
 	{
-		String fileName = vf.getFileName().getValue();
-		if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
+		String fileName;
+		if(cl.isSetVideo())
+		{
+			Episode xmlEpisode = cl.getVideo().get(0).getEpisode();
+			StringBuffer sb = new StringBuffer();
+			sb.append(xmlEpisode.getSeason().getSeries().getName()).append("-");
+			sb.append("S").append(xmlEpisode.getSeason().getNr()).append("E").append(xmlEpisode.getNr()).append("-");
+			sb.append(xmlEpisode.getName());
+			fileName = sb.toString();
+		}
+		else if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
+		else {fileName= vf.getFileName().getValue();}
 		
 		StringBuffer sb = new StringBuffer();
 		if(cl.getCut().size()==1)

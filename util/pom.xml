@@ -5,7 +5,7 @@
 	<parent>
     	<groupId>net.sf.otrcutmp4</groupId>
 		<artifactId>otrcutmp4</artifactId>
-  		<version>0.1.4-SNAPSHOT</version>
+  		<version>0.1.6-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	

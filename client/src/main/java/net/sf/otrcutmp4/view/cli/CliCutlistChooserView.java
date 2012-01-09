@@ -69,7 +69,13 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 	}
 
 	@Override
-	public void finished(String s)
+	public void srcFolderProcessed(String s)
+	{
+		logger.info("Src Folder processed");
+	}
+
+	@Override
+	public void cutlistsSelected()
 	{
 		logger.info("Selection finished");
 	}
