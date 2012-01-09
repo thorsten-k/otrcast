@@ -44,6 +44,7 @@
                 <xsd:element ref="s:series" maxOccurs="1"/>
                 <xsd:element ref="s:episode" maxOccurs="unbounded"/>
             </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="nr" type="xsd:int"/>
             <xsd:attribute name="name" type="xsd:string"/>
         </xsd:complexType>
