@@ -26,7 +26,7 @@ public class OtrBootstrap
 	public static Configuration init() throws ExlpConfigurationException
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/otrcutmp4-client");
+			loggerInit.addAltPath("otrcutmp4-client.test");
 			loggerInit.init();
 		
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(appCode,confCode).getAbsolutePath());
