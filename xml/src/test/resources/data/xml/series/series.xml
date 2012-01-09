@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <s:series xmlns:s="http://otrcutmp4.sf.net/series" name="Test Name">
-    <season nr="1"/>
+    <season id="123" nr="1"/>
 </s:series>

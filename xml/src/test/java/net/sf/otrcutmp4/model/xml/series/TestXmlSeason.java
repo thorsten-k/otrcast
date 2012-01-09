@@ -32,6 +32,7 @@ public class TestXmlSeason extends AbstractXmlSeriesTest
     public static Season create(boolean withChilds)
     {
     	Season xml = new Season();
+    	xml.setId(123);
     	xml.setNr(1);
     	
     	if(withChilds)
