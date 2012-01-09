@@ -66,17 +66,6 @@ public class RestSeedData
 		}
 	}
 	
-	public void addSeries() throws FileNotFoundException
-	{
-		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlSeries), Otr.class);
-		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
-		for(Series series : otr.getSeries())
-		{
-			Series response = gae.path("rest").path("series/addSeries").post(Series.class, series);
-			JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
-		}
-	}
-	
 	public void addFormats() throws FileNotFoundException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlFormats), Otr.class);
@@ -99,27 +88,15 @@ public class RestSeedData
 		}
 	}
 	
-	public void addEpisode() throws FileNotFoundException
+	public void addSeries() throws FileNotFoundException
 	{
 		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
 		for(File f : dirEpisodes.listFiles())
 		{
 			Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
+			series = restAdmin.addSeries(series);
+			logger.debug("series.id="+series.getId());
 			
-			Series seriesId = new Series();
-			seriesId.setId(series.getId());
-			for(Season season : series.getSeason())
-			{
-				Season seasonId = new Season();
-				seasonId.setNr(season.getNr());
-				seasonId.setSeries(seriesId);
-				for(Episode episode : season.getEpisode())
-				{
-					episode.setSeason(seasonId);
-					JaxbUtil.debug2(this.getClass(), episode, new OtrCutNsPrefixMapper());
-					restSeries.addEpisode(episode);
-				}
-			}
 		}
 	}
 	
@@ -130,9 +107,9 @@ public class RestSeedData
 //		rest.all();
 		
 //		rest.addCategories();
-//		rest.addSeries();
-//		rest.addEpisode();
-//		rest.addFormats();
-		rest.addQualities();
+		rest.addFormats();
+		rest.addSeries();
+//		
+//		rest.addQualities();
 	}
 }
