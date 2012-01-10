@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <s:season xmlns:s="http://otrcutmp4.sf.net/series" id="123" nr="1">
+    <update active="true"/>
+    <episode id="1" nr="1" name="Test Name"/>
     <episode id="1" nr="1" name="Test Name"/>
 </s:season>
