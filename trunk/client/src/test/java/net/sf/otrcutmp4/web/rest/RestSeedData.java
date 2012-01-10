@@ -73,7 +73,7 @@ public class RestSeedData
 		for(Format format : otr.getFormat())
 		{
 			Format response = restAdmin.addFormat(format);
-			JaxbUtil.debug2(this.getClass(), response, new OtrCutNsPrefixMapper());
+			logger.debug("Updated "+response.getType());
 		}
 	}
 	
@@ -94,9 +94,11 @@ public class RestSeedData
 		for(File f : dirEpisodes.listFiles())
 		{
 			Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
-			series = restAdmin.addSeries(series);
-			logger.debug("series.id="+series.getId());
-			
+			if(series.isSetUpdate() && series.getUpdate().isSetActive() && series.getUpdate().isActive())
+			{
+				series = restAdmin.addSeries(series);
+				logger.debug("Updated "+series.getName());
+			}
 		}
 	}
 	

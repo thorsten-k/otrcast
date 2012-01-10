@@ -11,35 +11,29 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlSeries extends AbstractXmlSeriesTest
+public class TestXmlUpdate extends AbstractXmlSeriesTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlSeries.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlUpdate.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"series.xml");
+		fXml = new File(rootDir,"update.xml");
 	}
     
     @Test
     public void testAclContainer() throws FileNotFoundException
     {
-    	Series test = create(true);
-    	Series ref = (Series)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Series.class);
+    	Update test = create(true);
+    	Update ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Update.class);
     	assertJaxbEquals(ref, test);
     }
     
-    public static Series create(boolean withChilds)
+    public static Update create(boolean withChilds)
     {
-    	Series xml = new Series();
-    	xml.setName("Test Name");
+    	Update xml = new Update();
+    	xml.setActive(true);
     	
-    	if(withChilds)
-    	{
-    		xml.getSeason().add(TestXmlSeason.create(false));
-    		xml.getSeason().add(TestXmlSeason.create(false));
-    		xml.setUpdate(TestXmlUpdate.create(false));
-    	}
     	
     	return xml;
     }
@@ -50,8 +44,8 @@ public class TestXmlSeries extends AbstractXmlSeriesTest
     {
 		OtrXmlTstBootstrap.init();
 		
-		TestXmlSeries.initFiles();	
-		TestXmlSeries test = new TestXmlSeries();
+		TestXmlUpdate.initFiles();	
+		TestXmlUpdate test = new TestXmlUpdate();
 		test.save();
     }
 }
