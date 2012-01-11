@@ -1,10 +1,10 @@
 package net.sf.otrcutmp4.interfaces.rest;
 
-import net.sf.otrcutmp4.controller.exception.OtrNotFoundException;
+import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
 public interface OtrCutRestService
 {
-	public String request(VideoFiles cutRequest);
-	public VideoFiles processed(String token) throws OtrNotFoundException;
+	String addSelection(VideoFiles cutRequest);
+	VideoFiles getSelection(String token) throws UtilsNotFoundException;
 }

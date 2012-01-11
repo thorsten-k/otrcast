@@ -15,10 +15,10 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>net.sf.ahtutils</groupId>
+			<artifactId>ahtutils-interfaces</artifactId>
 			<type>jar</type>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
@@ -26,6 +26,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-core</artifactId>
@@ -41,5 +42,12 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 </project>
