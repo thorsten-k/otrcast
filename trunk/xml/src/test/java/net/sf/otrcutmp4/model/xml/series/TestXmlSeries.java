@@ -38,7 +38,6 @@ public class TestXmlSeries extends AbstractXmlSeriesTest
     	{
     		xml.getSeason().add(TestXmlSeason.create(false));
     		xml.getSeason().add(TestXmlSeason.create(false));
-    		xml.setUpdate(TestXmlUpdate.create(false));
     	}
     	
     	return xml;

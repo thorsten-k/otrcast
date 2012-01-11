@@ -141,9 +141,9 @@ public class CutGenerator extends AbstactBatchGenerator
 		{
 			Episode xmlEpisode = cl.getVideo().get(0).getEpisode();
 			StringBuffer sb = new StringBuffer();
-			sb.append(xmlEpisode.getSeason().getSeries().getName()).append("-");
 			sb.append("S").append(xmlEpisode.getSeason().getNr()).append("E").append(xmlEpisode.getNr()).append("-");
 			sb.append(xmlEpisode.getName());
+			sb.append("-").append(xmlEpisode.getSeason().getSeries().getName());
 			fileName = sb.toString();
 		}
 		else if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
