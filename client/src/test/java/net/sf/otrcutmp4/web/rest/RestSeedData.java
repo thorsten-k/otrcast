@@ -94,11 +94,9 @@ public class RestSeedData
 		for(File f : dirEpisodes.listFiles())
 		{
 			Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
-			if(series.isSetUpdate() && series.getUpdate().isSetActive() && series.getUpdate().isActive())
-			{
-				series = restAdmin.addSeries(series);
-				logger.debug("Updated "+series.getName());
-			}
+
+			series = restAdmin.addSeries(series);
+			logger.debug("Updated "+series.getName());
 		}
 	}
 	
