@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import javax.ws.rs.core.UriBuilder;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.rest.AdminRestClient;
@@ -66,7 +67,7 @@ public class RestSeedData
 		}
 	}
 	
-	public void addFormats() throws FileNotFoundException
+	public void addFormats() throws FileNotFoundException, UtilsProcessingException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlFormats), Otr.class);
 		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
@@ -77,7 +78,7 @@ public class RestSeedData
 		}
 	}
 	
-	public void addQualities() throws FileNotFoundException
+	public void addQualities() throws FileNotFoundException, UtilsProcessingException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlQuality), Otr.class);
 		JaxbUtil.debug2(this.getClass(), otr, new OtrCutNsPrefixMapper());
@@ -88,19 +89,19 @@ public class RestSeedData
 		}
 	}
 	
-	public void addSeries() throws FileNotFoundException
+	public void addSeries() throws FileNotFoundException, UtilsProcessingException
 	{
 		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
 		for(File f : dirEpisodes.listFiles())
 		{
 			Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
-
+			logger.debug("\tSeasons: "+series.getSeason().size());
 			series = restAdmin.addSeries(series);
 			logger.debug("Updated "+series.getName());
 		}
 	}
 	
-	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException
+	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException, UtilsProcessingException
 	{
 		Configuration config = OtrBootstrap.init();
 		RestSeedData rest = new RestSeedData(config);

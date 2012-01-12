@@ -45,6 +45,6 @@ public class AdminRestClient implements OtrAdminRestService
 	@Override
 	public Quality addQuality(Quality quality)
 	{
-		return gae.path("rest").path("admin/addQuality").accept(MediaType.APPLICATION_XML).post(Quality.class,quality);
+		return gae.path("rest").path("admin/add/Quality").accept(MediaType.APPLICATION_XML).post(Quality.class,quality);
 	}
 }
