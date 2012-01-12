@@ -29,13 +29,13 @@ public class CutRestClient implements OtrCutRestService
 	}
 	
 	@Override
-	public String addSelection(VideoFiles cutRequest)
+	public String addCutPackage(VideoFiles cutRequest)
 	{
 		return gae.path("rest").path("cut/addSelection").post(String.class,cutRequest);
 	}
 
 	@Override
-	public VideoFiles getSelection(String token)
+	public VideoFiles findCutPackage(String token)
 	{
 		return gae.path("rest").path("cut/getSelection/"+token).get(VideoFiles.class);
 	}

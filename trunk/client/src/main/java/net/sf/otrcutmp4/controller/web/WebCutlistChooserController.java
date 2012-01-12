@@ -32,13 +32,13 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 	public VideoFiles chooseCutlists(VideoFiles vFiles)
 	{
 		view.welcome(vFiles);
-		String token = rest.addSelection(vFiles);
+		String token = rest.addCutPackage(vFiles);
 		view.srcFolderProcessed(token);
 		
 		System.out.println("Press Any Key To Continue...");
         new java.util.Scanner(System.in).nextLine();
 		
-		vFiles = rest.getSelection(token);
+		vFiles = rest.findCutPackage(token);
 		view.cutlistsSelected();
 
 		return vFiles;

@@ -5,6 +5,6 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
 public interface OtrCutRestService
 {
-	String addSelection(VideoFiles cutRequest);
-	VideoFiles getSelection(String token) throws UtilsNotFoundException;
+	String addCutPackage(VideoFiles cutRequest);
+	VideoFiles findCutPackage(String token) throws UtilsNotFoundException;
 }
