@@ -218,6 +218,13 @@
 			<releases><enabled>false</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
+  		<repository>
+  			<id>aht-public</id>
+  			<name>AHT public</name>
+  			<url>https://www.aht-group.com/nexus/content/groups/public/</url>
+  			<releases><enabled>true</enabled></releases>
+  			<snapshots><enabled>false</enabled></snapshots>
+  		</repository>
 	</repositories>
 	
 	<distributionManagement>
