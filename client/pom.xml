@@ -134,12 +134,6 @@
     		<groupId>org.slf4j</groupId>
    	 		<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.bitext</groupId>
-			<artifactId>jbittorrent</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
    
 </project>
