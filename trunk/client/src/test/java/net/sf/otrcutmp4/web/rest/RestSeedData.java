@@ -94,10 +94,14 @@ public class RestSeedData
 		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
 		for(File f : dirEpisodes.listFiles())
 		{
-			Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
-			logger.debug("\tSeasons: "+series.getSeason().size());
-			series = restAdmin.addSeries(series);
-			logger.debug("Updated "+series.getName());
+			if(f.getAbsolutePath().endsWith(".xml"))
+			{
+				logger.debug("\file: "+f.getAbsolutePath());
+				Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
+				logger.debug("\tSeasons: "+series.getSeason().size());
+				series = restAdmin.addSeries(series);
+				logger.debug("Updated "+series.getName());
+			}
 		}
 	}
 	
