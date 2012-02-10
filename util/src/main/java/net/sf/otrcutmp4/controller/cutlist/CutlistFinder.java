@@ -38,13 +38,15 @@ public class CutlistFinder
 		logger.info(" ");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			searchCutlist(vf);
+			CutListsAvailable avlCutLists = searchCutlist(vf);
+			if(avlCutLists.getCutList().size()>0){vf.setCutListsAvailable(avlCutLists);}
 		}
 		return vFiles;
 	}
 	
-	private void searchCutlist(VideoFile vf)
+	public CutListsAvailable searchCutlist(VideoFile vf)
 	{
+		CutListsAvailable result = new CutListsAvailable();
 		StringBuffer sb = new StringBuffer();
 		sb.append(vf.getOtrId().getKey()).append(".").append(vf.getOtrId().getFormat().getType());
 		logger.info("Searching for "+sb);
@@ -59,9 +61,10 @@ public class CutlistFinder
 		try
 		{
 			Document doc = ((JDomEvent)leh.getSingleResult()).getDoc();
-			vf.setCutListsAvailable(getAvailableCutLists(doc));
+			result = getAvailableCutLists(doc);
 		}
 		catch (NoSuchElementException e){logger.error("No cutlist found. URL: "+sUrl);}
+		return result;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -106,8 +109,7 @@ public class CutlistFinder
 		
 		FileName fn = new FileName();
 		fn.setValue(e.getChildTextNormalize("filename"));
-		cl.setFileName(fn);
-		
+		cl.setFileName(fn);	
 		
 		return cl;
 	}

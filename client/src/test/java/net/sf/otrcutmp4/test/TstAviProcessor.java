@@ -6,6 +6,7 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.util.OtrConfig;
@@ -34,7 +35,7 @@ public class TstAviProcessor
 	public void cut()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),XmlOtrIdFactory.VideType.avi); 
 		JaxbUtil.debug2(this.getClass(), videoFiles, nsPrefixMapper);
 		
 		String xmlFile = config.getString("test.xml.aviprocessor.cut");
@@ -45,7 +46,7 @@ public class TstAviProcessor
 	public void rename()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirRename)),SrcDirProcessor.VideType.mp4); 
+		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirRename)),XmlOtrIdFactory.VideType.mp4); 
 		
 		JaxbUtil.debug(TstAviProcessor.class,videoFiles);
 		String xmlFile = config.getString("xml.test.rename.1");
