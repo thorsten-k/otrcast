@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -34,7 +35,7 @@ public class TstSeriesTagger
 		rest = new RestSeriesClient(config);
 		
 		SrcDirProcessor dirProcessor = new SrcDirProcessor(view);
-		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),SrcDirProcessor.VideType.avi); 
+		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),XmlOtrIdFactory.VideType.avi); 
 	}
 	
 	public void tag()

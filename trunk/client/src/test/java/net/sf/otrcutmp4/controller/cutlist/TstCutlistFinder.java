@@ -5,8 +5,12 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
+import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.controller.noop.NoopCutlistChooserController;
 import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
+import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
@@ -58,11 +62,21 @@ public class TstCutlistFinder
 		}
 		else{logger.warn("No output specified. Do this in test class");}
 		
-		
 		JaxbUtil.debug(this.getClass(),vFiles);
 		
 		String xmlOut = config.getString("xml.test."+type+".3");
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
+	}
+	
+	public void find() throws OtrProcessingException
+	{
+		String fileName = "Hawaii_Five_0_11.08.25_21-15_sat1_60_TVOON_DE.mpg.HQ.avi";
+		VideoFile vf = XmlVideoFileFactory.create(fileName);
+		JaxbUtil.debug(this.getClass(),vf);
+		
+		CutlistFinder clf = new CutlistFinder();
+		CutListsAvailable cla = clf.searchCutlist(vf);
+		JaxbUtil.debug(this.getClass(),cla);
 	}
 	
 	public static void main(String args[]) throws Exception
@@ -70,9 +84,10 @@ public class TstCutlistFinder
 		Configuration config = OtrClientTstBootstrap.init();
 		
 		TstCutlistFinder test = new TstCutlistFinder(config);
-		test.findCl();
+//		test.findCl();
 //		test.findCl("rename");
 //		test.chooseCl("cut");
 //		test.chooseCl("rename");
+		test.find();
 	}
 }

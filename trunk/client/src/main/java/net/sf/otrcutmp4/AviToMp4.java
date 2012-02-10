@@ -9,6 +9,7 @@ import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
@@ -99,11 +100,11 @@ public class AviToMp4
         
         if(line.hasOption("hq"))
         {
-        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.HQAVI),SrcDirProcessor.VideType.avi); 
+        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.HQAVI),XmlOtrIdFactory.VideType.avi); 
         }
         else if(line.hasOption("hd"))
         {
-        	aviProcessor.readFiles(otrConfig.getDir(Dir.HDAVI),SrcDirProcessor.VideType.avi); 
+        	aviProcessor.readFiles(otrConfig.getDir(Dir.HDAVI),XmlOtrIdFactory.VideType.avi); 
         }
         
         if(line.hasOption("tag"))
@@ -165,7 +166,7 @@ public class AviToMp4
         {
         	RenameGenerator batchRen = new RenameGenerator(otrConfig);
         	
-        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.RENAME),SrcDirProcessor.VideType.mp4); 
+        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.RENAME),XmlOtrIdFactory.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);
             clChooser.setRenameOutput();
             vFiles = clChooser.chooseFileRename(vFiles);

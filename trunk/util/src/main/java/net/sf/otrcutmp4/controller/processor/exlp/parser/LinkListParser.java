@@ -101,7 +101,7 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 		}
 		
 		r.setLink(link);
-		r.setOtrId(XmlOtrIdFactory.create(fileId));
+		r.setOtrId(XmlOtrIdFactory.createForId(fileId));
 		download.getRecording().add(r);
 	}
 	

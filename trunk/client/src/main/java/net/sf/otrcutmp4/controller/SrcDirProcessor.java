@@ -2,6 +2,10 @@ package net.sf.otrcutmp4.controller;
 
 import java.io.File;
 
+import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory.VideType;
+import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -15,12 +19,7 @@ import org.slf4j.LoggerFactory;
 public class SrcDirProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(SrcDirProcessor.class);
-	
-	private static final String typeAvi = "mpg.HQ.avi";
-	private static final String typeMp4 = "mpg.cut.mp4";
-	
-	public static enum VideType {avi,mp4}
-	
+		
 	private ViewInterface view;
 	
 	private File srcDir;
@@ -50,16 +49,12 @@ public class SrcDirProcessor
 			int index = fileName.lastIndexOf("."+vType);
 			if(index>0)
 			{
-				VideoFile vf = new VideoFile();
-				
-				FileName fName = new FileName();
-				fName.setValue(f.getName());
-				vf.setFileName(fName);
-				
-				OtrId fId = getFileId(fName);
-				vf.setOtrId(fId);
-				
-				result.getVideoFile().add(vf);
+				try
+				{
+					VideoFile vf = XmlVideoFileFactory.create(f.getName());
+					result.getVideoFile().add(vf);
+				}
+				catch (OtrProcessingException e) {logger.error("Error processing file: "+e.getMessage());}
 			}
 			else
 			{
@@ -92,10 +87,10 @@ public class SrcDirProcessor
 		OtrId fId = new OtrId();
 		
 		String fileName = fName.getValue();
-		fId.setKey(fileName.substring(0, fileName.lastIndexOf("."+typeAvi)));
+		fId.setKey(fileName.substring(0, fileName.lastIndexOf("."+XmlOtrIdFactory.typeAvi)));
 		
 		Format format = new Format();
-		format.setType(typeAvi);
+		format.setType(XmlOtrIdFactory.typeAvi);
 		fId.setFormat(format);
 		
 		return fId;
@@ -107,11 +102,11 @@ public class SrcDirProcessor
 		
 		String fileName = fName.getValue();
 		int indexFrom = fileName.indexOf("_")+1;
-		int indexTo = fileName.lastIndexOf("."+typeMp4);
+		int indexTo = fileName.lastIndexOf("."+XmlOtrIdFactory.typeMp4);
 		fId.setKey(fileName.substring(indexFrom, indexTo));
 		
 		Format format = new Format();
-		format.setType(typeMp4);
+		format.setType(XmlOtrIdFactory.typeMp4);
 		fId.setFormat(format);
 		
 		return fId;
