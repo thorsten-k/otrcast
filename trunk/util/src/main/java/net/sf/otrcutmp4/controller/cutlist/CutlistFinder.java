@@ -1,6 +1,8 @@
 package net.sf.otrcutmp4.controller.cutlist;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.exlp.event.handler.EhResultContainer;
@@ -53,12 +55,22 @@ public class CutlistFinder
 		StringBuffer sb = new StringBuffer();
 		sb.append(vf.getOtrId().getKey()).append(".").append(vf.getOtrId().getFormat().getType());
 		
-		result.getCutList().addAll(find(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()).getCutList());
+		Map<String,CutList> mapCl = new Hashtable<String,CutList>();
+		
+		for(CutList cl : find(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()).getCutList())
+		{
+			mapCl.put(cl.getId(), cl);
+		}
 		
 		if(XmlOtrIdFactory.typeAvi.equals(vf.getOtrId().getFormat().getType()))
 		{
-			result.getCutList().addAll(find(vf.getOtrId().getKey()+".mpg.HQ").getCutList());
+			for(CutList cl : find(vf.getOtrId().getKey()+".mpg.HQ").getCutList())
+			{
+				mapCl.put(cl.getId(), cl);
+			}
 		}
+		
+		for(String key : mapCl.keySet()){result.getCutList().add(mapCl.get(key));}
 		
 		if(!result.isSetCutList()){logger.warn("No CL found");}
 		
