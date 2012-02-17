@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.controller.batch;
 import java.io.File;
 
 import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.util.io.FilenameIllegalCharRemover;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.os.shell.ShellCmdRm;
@@ -69,7 +70,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		 }
 		 txt.debug();
 
-		 File f = new File("cut.bat");
+		 File f = new File(cfg.getDir(Dir.BAT),"cut.bat");
 		 txt.writeFile(f);
 		 logger.info("");
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
@@ -148,6 +149,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		}
 		else if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
 		else {fileName= vf.getFileName().getValue();}
+		fileName = FilenameIllegalCharRemover.convert(fileName); 
 		
 		StringBuffer sb = new StringBuffer();
 		if(cl.getCut().size()==1)

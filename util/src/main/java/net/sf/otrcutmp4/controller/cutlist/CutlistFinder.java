@@ -9,6 +9,7 @@ import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerHttp;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.parser.impl.XmlParser;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Comment;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
@@ -47,10 +48,26 @@ public class CutlistFinder
 	public CutListsAvailable searchCutlist(VideoFile vf)
 	{
 		CutListsAvailable result = new CutListsAvailable();
+		
+		logger.info("Searching for "+vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType());
 		StringBuffer sb = new StringBuffer();
 		sb.append(vf.getOtrId().getKey()).append(".").append(vf.getOtrId().getFormat().getType());
-		logger.info("Searching for "+sb);
-		String sUrl = "http://cutlist.at/getxml.php?name="+sb;
+		
+		result.getCutList().addAll(find(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()).getCutList());
+		
+		if(XmlOtrIdFactory.typeAvi.equals(vf.getOtrId().getFormat().getType()))
+		{
+			result.getCutList().addAll(find(vf.getOtrId().getKey()+".mpg.HQ").getCutList());
+		}
+		
+		if(!result.isSetCutList()){logger.warn("No CL found");}
+		
+		return result;
+	}
+	
+	private CutListsAvailable find(String clKey)
+	{	
+		String sUrl = "http://cutlist.at/getxml.php?name="+clKey;
 		
 		EhResultContainer leh = new EhResultContainer();
 		LogParser lp = new XmlParser(leh);
@@ -61,10 +78,9 @@ public class CutlistFinder
 		try
 		{
 			Document doc = ((JDomEvent)leh.getSingleResult()).getDoc();
-			result = getAvailableCutLists(doc);
+			return getAvailableCutLists(doc);
 		}
-		catch (NoSuchElementException e){logger.error("No cutlist found. URL: "+sUrl);}
-		return result;
+		catch (NoSuchElementException e) {return new CutListsAvailable();}
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -70,8 +70,14 @@ public class TstCutlistFinder
 	
 	public void find() throws OtrProcessingException
 	{
-		String fileName = "Hawaii_Five_0_11.08.25_21-15_sat1_60_TVOON_DE.mpg.HQ.avi";
-		VideoFile vf = XmlVideoFileFactory.create(fileName);
+		find("Supernatural_11.10.24_22-05_pro7_55_TVOON_DE.mpg.HQ.avi");
+		
+	}
+	
+	public void find(String clKey) throws OtrProcessingException
+	{
+		
+		VideoFile vf = XmlVideoFileFactory.create(clKey);
 		JaxbUtil.debug(this.getClass(),vf);
 		
 		CutlistFinder clf = new CutlistFinder();
