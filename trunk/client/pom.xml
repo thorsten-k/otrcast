@@ -134,6 +134,10 @@
     		<groupId>org.slf4j</groupId>
    	 		<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
+	  	<dependency>
+	  		<groupId>net.sf.exlp</groupId>
+	  		<artifactId>exlp-util</artifactId>
+	  	</dependency>
 	</dependencies>
    
 </project>
