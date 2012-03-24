@@ -26,7 +26,6 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 	private static final String secPay = "BEZAHLTER DOWNLOAD";
 
 	private Download download;
-	private int uCounter;
 	
 	public LinkListParser(LogEventHandler leh)
 	{
@@ -36,7 +35,7 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 		pattern.add(Pattern.compile("# "+secPrio+"(.*)"));
 		pattern.add(Pattern.compile("# "+secPay+"(.*)"));
 		pattern.add(Pattern.compile("http(.*)"));
-		
+		pattern.add(Pattern.compile("# Diese Datei ist leider nicht verfügbar"));
 	}
 
 	public void parseLine(String line)
@@ -54,6 +53,7 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 					case 1: createSection(secPrio);break;
 					case 2: createSection(secPay);break;
 					case 3: createRecording(m);break;
+					case 4: break;
 					
 					default: unknownHandling++;break;
 				}
@@ -61,28 +61,33 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 			}
 		}
 		if(unknownPattern)
-		{
-			uCounter++;
-			if(download!=null && uCounter==2)
-			{
-				LogEvent e = new DownloadEvent(download);
-				leh.handleEvent(e);
-				download = null;
-			}
-//			logger.warn("Unknown pattern: " +line);
+		{			
+			logger.warn("Unknown pattern: " +line);
 			unknownLines++;
+		}
+	}
+	
+	@Override
+	public void close()
+	{
+		logger.warn("close" );
+		if(download!=null)
+		{
+			LogEvent e = new DownloadEvent(download);
+			leh.handleEvent(e);
+			download = null;
 		}
 	}
 	
 	private void createSection(String type)
 	{
-		uCounter=0;
 		download = new Download();
 		download.setType(type);
 	}
 	
 	private void createRecording(Matcher m)
 	{
+		logger.debug(m.group(0));
 		String s = m.group(0);
 		
 		int lastSlashIndex = s.lastIndexOf("/");

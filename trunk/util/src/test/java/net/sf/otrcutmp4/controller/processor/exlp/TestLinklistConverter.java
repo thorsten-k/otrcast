@@ -10,6 +10,7 @@ import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 
+import org.apache.commons.configuration.Configuration;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -48,12 +49,17 @@ public class TestLinklistConverter extends AbstractUtilTest
 	
 	public static void main(String[] args) throws ExlpConfigurationException
     {
-		OtrUtilTstBootstrap.init();		
+		Configuration config = OtrUtilTstBootstrap.init();		
 			
 		TestLinklistConverter.initPrefixMapper();
 		TestLinklistConverter.initFiles();
 	
 		TestLinklistConverter test = new TestLinklistConverter();
 		test.save();
+		
+		String txt = StringIO.loadTxt(config.getString("test.ll.error1"));
+		LinklistConverter llc = new LinklistConverter();
+    	Linklist xml = llc.convert(txt);
+    	JaxbUtil.debug(xml);
     }
 }
