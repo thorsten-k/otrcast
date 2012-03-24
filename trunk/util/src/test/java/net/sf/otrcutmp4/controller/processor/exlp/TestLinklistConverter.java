@@ -31,12 +31,12 @@ public class TestLinklistConverter extends AbstractUtilTest
 	}
     
     @Test
-    public void testAclContainer() throws FileNotFoundException
+    public void testConverter() throws FileNotFoundException
     {
     	LinklistConverter llc = new LinklistConverter();
-    	Linklist test = llc.convert(sourceLinklist);
-    	Linklist ref = (Linklist)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Linklist.class);
-    	assertJaxbEquals(ref, test);
+    	Linklist actual = llc.convert(sourceLinklist);
+    	Linklist expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Linklist.class);
+    	assertJaxbEquals(expected, actual);
     }
  
     public void save()
