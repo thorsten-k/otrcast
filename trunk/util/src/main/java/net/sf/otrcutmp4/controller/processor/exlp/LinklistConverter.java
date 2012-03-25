@@ -7,6 +7,7 @@ import net.sf.exlp.listener.impl.LogListenerString;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.event.DownloadEvent;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;
 import net.sf.otrcutmp4.model.xml.otr.Download;
@@ -33,6 +34,7 @@ public class LinklistConverter
 		Linklist xml = new Linklist();
 		
 		Linklist xmlParse = parse(sLinkList);
+		
 		for(Download xmlDlParse : xmlParse.getDownload())
 		{
 			xml.getDownload().add(convertDownload(xmlDlParse));

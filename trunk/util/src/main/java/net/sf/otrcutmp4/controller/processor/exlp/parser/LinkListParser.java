@@ -21,9 +21,9 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 {
 	final static Logger logger = LoggerFactory.getLogger(LinkListParser.class);
 	
-	private static final String secNormal = "NORMAL DOWNLOAD";
-	private static final String secPrio = "PRIORISIERTER DOWNLOAD";
-	private static final String secPay = "BEZAHLTER DOWNLOAD";
+	public static final String secNormal = "NORMAL DOWNLOAD";
+	public static final String secPrio = "PRIORISIERTER DOWNLOAD";
+	public static final String secPay = "BEZAHLTER DOWNLOAD";
 
 	private Download download;
 	
@@ -70,7 +70,6 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 	@Override
 	public void close()
 	{
-		logger.warn("close" );
 		if(download!=null)
 		{
 			LogEvent e = new DownloadEvent(download);
@@ -81,6 +80,7 @@ public class LinkListParser extends AbstractLogParser implements LogParser
 	
 	private void createSection(String type)
 	{
+		close();
 		download = new Download();
 		download.setType(type);
 	}
