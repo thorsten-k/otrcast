@@ -1,0 +1,33 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net"
+    xmlns:otr="http://otrcutmp4.sf.net"
+    xmlns:u="http://otrcutmp4.sf.net/user"
+    xmlns:c="http://otrcutmp4.sf.net/cut"
+    xmlns:s="http://otrcutmp4.sf.net/series"
+    xmlns:o="http://otrcutmp4.sf.net/otr"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    elementFormDefault="qualified" attributeFormDefault="unqualified"
+    jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+    <xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="otr/cut.xsd"/>
+    <xsd:import namespace="http://otrcutmp4.sf.net/user" schemaLocation="otr/user.xsd"/>
+    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="otr/series.xsd"/>
+    <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr/otr.xsd"/>
+    <xsd:annotation>
+        <xsd:appinfo>
+            <jaxb:globalBindings generateIsSetMethod="true">
+                <xjc:serializable uid="1"/>
+            </jaxb:globalBindings>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:element name="otr">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="s:series" maxOccurs="unbounded"/>
+                <xsd:element ref="s:category" maxOccurs="unbounded"/>
+                <xsd:element ref="o:format" maxOccurs="unbounded"/>
+                <xsd:element ref="o:quality" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

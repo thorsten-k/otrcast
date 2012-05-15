@@ -34,6 +34,9 @@ public class TestXmlSeason extends AbstractXmlSeriesTest
     	Season xml = new Season();
     	xml.setId(123);
     	xml.setNr(1);
+    	xml.setName("myName");
+    	xml.setShowName(true);
+    	xml.setShowNr(true);
     	
     	if(withChilds)
     	{
