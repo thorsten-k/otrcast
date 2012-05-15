@@ -4,31 +4,31 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:com.fnf="http://www.fnf.com/xes">
 
-   	<jxb:bindings schemaLocation="../resources/xsd/otr.xsd" node="/xsd:schema">
+   	<jxb:bindings schemaLocation="../xsd/otr.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.otrcutmp4.model.xml.container"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <jxb:bindings schemaLocation="../resources/xsd/otr/cut.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="../xsd/otr/cut.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.otrcutmp4.model.xml.cut"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <jxb:bindings schemaLocation="../resources/xsd/otr/user.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="../xsd/otr/user.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.otrcutmp4.model.xml.user"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <jxb:bindings schemaLocation="../resources/xsd/otr/series.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="../xsd/otr/series.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.otrcutmp4.model.xml.series"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="../resources/xsd/otr/otr.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../xsd/otr/otr.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.otrcutmp4.model.xml.otr"/>
         </jxb:schemaBindings>

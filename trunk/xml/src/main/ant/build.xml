@@ -3,8 +3,7 @@
 <project name="OTR-XML"  basedir="../../..">
 
 	<property name="src.dir" location="${basedir}/src/main/java" />
-	<property name="rsrc.dir" location="${basedir}/src/main/resources" />
-	<property name="xsd.dir" location="${rsrc.dir}/xsd"/>
+	<property name="xsd.dir" location="${basedir}/src/main/xsd"/>
 	
 	<property name="jaxb.version" value="2.2.2"/>
 	<property name="jaxb-api.lib" value="${user.home}/.m2/repository/javax/xml/bind/jaxb-api/${jaxb.version}/jaxb-api-${jaxb.version}.jar"/>
@@ -21,12 +20,11 @@
 		<echo level="info">    basedir = ${basedir}</echo>
 		<echo level="info">    src.dir = ${src.dir}</echo>
 		<echo level="info">    xsd.dir = ${xsd.dir}</echo>
-	    <java classname="com.sun.tools.xjc.XJCFacade"
-				fork="true" failonerror="true"  maxmemory="128m">
+	    <java classname="com.sun.tools.xjc.XJCFacade" fork="true" failonerror="true"  maxmemory="128m">
 			<arg value="-extension"/>
 			<arg value="${xsd.dir}/otr.xsd"/>
 			<arg value="-d"/><arg value="${src.dir}"/>
-			<arg value="-b"/><arg value="${rsrc.dir}/../ant/otr.xjb"/>
+	    	<arg value="-b"/><arg value="${basedir}/src/main/ant/otr.xjb"/>
 			<classpath>
 				<pathelement location="${jaxb-api.lib}"/>
 				<pathelement location="${jaxb-impl.lib}"/>
