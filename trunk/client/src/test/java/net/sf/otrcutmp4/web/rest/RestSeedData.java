@@ -10,7 +10,7 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.rest.AdminRestClient;
 import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
-import net.sf.otrcutmp4.interfaces.rest.OtrAdminRestService;
+import net.sf.otrcutmp4.interfaces.rest.OtrAdminRest;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.otr.Format;
@@ -33,7 +33,7 @@ public class RestSeedData
 	final static Logger logger = LoggerFactory.getLogger(TstCutRest.class);
 	
 	private RestSeriesClient restSeries;
-	private OtrAdminRestService restAdmin;
+	private OtrAdminRest restAdmin;
 	private Configuration config;
 	private WebResource gae;
 	

@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.rest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
-import net.sf.otrcutmp4.interfaces.rest.OtrAdminRestService;
+import net.sf.otrcutmp4.interfaces.rest.OtrAdminRest;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -16,7 +16,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-public class AdminRestClient implements OtrAdminRestService
+public class AdminRestClient implements OtrAdminRest
 {
 	final static Logger logger = LoggerFactory.getLogger(AdminRestClient.class);
 	
