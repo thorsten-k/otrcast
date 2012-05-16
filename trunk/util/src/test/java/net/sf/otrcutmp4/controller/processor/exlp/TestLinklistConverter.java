@@ -14,7 +14,6 @@ import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +75,6 @@ public class TestLinklistConverter extends AbstractUtilTest
 		String txt = StringIO.loadTxt(config.getString("test.ll.error1"));
 		LinklistConverter llc = new LinklistConverter();
     	Linklist xml = llc.convert(txt);
-    	JaxbUtil.debug(xml);
+    	JaxbUtil.debug(TestLinklistConverter.class,xml);
     }
 }

@@ -1,30 +1,29 @@
 package net.sf.otrcutmp4.web.rest;
 
-import javax.ws.rs.core.UriBuilder;
-
+import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.interfaces.rest.OtrUserRest;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.user.User;
 
+import org.jboss.resteasy.client.ClientExecutor;
+import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class TstUserRest
 {
 	final static Logger logger = LoggerFactory.getLogger(TstUserRest.class);
 	
-	private WebResource gae;
+	private OtrUserRest rest;
 	
 	public TstUserRest()
 	{	
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		gae = client.resource(UriBuilder.fromUri("http://otr-series.appspot.com").build());
+		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
+		rest = ProxyFactory.create(OtrUserRest.class, "http://localhost:8080/otr",clientExecutor);
 	}
 	
 	public void test()
@@ -32,8 +31,8 @@ public class TstUserRest
 		User user = new User();
 		user.setEmail("t.kisner@web.de");
 		
-		user = gae.path("rest").path("user/register").post(User.class, user);
-		JaxbUtil.debug2(this.getClass(), user, new OtrCutNsPrefixMapper());
+		user = rest.register(user);
+		JaxbUtil.debug(this.getClass(), user, new OtrCutNsPrefixMapper());
 	}
 	
 	public static void main(String[] args)

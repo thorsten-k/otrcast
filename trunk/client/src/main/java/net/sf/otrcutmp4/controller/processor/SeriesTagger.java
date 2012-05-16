@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
+import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.series.Episode;
@@ -14,6 +15,10 @@ import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.series.Tag;
 
 import org.apache.commons.configuration.Configuration;
+import org.jboss.resteasy.client.ClientExecutor;
+import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,11 +26,13 @@ public class SeriesTagger
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesTagger.class);
 	
-	private RestSeriesClient rest;
+	private OtrSeriesRest rest;
 	
 	public SeriesTagger(Configuration config)
 	{
-		rest = new RestSeriesClient(config);
+		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
+		rest = ProxyFactory.create(OtrSeriesRest.class, "http://localhost:8080/otr",clientExecutor);
 	}
 	
 	

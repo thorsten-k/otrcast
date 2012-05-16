@@ -41,17 +41,14 @@
 			<artifactId>otrcutmp4-xml</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>jaxen</artifactId>
-					<groupId>jaxen</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-      	<dependency>
-	   		<groupId>log4j</groupId>
-	   		<artifactId>log4j</artifactId>
-	   	</dependency>
+		
+		<dependency>
+	  		<groupId>net.sf.exlp</groupId>
+	  		<artifactId>exlp-util</artifactId>
+	  	</dependency>
+	  	
+		<!-- Commons -->
  		<dependency>
  			<groupId>commons-cli</groupId>
  			<artifactId>commons-cli</artifactId>
@@ -76,6 +73,8 @@
       		<type>jar</type>
       		<scope>compile</scope>
 		</dependency>
+		
+		<!-- XML -->
      	<dependency>
      		<groupId>javax.xml.bind</groupId>
     		<artifactId>jaxb-api</artifactId>
@@ -94,7 +93,14 @@
      		<type>jar</type>
       		<scope>test</scope>
      	</dependency>
-    	<dependency>
+		<dependency>
+   			<groupId>jaxen</groupId>
+      		<artifactId>jaxen</artifactId>
+    		<type>jar</type>
+    		<scope>compile</scope>
+    	</dependency>
+     			
+		<dependency>
       		<groupId>junit</groupId>
       		<artifactId>junit</artifactId>
       		<type>jar</type>
@@ -105,23 +111,23 @@
 			<artifactId>isoparser</artifactId> 
 			<scope>test</scope>
 		</dependency> 
- 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-		</dependency>
+		<dependency>
+        	<groupId>net.sf.ahtutils</groupId>
+        	<artifactId>ahtutils-jsf</artifactId>
+        </dependency>
+		
    	 	<dependency>
     		<groupId>net.sf.exlp</groupId>
   	   		<artifactId>exlp-core</artifactId>
   	   		<type>jar</type>
   	   		<scope>compile</scope>
    	  	</dependency>
-
-	  	<dependency>
-   			<groupId>jaxen</groupId>
-      		<artifactId>jaxen</artifactId>
-    		<type>jar</type>
-    		<scope>compile</scope>
-    	</dependency>
+    	
+    	<!-- Logging -->
+		<dependency>
+	   		<groupId>log4j</groupId>
+	   		<artifactId>log4j</artifactId>
+	   	</dependency>
 	  	<dependency>
 	  		<groupId>org.slf4j</groupId>
 	  		<artifactId>slf4j-api</artifactId>
@@ -134,10 +140,24 @@
     		<groupId>org.slf4j</groupId>
    	 		<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
-	  	<dependency>
-	  		<groupId>net.sf.exlp</groupId>
-	  		<artifactId>exlp-util</artifactId>
-	  	</dependency>
+	  	
+
+		<!-- REST -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+		</dependency>
+
 	</dependencies>
    
 </project>
