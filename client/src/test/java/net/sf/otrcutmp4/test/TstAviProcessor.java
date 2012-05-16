@@ -36,7 +36,7 @@ public class TstAviProcessor
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
 		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),XmlOtrIdFactory.VideType.avi); 
-		JaxbUtil.debug2(this.getClass(), videoFiles, nsPrefixMapper);
+		JaxbUtil.debug(this.getClass(), videoFiles, nsPrefixMapper);
 		
 		String xmlFile = config.getString("test.xml.aviprocessor.cut");
 		logger.debug("Saving to file: "+xmlFile);

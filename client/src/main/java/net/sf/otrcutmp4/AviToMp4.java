@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
@@ -55,7 +56,7 @@ public class AviToMp4
 		otrConfig = new OtrConfig();
 	}
 	
-	public void parseArguments(String args[]) throws ParseException, OtrConfigurationException, OtrInternalErrorException
+	public void parseArguments(String args[]) throws ParseException, OtrConfigurationException, OtrInternalErrorException, UtilsProcessingException
 	{
 		options = createOptions();
 		CommandLineParser parser = new PosixParser();
@@ -149,7 +150,7 @@ public class AviToMp4
         vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
         controllerCutlistChooser.loadCurlists(vFiles);
         for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}
-        JaxbUtil.debug(vFiles);
+        JaxbUtil.debug(this.getClass(),vFiles);
         
         CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
         CutGenerator batch = new CutGenerator(otrConfig);
@@ -256,5 +257,6 @@ public class AviToMp4
 		try {hqToMp4.parseArguments(args);}
 		catch (ParseException e) {logger.error(e.getMessage());hqToMp4.printHelp();}
 		catch (OtrConfigurationException e) {logger.error(e.getMessage());hqToMp4.printHelp();}
+		catch (UtilsProcessingException e) {e.printStackTrace();}
 	}
 }

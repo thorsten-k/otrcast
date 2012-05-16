@@ -1,12 +1,14 @@
-package net.sf.otrcutmp4.controller.processor;
+package net.sf.otrcutmp4.web.rest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
-import net.sf.otrcutmp4.controller.rest.RestSeriesClient;
+import net.sf.otrcutmp4.controller.processor.SeriesTagger;
+import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Tags;
@@ -16,6 +18,10 @@ import net.sf.otrcutmp4.view.cli.CliView;
 import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.configuration.Configuration;
+import org.jboss.resteasy.client.ClientExecutor;
+import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +32,16 @@ public class TstSeriesTagger
 	private ViewInterface view;
 	private SeriesTagger tagger;
 	private VideoFiles vFiles;
-	private RestSeriesClient rest;
+	private OtrSeriesRest rest;
 	
 	public TstSeriesTagger(Configuration config)
 	{	
 		view = new CliView();
 		tagger = new SeriesTagger(config);
-		rest = new RestSeriesClient(config);
+		
+		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
+		rest = ProxyFactory.create(OtrSeriesRest.class, "http://localhost:8080/otr",clientExecutor);
 		
 		SrcDirProcessor dirProcessor = new SrcDirProcessor(view);
 		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),XmlOtrIdFactory.VideType.avi); 

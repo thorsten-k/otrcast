@@ -41,7 +41,7 @@ public class TstCutlistFinder
 		
 		CutlistFinder finder = new CutlistFinder();
 		vFiles = finder.searchCutlist(vFiles);
-		JaxbUtil.debug2(this.getClass(), vFiles, nsPrefixMapper);
+		JaxbUtil.debug(this.getClass(), vFiles, nsPrefixMapper);
 		
 		String xmlOut = config.getString("test.xml.cutlistfinder");
 		JaxbUtil.save(new File(xmlOut), vFiles, nsPrefixMapper, true);
