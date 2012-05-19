@@ -6,12 +6,12 @@ import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory.VideType;
 import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
+import net.sf.otrcutmp4.interfaces.view.ViewInterface;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
-import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +35,10 @@ public class SrcDirProcessor
 		this.srcDir = srcDir;
 		this.vType=vType;
 		
-		
 		return readFiles();
 	}
 	
-	public VideoFiles readFiles()
+	private VideoFiles readFiles()
 	{
 		view.readFilesInDir(srcDir);
 		VideoFiles result = new VideoFiles();

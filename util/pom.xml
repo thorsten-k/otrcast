@@ -5,7 +5,7 @@
 	<parent>
     	<groupId>net.sf.otrcutmp4</groupId>
 		<artifactId>otrcutmp4</artifactId>
-  		<version>0.1.7-SNAPSHOT</version>
+  		<version>0.1.8-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
@@ -58,6 +58,12 @@
 					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.plist</groupId>
+			<artifactId>propertylist</artifactId>
+			<type>jar</type>
+			<version>1.0.1</version>
 		</dependency>
 	</dependencies>
 </project>
