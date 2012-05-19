@@ -20,7 +20,7 @@ public class OtrConfig
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
-	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4};
+	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4,AVI};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{GAE};
@@ -30,6 +30,7 @@ public class OtrConfig
 	public static final String dirHqAvi = "dir.hq.avi";
 	public static final String dirHdAc3 = "dir.hd.ac3";
 	public static final String dirHdAvi = "dir.hd.avi";
+	public static final String dirAvi = "dir.avi";
 	public static final String dirMp4 = "dir.mp4";
 	public static final String dirTmp = "dir.tmp";
 	public static final String dirBat = "dir.bat";
@@ -71,6 +72,7 @@ public class OtrConfig
 		lDirectotries.add(dirHqAvi);mapDir.put(Dir.HQAVI, dirHqAvi);
 		lDirectotries.add(dirHdAvi);mapDir.put(Dir.HDAVI, dirHdAvi);
 		lDirectotries.add(dirHdAc3);mapDir.put(Dir.AC3, dirHdAc3);
+		lDirectotries.add(dirAvi);mapDir.put(Dir.AVI, dirAvi);
 		lDirectotries.add(dirMp4);mapDir.put(Dir.MP4, dirMp4);
 		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
 		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);

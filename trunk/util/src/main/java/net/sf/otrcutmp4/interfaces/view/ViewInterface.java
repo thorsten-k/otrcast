@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.view.interfaces;
+package net.sf.otrcutmp4.interfaces.view;
 
 import java.io.File;
 

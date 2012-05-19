@@ -15,13 +15,13 @@ import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
+import net.sf.otrcutmp4.interfaces.view.ViewInterface;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliView;
-import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
 
 import org.apache.commons.cli.CommandLine;
@@ -94,18 +94,22 @@ public class AviToMp4
          
         ViewInterface view = new CliView();
         
-        SrcDirProcessor aviProcessor = new SrcDirProcessor(view);
+        SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         CutlistFinder clFinder = new CutlistFinder();
         
         VideoFiles vFiles = null;
         
         if(line.hasOption("hq"))
         {
-        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.HQAVI),XmlOtrIdFactory.VideType.avi); 
+        	vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.HQAVI),XmlOtrIdFactory.VideType.avi); 
         }
         else if(line.hasOption("hd"))
         {
-        	aviProcessor.readFiles(otrConfig.getDir(Dir.HDAVI),XmlOtrIdFactory.VideType.avi); 
+        	srcDirProcessor.readFiles(otrConfig.getDir(Dir.HDAVI),XmlOtrIdFactory.VideType.avi); 
+        }
+        else
+        {
+        	srcDirProcessor.readFiles(otrConfig.getDir(Dir.AVI),XmlOtrIdFactory.VideType.avi); 
         }
         
         if(line.hasOption("tag"))
@@ -167,7 +171,7 @@ public class AviToMp4
         {
         	RenameGenerator batchRen = new RenameGenerator(otrConfig);
         	
-        	vFiles = aviProcessor.readFiles(otrConfig.getDir(Dir.RENAME),XmlOtrIdFactory.VideType.mp4); 
+        	vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.RENAME),XmlOtrIdFactory.VideType.mp4); 
             vFiles = clFinder.searchCutlist(vFiles);
             clChooser.setRenameOutput();
             vFiles = clChooser.chooseFileRename(vFiles);

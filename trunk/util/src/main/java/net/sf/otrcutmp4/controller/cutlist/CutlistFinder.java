@@ -11,6 +11,7 @@ import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerHttp;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.parser.impl.XmlParser;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Comment;
@@ -38,6 +39,7 @@ public class CutlistFinder
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)
 	{
+		JaxbUtil.debug(this.getClass(), vFiles);
 		logger.info(" ");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{

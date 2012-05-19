@@ -9,13 +9,13 @@ import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.processor.SeriesTagger;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
+import net.sf.otrcutmp4.interfaces.view.ViewInterface;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliView;
-import net.sf.otrcutmp4.view.interfaces.ViewInterface;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
