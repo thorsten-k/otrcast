@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.batch.video;
 
 import java.io.IOException;
 
+import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
@@ -20,7 +21,7 @@ public class TestVideoCutter extends AbstractClientTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestVideoCutter.class);
 	
-	private RawExtract rawExtract;
+	private AviExtract rawExtract;
 	private String testFile;
 	
 	private VideoFile vf;
@@ -29,7 +30,7 @@ public class TestVideoCutter extends AbstractClientTest
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		rawExtract = new  RawExtract(tC.getOtrConfig());
+		rawExtract = new  AviExtract(tC.getOtrConfig(),Profile.P0);
 		testFile = "myTest";
 		
 		FileName fn = new FileName();
@@ -47,6 +48,5 @@ public class TestVideoCutter extends AbstractClientTest
 		Assert.assertEquals(VideoCutter.getSecond(2.0),"2.00");
 		Assert.assertEquals(VideoCutter.getSecond(2.1),"2.10");
 		Assert.assertEquals(VideoCutter.getSecond(12342.1),"12342.10");
-
 	}
 }

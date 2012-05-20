@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
 
+import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
@@ -13,9 +14,14 @@ public class Ac3ToAac extends AbstactBatchGenerator
 {	
 	final static Logger logger = LoggerFactory.getLogger(Ac3ToAac.class);
 	
-	public Ac3ToAac(OtrConfig otrConfig)
+	public Ac3ToAac(OtrConfig otrConfig,AviToMp4.Profile profile)
 	{
-		super(otrConfig);
+		super(otrConfig,profile);
+	}
+	
+	public String extract()
+	{
+		return null;
 	}
 	
 	public String create(String vName)

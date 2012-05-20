@@ -4,7 +4,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
-import net.sf.otrcutmp4.controller.batch.CutGenerator;
+import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
@@ -145,7 +145,7 @@ public class AviToMp4
         
         if(line.hasOption("rename"))
         {
-        	RenameGenerator batchRen = new RenameGenerator(otrConfig);
+        	RenameGenerator batchRen = new RenameGenerator(otrConfig,profile);
         	
         	vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.RENAME)); 
             vFiles = clFinder.searchCutlist(vFiles);
@@ -156,8 +156,8 @@ public class AviToMp4
         }
         else
         {
-        	CutGenerator batch = new CutGenerator(otrConfig);
-        	batch.create(vFiles,profile);
+        	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
+        	batch.create(vFiles);
         }
         
         logger.info("... finished.");

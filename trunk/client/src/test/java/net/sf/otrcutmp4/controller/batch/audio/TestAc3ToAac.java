@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.IOException;
 
+import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
@@ -23,7 +24,7 @@ public class TestAc3ToAac extends AbstractClientTest
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		ac3ToAac = new  Ac3ToAac(tC.getOtrConfig());
+		ac3ToAac = new  Ac3ToAac(tC.getOtrConfig(),Profile.P0);
 		testFile = "myTest";
 	}
 	

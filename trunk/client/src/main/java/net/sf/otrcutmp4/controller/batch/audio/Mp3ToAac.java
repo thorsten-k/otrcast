@@ -2,8 +2,11 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
+import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Audio;
@@ -16,17 +19,32 @@ public class Mp3ToAac extends AbstactBatchGenerator
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp3ToAac.class);
 	
-	public Mp3ToAac(OtrConfig otrConfig)
+	public Mp3ToAac(OtrConfig otrConfig,AviToMp4.Profile profile)
 	{
-		super(otrConfig);
+		super(otrConfig,profile);
 	}
 	
-	public String extract(VideoFile vf, AviToMp4.Profile profile)
+	public String extract(VideoFile vf) throws UtilsProcessingException, OtrInternalErrorException
 	{
-		return create();
+		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));
+		String outMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.mp3"));
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(cmdMp4Box).append(" ");
+		
+		switch(XmlOtrIdFactory.getType(vf.getOtrId().getFormat().getType()))
+		{
+			case hd: sb.append("-fps 50 ");break;
+			case hq: logger.trace("No FPS Handling required here");break;
+			default: throw new OtrInternalErrorException("No Default Handling available");
+		}
+		
+		sb.append("-aviraw audio ").append(inAvi).append(" -out "+outMp3);
+		
+		return sb.toString();
 	}
 	
-	public String create()
+	public String transcode()
 	{
 		String sMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw_audio.mp3"));
 		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP), "aac.aac"));
