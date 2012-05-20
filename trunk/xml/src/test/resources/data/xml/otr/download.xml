@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<o:download xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" id="1" type="myType">
+<o:download xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series" id="1" type="myType">
     <o:recording id="1"/>
     <o:recording id="1"/>
     <o:otrId id="1" key="myKey"/>
