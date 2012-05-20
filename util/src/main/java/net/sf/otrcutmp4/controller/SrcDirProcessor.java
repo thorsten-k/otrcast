@@ -2,8 +2,9 @@ package net.sf.otrcutmp4.controller;
 
 import java.io.File;
 
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory.VideType;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -19,18 +20,15 @@ public class SrcDirProcessor
 	private ViewSrcDirProcessor view;
 	
 	private File srcDir;
-	private VideType vType;
 	
 	public SrcDirProcessor(ViewSrcDirProcessor view)
 	{
 		this.view=view;
 	}
 	
-	public VideoFiles readFiles(File srcDir, VideType vType)
+	public VideoFiles readFiles(File srcDir)
 	{
 		this.srcDir = srcDir;
-		this.vType=vType;
-		
 		return readFiles();
 	}
 	
@@ -40,25 +38,41 @@ public class SrcDirProcessor
 		VideoFiles result = new VideoFiles();
 		for(File f : srcDir.listFiles())
 		{
-			String fileName = f.getName();
-			int index = fileName.lastIndexOf("."+vType);
-			if(index>0)
+			boolean valid = isValidSrcFile(f.getName());
+			logger.trace("Testing: "+f.getName()+" valid?"+valid);
+			if(valid)
 			{
 				try
 				{
 					VideoFile vf = XmlVideoFileFactory.create(f.getName());
+					if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHd))
+					{
+						File fAc3 = new File(f.getParentFile(),vf.getOtrId().getKey()+"."+XmlOtrIdFactory.typeAc3Hd);
+						if(fAc3.exists()){logger.debug("AC3");}
+						else{logger.debug("NoAC3");}
+					}
 					result.getVideoFile().add(vf);
 				}
 				catch (OtrProcessingException e) {logger.error("Error processing file: "+e.getMessage());}
 			}
 			else
 			{
-				logger.warn("File "+f.getName()+" is not a ."+vType+"-file. Ignoring");
+				if(!f.getName().endsWith(XmlOtrIdFactory.typeAc3Hd))
+				{
+					logger.debug("File "+f.getName()+" is not a valid source file. Ignoring it.");
+				}
+				
 			}
 		}
+		JaxbUtil.trace(result);
 		view.found(result.getVideoFile().size());
 		return result;
 	}
 	
-
+	private boolean isValidSrcFile(String fileName)
+	{
+		if(fileName.endsWith(XmlOtrIdFactory.typeAviHq)){return true;}
+		if(fileName.endsWith(XmlOtrIdFactory.typeAviHd)){return true;}
+		return false;
+	}
 }

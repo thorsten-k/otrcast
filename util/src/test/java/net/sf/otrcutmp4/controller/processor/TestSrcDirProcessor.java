@@ -3,10 +3,10 @@ package net.sf.otrcutmp4.controller.processor;
 import java.io.File;
 
 import junit.framework.Assert;
-
 import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
-import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory.VideType;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
@@ -34,10 +34,36 @@ public class TestSrcDirProcessor extends AbstractUtilTest
 	}
 	
 	//HD
-    @Test public void size()
+    @Test
+    public void size()
     {
-    	VideoFiles vf = srcDirProcessor.readFiles(fSrc, VideType.avi);
-    	Assert.assertEquals(1,vf.getVideoFile().size());
+    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	Assert.assertEquals(3,vFiles.getVideoFile().size());
+    }
+    
+    @Test
+    public void hqNoAc3()
+    {
+    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFile vf = vFiles.getVideoFile().get(1);
+    	Assert.assertEquals("test2",vf.getOtrId().getKey());
+    }
+    
+    @Test
+    public void hqAc3()
+    {
+    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFile vf = vFiles.getVideoFile().get(2);
+    	Assert.assertEquals("test3",vf.getOtrId().getKey());
+    }
+    
+    @Test
+    public void hd()
+    {
+    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFile vf = vFiles.getVideoFile().get(1);
+    	JaxbUtil.debug(vf);
+    	Assert.assertEquals("test2",vf.getOtrId().getKey());
     }
     
     public static void main(String[] args) throws ExlpConfigurationException
@@ -46,6 +72,8 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     	
     	TestSrcDirProcessor test = new TestSrcDirProcessor();
     	test.init();
-    	test.size();
+//    	test.size();
+//    	test.hq();
+    	test.hd();
     }
  }

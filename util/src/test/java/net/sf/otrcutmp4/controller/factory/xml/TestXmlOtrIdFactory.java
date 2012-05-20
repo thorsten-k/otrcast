@@ -24,7 +24,7 @@ public class TestXmlOtrIdFactory extends AbstractUtilTest
     {
     	fileName = "Hawaii_Five_0_11.08.25_21-15_sat1_60_TVOON_DE.mpg.HQ.avi";
     	OtrId xml = XmlOtrIdFactory.createForFileName(fileName);
-    	JaxbUtil.debug(this.getClass(),xml);
+    	JaxbUtil.debug(xml);
     	Assert.assertTrue(xml.isSetFormat());
     	Assert.assertTrue(xml.getFormat().isSetType());
     	Assert.assertEquals("mpg.HQ.avi", xml.getFormat().getType());

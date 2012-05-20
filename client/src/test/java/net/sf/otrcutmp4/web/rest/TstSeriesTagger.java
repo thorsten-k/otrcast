@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
-import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.controller.processor.SeriesTagger;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
@@ -44,7 +43,7 @@ public class TstSeriesTagger
 		rest = ProxyFactory.create(OtrSeriesRest.class, "http://localhost:8080/otr",clientExecutor);
 		
 		SrcDirProcessor dirProcessor = new SrcDirProcessor(view);
-		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi)),XmlOtrIdFactory.VideType.avi); 
+		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirHqAvi))); 
 	}
 	
 	public void tag()

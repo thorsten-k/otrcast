@@ -58,7 +58,7 @@ public class TestLinklistConverter extends AbstractUtilTest
     {
     	LinklistConverter llc = new LinklistConverter();
     	Linklist xml = llc.convert(srcLinklist);
-    	JaxbUtil.debug(this.getClass(),xml);
+    	JaxbUtil.debug(xml);
     	JaxbUtil.save(dstXml, xml, nsPrefixMapper, true);
     }
 	
@@ -75,6 +75,6 @@ public class TestLinklistConverter extends AbstractUtilTest
 		String txt = StringIO.loadTxt(config.getString("test.ll.error1"));
 		LinklistConverter llc = new LinklistConverter();
     	Linklist xml = llc.convert(txt);
-    	JaxbUtil.debug(TestLinklistConverter.class,xml);
+    	JaxbUtil.debug(xml);
     }
 }

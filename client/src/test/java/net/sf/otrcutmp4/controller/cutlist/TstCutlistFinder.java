@@ -41,7 +41,7 @@ public class TstCutlistFinder
 		
 		CutlistFinder finder = new CutlistFinder();
 		vFiles = finder.searchCutlist(vFiles);
-		JaxbUtil.debug(this.getClass(), vFiles, nsPrefixMapper);
+		JaxbUtil.debug(vFiles, nsPrefixMapper);
 		
 		String xmlOut = config.getString("test.xml.cutlistfinder");
 		JaxbUtil.save(new File(xmlOut), vFiles, nsPrefixMapper, true);
@@ -62,7 +62,7 @@ public class TstCutlistFinder
 		}
 		else{logger.warn("No output specified. Do this in test class");}
 		
-		JaxbUtil.debug(this.getClass(),vFiles);
+		JaxbUtil.debug(vFiles);
 		
 		String xmlOut = config.getString("xml.test."+type+".3");
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
@@ -78,11 +78,11 @@ public class TstCutlistFinder
 	{
 		
 		VideoFile vf = XmlVideoFileFactory.create(clKey);
-		JaxbUtil.debug(this.getClass(),vf);
+		JaxbUtil.debug(vf);
 		
 		CutlistFinder clf = new CutlistFinder();
 		CutListsAvailable cla = clf.searchCutlist(vf);
-		JaxbUtil.debug(this.getClass(),cla);
+		JaxbUtil.debug(cla);
 	}
 	
 	public static void main(String args[]) throws Exception

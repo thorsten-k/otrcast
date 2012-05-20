@@ -32,7 +32,7 @@ public class TstUserRest
 		user.setEmail("t.kisner@web.de");
 		
 		user = rest.register(user);
-		JaxbUtil.debug(this.getClass(), user, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(user, new OtrCutNsPrefixMapper());
 	}
 	
 	public static void main(String[] args)

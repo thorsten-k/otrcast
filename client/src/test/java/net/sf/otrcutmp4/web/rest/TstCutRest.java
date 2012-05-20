@@ -39,7 +39,7 @@ public class TstCutRest
 	{
 		String xmlIn = otrConfig.getKey("test.xml.cutlistfinder");
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
-		JaxbUtil.debug(this.getClass(), vFiles, nsPrefixMapper);
+		JaxbUtil.debug(vFiles, nsPrefixMapper);
 		String s = rest.addCutPackage(vFiles);
 		logger.debug("Saved Request with token: "+s);
 	}
