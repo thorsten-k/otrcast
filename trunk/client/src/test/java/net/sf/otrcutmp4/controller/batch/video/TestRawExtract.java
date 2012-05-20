@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.List;
 
 import junit.framework.Assert;
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.otr.Format;
+import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 
@@ -34,18 +37,26 @@ public class TestRawExtract extends AbstractClientTest
 		FileName fn = new FileName();
 		fn.setValue("my.file.avi");
 		
+		Format format = new Format();
+		format.setType(XmlOtrIdFactory.typeAviHq);
+		format.setAc3(false);
+		
+		OtrId id = new OtrId();
+		id.setFormat(format);
+		
 		vf = new VideoFile();
 		vf.setFileName(fn);
+		vf.setOtrId(id);
 	}
 	
 	@Test
-	public void hqMp3() throws OtrConfigurationException, OtrInternalErrorException
+	public void hq() throws OtrConfigurationException, OtrInternalErrorException, UtilsProcessingException
 	{
-		List<String> actual = rawExtract.rawExtract(vf,AviToMp4.Quality.HQ, AviToMp4.Audio.Mp3);
+		List<String> actual = rawExtract.rawExtract(vf);
 		Assert.assertEquals(2, actual.size());
 		
-		String expected0 = "dir.tools/tool.mp4box -aviraw video dir.hq.avi/my.file.avi -out dir.tmp/raw.h264";
-		String expected1 = "dir.tools/tool.mp4box -aviraw audio dir.hq.avi/my.file.avi -out dir.tmp/raw.mp3";
+		String expected0 = "dir.tools/tool.mp4box -aviraw video dir.avi/my.file.avi -out dir.tmp/raw.h264";
+		String expected1 = "dir.tools/tool.mp4box -aviraw audio dir.avi/my.file.avi -out dir.tmp/raw.mp3";
 		
 		for(String s : actual){logger.debug(s);}
 		

@@ -2,7 +2,9 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
 
+import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Audio;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
@@ -17,6 +19,11 @@ public class Mp3ToAac extends AbstactBatchGenerator
 	public Mp3ToAac(OtrConfig otrConfig)
 	{
 		super(otrConfig);
+	}
+	
+	public String extract(VideoFile vf, AviToMp4.Profile profile)
+	{
+		return create();
 	}
 	
 	public String create()

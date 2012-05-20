@@ -18,6 +18,8 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>${maven-assembly-plugin.version}</version>
 				<configuration>
+					<finalName>OtrCutMp4-${project.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
 					<descriptors>
 						<descriptor>src/assemble/exe.xml</descriptor>
 					</descriptors>
