@@ -15,13 +15,13 @@ import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
-import net.sf.otrcutmp4.interfaces.view.ViewInterface;
+import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
-import net.sf.otrcutmp4.view.cli.CliView;
+import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
 
 import org.apache.commons.cli.CommandLine;
@@ -92,7 +92,7 @@ public class AviToMp4
         if(line.hasOption("createDirs")){otrConfig.createDirs();}
         otrConfig.checkConfigSettings();
          
-        ViewInterface view = new CliView();
+        ViewSrcDirProcessor view = new CliSrcDirProcessorView();
         
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         CutlistFinder clFinder = new CutlistFinder();

@@ -7,11 +7,11 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
-import net.sf.otrcutmp4.interfaces.view.ViewInterface;
+import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.util.OtrConfig;
-import net.sf.otrcutmp4.view.cli.CliView;
+import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -22,13 +22,13 @@ public class TstAviProcessor
 	final static Logger logger = LoggerFactory.getLogger(TstAviProcessor.class);
 	
 	private Configuration config;
-	private ViewInterface view;
+	private ViewSrcDirProcessor view;
 	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstAviProcessor(Configuration config)
 	{
 		this.config=config;
-		view = new CliView();
+		view = new CliSrcDirProcessorView();
 		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
