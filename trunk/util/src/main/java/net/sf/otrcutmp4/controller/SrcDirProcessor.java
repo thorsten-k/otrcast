@@ -48,8 +48,7 @@ public class SrcDirProcessor
 					if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHd))
 					{
 						File fAc3 = new File(f.getParentFile(),vf.getOtrId().getKey()+"."+XmlOtrIdFactory.typeAc3Hd);
-						if(fAc3.exists()){logger.debug("AC3");}
-						else{logger.debug("NoAC3");}
+						vf.getOtrId().getFormat().setAc3(fAc3.exists());
 					}
 					result.getVideoFile().add(vf);
 				}
