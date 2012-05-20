@@ -5,6 +5,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
@@ -24,7 +25,7 @@ public class TestRawExtract extends AbstractClientTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestRawExtract.class);
 	
-	private RawExtract rawExtract;
+	private AviExtract rawExtract;
 	
 	private VideoFile vf;
 	
@@ -32,7 +33,7 @@ public class TestRawExtract extends AbstractClientTest
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		rawExtract = new  RawExtract(tC.getOtrConfig());
+		rawExtract = new  AviExtract(tC.getOtrConfig(),Profile.P0);
 		
 		FileName fn = new FileName();
 		fn.setValue("my.file.avi");
@@ -53,14 +54,12 @@ public class TestRawExtract extends AbstractClientTest
 	public void hq() throws OtrConfigurationException, OtrInternalErrorException, UtilsProcessingException
 	{
 		List<String> actual = rawExtract.rawExtract(vf);
-		Assert.assertEquals(2, actual.size());
+		Assert.assertEquals(1, actual.size());
 		
 		String expected0 = "dir.tools/tool.mp4box -aviraw video dir.avi/my.file.avi -out dir.tmp/raw.h264";
-		String expected1 = "dir.tools/tool.mp4box -aviraw audio dir.avi/my.file.avi -out dir.tmp/raw.mp3";
 		
 		for(String s : actual){logger.debug(s);}
 		
 		Assert.assertEquals(expected0, actual.get(0));
-		Assert.assertEquals(expected1, actual.get(1));
 	}
 }

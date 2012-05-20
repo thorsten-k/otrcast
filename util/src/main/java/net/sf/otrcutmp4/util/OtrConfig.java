@@ -21,7 +21,7 @@ public class OtrConfig
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
 	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4,AVI};
-	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC};
+	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{GAE};
 	
@@ -42,6 +42,8 @@ public class OtrConfig
 	public static final String toolLame = "tool.lame";
 	public static final String toolFfmpeg = "tool.ffmpeg";
 	public static final String toolFaac = "tool.faac";
+	public static final String toolEac3to = "tool.eac3to";
+	public static final String toolNeroAac = "tool.neroaac";
 	
 	public static final String paraAudioFaac = "audio.faac.kbit";
 	
@@ -89,6 +91,8 @@ public class OtrConfig
 		lTools.add(toolLame);mapTool.put(Tool.LAME, toolLame);
 		lTools.add(toolFfmpeg);mapTool.put(Tool.FFMPEG, toolFfmpeg);
 		lTools.add(toolFaac);mapTool.put(Tool.FAAC, toolFaac);
+		lTools.add(toolEac3to);mapTool.put(Tool.EAC3TO, toolEac3to);
+		lTools.add(toolNeroAac);mapTool.put(Tool.NEROAAC, toolNeroAac);
 	}
 	
 	private void initParameterList()
@@ -137,6 +141,8 @@ public class OtrConfig
 				config.setProperty(toolLame, "lame.exe");
 				config.setProperty(toolFfmpeg, "ffmpeg.exe");
 				config.setProperty(toolFaac, "faac.exe");
+				config.setProperty(toolEac3to, "nero.exe");
+				config.setProperty(toolNeroAac, "nero.exe");
 				
 				config.setProperty(paraAudioFaac, "192");
 				config.save();

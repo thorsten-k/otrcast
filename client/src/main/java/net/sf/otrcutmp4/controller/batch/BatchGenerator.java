@@ -11,7 +11,7 @@ import net.sf.exlp.util.os.shell.ShellCmdRm;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.controller.batch.audio.Mp3ToAac;
-import net.sf.otrcutmp4.controller.batch.video.RawExtract;
+import net.sf.otrcutmp4.controller.batch.video.AviExtract;
 import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
@@ -26,36 +26,36 @@ import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CutGenerator extends AbstactBatchGenerator
+public class BatchGenerator extends AbstactBatchGenerator
 {
-	final static Logger logger = LoggerFactory.getLogger(CutGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(BatchGenerator.class);
 	
-	private RawExtract rawExtract;
+	private AviExtract rawExtract;
 	private VideoCutter videoCutter;
 	
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
 	
-	public CutGenerator(OtrConfig cfg) throws OtrInternalErrorException
+	public BatchGenerator(OtrConfig cfg,AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
-		super(cfg);
+		super(cfg,profile);
 		
-		mp3ToAac = new Mp3ToAac(cfg);
-		ac3ToAac = new Ac3ToAac(cfg);
+		mp3ToAac = new Mp3ToAac(cfg,profile);
+		ac3ToAac = new Ac3ToAac(cfg,profile);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT).getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
 		
-		rawExtract = new RawExtract(cfg);
+		rawExtract = new AviExtract(cfg,profile);
 		rawExtract.setTxt(txt);
 
-		videoCutter = new VideoCutter(cfg);
+		videoCutter = new VideoCutter(cfg,profile);
 		videoCutter.setTxt(txt);
 	}
 	
-	public void create(VideoFiles vFiles, AviToMp4.Profile profile) throws OtrInternalErrorException
+	public void create(VideoFiles vFiles) throws OtrInternalErrorException
 	{
 		 for(VideoFile vf : vFiles.getVideoFile())
 		 {
@@ -90,11 +90,10 @@ public class CutGenerator extends AbstactBatchGenerator
 		try {txt.add(ShellCmdRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error("",e);}
 	
-		switch(profile)
-		{
-			case P0: extract(vf,profile);transcodeToMp4(vf);cut(vf,profile);merge(vf);break;
-			case P1:                     transcodeToMp4(vf);cut(vf,profile);merge(vf);break;
-		}	
+		extract(vf,profile);
+		transcode(vf);
+		cut(vf,profile);
+		merge(vf);
 		
 		txt.add("");
 		txt.add("");
@@ -102,15 +101,20 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 	private void extract(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
 	{
-		
-				
-		txt.add(rawExtract.rawExtract(vf));
-		if(!vf.getOtrId().getFormat().isAc3())
+		switch(profile)
 		{
-			txt.add(mp3ToAac.extract(vf, profile));
+			case P0: txt.add(rawExtract.rawExtract(vf));break;
+		}	
+		
+		if(vf.getOtrId().getFormat().isAc3())
+		{
+			logger.warn("AC§ NYI");
+		}
+		else
+		{
+			txt.add(mp3ToAac.extract(vf));
 		}
 	}
-	
 	
 	
 	private void cut(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException
@@ -188,8 +192,13 @@ public class CutGenerator extends AbstactBatchGenerator
 		}
 	}
 	
-	private void transcodeToMp4(VideoFile vf) throws UtilsProcessingException
+	private void transcode(VideoFile vf) throws UtilsProcessingException
 	{
+		if(!vf.getOtrId().getFormat().isAc3())
+		{
+			txt.add(mp3ToAac.transcode());
+		}
+		
 		String sMp4 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));
 		String sH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"raw_video.h264"));
 		String sAudio=rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));

@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
+import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Tool;
@@ -19,11 +20,14 @@ public class AbstactBatchGenerator
 	protected ExlpTxtWriter txt;
 		
 	protected String cmdMp4Box,cmdFfmpeg,cmdLame,cmdFaac;
-	protected OtrConfig cfg;
 	
-	public AbstactBatchGenerator(OtrConfig cfg)
+	protected OtrConfig cfg;
+	protected AviToMp4.Profile profile;
+	
+	public AbstactBatchGenerator(OtrConfig cfg, AviToMp4.Profile profile)
 	{
 		this.cfg=cfg;
+		this.profile=profile;
 		
 		for(Dir dir : Dir.values())
 		{

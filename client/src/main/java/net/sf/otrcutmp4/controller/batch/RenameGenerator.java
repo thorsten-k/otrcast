@@ -6,6 +6,7 @@ import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdMove;
+import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -24,9 +25,9 @@ public class RenameGenerator extends AbstactBatchGenerator
 	
 	private RelativePathFactory rpf;
 	
-	public RenameGenerator(OtrConfig cfg)
+	public RenameGenerator(OtrConfig cfg, AviToMp4.Profile profile)
 	{
-		super(cfg);
+		super(cfg,profile);
 		
 		dirHqMp4 = cfg.getDir(Dir.MP4);
 		dirMp4Rename = cfg.getDir(Dir.RENAME);

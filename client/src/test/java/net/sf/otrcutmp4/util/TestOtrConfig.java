@@ -23,7 +23,7 @@ public class TestOtrConfig extends AbstractClientTest
 	private OtrConfig otrConfig;
 
 	private static File fRoot,fHqAvi,fHdAvi,fAvi,fHdAc3,fMp4,fTmp,fBat,fTools,fRename;
-	private static File tMp4Box,tLame,tFfmpeg,tFaac;
+	private static File tMp4Box,tLame,tFfmpeg,tFaac,tEac3to,tNeroAac;
 	
 	public static TestOtrConfig factory() throws IOException
 	{
@@ -51,6 +51,8 @@ public class TestOtrConfig extends AbstractClientTest
 		tLame = new File(fTools,OtrConfig.toolLame);tLame.createNewFile();
 		tFfmpeg = new File(fTools,OtrConfig.toolFfmpeg);tFfmpeg.createNewFile();
 		tFaac = new File(fTools,OtrConfig.toolFaac);tFaac.createNewFile();
+		tEac3to = new File(fTools,OtrConfig.toolEac3to);tEac3to.createNewFile();
+		tNeroAac = new File(fTools,OtrConfig.toolNeroAac);tNeroAac.createNewFile();
 	}
 	
 	@Before
@@ -72,6 +74,8 @@ public class TestOtrConfig extends AbstractClientTest
 		config.addProperty(OtrConfig.toolLame, tLame.getName());
 		config.addProperty(OtrConfig.toolFfmpeg, tFfmpeg.getName());
 		config.addProperty(OtrConfig.toolFaac, tFaac.getName());
+		config.addProperty(OtrConfig.toolEac3to, tEac3to.getName());
+		config.addProperty(OtrConfig.toolNeroAac, tNeroAac.getName());
 		
 		config.addProperty(OtrConfig.paraAudioFaac, faacKbit);
 		

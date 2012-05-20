@@ -21,9 +21,9 @@ public class VideoCutter extends AbstactBatchGenerator
 	
 	private static DecimalFormat df;
 	
-	public VideoCutter(OtrConfig cfg)
+	public VideoCutter(OtrConfig cfg, AviToMp4.Profile profile)
 	{
-		super(cfg);
+		super(cfg, profile);
 	}
 	
 	public void applyCutList(CutListsSelected clSelected, String inVideo, AviToMp4.Profile profile)

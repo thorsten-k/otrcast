@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Profile;
-import net.sf.otrcutmp4.controller.batch.CutGenerator;
+import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -29,8 +29,8 @@ public class TstBatchProcessor
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutGenerator test = new CutGenerator(null);
-		test.create(vFiles,Profile.P0);
+		BatchGenerator test = new BatchGenerator(null,Profile.P0);
+		test.create(vFiles);
 	}
 	
 	public void renameGenerator() throws FileNotFoundException
@@ -39,7 +39,7 @@ public class TstBatchProcessor
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		RenameGenerator test = new RenameGenerator(null);
+		RenameGenerator test = new RenameGenerator(null,Profile.P0);
 		test.create(vFiles);
 	}
 	
