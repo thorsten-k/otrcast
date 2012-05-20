@@ -124,7 +124,7 @@ public class TestTxtLinkListFactory extends AbstractUtilTest
     {
     	Linklist xml = JaxbUtil.loadJAXB("xml/recordings.xml", Linklist.class);
     	List<String> actual = txtLinkFactory.create(xml);
-    	JaxbUtil.debug(this.getClass(),xml);
+    	JaxbUtil.debug(xml);
     	for(String s : actual){logger.debug(s);}
     }
  }

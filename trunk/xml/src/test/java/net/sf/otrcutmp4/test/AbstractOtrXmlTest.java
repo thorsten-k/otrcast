@@ -42,7 +42,7 @@ public abstract class AbstractOtrXmlTest
 	protected void save(Object xml, File f)
 	{
 		logger.debug("Saving Reference XML");
-		JaxbUtil.debug(this.getClass(),xml, getPrefixMapper());
+		JaxbUtil.debug(xml, getPrefixMapper());
     	JaxbUtil.save(f, xml, getPrefixMapper(), true);
 	}
 	

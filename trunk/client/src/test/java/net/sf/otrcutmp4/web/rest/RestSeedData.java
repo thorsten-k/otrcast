@@ -48,13 +48,13 @@ public class RestSeedData
 	public void all()
 	{
 		Otr otr = restSeries.allSeries();
-		JaxbUtil.debug(this.getClass(), otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
 	}
 		
 	public void addCategories() throws FileNotFoundException
 	{	
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlCategories), Otr.class);
-		JaxbUtil.debug(this.getClass(), otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
 		for(Category category : otr.getCategory())
 		{
 			restSeries.addCategory(category);
@@ -64,7 +64,7 @@ public class RestSeedData
 	public void addFormats() throws FileNotFoundException, UtilsProcessingException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlFormats), Otr.class);
-		JaxbUtil.debug(this.getClass(), otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
 		for(Format format : otr.getFormat())
 		{
 			Format response = restAdmin.addFormat(format);
@@ -75,11 +75,11 @@ public class RestSeedData
 	public void addQualities() throws FileNotFoundException, UtilsProcessingException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlQuality), Otr.class);
-		JaxbUtil.debug(this.getClass(), otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
 		for(Quality quality : otr.getQuality())
 		{
 			Quality response = restAdmin.addQuality(quality);
-			JaxbUtil.debug(this.getClass(), response, new OtrCutNsPrefixMapper());
+			JaxbUtil.debug(response, new OtrCutNsPrefixMapper());
 		}
 	}
 	

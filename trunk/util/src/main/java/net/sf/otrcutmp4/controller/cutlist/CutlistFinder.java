@@ -39,7 +39,7 @@ public class CutlistFinder
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)
 	{
-		JaxbUtil.debug(this.getClass(), vFiles);
+		JaxbUtil.debug(vFiles);
 		logger.info(" ");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
@@ -64,12 +64,16 @@ public class CutlistFinder
 			mapCl.put(cl.getId(), cl);
 		}
 		
-		if(XmlOtrIdFactory.typeAvi.equals(vf.getOtrId().getFormat().getType()))
+		if(XmlOtrIdFactory.typeAviHq.equals(vf.getOtrId().getFormat().getType()))
 		{
 			for(CutList cl : find(vf.getOtrId().getKey()+".mpg.HQ").getCutList())
 			{
 				mapCl.put(cl.getId(), cl);
 			}
+		}
+		else
+		{
+			logger.warn("Format not handled!!");
 		}
 		
 		for(String key : mapCl.keySet()){result.getCutList().add(mapCl.get(key));}

@@ -24,7 +24,7 @@ public class TestXmlVideoFileFactory extends AbstractUtilTest
     {
     	fileName = "Hawaii_Five_0_11.08.25_21-15_sat1_60_TVOON_DE.mpg.HQ.avi";
     	VideoFile xml = XmlVideoFileFactory.create(fileName);
-    	JaxbUtil.debug(this.getClass(),xml);
+    	JaxbUtil.debug(xml);
     	Assert.assertTrue(xml.isSetOtrId());
     	Assert.assertTrue(xml.isSetFileName());
     	Assert.assertTrue(xml.getFileName().isSetValue());
