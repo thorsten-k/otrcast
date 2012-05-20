@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
@@ -63,6 +65,20 @@ public class OtrXpath
 		List<Quality> listResult = (List<Quality>)context.selectNodes(sb.toString());
 		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Quality.class.getSimpleName()+" for type="+type);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Quality.class.getSimpleName()+" for type="+type);}
+		return listResult.get(0);
+	}
+	
+	public static synchronized VideoFile getFileByKey(VideoFiles vFiles,String key) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+	{
+		JXPathContext context = JXPathContext.newContext(vFiles);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("videoFile/otrId[@key='"+key+"']/..");
+		
+		@SuppressWarnings("unchecked")
+		List<VideoFile> listResult = (List<VideoFile>)context.selectNodes(sb.toString());
+		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+OtrId.class.getSimpleName()+" for key="+key);}
+		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+OtrId.class.getSimpleName()+" for key="+key);}
 		return listResult.get(0);
 	}
 }

@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
@@ -23,11 +25,11 @@ public class RawExtract extends AbstactBatchGenerator
 		super(cfg);
 	}
 	
-	public List<String> rawExtract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio) throws OtrInternalErrorException
+	public List<String> rawExtract(VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		List<String> result = new ArrayList<String>();
 		
-		String inAvi = rpf.relativate(new File(getAviDir(quality),vf.getFileName().getValue()));		
+		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));		
 		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.h264"));
 		String outMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.mp3"));
 		
@@ -37,10 +39,12 @@ public class RawExtract extends AbstactBatchGenerator
 		sbVideo.append(cmdMp4Box).append(" ");
 		sbAudio.append(cmdMp4Box).append(" ");
 		
-		switch(quality)
+		JaxbUtil.error(vf);
+		
+		switch(XmlOtrIdFactory.getType(vf.getOtrId().getFormat().getType()))
 		{
-			case HD: sbVideo.append("-fps 50 ");sbAudio.append("-fps 50 ");break;
-			case HQ: logger.trace("No FPS Handling required here");break;
+			case hd: sbVideo.append("-fps 50 ");sbAudio.append("-fps 50 ");break;
+			case hq: logger.trace("No FPS Handling required here");break;
 			default: throw new OtrInternalErrorException("No Default Handling available");
 		}
 		
@@ -49,12 +53,15 @@ public class RawExtract extends AbstactBatchGenerator
 			
 		result.add(sbVideo.toString());
 		
-		switch(audio)
+		if(vf.getOtrId().getFormat().isAc3())
 		{
-			case Mp3: result.add(sbAudio.toString());break;
-			case Ac3: logger.trace("No Handling required here for AC3");break;
-			default: throw new OtrInternalErrorException("No Default Handling available");
+			logger.trace("No Handling required here for AC3");
 		}
+		else
+		{
+			result.add(sbAudio.toString());
+		}
+
 
 		return result;
 	}

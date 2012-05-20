@@ -3,9 +3,7 @@ package net.sf.otrcutmp4.test;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.AviToMp4.Audio;
 import net.sf.otrcutmp4.AviToMp4.Profile;
-import net.sf.otrcutmp4.AviToMp4.Quality;
 import net.sf.otrcutmp4.controller.batch.CutGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
@@ -32,7 +30,7 @@ public class TstBatchProcessor
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
 		CutGenerator test = new CutGenerator(null);
-		test.create(vFiles,Quality.HQ,Audio.Mp3,Profile.P0);
+		test.create(vFiles,Profile.P0);
 	}
 	
 	public void renameGenerator() throws FileNotFoundException

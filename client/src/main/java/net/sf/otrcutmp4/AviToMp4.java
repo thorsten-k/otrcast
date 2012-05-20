@@ -38,13 +38,12 @@ public class AviToMp4
 {
 	final static Logger logger = LoggerFactory.getLogger(AviToMp4.class);
 	
-	public static enum Quality {HQ,HD}
-	public static enum Audio {Mp3,Ac3}
 	public static enum Profile {P0,P1}
 	
 	public static final String exeName = "CutHqAviToMp4";
 	
 	private Option oHelp,oDebug,oProfile,oWeb;
+	private Option oAc3;
 	private Options options;
 	private OtrConfig otrConfig;
 	
@@ -96,20 +95,9 @@ public class AviToMp4
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         CutlistFinder clFinder = new CutlistFinder();
         
-        VideoFiles vFiles = null;
+        VideoFiles vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.AVI));
         
-        if(line.hasOption("hq"))
-        {
-        	vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.HQAVI)); 
-        }
-        else if(line.hasOption("hd"))
-        {
-        	srcDirProcessor.readFiles(otrConfig.getDir(Dir.HDAVI)); 
-        }
-        else
-        {
-        	srcDirProcessor.readFiles(otrConfig.getDir(Dir.AVI)); 
-        }
+        
         
         if(line.hasOption("tag"))
         {
@@ -120,18 +108,15 @@ public class AviToMp4
         	return;
         }
         
-        Audio audio = Audio.Mp3;
-        if(line.hasOption("ac3") && !line.hasOption("hd"))
-        {
-        	logger.warn("ac3 is not allowed for HQ");
-        	printHelp();
-        }
         if(line.hasOption("ac3"))
         {
         	logger.warn("Remember, the option ac3 is EXPERIMENTAL");
         	logger.warn("http://otrcutmp4.sourceforge.net/future.html");
         	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error("",e);}
-        	audio = Audio.Ac3;
+        }
+        else
+        {
+        	for(VideoFile vf : vFiles.getVideoFile()){vf.getOtrId().getFormat().setAc3(false);}
         }
         
         vFiles = clFinder.searchCutlist(vFiles);
@@ -156,15 +141,7 @@ public class AviToMp4
         JaxbUtil.debug(vFiles);
         
         CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
-        CutGenerator batch = new CutGenerator(otrConfig);
-        if(line.hasOption("hq"))
-        {
-            batch.create(vFiles,Quality.HQ,Audio.Mp3,profile);
-        }
-        if(line.hasOption("hd"))
-        {
-            batch.create(vFiles,Quality.HD,audio,profile);
-        }
+        
         
         if(line.hasOption("rename"))
         {
@@ -177,14 +154,10 @@ public class AviToMp4
             
             batchRen.create(vFiles);
         }
-        
-        if(!line.hasOption("rename")
-        		&& !line.hasOption("hq")
-        		&& !line.hasOption("hd")
-        		&& !line.hasOption("createDirs")
-        		&& !line.hasOption("createConfig"))
+        else
         {
-        	printHelp();
+        	CutGenerator batch = new CutGenerator(otrConfig);
+        	batch.create(vFiles,profile);
         }
         
         logger.info("... finished.");
@@ -196,13 +169,12 @@ public class AviToMp4
 		oHelp = new Option("help", "Print this message" );
 		oDebug = new Option("debug", "Debug output");
 		oWeb = new Option("web", "Web GUI Interface");
+		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
+		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
 		
 		
-		Option oHQ = new Option("hq", "Convert HQ.AVI to MP4 and apply cutlist");
-		Option oHD = new Option("hd", "Convert HD.AVI to MP4 and apply cutlist");
-		Option oAc3 = new Option("ac3", "Use Ac3 Audio for HD (experimental)");
 		Option oRename = new Option("rename", "Rename downloaded HQ.MP4.cut with cutlist filename");
 		
 		Option oConfig  = OptionBuilder.withArgName("FILENAME")
@@ -226,8 +198,6 @@ public class AviToMp4
 		options.addOption(oHelp);
 		options.addOption(oDebug);
 		options.addOption(oWeb);
-		options.addOption(oHQ);
-		options.addOption(oHD);
 		options.addOption(oAc3);
 		options.addOption(oRename);
 		options.addOption(oCreate);

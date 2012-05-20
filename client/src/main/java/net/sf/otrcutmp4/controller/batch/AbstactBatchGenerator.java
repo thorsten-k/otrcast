@@ -4,8 +4,6 @@ import java.io.File;
 
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-import net.sf.otrcutmp4.AviToMp4;
-import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Tool;
@@ -38,16 +36,6 @@ public class AbstactBatchGenerator
 		cmdMp4Box = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.MP4BOX)));
 		cmdFfmpeg = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.FFMPEG)));
 		cmdFaac = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.FAAC)));
-	}
-	
-	protected File getAviDir(AviToMp4.Quality quality) throws OtrInternalErrorException
-	{
-		switch(quality)
-		{
-			case HQ: return cfg.getDir(Dir.HQAVI);
-			case HD: return cfg.getDir(Dir.HDAVI);
-		}
-		throw new OtrInternalErrorException("No valid AVI Dir requested: quality="+quality);
 	}
 	
 	protected void setTxt(ExlpTxtWriter txt) {this.txt = txt;}

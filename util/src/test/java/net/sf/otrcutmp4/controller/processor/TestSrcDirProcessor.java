@@ -4,10 +4,13 @@ import java.io.File;
 
 import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 import net.sf.otrcutmp4.view.noop.NoopSrcDirProcessorView;
@@ -39,36 +42,38 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     {
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	Assert.assertEquals(3,vFiles.getVideoFile().size());
-    	JaxbUtil.debug(vFiles);
     }
     
     @Test
-    public void hq()
+    public void hq() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
+    	String key = "test1";
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
-    	VideoFile vf = vFiles.getVideoFile().get(0);
-    	Assert.assertEquals("test1",vf.getOtrId().getKey());
+    	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
+    	Assert.assertEquals(key,vf.getOtrId().getKey());
     }
     
     @Test
-    public void hdNoAc3()
+    public void hdNoAc3() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
+    	String key = "test2";
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
-    	VideoFile vf = vFiles.getVideoFile().get(1);
-    	Assert.assertEquals("test2",vf.getOtrId().getKey());
+    	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
+    	Assert.assertEquals(key,vf.getOtrId().getKey());
     	Assert.assertEquals(false, vf.getOtrId().getFormat().isAc3());
     }
     
     @Test
-    public void hdAc3()
+    public void hdAc3() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
+    	String key = "test3";
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
-    	VideoFile vf = vFiles.getVideoFile().get(2);
-    	Assert.assertEquals("test3",vf.getOtrId().getKey());
+    	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
+    	Assert.assertEquals(key,vf.getOtrId().getKey());
     	Assert.assertEquals(true, vf.getOtrId().getFormat().isAc3());
     }
     
-    public static void main(String[] args) throws ExlpConfigurationException
+    public static void main(String[] args) throws Exception
     {
     	OtrUtilTstBootstrap.init();
     	

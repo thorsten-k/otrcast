@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.batch;
 
 import java.io.File;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.FilenameIllegalCharRemover;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
@@ -13,6 +14,7 @@ import net.sf.otrcutmp4.controller.batch.audio.Mp3ToAac;
 import net.sf.otrcutmp4.controller.batch.video.RawExtract;
 import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -53,19 +55,23 @@ public class CutGenerator extends AbstactBatchGenerator
 		videoCutter.setTxt(txt);
 	}
 	
-	public void create(VideoFiles vFiles, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
+	public void create(VideoFiles vFiles, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
 		 for(VideoFile vf : vFiles.getVideoFile())
 		 {
-			 if(vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
+			 try
 			 {
-				 crateForVideo(vf,quality,audio,profile);
+				 if(vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
+				 {
+					 crateForVideo(vf,profile);
+				 }
+				 else
+				 {
+					 txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
+					 txt.add("");
+				 }
 			 }
-			 else
-			 {
-				 txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
-				 txt.add("");
-			 }
+			 catch (UtilsProcessingException e){e.printStackTrace();}
 			 
 		 }
 		 txt.debug();
@@ -76,7 +82,7 @@ public class CutGenerator extends AbstactBatchGenerator
 		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
 	}
 	
-	private void crateForVideo(VideoFile vf, AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
+	private void crateForVideo(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		txt.add("echo Processing: "+vf.getFileName().getValue());
 		txt.add("");
@@ -86,56 +92,51 @@ public class CutGenerator extends AbstactBatchGenerator
 	
 		switch(profile)
 		{
-			case P0: extract(vf,quality,audio,profile);cut(vf,quality,profile);merge(vf,quality);break;
-			case P1: cut(vf,quality,profile);merge(vf,quality);break;
+			case P0: extract(vf,profile);transcodeToMp4(vf);cut(vf,profile);merge(vf);break;
+			case P1:                     transcodeToMp4(vf);cut(vf,profile);merge(vf);break;
 		}	
 		
 		txt.add("");
 		txt.add("");
 	}
 	
-	private void extract(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Audio audio, AviToMp4.Profile profile) throws OtrInternalErrorException
+	private void extract(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
 	{
-		String sMp4 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));
+		
 				
-		txt.add(rawExtract.rawExtract(vf,quality,audio));
-		switch(audio)
+		txt.add(rawExtract.rawExtract(vf));
+		if(!vf.getOtrId().getFormat().isAc3())
 		{
-			case Mp3: txt.add(mp3ToAac.create());break;
-			case Ac3: txt.add(ac3ToAac.create(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()));break;
+			txt.add(mp3ToAac.extract(vf, profile));
 		}
-		createMp4(vf.getFileName().getValue(),sMp4,quality);
 	}
 	
-	private void cut(VideoFile vf,AviToMp4.Quality quality, AviToMp4.Profile profile) throws OtrInternalErrorException
+	
+	
+	private void cut(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
 		String inVideo=null;
 		switch(profile)
 		{
 			case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));break;
-			case P1: inVideo = rpf.relativate(new File(getAviDir(quality),vf.getFileName().getValue()));break;
+			case P1: inVideo = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));break;
 		}
 		 
 		videoCutter.applyCutList(vf.getCutListsSelected(),inVideo,profile);
 	}
 	
-	private void merge(VideoFile vf,AviToMp4.Quality quality)
-	{
-		mergeMp4(vf.getCutListsSelected(),vf,quality);
-	}
-	
-	private void mergeMp4(CutListsSelected clSelected, VideoFile vf,AviToMp4.Quality quality)
+	private void merge(VideoFile vf) throws UtilsProcessingException
 	{
 		txt.add("");
 		int counter=1;
-		for(CutList cl : clSelected.getCutList())
+		for(CutList cl : vf.getCutListsSelected().getCutList())
 		{
-			mergeMp4(counter,cl,vf,quality);
+			mergeMp4(counter,cl,vf);
 			counter++;
 		}
 	}
 	
-	private void mergeMp4(int index, CutList cl, VideoFile vf,AviToMp4.Quality quality)
+	private void mergeMp4(int index, CutList cl, VideoFile vf) throws UtilsProcessingException
 	{
 		String fileName;
 		if(cl.isSetVideo())
@@ -169,7 +170,10 @@ public class CutGenerator extends AbstactBatchGenerator
 		else if(cl.getCut().size()>1)
 		{
 			sb.append(cmdMp4Box).append(" ");
-			switch(quality){case HD: sb.append("-fps 50 ");break;}
+			switch(XmlOtrIdFactory.getType(vf.getOtrId().getFormat().getType()))
+			{
+				case hd: sb.append("-fps 50 ");break;
+			}
 			sb.append(rpf.relativate(new File(cfg.getDir(Dir.TMP),index+"-1.mp4")));
 			sb.append(" ");
 			for(int i=2;i<=cl.getCut().size();i++)
@@ -184,14 +188,18 @@ public class CutGenerator extends AbstactBatchGenerator
 		}
 	}
 	
-	private void createMp4(String vfName, String sMp4,AviToMp4.Quality quality)
+	private void transcodeToMp4(VideoFile vf) throws UtilsProcessingException
 	{
+		String sMp4 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));
 		String sH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"raw_video.h264"));
 		String sAudio=rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");
-		switch(quality){case HD: sb.append("-fps 50 ");break;}
+		switch(XmlOtrIdFactory.getType(vf.getOtrId().getFormat().getType()))
+		{
+			case hd: sb.append("-fps 50 ");break;
+		}
 		sb.append(" -add "+sH264+" -add "+sAudio+" "+sMp4);
 		txt.add(sb.toString());
 	}	

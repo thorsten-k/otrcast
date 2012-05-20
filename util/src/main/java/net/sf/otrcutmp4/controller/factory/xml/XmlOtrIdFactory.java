@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.controller.factory.xml;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
@@ -94,5 +95,12 @@ public class XmlOtrIdFactory
 		fId.setFormat(format);
 		
 		return fId;
+	}
+	
+	public static VideType getType(String s) throws UtilsProcessingException
+	{
+		if(s.equals(typeAviHq)){return VideType.hq;}
+		else if(s.equals(typeAviHd)){return VideType.hd;}
+		throw new UtilsProcessingException("No Type defined for "+s);
 	}
 }
