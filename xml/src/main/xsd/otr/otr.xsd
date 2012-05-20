@@ -48,6 +48,7 @@
             <xsd:attribute name="type" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="image" type="xsd:string"/>
+            <xsd:attribute name="ac3" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="link">

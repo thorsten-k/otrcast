@@ -24,12 +24,11 @@ public class TestXmlFormat extends AbstractXmlOtrTest
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	Format test = create();
+    	Format test = create(true);
     	Format ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Format.class);
     	assertJaxbEquals(ref, test);
     }
     
-    private static Format create(){return create(true);}
     public static Format create(boolean withChilds)
     {
     	Format xml = new Format();
@@ -39,6 +38,7 @@ public class TestXmlFormat extends AbstractXmlOtrTest
     	xml.setName("myName");
     	xml.setOtrkey(true);
     	xml.setType("myType");
+    	xml.setAc3(true);
     	
     	if(withChilds)
     	{
@@ -48,7 +48,7 @@ public class TestXmlFormat extends AbstractXmlOtrTest
     	return xml;
     }
     
-    public void save() {save(create(), fXml);}
+    public void save() {save(create(true), fXml);}
 	
 	public static void main(String[] args)
     {

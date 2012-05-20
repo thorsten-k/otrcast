@@ -39,31 +39,33 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     {
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	Assert.assertEquals(3,vFiles.getVideoFile().size());
+    	JaxbUtil.debug(vFiles);
     }
     
     @Test
-    public void hqNoAc3()
+    public void hq()
+    {
+    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFile vf = vFiles.getVideoFile().get(0);
+    	Assert.assertEquals("test1",vf.getOtrId().getKey());
+    }
+    
+    @Test
+    public void hdNoAc3()
     {
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	VideoFile vf = vFiles.getVideoFile().get(1);
     	Assert.assertEquals("test2",vf.getOtrId().getKey());
+    	Assert.assertEquals(false, vf.getOtrId().getFormat().isAc3());
     }
     
     @Test
-    public void hqAc3()
+    public void hdAc3()
     {
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	VideoFile vf = vFiles.getVideoFile().get(2);
     	Assert.assertEquals("test3",vf.getOtrId().getKey());
-    }
-    
-    @Test
-    public void hd()
-    {
-    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
-    	VideoFile vf = vFiles.getVideoFile().get(1);
-    	JaxbUtil.debug(vf);
-    	Assert.assertEquals("test2",vf.getOtrId().getKey());
+    	Assert.assertEquals(true, vf.getOtrId().getFormat().isAc3());
     }
     
     public static void main(String[] args) throws ExlpConfigurationException
@@ -72,8 +74,8 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     	
     	TestSrcDirProcessor test = new TestSrcDirProcessor();
     	test.init();
-//    	test.size();
+    	test.size();
 //    	test.hq();
-    	test.hd();
+    	test.hdNoAc3();
     }
  }

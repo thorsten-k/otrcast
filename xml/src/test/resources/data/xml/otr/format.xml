@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<o:format xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" id="1" otrkey="true" cut="true" type="myType" name="myName" image="myImage">
+<o:format xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series" id="1" otrkey="true" cut="true" type="myType" name="myName" image="myImage" ac3="true">
     <o:quality id="1" type="myType" name="myName" image="myImage"/>
 </o:format>
