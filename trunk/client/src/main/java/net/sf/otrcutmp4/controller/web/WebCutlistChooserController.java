@@ -32,9 +32,12 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		super(view);
 		cli = new CliCutlistChooserController(new CliCutlistChooserView());
 		
+		String host = otrConfig.getUrl(OtrConfig.Url.OTR);
+		logger.info("Connecting to 2"+host);
+		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrCutRest.class, "http://localhost:8080/otr",clientExecutor);
+		rest = ProxyFactory.create(OtrCutRest.class, host,clientExecutor);
 	}
 	
 	@Override

@@ -16,7 +16,6 @@ import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Episode;
@@ -90,7 +89,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		try {txt.add(ShellCmdRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error("",e);}
 	
-		extract(vf,profile);
+		extract(vf);
 		transcode(vf);
 		cut(vf,profile);
 		merge(vf);
@@ -99,7 +98,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		txt.add("");
 	}
 	
-	private void extract(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
+	private void extract(VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		switch(profile)
 		{
@@ -108,7 +107,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		
 		if(vf.getOtrId().getFormat().isAc3())
 		{
-			logger.warn("AC§ NYI");
+			txt.add(ac3ToAac.extract(vf));
 		}
 		else
 		{
@@ -194,14 +193,19 @@ public class BatchGenerator extends AbstactBatchGenerator
 	
 	private void transcode(VideoFile vf) throws UtilsProcessingException
 	{
-		if(!vf.getOtrId().getFormat().isAc3())
-		{
-			txt.add(mp3ToAac.transcode());
-		}
-		
 		String sMp4 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));
 		String sH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"raw_video.h264"));
-		String sAudio=rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
+		String sAudio;
+		
+		if(vf.getOtrId().getFormat().isAc3())
+		{
+			sAudio = rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.m4a"));
+		}
+		else
+		{
+			txt.add(mp3ToAac.transcode());
+			sAudio = rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
+		}
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");

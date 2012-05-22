@@ -4,6 +4,8 @@ import java.io.File;
 
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
+import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
@@ -19,25 +21,20 @@ public class Ac3ToAac extends AbstactBatchGenerator
 		super(otrConfig,profile);
 	}
 	
-	public String extract()
+	public String extract(VideoFile vf)
 	{
-		return null;
-	}
-	
-	public String create(String vName)
-	{
-		String sAc3 = rpf.relativate(new File(cfg.getDir(Dir.AC3),vName+".ac3"));
-		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
+		String sAc3 = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getOtrId().getKey()+"."+XmlOtrIdFactory.typeAc3Hd));
+		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP), "aac.m4a"));
 		
 		StringBuffer sb = new StringBuffer();
-		
-		sb.append(cmdFfmpeg);
-		sb.append(" -i ").append(sAc3);
-		sb.append(" -vn -r 30000/1001");
-		sb.append(" -acodec aac -strict experimental");
-		sb.append(" -ac 6 -ar 48000 -ab 448k");
-		sb.append(" ").append(sAac);
-		
+		sb.append(cmdEac3to);
+		sb.append(" ").append(sAc3);
+		sb.append(" 1: stdout.wav");
+		sb.append(" | ").append(cmdNero);
+		sb.append(" -q 0.35");
+		sb.append(" -ignorelength");
+		sb.append(" -if -");
+		sb.append(" -of ").append(sAac);
 		return sb.toString();
 	}
 }

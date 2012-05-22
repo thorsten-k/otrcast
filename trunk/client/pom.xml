@@ -28,6 +28,21 @@
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+			  <groupId>org.dstovall</groupId>
+			  <artifactId>onejar-maven-plugin</artifactId>
+			  <version>1.3.0</version>
+			  <executions>
+			    <execution>
+			      <configuration>
+			        <mainClass>net.sf.otrcutmp4.AviToMp4</mainClass>
+			      </configuration>
+			      <goals>
+			        <goal>one-jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
 		</plugins>
 	</build>
   

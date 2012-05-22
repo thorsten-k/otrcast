@@ -19,7 +19,7 @@ public class AbstactBatchGenerator
 	protected RelativePathFactory rpf;
 	protected ExlpTxtWriter txt;
 		
-	protected String cmdMp4Box,cmdFfmpeg,cmdLame,cmdFaac;
+	protected String cmdMp4Box,cmdFfmpeg,cmdLame,cmdFaac,cmdEac3to,cmdNero;
 	
 	protected OtrConfig cfg;
 	protected AviToMp4.Profile profile;
@@ -40,6 +40,8 @@ public class AbstactBatchGenerator
 		cmdMp4Box = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.MP4BOX)));
 		cmdFfmpeg = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.FFMPEG)));
 		cmdFaac = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.FAAC)));
+		cmdEac3to = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.EAC3TO)));
+		cmdNero = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.NEROAAC)));
 	}
 	
 	protected void setTxt(ExlpTxtWriter txt) {this.txt = txt;}
