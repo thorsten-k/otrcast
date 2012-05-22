@@ -25,7 +25,7 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RestSeedData
+public class OtrRestSeedData
 {
 	final static Logger logger = LoggerFactory.getLogger(TstCutRest.class);
 	
@@ -33,7 +33,7 @@ public class RestSeedData
 	private OtrAdminRest restAdmin;
 	private Configuration config;
 	
-	public RestSeedData(Configuration config)
+	public OtrRestSeedData(Configuration config)
 	{	
 		this.config=config;
 		
@@ -102,7 +102,7 @@ public class RestSeedData
 	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException, UtilsProcessingException
 	{
 		Configuration config = OtrBootstrap.init();
-		RestSeedData rest = new RestSeedData(config);
+		OtrRestSeedData rest = new OtrRestSeedData(config);
 //		rest.all();
 		
 //		rest.addCategories();

@@ -23,7 +23,7 @@ public class OtrConfig
 	public static enum Dir{HQAVI,TMP,BAT,HDAVI,RENAME,TOOLS,AC3,MP4,AVI};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
-	public static enum Url{GAE};
+	public static enum Url{OTR};
 	
 	public static String otrConfigName = "properties.txt";
 		
@@ -104,7 +104,7 @@ public class OtrConfig
 	private void initUrlList()
 	{
 		mapUrl = new Hashtable<Url,String>();
-		mapUrl.put(Url.GAE, urlOtrSeries);
+		mapUrl.put(Url.OTR, urlOtrSeries);
 	}
 	
 	public void createDefault(String configFile)

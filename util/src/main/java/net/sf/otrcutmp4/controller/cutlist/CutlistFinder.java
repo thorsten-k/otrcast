@@ -64,7 +64,7 @@ public class CutlistFinder
 			mapCl.put(cl.getId(), cl);
 		}
 		
-		if(XmlOtrIdFactory.typeAviHq.equals(vf.getOtrId().getFormat().getType()))
+		if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHq))
 		{
 			for(CutList cl : find(vf.getOtrId().getKey()+".mpg.HQ").getCutList())
 			{
@@ -73,7 +73,7 @@ public class CutlistFinder
 		}
 		else
 		{
-			logger.warn("Format not handled!!");
+			logger.warn("Format NYI: "+vf.getOtrId().getFormat().getType());
 		}
 		
 		for(String key : mapCl.keySet()){result.getCutList().add(mapCl.get(key));}
