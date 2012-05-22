@@ -37,10 +37,7 @@ public class TestOtrConfig extends AbstractClientTest
 	public static void initFiles() throws IOException
 	{
 		fRoot = new File("target/test");fRoot.mkdirs();
-		fHqAvi = new File(fRoot,OtrConfig.dirHqAvi);fHqAvi.mkdirs();
-		fHdAvi = new File(fRoot,OtrConfig.dirHdAvi);fHdAvi.mkdirs();
 		fAvi = new File(fRoot,OtrConfig.dirAvi);fAvi.mkdirs();
-		fHdAc3 = new File(fRoot,OtrConfig.dirHdAc3);fHdAc3.mkdirs();
 		fMp4 = new File(fRoot,OtrConfig.dirMp4);fMp4.mkdirs();
 		fTmp = new File(fRoot,OtrConfig.dirTmp);fTmp.mkdirs();
 		fBat = fRoot;fBat.mkdirs();
@@ -60,10 +57,7 @@ public class TestOtrConfig extends AbstractClientTest
 	{		
 		Configuration config = new PropertiesConfiguration();
 		
-		config.addProperty(OtrConfig.dirHqAvi, fHqAvi.getAbsolutePath());
-		config.addProperty(OtrConfig.dirHdAvi, fHdAvi.getAbsolutePath());
 		config.addProperty(OtrConfig.dirAvi, fAvi.getAbsolutePath());
-		config.addProperty(OtrConfig.dirHdAc3, fHdAc3.getAbsolutePath());
 		config.addProperty(OtrConfig.dirMp4, fMp4.getAbsolutePath());
 		config.addProperty(OtrConfig.dirTmp, fTmp.getAbsolutePath());
 		config.addProperty(OtrConfig.dirBat, fBat.getAbsolutePath());
