@@ -36,6 +36,7 @@
 			    <execution>
 			      <configuration>
 			        <mainClass>net.sf.otrcutmp4.AviToMp4</mainClass>
+			        <filename>OtrCutMp4-${project.version}.jar</filename>
 			      </configuration>
 			      <goals>
 			        <goal>one-jar</goal>
