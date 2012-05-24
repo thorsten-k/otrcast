@@ -15,8 +15,4 @@ public interface OtrSeriesRest
 	public Otr allSeries();
 	public Series series(long seriesId);
 	
-	
-	@Deprecated public Category addCategory(Category category);
-	@Deprecated public Series addSeries(Series series);
-	@Deprecated public Episode addEpisode(Episode episode);
 }

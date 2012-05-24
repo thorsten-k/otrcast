@@ -8,7 +8,6 @@ import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.rest.OtrAdminRest;
-import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.otr.Format;
@@ -29,7 +28,6 @@ public class OtrRestSeedData
 {
 	final static Logger logger = LoggerFactory.getLogger(TstCutRest.class);
 	
-	private OtrSeriesRest restSeries;
 	private OtrAdminRest restAdmin;
 	private Configuration config;
 	
@@ -47,8 +45,9 @@ public class OtrRestSeedData
 	
 	public void all()
 	{
-		Otr otr = restSeries.allSeries();
-		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
+		logger.warn("NYI");
+//		Otr otr = restAdmin.allSeries();
+//		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
 	}
 		
 	public void addCategories() throws FileNotFoundException
@@ -57,7 +56,7 @@ public class OtrRestSeedData
 		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
 		for(Category category : otr.getCategory())
 		{
-			restSeries.addCategory(category);
+			restAdmin.addCategory(category);
 		}
 	}
 	
