@@ -1,18 +1,10 @@
 package net.sf.otrcutmp4.controller.processor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
-import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.series.Episode;
-import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
-import net.sf.otrcutmp4.model.xml.series.Tag;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
@@ -45,16 +37,18 @@ public class SeriesTagger
 		Episode episode = getEpisode(series);
 		if(episode!=null)
 		{
+			logger.warn("NYI");
 //			JaxbUtil.debug(episode);
-			Tag tag = rest.tag(episode.getId(), vf.getOtrId().getKey());
-			JaxbUtil.debug(tag);
+//			Tag tag = rest.tag(episode.getId(), vf.getOtrId().getKey());
+//			JaxbUtil.debug(tag);
 		}
 
 	}
 	
 	private Series getSeries()
 	{
-		Otr otr = rest.allSeries();
+		logger.warn("NYI");
+/*		Otr otr = rest.allSeries();
 		for(int i=0;i<otr.getSeries().size();i++)
 		{
 			Series s = otr.getSeries().get(i);
@@ -63,11 +57,13 @@ public class SeriesTagger
 		Scanner sc = new Scanner(System.in);
 		int i = sc.nextInt();
 		return otr.getSeries().get(i);
+*/		return null;
 	}
 	
 	private Episode getEpisode(Series series)
 	{
-		Series xml = rest.series(series.getId());
+		logger.warn("NYI");
+/*		Series xml = rest.series(series.getId());
 		int i=0;
 		List<Episode> list = new ArrayList<Episode>();
 		for(Season season : xml.getSeason())
@@ -86,6 +82,6 @@ public class SeriesTagger
 			return list.get(index);
 		}
 		catch (NumberFormatException e){}
-		return null;
+*/		return null;
 	}
 }

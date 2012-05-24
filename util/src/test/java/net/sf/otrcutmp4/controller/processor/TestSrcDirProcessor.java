@@ -7,7 +7,6 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
@@ -71,6 +70,14 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());
     	Assert.assertEquals(true, vf.getOtrId().getFormat().isAc3());
+    }
+    
+    @Test
+    public void isValidSrcFileName()
+    {
+    	//MP4
+    	Assert.assertFalse(SrcDirProcessor.isValidSrcFileName("xxx.mp4"));
+    	Assert.assertTrue(SrcDirProcessor.isValidSrcFileName("66128_Der_Tatortreiniger_12.05.17_21-45_ard_30_TVOON_DE.mpg.HQ.cut.mp4"));
     }
     
     public static void main(String[] args) throws Exception

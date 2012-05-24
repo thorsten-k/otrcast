@@ -3,7 +3,6 @@ package net.sf.otrcutmp4;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
@@ -11,6 +10,7 @@ import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
+import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
@@ -43,7 +43,7 @@ public class AviToMp4
 	public static final String exeName = "CutHqAviToMp4";
 	
 	private Option oHelp,oDebug,oProfile,oWeb;
-	private Option oAc3;
+	private Option oAc3,oRename;
 	private Options options;
 	private OtrConfig otrConfig;
 	
@@ -94,11 +94,21 @@ public class AviToMp4
         
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         CutlistFinder clFinder = new CutlistFinder();
+        VideoFiles vFiles;
         
-        VideoFiles vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.AVI));
+        if(line.hasOption(oRename.getOpt()))
+        {
+        	vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.RENAME)); 
+            JaxbUtil.debug(vFiles);
+            
+        	RenameGenerator batchRen = new RenameGenerator(otrConfig,profile);	
+            
+            logger.debug("RENAME finished");
+            return;
+        }
         
-        
-        
+        vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.AVI));
+           
         if(line.hasOption("tag"))
         {
         	if(vFiles!=null)
@@ -121,9 +131,10 @@ public class AviToMp4
         
         vFiles = clFinder.searchCutlist(vFiles);
         
-        
         ViewCutlistChooser viewCutlistChooser = null;
         CutlistChooser controllerCutlistChooser = null;
+                 
+        
         if(line.hasOption(oWeb.getOpt()))
         {
         	viewCutlistChooser = new WebCutlistChooserView();
@@ -134,31 +145,16 @@ public class AviToMp4
         	viewCutlistChooser = new CliCutlistChooserView();
         	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
         }
-        
-        vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
+    	
+    	vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
         controllerCutlistChooser.loadCurlists(vFiles);
         for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}
         JaxbUtil.debug(vFiles);
         
         CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
-        
-        
-        if(line.hasOption("rename"))
-        {
-        	RenameGenerator batchRen = new RenameGenerator(otrConfig,profile);
-        	
-        	vFiles = srcDirProcessor.readFiles(otrConfig.getDir(Dir.RENAME)); 
-            vFiles = clFinder.searchCutlist(vFiles);
-            clChooser.setRenameOutput();
-            vFiles = clChooser.chooseFileRename(vFiles);
-            
-            batchRen.create(vFiles);
-        }
-        else
-        {
-        	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
-        	batch.create(vFiles);
-        }
+    	
+    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
+    	batch.create(vFiles);
         
         logger.info("... finished.");
 	}
@@ -170,12 +166,10 @@ public class AviToMp4
 		oDebug = new Option("debug", "Debug output");
 		oWeb = new Option("web", "Web GUI Interface");
 		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
+		oRename = new Option("rename", "Rename downloaded HQ.MP4.cut");
 		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
-		
-		
-		Option oRename = new Option("rename", "Rename downloaded HQ.MP4.cut with cutlist filename");
 		
 		Option oConfig  = OptionBuilder.withArgName("FILENAME")
 						  .hasArg()

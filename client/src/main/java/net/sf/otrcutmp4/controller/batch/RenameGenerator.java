@@ -73,7 +73,7 @@ public class RenameGenerator extends AbstactBatchGenerator
 		catch (ExlpUnsupportedOsException e)
 		{
 			logger.error("",e);
-			logger.error("File was not copied! ");
+			logger.error("File will not be copied! ");
 			logger.error("\tFrom: "+sOriginal);
 			logger.error("\tTo  : "+sTo);
 		}

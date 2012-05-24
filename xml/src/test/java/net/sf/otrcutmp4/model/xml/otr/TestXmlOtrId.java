@@ -35,6 +35,7 @@ public class TestXmlOtrId extends AbstractXmlOtrTest
     	OtrId xml = new OtrId();
     	xml.setId(1);
     	xml.setKey("myKey");
+    	xml.setOtrCl("1234");
     	
     	if(withChilds)
     	{

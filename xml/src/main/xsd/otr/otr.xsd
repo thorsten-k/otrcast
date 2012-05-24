@@ -24,6 +24,7 @@
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="key" type="xsd:string"/>
+            <xsd:attribute name="otrCl" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="quality">
