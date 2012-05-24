@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller;
+package net.sf.otrcutmp4.controller.processor;
 
 import java.io.File;
 
@@ -38,7 +38,7 @@ public class SrcDirProcessor
 		VideoFiles result = new VideoFiles();
 		for(File f : srcDir.listFiles())
 		{
-			boolean valid = isValidSrcFile(f.getName());
+			boolean valid = isValidSrcFileName(f.getName());
 			logger.trace("Testing: "+f.getName()+" valid?"+valid);
 			if(valid)
 			{
@@ -68,10 +68,11 @@ public class SrcDirProcessor
 		return result;
 	}
 	
-	private boolean isValidSrcFile(String fileName)
+	protected static boolean isValidSrcFileName(String fileName)
 	{
 		if(fileName.endsWith(XmlOtrIdFactory.typeAviHq)){return true;}
 		if(fileName.endsWith(XmlOtrIdFactory.typeAviHd)){return true;}
+		if(fileName.endsWith(XmlOtrIdFactory.typeMp4Hq)){return true;}
 		return false;
 	}
 }

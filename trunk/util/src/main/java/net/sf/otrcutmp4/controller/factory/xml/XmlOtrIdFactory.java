@@ -17,7 +17,7 @@ public class XmlOtrIdFactory
 	public static final String typeAviHq = "mpg.HQ.avi";
 	public static final String typeAviHd = "mpg.HD.avi";
 	public static final String typeAc3Hd = "mpg.HD.ac3";
-	public static final String typeMp4 = "mpg.cut.mp4";
+	public static final String typeMp4Hq   = "mpg.HQ.cut.mp4";
 	
 	private static final String tag = ".mpg.";
 	
@@ -38,7 +38,7 @@ public class XmlOtrIdFactory
 		OtrId xml = null;
 		if(     fileName.endsWith(typeAviHq)){xml = getFileId(VideType.hq, fileName);}
 		else if(fileName.endsWith(typeAviHd)){xml = getFileId(VideType.hd, fileName);}
-		else if(fileName.endsWith(typeMp4)){xml = getFileId(VideType.mp4, fileName);}
+		else if(fileName.endsWith(typeMp4Hq)){xml = getFileId(VideType.mp4, fileName);}
 		else {throw new OtrProcessingException("Unknown video.type "+fileName);}
 		
 		return xml;
@@ -84,17 +84,19 @@ public class XmlOtrIdFactory
 	
 	private static OtrId getMp4Id(String fileName)
 	{
-		OtrId fId = new OtrId();
+		OtrId otrId = new OtrId();
 		
 		int indexFrom = fileName.indexOf("_")+1;
-		int indexTo = fileName.lastIndexOf("."+typeMp4);
-		fId.setKey(fileName.substring(indexFrom, indexTo));
+		int indexTo = fileName.lastIndexOf("."+typeMp4Hq);
+		otrId.setOtrCl(fileName.substring(0,indexFrom-1));
+		otrId.setKey(fileName.substring(indexFrom, indexTo));
 		
 		Format format = new Format();
-		format.setType(typeMp4);
-		fId.setFormat(format);
+		format.setType(typeMp4Hq);
+		format.setAc3(false);
+		otrId.setFormat(format);
 		
-		return fId;
+		return otrId;
 	}
 	
 	public static VideType getType(String s) throws UtilsProcessingException
