@@ -9,7 +9,6 @@ import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
-import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
@@ -102,8 +101,8 @@ public class AviToMp4
             JaxbUtil.debug(vFiles);
             
         	RenameGenerator batchRen = new RenameGenerator(otrConfig,profile);	
-            
-            logger.debug("RENAME finished");
+        	batchRen.create(vFiles);
+            logger.trace("RENAME finished");
             return;
         }
         
@@ -151,7 +150,6 @@ public class AviToMp4
         for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}
         JaxbUtil.debug(vFiles);
         
-        CutlistChooserProcessing clChooser = new CutlistChooserProcessing(viewCutlistChooser,controllerCutlistChooser);
     	
     	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
     	batch.create(vFiles);

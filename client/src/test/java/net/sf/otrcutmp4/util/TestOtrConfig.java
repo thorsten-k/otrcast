@@ -19,10 +19,11 @@ public class TestOtrConfig extends AbstractClientTest
 	final static Logger logger = LoggerFactory.getLogger(TestOtrConfig.class);
 	
 	public static final String faacKbit = "196";
+	public static final String tpSeries = "template";
 	
 	private OtrConfig otrConfig;
 
-	private static File fRoot,fHqAvi,fHdAvi,fAvi,fHdAc3,fMp4,fTmp,fBat,fTools,fRename;
+	private static File fRoot,fAvi,fMp4,fTmp,fBat,fTools,fRename;
 	private static File tMp4Box,tLame,tFfmpeg,tFaac,tEac3to,tNeroAac;
 	
 	public static TestOtrConfig factory() throws IOException
@@ -50,6 +51,7 @@ public class TestOtrConfig extends AbstractClientTest
 		tFaac = new File(fTools,OtrConfig.toolFaac);tFaac.createNewFile();
 		tEac3to = new File(fTools,OtrConfig.toolEac3to);tEac3to.createNewFile();
 		tNeroAac = new File(fTools,OtrConfig.toolNeroAac);tNeroAac.createNewFile();
+		
 	}
 	
 	@Before
@@ -72,6 +74,8 @@ public class TestOtrConfig extends AbstractClientTest
 		config.addProperty(OtrConfig.toolNeroAac, tNeroAac.getName());
 		
 		config.addProperty(OtrConfig.paraAudioFaac, faacKbit);
+		
+		config.addProperty(OtrConfig.templateSeries, tpSeries);
 		
 		otrConfig = new OtrConfig(config);
 	}

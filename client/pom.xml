@@ -176,6 +176,10 @@
 			<artifactId>resteasy-jaxb-provider</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
 	</dependencies>
    
 </project>
