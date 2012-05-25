@@ -24,6 +24,7 @@ public class OtrConfig
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
+	public static enum Template{fnSeries}
 	
 	public static String otrConfigName = "properties.txt";
 		
@@ -44,12 +45,15 @@ public class OtrConfig
 	
 	public static final String paraAudioFaac = "audio.faac.kbit";
 	
+	public static final String templateSeries = "template.series";
+	
 	public static final String urlOtrSeries = "url.otrseries";
 	
 	private Map<Dir,String> mapDir;
 	private Map<Tool,String> mapTool;
 	private Map<Audio,String> mapAudio;
 	private Map<Url,String> mapUrl;
+	private Map<Template,String> mapTemplate;
 	
 	private List<String> lDirectotries,lTools;
 	private Configuration config;
@@ -62,6 +66,7 @@ public class OtrConfig
 		initToolList();
 		initParameterList();
 		initUrlList();
+		initTemplateList();
 	}
 	
 	private void initDirectoryList()
@@ -93,6 +98,12 @@ public class OtrConfig
 	{
 		mapAudio = new Hashtable<Audio,String>();
 		mapAudio.put(Audio.FAAC, paraAudioFaac);
+	}
+	
+	private void initTemplateList()
+	{
+		mapTemplate = new Hashtable<Template,String>();
+		mapTemplate.put(Template.fnSeries, templateSeries);
 	}
 	
 	private void initUrlList()
@@ -137,6 +148,8 @@ public class OtrConfig
 				config.setProperty(toolNeroAac, "nero.exe");
 				
 				config.setProperty(paraAudioFaac, "192");
+				
+				config.setProperty(templateSeries, "${seriesName} ${seasonNr}x${episodeNr} ${episodeName}");
 				config.save();
 			}
 			catch (ConfigurationException e) {logger.error("",e);}
@@ -189,6 +202,7 @@ public class OtrConfig
 		checkDirs();
 		checkTools();
 		checkParameter();
+		checkTemplates();
 	}
 	
 	private void checkDirs() throws OtrConfigurationException
@@ -245,6 +259,15 @@ public class OtrConfig
 		}
 	}
 	
+	private void checkTemplates() throws OtrConfigurationException
+	{
+		for(Template template : Template.values())
+		{
+			String value = config.getString(mapTemplate.get(template));
+			if(value==null){throw new OtrConfigurationException("Entry in properties file. Missing Key: "+mapTemplate.get(template));}
+		}
+	}
+	
 	public File getDir(Dir dir)
 	{
 		if(config==null){logger.error("Throw");}
@@ -267,6 +290,12 @@ public class OtrConfig
 	{
 		if(config==null){logger.error("Throw");}
 		return config.getString(mapUrl.get(url));
+	}
+	
+	public String getTemplate(Template template)
+	{
+		if(config==null){logger.error("Throw");}
+		return config.getString(mapTemplate.get(template));
 	}
 	
 	public String getKey(String key)
