@@ -57,8 +57,7 @@ public class AviToMp4
 	{
 		options = createOptions();
 		CommandLineParser parser = new PosixParser();
-		CommandLine line = null;
-	    line = parser.parse(options , args); 
+		CommandLine line = parser.parse(options , args); 
 	    
         String configFile = line.getOptionValue("config",OtrConfig.otrConfigName);
         

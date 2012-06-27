@@ -137,7 +137,7 @@
 	
 	<pluginRepositories>
 	  <pluginRepository>
-	    <id>onejar-maven-plugin.googlecode.com</id>
+	    <id>onejar.googlecode.com</id>
 	    <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
 	  </pluginRepository>
 	</pluginRepositories>
