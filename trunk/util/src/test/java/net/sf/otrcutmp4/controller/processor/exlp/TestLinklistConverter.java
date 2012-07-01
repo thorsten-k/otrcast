@@ -59,7 +59,7 @@ public class TestLinklistConverter extends AbstractUtilTest
     	LinklistConverter llc = new LinklistConverter();
     	Linklist xml = llc.convert(srcLinklist);
     	JaxbUtil.debug(xml);
-    	JaxbUtil.save(dstXml, xml, nsPrefixMapper, true);
+    	JaxbUtil.save(dstXml, xml, true);
     }
 	
 	public static void main(String[] args) throws ExlpConfigurationException
