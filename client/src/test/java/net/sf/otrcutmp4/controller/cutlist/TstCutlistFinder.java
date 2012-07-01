@@ -25,12 +25,10 @@ public class TstCutlistFinder
 	final static Logger logger = LoggerFactory.getLogger(TstCutlistFinder.class);
 	
 	private Configuration config;
-	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstCutlistFinder(Configuration config)
 	{
 		this.config=config;
-		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
 	public void findCl() throws FileNotFoundException
@@ -41,10 +39,10 @@ public class TstCutlistFinder
 		
 		CutlistFinder finder = new CutlistFinder();
 		vFiles = finder.searchCutlist(vFiles);
-		JaxbUtil.debug(vFiles, nsPrefixMapper);
+		JaxbUtil.debug(vFiles);
 		
 		String xmlOut = config.getString("test.xml.cutlistfinder");
-		JaxbUtil.save(new File(xmlOut), vFiles, nsPrefixMapper, true);
+		JaxbUtil.save(new File(xmlOut), vFiles, true);
 	}
 	
 	public void chooseCl(String type) throws FileNotFoundException, InterruptedException

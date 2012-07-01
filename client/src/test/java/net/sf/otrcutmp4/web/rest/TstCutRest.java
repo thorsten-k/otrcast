@@ -24,7 +24,6 @@ public class TstCutRest
 	
 	private OtrConfig otrConfig;
 	private OtrCutRest rest;
-	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstCutRest(OtrConfig otrConfig)
 	{	
@@ -39,7 +38,7 @@ public class TstCutRest
 	{
 		String xmlIn = otrConfig.getKey("test.xml.cutlistfinder");
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
-		JaxbUtil.debug(vFiles, nsPrefixMapper);
+		JaxbUtil.debug(vFiles);
 		String s = rest.addCutPackage(vFiles);
 		logger.debug("Saved Request with token: "+s);
 	}

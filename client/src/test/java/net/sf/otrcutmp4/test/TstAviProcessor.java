@@ -22,24 +22,22 @@ public class TstAviProcessor
 	
 	private Configuration config;
 	private ViewSrcDirProcessor view;
-	private NsPrefixMapperInterface nsPrefixMapper;
 	
 	public TstAviProcessor(Configuration config)
 	{
 		this.config=config;
 		view = new CliSrcDirProcessorView();
-		nsPrefixMapper = new OtrCutNsPrefixMapper();
 	}
 	
 	public void cut()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
 		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirAvi))); 
-		JaxbUtil.debug(videoFiles, nsPrefixMapper);
+		JaxbUtil.debug(videoFiles);
 		
 		String xmlFile = config.getString("test.xml.aviprocessor.cut");
 		logger.debug("Saving to file: "+xmlFile);
-		JaxbUtil.save(new File(xmlFile), videoFiles, nsPrefixMapper, true);
+		JaxbUtil.save(new File(xmlFile), videoFiles, true);
 	}
 	
 	public void rename()

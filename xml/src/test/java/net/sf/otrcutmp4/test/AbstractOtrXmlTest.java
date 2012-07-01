@@ -6,7 +6,6 @@ import java.util.Date;
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 
 import org.junit.Assert;
@@ -17,9 +16,6 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractOtrXmlTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrXmlTest.class);
-	
-	protected NsPrefixMapperInterface nsPrefixMapper;
-	
 	@BeforeClass
     public static void initLogger()
 	{
@@ -28,10 +24,10 @@ public abstract class AbstractOtrXmlTest
 		loggerInit.init();
     }
 	
-	protected NsPrefixMapperInterface getPrefixMapper()
+	@BeforeClass
+	public static void initPrefixMapper()
 	{
-		if(nsPrefixMapper==null){nsPrefixMapper = new OtrCutNsPrefixMapper();}
-		return nsPrefixMapper;
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
@@ -42,8 +38,8 @@ public abstract class AbstractOtrXmlTest
 	protected void save(Object xml, File f)
 	{
 		logger.debug("Saving Reference XML");
-		JaxbUtil.debug(xml, getPrefixMapper());
-    	JaxbUtil.save(f, xml, getPrefixMapper(), true);
+		JaxbUtil.debug(xml);
+    	JaxbUtil.save(f, xml, true);
 	}
 	
 	protected static Date getDefaultDate()

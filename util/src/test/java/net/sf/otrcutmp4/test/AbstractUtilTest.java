@@ -18,14 +18,18 @@ public abstract class AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractUtilTest.class);
 	
-	protected static NsPrefixMapperInterface nsPrefixMapper;
 	protected static Random rnd;
+	
+	@BeforeClass
+	public static void initRnd()
+	{
+		rnd = new Random();
+	}
 	
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
-		nsPrefixMapper = new OtrCutNsPrefixMapper();
-		rnd = new Random();
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
 	@BeforeClass

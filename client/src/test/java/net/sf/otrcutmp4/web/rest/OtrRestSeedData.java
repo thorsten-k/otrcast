@@ -9,7 +9,6 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.rest.OtrAdminRest;
 import net.sf.otrcutmp4.model.xml.container.Otr;
-import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.series.Category;
@@ -53,7 +52,7 @@ public class OtrRestSeedData
 	public void addCategories() throws FileNotFoundException
 	{	
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlCategories), Otr.class);
-		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr);
 		for(Category category : otr.getCategory())
 		{
 			restAdmin.addCategory(category);
@@ -63,7 +62,7 @@ public class OtrRestSeedData
 	public void addFormats() throws FileNotFoundException, UtilsProcessingException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlFormats), Otr.class);
-		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr);
 		for(Format format : otr.getFormat())
 		{
 			Format response = restAdmin.addFormat(format);
@@ -74,11 +73,11 @@ public class OtrRestSeedData
 	public void addQualities() throws FileNotFoundException, UtilsProcessingException
 	{
 		Otr otr = (Otr)JaxbUtil.loadJAXB(config.getString(OtrBootstrap.cfgXmlQuality), Otr.class);
-		JaxbUtil.debug(otr, new OtrCutNsPrefixMapper());
+		JaxbUtil.debug(otr);
 		for(Quality quality : otr.getQuality())
 		{
 			Quality response = restAdmin.addQuality(quality);
-			JaxbUtil.debug(response, new OtrCutNsPrefixMapper());
+			JaxbUtil.debug(response);
 		}
 	}
 	
