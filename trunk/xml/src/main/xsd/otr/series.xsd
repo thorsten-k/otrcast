@@ -34,8 +34,9 @@
                 <xsd:element ref="s:category" maxOccurs="1"/>
                 <xsd:element ref="s:season" maxOccurs="unbounded"/>
             </xsd:sequence>
-            <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="key" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="season">
