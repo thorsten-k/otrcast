@@ -3,7 +3,11 @@ package net.sf.otrcutmp4.controller.factory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.Map;
+
+import net.sf.otrcutmp4.controller.factory.txt.TxtDsFactory;
+import net.sf.otrcutmp4.model.xml.series.Episode;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +37,20 @@ public class FileNameFactoy
 		catch (IOException e) {e.printStackTrace();}
 	}
 	
-	public String convert(Map<String,String>  ds) throws TemplateException, IOException
+	public String convert(Episode e) throws TemplateException, IOException
+	{
+		Map<String,String> ds = new HashMap<String,String>();
+		ds.put(TxtDsFactory.Key.seriesName.toString(), e.getSeason().getSeries().getName());
+		ds.put(TxtDsFactory.Key.seriesKey.toString(), "KEY");
+		ds.put(TxtDsFactory.Key.seasonNr.toString(), ""+e.getSeason().getNr());
+		ds.put(TxtDsFactory.Key.seasonName.toString(), e.getSeason().getName());
+		ds.put(TxtDsFactory.Key.episodeName.toString(), e.getName());
+		ds.put(TxtDsFactory.Key.episodeNr.toString(), ""+e.getNr());
+		
+		return convert(ds);
+	}
+	
+	public String convert(Map<String,String> ds) throws TemplateException, IOException
 	{	
 		StringWriter sw = new StringWriter();
         t.process(ds, sw);

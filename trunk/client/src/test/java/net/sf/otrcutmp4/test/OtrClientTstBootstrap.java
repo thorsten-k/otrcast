@@ -4,6 +4,8 @@ import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 
@@ -22,6 +24,7 @@ public class OtrClientTstBootstrap
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("otrcutmp4-client.test");
 			loggerInit.init();
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 		
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,confCode).getAbsolutePath());
 		Configuration config = ConfigLoader.init();
