@@ -33,6 +33,7 @@ public class TestXmlSeries extends AbstractXmlSeriesTest
     {
     	Series xml = new Series();
     	xml.setName("Test Name");
+    	xml.setKey("KEY");
     	
     	if(withChilds)
     	{

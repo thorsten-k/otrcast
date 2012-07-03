@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<s:series xmlns:s="http://otrcutmp4.sf.net/series" name="Test Name">
-    <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
-    <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
-</s:series>
+<series xmlns="http://otrcutmp4.sf.net/series" name="Test Name" key="KEY">
+    <season id="123" nr="1" name="myName" showNr="true" showName="true"/>
+    <season id="123" nr="1" name="myName" showNr="true" showName="true"/>
+</series>
