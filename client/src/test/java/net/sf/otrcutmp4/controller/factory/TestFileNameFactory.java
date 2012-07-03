@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.Assert;
-
 import net.sf.otrcutmp4.controller.factory.txt.TxtDsFactory;
+import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 
 import org.junit.Before;
@@ -24,11 +26,11 @@ public class TestFileNameFactory extends AbstractClientTest
 	private Map<String,String>  ds;
 	
 	private static String seriesName = "My Series";
-	private static String seriesKey = "MS";
-	private static String seasonNr = "1";
+	private static String seriesKey = "KEY";
+	private static int seasonNr = 1;
 	private static String seasonName = "The beginning";
 	private static String episodeName = "Pilot";
-	private static String episodeNr = "2";
+	private static int episodeNr = 2;
 	
 	@Before
 	public void init()
@@ -38,10 +40,10 @@ public class TestFileNameFactory extends AbstractClientTest
 		ds = new HashMap<String,String>();
 		ds.put(TxtDsFactory.Key.seriesName.toString(), seriesName);
 		ds.put(TxtDsFactory.Key.seriesKey.toString(), seriesKey);
-		ds.put(TxtDsFactory.Key.seasonNr.toString(), seasonNr);
+		ds.put(TxtDsFactory.Key.seasonNr.toString(), ""+seasonNr);
 		ds.put(TxtDsFactory.Key.seasonName.toString(), seasonName);
 		ds.put(TxtDsFactory.Key.episodeName.toString(), episodeName);
-		ds.put(TxtDsFactory.Key.episodeNr.toString(), episodeNr);
+		ds.put(TxtDsFactory.Key.episodeNr.toString(), ""+episodeNr);
 	}
 	
 	@Test
@@ -50,6 +52,30 @@ public class TestFileNameFactory extends AbstractClientTest
 		String template = "${seriesKey} ${seasonNr}x${episodeNr} ${episodeName}";
 		fnf.initTemplate(template);
 		String actual = fnf.convert(ds);
+		String expected = seriesKey+" "+seasonNr+"x"+episodeNr+" "+episodeName;
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void xmlEpisode() throws IOException, TemplateException
+	{
+		String template = "${seriesKey} ${seasonNr}x${episodeNr} ${episodeName}";
+		fnf.initTemplate(template);
+		
+		Series series = new Series();
+		series.setName(seriesName);
+		
+		Season season = new Season();
+		season.setSeries(series);
+		season.setName(seasonName);
+		season.setNr(seasonNr);
+		
+		Episode episode = new Episode();
+		episode.setNr(episodeNr);
+		episode.setName(episodeName);
+		episode.setSeason(season);
+		
+		String actual = fnf.convert(episode);
 		String expected = seriesKey+" "+seasonNr+"x"+episodeNr+" "+episodeName;
 		Assert.assertEquals(expected, actual);
 	}

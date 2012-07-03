@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.web;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
@@ -33,7 +34,7 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		cli = new CliCutlistChooserController(new CliCutlistChooserView());
 		
 		String host = otrConfig.getUrl(OtrConfig.Url.OTR);
-		logger.info("Connecting to 2"+host);
+		logger.info("Connecting to "+host);
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
@@ -51,6 +52,7 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
         new java.util.Scanner(System.in).nextLine();
 		
 		vFiles = rest.findCutPackage(token);
+		JaxbUtil.warn(vFiles);
 		view.cutlistsSelected();
 
 		return vFiles;
