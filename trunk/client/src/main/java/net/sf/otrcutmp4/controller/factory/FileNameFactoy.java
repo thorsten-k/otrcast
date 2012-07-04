@@ -41,7 +41,7 @@ public class FileNameFactoy
 	{
 		Map<String,String> ds = new HashMap<String,String>();
 		ds.put(TxtDsFactory.Key.seriesName.toString(), e.getSeason().getSeries().getName());
-		ds.put(TxtDsFactory.Key.seriesKey.toString(), "KEY");
+		ds.put(TxtDsFactory.Key.seriesKey.toString(), e.getSeason().getSeries().getKey());
 		ds.put(TxtDsFactory.Key.seasonNr.toString(), ""+e.getSeason().getNr());
 		ds.put(TxtDsFactory.Key.seasonName.toString(), e.getSeason().getName());
 		ds.put(TxtDsFactory.Key.episodeName.toString(), e.getName());

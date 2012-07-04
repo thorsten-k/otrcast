@@ -48,7 +48,7 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		String token = rest.addCutPackage(vFiles);
 		view.srcFolderProcessed(token);
 		
-		System.out.println("Press Any Key To Continue...");
+		logger.info("Press Any Key To Continue...");
         new java.util.Scanner(System.in).nextLine();
 		
 		vFiles = rest.findCutPackage(token);

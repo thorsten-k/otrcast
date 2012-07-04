@@ -25,9 +25,9 @@ public class TstRestCutlistDownloader extends AbstractClientTest
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		OtrCutRest rest = ProxyFactory.create(OtrCutRest.class, "http://otr.hekit.de/otr", clientExecutor);
+		OtrCutRest rest = ProxyFactory.create(OtrCutRest.class, config.getString("url.otrseries"), clientExecutor);
 		
-		VideoFiles vFiles = rest.findCutPackage("1341322821838");
+		VideoFiles vFiles = rest.findCutPackage("1341384741423");
 	//	new TstRestCutlistDownloader(vFiles);
 		logger.info("JAXB: "+vFiles);
 		JaxbUtil.debug(vFiles);
