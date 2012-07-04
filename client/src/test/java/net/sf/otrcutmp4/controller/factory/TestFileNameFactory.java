@@ -64,6 +64,7 @@ public class TestFileNameFactory extends AbstractClientTest
 		
 		Series series = new Series();
 		series.setName(seriesName);
+		series.setKey(seriesKey);
 		
 		Season season = new Season();
 		season.setSeries(series);

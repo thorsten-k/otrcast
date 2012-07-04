@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.controller.batch;
 
 import java.io.File;
+import java.io.IOException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
@@ -14,6 +15,7 @@ import net.sf.otrcutmp4.controller.batch.audio.Mp3ToAac;
 import net.sf.otrcutmp4.controller.batch.video.AviExtract;
 import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
 import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -21,9 +23,12 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
+import net.sf.otrcutmp4.util.OtrConfig.Template;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import freemarker.template.TemplateException;
 
 public class BatchGenerator extends AbstactBatchGenerator
 {
@@ -142,15 +147,25 @@ public class BatchGenerator extends AbstactBatchGenerator
 	private void mergeMp4(int index, CutList cl, VideoFile vf) throws UtilsProcessingException
 	{
 		String fileName;
-		if(cl.isSetVideo())
+		if(cl.isSetVideo() && cl.getVideo().get(0).isSetEpisode())
 		{
-			Episode xmlEpisode = cl.getVideo().get(0).getEpisode();
+			
+			try
+			{
+				FileNameFactoy fnf = new FileNameFactoy();
+				fnf.initTemplate(cfg.getTemplate(Template.fnSeries));
+				fileName = fnf.convert(cl.getVideo().get(0).getEpisode());
+			}
+			catch (TemplateException e) {throw new UtilsProcessingException(e.getMessage());}
+			catch (IOException e) {throw new UtilsProcessingException(e.getMessage());}
+			
+/*			Episode xmlEpisode = cl.getVideo().get(0).getEpisode();
 			StringBuffer sb = new StringBuffer();
 			sb.append("S").append(xmlEpisode.getSeason().getNr()).append("E").append(xmlEpisode.getNr()).append("-");
 			sb.append(xmlEpisode.getName());
 			sb.append("-").append(xmlEpisode.getSeason().getSeries().getName());
 			fileName = sb.toString();
-		}
+*/		}
 		else if(cl.isSetFileName() && cl.getFileName().getValue().length()>0){fileName=cl.getFileName().getValue();}
 		else {fileName= vf.getFileName().getValue();}
 		fileName = FilenameIllegalCharRemover.convert(fileName); 
