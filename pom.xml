@@ -16,9 +16,7 @@
     	<my.build.directory>target</my.build.directory>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
-    	<jaxb.version>2.2.2</jaxb.version>
 
-    	<jaxen.version>1.1.1</jaxen.version>
     	<isoparser.version>1.0-beta-3</isoparser.version>
     	
     	<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -102,13 +100,6 @@
 				<artifactId>isoparser</artifactId> 
 				<version>${isoparser.version}</version> 
 			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-client</artifactId>
-				<version>${jersey.version}</version>
-			</dependency>
-
-		
 		</dependencies>
 	</dependencyManagement>
 
