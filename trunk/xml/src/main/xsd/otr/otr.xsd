@@ -20,11 +20,20 @@
         <xsd:complexType>
         	<xsd:sequence>
                 <xsd:element ref="o:format" maxOccurs="1"/>
+                <xsd:element ref="o:tv" maxOccurs="1"/>
                 <xsd:element ref="o:quality" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="key" type="xsd:string"/>
             <xsd:attribute name="otrCl" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tv">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="channel" type="xsd:string"/>
+            <xsd:attribute name="airtime" type="xsd:dateTime"/>
+            <xsd:attribute name="duration" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="quality">

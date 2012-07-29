@@ -11,29 +11,31 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlLink extends AbstractXmlOtrTest
+public class TestXmlTv extends AbstractXmlOtrTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlOtrId.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"link.xml");
+		fXml = new File(rootDir,Tv.class.getSimpleName()+".xml");
 	}
     
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	Link test = create(true);
-    	Link ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Link.class);
+    	Tv test = create(true);
+    	Tv ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Tv.class);
     	assertJaxbEquals(ref, test);
     }
     
-    public static Link create(boolean withChilds)
+    public static Tv create(boolean withChilds)
     {
-    	Link xml = new Link();
-    	xml.setId(123);
-    	xml.setUrl("myUrl");
+    	Tv xml = new Tv();
+    	xml.setChannel("myChannel");
+    	xml.setDuration(123);
+    	xml.setName("myName");
+    	xml.setAirtime(getDefaultXmlDate());
     	return xml;
     }
     
@@ -43,8 +45,8 @@ public class TestXmlLink extends AbstractXmlOtrTest
     {
 		OtrXmlTstBootstrap.init();	
 			
-		TestXmlLink.initFiles();	
-		TestXmlLink test = new TestXmlLink();
+		TestXmlTv.initFiles();	
+		TestXmlTv test = new TestXmlTv();
 		test.save();
     }
 }

@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.model.xml.ns;
+package net.sf.otrcutmp4.model.xml;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 

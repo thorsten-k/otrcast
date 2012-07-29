@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<o:otrId xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series" id="1" key="myKey" otrCl="1234">
-    <o:format id="1" otrkey="true" cut="true" type="myType" name="myName" image="myImage" ac3="true"/>
-    <o:quality id="1" type="myType" name="myName" image="myImage"/>
-    <o:quality id="1" type="myType" name="myName" image="myImage"/>
-</o:otrId>
+<otrId xmlns="http://otrcutmp4.sf.net/otr" xmlns:ns2="http://otrcutmp4.sf.net/cut" xmlns:ns3="http://otrcutmp4.sf.net/series" id="1" key="myKey" otrCl="1234">
+    <format id="1" otrkey="true" cut="true" type="myType" name="myName" image="myImage" ac3="true"/>
+    <tv name="myName" channel="myChannel" airtime="2011-11-11T11:11:11" duration="123"/>
+    <quality id="1" type="myType" name="myName" image="myImage"/>
+    <quality id="1" type="myType" name="myName" image="myImage"/>
+</otrId>

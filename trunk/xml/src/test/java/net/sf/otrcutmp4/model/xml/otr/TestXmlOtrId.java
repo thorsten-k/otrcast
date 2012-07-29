@@ -42,6 +42,7 @@ public class TestXmlOtrId extends AbstractXmlOtrTest
     		xml.getQuality().add(TestXmlQuality.create(false));
     		xml.getQuality().add(TestXmlQuality.create(false));
     		xml.setFormat(TestXmlFormat.create(false));
+    		xml.setTv(TestXmlTv.create(false));
     	}
     	
     	return xml;

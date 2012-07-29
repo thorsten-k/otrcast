@@ -9,10 +9,10 @@ import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.controller.noop.NoopCutlistChooserController;
 import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.view.noop.NoopCutlistChooserView;
 
