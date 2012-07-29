@@ -22,8 +22,6 @@ public class ImlProcessor
 	
 	private NSDictionary rootNode;
 	
-	
-	
 	public ImlProcessor()
 	{
 		
