@@ -8,6 +8,8 @@ import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
+import net.sf.otrcutmp4.controller.factory.xml.otr.XmlTvFactory;
 import net.sf.otrcutmp4.controller.processor.exlp.event.DownloadEvent;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;
 import net.sf.otrcutmp4.model.xml.otr.Download;
@@ -60,6 +62,11 @@ public class LinklistConverter
 			{
 				otrId = new OtrId();
 				otrId.setKey(keyId);
+				try
+				{
+					otrId.setTv(XmlTvFactory.createForFileName(keyId));
+				}
+				catch (OtrProcessingException e1) {logger.warn(e1.getMessage());}
 				download.getOtrId().add(otrId);
 			}
 			

@@ -15,7 +15,7 @@ public class TestLinklistProcessor extends AbstractUtilTest
 	private LinklistProcessor llP;
 	
 	@Before
-	public void initFiles()
+	public void init()
 	{
 		llP = new LinklistProcessor();
 	}

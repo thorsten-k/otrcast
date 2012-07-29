@@ -2,6 +2,7 @@
 <o:linklist xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series">
     <o:download type="NORMAL DOWNLOAD">
         <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
+            <o:tv name="Hangover" channel="pro7" airtime="2011-09-04T20:15:00" duration="135"/>
             <o:quality type="MP4">
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
@@ -48,6 +49,7 @@
             </o:quality>
         </o:otrId>
         <o:otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
+            <o:tv name="Sin City" channel="pro7" airtime="2011-09-04T23:25:00" duration="145"/>
             <o:quality type="DivX">
                 <o:recording>
                     <o:format otrkey="false" cut="false" type="avi"/>
@@ -96,6 +98,7 @@
     </o:download>
     <o:download type="PRIORISIERTER DOWNLOAD">
         <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
+            <o:tv name="Hangover" channel="pro7" airtime="2011-09-04T20:15:00" duration="135"/>
             <o:quality type="MP4">
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
@@ -142,6 +145,7 @@
             </o:quality>
         </o:otrId>
         <o:otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
+            <o:tv name="Sin City" channel="pro7" airtime="2011-09-04T23:25:00" duration="145"/>
             <o:quality type="DivX">
                 <o:recording>
                     <o:format otrkey="false" cut="false" type="avi"/>
@@ -190,6 +194,7 @@
     </o:download>
     <o:download type="BEZAHLTER DOWNLOAD">
         <o:otrId key="Hangover_11.09.04_20-15_pro7_135_TVOON_DE">
+            <o:tv name="Hangover" channel="pro7" airtime="2011-09-04T20:15:00" duration="135"/>
             <o:quality type="MP4">
                 <o:recording>
                     <o:format otrkey="false" cut="true" type="mp4"/>
@@ -236,6 +241,7 @@
             </o:quality>
         </o:otrId>
         <o:otrId key="Sin_City_11.09.04_23-25_pro7_145_TVOON_DE">
+            <o:tv name="Sin City" channel="pro7" airtime="2011-09-04T23:25:00" duration="145"/>
             <o:quality type="DivX">
                 <o:recording>
                     <o:format otrkey="true" cut="false" type="avi"/>

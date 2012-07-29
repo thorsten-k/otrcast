@@ -35,7 +35,7 @@ public class XmlTvFactory
 				
 			}
 			Tv xml = new Tv();
-			xml.setName(buildName(m.group(0)));
+			xml.setName(buildName(m.group(1)));
 			xml.setAirtime(buildAirTime(m));
 			xml.setChannel(m.group(7));
 			xml.setDuration(new Integer(m.group(8)));
