@@ -7,7 +7,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
-import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
+import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.otr.Format;

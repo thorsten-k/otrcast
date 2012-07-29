@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.controller.factory.xml;
 
+import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 
 import org.slf4j.Logger;

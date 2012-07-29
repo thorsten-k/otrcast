@@ -1,7 +1,8 @@
-package net.sf.otrcutmp4.controller.factory.xml;
+package net.sf.otrcutmp4.controller.factory.xml.otr;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
+import net.sf.otrcutmp4.controller.factory.xml.XmlFormatFactory;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 

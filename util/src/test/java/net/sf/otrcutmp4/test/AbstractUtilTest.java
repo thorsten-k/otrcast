@@ -6,7 +6,6 @@ import java.util.Random;
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 
 import org.junit.Assert;
@@ -36,7 +35,7 @@ public abstract class AbstractUtilTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/otrcutmp4-util");
+		loggerInit.addAltPath("otrcutmp4-util.test");
 		loggerInit.init();
     }
 	

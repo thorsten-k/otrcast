@@ -7,7 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
 import net.sf.otrcutmp4.controller.factory.txt.TxtDsFactory;
-import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
+import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;

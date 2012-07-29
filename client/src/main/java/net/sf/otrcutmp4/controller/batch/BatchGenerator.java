@@ -16,7 +16,7 @@ import net.sf.otrcutmp4.controller.batch.video.AviExtract;
 import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
-import net.sf.otrcutmp4.controller.factory.xml.XmlOtrIdFactory;
+import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;

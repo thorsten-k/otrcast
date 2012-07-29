@@ -10,7 +10,7 @@
 	</appender>
     
 	<root>
-		<priority value="ERROR" />
+		<priority value="DEBUG" />
 		<appender-ref ref="A1" />
 	</root>
 
