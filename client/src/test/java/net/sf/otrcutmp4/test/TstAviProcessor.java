@@ -7,8 +7,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 

@@ -6,7 +6,7 @@ import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
-import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;

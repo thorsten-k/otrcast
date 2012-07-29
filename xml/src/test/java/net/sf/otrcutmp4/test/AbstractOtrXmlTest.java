@@ -3,10 +3,12 @@ package net.sf.otrcutmp4.test;
 import java.io.File;
 import java.util.Date;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -40,6 +42,11 @@ public abstract class AbstractOtrXmlTest
 		logger.debug("Saving Reference XML");
 		JaxbUtil.debug(xml);
     	JaxbUtil.save(f, xml, true);
+	}
+	
+	protected static XMLGregorianCalendar getDefaultXmlDate()
+	{
+		return DateUtil.getXmlGc4D(getDefaultDate());
 	}
 	
 	protected static Date getDefaultDate()

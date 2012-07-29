@@ -5,7 +5,7 @@ import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.ns.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 
