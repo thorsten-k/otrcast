@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.factory.xml;
 
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
+import net.sf.otrcutmp4.controller.factory.xml.otr.XmlTvFactory;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 
@@ -21,6 +22,7 @@ public class XmlVideoFileFactory
 		xml.setFileName(fName);
 		
 		xml.setOtrId(XmlOtrIdFactory.createForFileName(fileName));
+		xml.getOtrId().setTv(XmlTvFactory.createForFileName(fileName));
 		
 		return xml;
 	}
