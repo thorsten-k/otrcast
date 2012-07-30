@@ -3,18 +3,18 @@ package net.sf.otrcutmp4.controller.cutlist;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
+import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
-import net.sf.otrcutmp4.controller.noop.NoopCutlistChooserController;
-import net.sf.otrcutmp4.controller.processor.CutlistChooserProcessing;
-import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
+import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
-import net.sf.otrcutmp4.view.noop.NoopCutlistChooserView;
+import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -45,24 +45,18 @@ public class TstCutlistFinder
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
 	}
 	
-	public void chooseCl(String type) throws FileNotFoundException, InterruptedException
+	public void chooseCl(String type) throws FileNotFoundException, UtilsProcessingException
 	{
-		String xmlIn = config.getString("xml.test."+type+".2");
+		String xmlIn = config.getString("test.xml.aviprocessor");
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutlistChooserProcessing chooser = new CutlistChooserProcessing(new NoopCutlistChooserView(),new NoopCutlistChooserController());
+		ViewCutlistChooser viewCutlistChooser = new CliCutlistChooserView();
+		CutlistChooser chooser = new CliCutlistChooserController(viewCutlistChooser);
+		chooser.chooseCutlists(vFiles);
 		
-		if(type.equals("rename"))
-		{
-			chooser.setRenameOutput();
-			vFiles = chooser.chooseFileRename(vFiles);
-		}
-		else{logger.warn("No output specified. Do this in test class");}
-		
-		JaxbUtil.debug(vFiles);
-		
-		String xmlOut = config.getString("xml.test."+type+".3");
+		JaxbUtil.info(vFiles);		
+		String xmlOut = config.getString("test.xml.cutlistfinder");
 		JaxbUtil.save(new File(xmlOut), vFiles, true);
 	}
 	
@@ -90,7 +84,7 @@ public class TstCutlistFinder
 		TstCutlistFinder test = new TstCutlistFinder(config);
 //		test.findCl();
 //		test.findCl("rename");
-//		test.chooseCl("cut");
+		test.chooseCl("cut");
 //		test.chooseCl("rename");
 		test.find();
 	}

@@ -213,6 +213,7 @@ public class AviToMp4
 		loggerInit.addAltPath("otrcutmp4");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
+//		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
 	public static void main(String args[]) throws OtrInternalErrorException

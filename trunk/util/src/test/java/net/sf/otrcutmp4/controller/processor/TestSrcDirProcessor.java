@@ -3,10 +3,8 @@ package net.sf.otrcutmp4.controller.processor;
 import java.io.File;
 
 import junit.framework.Assert;
-import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
@@ -46,7 +44,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     @Test
     public void hq() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
-    	String key = "test1";
+    	String key = "Test1_11.11.11_20-15_zdf_100_TVOON_DE";
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());
@@ -55,7 +53,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     @Test
     public void hdNoAc3() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
-    	String key = "test2";
+    	String key = "Test2_11.11.11_20-15_zdf_100_TVOON_DE";
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());
@@ -65,7 +63,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     @Test
     public void hdAc3() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
-    	String key = "test3";
+    	String key = "Test3_11.11.11_20-15_zdf_100_TVOON_DE";
     	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());

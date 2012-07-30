@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 public class OtrRestSeedData
 {
-	final static Logger logger = LoggerFactory.getLogger(TstCutRest.class);
+	final static Logger logger = LoggerFactory.getLogger(TestCutRest.class);
 	
 	private OtrAdminRest restAdmin;
 	private Configuration config;
