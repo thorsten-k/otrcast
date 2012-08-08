@@ -51,7 +51,7 @@ public class TestCutRest
 	{
 		 ViewSrcDirProcessor view = new CliSrcDirProcessorView();
 		 SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
-		 VideoFiles vFiles = srcDirProcessor.readFiles(new File(otrConfig.getKey(OtrClientTstBootstrap.testAviDir)));
+		 VideoFiles vFiles = srcDirProcessor.scan(new File(otrConfig.getKey(OtrClientTstBootstrap.testAviDir)));
 		 JaxbUtil.info(vFiles);
 		 
 		 logger.info("Saving result to "+fSrcDirProcessorResult.getAbsolutePath());

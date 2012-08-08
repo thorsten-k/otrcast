@@ -19,22 +19,29 @@ public class SrcDirProcessor
 		
 	private ViewSrcDirProcessor view;
 	
-	private File srcDir;
-	
 	public SrcDirProcessor(ViewSrcDirProcessor view)
 	{
 		this.view=view;
 	}
 	
-	public VideoFiles readFiles(File srcDir)
-	{
-		this.srcDir = srcDir;
-		return readFiles();
-	}
-	
-	private VideoFiles readFiles()
+	public VideoFiles scan(File srcDir)
 	{
 		view.readFilesInDir(srcDir);
+		VideoFiles vfs = privateScan(srcDir,false);
+		view.found(vfs.getVideoFile().size());
+		return vfs;
+	}
+	
+	public VideoFiles scan(File srcDir, boolean recursive)
+	{
+		view.readFilesInDir(srcDir);
+		VideoFiles vfs = privateScan(srcDir,recursive);
+		view.found(vfs.getVideoFile().size());
+		return vfs;
+	}
+	
+	private VideoFiles privateScan(File srcDir,boolean rekursive)
+	{
 		VideoFiles result = new VideoFiles();
 		for(File f : srcDir.listFiles())
 		{
@@ -54,6 +61,7 @@ public class SrcDirProcessor
 				}
 				catch (OtrProcessingException e) {logger.error("Error processing file: "+e.getMessage());}
 			}
+			else if(f.isDirectory()){}
 			else
 			{
 				if(!f.getName().endsWith(XmlOtrIdFactory.typeAc3Hd))
@@ -63,8 +71,17 @@ public class SrcDirProcessor
 				
 			}
 		}
+		if(rekursive)
+		{
+			for(File f : srcDir.listFiles())
+			{
+				if(f.isDirectory())
+				{
+					result.getVideoFile().addAll(privateScan(f,rekursive).getVideoFile());
+				}
+			}
+		}
 		JaxbUtil.trace(result);
-		view.found(result.getVideoFile().size());
 		return result;
 	}
 	

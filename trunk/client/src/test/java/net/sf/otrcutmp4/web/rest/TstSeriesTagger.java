@@ -43,7 +43,7 @@ public class TstSeriesTagger
 		rest = ProxyFactory.create(OtrSeriesRest.class, "http://localhost:8080/otr",clientExecutor);
 		
 		SrcDirProcessor dirProcessor = new SrcDirProcessor(view);
-		vFiles = dirProcessor.readFiles(new File(config.getString(OtrConfig.dirAvi))); 
+		vFiles = dirProcessor.scan(new File(config.getString(OtrConfig.dirAvi))); 
 	}
 	
 	public void tag()
