@@ -28,11 +28,7 @@ public class TstUserRest
 	
 	public void test()
 	{
-		User user = new User();
-		user.setEmail("t.kisner@web.de");
 		
-		user = rest.register(user);
-		JaxbUtil.debug(user);
 	}
 	
 	public static void main(String[] args)

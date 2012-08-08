@@ -37,7 +37,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     @Test
     public void size()
     {
-    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFiles vFiles = srcDirProcessor.scan(fSrc);
     	Assert.assertEquals(3,vFiles.getVideoFile().size());
     }
     
@@ -45,7 +45,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     public void hq() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
     	String key = "Test1_11.11.11_20-15_zdf_100_TVOON_DE";
-    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFiles vFiles = srcDirProcessor.scan(fSrc);
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());
     }
@@ -54,7 +54,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     public void hdNoAc3() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
     	String key = "Test2_11.11.11_20-15_zdf_100_TVOON_DE";
-    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFiles vFiles = srcDirProcessor.scan(fSrc);
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());
     	Assert.assertEquals(false, vf.getOtrId().getFormat().isAc3());
@@ -64,7 +64,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     public void hdAc3() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
     {
     	String key = "Test3_11.11.11_20-15_zdf_100_TVOON_DE";
-    	VideoFiles vFiles = srcDirProcessor.readFiles(fSrc);
+    	VideoFiles vFiles = srcDirProcessor.scan(fSrc);
     	VideoFile vf = OtrXpath.getFileByKey(vFiles, key);
     	Assert.assertEquals(key,vf.getOtrId().getKey());
     	Assert.assertEquals(true, vf.getOtrId().getFormat().isAc3());
@@ -76,6 +76,13 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     	//MP4
     	Assert.assertFalse(SrcDirProcessor.isValidSrcFileName("xxx.mp4"));
     	Assert.assertTrue(SrcDirProcessor.isValidSrcFileName("66128_Der_Tatortreiniger_12.05.17_21-45_ard_30_TVOON_DE.mpg.HQ.cut.mp4"));
+    }
+    
+    @Test
+    public void subDirs()
+    {
+    	VideoFiles vFiles = srcDirProcessor.scan(fSrc,true);
+    	Assert.assertEquals(4,vFiles.getVideoFile().size());
     }
     
     public static void main(String[] args) throws Exception

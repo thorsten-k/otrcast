@@ -32,7 +32,7 @@ public class TstAviProcessor
 	public void cut()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirAvi))); 
+		VideoFiles videoFiles = test.scan(new File(config.getString(OtrConfig.dirAvi))); 
 		JaxbUtil.debug(videoFiles);
 		
 		String xmlFile = config.getString("test.xml.aviprocessor.cut");
@@ -43,7 +43,7 @@ public class TstAviProcessor
 	public void rename()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.readFiles(new File(config.getString(OtrConfig.dirRename))); 
+		VideoFiles videoFiles = test.scan(new File(config.getString(OtrConfig.dirRename))); 
 		
 		JaxbUtil.debug(videoFiles);
 		String xmlFile = config.getString("xml.test.rename.1");
