@@ -24,6 +24,7 @@ public class OtrConfig
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
+	public static enum Credential{EMAIL,PWD}
 	public static enum Template{fnSeries}
 	
 	public static String otrConfigName = "properties.txt";
@@ -45,6 +46,9 @@ public class OtrConfig
 	
 	public static final String paraAudioFaac = "audio.faac.kbit";
 	
+	public static final String credentialEmail = "user.email";
+	public static final String credentialPassword = "user.password";
+	
 	public static final String templateSeries = "template.series";
 	
 	public static final String urlOtrSeries = "url.otrseries";
@@ -53,6 +57,7 @@ public class OtrConfig
 	private Map<Tool,String> mapTool;
 	private Map<Audio,String> mapAudio;
 	private Map<Url,String> mapUrl;
+	private Map<Credential,String> mapCredential;
 	private Map<Template,String> mapTemplate;
 	
 	private List<String> lDirectotries,lTools;
@@ -67,6 +72,7 @@ public class OtrConfig
 		initParameterList();
 		initUrlList();
 		initTemplateList();
+		initCredentialList();
 	}
 	
 	private void initDirectoryList()
@@ -98,6 +104,13 @@ public class OtrConfig
 	{
 		mapAudio = new Hashtable<Audio,String>();
 		mapAudio.put(Audio.FAAC, paraAudioFaac);
+	}
+	
+	private void initCredentialList()
+	{
+		mapCredential = new Hashtable<Credential,String>();
+		mapCredential.put(Credential.EMAIL, credentialEmail);
+		mapCredential.put(Credential.PWD, credentialPassword);
 	}
 	
 	private void initTemplateList()
@@ -148,6 +161,12 @@ public class OtrConfig
 				config.setProperty(toolNeroAac, "nero.exe");
 				
 				config.setProperty(paraAudioFaac, "192");
+				
+				
+				mapCredential.put(Credential.EMAIL, credentialEmail);
+				mapCredential.put(Credential.PWD, credentialPassword);
+				config.setProperty(credentialEmail, "your@e.mail");
+				config.setProperty(credentialPassword, "your-secret-password");
 				
 				config.setProperty(templateSeries, "${seriesName} ${seasonNr}x${episodeNr} ${episodeName}");
 				config.save();
@@ -203,6 +222,15 @@ public class OtrConfig
 		checkTools();
 		checkParameter();
 		checkTemplates();
+	}
+	
+	public void checkEmailPwd() throws OtrConfigurationException
+	{
+		for(Credential credential : mapCredential.keySet())
+		{
+			String value = config.getString(mapCredential.get(credential));
+			if(value==null){throw new OtrConfigurationException("Entry in properties file missing : "+mapCredential.get(credential));}
+		}
 	}
 	
 	private void checkDirs() throws OtrConfigurationException
@@ -296,6 +324,12 @@ public class OtrConfig
 	{
 		if(config==null){logger.error("Throw");}
 		return config.getString(mapTemplate.get(template));
+	}
+	
+	public String getCredential(Credential credential)
+	{
+		if(config==null){logger.error("Throw");}
+		return config.getString(mapCredential.get(credential));
 	}
 	
 	public String getKey(String key)
