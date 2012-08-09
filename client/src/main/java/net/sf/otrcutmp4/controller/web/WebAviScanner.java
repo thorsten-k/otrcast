@@ -1,13 +1,12 @@
 package net.sf.otrcutmp4.controller.web;
 
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
-import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.rest.OtrUserRest;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Credential;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
-import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
@@ -30,7 +29,7 @@ public class WebAviScanner
 		logger.info("Connecting to "+host);
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(otrConfig.getCredential(Credential.EMAIL),otrConfig.getCredential(Credential.PWD));
 		rest = ProxyFactory.create(OtrUserRest.class, host,clientExecutor);
 	}
 	

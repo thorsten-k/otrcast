@@ -12,5 +12,5 @@ public interface OtrUserRest
 {	
 	@POST @Path("/scan")
 	@Consumes(MediaType.APPLICATION_XML)
-	String scan(VideoFiles vf);
+	String scan(VideoFiles vfs);
 }

@@ -99,7 +99,7 @@ public class AviToMp4
         
         if(line.hasOption(oScan.getOpt()))
     	{
-    		otrConfig.checkConfigSettings();
+    		otrConfig.checkEmailPwd();
     		WebAviScanner was = new WebAviScanner(otrConfig);
     		was.scan(srcDirProcessor);
          }
@@ -194,6 +194,7 @@ public class AviToMp4
 		options.addOption(oDebug);
 		options.addOption(oWeb);
 		options.addOption(oAc3);
+		options.addOption(oMp4);
 		options.addOption(oRename);
 		options.addOption(oScan);
 		options.addOption(oCreate);
