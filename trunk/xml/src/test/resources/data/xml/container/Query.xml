@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns4:query xmlns="http://otrcutmp4.sf.net/otr" xmlns:ns2="http://otrcutmp4.sf.net/cut" xmlns:ns3="http://otrcutmp4.sf.net/series" xmlns:ns4="http://otrcutmp4.sf.net">
+    <ns2:videoFile/>
+</ns4:query>
