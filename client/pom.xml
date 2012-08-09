@@ -12,22 +12,7 @@
 	<name>OTR AVI cut to MP4: Client</name>
   
 	<build>
-		<finalName>OtrCutMp4</finalName>
 		<plugins>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin.version}</version>
-				<configuration>
-					<finalName>OtrCutMp4-${project.version}</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-					<descriptors>
-						<descriptor>src/assemble/exe.xml</descriptor>
-					</descriptors>
-					<archive>
-						<manifestFile>src/assemble/MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-			</plugin>
 			<plugin>
 			  <groupId>org.dstovall</groupId>
 			  <artifactId>onejar-maven-plugin</artifactId>
