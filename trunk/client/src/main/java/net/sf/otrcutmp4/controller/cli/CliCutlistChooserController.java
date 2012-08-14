@@ -4,13 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import net.sf.exlp.event.handler.EhResultContainer;
-import net.sf.exlp.event.impl.JaxbEvent;
-import net.sf.exlp.listener.LogListener;
-import net.sf.exlp.listener.impl.LogListenerHttp;
-import net.sf.exlp.parser.LogParser;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
-import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
@@ -18,6 +12,7 @@ import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.web.WebCutListLoader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +21,12 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 {
 	final static Logger logger = LoggerFactory.getLogger(CliCutlistChooserController.class);
 	
+	private WebCutListLoader wcll;
+	
 	public CliCutlistChooserController(ViewCutlistChooser view)
 	{
 		super(view);
+		wcll = new WebCutListLoader();
 	}
 	
 	@Override
@@ -112,25 +110,8 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 	{
 		for(CutList cl : clSelected.getCutList())
 		{		
-			CutList loaded = loadCutlist(cl.getId());
+			CutList loaded = wcll.loadCutlist(cl.getId());
 			cl.getCut().addAll(loaded.getCut());
 		}
-	}
-	
-	private CutList loadCutlist(String id)
-	{
-		String http = "http://cutlist.at/getfile.php?id="+id;
-		
-		logger.info("Trying to download cutlist "+id);
-		logger.debug("\t"+http);
-	
-		EhResultContainer leh = new EhResultContainer();
-		LogParser lp = new CutlistParser(leh);
-		
-		LogListener ll = new LogListenerHttp(lp);
-		ll.processSingle(http);
-		
-		JaxbEvent event = (JaxbEvent)leh.getSingleResult();
-		return (CutList)event.getObject();
 	}
 }
