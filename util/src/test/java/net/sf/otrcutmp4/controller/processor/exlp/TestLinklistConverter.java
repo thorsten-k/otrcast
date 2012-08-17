@@ -25,7 +25,6 @@ public class TestLinklistConverter extends AbstractUtilTest
 	private static String srcLinklist;
 	private static File dstXml;
 	
-	
 	@BeforeClass
 	public static void initFiles()
 	{

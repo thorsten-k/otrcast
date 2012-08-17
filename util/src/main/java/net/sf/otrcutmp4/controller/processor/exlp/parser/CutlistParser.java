@@ -9,6 +9,7 @@ import net.sf.exlp.event.impl.JaxbEvent;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
@@ -79,6 +80,7 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 				switch(i)
 				{
 					case 0: general();break;
+					case 17: author(m);break;
 					case 27: name(m);break;
 					case 29: cut(m);break;
 					case 30: cutStart(m);break;
@@ -98,6 +100,16 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 	private void general()
 	{
 		cl = new CutList();
+	}
+	
+	private void author(Matcher m)
+	{
+		if(cl!=null)
+		{
+			Author author = new Author();
+			author.setValue(m.group(1));
+			cl.setAuthor(author);
+		}
 	}
 	
 	private void cut(Matcher m)

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<c:cutList xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series">
+    <c:author>Tambil</c:author>
+    <c:cut include="true" start="321.12" duration="1065.12"/>
+    <c:cut include="true" start="1852.4" duration="775.92"/>
+    <c:cut include="true" start="3151.72" duration="1376.4"/>
+    <c:cut include="true" start="4985.04" duration="1296.96"/>
+    <c:cut include="true" start="6791.64" duration="420.12"/>
+    <c:fileName>Falling Skies_1x07_Sicherheit Teil 2_1x08_Die Entdeckung</c:fileName>
+</c:cutList>
