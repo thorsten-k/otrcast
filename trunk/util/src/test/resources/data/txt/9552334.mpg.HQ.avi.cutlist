@@ -1,0 +1,51 @@
+[General]
+Application=ColdCut
+Version=1.0.7.2
+comment1=The following parts of the movie will be kept, the rest will be cut out.
+comment2=All values are given in seconds.
+ApplyToFile=Falling_Skies_11.12.12_20-15_pro7_115_TVOON_DE.mpg.HQ.avi
+OriginalFileSizeBytes=1706546164
+FramesPerSecond=25
+DisplayAspectRatio=16:9
+IntendedCutApplicationName=VirtualDub
+IntendedCutApplication=VirtualDub.exe
+VDUseSmartRendering=1
+NoOfCuts=5
+IntendedCutApplicationVersion=1.7.8.0
+VDSmartRenderingCodecFourCC=0x53444646
+VDSmartRenderingCodecVersion=0x00000000
+
+[Info]
+Author=Tambil
+RatingByAuthor=5
+EPGError=0
+ActualContent=
+MissingBeginning=0
+MissingEnding=0
+MissingVideo=0
+MissingAudio=0
+OtherError=0
+OtherErrorDescription=
+SuggestedMovieName=Falling Skies_1x07_Sicherheit Teil 2_1x08_Die Entdeckung
+UserComment=mit vor- und ohne abspann, von trobal übernommen, einige frames entfernt
+
+[Cut0]
+Start=321.12
+Duration=1065.12
+
+[Cut1]
+Start=1852.4
+Duration=775.92
+
+[Cut2]
+Start=3151.72
+Duration=1376.4
+
+[Cut3]
+Start=4985.04
+Duration=1296.96
+
+[Cut4]
+Start=6791.64
+Duration=420.12
+

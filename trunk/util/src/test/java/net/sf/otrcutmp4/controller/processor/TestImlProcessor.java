@@ -1,15 +1,9 @@
 package net.sf.otrcutmp4.controller.processor;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Map;
 
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
-import net.sf.plist.NSDictionary;
-import net.sf.plist.NSObject;
-import net.sf.plist.io.PropertyListException;
-import net.sf.plist.io.PropertyListParser;
 
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
@@ -46,7 +40,4 @@ public class TestImlProcessor extends AbstractUtilTest
 		test.init();
 		test.hello(iml);
 	}
-	
-	
- 
 }
