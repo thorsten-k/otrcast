@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4;
 
-import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
