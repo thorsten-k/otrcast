@@ -104,7 +104,7 @@ public class OtrRestSeedData
 //		rest.all();
 		
 //		rest.addCategories();
-		rest.addFormats();
+//		rest.addFormats();
 		rest.addSeries();
 //		
 //		rest.addQualities();

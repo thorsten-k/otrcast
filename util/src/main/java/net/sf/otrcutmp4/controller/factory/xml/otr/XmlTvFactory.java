@@ -52,10 +52,11 @@ public class XmlTvFactory
 	private static XMLGregorianCalendar buildAirTime(Matcher m)
 	{
 		MutableDateTime dt = new MutableDateTime();
-		dt.setDayOfMonth(new Integer(m.group(4)));
-		dt.setMonthOfYear(new Integer(m.group(3)));
-		dt.setYear(2000+new Integer(m.group(2)));
 		
+		dt.setYear(2000+new Integer(m.group(2)));
+		dt.setMonthOfYear(new Integer(m.group(3)));
+		dt.setDayOfMonth(new Integer(m.group(4)));
+				
 		dt.setHourOfDay(new Integer(m.group(5)));
 		dt.setMinuteOfHour(new Integer(m.group(6)));
 		dt.setSecondOfMinute(0);
