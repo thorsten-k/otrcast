@@ -17,8 +17,6 @@ public class OtrClientTstBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrClientTstBootstrap.class);
 	
-	private static final String confCode="test";
-	
 	public static String testAviDir = "test.dir.avi";
 	public static String testSrcDirProcessorResult = "test.xml.scrDirProcessorResult";
 	public static String testClFinderResult = "test.xml.clFinderResult";
@@ -31,7 +29,7 @@ public class OtrClientTstBootstrap
 			loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 		
-		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,confCode).getAbsolutePath());
+		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		Configuration config = ConfigLoader.init();
 		return config;
 	}

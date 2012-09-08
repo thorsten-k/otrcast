@@ -13,8 +13,8 @@ public class OtrBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrBootstrap.class);
 	
-	public static final String appCode="otrcutmp4-client";
-	private static final String confCode="test";
+	public static final String appCode="otr";
+	public static final String confCode="cutmp4.client";
 	
 	public static final String cfgUrlGae = "url.otrseries";
 	public static final String cfgXmlCategories = "xml.categories";

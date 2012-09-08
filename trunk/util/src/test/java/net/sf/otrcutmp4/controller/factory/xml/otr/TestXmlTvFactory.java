@@ -23,8 +23,14 @@ public class TestXmlTvFactory extends AbstractUtilTest
     	fileName = "Hawaii_Five_0_11.08.25_21-15_sat1_60_TVOON_DE.mpg.HQ.avi";
     	Tv xml = XmlTvFactory.createForFileName(fileName);
     	JaxbUtil.info(xml);
-   
-    	
+    }
+    
+    @Test
+    public void testDay31() throws OtrProcessingException
+    {
+    	fileName = "Stargate_12.08.31_20-15_rtl_60_TVOON_DE.mpg.HQ.avi";
+    	Tv xml = XmlTvFactory.createForFileName(fileName);
+    	JaxbUtil.info(xml);
     }
     
     @Test(expected=OtrProcessingException.class)
@@ -33,7 +39,5 @@ public class TestXmlTvFactory extends AbstractUtilTest
     	fileName = "abc";
     	Tv xml = XmlTvFactory.createForFileName(fileName);
     	JaxbUtil.info(xml);
-   
-    	
     }
  }
