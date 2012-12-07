@@ -70,6 +70,7 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 
 	public void parseLine(String line)
 	{
+		line = line.trim();
 		allLines++;
 		boolean unknownPattern = true;
 		for(int i=0;i<pattern.size();i++)

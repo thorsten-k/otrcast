@@ -1,82 +1,89 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/series"
-    xmlns:s="http://otrcutmp4.sf.net/series"
-    xmlns:o="http://otrcutmp4.sf.net/otr"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
-    <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr.xsd"/>
-    <xsd:element name="video">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:episode" maxOccurs="1"/>
-                <xsd:element ref="s:movie" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="movie">
-        <xsd:complexType>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="name" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="category">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:series" maxOccurs="unbounded"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="name" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="series">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:category" maxOccurs="1"/>
-                <xsd:element ref="s:season" maxOccurs="unbounded"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="name" type="xsd:string"/>
-            <xsd:attribute name="key" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="season">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:series" maxOccurs="1"/>
-                <xsd:element ref="s:episode" maxOccurs="unbounded"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="nr" type="xsd:int"/>
-            <xsd:attribute name="name" type="xsd:string"/>
-            <xsd:attribute name="showNr" type="xsd:boolean"/>
-            <xsd:attribute name="showName" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="episode">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:season" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="nr" type="xsd:int"/>
-            <xsd:attribute name="name" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="tags">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:tag" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="tag">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="o:otrId" maxOccurs="1"/>
-                <xsd:element ref="s:episode" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="withBegin" type="xsd:boolean"/>
-            <xsd:attribute name="withEnd" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
+	xmlns:s="http://otrcutmp4.sf.net/series"
+	xmlns:o="http://otrcutmp4.sf.net/otr"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+	<xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr.xsd"/>
+	<xsd:element name="videos">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:video" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="video">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:episode" maxOccurs="1"/>
+				<xsd:element ref="s:movie" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="movie">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:long"/>
+			<xsd:attribute name="name" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="category">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:series" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:long"/>
+			<xsd:attribute name="name" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="series">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:category" maxOccurs="1"/>
+				<xsd:element ref="s:season" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:long"/>
+			<xsd:attribute name="name" type="xsd:string"/>
+			<xsd:attribute name="key" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="season">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:series" maxOccurs="1"/>
+				<xsd:element ref="s:episode" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:long"/>
+			<xsd:attribute name="nr" type="xsd:int"/>
+			<xsd:attribute name="name" type="xsd:string"/>
+			<xsd:attribute name="showNr" type="xsd:boolean"/>
+			<xsd:attribute name="showName" type="xsd:boolean"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="episode">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:season" maxOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:long"/>
+			<xsd:attribute name="nr" type="xsd:int"/>
+			<xsd:attribute name="name" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tags">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:tag" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tag">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="o:otrId" maxOccurs="1"/>
+				<xsd:element ref="s:episode" maxOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="withBegin" type="xsd:boolean"/>
+			<xsd:attribute name="withEnd" type="xsd:boolean"/>
+		</xsd:complexType>
+	</xsd:element>
 </xsd:schema>
