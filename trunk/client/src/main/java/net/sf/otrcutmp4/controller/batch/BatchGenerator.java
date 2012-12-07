@@ -20,7 +20,8 @@ import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Video;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Template;
@@ -57,6 +58,19 @@ public class BatchGenerator extends AbstactBatchGenerator
 
 		videoCutter = new VideoCutter(cfg,profile);
 		videoCutter.setTxt(txt);
+	}
+	
+	public void build(Videos videos)
+	{
+		for(Video video : videos.getVideo())
+		{
+			build(video);
+		}
+	}
+	
+	private void build(Video video)
+	{
+	
 	}
 	
 	public void create(VideoFiles vFiles) throws OtrInternalErrorException
