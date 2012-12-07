@@ -2,8 +2,12 @@ package net.sf.otrcutmp4.controller.processor.exlp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import junit.framework.Assert;
 
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.event.impl.JaxbEvent;
@@ -25,32 +29,52 @@ public class TestCutlistParser extends AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestCutlistParser.class);
 	
-	public static File fClTxt,fClXml;
+	private static List<File> lTxt,lXml;
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fClTxt = new File("src/test/resources/data/txt/9552334.mpg.HQ.avi.cutlist");
-		fClXml = new File("src/test/resources/data/xml/9552334.xml");
+		lTxt = new ArrayList<File>();
+		lXml = new ArrayList<File>();
+		
+		lTxt.add( new File("src/test/resources/data/txt/9552334.mpg.HQ.avi.cutlist"));
+		lXml.add(new File("src/test/resources/data/xml/9552334.xml"));
+		
+		lTxt.add( new File("src/test/resources/data/txt/527787054.mpg.HQ.avi.cutlist"));
+		lXml.add(new File("src/test/resources/data/xml/527787054.xml"));
+		
+	}
+	
+	@Test
+	public void testInit() throws FileNotFoundException
+	{
+		Assert.assertEquals(lTxt.size(), lXml.size());
 	}
 	
 	@Test
 	public void test() throws FileNotFoundException
 	{
-		CutList expected = JaxbUtil.loadJAXB(fClXml.getPath(), CutList.class);
-		CutList actual = cutlist();
+		for(int i=0;i<lTxt.size();i++)
+		{
+			testCutlist(lTxt.get(i), lXml.get(i));
+		}
+		
+	}
+	
+	private void testCutlist(File fTxt, File fXml) throws FileNotFoundException
+	{
+		CutList expected = JaxbUtil.loadJAXB(fXml.getPath(), CutList.class);
+		CutList actual = cutlist(fTxt);
 		this.assertJaxbEquals(expected, actual);
 	}
 	
-	public CutList cutlist()
+	public CutList cutlist(File fTxt)
 	{
-		String txt = "src/test/resources/data/txt/9552334.mpg.HQ.avi.cutlist";
-		logger.debug("Loading from file: "+txt);
 		
 		EhResultContainer leh =  new EhResultContainer();
 		LogParser lp = new CutlistParser(leh);
 		
-		LogListener ll = new LogListenerFile(fClTxt.getPath(),lp);
+		LogListener ll = new LogListenerFile(fTxt.getPath(),lp);
 		ll.processSingle();
 		
 		JaxbEvent event = (JaxbEvent)leh.getSingleResult();
@@ -82,10 +106,12 @@ public class TestCutlistParser extends AbstractUtilTest
 	{
 		OtrUtilTstBootstrap.init();		
 		
+		int index = 1;
+		
 		TestCutlistParser.initFiles();
 		TestCutlistParser test = new TestCutlistParser();
-		CutList cl = test.cutlist();
+		CutList cl = test.cutlist(TestCutlistParser.lTxt.get(index));
 		JaxbUtil.info(cl);
-		JaxbUtil.save(TestCutlistParser.fClXml, cl, true);
+		JaxbUtil.save(TestCutlistParser.lXml.get(index), cl, true);
 	}
 }

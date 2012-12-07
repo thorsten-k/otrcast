@@ -1,0 +1,34 @@
+[General]
+Application=Cut_assistant.exe
+Version=0.9.12.2
+ApplyToFile=Burn_Notice_12.08.13_22-15_vox_50_TVOON_DE.mpg.HQ.avi
+NoOfCuts=2
+comment1=The following parts of the movie will be kept, the rest will be cut out.
+comment2=All values are given in seconds.
+OriginalFileSizeBytes=527787054
+FramesPerSecond=25
+IntendedCutApplicationName=VirtualDub
+IntendedCutApplication=VirtualDub.exe
+IntendedCutApplicationVersion=1.7.8.0
+VDUseSmartRendering=1
+VDSmartRenderingCodecFourCC=0x34363258
+VDSmartRenderingCodecVersion=0x00000000
+[Info]
+Author=
+UserComment=
+RatingByAuthor=4
+EPGError=0
+ActualContent=
+MissingBeginning=0
+MissingEnding=0
+MissingVideo=0
+MissingAudio=0
+OtherError=0
+OtherErrorDescription=
+SuggestedMovieName=Burn Notice 12.08.13 22-15 vox 50 TVOON DE.mpg.HQ
+[Cut0]
+	Start=285.039
+	Duration=1745.051
+	[Cut1]
+	Start=2446.318
+	Duration=944.95975

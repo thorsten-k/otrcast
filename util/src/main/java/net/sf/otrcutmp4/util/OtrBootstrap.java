@@ -27,6 +27,7 @@ public class OtrBootstrap
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("otrcutmp4-client.test");
+			loggerInit.addAltPath("src/test/resources/otrcutmp4-client.test");
 			loggerInit.init();
 		
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(appCode,confCode).getAbsolutePath());
