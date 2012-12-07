@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.cut.TestXmlVideoFiles;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -37,6 +38,7 @@ public class TestXmlVideo extends AbstractXmlSeriesTest
     	{
     		xml.setMovie(TestXmlMovie.create(false));
     		xml.setEpisode(TestXmlEpisode.create(false));
+    		xml.setVideoFiles(TestXmlVideoFiles.create(false));
     	}
     	
     	return xml;

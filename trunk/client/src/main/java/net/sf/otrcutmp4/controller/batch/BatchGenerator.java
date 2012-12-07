@@ -60,17 +60,31 @@ public class BatchGenerator extends AbstactBatchGenerator
 		videoCutter.setTxt(txt);
 	}
 	
-	public void build(Videos videos)
+	public void build(Videos videos) throws OtrInternalErrorException
 	{
 		for(Video video : videos.getVideo())
 		{
 			build(video);
 		}
+		
+		txt.debug();
+		File f = new File(cfg.getDir(Dir.BAT),"cut.bat");
+		txt.writeFile(f);
+		logger.info("");
+		logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
 	}
 	
-	private void build(Video video)
+	private void build(Video video) throws OtrInternalErrorException
 	{
-	
+		if(!video.isSetVideoFiles() || !video.getVideoFiles().isSetVideoFile())
+		{
+			 txt.add("echo No Cutlist available for video: "+video);
+			 txt.add("");
+		}
+		if(video.getVideoFiles().getVideoFile().size()!=1)
+		{
+			throw new OtrInternalErrorException("Multiple files currently not supported");
+		}
 	}
 	
 	public void create(VideoFiles vFiles) throws OtrInternalErrorException
