@@ -14,6 +14,7 @@ import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
@@ -82,11 +83,11 @@ public class TestCutRest
 		VideoFiles vFiles = JaxbUtil.loadJAXB(fClFinderResult.getAbsolutePath(), VideoFiles.class);
         ViewCutlistChooser viewCutlistChooser = new CliCutlistChooserView();
         CutlistChooser controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
-        vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
-        JaxbUtil.info(vFiles);
+        Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
+        JaxbUtil.info(videos);
         
 		logger.info("Saving result to "+fSrcDirProcessorResult.getAbsolutePath());
-		JaxbUtil.save(flClChooserResult , vFiles, true);
+		JaxbUtil.save(flClChooserResult , videos, true);
 	}
 	
 	public static void main(String[] args) throws Exception

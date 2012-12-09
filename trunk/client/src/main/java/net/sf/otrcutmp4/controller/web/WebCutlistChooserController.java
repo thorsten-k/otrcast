@@ -11,6 +11,7 @@ import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 
@@ -41,8 +42,10 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		rest = ProxyFactory.create(OtrCutRest.class, host,clientExecutor);
 	}
 	
-	@Override
-	public VideoFiles chooseCutlists(VideoFiles vFiles) throws UtilsProcessingException
+	@Override public Videos chooseCutlists(VideoFiles vFiles) {return null;}
+	
+	@Deprecated
+	public VideoFiles chooseCutlists2(VideoFiles vFiles) throws UtilsProcessingException
 	{
 		view.welcome(vFiles);
 		String token = rest.addCutPackage(vFiles);

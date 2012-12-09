@@ -12,6 +12,8 @@ import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Video;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.web.WebCutListLoader;
 
 import org.slf4j.Logger;
@@ -30,21 +32,25 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 	}
 	
 	@Override
-	public VideoFiles chooseCutlists(VideoFiles vFiles)
+	public Videos chooseCutlists(VideoFiles vFiles)
 	{
 		view.welcome(vFiles);
+		Videos videos = new Videos();
+		
 		for(int i=0;i<vFiles.getVideoFile().size();i++)
 		{
 			VideoFile vf = vFiles.getVideoFile().get(i);
 			if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList())
 			{
-				chooseCutlist(i,vf,true);
+				Video video = chooseCutlist(i,vf,true);
+				if(video!=null){videos.getVideo().add(video);}
 			}
 		}		
-		return vFiles;
+		
+		return videos;
 	}
 	
-	private void chooseCutlist(int index, VideoFile vf,boolean loadCutlist)
+	private Video chooseCutlist(int index, VideoFile vf,boolean loadCutlist)
 	{
 		view.showFileInfo(index,vf);
 		for(int i=0;i<vf.getCutListsAvailable().getCutList().size();i++)
@@ -54,6 +60,12 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		}
 		
 		vf.setCutListsSelected(select(vf.getCutListsAvailable(), loadCutlist));
+		vf.setCutListsAvailable(null);
+		Video video = new Video();
+		video.setVideoFiles(new VideoFiles());
+		video.getVideoFiles().getVideoFile().add(vf);
+		
+		return video;
 	}
 	
 	@Override
