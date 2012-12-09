@@ -1,19 +1,15 @@
 package net.sf.otrcutmp4.controller.batch.video;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Assert;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.AviToMp4.Profile;
+import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
-import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
-import net.sf.otrcutmp4.model.xml.cut.FileName;
-import net.sf.otrcutmp4.model.xml.cut.VideoFile;
-import net.sf.otrcutmp4.model.xml.otr.Format;
-import net.sf.otrcutmp4.model.xml.otr.OtrId;
-import net.sf.otrcutmp4.test.AbstractClientTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 
 import org.junit.Before;
@@ -21,45 +17,35 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestRawExtract extends AbstractClientTest
+public class TestRawExtract extends AbstractBatchTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestRawExtract.class);
 	
 	private AviExtract rawExtract;
-	
-	private VideoFile vf;
 	
 	@Before
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
 		rawExtract = new  AviExtract(tC.getOtrConfig(),Profile.P0);
-		
-		FileName fn = new FileName();
-		fn.setValue("my.file.avi");
-		
-		Format format = new Format();
-		format.setType(XmlOtrIdFactory.typeAviHq);
-		format.setAc3(false);
-		
-		OtrId id = new OtrId();
-		id.setFormat(format);
-		
-		vf = new VideoFile();
-		vf.setFileName(fn);
-		vf.setOtrId(id);
 	}
 	
 	@Test
 	public void hq() throws OtrConfigurationException, OtrInternalErrorException, UtilsProcessingException
 	{
-		List<String> actual = rawExtract.rawExtract(vf);
-		Assert.assertEquals(1, actual.size());
+		List<String> expected = new ArrayList<String>();
+		expected.add("dir.tools/tool.mp4box -aviraw video dir.avi/my-1.file.avi -out dir.tmp/raw-1.h264");
+		expected.add("dir.tools/tool.mp4box -aviraw video dir.avi/my-2.file.avi -out dir.tmp/raw-2.h264");
 		
-		String expected0 = "dir.tools/tool.mp4box -aviraw video dir.avi/my.file.avi -out dir.tmp/raw.h264";
+		List<String> actual = rawExtract.rawExtract(video);
+		Assert.assertEquals(expected.size(), actual.size());
 		
-		for(String s : actual){logger.debug(s);}
-		
-		Assert.assertEquals(expected0, actual.get(0));
+		for(int i=0;i<expected.size();i++)
+		{
+			logger.debug("Result "+i);
+			logger.debug("Actual:   "+actual.get(i));
+			logger.debug("Expected: "+expected.get(i));
+			Assert.assertEquals(expected.get(i), actual.get(i));
+		}
 	}
 }

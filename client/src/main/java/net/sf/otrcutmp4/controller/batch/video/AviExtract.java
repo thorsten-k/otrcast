@@ -11,6 +11,7 @@ import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
@@ -26,12 +27,24 @@ public class AviExtract extends AbstactBatchGenerator
 		super(cfg, profile);
 	}
 	
-	public List<String> rawExtract(VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
+	public List<String> rawExtract(Video video) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		List<String> result = new ArrayList<String>();
 		
+		int index=1;
+		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		{
+			result.add(rawExtract(index,vf));
+			index++;
+		}
+		
+		return result;
+	}
+	
+	private String rawExtract(int index, VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
+	{	
 		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));		
-		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.h264"));
+		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+".h264"));
 		
 		StringBuffer sbVideo = new StringBuffer();
 	
@@ -48,10 +61,6 @@ public class AviExtract extends AbstactBatchGenerator
 		
 		sbVideo.append("-aviraw video "+inAvi+" -out "+outH264);
 		
-			
-		result.add(sbVideo.toString());
-		
-
-		return result;
+		return sbVideo.toString();
 	}
 }

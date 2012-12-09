@@ -3,12 +3,9 @@ package net.sf.otrcutmp4.controller.batch;
 import java.io.File;
 
 import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.otrcutmp4.AviToMp4;
-import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
-import net.sf.otrcutmp4.util.OtrConfig.Template;
 import net.sf.otrcutmp4.util.OtrConfig.Tool;
 
 import org.slf4j.Logger;
@@ -19,8 +16,7 @@ public class AbstactBatchGenerator
 	final static Logger logger = LoggerFactory.getLogger(AbstactBatchGenerator.class);
 	
 	protected RelativePathFactory rpf;
-	protected ExlpTxtWriter txt;
-	
+
 	protected String cmdMp4Box,cmdFfmpeg,cmdLame,cmdFaac,cmdEac3to,cmdNero;
 	
 	protected OtrConfig cfg;
@@ -45,6 +41,4 @@ public class AbstactBatchGenerator
 		cmdEac3to = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.EAC3TO)));
 		cmdNero = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.NEROAAC)));
 	}
-	
-	protected void setTxt(ExlpTxtWriter txt) {this.txt = txt;}
 }
