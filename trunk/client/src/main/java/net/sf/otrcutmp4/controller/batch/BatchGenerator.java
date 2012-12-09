@@ -13,6 +13,7 @@ import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.controller.batch.audio.Mp3ToAac;
 import net.sf.otrcutmp4.controller.batch.video.AviExtract;
+import net.sf.otrcutmp4.controller.batch.video.H264Transcode;
 import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
@@ -40,6 +41,9 @@ public class BatchGenerator extends AbstactBatchGenerator
 	
 	private Mp3ToAac mp3ToAac;
 	private Ac3ToAac ac3ToAac;
+	private H264Transcode h264Transcode;
+	
+	private ExlpTxtWriter txt;
 	
 	public BatchGenerator(OtrConfig cfg,AviToMp4.Profile profile) throws OtrInternalErrorException
 	{
@@ -47,24 +51,26 @@ public class BatchGenerator extends AbstactBatchGenerator
 		
 		mp3ToAac = new Mp3ToAac(cfg,profile);
 		ac3ToAac = new Ac3ToAac(cfg,profile);
+		h264Transcode = new H264Transcode(cfg,profile);
+		rawExtract = new AviExtract(cfg,profile);
+		videoCutter = new VideoCutter(cfg,profile);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT).getAbsolutePath());
 		
 		txt = new ExlpTxtWriter();
-		
-		rawExtract = new AviExtract(cfg,profile);
-		rawExtract.setTxt(txt);
-
-		videoCutter = new VideoCutter(cfg,profile);
-		videoCutter.setTxt(txt);
 	}
 	
 	public void build(Videos videos) throws OtrInternalErrorException
 	{
 		for(Video video : videos.getVideo())
 		{
-			build(video);
+			try {build(video);}
+			catch (UtilsProcessingException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		txt.debug();
@@ -74,7 +80,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
 	}
 	
-	private void build(Video video) throws OtrInternalErrorException
+	private void build(Video video) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		if(!video.isSetVideoFiles() || !video.getVideoFiles().isSetVideoFile())
 		{
@@ -85,80 +91,48 @@ public class BatchGenerator extends AbstactBatchGenerator
 		{
 			throw new OtrInternalErrorException("Multiple files currently not supported");
 		}
+		crateForVideo(video,profile);
 	}
 	
+	@Deprecated
 	public void create(VideoFiles vFiles) throws OtrInternalErrorException
 	{
-		 for(VideoFile vf : vFiles.getVideoFile())
-		 {
-			 try
-			 {
-				 if(vf.isSetCutListsSelected() && vf.getCutListsSelected().isSetCutList())
-				 {
-					 crateForVideo(vf,profile);
-				 }
-				 else
-				 {
-					 txt.add("echo No Cutlist available for: "+vf.getFileName().getValue());
-					 txt.add("");
-				 }
-			 }
-			 catch (UtilsProcessingException e){e.printStackTrace();}
-			 
-		 }
-		 txt.debug();
-
-		 File f = new File(cfg.getDir(Dir.BAT),"cut.bat");
-		 txt.writeFile(f);
-		 logger.info("");
-		 logger.info("Batch file written to: "+rpf.relativate(new File("."), f));
+		 logger.error("Deprecated");
 	}
 	
-	private void crateForVideo(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
+	private void crateForVideo(Video video, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
 	{
-		txt.add("echo Processing: "+vf.getFileName().getValue());
+		txt.add("echo Processing: "+video);
 		txt.add("");
 		
 		try {txt.add(ShellCmdRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error("",e);}
 	
-		extract(vf);
-		transcode(vf);
-		cut(vf,profile);
-		merge(vf);
+		extract(video);
+		transcode(video);
+//		cut(vf,profile);
+//		merge(vf);
 		
 		txt.add("");
 		txt.add("");
 	}
 	
-	private void extract(VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
+	private void extract(Video video) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		switch(profile)
 		{
-			case P0: txt.add(rawExtract.rawExtract(vf));break;
+			case P0: txt.add(rawExtract.rawExtract(video));break;
 		}	
 		
-		if(vf.getOtrId().getFormat().isAc3())
+		logger.warn("No AC3 processing available!");
+/*		if(vf.getOtrId().getFormat().isAc3())
 		{
 			txt.add(ac3ToAac.extract(vf));
 		}
 		else
-		{
-			txt.add(mp3ToAac.extract(vf));
+*/		{
+			txt.add(mp3ToAac.extract(video));
 		}
-	}
-	
-	
-	private void cut(VideoFile vf, AviToMp4.Profile profile) throws OtrInternalErrorException
-	{
-		String inVideo=null;
-		switch(profile)
-		{
-			case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));break;
-			case P1: inVideo = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));break;
-		}
-		 
-		videoCutter.applyCutList(vf.getCutListsSelected(),inVideo,profile);
 	}
 	
 	private void merge(VideoFile vf) throws UtilsProcessingException
@@ -234,29 +208,10 @@ public class BatchGenerator extends AbstactBatchGenerator
 		}
 	}
 	
-	private void transcode(VideoFile vf) throws UtilsProcessingException
+	private void transcode(Video video) throws UtilsProcessingException, OtrInternalErrorException
 	{
-		String sMp4 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4.mp4"));
-		String sH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP),"raw_video.h264"));
-		String sAudio;
-		
-		if(vf.getOtrId().getFormat().isAc3())
-		{
-			sAudio = rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.m4a"));
-		}
-		else
-		{
-			txt.add(mp3ToAac.transcode());
-			sAudio = rpf.relativate(new File(cfg.getDir(Dir.TMP),"aac.aac"));
-		}
-
-		StringBuffer sb = new StringBuffer();
-		sb.append(cmdMp4Box).append(" ");
-		switch(XmlOtrIdFactory.getType(vf.getOtrId().getFormat().getType()))
-		{
-			case hd: sb.append("-fps 50 ");break;
-		}
-		sb.append(" -add "+sH264+" -add "+sAudio+" "+sMp4);
-		txt.add(sb.toString());
+		logger.warn("No AC3 handling");
+		txt.add(mp3ToAac.transcode(video));
+		txt.add(h264Transcode.transcode(video));
 	}	
 }

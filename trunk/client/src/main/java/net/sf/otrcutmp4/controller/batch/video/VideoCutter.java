@@ -3,12 +3,18 @@ package net.sf.otrcutmp4.controller.batch.video;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
+import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
@@ -26,19 +32,43 @@ public class VideoCutter extends AbstactBatchGenerator
 		super(cfg, profile);
 	}
 	
-	public void applyCutList(CutListsSelected clSelected, String inVideo, AviToMp4.Profile profile)
+	public List<String> cut(Video video) throws OtrInternalErrorException, UtilsProcessingException
 	{
-		txt.add("");
+		List<String> result = new ArrayList<String>();
+		
+		int index=1;
+		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		{
+			String inVideo=null;
+			switch(profile)
+			{
+				case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4-"+index+".mp4"));break;
+//				case P1: inVideo = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));break;
+			}
+			applyCutList(vf.getCutListsSelected(),inVideo,profile);
+			
+//			result.add(transcode(index,vf));
+			index++;
+		}
+		
+		return result;
+	}
+	
+	private List<String> applyCutList(CutListsSelected clSelected, String inVideo, AviToMp4.Profile profile)
+	{
+		List<String> result = new ArrayList<String>();
 		int counter=1;
 		for(CutList cl : clSelected.getCutList())
 		{
-			cutList(counter, cl, inVideo, profile);
+			result.addAll(cutList(counter, cl, inVideo, profile));
 			counter++;
 		}
+		return result;
 	}
 	
-	private void cutList(int index, CutList cl, String inVideo,AviToMp4.Profile profile)
+	private List<String> cutList(int index, CutList cl, String inVideo,AviToMp4.Profile profile)
 	{
+		List<String> result = new ArrayList<String>();
 		int counter = 1;
 		for(Cut cut : cl.getCut())
 		{
@@ -46,13 +76,14 @@ public class VideoCutter extends AbstactBatchGenerator
 			{
 				switch(profile)
 				{
-					case P0:	txt.add(getP0cut(index, counter, cut, inVideo));break;
-					case P1:	txt.add(getP1cut(index, counter, cut, inVideo));break;
+					case P0:	result.add(getP0cut(index, counter, cut, inVideo));break;
+					case P1:	result.add(getP1cut(index, counter, cut, inVideo));break;
 				}
 				
 				counter++;
 			}
 		}
+		return result;
 	}
 	
 	private String getP0cut(int index, int counter, Cut cut, String inVideo)

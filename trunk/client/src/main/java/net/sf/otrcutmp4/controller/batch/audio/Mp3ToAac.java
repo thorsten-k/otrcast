@@ -1,6 +1,8 @@
 package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.AviToMp4;
@@ -8,6 +10,7 @@ import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Audio;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
@@ -24,10 +27,22 @@ public class Mp3ToAac extends AbstactBatchGenerator
 		super(otrConfig,profile);
 	}
 	
-	public String extract(VideoFile vf) throws UtilsProcessingException, OtrInternalErrorException
+	public List<String> extract(Video video) throws UtilsProcessingException, OtrInternalErrorException
+	{
+		List<String> result = new ArrayList<String>();
+		int index=1;
+		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		{
+			result.add(extract(index,vf));
+			index++;
+		}
+		return result;
+	}
+	
+	private String extract(int index, VideoFile vf) throws UtilsProcessingException, OtrInternalErrorException
 	{
 		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));
-		String outMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw.mp3"));
+		String outMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+".mp3"));
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");
@@ -44,13 +59,24 @@ public class Mp3ToAac extends AbstactBatchGenerator
 		return sb.toString();
 	}
 	
-	public String transcode()
+	public List<String> transcode(Video video) throws UtilsProcessingException, OtrInternalErrorException
 	{
-		String sMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw_audio.mp3"));
-		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP), "aac.aac"));
+		List<String> result = new ArrayList<String>();
+		int index=1;
+		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		{
+			result.add(transcode(index,vf));
+			index++;
+		}
+		return result;
+	}
+	
+	private String transcode(int index, VideoFile vf)
+	{
+		String sMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+"_audio.mp3"));
+		String sAac = rpf.relativate(new File(cfg.getDir(Dir.TMP), "aac-"+index+".aac"));
 		
 		StringBuffer sb = new StringBuffer();
-		
 		sb.append(cmdLame);
 		sb.append(" --decode ").append(sMp3);
 		sb.append(" - | ");
