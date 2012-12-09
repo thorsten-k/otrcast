@@ -17,6 +17,7 @@ import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
@@ -145,14 +146,15 @@ public class AviToMp4
 	        	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
 	        }
 	    	
-	    	vFiles = controllerCutlistChooser.chooseCutlists(vFiles);
+	    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
+	    	JaxbUtil.debug(videos);
 	    	
-	        controllerCutlistChooser.loadCurlists(vFiles);
-	        for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}
-	        JaxbUtil.debug(vFiles);
+	    	logger.error("NYI");
+//	        controllerCutlistChooser.loadCurlists(vFiles);        
+//	        for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}        
 	        
-	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
-	    	batch.create(vFiles);
+//	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
+//	    	batch.create(vFiles);
         }
         
         logger.info("... finished.");

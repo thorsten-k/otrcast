@@ -4,10 +4,11 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 
 public interface CutlistChooser
 {
-	VideoFiles chooseCutlists(VideoFiles vFiles) throws UtilsProcessingException;
+	Videos chooseCutlists(VideoFiles vFiles) throws UtilsProcessingException;
 	
 	CutListsSelected select(CutListsAvailable clAvailable, boolean loadCutlist);
 	
