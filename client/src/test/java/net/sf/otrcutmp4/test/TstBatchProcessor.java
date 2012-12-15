@@ -30,7 +30,8 @@ public class TstBatchProcessor
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
 		BatchGenerator test = new BatchGenerator(null,Profile.P0);
-		test.create(vFiles);
+		logger.warn("NYI");
+//		test.create(vFiles);
 	}
 	
 	public void renameGenerator() throws FileNotFoundException

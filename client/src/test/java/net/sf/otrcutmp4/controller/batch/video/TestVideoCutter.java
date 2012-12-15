@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.model.xml.cut.CutList;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 
 import org.junit.Assert;
@@ -31,12 +34,31 @@ public class TestVideoCutter extends AbstractBatchTest
 		videoCutter = new  VideoCutter(tC.getOtrConfig(),Profile.P0);
 	}
 	
-	@Ignore @Test
+	@Test
+	public void testInit()
+	{
+		Assert.assertTrue(video.isSetVideoFiles());
+		Assert.assertTrue(video.getVideoFiles().isSetVideoFile());
+		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		{
+			Assert.assertTrue(vf.isSetCutListsSelected());
+			Assert.assertTrue(vf.getCutListsSelected().isSetCutList());
+			for(CutList cl : vf.getCutListsSelected().getCutList())
+			{
+				Assert.assertTrue(cl.isSetCut());
+			}
+		}
+		JaxbUtil.trace(video);
+	}
+	
+	@Test
 	public void cut() throws OtrConfigurationException, OtrInternalErrorException, UtilsProcessingException
 	{
 		List<String> expected = new ArrayList<String>();
-		expected.add("dir.tools/tool.mp4box -add dir.tmp/raw-1_video.h264 -add dir.tmp/aac-1.aac dir.tmp/mp4-1.mp4");
-		expected.add("dir.tools/tool.mp4box -add dir.tmp/raw-2_video.h264 -add dir.tmp/aac-2.aac dir.tmp/mp4-2.mp4");
+		expected.add("dir.tools/tool.ffmpeg -ss 14.00 -t 23.00 -i dir.tmp/mp4-1.mp4 -vcodec copy -acodec copy dir.tmp/1.1-1.mp4");
+		expected.add("dir.tools/tool.ffmpeg -ss 28.00 -t 4.00 -i dir.tmp/mp4-1.mp4 -vcodec copy -acodec copy dir.tmp/1.1-2.mp4");
+		expected.add("dir.tools/tool.ffmpeg -ss 14.00 -t 23.00 -i dir.tmp/mp4-2.mp4 -vcodec copy -acodec copy dir.tmp/2.1-1.mp4");
+		expected.add("dir.tools/tool.ffmpeg -ss 28.00 -t 4.00 -i dir.tmp/mp4-2.mp4 -vcodec copy -acodec copy dir.tmp/2.1-2.mp4");
 		
 		List<String> actual = videoCutter.cut(video);
 		Assert.assertEquals(expected.size(), actual.size());
