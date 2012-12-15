@@ -5,7 +5,6 @@ import java.util.Date;
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 
 import org.junit.Assert;
@@ -17,12 +16,10 @@ public abstract class AbstractClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractClientTest.class);
 	
-	protected static NsPrefixMapperInterface nsPrefixMapper;
-	
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
-		nsPrefixMapper = new OtrCutNsPrefixMapper();
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
 	@BeforeClass

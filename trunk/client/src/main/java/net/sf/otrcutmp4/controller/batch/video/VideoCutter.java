@@ -36,37 +36,37 @@ public class VideoCutter extends AbstactBatchGenerator
 	{
 		List<String> result = new ArrayList<String>();
 		
-		int index=1;
+		int indexVf=1;
 		for(VideoFile vf : video.getVideoFiles().getVideoFile())
 		{
 			String inVideo=null;
 			switch(profile)
 			{
-				case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4-"+index+".mp4"));break;
+				case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4-"+indexVf+".mp4"));break;
 //				case P1: inVideo = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));break;
 			}
-			applyCutList(vf.getCutListsSelected(),inVideo,profile);
+			result.addAll(applyCutList(indexVf,vf.getCutListsSelected(),inVideo,profile));
 			
 //			result.add(transcode(index,vf));
-			index++;
+			indexVf++;
 		}
 		
 		return result;
 	}
 	
-	private List<String> applyCutList(CutListsSelected clSelected, String inVideo, AviToMp4.Profile profile)
+	private List<String> applyCutList(int indexVf,CutListsSelected clSelected, String inVideo, AviToMp4.Profile profile)
 	{
 		List<String> result = new ArrayList<String>();
-		int counter=1;
+		int indexCl=1;
 		for(CutList cl : clSelected.getCutList())
 		{
-			result.addAll(cutList(counter, cl, inVideo, profile));
-			counter++;
+			result.addAll(cutList(indexVf,indexCl, cl, inVideo, profile));
+			indexCl++;
 		}
 		return result;
 	}
 	
-	private List<String> cutList(int index, CutList cl, String inVideo,AviToMp4.Profile profile)
+	private List<String> cutList(int indexVf, int indexCl, CutList cl, String inVideo,AviToMp4.Profile profile)
 	{
 		List<String> result = new ArrayList<String>();
 		int counter = 1;
@@ -76,8 +76,8 @@ public class VideoCutter extends AbstactBatchGenerator
 			{
 				switch(profile)
 				{
-					case P0:	result.add(getP0cut(index, counter, cut, inVideo));break;
-					case P1:	result.add(getP1cut(index, counter, cut, inVideo));break;
+					case P0:	result.add(getP0cut(indexVf, indexCl, counter, cut, inVideo));break;
+					case P1:	result.add(getP1cut(indexVf, indexCl, counter, cut, inVideo));break;
 				}
 				
 				counter++;
@@ -86,7 +86,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		return result;
 	}
 	
-	private String getP0cut(int index, int counter, Cut cut, String inVideo)
+	private String getP0cut(int indexVf, int indexCl, int counter, Cut cut, String inVideo)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdFfmpeg);
@@ -95,11 +95,11 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
 		sb.append(" -acodec copy");
-		sb.append(" ").append(rpf.relativate(new File(cfg.getDir(Dir.TMP), index+"-"+counter+".mp4")));
+		sb.append(" ").append(rpf.relativate(new File(cfg.getDir(Dir.TMP), indexVf+"."+indexCl+"-"+counter+".mp4")));
 		return sb.toString();
 	}
 	
-	private String getP1cut(int index, int counter, Cut cut, String inVideo)
+	private String getP1cut(int indexVf,int indexCl, int counter, Cut cut, String inVideo)
 	{		
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdFfmpeg);
@@ -109,7 +109,7 @@ public class VideoCutter extends AbstactBatchGenerator
 		sb.append(" -i "+inVideo);
 		sb.append(" -vcodec copy");
 		sb.append(" -acodec libvo_aacenc");
-		sb.append(" ").append(rpf.relativate(new File(cfg.getDir(Dir.TMP), index+"-"+counter+".mp4")));
+		sb.append(" ").append(rpf.relativate(new File(cfg.getDir(Dir.TMP), indexVf+"."+indexCl+"-"+counter+".mp4")));
 		return sb.toString();
 	}
 	
