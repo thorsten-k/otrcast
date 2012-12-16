@@ -49,7 +49,7 @@ public class CutlistFinder
 		return vFiles;
 	}
 	
-	protected CutLists searchCutlist(VideoFile vf)
+	public CutLists searchCutlist(VideoFile vf)
 	{
 		CutLists result = new CutLists();
 		

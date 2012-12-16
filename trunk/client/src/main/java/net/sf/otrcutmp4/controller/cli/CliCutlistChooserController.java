@@ -3,19 +3,18 @@ package net.sf.otrcutmp4.controller.cli;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.CutLists;
-import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
-import net.sf.otrcutmp4.web.WebCutListLoader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +23,14 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 {
 	final static Logger logger = LoggerFactory.getLogger(CliCutlistChooserController.class);
 	
-	private WebCutListLoader wcll;
+	private static enum Type {single}
+	
+	private Pattern pSingle;
 	
 	public CliCutlistChooserController(ViewCutlistChooser view)
 	{
 		super(view);
-		wcll = new WebCutListLoader();
+		pSingle = Pattern.compile("(\\d)");
 	}
 	
 	@Override
@@ -43,41 +44,47 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 			VideoFile vf = vFiles.getVideoFile().get(i);
 			if(vf.isSetCutLists() && vf.getCutLists().isSetCutList())
 			{
-				Video video = chooseCutlist(i,vf,true);
-				if(video!=null){videos.getVideo().add(video);}
+				List<Video> list = chooseCutlist(i,vf);
+				videos.getVideo().addAll(list);
 			}
 		}		
 		
 		return videos;
 	}
 	
-	private Video chooseCutlist(int index, VideoFile vf,boolean loadCutlist)
+	private List<Video> chooseCutlist(int index, VideoFile vf)
 	{
 		view.showFileInfo(index,vf);
 		for(int i=0;i<vf.getCutLists().getCutList().size();i++)
-		{
+		{	// This shows infos
 			CutList cl = vf.getCutLists().getCutList().get(i);
 			view.showCutlistInfo(i, cl,true,true,true,true);
 		}
-		
-		vf.setCutListsSelected(select(vf.getCutLists(), loadCutlist));
-		vf.setCutLists(null);
-		Video video = new Video();
-		video.setVideoFiles(new VideoFiles());
-		video.getVideoFiles().getVideoFile().add(vf);
-		
-		return video;
+		return select(vf);
 	}
 	
 	@Override
-	public CutListsSelected select(CutLists clAvailable, boolean loadCutlist)
+	public List<Video> select(VideoFile vf)
 	{
-		CutListsSelected clSelected = new CutListsSelected();
+		List<Video> listVideos = new ArrayList<Video>();
 		Scanner sc = new Scanner(System.in);
 		String line = sc.nextLine();
-		String[] tokens = line.split( "," );
+		if(line.length()==0){return listVideos;}
 		
-		if(line.length()>0)
+		for(String token : line.split(","))
+		{
+			logger.debug("Token "+token);
+			
+			Matcher mSingle=pSingle.matcher(token);
+			
+			if(!mSingle.matches())
+			{
+				logger.warn("Unknown input");
+			}
+			
+			if(mSingle.matches()){listVideos.add(buildSingle(vf,Integer.parseInt(mSingle.group(1))));}
+		}
+/*		if(line.length()>0)
 		{
 			List<Integer> selectedIndexes = new ArrayList<Integer>();
 			for(String token : tokens)
@@ -85,55 +92,26 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 				selectedIndexes.add(Integer.parseInt(token));
 			}	
 			
-			if(loadCutlist)
+			for(Integer id : selectedIndexes)
 			{
-				for(Integer id : selectedIndexes)
-				{
-					clSelected.getCutList().add(clAvailable.getCutList().get(id));
-				}
-			}
-			else
-			{
-				if(selectedIndexes.size()==1)
-				{
-					clSelected.getCutList().add(clAvailable.getCutList().get(selectedIndexes.get(0)));
-				}
-				else
-				{
-					logger.warn("You have to chosse only one cutlist");
-				}
+				clSelected.getCutList().add(vf.getCutLists().getCutList().get(id));
 			}
 		}
-		return clSelected;
-	}
-
-	@Override
-	public void loadCutlists(Videos videos)
-	{
-		for(Video video : videos.getVideo())
-		{
-			JaxbUtil.info(video);
-		}
+*/		return listVideos;
 	}
 	
-	@Override
-	public void loadCurlists(VideoFiles vFiles)
+	private Video buildSingle(VideoFile vfInput, int index)
 	{
-		for(VideoFile vf : vFiles.getVideoFile())
-		{
-			if(vf.isSetCutListsSelected())
-			{
-				loadCurlists(vf.getCutListsSelected());
-			}
-		}
-	}
-	
-	private void loadCurlists(CutListsSelected clSelected)
-	{
-		for(CutList cl : clSelected.getCutList())
-		{		
-			CutList loaded = wcll.loadCutlist(cl.getId());
-			cl.getCut().addAll(loaded.getCut());
-		}
+		VideoFile vf = new VideoFile();
+		vf.setCutList(vfInput.getCutLists().getCutList().get(index));
+		
+		VideoFiles vfs = new VideoFiles();
+		vfs.getVideoFile().add(vf);
+		
+		Video video = new Video();
+		video.setVideoFiles(vfs);
+		
+		JaxbUtil.info(video);
+		return video;
 	}
 }

@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4.controller.web;
 
+import java.util.List;
+
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -8,9 +10,9 @@ import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
-import net.sf.otrcutmp4.model.xml.cut.CutLists;
-import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
@@ -61,15 +63,9 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		return vFiles;
 	}
 	
-	@Override public CutListsSelected select(CutLists clAvailable, boolean loadCutlist)
+	@Override public List<Video> select(VideoFile vf)
 	{
 		logger.debug("Uploading ...");
 		return null;
-	}
-	
-	@Override public void loadCutlists(Videos videos) {}
-	@Override public void loadCurlists(VideoFiles vf)
-	{
-		cli.loadCurlists(vf);
 	}
 }

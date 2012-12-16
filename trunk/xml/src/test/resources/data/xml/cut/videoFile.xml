@@ -4,5 +4,4 @@
     <c:fileName>myFile.mp4</c:fileName>
     <c:cutList id="myId" rating="12.3" ratingCount="3"/>
     <c:cutLists/>
-    <c:cutListsSelected/>
 </c:videoFile>

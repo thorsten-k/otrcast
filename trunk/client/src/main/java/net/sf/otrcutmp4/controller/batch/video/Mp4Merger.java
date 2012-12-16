@@ -61,15 +61,11 @@ public class Mp4Merger extends AbstactBatchGenerator
 		int indexVf=1;
 		for(VideoFile vf : video.getVideoFiles().getVideoFile())
 		{
-			for(int i=1;i<=vf.getCutListsSelected().getCutList().get(0).getCut().size();i++)
-			{
-				StringBuffer sb = new StringBuffer();
-				sb.append("mp4-").append(indexVf);
-				sb.append(".").append(1);
-				sb.append("-").append(i);
-				sb.append(".mp4");
-				fragments.add(sb.toString());
-			}
+			StringBuffer sb = new StringBuffer();
+			sb.append("mp4-").append(indexVf);
+			sb.append(".").append(1);
+			sb.append(".mp4");
+			fragments.add(sb.toString());
 			indexVf++;
 		}
 		return fragments;

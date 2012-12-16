@@ -5,7 +5,6 @@ import java.io.IOException;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -45,9 +44,6 @@ public class AbstractBatchTest extends AbstractClientTest
 		cl.getCut().add(c1);
 		cl.getCut().add(c2);
 		
-		CutListsSelected cs = new CutListsSelected();
-		cs.getCutList().add(cl);
-		
 		FileName fn = new FileName();
 		fn.setValue(name);
 		
@@ -61,7 +57,7 @@ public class AbstractBatchTest extends AbstractClientTest
 		VideoFile vf = new VideoFile();
 		vf.setFileName(fn);
 		vf.setOtrId(id);
-		vf.setCutListsSelected(cs);
+		vf.setCutList(cl);
 		return vf;
 	}
 }
