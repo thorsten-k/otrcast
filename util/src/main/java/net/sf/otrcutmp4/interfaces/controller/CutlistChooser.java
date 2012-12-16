@@ -1,17 +1,18 @@
 package net.sf.otrcutmp4.interfaces.controller;
 
+import java.util.List;
+
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.otrcutmp4.model.xml.cut.CutLists;
-import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
 
 public interface CutlistChooser
 {
 	Videos chooseCutlists(VideoFiles vFiles) throws UtilsProcessingException;
+	List<Video> select(VideoFile vf);
 	
-	CutListsSelected select(CutLists clAvailable, boolean loadCutlist);
-	
-	void loadCurlists(VideoFiles vf);
-	void loadCutlists(Videos videos);
+//	void loadCurlists(VideoFiles vf);
+//	void loadCutlists(Videos videos);
 }

@@ -1,9 +1,11 @@
 package net.sf.otrcutmp4.controller.noop;
 
+import java.util.List;
+
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
-import net.sf.otrcutmp4.model.xml.cut.CutLists;
-import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
+import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
 
 import org.slf4j.Logger;
@@ -13,8 +15,6 @@ public class NoopCutlistChooserController implements CutlistChooser
 {
 	final static Logger logger = LoggerFactory.getLogger(NoopCutlistChooserController.class); 
 	
-	@Override public CutListsSelected select(CutLists clAvailable, boolean loadCutlist) {return null;}
 	@Override public Videos chooseCutlists(VideoFiles vFiles) {return null;}
-	@Override public void loadCurlists(VideoFiles vf) {}
-	@Override public void loadCutlists(Videos videos) {}
+	@Override public List<Video> select(VideoFile vf) {return null;}
 }

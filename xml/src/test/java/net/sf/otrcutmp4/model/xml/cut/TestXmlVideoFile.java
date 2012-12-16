@@ -38,7 +38,6 @@ public class TestXmlVideoFile extends AbstractXmlCutTest
     	{
     		xml.setFileName(TestXmlFileName.create(false));
     		xml.setOtrId(TestXmlOtrId.create(false));
-    		xml.setCutListsSelected(TestXmlCutListsSelected.create(false));
     		xml.setCutList(TestXmlCutList.create(false));
     		xml.setCutLists(TestXmlCutLists.create(false));
     	}
