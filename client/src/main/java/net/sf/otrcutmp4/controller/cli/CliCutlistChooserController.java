@@ -13,6 +13,7 @@ import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
 
@@ -22,8 +23,6 @@ import org.slf4j.LoggerFactory;
 public class CliCutlistChooserController extends AbstractCutlistChooserController implements CutlistChooser
 {
 	final static Logger logger = LoggerFactory.getLogger(CliCutlistChooserController.class);
-	
-	private static enum Type {single}
 	
 	private Pattern pSingle;
 	
@@ -104,12 +103,18 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 	{
 		VideoFile vf = new VideoFile();
 		vf.setCutList(vfInput.getCutLists().getCutList().get(index));
+		vf.setOtrId(vfInput.getOtrId());
 		
 		VideoFiles vfs = new VideoFiles();
 		vfs.getVideoFile().add(vf);
 		
 		Video video = new Video();
 		video.setVideoFiles(vfs);
+		
+		Movie movie = new Movie();
+		if(vf.getCutList().isSetFileName()){movie.setName(vf.getCutList().getFileName().getValue());}
+		else{movie.setName(vfInput.getOtrId().getTv().getName());}
+		video.setMovie(movie);
 		
 		JaxbUtil.info(video);
 		return video;
