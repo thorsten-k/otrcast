@@ -14,6 +14,7 @@ public class NoopCutlistChooserController implements CutlistChooser
 	final static Logger logger = LoggerFactory.getLogger(NoopCutlistChooserController.class); 
 	
 	@Override public CutListsSelected select(CutListsAvailable clAvailable, boolean loadCutlist) {return null;}
-	@Override public void loadCurlists(VideoFiles vf) {}
 	@Override public Videos chooseCutlists(VideoFiles vFiles) {return null;}
+	@Override public void loadCurlists(VideoFiles vf) {}
+	@Override public void loadCutlists(Videos videos) {}
 }

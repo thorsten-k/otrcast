@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
@@ -106,6 +107,15 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		return clSelected;
 	}
 
+	@Override
+	public void loadCutlists(Videos videos)
+	{
+		for(Video video : videos.getVideo())
+		{
+			JaxbUtil.info(video);
+		}
+	}
+	
 	@Override
 	public void loadCurlists(VideoFiles vFiles)
 	{

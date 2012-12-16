@@ -25,12 +25,11 @@ public class TestXmlVideoFile extends AbstractXmlCutTest
     @Test
     public void testDownload() throws FileNotFoundException
     {
-    	VideoFile actual = create();
+    	VideoFile actual = create(true);
     	VideoFile expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), VideoFile.class);
     	assertJaxbEquals(expected, actual);
     }
     
-    private static VideoFile create(){return create(true);}
     public static VideoFile create(boolean withChilds)
     {
     	VideoFile xml = new VideoFile();
@@ -41,12 +40,14 @@ public class TestXmlVideoFile extends AbstractXmlCutTest
     		xml.setOtrId(TestXmlOtrId.create(false));
     		xml.setCutListsAvailable(TestXmlCutListsAvailable.create(false));
     		xml.setCutListsSelected(TestXmlCutListsSelected.create(false));
+    		xml.setCutList(TestXmlCutList.create(false));
+    		xml.setCutLists(TestXmlCutLists.create(false));
     	}
     	
     	return xml;
     }
     
-    public void save() {save(create(), fXml);}
+    public void save() {save(create(true), fXml);}
 	
 	public static void main(String[] args)
     {
