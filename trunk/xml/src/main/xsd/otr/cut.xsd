@@ -19,11 +19,20 @@
             <xsd:sequence>
                 <xsd:element ref="o:otrId" maxOccurs="1"/>
                 <xsd:element ref="c:fileName" maxOccurs="1"/>
+            		<xsd:element ref="c:cutList" maxOccurs="1"/>
+            		<xsd:element ref="c:cutLists" maxOccurs="1"/>
                 <xsd:element ref="c:cutListsAvailable" maxOccurs="1"/>
                 <xsd:element ref="c:cutListsSelected" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+	<xsd:element name="cutLists">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="c:cutList" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
     <xsd:element name="cutListsAvailable">
         <xsd:complexType>
             <xsd:sequence>

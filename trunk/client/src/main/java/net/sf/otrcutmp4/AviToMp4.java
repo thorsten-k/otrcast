@@ -149,12 +149,11 @@ public class AviToMp4
 	    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
 	    	JaxbUtil.warn(videos);
 	    	
-	    	logger.error("NYI");
-//	        controllerCutlistChooser.loadCurlists(vFiles);        
+	        controllerCutlistChooser.loadCutlists(videos);        
 //	        for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}        
 	        
-	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
-	    	batch.build(videos);
+//	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
+//	    	batch.build(videos);
         }
         
         logger.info("... finished.");

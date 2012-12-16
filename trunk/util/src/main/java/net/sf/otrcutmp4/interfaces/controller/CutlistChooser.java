@@ -13,4 +13,5 @@ public interface CutlistChooser
 	CutListsSelected select(CutListsAvailable clAvailable, boolean loadCutlist);
 	
 	void loadCurlists(VideoFiles vf);
+	void loadCutlists(Videos videos);
 }

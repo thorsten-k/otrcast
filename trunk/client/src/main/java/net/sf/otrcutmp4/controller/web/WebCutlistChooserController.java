@@ -67,6 +67,7 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		return null;
 	}
 	
+	@Override public void loadCutlists(Videos videos) {}
 	@Override public void loadCurlists(VideoFiles vf)
 	{
 		cli.loadCurlists(vf);

@@ -2,6 +2,8 @@
 <c:videoFile xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series">
     <o:otrId id="1" key="myKey" otrCl="1234"/>
     <c:fileName>myFile.mp4</c:fileName>
+    <c:cutList id="myId" rating="12.3" ratingCount="3"/>
+    <c:cutLists/>
     <c:cutListsAvailable/>
     <c:cutListsSelected/>
 </c:videoFile>
