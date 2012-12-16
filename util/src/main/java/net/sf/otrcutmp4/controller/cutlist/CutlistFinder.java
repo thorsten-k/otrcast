@@ -39,7 +39,7 @@ public class CutlistFinder
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)
 	{
-		JaxbUtil.debug(vFiles);
+		JaxbUtil.trace(vFiles);
 		logger.info(" ");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
@@ -49,7 +49,7 @@ public class CutlistFinder
 		return vFiles;
 	}
 	
-	public CutLists searchCutlist(VideoFile vf)
+	protected CutLists searchCutlist(VideoFile vf)
 	{
 		CutLists result = new CutLists();
 		

@@ -24,8 +24,6 @@ public class TestSrcDirProcessor extends AbstractUtilTest
 	private SrcDirProcessor srcDirProcessor;
 	private File fSrc;
 	
-//	@Rule public IgnoreOtherRule test = new IgnoreOtherRule("testHdAc3Key");
-	
 	@Before
 	public void init()
 	{
@@ -33,7 +31,6 @@ public class TestSrcDirProcessor extends AbstractUtilTest
 		srcDirProcessor = new SrcDirProcessor(new NoopSrcDirProcessorView());
 	}
 	
-	//HD
     @Test
     public void size()
     {
