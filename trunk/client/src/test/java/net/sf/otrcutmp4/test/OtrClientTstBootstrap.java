@@ -17,10 +17,7 @@ public class OtrClientTstBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrClientTstBootstrap.class);
 	
-	public static String testAviDir = "test.dir.avi";
-	public static String testSrcDirProcessorResult = "test.xml.scrDirProcessorResult";
-	public static String testClFinderResult = "test.xml.clFinderResult";
-	public static String testClChooserResult = "test.xml.clChooserResult";
+	
 	
 	public static Configuration init() throws ExlpConfigurationException
 	{

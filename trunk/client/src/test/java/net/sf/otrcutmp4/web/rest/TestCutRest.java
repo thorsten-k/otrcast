@@ -15,6 +15,7 @@ import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
+import net.sf.otrcutmp4.test.CliTestRun;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
@@ -43,16 +44,16 @@ public class TestCutRest
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
 		rest = ProxyFactory.create(OtrCutRest.class, "http://localhost:8080/otr",clientExecutor);
 		
-		fSrcDirProcessorResult = new File(otrConfig.getKey(OtrClientTstBootstrap.testSrcDirProcessorResult));
-		fClFinderResult = new File(otrConfig.getKey(OtrClientTstBootstrap.testClFinderResult));
-		flClChooserResult = new File(otrConfig.getKey(OtrClientTstBootstrap.testClChooserResult));
+		fSrcDirProcessorResult = new File(otrConfig.getKey(CliTestRun.testSrcDirProcessor));
+		fClFinderResult = new File(otrConfig.getKey(CliTestRun.testClFinder));
+		flClChooserResult = new File(otrConfig.getKey(CliTestRun.testClChooser));
 	}
 	
 	public void readSrcDir()
 	{
 		 ViewSrcDirProcessor view = new CliSrcDirProcessorView();
 		 SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
-		 VideoFiles vFiles = srcDirProcessor.scan(new File(otrConfig.getKey(OtrClientTstBootstrap.testAviDir)));
+		 VideoFiles vFiles = srcDirProcessor.scan(new File(otrConfig.getKey(otrConfig.getKey(CliTestRun.testAviDir))));
 		 JaxbUtil.info(vFiles);
 		 
 		 logger.info("Saving result to "+fSrcDirProcessorResult.getAbsolutePath());
