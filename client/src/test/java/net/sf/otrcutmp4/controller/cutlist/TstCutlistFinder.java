@@ -10,7 +10,7 @@ import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
-import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
+import net.sf.otrcutmp4.model.xml.cut.CutLists;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
@@ -73,7 +73,7 @@ public class TstCutlistFinder
 		JaxbUtil.debug(vf);
 		
 		CutlistFinder clf = new CutlistFinder();
-		CutListsAvailable cla = clf.searchCutlist(vf);
+		CutLists cla = clf.searchCutlist(vf);
 		JaxbUtil.debug(cla);
 	}
 	

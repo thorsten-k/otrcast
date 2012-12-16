@@ -44,7 +44,7 @@ public class CutlistChooserProcessing
 		logger.info("\tIgnore the file by pressing ENTER");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList())
+			if(vf.isSetCutLists() && vf.getCutLists().isSetCutList())
 			{
 				logger.warn("NYI");
 				//chooseCutlist(-1,vf,false);
