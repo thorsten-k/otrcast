@@ -16,7 +16,7 @@ import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Comment;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
+import net.sf.otrcutmp4.model.xml.cut.CutLists;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -43,15 +43,15 @@ public class CutlistFinder
 		logger.info(" ");
 		for(VideoFile vf : vFiles.getVideoFile())
 		{
-			CutListsAvailable avlCutLists = searchCutlist(vf);
-			if(avlCutLists.getCutList().size()>0){vf.setCutListsAvailable(avlCutLists);}
+			CutLists avlCutLists = searchCutlist(vf);
+			if(avlCutLists.getCutList().size()>0){vf.setCutLists(avlCutLists);}
 		}
 		return vFiles;
 	}
 	
-	public CutListsAvailable searchCutlist(VideoFile vf)
+	public CutLists searchCutlist(VideoFile vf)
 	{
-		CutListsAvailable result = new CutListsAvailable();
+		CutLists result = new CutLists();
 		
 		logger.info("Searching for "+vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType());
 		StringBuffer sb = new StringBuffer();
@@ -83,7 +83,7 @@ public class CutlistFinder
 		return result;
 	}
 	
-	private CutListsAvailable find(String clKey)
+	private CutLists find(String clKey)
 	{	
 		String sUrl = "http://cutlist.at/getxml.php?name="+clKey;
 		
@@ -98,13 +98,13 @@ public class CutlistFinder
 			Document doc = ((JDomEvent)leh.getSingleResult()).getDoc();
 			return getAvailableCutLists(doc);
 		}
-		catch (NoSuchElementException e) {return new CutListsAvailable();}
+		catch (NoSuchElementException e) {return new CutLists();}
 	}
 	
 	@SuppressWarnings("unchecked")
-	private CutListsAvailable getAvailableCutLists(Document doc)
+	private CutLists getAvailableCutLists(Document doc)
 	{
-		CutListsAvailable cls = new CutListsAvailable();
+		CutLists cls = new CutLists();
 		if(doc!=null)
 		{
 			try

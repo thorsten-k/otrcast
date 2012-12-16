@@ -9,7 +9,7 @@ import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.CutListsAvailable;
+import net.sf.otrcutmp4.model.xml.cut.CutLists;
 import net.sf.otrcutmp4.model.xml.cut.CutListsSelected;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
@@ -41,7 +41,7 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		for(int i=0;i<vFiles.getVideoFile().size();i++)
 		{
 			VideoFile vf = vFiles.getVideoFile().get(i);
-			if(vf.isSetCutListsAvailable() && vf.getCutListsAvailable().isSetCutList())
+			if(vf.isSetCutLists() && vf.getCutLists().isSetCutList())
 			{
 				Video video = chooseCutlist(i,vf,true);
 				if(video!=null){videos.getVideo().add(video);}
@@ -54,14 +54,14 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 	private Video chooseCutlist(int index, VideoFile vf,boolean loadCutlist)
 	{
 		view.showFileInfo(index,vf);
-		for(int i=0;i<vf.getCutListsAvailable().getCutList().size();i++)
+		for(int i=0;i<vf.getCutLists().getCutList().size();i++)
 		{
-			CutList cl = vf.getCutListsAvailable().getCutList().get(i);
+			CutList cl = vf.getCutLists().getCutList().get(i);
 			view.showCutlistInfo(i, cl,true,true,true,true);
 		}
 		
-		vf.setCutListsSelected(select(vf.getCutListsAvailable(), loadCutlist));
-		vf.setCutListsAvailable(null);
+		vf.setCutListsSelected(select(vf.getCutLists(), loadCutlist));
+		vf.setCutLists(null);
 		Video video = new Video();
 		video.setVideoFiles(new VideoFiles());
 		video.getVideoFiles().getVideoFile().add(vf);
@@ -70,7 +70,7 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 	}
 	
 	@Override
-	public CutListsSelected select(CutListsAvailable clAvailable, boolean loadCutlist)
+	public CutListsSelected select(CutLists clAvailable, boolean loadCutlist)
 	{
 		CutListsSelected clSelected = new CutListsSelected();
 		Scanner sc = new Scanner(System.in);
