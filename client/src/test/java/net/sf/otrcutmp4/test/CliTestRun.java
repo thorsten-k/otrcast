@@ -6,9 +6,10 @@ import java.io.FileNotFoundException;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
-import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
+import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
+import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
@@ -28,6 +29,7 @@ public class CliTestRun
 	public static String testSrcDirProcessor = "test.xml.scrDirProcessor";
 	public static String testClFinder = "test.xml.cutlistFinder";
 	public static String testClChooser = "test.xml.clChooser";
+	public static String testClLoader = "test.xml.clLoader";
 	
 	private Configuration config;
 	private ViewSrcDirProcessor view;
@@ -53,7 +55,7 @@ public class CliTestRun
 	{
 		VideoFiles input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testSrcDirProcessor),VideoFiles.class);
 		
-		CutlistFinder finder = new CutlistFinder();
+		DefaultCutlistLoader finder = new DefaultCutlistLoader();
 		VideoFiles result = finder.searchCutlist(input);
 		JaxbUtil.debug(result);
 		
@@ -74,6 +76,15 @@ public class CliTestRun
 		JaxbUtil.save(new File(xmlOutput), videos, true);
 	}
 	
+	public void cutlistLoader() throws FileNotFoundException
+	{
+		Videos input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClChooser),Videos.class);
+		JaxbUtil.debug(input);
+		
+		CutlistLoader cutlistLoader = new DefaultCutlistLoader();
+		cutlistLoader.loadCuts(input);
+	}
+	
 	public void rename()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
@@ -92,7 +103,8 @@ public class CliTestRun
 		CliTestRun test = new CliTestRun(config);
 //		test.srcDirProcessor();
 //		test.cutlistFinder();
-		test.cutlistChooser();
+//		test.cutlistChooser();
+		test.cutlistLoader();
 		
 //		test.rename();
 	}

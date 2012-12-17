@@ -7,7 +7,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
-import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
+import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
@@ -63,7 +63,7 @@ public class TestCutRest
 	public void findCl() throws FileNotFoundException
 	{
 		VideoFiles vFiles = JaxbUtil.loadJAXB(fSrcDirProcessorResult.getAbsolutePath(), VideoFiles.class);
-		CutlistFinder clFinder = new CutlistFinder();
+		DefaultCutlistLoader clFinder = new DefaultCutlistLoader();
 		vFiles = clFinder.searchCutlist(vFiles);
 		JaxbUtil.info(vFiles);
 		
