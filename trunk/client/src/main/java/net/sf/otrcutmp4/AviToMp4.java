@@ -3,16 +3,17 @@ package net.sf.otrcutmp4;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
-import net.sf.otrcutmp4.controller.cutlist.CutlistFinder;
+import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.noop.NoopCutlistLoader;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebAviScanner;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
+import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -95,7 +96,7 @@ public class AviToMp4
         
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
-        CutlistFinder clFinder = new CutlistFinder();
+        DefaultCutlistLoader clFinder = new DefaultCutlistLoader();
         VideoFiles vFiles;
         
         if(line.hasOption(oScan.getOpt()))
@@ -134,21 +135,25 @@ public class AviToMp4
 	        
 	        ViewCutlistChooser viewCutlistChooser = null;
 	        CutlistChooser controllerCutlistChooser = null;
-	                 
+	        CutlistLoader cutlistLoader = null;       
+	        
 	        if(line.hasOption(oWeb.getOpt()))
 	        {
 	        	viewCutlistChooser = new WebCutlistChooserView();
 	        	controllerCutlistChooser = new WebCutlistChooserController(viewCutlistChooser,otrConfig);
+	        	cutlistLoader = new NoopCutlistLoader();
 	        }
 	        else
 	        {
 	        	viewCutlistChooser = new CliCutlistChooserView();
 	        	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
+	        	cutlistLoader = new DefaultCutlistLoader();
 	        }
 	    	
 	    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
 	    	JaxbUtil.warn(videos);
 	    	
+	    	cutlistLoader.loadCuts(videos);
 //	        controllerCutlistChooser.loadCutlists(videos);        
 //	        for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}        
 	        

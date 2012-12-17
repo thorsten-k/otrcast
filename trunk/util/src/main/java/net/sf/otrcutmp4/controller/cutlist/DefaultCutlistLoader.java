@@ -13,6 +13,7 @@ import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.parser.impl.XmlParser;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
+import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Comment;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
@@ -20,6 +21,8 @@ import net.sf.otrcutmp4.model.xml.cut.CutLists;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Video;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -28,13 +31,29 @@ import org.jdom.xpath.XPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CutlistFinder
+public class DefaultCutlistLoader implements CutlistLoader
 {
-	final static Logger logger = LoggerFactory.getLogger(CutlistFinder.class);
+	final static Logger logger = LoggerFactory.getLogger(DefaultCutlistLoader.class);
 		
-	public CutlistFinder()
+	public DefaultCutlistLoader()
 	{
 
+	}
+	
+	@Override
+	public void loadCuts(Videos videos)
+	{
+		for(Video video : videos.getVideo())
+		{
+			if(video.isSetVideoFiles())
+			{
+				for(VideoFile vf : video.getVideoFiles().getVideoFile())
+				{
+					CutLists cl = find(vf.getCutList().getId());
+					JaxbUtil.info(cl);
+				}
+			}
+		}
 	}
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)

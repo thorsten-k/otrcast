@@ -37,7 +37,7 @@ public class TstCutlistFinder
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		CutlistFinder finder = new CutlistFinder();
+		DefaultCutlistLoader finder = new DefaultCutlistLoader();
 		vFiles = finder.searchCutlist(vFiles);
 		JaxbUtil.debug(vFiles);
 		
@@ -72,7 +72,7 @@ public class TstCutlistFinder
 		VideoFile vf = XmlVideoFileFactory.create(clKey);
 		JaxbUtil.debug(vf);
 		
-		CutlistFinder clf = new CutlistFinder();
+		DefaultCutlistLoader clf = new DefaultCutlistLoader();
 		CutLists cla = clf.searchCutlist(vf);
 		JaxbUtil.debug(cla);
 	}
