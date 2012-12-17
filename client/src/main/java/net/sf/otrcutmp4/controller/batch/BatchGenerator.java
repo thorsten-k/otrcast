@@ -58,11 +58,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		for(Video video : videos.getVideo())
 		{
 			try {build(video);}
-			catch (UtilsProcessingException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			catch (UtilsProcessingException e) {e.printStackTrace();}
 		}
 		
 		txt.debug();

@@ -3,6 +3,7 @@ package net.sf.otrcutmp4;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
@@ -155,8 +156,8 @@ public class AviToMp4
 	    	
 	    	cutlistLoader.loadCuts(videos);       
 	        
-//	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
-//	    	batch.build(videos);
+	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
+	    	batch.build(videos);
         }
         
         logger.info("... finished.");
