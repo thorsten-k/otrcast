@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.test;
+package net.sf.otrcutmp4.controller.cli;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +19,7 @@ import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
+import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
