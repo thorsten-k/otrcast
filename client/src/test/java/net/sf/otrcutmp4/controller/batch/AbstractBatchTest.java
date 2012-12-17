@@ -5,7 +5,6 @@ import java.io.IOException;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.otr.Format;
@@ -24,8 +23,8 @@ public class AbstractBatchTest extends AbstractClientTest
 	{		
 		video = new Video();
 		video.setVideoFiles(new VideoFiles());
-		video.getVideoFiles().getVideoFile().add(createVideoFile("my-1.file.avi"));
-		video.getVideoFiles().getVideoFile().add(createVideoFile("my-2.file.avi"));
+		video.getVideoFiles().getVideoFile().add(createVideoFile("my-1"));
+		video.getVideoFiles().getVideoFile().add(createVideoFile("my-2"));
 	}
 	
 	private VideoFile createVideoFile(String name)
@@ -44,18 +43,15 @@ public class AbstractBatchTest extends AbstractClientTest
 		cl.getCut().add(c1);
 		cl.getCut().add(c2);
 		
-		FileName fn = new FileName();
-		fn.setValue(name);
-		
 		Format format = new Format();
 		format.setType(XmlOtrIdFactory.typeAviHq);
 		format.setAc3(false);
 		
 		OtrId id = new OtrId();
+		id.setKey(name);
 		id.setFormat(format);
 		
 		VideoFile vf = new VideoFile();
-		vf.setFileName(fn);
 		vf.setOtrId(id);
 		vf.setCutList(cl);
 		return vf;

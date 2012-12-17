@@ -4,6 +4,7 @@ import java.util.Date;
 
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
+import net.sf.otrcutmp4.model.xml.otr.OtrId;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -35,6 +36,15 @@ public class TxtFilenameFactory
 		Integer i = new Integer(in);
 		if(i<10){return "0"+in;}
 		else{return ""+in;}
+	}
+	
+	public static String build(OtrId otrId)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append(otrId.getKey());
+		sb.append(".");
+		sb.append(otrId.getFormat().getType());
+		return sb.toString();
 	}
 	
 	public String create(CutList cl) throws OtrProcessingException

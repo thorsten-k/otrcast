@@ -153,9 +153,7 @@ public class AviToMp4
 	    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
 	    	JaxbUtil.warn(videos);
 	    	
-	    	cutlistLoader.loadCuts(videos);
-//	        controllerCutlistChooser.loadCutlists(videos);        
-//	        for(VideoFile vf : vFiles.getVideoFile()){vf.setCutListsAvailable(null);}        
+	    	cutlistLoader.loadCuts(videos);       
 	        
 //	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
 //	    	batch.build(videos);

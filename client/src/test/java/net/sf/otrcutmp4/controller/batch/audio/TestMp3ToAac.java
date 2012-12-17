@@ -34,8 +34,8 @@ public class TestMp3ToAac extends AbstractBatchTest
 	public void extract() throws OtrConfigurationException, UtilsProcessingException, OtrInternalErrorException
 	{
 		List<String> expected = new ArrayList<String>();
-		expected.add("dir.tools/tool.mp4box -aviraw audio dir.avi/my-1.file.avi -out dir.tmp/raw-1.mp3");
-		expected.add("dir.tools/tool.mp4box -aviraw audio dir.avi/my-2.file.avi -out dir.tmp/raw-2.mp3");
+		expected.add("dir.tools/tool.mp4box -aviraw audio dir.avi/my-1.mpg.HQ.avi -out dir.tmp/raw-1.mp3");
+		expected.add("dir.tools/tool.mp4box -aviraw audio dir.avi/my-2.mpg.HQ.avi -out dir.tmp/raw-2.mp3");
 		
 		List<String> actual = mp3ToAac.extract(video);
 		Assert.assertEquals(expected.size(), actual.size());

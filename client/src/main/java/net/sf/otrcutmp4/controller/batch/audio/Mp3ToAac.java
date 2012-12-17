@@ -8,6 +8,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.factory.txt.TxtFilenameFactory;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.series.Video;
@@ -41,7 +42,7 @@ public class Mp3ToAac extends AbstactBatchGenerator
 	
 	private String extract(int index, VideoFile vf) throws UtilsProcessingException, OtrInternalErrorException
 	{
-		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));
+		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),TxtFilenameFactory.build(vf.getOtrId())));
 		String outMp3 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+".mp3"));
 		
 		StringBuffer sb = new StringBuffer();

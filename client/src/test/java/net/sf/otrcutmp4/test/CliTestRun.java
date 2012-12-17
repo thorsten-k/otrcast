@@ -4,15 +4,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.AviToMp4.Profile;
+import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
+import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
+import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
+import net.sf.otrcutmp4.util.OtrBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
@@ -37,6 +44,7 @@ public class CliTestRun
 	public CliTestRun(Configuration config)
 	{
 		this.config=config;
+		
 		view = new CliSrcDirProcessorView();
 	}
 	
@@ -78,11 +86,25 @@ public class CliTestRun
 	
 	public void cutlistLoader() throws FileNotFoundException
 	{
-		Videos input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClChooser),Videos.class);
-		JaxbUtil.debug(input);
+		Videos videos = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClChooser),Videos.class);
 		
 		CutlistLoader cutlistLoader = new DefaultCutlistLoader();
-		cutlistLoader.loadCuts(input);
+		cutlistLoader.loadCuts(videos);
+		JaxbUtil.debug(videos);
+		
+		String xmlOutput = config.getString(CliTestRun.testClLoader);
+		logger.debug("Saving to file: "+xmlOutput);
+		JaxbUtil.save(new File(xmlOutput), videos, true);
+	}
+	
+	public void batch() throws OtrConfigurationException, ExlpConfigurationException, FileNotFoundException, OtrInternalErrorException
+	{
+		OtrConfig otrConfig = new OtrConfig();
+		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
+		
+		Videos videos = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClLoader),Videos.class);
+		BatchGenerator batch = new BatchGenerator(otrConfig,Profile.P0);
+    	batch.build(videos);
 	}
 	
 	public void rename()
@@ -104,7 +126,8 @@ public class CliTestRun
 //		test.srcDirProcessor();
 //		test.cutlistFinder();
 //		test.cutlistChooser();
-		test.cutlistLoader();
+//		test.cutlistLoader();
+		test.batch();
 		
 //		test.rename();
 	}
