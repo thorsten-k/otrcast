@@ -7,12 +7,14 @@ import java.util.NoSuchElementException;
 
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.event.impl.JDomEvent;
+import net.sf.exlp.event.impl.JaxbEvent;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerHttp;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.parser.impl.XmlParser;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
+import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Comment;
@@ -49,11 +51,28 @@ public class DefaultCutlistLoader implements CutlistLoader
 			{
 				for(VideoFile vf : video.getVideoFiles().getVideoFile())
 				{
-					CutLists cl = find(vf.getCutList().getId());
-					JaxbUtil.info(cl);
+					CutList cl = loadCutlist(vf.getCutList().getId());
+					vf.setCutList(cl);
 				}
 			}
 		}
+	}
+	
+	private CutList loadCutlist(String id)
+	{
+		String http = "http://cutlist.at/getfile.php?id="+id;
+		
+		logger.info("Trying to download cutlist "+id);
+		logger.debug("\t"+http);
+	
+		EhResultContainer leh = new EhResultContainer();
+		LogParser lp = new CutlistParser(leh);
+		
+		LogListener ll = new LogListenerHttp(lp);
+		ll.processSingle(http);
+		
+		JaxbEvent event = (JaxbEvent)leh.getSingleResult();
+		return (CutList)event.getObject();
 	}
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)
