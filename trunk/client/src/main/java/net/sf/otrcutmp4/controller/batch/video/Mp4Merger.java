@@ -9,6 +9,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.FilenameIllegalCharRemover;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
@@ -37,20 +38,22 @@ public class Mp4Merger extends AbstactBatchGenerator
 	
 	public List<String> merge(Video video) throws OtrInternalErrorException, UtilsProcessingException
 	{
+		JaxbUtil.trace(video);
 		List<String> result = new ArrayList<String>();
 		
 		List<String> fragments = getFragments(video);
 
-		logger.debug("Fragments:");
-		for(String s : fragments){logger.debug("\t:"+s);}
+		logger.trace("Fragments:");
+		for(String s : fragments){logger.trace("\t:"+s);}
 		
 		Format format = new Format();
 		format.setType(XmlOtrIdFactory.typeAviHq);
 		logger.warn("NYI Format in video");
 		
 		String fileName = buildFinalName(video);
-		if(fragments.size()==1){mergeSingle(fragments.get(0), fileName);}
-		else{result.add(mergeMulti(fragments,fileName,format));}
+		if(fragments.size()==1){result.add(mergeSingle(fragments.get(0), fileName));}
+		else if(fragments.size()>1){result.add(mergeMulti(fragments,fileName,format));}
+		else{logger.trace("No fragements");}
 		
 		return result;
 	}
@@ -58,21 +61,30 @@ public class Mp4Merger extends AbstactBatchGenerator
 	private List<String> getFragments(Video video)
 	{
 		List<String> fragments = new ArrayList<String>();
-		int indexVf=1;
-		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		if(video.getVideoFiles().isSetVideoFile())
 		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("mp4-").append(indexVf);
-			sb.append(".").append(1);
-			sb.append(".mp4");
-			fragments.add(sb.toString());
-			indexVf++;
+			for(int indexVf=0;indexVf<video.getVideoFiles().getVideoFile().size();indexVf++)
+			{
+				VideoFile vf = video.getVideoFiles().getVideoFile().get(indexVf);
+				for(int indexCut=0;indexCut<vf.getCutList().getCut().size();indexCut++)
+				{
+					StringBuffer sb = new StringBuffer();
+					sb.append(indexVf+1);
+					sb.append("-");
+					sb.append(indexCut+1);
+					sb.append(".mp4");
+					fragments.add(sb.toString());
+				}
+			}
 		}
+		
 		return fragments;
 	}
 	
 	private String mergeSingle(String input, String output)
 	{
+		logger.info("mergeSingle");
+		
 		String sFrom = rpf.relativate(new File(cfg.getDir(Dir.TMP),input));
 		String sTo = rpf.relativate(new File(cfg.getDir(Dir.MP4),output));
 		
@@ -89,6 +101,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 	
 	private String mergeMulti(List<String> fragments, String output, Format format) throws UtilsProcessingException
 	{
+		logger.info("mergeMulti");
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");
 		
@@ -100,7 +113,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 		}
 		sb.append(rpf.relativate(new File(cfg.getDir(Dir.TMP),fragments.get(0))));
 		sb.append(" ");
-		for(int i=2;i<=fragments.size();i++)
+		for(int i=1;i<fragments.size();i++)
 		{
 			sb.append("-cat ");
 			sb.append(rpf.relativate(new File(cfg.getDir(Dir.TMP),fragments.get(i))));
@@ -129,8 +142,8 @@ public class Mp4Merger extends AbstactBatchGenerator
 		}
 		else if(video.isSetMovie())
 		{
-			logger.warn("build Movie Name");
-			fileName="xx";
+			logger.trace("build Movie Name");
+			fileName=video.getMovie().getName()+".mp4";
 		}
 		else
 		{

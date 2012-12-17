@@ -44,7 +44,7 @@ public class AviExtract extends AbstactBatchGenerator
 	
 	private String rawExtract(int index, VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
 	{	
-		JaxbUtil.info(vf);
+		JaxbUtil.trace(vf);
 		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),TxtFilenameFactory.build(vf.getOtrId())));		
 		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+".h264"));
 		
