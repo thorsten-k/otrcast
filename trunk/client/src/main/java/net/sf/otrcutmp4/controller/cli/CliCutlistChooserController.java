@@ -136,7 +136,6 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		
 		String[] tokens = sc.nextLine().split(",");
 		
-		
 		int vfIndex = Integer.parseInt(tokens[0])-1;
 		int clIndex = Integer.parseInt(tokens[1])-1;
 		

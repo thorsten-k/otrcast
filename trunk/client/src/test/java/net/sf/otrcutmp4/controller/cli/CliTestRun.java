@@ -2,8 +2,10 @@ package net.sf.otrcutmp4.controller.cli;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -16,6 +18,7 @@ import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
+import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
@@ -26,6 +29,10 @@ import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 
 import org.apache.commons.configuration.Configuration;
+import org.jboss.resteasy.client.ClientExecutor;
+import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,12 +48,16 @@ public class CliTestRun
 	
 	private Configuration config;
 	private ViewSrcDirProcessor view;
+	private OtrCutRest rest;
 	
 	public CliTestRun(Configuration config)
 	{
 		this.config=config;
-		
 		view = new CliSrcDirProcessorView();
+		
+		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
+		rest = ProxyFactory.create(OtrCutRest.class, "http://localhost:8080/otr",clientExecutor);
 	}
 	
 	public void srcDirProcessor()
@@ -73,6 +84,8 @@ public class CliTestRun
 		JaxbUtil.save(new File(xmlOutput), result, true);
 	}
 	
+
+	
 	public void cutlistChooser() throws FileNotFoundException, UtilsProcessingException
 	{
 		VideoFiles input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder),VideoFiles.class);
@@ -85,7 +98,7 @@ public class CliTestRun
 		JaxbUtil.save(new File(xmlOutput), videos, true);
 	}
 	
-	public void cutlistLoader() throws FileNotFoundException
+	public void cutLoader() throws FileNotFoundException
 	{
 		Videos videos = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClChooser),Videos.class);
 		
@@ -108,6 +121,18 @@ public class CliTestRun
     	batch.build(videos);
 	}
 	
+	public void rest() throws FileNotFoundException, UtilsProcessingException
+	{
+		VideoFiles vFiles = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder), VideoFiles.class);
+		JaxbUtil.debug(vFiles);
+		String token = rest.addCutPackage(vFiles);
+		logger.debug("Saved Request with token: "+token);
+		Scanner sc = new Scanner(System.in);
+		sc.nextLine();
+		logger.debug("result: "+token);
+		rest.findCutPackage(token);
+	}
+	
 	public void rename()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
@@ -127,8 +152,11 @@ public class CliTestRun
 //		test.srcDirProcessor();
 //		test.cutlistFinder();
 //		test.cutlistChooser();
-//		test.cutlistLoader();
-		test.batch();
+		
+//		test.cutLoader();
+//		test.batch();
+		
+		test.rest();
 		
 //		test.rename();
 	}
