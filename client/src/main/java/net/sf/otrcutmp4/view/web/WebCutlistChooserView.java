@@ -41,6 +41,5 @@ public class WebCutlistChooserView implements ViewCutlistChooser
 		logger.info("Cutlists selected");
 	}
 
-
-
+	@Override public void additionalFile(VideoFiles vFiles) {}
 }

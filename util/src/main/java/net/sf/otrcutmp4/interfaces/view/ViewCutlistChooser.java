@@ -11,4 +11,5 @@ public interface ViewCutlistChooser
 	void showFileInfo(int index, VideoFile vFile);
 	void showCutlistInfo(int i, CutList cl, boolean showAuthor, boolean showRanking, boolean showComment, boolean showFile);
 	void cutlistsSelected();
+	void additionalFile(VideoFiles vFiles);
 }
