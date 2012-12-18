@@ -24,17 +24,20 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 {
 	final static Logger logger = LoggerFactory.getLogger(CliCutlistChooserController.class);
 	
-	private Pattern pSingle;
+	private Pattern pSingle,pMulti;
+	private VideoFiles vFiles;
 	
 	public CliCutlistChooserController(ViewCutlistChooser view)
 	{
 		super(view);
+		pMulti = Pattern.compile("(\\d)\\+");
 		pSingle = Pattern.compile("(\\d)");
 	}
 	
 	@Override
 	public Videos chooseCutlists(VideoFiles vFiles)
 	{
+		this.vFiles=vFiles;
 		view.welcome(vFiles);
 		Videos videos = new Videos();
 		
@@ -71,17 +74,22 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		if(line.length()==0){return listVideos;}
 		
 		for(String token : line.split(","))
-		{
-			logger.debug("Token "+token);
+		{			
+			Matcher mSingle = pSingle.matcher(token);
+			Matcher mMulti = pMulti.matcher(token);
 			
-			Matcher mSingle=pSingle.matcher(token);
+			boolean bSingle = mSingle.matches();
+			boolean bMulti = mMulti.matches();
 			
-			if(!mSingle.matches())
+			logger.debug("Token "+token+" single:"+bSingle+" multi:"+bMulti);
+			
+			if(!bSingle && !bMulti)
 			{
 				logger.warn("Unknown input");
 			}
 			
-			if(mSingle.matches()){listVideos.add(buildSingle(vf,Integer.parseInt(mSingle.group(1))));}
+			if(bSingle){listVideos.add(buildSingle(vf,Integer.parseInt(mSingle.group(1))));}
+			if(bMulti){listVideos.add(buildMulti(vf,Integer.parseInt(mMulti.group(1))));}
 		}
 /*		if(line.length()>0)
 		{
@@ -117,6 +125,27 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		video.setMovie(movie);
 		
 		JaxbUtil.info(video);
+		return video;
+	}
+	
+	private Video buildMulti(VideoFile vfInput, int index)
+	{
+		Video video = buildSingle(vfInput, index);
+		view.additionalFile(vFiles);
+		Scanner sc = new Scanner(System.in);
+		
+		String[] tokens = sc.nextLine().split(",");
+		
+		
+		int vfIndex = Integer.parseInt(tokens[0])-1;
+		int clIndex = Integer.parseInt(tokens[1])-1;
+		
+		VideoFile vf2 = vFiles.getVideoFile().get(vfIndex);
+		VideoFile vf = new VideoFile();
+		vf.setCutList(vf2.getCutLists().getCutList().get(clIndex));
+		vf.setOtrId(vf2.getOtrId());
+		video.getVideoFiles().getVideoFile().add(vf);
+		
 		return video;
 	}
 }

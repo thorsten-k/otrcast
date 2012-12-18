@@ -75,10 +75,6 @@ public class BatchGenerator extends AbstactBatchGenerator
 			 txt.add("echo No Cutlist available for video: "+video);
 			 txt.add("");
 		}
-		if(video.getVideoFiles().getVideoFile().size()!=1)
-		{
-			throw new OtrInternalErrorException("Multiple files currently not supported");
-		}
 		crateForVideo(video,profile);
 	}
 	

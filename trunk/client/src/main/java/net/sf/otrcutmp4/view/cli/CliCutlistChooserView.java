@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.view.cli;
 
+import net.sf.otrcutmp4.controller.factory.txt.TxtFilenameFactory;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -19,6 +20,7 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 		logger.info("Choose cutlist for "+vFiles.getVideoFile().size()+" files");
 		logger.info("\tYou can select a single cutlist e.g. with '1'");
 		logger.info("\tMultiple selections (e.g. '1,3') result in multiple output files");
+		logger.info("\tA second file can be added with a +, e.g. '1+'");
 		logger.info("\tIgnore the file by pressing ENTER");
 	}
 
@@ -26,7 +28,7 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 	public void showFileInfo(int index, VideoFile vFile)
 	{
 		logger.info("");
-		logger.info(vFile.getOtrId().getKey()+"."+vFile.getOtrId().getFormat().getType());
+		logger.info(TxtFilenameFactory.build(vFile.getOtrId()));
 	}
 	
 	public void showCutlistInfo(int i, CutList cl, boolean showAuthor, boolean showRanking, boolean showComment, boolean showFile)
@@ -78,6 +80,25 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 	public void cutlistsSelected()
 	{
 		logger.info("Selection finished");
+	}
+
+	@Override
+	public void additionalFile(VideoFiles vFiles)
+	{
+		logger.info("Select the second file!");
+		for(int i=1;i<=vFiles.getVideoFile().size();i++)
+		{
+			VideoFile vFile = vFiles.getVideoFile().get(i-1);
+			logger.info("\t"+i+" "+TxtFilenameFactory.build(vFile.getOtrId()));
+			for(int j=1;j<=vFile.getCutLists().getCutList().size();j++)
+			{
+				CutList cl = vFile.getCutLists().getCutList().get(j-1);
+				logger.info("\t\t"+j+" "+cl.getAuthor().getValue());
+				logger.info("\t\t  "+cl.getComment().getValue());
+				logger.info("\t\t  "+cl.getFileName().getValue());
+				
+			}
+		}
 	}
 
 }
