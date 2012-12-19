@@ -9,7 +9,6 @@ import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
-import net.sf.otrcutmp4.controller.noop.NoopCutlistLoader;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebAviScanner;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
@@ -136,24 +135,22 @@ public class AviToMp4
 	        
 	        ViewCutlistChooser viewCutlistChooser = null;
 	        CutlistChooser controllerCutlistChooser = null;
-	        CutlistLoader cutlistLoader = null;       
-	        
+	              
 	        if(line.hasOption(oWeb.getOpt()))
 	        {
 	        	viewCutlistChooser = new WebCutlistChooserView();
 	        	controllerCutlistChooser = new WebCutlistChooserController(viewCutlistChooser,otrConfig);
-	        	cutlistLoader = new NoopCutlistLoader();
 	        }
 	        else
 	        {
 	        	viewCutlistChooser = new CliCutlistChooserView();
 	        	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
-	        	cutlistLoader = new DefaultCutlistLoader();
 	        }
 	    	
 	    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
 	    	JaxbUtil.warn(videos);
 	    	
+	    	CutlistLoader cutlistLoader = new DefaultCutlistLoader();;
 	    	cutlistLoader.loadCuts(videos);       
 	        
 	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
