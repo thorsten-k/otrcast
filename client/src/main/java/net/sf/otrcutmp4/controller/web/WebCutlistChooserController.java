@@ -44,23 +44,21 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		rest = ProxyFactory.create(OtrCutRest.class, host,clientExecutor);
 	}
 	
-	@Override public Videos chooseCutlists(VideoFiles vFiles) {return null;}
-	
-	@Deprecated
-	public VideoFiles chooseCutlists2(VideoFiles vFiles) throws UtilsProcessingException
+	@Override public Videos chooseCutlists(VideoFiles vFiles) throws UtilsProcessingException
 	{
 		view.welcome(vFiles);
+
 		String token = rest.addCutPackage(vFiles);
 		view.srcFolderProcessed(token);
 		
 		logger.info("Press Any Key To Continue...");
         new java.util.Scanner(System.in).nextLine();
 		
-		vFiles = rest.findCutPackage(token);
+        Videos videos = rest.findCutPackage(token);
 		JaxbUtil.warn(vFiles);
 		view.cutlistsSelected();
-
-		return vFiles;
+		
+		return videos;
 	}
 	
 	@Override public List<Video> select(VideoFile vf)
