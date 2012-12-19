@@ -130,7 +130,8 @@ public class CliTestRun
 		Scanner sc = new Scanner(System.in);
 		sc.nextLine();
 		logger.debug("result: "+token);
-		rest.findCutPackage(token);
+		Videos videos = rest.findCutPackage(token);
+		JaxbUtil.info(videos);
 	}
 	
 	public void rename()

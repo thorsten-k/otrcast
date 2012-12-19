@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
+import net.sf.otrcutmp4.model.xml.series.Videos;
 
 @Path("/rest/cut")
 public interface OtrCutRest
@@ -21,5 +22,5 @@ public interface OtrCutRest
 	@GET @Path("/getSelection/{token}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	VideoFiles findCutPackage(@PathParam("token") String token) throws UtilsProcessingException;
+	Videos findCutPackage(@PathParam("token") String token) throws UtilsProcessingException;
 }
