@@ -57,7 +57,7 @@ public class CliTestRun
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrCutRest.class, "http://localhost:8080/otr",clientExecutor);
+		rest = ProxyFactory.create(OtrCutRest.class, "http://otr.hekit.de/otr",clientExecutor);
 	}
 	
 	public void srcDirProcessor()
@@ -86,12 +86,29 @@ public class CliTestRun
 	
 
 	
-	public void cutlistChooser() throws FileNotFoundException, UtilsProcessingException
+	public void cliChooser() throws FileNotFoundException, UtilsProcessingException
 	{
 		VideoFiles input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder),VideoFiles.class);
 		CutlistChooser chooser = new CliCutlistChooserController(new CliCutlistChooserView());
 		Videos videos = chooser.chooseCutlists(input);
 		JaxbUtil.debug(videos);
+		
+		String xmlOutput = config.getString(CliTestRun.testClChooser);
+		logger.debug("Saving to file: "+xmlOutput);
+		JaxbUtil.save(new File(xmlOutput), videos, true);
+	}
+	
+	public void restChooser() throws FileNotFoundException, UtilsProcessingException
+	{
+		VideoFiles vFiles = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder), VideoFiles.class);
+		JaxbUtil.debug(vFiles);
+		String token = rest.addCutPackage(vFiles);
+		logger.debug("Saved Request with token: "+token);
+		Scanner sc = new Scanner(System.in);
+		sc.nextLine();
+		logger.debug("result: "+token);
+		Videos videos = rest.findCutPackage(token);
+		JaxbUtil.info(videos);
 		
 		String xmlOutput = config.getString(CliTestRun.testClChooser);
 		logger.debug("Saving to file: "+xmlOutput);
@@ -121,18 +138,7 @@ public class CliTestRun
     	batch.build(videos);
 	}
 	
-	public void rest() throws FileNotFoundException, UtilsProcessingException
-	{
-		VideoFiles vFiles = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder), VideoFiles.class);
-		JaxbUtil.debug(vFiles);
-		String token = rest.addCutPackage(vFiles);
-		logger.debug("Saved Request with token: "+token);
-		Scanner sc = new Scanner(System.in);
-		sc.nextLine();
-		logger.debug("result: "+token);
-		Videos videos = rest.findCutPackage(token);
-		JaxbUtil.info(videos);
-	}
+	
 	
 	public void rename()
 	{
@@ -150,14 +156,16 @@ public class CliTestRun
 		Configuration config = OtrClientTstBootstrap.init();
 				
 		CliTestRun test = new CliTestRun(config);
-//		test.srcDirProcessor();
-//		test.cutlistFinder();
-//		test.cutlistChooser();
+		test.srcDirProcessor();
+		test.cutlistFinder();
+
+//		test.cliChooser();
+		test.restChooser();
 		
-//		test.cutLoader();
-//		test.batch();
+		test.cutLoader();
+		test.batch();
 		
-		test.rest();
+		
 		
 //		test.rename();
 	}
