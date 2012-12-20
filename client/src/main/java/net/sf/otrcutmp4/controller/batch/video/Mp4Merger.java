@@ -77,7 +77,6 @@ public class Mp4Merger extends AbstactBatchGenerator
 				}
 			}
 		}
-		
 		return fragments;
 	}
 	
@@ -104,7 +103,6 @@ public class Mp4Merger extends AbstactBatchGenerator
 		logger.info("mergeMulti");
 		StringBuffer sb = new StringBuffer();
 		sb.append(cmdMp4Box).append(" ");
-		
 		
 		switch(XmlOtrIdFactory.getType(format.getType()))
 		{
@@ -134,7 +132,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 			{
 				FileNameFactoy fnf = new FileNameFactoy();
 				fnf.initTemplate(cfg.getTemplate(Template.fnSeries));
-				fileName = fnf.convert(video.getEpisode());
+				fileName = fnf.convert(video.getEpisode())+".mp4";
 			}
 			catch (TemplateException e) {throw new UtilsProcessingException(e.getMessage());}
 			catch (IOException e) {throw new UtilsProcessingException(e.getMessage());}

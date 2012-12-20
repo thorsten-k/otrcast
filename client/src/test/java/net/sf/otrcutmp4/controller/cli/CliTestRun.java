@@ -11,11 +11,11 @@ import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
-import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
+import net.sf.otrcutmp4.controller.web.WebAviScanner;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
@@ -47,13 +47,18 @@ public class CliTestRun
 	public static String testClLoader = "test.xml.clLoader";
 	
 	private Configuration config;
+	private OtrConfig otrConfig;
 	private ViewSrcDirProcessor view;
 	private OtrCutRest rest;
 	
-	public CliTestRun(Configuration config)
+	
+	public CliTestRun(Configuration config) throws OtrConfigurationException, ExlpConfigurationException
 	{
 		this.config=config;
 		view = new CliSrcDirProcessorView();
+		
+		otrConfig = new OtrConfig();
+		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
@@ -138,7 +143,12 @@ public class CliTestRun
     	batch.build(videos);
 	}
 	
-	
+	public void scan() throws OtrConfigurationException, ExlpConfigurationException, FileNotFoundException, OtrInternalErrorException
+	{
+		SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
+		WebAviScanner scanner = new WebAviScanner(otrConfig);
+		scanner.scan(srcDirProcessor);
+	}
 	
 	public void rename()
 	{
@@ -156,16 +166,16 @@ public class CliTestRun
 		Configuration config = OtrClientTstBootstrap.init();
 				
 		CliTestRun test = new CliTestRun(config);
-		test.srcDirProcessor();
-		test.cutlistFinder();
+//		test.srcDirProcessor();
+//		test.cutlistFinder();
 
 //		test.cliChooser();
-		test.restChooser();
+//		test.restChooser();
 		
-		test.cutLoader();
-		test.batch();
+//		test.cutLoader();
+//		test.batch();
 		
-		
+		test.scan();
 		
 //		test.rename();
 	}
