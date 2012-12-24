@@ -25,6 +25,7 @@ import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Credential;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 
@@ -51,7 +52,6 @@ public class CliTestRun
 	private ViewSrcDirProcessor view;
 	private OtrCutRest rest;
 	
-	
 	public CliTestRun(Configuration config) throws OtrConfigurationException, ExlpConfigurationException
 	{
 		this.config=config;
@@ -61,8 +61,10 @@ public class CliTestRun
 		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrCutRest.class, "http://otr.hekit.de/otr",clientExecutor);
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
+				otrConfig.getCredential(Credential.EMAIL,""),
+				"test");
+		rest = ProxyFactory.create(OtrCutRest.class, "http://localhost:8080/otr",clientExecutor);
 	}
 	
 	public void srcDirProcessor()
@@ -88,8 +90,6 @@ public class CliTestRun
 		logger.debug("Saving to file: "+xmlOutput);
 		JaxbUtil.save(new File(xmlOutput), result, true);
 	}
-	
-
 	
 	public void cliChooser() throws FileNotFoundException, UtilsProcessingException
 	{
@@ -170,12 +170,12 @@ public class CliTestRun
 //		test.cutlistFinder();
 
 //		test.cliChooser();
-//		test.restChooser();
+		test.restChooser();
 		
 //		test.cutLoader();
 //		test.batch();
 		
-		test.scan();
+//		test.scan();
 		
 //		test.rename();
 	}

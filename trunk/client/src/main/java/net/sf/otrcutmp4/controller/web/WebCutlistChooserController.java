@@ -6,7 +6,6 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
-import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
@@ -15,7 +14,7 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.util.OtrConfig;
-import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
+import net.sf.otrcutmp4.util.OtrConfig.Credential;
 
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
@@ -29,18 +28,18 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 	final static Logger logger = LoggerFactory.getLogger(WebCutlistChooserController.class);
 
 	private OtrCutRest rest;
-	private CliCutlistChooserController cli;
 	
 	public WebCutlistChooserController(ViewCutlistChooser view, OtrConfig otrConfig)
 	{
 		super(view);
-		cli = new CliCutlistChooserController(new CliCutlistChooserView());
 		
 		String host = otrConfig.getUrl(OtrConfig.Url.OTR);
 		logger.info("Connecting to "+host);
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
+				otrConfig.getCredential(Credential.EMAIL,""),
+				otrConfig.getCredential(Credential.PWD,""));
 		rest = ProxyFactory.create(OtrCutRest.class, host,clientExecutor);
 	}
 	
