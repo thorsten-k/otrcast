@@ -29,7 +29,9 @@ public class WebAviScanner
 		logger.info("Connecting to "+host);
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(otrConfig.getCredential(Credential.EMAIL),otrConfig.getCredential(Credential.PWD));
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
+				otrConfig.getCredential(Credential.EMAIL,""),
+				otrConfig.getCredential(Credential.PWD,""));
 		rest = ProxyFactory.create(OtrUserRest.class, host,clientExecutor);
 	}
 	

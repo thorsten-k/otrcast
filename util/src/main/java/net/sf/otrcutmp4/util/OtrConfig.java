@@ -326,10 +326,12 @@ public class OtrConfig
 		return config.getString(mapTemplate.get(template));
 	}
 	
-	public String getCredential(Credential credential)
+	public String getCredential(Credential credential, String defaultCredential)
 	{
 		if(config==null){logger.error("Throw");}
-		return config.getString(mapCredential.get(credential));
+		String result = config.getString(mapCredential.get(credential));
+		if(result==null){result=defaultCredential;}
+		return result;
 	}
 	
 	public String getKey(String key)
