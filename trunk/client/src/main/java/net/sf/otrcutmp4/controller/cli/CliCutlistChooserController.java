@@ -120,7 +120,10 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		video.setVideoFiles(vfs);
 		
 		Movie movie = new Movie();
-		if(vf.getCutList().isSetFileName()){movie.setName(vf.getCutList().getFileName().getValue());}
+		if(vf.getCutList().isSetFileName() && vf.getCutList().getFileName().isSetValue() && vf.getCutList().getFileName().getValue().length()>0)
+		{
+			movie.setName(vf.getCutList().getFileName().getValue());
+		}
 		else{movie.setName(vfInput.getOtrId().getTv().getName());}
 		video.setMovie(movie);
 		
