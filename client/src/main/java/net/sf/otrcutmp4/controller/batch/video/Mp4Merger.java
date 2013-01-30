@@ -125,6 +125,8 @@ public class Mp4Merger extends AbstactBatchGenerator
 		
 	public String buildFinalName(Video video) throws UtilsProcessingException
 	{
+		logger.trace("buildFinalName");
+		JaxbUtil.trace(video);
 		String fileName;
 		if(video.isSetEpisode())
 		{
