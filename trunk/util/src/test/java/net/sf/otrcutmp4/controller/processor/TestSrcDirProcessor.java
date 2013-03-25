@@ -2,7 +2,6 @@ package net.sf.otrcutmp4.controller.processor;
 
 import java.io.File;
 
-import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -12,6 +11,7 @@ import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 import net.sf.otrcutmp4.view.noop.NoopSrcDirProcessorView;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
