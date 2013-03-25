@@ -1,8 +1,8 @@
 package net.sf.otrcutmp4.controller.processor;
 
-import junit.framework.Assert;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;

@@ -1,10 +1,7 @@
 package net.sf.otrcutmp4.web.rest;
 
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.rest.OtrUserRest;
-import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
-import net.sf.otrcutmp4.model.xml.user.User;
 
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
