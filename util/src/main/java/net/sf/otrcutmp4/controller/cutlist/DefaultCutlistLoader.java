@@ -26,10 +26,11 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.model.xml.series.Videos;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.filter.Filters;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -139,23 +140,17 @@ public class DefaultCutlistLoader implements CutlistLoader
 		catch (NoSuchElementException e) {return new CutLists();}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private CutLists getAvailableCutLists(Document doc)
 	{
 		CutLists cls = new CutLists();
 		if(doc!=null)
 		{
-			try
+			XPathExpression<Element> xpath = XPathFactory.instance().compile("/files/cutlist", Filters.element());
+			List<Element> elements = xpath.evaluate(doc);
+			for (Element e : elements)
 			{
-				XPath xpath = XPath.newInstance("/files/cutlist");
-				List<Object> lCl= xpath.selectNodes(doc);
-				for(Object cl : lCl)
-				{
-					Element e = (Element)cl;
-					cls.getCutList().add(getCutList(e));
-				}
+				cls.getCutList().add(getCutList(e));
 			}
-			catch (JDOMException e) {logger.error("",e);}
 		}
 		return cls;
 	}
