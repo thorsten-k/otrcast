@@ -13,6 +13,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
+import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
@@ -40,21 +41,28 @@ public class TagGenerator extends AbstactBatchGenerator
 		String sFrom = rpf.relativate(new File(cfg.getDir(Dir.TMP),"final.mp4"));
 		String sTo = rpf.relativate(new File(cfg.getDir(Dir.MP4),buildFinalName(video)));
 		
-/*		if(tagMp4)
+		if(tagMp4)
 		{
 			if(video.isSetEpisode() && video.getEpisode().isSetId())
 			{
-				return tag(video);
+				return tag(video.getEpisode(),sTo);
 			}
-			
+			else
+			{
+				logger.warn("Tagging is selected, but we don't have an episode and/or id");
+			}
 		}
-*/		return move(sFrom,sTo);
+		return move(sFrom,sTo);
 	}
 	
-	public List<String> tag(Video video) throws UtilsProcessingException
+	public List<String> tag(Episode episode, String dstName) throws UtilsProcessingException
 	{
+		StringBuffer sb = new StringBuffer();
+		sb.append(episode).append("-");
+		sb.append(dstName);
+		
 		List<String> result = new ArrayList<String>();
-		result.add("tat");
+		result.add(sb.toString());
 		return result;
 	}
 	

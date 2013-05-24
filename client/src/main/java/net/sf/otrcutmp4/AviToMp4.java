@@ -45,7 +45,8 @@ public class AviToMp4
 	public static final String exeName = "CutHqAviToMp4";
 	
 	private Option oHelp,oDebug,oProfile,oWeb;
-	private Option oAc3,oRename,oMp4,oTag;
+	private Option oAc3,oRename,oMp4;
+	private Option oTagMp4,oTag;
 	private Option oScan;
 	private Options options;
 	private OtrConfig otrConfig;
@@ -104,7 +105,12 @@ public class AviToMp4
     		otrConfig.checkEmailPwd();
     		WebAviScanner was = new WebAviScanner(otrConfig);
     		was.scan(srcDirProcessor);
-         }
+        }
+        
+        if(line.hasOption(oTagMp4.getOpt()))
+    	{
+        	logger.info("Tag "+line.getOptionValue(oTagMp4.getOpt()));
+        }
         
         if(line.hasOption(oRename.getOpt()))
         {
@@ -173,7 +179,7 @@ public class AviToMp4
 		oWeb = new Option("web", "Web GUI Interface");
 		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
 		oScan = new Option("scan","Scans subdirectories and stores AVI files as unprocesed. Login required!");
-		oTag = new Option("tag","Tag final Mp4 file. Login required!");
+		oTag = new Option("tag","Tag processed files. Login required!");
 		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
@@ -182,6 +188,11 @@ public class AviToMp4
 						  .hasArg()
 						  .withDescription( "Use configuration file FILENAME (optional, default is "+OtrConfig.otrConfigName+")")
 						  .create("config");
+		
+		oTagMp4  = OptionBuilder.withArgName("TOKEN")
+				  .hasArg()
+				  .withDescription("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
+				  .create("tagMp4");
 		
 		StringBuffer sb = new StringBuffer();
 		for(int i=1;i<Profile.values().length;i++)
@@ -208,6 +219,7 @@ public class AviToMp4
 		options.addOption(oConfig);
 		options.addOption(oProfile);
 		options.addOption(oTag);
+		options.addOption(oTagMp4);
 		
 		return options;
 	}

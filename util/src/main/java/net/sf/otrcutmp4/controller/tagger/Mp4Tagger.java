@@ -32,11 +32,11 @@ public class Mp4Tagger
 	}
 	
 	@SuppressWarnings("resource")
-	public void tagEpisode(String filename, Episode episode) throws IOException
+	public void tagEpisode(String srcFile, Episode episode, String dstFile) throws IOException
 	{
 		JaxbUtil.info(episode);
-		FileChannel fcr = new RandomAccessFile(filename, "r").getChannel();
-		FileChannel fcw = new RandomAccessFile(filename +".new", "rw").getChannel();
+		FileChannel fcr = new RandomAccessFile(srcFile, "r").getChannel();
+		FileChannel fcw = new RandomAccessFile(dstFile, "rw").getChannel();
 		
 		//TODO Write a temporary file and in the end, remove original and rename the temp file to replace the original
 		

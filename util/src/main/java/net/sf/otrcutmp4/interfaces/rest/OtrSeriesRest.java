@@ -7,6 +7,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 
 @Path("/rest/series")
@@ -16,6 +17,11 @@ public interface OtrSeriesRest
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
 	Tags getTags(@PathParam("id") String fileName);
+	
+	@GET @Path("/episode/{id}")
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.TEXT_PLAIN)
+	Episode getEpisode(@PathParam("id") long episodeId);
 	
 //	public Tag tag(long episodeId, String otrName);
 	

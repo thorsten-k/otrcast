@@ -31,8 +31,9 @@ public class TestMp4Tagger extends AbstractUtilTest
 	@Test
 	public void tag() throws IOException
 	{
-		String filename = "/Volumes/ramdisk/test.mp4";
-		tagger.tagEpisode(filename, episode);
+		String srcFile = "/Volumes/ramdisk/test.mp4";
+		String dstFile = "/Volumes/ramdisk/tagged.mp4";
+		tagger.tagEpisode(srcFile, episode, dstFile);
 	}
 	
 	public static void main(String args[]) throws Exception
