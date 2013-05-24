@@ -6,6 +6,8 @@ import java.nio.channels.FileChannel;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
@@ -49,49 +52,76 @@ public class Mp4Tagger
 		
 		//TODO Write a method to make this code DRY-compatible!
 		
-		//Write or update the episodes name
-		AppleTrackTitleBox titleBox = null;
-		if (!apple.getBoxes(AppleTrackTitleBox.class).isEmpty())
-		{
-			titleBox = (AppleTrackTitleBox) apple.getBoxes(AppleTrackTitleBox.class).get(0);
-		}
-		else
-		{
-			titleBox = new AppleTrackTitleBox();
-		}
-		titleBox.setValue(episode.getName());
-		apple.addBox(titleBox);
-		
-		//Write or update the episodes number
-		AppleTvEpisodeBox episodeBox = null;
-		if (!apple.getBoxes(AppleTvEpisodeBox.class).isEmpty())
-		{
-			episodeBox = (AppleTvEpisodeBox) apple.getBoxes(AppleTvEpisodeBox.class).get(0);
-		}
-		else
-		{
-			episodeBox = new AppleTvEpisodeBox();
-		}
-		episodeBox.setValue(episode.getNr() +"");
-		apple.addBox(episodeBox);
-		
-		//Write or update the episodes number
-		AppleTvSeasonBox seasonBox = null;
-		if (!apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
-		{
-			seasonBox = (AppleTvSeasonBox) apple.getBoxes(AppleTvSeasonBox.class).get(0);
-		}
-		else
-		{
-			seasonBox = new AppleTvSeasonBox();
-		}
-		seasonBox.setValue(episode.getSeason() +"");
-		apple.addBox(seasonBox);
+		writeEpisodeName(apple, episode);
+		writeEpisodeNr(apple, episode);
+		writeSeason(apple, episode.getSeason());
+		writeSeries(apple, episode.getSeason().getSeries());
 		
 		//TODO Add more information like show title
 		
 		isoFile.getBox(fcw);
 		fcw.close();
 		fcr.close();
+	}
+	
+	private void writeEpisodeName(AppleItemListBox apple, Episode episode)
+	{
+		AppleTrackTitleBox titleBox = null;
+		if (apple.getBoxes(AppleTrackTitleBox.class).isEmpty())
+		{
+			titleBox = new AppleTrackTitleBox();
+		}
+		else
+		{
+			titleBox = (AppleTrackTitleBox) apple.getBoxes(AppleTrackTitleBox.class).get(0);
+		}
+		titleBox.setValue(episode.getName());
+		apple.addBox(titleBox);
+	}
+	
+	private void writeEpisodeNr(AppleItemListBox apple, Episode episode)
+	{
+		AppleTvEpisodeBox episodeBox = null;
+		if (apple.getBoxes(AppleTvEpisodeBox.class).isEmpty())
+		{
+			episodeBox = new AppleTvEpisodeBox();
+		}
+		else
+		{
+			episodeBox = (AppleTvEpisodeBox) apple.getBoxes(AppleTvEpisodeBox.class).get(0);
+			
+		}
+		episodeBox.setValue(episode.getNr() +"");
+		apple.addBox(episodeBox);
+	}
+	
+	private void writeSeason(AppleItemListBox apple, Season season)
+	{
+		AppleTvSeasonBox seasonBox = null;
+		if(apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
+		{
+			seasonBox = new AppleTvSeasonBox();
+		}
+		else
+		{
+			seasonBox = (AppleTvSeasonBox) apple.getBoxes(AppleTvSeasonBox.class).get(0);
+		}
+		seasonBox.setValue(season.getNr()+"");
+		apple.addBox(seasonBox);
+	}
+	
+	private void writeSeries(AppleItemListBox apple, Series series)
+	{
+		AppleShowBox box = null;
+		if(apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
+		{
+			box = new AppleShowBox();
+		}
+		else
+		{
+			box = (AppleShowBox) apple.getBoxes(AppleShowBox.class).get(0);
+		}
+		box.setValue(series.getName());
+		apple.addBox(box);
 	}
 }
