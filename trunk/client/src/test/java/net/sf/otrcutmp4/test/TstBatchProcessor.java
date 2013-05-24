@@ -29,7 +29,7 @@ public class TstBatchProcessor
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		BatchGenerator test = new BatchGenerator(null,Profile.P0);
+		BatchGenerator test = new BatchGenerator(null,Profile.P0,false);
 		logger.warn("NYI");
 //		test.create(vFiles);
 	}

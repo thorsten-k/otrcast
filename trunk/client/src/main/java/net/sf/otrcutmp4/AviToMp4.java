@@ -45,7 +45,7 @@ public class AviToMp4
 	public static final String exeName = "CutHqAviToMp4";
 	
 	private Option oHelp,oDebug,oProfile,oWeb;
-	private Option oAc3,oRename,oMp4;
+	private Option oAc3,oRename,oMp4,oTag;
 	private Option oScan;
 	private Options options;
 	private OtrConfig otrConfig;
@@ -153,7 +153,10 @@ public class AviToMp4
 	    	CutlistLoader cutlistLoader = new DefaultCutlistLoader();;
 	    	cutlistLoader.loadCuts(videos);       
 	        
-	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile);
+	    	boolean tag = false;
+	    	
+	    	
+	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,line.hasOption(oTag.getOpt()));
 	    	batch.build(videos);
         }
         
@@ -170,6 +173,7 @@ public class AviToMp4
 		oWeb = new Option("web", "Web GUI Interface");
 		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
 		oScan = new Option("scan","Scans subdirectories and stores AVI files as unprocesed. Login required!");
+		oTag = new Option("tag","Tag final Mp4 file. Login required!");
 		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
@@ -203,6 +207,7 @@ public class AviToMp4
 		options.addOption(oDir);
 		options.addOption(oConfig);
 		options.addOption(oProfile);
+		options.addOption(oTag);
 		
 		return options;
 	}
@@ -226,10 +231,10 @@ public class AviToMp4
 	
 	public static void main(String args[]) throws OtrInternalErrorException
 	{		
-		AviToMp4 hqToMp4 = new AviToMp4();	
-		try {hqToMp4.parseArguments(args);}
-		catch (ParseException e) {logger.error(e.getMessage());hqToMp4.printHelp();}
-		catch (OtrConfigurationException e) {logger.error(e.getMessage());hqToMp4.printHelp();}
+		AviToMp4 avi2Mp4 = new AviToMp4();	
+		try {avi2Mp4.parseArguments(args);}
+		catch (ParseException e) {logger.error(e.getMessage());avi2Mp4.printHelp();}
+		catch (OtrConfigurationException e) {logger.error(e.getMessage());avi2Mp4.printHelp();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
 	}
 }

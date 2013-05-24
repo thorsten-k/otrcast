@@ -50,6 +50,10 @@
 	  		<groupId>net.sf.exlp</groupId>
 	  		<artifactId>exlp-util</artifactId>
 	  	</dependency>
+	  	<dependency>
+	  		<groupId>net.sf.exlp</groupId>
+	  		<artifactId>exlp-shell</artifactId>
+	  	</dependency>
 	  	
 		<!-- Commons -->
  		<dependency>

@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.batch;
 import java.io.File;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sf.exlp.util.os.shell.ShellCmdRm;
 import net.sf.otrcutmp4.AviToMp4;
@@ -12,6 +12,7 @@ import net.sf.otrcutmp4.controller.batch.audio.Mp3ToAac;
 import net.sf.otrcutmp4.controller.batch.video.AviExtract;
 import net.sf.otrcutmp4.controller.batch.video.H264Transcode;
 import net.sf.otrcutmp4.controller.batch.video.Mp4Merger;
+import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
 import net.sf.otrcutmp4.controller.batch.video.VideoCutter;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.model.xml.series.Video;
@@ -33,10 +34,11 @@ public class BatchGenerator extends AbstactBatchGenerator
 	private Ac3ToAac ac3ToAac;
 	private H264Transcode h264Transcode;
 	private Mp4Merger mp4Merger;
+	private TagGenerator tagGenerator;
 	
 	private ExlpTxtWriter txt;
 	
-	public BatchGenerator(OtrConfig cfg,AviToMp4.Profile profile) throws OtrInternalErrorException
+	public BatchGenerator(OtrConfig cfg,AviToMp4.Profile profile,boolean tagMp4) throws OtrInternalErrorException
 	{
 		super(cfg,profile);
 		
@@ -45,7 +47,8 @@ public class BatchGenerator extends AbstactBatchGenerator
 		h264Transcode = new H264Transcode(cfg,profile);
 		aviExtract = new AviExtract(cfg,profile);
 		videoCutter = new VideoCutter(cfg,profile);
-		mp4Merger = new Mp4Merger(cfg,profile); 
+		mp4Merger = new Mp4Merger(cfg,profile);
+		tagGenerator = new TagGenerator(cfg,profile,tagMp4);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT).getAbsolutePath());
@@ -90,6 +93,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		transcode(video);
 		txt.add(videoCutter.cut(video));
 		txt.add(mp4Merger.merge(video));
+		txt.add(tagGenerator.mvToMp4(video));
 		
 		txt.add("");
 		txt.add("");

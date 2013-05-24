@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.FilenameIllegalCharRemover;
 import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -50,7 +50,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 		format.setType(XmlOtrIdFactory.typeAviHq);
 		logger.warn("NYI Format in video");
 		
-		String fileName = buildFinalName(video);
+		String fileName = "final.mp4";//buildFinalName(video);
 		if(fragments.size()==1){result.add(mergeSingle(fragments.get(0), fileName));}
 		else if(fragments.size()>1){result.add(mergeMulti(fragments,fileName,format));}
 		else{logger.trace("No fragements");}
@@ -85,7 +85,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 		logger.info("mergeSingle");
 		
 		String sFrom = rpf.relativate(new File(cfg.getDir(Dir.TMP),input));
-		String sTo = rpf.relativate(new File(cfg.getDir(Dir.MP4),output));
+		String sTo = rpf.relativate(new File(cfg.getDir(Dir.TMP),output));
 		
 		try {return ShellCmdCopy.copyFile(sFrom, sTo);}
 		catch (ExlpUnsupportedOsException e)
@@ -118,7 +118,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 			sb.append(" ");
 		}
 		sb.append("-out ");
-		sb.append(rpf.relativate(new File(cfg.getDir(Dir.MP4),output)));	
+		sb.append(rpf.relativate(new File(cfg.getDir(Dir.TMP),output)));	
 		
 		return sb.toString();
 	}
