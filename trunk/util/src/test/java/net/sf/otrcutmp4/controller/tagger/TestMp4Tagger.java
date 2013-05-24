@@ -20,7 +20,7 @@ public class TestMp4Tagger extends AbstractUtilTest
 	@Before
 	public void init()
 	{
-		episode = XmlEpisodeFactory.create("mySeries", 1, 2, "myEpisode");
+		episode = XmlEpisodeFactory.create("mySeries", 11, 22, "myEpisode");
 		tagger = new Mp4Tagger();
 	}
 	
@@ -31,7 +31,7 @@ public class TestMp4Tagger extends AbstractUtilTest
 	@Test
 	public void tag() throws IOException
 	{
-		String filename = ".m4v";
+		String filename = "/Volumes/ramdisk/test.mp4";
 		tagger.tagEpisode(filename, episode);
 	}
 	
