@@ -9,6 +9,7 @@ import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
 import net.sf.otrcutmp4.controller.factory.txt.TxtDsFactory;
 import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
+import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
 
@@ -65,11 +66,18 @@ public class TestSeriesRest
 		logger.debug(fnf.convert(fDs.build(tags)));
 	}
 	
+	public void episode()
+	{
+		Episode xml = rest.getEpisode(12);
+		JaxbUtil.info(xml);
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		OtrClientTstBootstrap.init();
 		TestSeriesRest rest = new TestSeriesRest();
-		rest.single();
-		rest.multi();
+//		rest.single();
+//		rest.multi();
+		rest.episode();
 	}
 }
