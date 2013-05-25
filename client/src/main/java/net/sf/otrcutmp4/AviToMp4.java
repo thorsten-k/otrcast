@@ -5,10 +5,12 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
+import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.processor.SeriesTagger;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebAviScanner;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
@@ -109,7 +111,8 @@ public class AviToMp4
         
         if(line.hasOption(oTagMp4.getOpt()))
     	{
-        	logger.info("Tag "+line.getOptionValue(oTagMp4.getOpt()));
+        	SeriesTagger tagger = new SeriesTagger(otrConfig,profile);
+        	tagger.tag(new Long(line.getOptionValue(oTagMp4.getOpt())));
         }
         
         if(line.hasOption(oRename.getOpt()))
@@ -158,9 +161,6 @@ public class AviToMp4
 	    	
 	    	CutlistLoader cutlistLoader = new DefaultCutlistLoader();;
 	    	cutlistLoader.loadCuts(videos);       
-	        
-	    	boolean tag = false;
-	    	
 	    	
 	    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,line.hasOption(oTag.getOpt()));
 	    	batch.build(videos);

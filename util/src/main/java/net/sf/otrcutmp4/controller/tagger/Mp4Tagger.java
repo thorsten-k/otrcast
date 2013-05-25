@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.controller.tagger;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
@@ -31,14 +32,25 @@ public class Mp4Tagger
 
 	}
 	
+	public void tagEpisode(String srcFileName, Episode episode, String dstFileName) throws IOException
+	{
+		File srcFile = new File(srcFileName);
+		File dstFile = new File(dstFileName);
+		
+		logger.info("srcFile: "+srcFile.getAbsolutePath());
+		logger.info("dstFile: "+dstFile.getAbsolutePath());
+		
+		tagEpisode(srcFile, episode, dstFile);
+	}
 	@SuppressWarnings("resource")
-	public void tagEpisode(String srcFile, Episode episode, String dstFile) throws IOException
+	public void tagEpisode(File srcFile, Episode episode, File dstFile) throws IOException
 	{
 		JaxbUtil.info(episode);
 		FileChannel fcr = new RandomAccessFile(srcFile, "r").getChannel();
 		FileChannel fcw = new RandomAccessFile(dstFile, "rw").getChannel();
 		
 		//TODO Write a temporary file and in the end, remove original and rename the temp file to replace the original
+		//tk: This should be done outside of this class!
 		
 		IsoFile isoFile = new IsoFile(fcr);
 		
@@ -113,7 +125,7 @@ public class Mp4Tagger
 	private void writeSeries(AppleItemListBox apple, Series series)
 	{
 		AppleShowBox box = null;
-		if(apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
+		if(apple.getBoxes(AppleShowBox.class).isEmpty())
 		{
 			box = new AppleShowBox();
 		}

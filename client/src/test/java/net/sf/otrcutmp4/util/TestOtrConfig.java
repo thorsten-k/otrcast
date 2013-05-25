@@ -20,6 +20,7 @@ public class TestOtrConfig extends AbstractClientTest
 	
 	public static final String faacKbit = "196";
 	public static final String tpSeries = "template";
+	public static final String cmdTagger = "java";
 	
 	private OtrConfig otrConfig;
 
@@ -76,6 +77,7 @@ public class TestOtrConfig extends AbstractClientTest
 		config.addProperty(OtrConfig.paraAudioFaac, faacKbit);
 		
 		config.addProperty(OtrConfig.templateSeries, tpSeries);
+		config.addProperty(OtrConfig.cmdTagger, cmdTagger);
 		
 		otrConfig = new OtrConfig(config);
 	}
