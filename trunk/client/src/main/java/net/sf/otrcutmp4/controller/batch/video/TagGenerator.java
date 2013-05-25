@@ -16,6 +16,7 @@ import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
+import net.sf.otrcutmp4.util.OtrConfig.Cmd;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Template;
 
@@ -38,28 +39,41 @@ public class TagGenerator extends AbstactBatchGenerator
 	
 	public List<String> mvToMp4(Video video) throws UtilsProcessingException
 	{
-		String sFrom = rpf.relativate(new File(cfg.getDir(Dir.TMP),"final.mp4"));
-		String sTo = rpf.relativate(new File(cfg.getDir(Dir.MP4),buildFinalName(video)));
+		String sFrom = buildSrc();
+		String sTo = buildDst(video);
 		
 		if(tagMp4)
 		{
 			if(video.isSetEpisode() && video.getEpisode().isSetId())
 			{
-				return tag(video.getEpisode(),sTo);
+				return tag(video.getEpisode());
 			}
 			else
 			{
+				JaxbUtil.info(video);
+				
 				logger.warn("Tagging is selected, but we don't have an episode and/or id");
 			}
 		}
 		return move(sFrom,sTo);
 	}
 	
-	public List<String> tag(Episode episode, String dstName) throws UtilsProcessingException
+	public String buildSrc()
+	{
+		return rpf.relativate(new File(cfg.getDir(Dir.TMP),"final.mp4"));
+	}
+	
+	public String buildDst(Video video) throws UtilsProcessingException
+	{
+		return rpf.relativate(new File(cfg.getDir(Dir.MP4),buildFinalName(video)));
+	}
+	
+	public List<String> tag(Episode episode) throws UtilsProcessingException
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append(episode).append("-");
-		sb.append(dstName);
+		sb.append(cfg.getCmd(Cmd.TAGGER));
+		sb.append(" -tagMp4 ");
+		sb.append(episode.getId());
 		
 		List<String> result = new ArrayList<String>();
 		result.add(sb.toString());

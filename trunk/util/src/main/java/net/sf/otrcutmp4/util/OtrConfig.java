@@ -26,6 +26,7 @@ public class OtrConfig
 	public static enum Url{OTR};
 	public static enum Credential{EMAIL,PWD}
 	public static enum Template{fnSeries}
+	public static enum Cmd{TAGGER}
 	
 	public static String otrConfigName = "properties.txt";
 		
@@ -53,12 +54,15 @@ public class OtrConfig
 	
 	public static final String urlOtrSeries = "url.otrseries";
 	
+	public static final String cmdTagger = "cmd.tagger";
+	
 	private Map<Dir,String> mapDir;
 	private Map<Tool,String> mapTool;
 	private Map<Audio,String> mapAudio;
 	private Map<Url,String> mapUrl;
 	private Map<Credential,String> mapCredential;
 	private Map<Template,String> mapTemplate;
+	private Map<Cmd,String> mapCmd;
 	
 	private List<String> lDirectotries,lTools;
 	private Configuration config;
@@ -73,6 +77,7 @@ public class OtrConfig
 		initUrlList();
 		initTemplateList();
 		initCredentialList();
+		initCmdList();
 	}
 	
 	private void initDirectoryList()
@@ -125,6 +130,12 @@ public class OtrConfig
 		mapUrl.put(Url.OTR, urlOtrSeries);
 	}
 	
+	private void initCmdList()
+	{
+		mapCmd = new Hashtable<Cmd,String>();
+		mapCmd.put(Cmd.TAGGER, cmdTagger);
+	}
+	
 	public void createDefault(String configFile)
 	{	
 		File f = new File(configFile);
@@ -159,9 +170,8 @@ public class OtrConfig
 				config.setProperty(toolFaac, "faac.exe");
 				config.setProperty(toolEac3to, "nero.exe");
 				config.setProperty(toolNeroAac, "nero.exe");
-				
+						
 				config.setProperty(paraAudioFaac, "192");
-				
 				
 				mapCredential.put(Credential.EMAIL, credentialEmail);
 				mapCredential.put(Credential.PWD, credentialPassword);
@@ -169,6 +179,7 @@ public class OtrConfig
 				config.setProperty(credentialPassword, "your-secret-password");
 				
 				config.setProperty(templateSeries, "${seriesName} ${seasonNr}x${episodeNr} ${episodeName}");
+				config.setProperty(cmdTagger, "java -jar ........");
 				config.save();
 			}
 			catch (ConfigurationException e) {logger.error("",e);}
@@ -222,6 +233,7 @@ public class OtrConfig
 		checkTools();
 		checkParameter();
 		checkTemplates();
+		checkCmds();
 	}
 	
 	public void checkEmailPwd() throws OtrConfigurationException
@@ -296,6 +308,15 @@ public class OtrConfig
 		}
 	}
 	
+	private void checkCmds() throws OtrConfigurationException
+	{
+		for(Cmd cmd : Cmd.values())
+		{
+			String value = config.getString(mapCmd.get(cmd));
+			if(value==null){throw new OtrConfigurationException("Entry in properties file. Missing Key: "+mapCmd.get(cmd));}
+		}
+	}
+	
 	public File getDir(Dir dir)
 	{
 		if(config==null){logger.error("Throw");}
@@ -324,6 +345,12 @@ public class OtrConfig
 	{
 		if(config==null){logger.error("Throw");}
 		return config.getString(mapTemplate.get(template));
+	}
+	
+	public String getCmd(Cmd cmd)
+	{
+		if(config==null){logger.error("Throw");}
+		return config.getString(mapCmd.get(cmd));
 	}
 	
 	public String getCredential(Credential credential, String defaultCredential)

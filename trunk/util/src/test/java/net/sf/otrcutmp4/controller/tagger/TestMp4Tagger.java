@@ -7,6 +7,7 @@ import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 
+import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,18 +32,22 @@ public class TestMp4Tagger extends AbstractUtilTest
 	@Test
 	public void tag() throws IOException
 	{
-		String srcFile = "/Volumes/ramdisk/test.mp4";
-		String dstFile = "/Volumes/ramdisk/tagged.mp4";
-		tagger.tagEpisode(srcFile, episode, dstFile);
+		String src = "/Volumes/ramdisk/test.mp4";
+		String dst = "/Volumes/ramdisk/tagged.mp4";
+		tag(src,dst);
+	}
+	
+	public void tag(String src, String dst) throws IOException
+	{
+		tagger.tagEpisode(src, episode, dst);
 	}
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrUtilTstBootstrap.init();
+		Configuration config = OtrUtilTstBootstrap.init();
 		
 		TestMp4Tagger test = new TestMp4Tagger();
 		test.init();
-		test.tag();
+		test.tag(config.getString("test.mp4Tagger.src"),config.getString("test.mp4Tagger.dst"));
 	}
-	
  }

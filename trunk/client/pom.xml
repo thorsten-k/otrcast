@@ -114,11 +114,6 @@
       		<scope>test</scope>
   		</dependency>
 		<dependency>
-			<groupId>com.googlecode.mp4parser</groupId> 
-			<artifactId>isoparser</artifactId> 
-			<scope>test</scope>
-		</dependency> 
-		<dependency>
         	<groupId>net.sf.ahtutils</groupId>
         	<artifactId>ahtutils-jsf</artifactId>
         </dependency>
