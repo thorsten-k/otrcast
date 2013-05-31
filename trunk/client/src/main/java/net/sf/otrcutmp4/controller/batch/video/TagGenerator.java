@@ -42,7 +42,8 @@ public class TagGenerator extends AbstactBatchGenerator
 		String sFrom = buildSrc();
 		String sTo = buildDst(video);
 		
-		if(tagMp4)
+		return move(sFrom,sTo);
+/*		if(tagMp4)
 		{
 			if(video.isSetEpisode() && video.getEpisode().isSetId())
 			{
@@ -56,7 +57,7 @@ public class TagGenerator extends AbstactBatchGenerator
 			}
 		}
 		return move(sFrom,sTo);
-	}
+*/	}
 	
 	public String buildSrc()
 	{

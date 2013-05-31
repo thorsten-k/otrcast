@@ -47,7 +47,11 @@ public class TestMp4Tagger extends AbstractUtilTest
 		Configuration config = OtrUtilTstBootstrap.init();
 		
 		TestMp4Tagger test = new TestMp4Tagger();
+		
 		test.init();
-		test.tag(config.getString("test.mp4Tagger.src"),config.getString("test.mp4Tagger.dst"));
+		test.tag(config.getString("test.mp4Tagger.src.avicut"),config.getString("test.mp4Tagger.dst.avicut"));
+		
+		test.init();
+		test.tag(config.getString("test.mp4Tagger.src.otrcut"),config.getString("test.mp4Tagger.dst.otrcut"));
 	}
  }
