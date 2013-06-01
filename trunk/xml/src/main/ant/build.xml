@@ -25,6 +25,7 @@
 			<arg value="${xsd.dir}/otr.xsd"/>
 			<arg value="-d"/><arg value="${src.dir}"/>
 	    	<arg value="-b"/><arg value="${basedir}/src/main/ant/otr.xjb"/>
+	    	<arg value="-no-header"/>
 			<classpath>
 				<pathelement location="${jaxb-api.lib}"/>
 				<pathelement location="${jaxb-impl.lib}"/>
