@@ -10,6 +10,7 @@ import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,7 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
+import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
@@ -27,9 +29,11 @@ public class Mp4Tagger
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4Tagger.class);
 		
-	public Mp4Tagger()
+	private File dirCovers;
+	
+	public Mp4Tagger(File dirCovers)
 	{
-
+		this.dirCovers=dirCovers;
 	}
 	
 	public void tagEpisode(String srcFileName, Episode episode, String dstFileName) throws IOException
@@ -67,6 +71,7 @@ public class Mp4Tagger
 		writeEpisodeNr(apple, episode);
 		writeSeason(apple, episode.getSeason());
 		writeSeries(apple, episode.getSeason().getSeries());
+		writeCover(apple, episode.getSeason());
 					
 		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
 		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
@@ -146,6 +151,26 @@ public class Mp4Tagger
 			logger.debug(AppleShowBox.class.getSimpleName()+" exists: "+box.getValue());
 		}
 		box.setValue(series.getName());
+		apple.addBox(box);
+	}
+	
+	private void writeCover(AppleItemListBox apple, Season season) throws IOException
+	{
+		logger.debug("Writing Cover");
+		 AppleCoverBox box = null;
+		 if(apple.getBoxes(AppleCoverBox.class).isEmpty())
+		{
+			logger.debug(AppleShowBox.class.getSimpleName()+" is empty");
+			box = new AppleCoverBox();
+		}
+		else
+		{
+			box = (AppleCoverBox) apple.getBoxes(AppleCoverBox.class).get(0);
+			logger.debug(AppleCoverBox.class.getSimpleName()+" exists: "+box.getValue());
+		}
+		 
+		byte[] pngData = FileUtils.readFileToByteArray(new File(dirCovers,"test.png"));
+		box.setPng(pngData);
 		apple.addBox(box);
 	}
 }

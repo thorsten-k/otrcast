@@ -12,9 +12,6 @@ import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,18 +19,15 @@ public class TestMp4Tagger extends AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestMp4Tagger.class);
 	
-	@Before
-	public void init()
+	public TestMp4Tagger(File dirCovers)
 	{
 		episode = XmlEpisodeFactory.create("mySeries", 11, 22, "myEpisode");
-		tagger = new Mp4Tagger();
+		tagger = new Mp4Tagger(dirCovers);
 	}
 	
 	private Mp4Tagger tagger;
 	private Episode episode;
 	
-	@Ignore
-	@Test
 	public void tag() throws IOException
 	{
 		String src = "/Volumes/ramdisk/test.mp4";
@@ -50,7 +44,8 @@ public class TestMp4Tagger extends AbstractUtilTest
 	{
 		Configuration config = OtrUtilTstBootstrap.init();
 		
-		TestMp4Tagger test = new TestMp4Tagger();
+		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
+		TestMp4Tagger test = new TestMp4Tagger(dirCovers);
 		
 		
 		String src = config.getString("test.mp4Tagger.src");
@@ -63,7 +58,6 @@ public class TestMp4Tagger extends AbstractUtilTest
 		
 		for(String file : files)
 		{
-			test.init();
 			test.tag(src+fs+file,dst+fs+file);
 			
 // This tests the balancer directly
