@@ -49,7 +49,7 @@ public class SeriesTagger
 		if(dstFile.endsWith("\"")){dstFile = dstFile.substring(0,dstFile.length()-1);}
 		
 		logger.info("Tagging "+srcFile+" to "+dstFile);
-		Mp4Tagger mp4Tagger = new Mp4Tagger();
+		Mp4Tagger mp4Tagger = new Mp4Tagger(null);
 		try
 		{
 			mp4Tagger.tagEpisode(srcFile, video.getEpisode(), dstFile);
