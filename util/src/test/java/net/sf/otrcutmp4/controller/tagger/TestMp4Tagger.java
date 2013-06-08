@@ -1,6 +1,9 @@
 package net.sf.otrcutmp4.controller.tagger;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.otrcutmp4.controller.factory.xml.series.XmlEpisodeFactory;
 import net.sf.otrcutmp4.model.xml.series.Episode;
@@ -8,6 +11,7 @@ import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -48,10 +52,25 @@ public class TestMp4Tagger extends AbstractUtilTest
 		
 		TestMp4Tagger test = new TestMp4Tagger();
 		
-		test.init();
-		test.tag(config.getString("test.mp4Tagger.src.avicut"),config.getString("test.mp4Tagger.dst.avicut"));
 		
-		test.init();
-		test.tag(config.getString("test.mp4Tagger.src.otrcut"),config.getString("test.mp4Tagger.dst.otrcut"));
+		String src = config.getString("test.mp4Tagger.src");
+		String dst = config.getString("test.mp4Tagger.dst");
+		String fs = SystemUtils.FILE_SEPARATOR;
+		
+		List<String> files = new ArrayList<String>();
+		files.add("AviCutMp4.mp4"); //... Transcoded AVI to MP4 by AviCutMp4
+//		files.add("OtrCutMp4.mp4"); //... Transcoded by onlinetvrecorder.com
+		
+		for(String file : files)
+		{
+			test.init();
+			test.tag(src+fs+file,dst+fs+file);
+			
+// This tests the balancer directly
+//			Mp4MetadataBalancer balancer = new Mp4MetadataBalancer();
+//			File fSrc = new File(src+fs+file);
+//			File fDst = new File(dst+fs+"TMP-"+file);		
+//			balancer.writeRandomMetadata(fSrc, dst+fs+"MDB-"+file, "new data",fDst);
+		}
 	}
  }
