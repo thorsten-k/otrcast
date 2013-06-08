@@ -54,13 +54,12 @@ public class Mp4Tagger
 		
 		IsoFile isoFile = new IsoFile(fcr);
 		
-		//Get the MovieBox
 		MovieBox moov = isoFile.getBoxes(MovieBox.class).get(0);
-		
-		//Get the Meta Data from the UserDataBox and get the Apple meta-data
 		UserDataBox udta = moov.getBoxes(UserDataBox.class).get(0);
 		MetaBox meta = udta.getBoxes(MetaBox.class).get(0);
 		AppleItemListBox apple = meta.getBoxes(AppleItemListBox.class).get(0);
+		
+		long sizeBefore = udta.getSize();
 		
 		//TODO Write a method to make this code DRY-compatible!
 		
@@ -68,11 +67,21 @@ public class Mp4Tagger
 		writeEpisodeNr(apple, episode);
 		writeSeason(apple, episode.getSeason());
 		writeSeries(apple, episode.getSeason().getSeries());
+					
+		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
+		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
 		
-		//TODO Add more information like show title
+		long sizeAfter = udta.getSize();
+		logger.debug(UserDataBox.class.getSimpleName()+" "+sizeBefore);
+		logger.debug(UserDataBox.class.getSimpleName()+" "+sizeAfter);
+		logger.debug(UserDataBox.class.getSimpleName()+" needs corrction:"+needsCorrection);
+		if (needsCorrection)
+        {
+            mdb.correctChunkOffsets(isoFile, sizeAfter - sizeBefore);
+        }
 		
 		isoFile.getBox(fcw);
-		fcw.close();
+		fcw.force(true);fcw.close();
 		fcr.close();
 	}
 	
@@ -124,14 +133,17 @@ public class Mp4Tagger
 	
 	private void writeSeries(AppleItemListBox apple, Series series)
 	{
+		logger.debug("Writing Series");
 		AppleShowBox box = null;
 		if(apple.getBoxes(AppleShowBox.class).isEmpty())
 		{
+			logger.debug(AppleShowBox.class.getSimpleName()+" is empty");
 			box = new AppleShowBox();
 		}
 		else
 		{
 			box = (AppleShowBox) apple.getBoxes(AppleShowBox.class).get(0);
+			logger.debug(AppleShowBox.class.getSimpleName()+" exists: "+box.getValue());
 		}
 		box.setValue(series.getName());
 		apple.addBox(box);
