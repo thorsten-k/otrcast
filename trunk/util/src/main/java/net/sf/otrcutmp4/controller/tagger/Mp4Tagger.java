@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -31,6 +30,7 @@ public class Mp4Tagger
 		
 	private File dirCovers;
 	
+	public Mp4Tagger(){}
 	public Mp4Tagger(File dirCovers)
 	{
 		this.dirCovers=dirCovers;
@@ -49,7 +49,7 @@ public class Mp4Tagger
 	@SuppressWarnings("resource")
 	public void tagEpisode(File srcFile, Episode episode, File dstFile) throws IOException
 	{
-		JaxbUtil.info(episode);
+//		JaxbUtil.info(episode);
 		FileChannel fcr = new RandomAccessFile(srcFile, "r").getChannel();
 		FileChannel fcw = new RandomAccessFile(dstFile, "rw").getChannel();
 		
@@ -156,7 +156,15 @@ public class Mp4Tagger
 	
 	private void writeCover(AppleItemListBox apple, Season season) throws IOException
 	{
-		logger.debug("Writing Cover");
+		if(dirCovers==null || !season.getSeries().isSetKey()){return;}
+		
+		File dirSeason = new File(dirCovers,season.getSeries().getKey());
+		if(!dirSeason.exists()){return;}
+		
+		File fCover = new File(dirSeason,season.getNr()+".png");
+		if(!fCover.exists()){return;}
+		
+		logger.debug("Writing Cover "+season.getSeries().getKey());
 		 AppleCoverBox box = null;
 		 if(apple.getBoxes(AppleCoverBox.class).isEmpty())
 		{
@@ -169,7 +177,7 @@ public class Mp4Tagger
 			logger.debug(AppleCoverBox.class.getSimpleName()+" exists: "+box.getValue());
 		}
 		 
-		byte[] pngData = FileUtils.readFileToByteArray(new File(dirCovers,"test.png"));
+		byte[] pngData = FileUtils.readFileToByteArray(fCover);
 		box.setPng(pngData);
 		apple.addBox(box);
 	}
