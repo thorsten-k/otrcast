@@ -20,7 +20,7 @@ public class OtrConfig
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
-	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI};
+	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
@@ -37,6 +37,7 @@ public class OtrConfig
 	public static final String dirTools = "dir.tools";
 	public static final String dirCutlists = "dir.cutlists";
 	public static final String dirRename = "dir.rename";
+	public static final String dirCover = "dir.cover";
 	
 	public static final String toolMp4Box = "tool.mp4box";
 	public static final String toolLame = "tool.lame";
@@ -89,6 +90,7 @@ public class OtrConfig
 		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
 		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
 		lDirectotries.add(dirTools);mapDir.put(Dir.TOOLS, dirTools);
+		lDirectotries.add(dirCover);mapDir.put(Dir.COVER, dirCover);
 //		lDirectotries.add(dirCutlists);
 		lDirectotries.add(dirRename);mapDir.put(Dir.RENAME, dirRename);
 	}
@@ -319,7 +321,8 @@ public class OtrConfig
 	
 	public File getDir(Dir dir)
 	{
-		if(config==null){logger.error("Throw");}
+		checkPreconditions();
+		
 		return new File(config.getString(mapDir.get(dir)));
 	}
 	
@@ -359,6 +362,12 @@ public class OtrConfig
 		String result = config.getString(mapCredential.get(credential));
 		if(result==null){result=defaultCredential;}
 		return result;
+	}
+	
+	private void checkPreconditions()
+	{
+		if(config==null){throw new RuntimeException("config is null!");}
+		if(mapDir==null){throw new RuntimeException("mapDir is null!");}
 	}
 	
 	public String getKey(String key)

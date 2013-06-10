@@ -24,7 +24,7 @@ public class TestOtrConfig extends AbstractClientTest
 	
 	private OtrConfig otrConfig;
 
-	private static File fRoot,fAvi,fMp4,fTmp,fBat,fTools,fRename;
+	private static File fRoot,fAvi,fMp4,fTmp,fBat,fTools,fCover,fRename;
 	private static File tMp4Box,tLame,tFfmpeg,tFaac,tEac3to,tNeroAac;
 	
 	public static TestOtrConfig factory() throws IOException
@@ -44,6 +44,7 @@ public class TestOtrConfig extends AbstractClientTest
 		fTmp = new File(fRoot,OtrConfig.dirTmp);fTmp.mkdirs();
 		fBat = fRoot;fBat.mkdirs();
 		fTools = new File(fRoot,OtrConfig.dirTools);fTools.mkdirs();
+		fCover = new File(fRoot,OtrConfig.dirCover);fCover.mkdirs();
 		fRename = new File(fRoot,OtrConfig.dirRename);fRename.mkdirs();
 		
 		tMp4Box = new File(fTools,OtrConfig.toolMp4Box);tMp4Box.createNewFile();
@@ -65,6 +66,7 @@ public class TestOtrConfig extends AbstractClientTest
 		config.addProperty(OtrConfig.dirTmp, fTmp.getAbsolutePath());
 		config.addProperty(OtrConfig.dirBat, fBat.getAbsolutePath());
 		config.addProperty(OtrConfig.dirTools, fTools.getAbsolutePath());
+		config.addProperty(OtrConfig.dirCover, fCover.getAbsolutePath());
 		config.addProperty(OtrConfig.dirRename, fRename.getAbsolutePath());
 		
 		config.addProperty(OtrConfig.toolMp4Box, tMp4Box.getName());

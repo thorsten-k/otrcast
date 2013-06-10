@@ -5,7 +5,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
-import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
@@ -111,8 +110,10 @@ public class AviToMp4
         
         if(line.hasOption(oTagMp4.getOpt()))
     	{
+        	logger.info("Tagging MP4");
         	SeriesTagger tagger = new SeriesTagger(otrConfig,profile);
         	tagger.tag(new Long(line.getOptionValue(oTagMp4.getOpt())));
+        	return;
         }
         
         if(line.hasOption(oRename.getOpt()))

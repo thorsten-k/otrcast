@@ -42,8 +42,7 @@ public class TagGenerator extends AbstactBatchGenerator
 		String sFrom = buildSrc();
 		String sTo = buildDst(video);
 		
-		return move(sFrom,sTo);
-/*		if(tagMp4)
+		if(tagMp4)
 		{
 			if(video.isSetEpisode() && video.getEpisode().isSetId())
 			{
@@ -57,16 +56,22 @@ public class TagGenerator extends AbstactBatchGenerator
 			}
 		}
 		return move(sFrom,sTo);
-*/	}
-	
-	public String buildSrc()
-	{
-		return rpf.relativate(new File(cfg.getDir(Dir.TMP),"final.mp4"));
 	}
 	
-	public String buildDst(Video video) throws UtilsProcessingException
+	public String buildSrc(){return buildSrc(true);}
+	public String buildSrc(boolean relativate)
 	{
-		return rpf.relativate(new File(cfg.getDir(Dir.MP4),buildFinalName(video)));
+		File srcFile = new File(cfg.getDir(Dir.TMP),"final.mp4");
+		if(relativate){return rpf.relativate(srcFile);}
+		else {return srcFile.getAbsolutePath();}
+	}
+	
+	public String buildDst(Video video) throws UtilsProcessingException{return buildDst(true,video);}
+	public String buildDst(boolean relativate, Video video) throws UtilsProcessingException
+	{
+		File dstFile = new File(cfg.getDir(Dir.MP4),buildFinalName(video));
+		if(relativate){return rpf.relativate(dstFile);}
+		else {return dstFile.getAbsolutePath();}
 	}
 	
 	public List<String> tag(Episode episode) throws UtilsProcessingException
