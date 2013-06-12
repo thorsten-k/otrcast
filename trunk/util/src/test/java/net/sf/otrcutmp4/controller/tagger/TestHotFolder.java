@@ -3,8 +3,6 @@ package net.sf.otrcutmp4.controller.tagger;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.slf4j.Logger;

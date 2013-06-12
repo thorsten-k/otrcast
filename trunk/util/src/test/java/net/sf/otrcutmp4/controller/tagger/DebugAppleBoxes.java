@@ -3,10 +3,14 @@ package net.sf.otrcutmp4.controller.tagger;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,18 +30,16 @@ public class DebugAppleBoxes extends AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(DebugAppleBoxes.class);
 	
-	public void debug() throws IOException
+	public void debug(String filename) throws IOException
 	{
-		String filename = "/Volumes/ramdisk/test.mp4";
-		FileChannel fcr = new RandomAccessFile(filename, "r").getChannel();
-		FileChannel fcw = new RandomAccessFile(filename +".new", "rw").getChannel();
-		
-		//TODO Write a temporary file and in the end, remove original and rename the temp file to replace the original
+		logger.info("Debugging "+filename);
+		RandomAccessFile raf = new RandomAccessFile(filename, "r");
+		FileChannel fcr = raf.getChannel();
 		
 		IsoFile isoFile = new IsoFile(fcr);
 		
 		//Get the MovieBox
-		MovieBox moov = isoFile.getBoxes(MovieBox.class).get(0);
+		MovieBox moov = Mp4BoxManager.movieBox(isoFile);
 		
 		//Get the Meta Data from the UserDataBox and get the Apple meta-data
 		UserDataBox udta = moov.getBoxes(UserDataBox.class).get(0);
@@ -53,7 +55,11 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		debugAppleTvEpisodeBox(apple);
 		debugAppleTvSeasonBox(apple);
 		debugAppleShowBox(apple);
+		
+		fcr.close();
+		raf.close();
 	}
+	
 	
 	private void debugAppleTrackTitleBoxd(AppleItemListBox apple)
 	{
@@ -130,10 +136,19 @@ public class DebugAppleBoxes extends AbstractUtilTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrUtilTestBootstrap.init();
+		Configuration config = OtrUtilTestBootstrap.init();
+		
+		String src = config.getString("test.mp4Tagger.src");
+		String fs = SystemUtils.FILE_SEPARATOR;
+		
+		List<String> files = new ArrayList<String>();
+		files.add("AviCutMp4.mp4"); //... Transcoded AVI to MP4 by AviCutMp4
+		files.add("OtrCutMp4.mp4"); //... Transcoded by onlinetvrecorder.com
 		
 		DebugAppleBoxes test = new DebugAppleBoxes();
-		test.debug();
+		for(String s : files)
+		{
+			test.debug(src+fs+s);
+		}
 	}
-	
  }
