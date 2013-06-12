@@ -20,7 +20,7 @@ public class TestEpisodeFromFilename extends AbstractUtilTest{
 		Episode episode = processor.createEpisodeFromFilename(input.getName());
 		logger.info("Episode: " +episode.toString());
 		
-		Mp4Tagger tagger = new Mp4Tagger(new File("target"));
+		Mp4Tagger tagger = new Mp4Tagger();
 		tagger.tagEpisode(input, episode, new File("target/new4" +input.getName()));
 	}
 	

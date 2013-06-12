@@ -8,6 +8,7 @@ import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
 import net.sf.otrcutmp4.controller.tagger.Mp4Tagger;
+import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
@@ -25,10 +26,11 @@ public class SeriesTagger
 	
 	private OtrSeriesRest rest;
 	private TagGenerator tagGenerator;
-	private File dirCovers;
+	private CoverManager coverManager;
 	
-	public SeriesTagger(OtrConfig cfg, AviToMp4.Profile profile)
+	public SeriesTagger(OtrConfig cfg, AviToMp4.Profile profile, CoverManager coverManager)
 	{
+		this.coverManager=coverManager;
 		tagGenerator = new TagGenerator(cfg,profile,false);
 		
 		String host = cfg.getUrl(OtrConfig.Url.OTR);
@@ -38,7 +40,6 @@ public class SeriesTagger
 				cfg.getCredential(Credential.EMAIL,""),
 				cfg.getCredential(Credential.PWD,""));
 		rest = ProxyFactory.create(OtrSeriesRest.class, host,clientExecutor);
-		dirCovers = cfg.getDir(Dir.COVER);
 	}
 	
 	public void tag(long episodeId) throws UtilsProcessingException
@@ -53,7 +54,7 @@ public class SeriesTagger
 		if(dstFile.endsWith("\"")){dstFile = dstFile.substring(0,dstFile.length()-1);}
 		
 		logger.info("Tagging "+srcFile+" to "+dstFile);
-		Mp4Tagger mp4Tagger = new Mp4Tagger(dirCovers);
+		Mp4Tagger mp4Tagger = new Mp4Tagger(coverManager);
 		try
 		{
 			mp4Tagger.tagEpisode(srcFile, video.getEpisode(), dstFile);
