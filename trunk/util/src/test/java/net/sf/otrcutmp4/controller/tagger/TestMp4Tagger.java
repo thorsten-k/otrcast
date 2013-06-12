@@ -10,7 +10,7 @@ import net.sf.otrcutmp4.controller.factory.xml.series.XmlEpisodeFactory;
 import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -40,7 +40,7 @@ public class TestMp4Tagger extends AbstractUtilTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrUtilTstBootstrap.init();
+		Configuration config = OtrUtilTestBootstrap.init();
 		
 		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
 		TestMp4Tagger test = new TestMp4Tagger(dirCovers);
@@ -52,7 +52,7 @@ public class TestMp4Tagger extends AbstractUtilTest
 		
 		List<String> files = new ArrayList<String>();
 		files.add("AviCutMp4.mp4"); //... Transcoded AVI to MP4 by AviCutMp4
-//		files.add("OtrCutMp4.mp4"); //... Transcoded by onlinetvrecorder.com
+		files.add("OtrCutMp4.mp4"); //... Transcoded by onlinetvrecorder.com
 		
 		for(String file : files)
 		{

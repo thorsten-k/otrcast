@@ -13,15 +13,15 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OtrUtilTstBootstrap
+public class OtrUtilTestBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(OtrUtilTstBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrUtilTestBootstrap.class);
 	
 	public static Configuration init() throws ExlpConfigurationException
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("otrcutmp4-util.test");
-			loggerInit.addAltPath("src/test/resources/otrcutmp4-util.test");
+			loggerInit.addAltPath("config.otrcutmp4-util.test");
+//			loggerInit.addAltPath("src/test/resources/otrcutmp4-util.test");
 			loggerInit.init();
 		
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());	

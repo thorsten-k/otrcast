@@ -5,7 +5,7 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,7 +130,7 @@ public class DebugAppleBoxes extends AbstractUtilTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrUtilTstBootstrap.init();
+		OtrUtilTestBootstrap.init();
 		
 		DebugAppleBoxes test = new DebugAppleBoxes();
 		test.debug();

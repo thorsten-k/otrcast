@@ -6,7 +6,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class TestXmlVideoFileFactory extends AbstractUtilTest
     
     public static void main(String[] args) throws ExlpConfigurationException, OtrProcessingException
     {
-		OtrUtilTstBootstrap.init();		
+		OtrUtilTestBootstrap.init();		
 			
 		TestXmlVideoFileFactory.initPrefixMapper();
 	

@@ -61,7 +61,7 @@ public class Mp4Tagger
 		
 		IsoFile isoFile = new IsoFile(fcr);
 		
-		MovieBox moov = isoFile.getBoxes(MovieBox.class).get(0);
+		MovieBox moov = Mp4BoxManager.movieBox(isoFile);
 		UserDataBox udta = null;
 		MetaBox meta = null;
 		AppleItemListBox apple = null;

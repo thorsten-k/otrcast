@@ -9,7 +9,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;
 import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.junit.Assert;
@@ -63,7 +63,7 @@ public class TestLinklistConverter extends AbstractUtilTest
 	
 	public static void main(String[] args) throws ExlpConfigurationException
     {
-		Configuration config = OtrUtilTstBootstrap.init();		
+		Configuration config = OtrUtilTestBootstrap.init();		
 			
 		TestLinklistConverter.initPrefixMapper();
 		TestLinklistConverter.initFiles();
