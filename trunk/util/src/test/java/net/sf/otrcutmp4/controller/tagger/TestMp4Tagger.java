@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.otrcutmp4.controller.cover.FileSystemCoverManager;
 import net.sf.otrcutmp4.controller.factory.xml.series.XmlEpisodeFactory;
+import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
@@ -21,8 +23,10 @@ public class TestMp4Tagger extends AbstractUtilTest
 	
 	public TestMp4Tagger(File dirCovers)
 	{
+		CoverManager coverManager = new FileSystemCoverManager(dirCovers);
+		
 		episode = XmlEpisodeFactory.create("mySeries", 11, 22, "myEpisode");
-		tagger = new Mp4Tagger(dirCovers);
+		tagger = new Mp4Tagger(coverManager);
 	}
 	
 	private Mp4Tagger tagger;

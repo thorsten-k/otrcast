@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
+import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,6 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
-import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
@@ -27,13 +26,13 @@ import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 public class Mp4Tagger
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4Tagger.class);
-		
-	private File dirCovers;
+
+	private CoverManager coverManager;
 	
-	public Mp4Tagger(){}
-	public Mp4Tagger(File dirCovers)
+	public Mp4Tagger() {}
+	public Mp4Tagger(CoverManager coverManager)
 	{
-		this.dirCovers=dirCovers;
+		
 	}
 	
 	public void tagEpisode(String srcFileName, Episode episode, String dstFileName) throws IOException
@@ -78,10 +77,7 @@ public class Mp4Tagger
 			meta.addBox(apple);
 			udta.addBox(meta);
 			moov.addBox(udta);
-			
 		}
-		
-		
 		
 		long sizeBefore = udta.getSize();
 		
@@ -91,7 +87,7 @@ public class Mp4Tagger
 		writeEpisodeNr(apple, episode);
 		writeSeason(apple, episode.getSeason());
 		writeSeries(apple, episode.getSeason().getSeries());
-//		writeCover(apple, episode.getSeason());
+		writeCover(apple, episode.getSeason());
 					
 		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
 		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
@@ -176,9 +172,9 @@ public class Mp4Tagger
 	
 	private void writeCover(AppleItemListBox apple, Season season) throws IOException
 	{
-		if(dirCovers==null || !season.getSeries().isSetKey()){return;}
+		if(coverManager==null || !season.getSeries().isSetKey()){return;}
 		
-		File dirSeason = new File(dirCovers,season.getSeries().getKey());
+/*		File dirSeason = new File(dirCovers,season.getSeries().getKey());
 		if(!dirSeason.exists()){return;}
 		
 		File fCover = new File(dirSeason,season.getNr()+".png");
@@ -200,5 +196,5 @@ public class Mp4Tagger
 		byte[] pngData = FileUtils.readFileToByteArray(fCover);
 		box.setPng(pngData);
 		apple.addBox(box);
-	}
+*/	}
 }

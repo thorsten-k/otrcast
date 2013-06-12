@@ -26,7 +26,7 @@ public class ProcessTagging implements Processor{
 			
 			
 			Episode episode = createEpisodeFromFilename(file.getFileName());
-			tagger = new Mp4Tagger(new File("target"));
+			tagger = new Mp4Tagger();
 			tagger.tagEpisode(jFile, episode, new File("target/test.mp4"));		
 		}
 		

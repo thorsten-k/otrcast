@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4;
 
+import java.io.File;
+
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -13,6 +15,7 @@ import net.sf.otrcutmp4.controller.processor.SeriesTagger;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebAviScanner;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
+import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
@@ -108,10 +111,13 @@ public class AviToMp4
     		was.scan(srcDirProcessor);
         }
         
+        File dirCovers = otrConfig.getDir(Dir.COVER);
+        CoverManager coverManager = null;
+        
         if(line.hasOption(oTagMp4.getOpt()))
     	{
         	logger.info("Tagging MP4");
-        	SeriesTagger tagger = new SeriesTagger(otrConfig,profile);
+        	SeriesTagger tagger = new SeriesTagger(otrConfig,profile,coverManager);
         	tagger.tag(new Long(line.getOptionValue(oTagMp4.getOpt())));
         	return;
         }
