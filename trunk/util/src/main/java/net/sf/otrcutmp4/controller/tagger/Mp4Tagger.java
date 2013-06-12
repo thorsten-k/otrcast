@@ -59,9 +59,29 @@ public class Mp4Tagger
 		IsoFile isoFile = new IsoFile(fcr);
 		
 		MovieBox moov = isoFile.getBoxes(MovieBox.class).get(0);
-		UserDataBox udta = moov.getBoxes(UserDataBox.class).get(0);
-		MetaBox meta = udta.getBoxes(MetaBox.class).get(0);
-		AppleItemListBox apple = meta.getBoxes(AppleItemListBox.class).get(0);
+		UserDataBox udta = null;
+		MetaBox meta = null;
+		AppleItemListBox apple = null;
+		try
+		{
+			udta = moov.getBoxes(UserDataBox.class).get(0);
+			meta = udta.getBoxes(MetaBox.class).get(0);
+			apple = meta.getBoxes(AppleItemListBox.class).get(0);
+		}
+		catch (Exception e)
+		{
+			logger.info("Exception occured: " +e.getMessage());
+			apple = new AppleItemListBox();
+			meta = new MetaBox();
+			udta = new UserDataBox();
+			
+			meta.addBox(apple);
+			udta.addBox(meta);
+			moov.addBox(udta);
+			
+		}
+		
+		
 		
 		long sizeBefore = udta.getSize();
 		
@@ -71,7 +91,7 @@ public class Mp4Tagger
 		writeEpisodeNr(apple, episode);
 		writeSeason(apple, episode.getSeason());
 		writeSeries(apple, episode.getSeason().getSeries());
-		writeCover(apple, episode.getSeason());
+//		writeCover(apple, episode.getSeason());
 					
 		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
 		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
