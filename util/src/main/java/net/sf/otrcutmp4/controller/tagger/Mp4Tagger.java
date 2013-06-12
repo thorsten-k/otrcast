@@ -17,6 +17,7 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
+import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
@@ -29,10 +30,13 @@ public class Mp4Tagger
 
 	private CoverManager coverManager;
 	
-	public Mp4Tagger() {}
+	public Mp4Tagger()
+	{
+		coverManager = null;
+	}
 	public Mp4Tagger(CoverManager coverManager)
 	{
-		
+		this.coverManager=coverManager;
 	}
 	
 	public void tagEpisode(String srcFileName, Episode episode, String dstFileName) throws IOException
@@ -172,29 +176,37 @@ public class Mp4Tagger
 	
 	private void writeCover(AppleItemListBox apple, Season season) throws IOException
 	{
-		if(coverManager==null || !season.getSeries().isSetKey()){return;}
+		boolean abortNoCoverManager = (coverManager==null);
+		boolean aboirtNoSeriesKey = !season.getSeries().isSetKey();
 		
-/*		File dirSeason = new File(dirCovers,season.getSeries().getKey());
-		if(!dirSeason.exists()){return;}
+		logger.trace("Aboirt because no coverManager?"+abortNoCoverManager);
+		logger.trace("Aboirt because no series@key?"+aboirtNoSeriesKey);
 		
-		File fCover = new File(dirSeason,season.getNr()+".png");
-		if(!fCover.exists()){return;}
+		if(abortNoCoverManager || aboirtNoSeriesKey){return;}
 		
-		logger.debug("Writing Cover "+season.getSeries().getKey());
-		 AppleCoverBox box = null;
-		 if(apple.getBoxes(AppleCoverBox.class).isEmpty())
+		boolean coverAvailable = coverManager.isAvailable(season);
+		logger.info("Available: "+coverAvailable);
+		if(coverAvailable)
 		{
-			logger.debug(AppleShowBox.class.getSimpleName()+" is empty");
-			box = new AppleCoverBox();
+			logger.debug("Writing Cover "+season.getSeries().getKey());
+			AppleCoverBox box = null;
+			if(apple.getBoxes(AppleCoverBox.class).isEmpty())
+			{
+				logger.debug(AppleShowBox.class.getSimpleName()+" is empty");
+				box = new AppleCoverBox();
+			}
+			else
+			{
+				box = (AppleCoverBox) apple.getBoxes(AppleCoverBox.class).get(0);
+				logger.debug(AppleCoverBox.class.getSimpleName()+" exists: "+box.getValue());
+			}
+			switch(coverManager.getFormat())
+			{
+				case PNG:	box.setPng(coverManager.getImageStream());break;
+				default:   logger.warn("IMAGE Format "+coverManager.getFormat()+" not handled");
+							  return;
+			}
+			apple.addBox(box);
 		}
-		else
-		{
-			box = (AppleCoverBox) apple.getBoxes(AppleCoverBox.class).get(0);
-			logger.debug(AppleCoverBox.class.getSimpleName()+" exists: "+box.getValue());
-		}
-		 
-		byte[] pngData = FileUtils.readFileToByteArray(fCover);
-		box.setPng(pngData);
-		apple.addBox(box);
-*/	}
+	}
 }

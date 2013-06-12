@@ -26,19 +26,13 @@ public class TestMp4Tagger extends AbstractUtilTest
 		CoverManager coverManager = new FileSystemCoverManager(dirCovers);
 		
 		episode = XmlEpisodeFactory.create("mySeries", 11, 22, "myEpisode");
+		episode.getSeason().getSeries().setKey("TEST");
 		tagger = new Mp4Tagger(coverManager);
 	}
 	
 	private Mp4Tagger tagger;
 	private Episode episode;
-	
-	public void tag() throws IOException
-	{
-		String src = "/Volumes/ramdisk/test.mp4";
-		String dst = "/Volumes/ramdisk/tagged.mp4";
-		tag(src,dst);
-	}
-	
+		
 	public void tag(String src, String dst) throws IOException
 	{
 		tagger.tagEpisode(src, episode, dst);
