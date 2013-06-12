@@ -16,6 +16,7 @@ public class TestHotFolder extends AbstractUtilTest{
 	
 	public static void main(String[] args) throws Exception
 	{
+		
 		CamelContext context = new DefaultCamelContext();
 		context.addRoutes(new RouteBuilder() {
 		    public void configure() {

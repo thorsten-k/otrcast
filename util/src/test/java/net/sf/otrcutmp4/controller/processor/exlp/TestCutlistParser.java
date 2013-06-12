@@ -18,7 +18,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -104,7 +104,7 @@ public class TestCutlistParser extends AbstractUtilTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrUtilTstBootstrap.init();		
+		OtrUtilTestBootstrap.init();		
 		
 		int index = 1;
 		

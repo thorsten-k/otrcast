@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.processor;
 import java.io.File;
 
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class TestImlProcessor extends AbstractUtilTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrUtilTstBootstrap.init();
+		Configuration config = OtrUtilTestBootstrap.init();
 		
 		String iml = config.getString("xml.itunes.lib");
 		

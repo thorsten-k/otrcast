@@ -8,7 +8,7 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import net.sf.otrcutmp4.view.noop.NoopSrcDirProcessorView;
 
 import org.junit.Assert;
@@ -84,7 +84,7 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     
     public static void main(String[] args) throws Exception
     {
-    	OtrUtilTstBootstrap.init();
+    	OtrUtilTestBootstrap.init();
     	
     	TestSrcDirProcessor test = new TestSrcDirProcessor();
     	test.init();

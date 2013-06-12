@@ -4,7 +4,7 @@ import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTstBootstrap;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -149,7 +149,7 @@ public class TestXmlFormatFactory extends AbstractUtilTest
     
     public static void main(String[] args) throws ExlpConfigurationException
     {
-		OtrUtilTstBootstrap.init();		
+		OtrUtilTestBootstrap.init();		
 			
 		TestXmlFormatFactory.initPrefixMapper();
 	
