@@ -21,7 +21,7 @@ public class OtrUtilTestBootstrap
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("config.otrcutmp4-util.test");
-//			loggerInit.addAltPath("src/test/resources/otrcutmp4-util.test");
+			loggerInit.addAltPath("src/test/resources/config.otrcutmp4-util.test");
 			loggerInit.init();
 		
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());	

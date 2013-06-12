@@ -49,41 +49,24 @@ public class Mp4Tagger
 		
 		tagEpisode(srcFile, episode, dstFile);
 	}
-	@SuppressWarnings("resource")
+
 	public void tagEpisode(File srcFile, Episode episode, File dstFile) throws IOException
 	{
 //		JaxbUtil.info(episode);
-		FileChannel fcr = new RandomAccessFile(srcFile, "r").getChannel();
-		FileChannel fcw = new RandomAccessFile(dstFile, "rw").getChannel();
+		RandomAccessFile rafR = new RandomAccessFile(srcFile, "r");
+		RandomAccessFile rafW = new RandomAccessFile(dstFile, "rw");
 		
-		//TODO Write a temporary file and in the end, remove original and rename the temp file to replace the original
-		//tk: This should be done outside of this class!
+		FileChannel fcr = rafR.getChannel();
+		FileChannel fcw = rafW.getChannel();
 		
 		IsoFile isoFile = new IsoFile(fcr);
 		
 		MovieBox moov = Mp4BoxManager.movieBox(isoFile);
-		UserDataBox udta = null;
-		MetaBox meta = null;
-		AppleItemListBox apple = null;
-		try
-		{
-			udta = moov.getBoxes(UserDataBox.class).get(0);
-			meta = udta.getBoxes(MetaBox.class).get(0);
-			apple = meta.getBoxes(AppleItemListBox.class).get(0);
-		}
-		catch (Exception e)
-		{
-			logger.info("Exception occured: " +e.getMessage());
-			apple = new AppleItemListBox();
-			meta = new MetaBox();
-			udta = new UserDataBox();
-			
-			meta.addBox(apple);
-			udta.addBox(meta);
-			moov.addBox(udta);
-		}
+		long sizeBefore = moov.getSize();
 		
-		long sizeBefore = udta.getSize();
+		UserDataBox udta = Mp4BoxManager.userDataBox(moov);
+		MetaBox meta = Mp4BoxManager.metaBox(udta);
+		AppleItemListBox apple = Mp4BoxManager.appleItemListBox(meta);
 		
 		//TODO Write a method to make this code DRY-compatible!
 		
@@ -96,7 +79,7 @@ public class Mp4Tagger
 		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
 		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
 		
-		long sizeAfter = udta.getSize();
+		long sizeAfter = moov.getSize();
 		logger.debug(UserDataBox.class.getSimpleName()+" "+sizeBefore);
 		logger.debug(UserDataBox.class.getSimpleName()+" "+sizeAfter);
 		logger.debug(UserDataBox.class.getSimpleName()+" needs corrction:"+needsCorrection);
@@ -106,8 +89,8 @@ public class Mp4Tagger
         }
 		
 		isoFile.getBox(fcw);
-		fcw.force(true);fcw.close();
-		fcr.close();
+		fcw.force(true);fcw.close();rafW.close();
+		fcr.close();rafR.close();
 	}
 	
 	private void writeEpisodeName(AppleItemListBox apple, Episode episode)

@@ -45,7 +45,6 @@ public class TestMp4Tagger extends AbstractUtilTest
 		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
 		TestMp4Tagger test = new TestMp4Tagger(dirCovers);
 		
-		
 		String src = config.getString("test.mp4Tagger.src");
 		String dst = config.getString("test.mp4Tagger.dst");
 		String fs = SystemUtils.FILE_SEPARATOR;
