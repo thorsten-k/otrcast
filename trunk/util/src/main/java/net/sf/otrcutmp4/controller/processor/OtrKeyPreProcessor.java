@@ -21,12 +21,12 @@ public class OtrKeyPreProcessor
 	
 	public String guess(String input)
 	{
-		if(input.endsWith(".otrkey"))
+/*		if(input.endsWith(".otrkey"))
 		{
 			int index = input.lastIndexOf(".otrkey");
 			input = input.substring(0,index);
 		}
-		
+*/		
 		if(input.startsWith("http://otr.datenkeller.at/?getFile="))
 		{
 			int index = "http://otr.datenkeller.at/?getFile=".length();
