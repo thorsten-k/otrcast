@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory;
+package net.sf.otrcutmp4.factory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import junit.framework.Assert;
 import net.sf.otrcutmp4.controller.factory.txt.TxtDsFactory;
+import net.sf.otrcutmp4.factory.FileNameFactoy;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;

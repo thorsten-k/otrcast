@@ -1,13 +1,12 @@
 package net.sf.otrcutmp4;
 
-import java.io.File;
-
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
+import net.sf.otrcutmp4.controller.cover.FileSystemCoverManager;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
@@ -50,6 +49,7 @@ public class AviToMp4
 	
 	private Option oHelp,oDebug,oProfile,oWeb;
 	private Option oAc3,oRename,oMp4;
+	private Option oCover;
 	private Option oTagMp4,oTag;
 	private Option oScan;
 	private Options options;
@@ -111,8 +111,19 @@ public class AviToMp4
     		was.scan(srcDirProcessor);
         }
         
-        File dirCovers = otrConfig.getDir(Dir.COVER);
         CoverManager coverManager = null;
+
+        if(line.hasOption(oCover.getOpt()))
+        {
+        	String type = line.getOptionValue(oCover.getOpt());
+        	CoverManager.TYPE cmType = CoverManager.TYPE.valueOf(type);
+        	
+        	switch(cmType)
+        	{
+        		case FS:	coverManager = new FileSystemCoverManager(otrConfig.getDir(Dir.COVER));break;
+        		default: coverManager=null;break;
+        	}
+        }
         
         if(line.hasOption(oTagMp4.getOpt()))
     	{
@@ -201,6 +212,11 @@ public class AviToMp4
 				  .withDescription("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
 				  .create("tagMp4");
 		
+		oCover  = OptionBuilder.withArgName("TYPE")
+				  .hasArg()
+				  .withDescription("CoverManager: (FS) FileSystem")
+				  .create("cover");
+		
 		StringBuffer sb = new StringBuffer();
 		for(int i=1;i<Profile.values().length;i++)
 		{
@@ -224,6 +240,7 @@ public class AviToMp4
 		options.addOption(oCreate);
 		options.addOption(oDir);
 		options.addOption(oConfig);
+		options.addOption(oCover);
 		options.addOption(oProfile);
 		options.addOption(oTag);
 		options.addOption(oTagMp4);

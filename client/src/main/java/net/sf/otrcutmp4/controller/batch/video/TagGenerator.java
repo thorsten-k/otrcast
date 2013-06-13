@@ -12,7 +12,7 @@ import net.sf.exlp.util.os.shell.ShellCmdMove;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
-import net.sf.otrcutmp4.controller.factory.FileNameFactoy;
+import net.sf.otrcutmp4.factory.FileNameFactoy;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;

@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory;
+package net.sf.otrcutmp4.factory;
 
 import java.io.IOException;
 import java.io.StringReader;

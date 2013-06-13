@@ -34,8 +34,6 @@ public class CutlistChooserProcessing
          setShowComment(false);
 	}
 
-
-	
 	public VideoFiles chooseFileRename(VideoFiles vFiles)
 	{
 		logger.info("");
@@ -52,8 +50,6 @@ public class CutlistChooserProcessing
 		}
 		return vFiles;
 	}
-	
-	
 	
 	public void setShowAuthor(boolean showAuthor) {this.showAuthor = showAuthor;}
 	public void setShowComment(boolean showComment) {this.showComment = showComment;}
