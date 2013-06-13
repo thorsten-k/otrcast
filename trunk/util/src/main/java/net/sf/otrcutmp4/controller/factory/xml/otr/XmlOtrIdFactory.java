@@ -15,10 +15,12 @@ public class XmlOtrIdFactory
 	
 	public static enum VideType {avi,hq,hd,mp4}
 	
+	public static final String typeMp4 = "mpg.mp4";
 	public static final String typeAviHq = "mpg.HQ.avi";
 	public static final String typeAviHd = "mpg.HD.avi";
 	public static final String typeAc3Hd = "mpg.HD.ac3";
 	public static final String typeMp4Hq   = "mpg.HQ.cut.mp4";
+	public static final String typeOtrkey   = "otrkey";
 	
 	private static final String tag = ".mpg.";
 	
@@ -37,6 +39,14 @@ public class XmlOtrIdFactory
 	public static OtrId createForFileName(String fileName) throws OtrProcessingException
 	{	
 		OtrId xml = null;
+		
+		if(fileName.endsWith(typeOtrkey))
+		{
+			logger.warn("Is otrkey");
+			int index = fileName.lastIndexOf(typeOtrkey);
+			fileName = fileName.substring(0,index-1);
+		}
+		
 		if(     fileName.endsWith(typeAviHq)){xml = getFileId(VideType.hq, fileName);}
 		else if(fileName.endsWith(typeAviHd)){xml = getFileId(VideType.hd, fileName);}
 		else if(fileName.endsWith(typeMp4Hq)){xml = getFileId(VideType.mp4, fileName);}
@@ -48,6 +58,7 @@ public class XmlOtrIdFactory
 	private static OtrId getFileId(VideType vType, String fileName)
 	{
 		OtrId otrId = null;
+		
 		switch(vType)
 		{
 			case hq: otrId=getHq(fileName);break;
