@@ -1,16 +1,17 @@
 package net.sf.otrcutmp4.controller.processor;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +38,36 @@ public class OtrFileDownloader
 		VideoFile vf = XmlVideoFileFactory.create(fileName);
 		JaxbUtil.info(vf);
 		URL url = new URL(line);
-		
-		File f = new File(dirDownload,fileName+".otrkey");
-		FileUtils.copyURLToFile(url, f);
+//		urlDownload(url);
+
+	}
+	
+	private void urlDownload(URL url) throws IOException
+	{
+		logger.info("Connecting");
+		URLConnection conn = url.openConnection();
+		conn.connect();
+		long totalFileSize = conn.getContentLength();
+		logger.info("Size: "+totalFileSize);
+		 
+		BufferedInputStream in = null;
+		FileOutputStream fout = null;
+	    try
+	    {
+	    	in = new BufferedInputStream(conn.getInputStream());
+	    	fout = new FileOutputStream(new File(dirDownload,"test.io"));
+		 
+	    	byte data[] = new byte[1024];
+	    	int count;
+	    	while ((count = in.read(data, 0, 1024)) != -1)
+	    	{
+	    		fout.write(data, 0, count);
+	    	}
+	    }
+		finally
+	    {
+			if (in != null){in.close();}
+	    	if (fout != null){fout.close();}
+	    }
 	}
 }

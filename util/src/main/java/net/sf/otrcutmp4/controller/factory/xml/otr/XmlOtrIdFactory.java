@@ -40,17 +40,20 @@ public class XmlOtrIdFactory
 	{	
 		OtrId xml = null;
 		
+		boolean formatIsKey=false;
 		if(fileName.endsWith(typeOtrkey))
 		{
 			logger.warn("Is otrkey");
 			int index = fileName.lastIndexOf(typeOtrkey);
 			fileName = fileName.substring(0,index-1);
+			formatIsKey=true;
 		}
 		
 		if(     fileName.endsWith(typeAviHq)){xml = getFileId(VideType.hq, fileName);}
 		else if(fileName.endsWith(typeAviHd)){xml = getFileId(VideType.hd, fileName);}
 		else if(fileName.endsWith(typeMp4Hq)){xml = getFileId(VideType.mp4, fileName);}
 		else {throw new OtrProcessingException("Unknown video.type "+fileName);}
+		xml.getFormat().setOtrkey(formatIsKey);
 		
 		return xml;
 	}
@@ -64,6 +67,7 @@ public class XmlOtrIdFactory
 			case hq: otrId=getHq(fileName);break;
 			case hd: otrId=getHd(fileName);break;
 			case mp4: otrId=getMp4Id(fileName);break;
+			default: logger.warn("NYI format: vType. Please contact the developers!");
 		}
 		return otrId;
 	}

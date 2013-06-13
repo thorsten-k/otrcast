@@ -16,17 +16,19 @@ public class CliOtrDownloader
 {
 	final static Logger logger = LoggerFactory.getLogger(CliOtrDownloader.class);
 	
+	private Configuration config;
 	private OtrFileDownloader otrDownloader;
 	
 	public CliOtrDownloader(Configuration config) throws OtrConfigurationException, ExlpConfigurationException
 	{
+		this.config=config;
 		File fDownload = new File("/Volumes/ramdisk/dev/otr/key");
 		otrDownloader = new OtrFileDownloader(fDownload);
 	}
 	
 	public void test() throws OtrProcessingException, IOException
 	{
-		otrDownloader.download("url");
+		otrDownloader.download(config.getString("test.download.url"));
 	}
 		
 	public static void main(String args[]) throws Exception
