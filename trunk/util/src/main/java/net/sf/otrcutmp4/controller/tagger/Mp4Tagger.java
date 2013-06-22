@@ -19,6 +19,7 @@ import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
@@ -75,6 +76,7 @@ public class Mp4Tagger
 		writeSeason(apple, episode.getSeason());
 		writeSeries(apple, episode.getSeason().getSeries());
 		writeCover(apple, episode.getSeason());
+		writeMediaType(apple);
 					
 		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
 		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
@@ -102,7 +104,7 @@ public class Mp4Tagger
 		}
 		else
 		{
-			titleBox = (AppleTrackTitleBox) apple.getBoxes(AppleTrackTitleBox.class).get(0);
+			titleBox = apple.getBoxes(AppleTrackTitleBox.class).get(0);
 		}
 		titleBox.setValue(episode.getName());
 		apple.addBox(titleBox);
@@ -117,7 +119,7 @@ public class Mp4Tagger
 		}
 		else
 		{
-			episodeBox = (AppleTvEpisodeBox) apple.getBoxes(AppleTvEpisodeBox.class).get(0);
+			episodeBox = apple.getBoxes(AppleTvEpisodeBox.class).get(0);
 			
 		}
 		episodeBox.setValue(episode.getNr() +"");
@@ -133,10 +135,25 @@ public class Mp4Tagger
 		}
 		else
 		{
-			seasonBox = (AppleTvSeasonBox) apple.getBoxes(AppleTvSeasonBox.class).get(0);
+			seasonBox =apple.getBoxes(AppleTvSeasonBox.class).get(0);
 		}
 		seasonBox.setValue(season.getNr()+"");
 		apple.addBox(seasonBox);
+	}
+	
+	private void writeMediaType(AppleItemListBox apple)
+	{
+		AppleMediaTypeBox box = null;
+		if(apple.getBoxes(AppleMediaTypeBox.class).isEmpty())
+		{
+			box = new AppleMediaTypeBox();
+		}
+		else
+		{
+			box = apple.getBoxes(AppleMediaTypeBox.class).get(0);
+		}
+		box.setValue("10");
+		apple.addBox(box);
 	}
 	
 	private void writeSeries(AppleItemListBox apple, Series series)
