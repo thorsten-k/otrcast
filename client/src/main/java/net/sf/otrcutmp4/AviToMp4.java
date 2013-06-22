@@ -45,13 +45,14 @@ public class AviToMp4
 	
 	public static enum Profile {P0,P1}
 	
-	public static final String exeName = "CutHqAviToMp4";
+	public static final String exeName = "OtrCutMp4-<version>.jar";
 	
 	private Option oHelp,oDebug,oProfile,oWeb;
 	private Option oAc3,oRename,oMp4;
 	private Option oCover;
 	private Option oTagMp4,oTag;
 	private Option oScan;
+	private Option oHotfolder;
 	private Options options;
 	private OtrConfig otrConfig;
 	
@@ -212,6 +213,11 @@ public class AviToMp4
 				  .withDescription("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
 				  .create("tagMp4");
 		
+		oHotfolder = OptionBuilder.withArgName("TASKS")
+				  .hasArg()
+				  .withDescription("Activate hotfolder with comma separated tasks (tag)")
+				  .create("hotfolder");
+		
 		oCover  = OptionBuilder.withArgName("TYPE")
 				  .hasArg()
 				  .withDescription("CoverManager: (FS) FileSystem")
@@ -244,6 +250,7 @@ public class AviToMp4
 		options.addOption(oProfile);
 		options.addOption(oTag);
 		options.addOption(oTagMp4);
+		options.addOption(oHotfolder);
 		
 		return options;
 	}

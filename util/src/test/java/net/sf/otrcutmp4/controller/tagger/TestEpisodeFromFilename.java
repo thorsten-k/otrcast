@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.controller.tagger;
 
 import java.io.File;
 
+import net.sf.otrcutmp4.controller.processor.hotfolder.ProcessTagging;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 

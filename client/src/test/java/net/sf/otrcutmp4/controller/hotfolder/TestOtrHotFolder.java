@@ -1,5 +1,6 @@
-package net.sf.otrcutmp4.controller.tagger;
+package net.sf.otrcutmp4.controller.hotfolder;
 
+import net.sf.otrcutmp4.controller.processor.hotfolder.ProcessTagging;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
 import org.apache.camel.CamelContext;
@@ -8,13 +9,13 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestHotFolder extends AbstractUtilTest{
+public class TestOtrHotFolder extends AbstractUtilTest
+{	
+	final static Logger logger = LoggerFactory.getLogger(TestOtrHotFolder.class);
 	
-	final static Logger logger = LoggerFactory.getLogger(TestHotFolder.class);
 	
 	public static void main(String[] args) throws Exception
 	{
-		
 		CamelContext context = new DefaultCamelContext();
 		context.addRoutes(new RouteBuilder() {
 		    public void configure() {
