@@ -4,8 +4,12 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
@@ -18,7 +22,8 @@ import org.slf4j.LoggerFactory;
 public class OtrFileDownloader
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrFileDownloader.class);
-		
+	private static enum Status {Pending,Queue,Finished}
+	
 	private File dirDownload;
 	private OtrKeyPreProcessor kpp;
 	
@@ -38,18 +43,44 @@ public class OtrFileDownloader
 		VideoFile vf = XmlVideoFileFactory.create(fileName);
 		JaxbUtil.info(vf);
 		URL url = new URL(line);
-//		urlDownload(url);
+		Status status = Status.Pending;
+		
+		while(status!=Status.Finished)
+		{
+			status = urlDownload(url,fileName);
+		}
 
 	}
 	
-	private void urlDownload(URL url) throws IOException
+	private Status urlDownload(URL url, String file) throws IOException
 	{
+		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy", 3128));
+		
 		logger.info("Connecting");
-		URLConnection conn = url.openConnection();
+		URLConnection conn = url.openConnection(proxy);
 		conn.connect();
 		long totalFileSize = conn.getContentLength();
 		logger.info("Size: "+totalFileSize);
 		 
+		Map<String,List<String>> headerFields = conn.getHeaderFields();
+		for(String key : headerFields.keySet())
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append(key).append(": ");
+			for(String s : headerFields.get(key))
+			{
+				sb.append(s).append(" -- ");
+			}
+			logger.trace(sb.toString());
+		}
+		if(headerFields.containsKey("X-OTR-Queueposition"))
+		{
+			logger.info("X-OTR-Queueposition :"+headerFields.get("X-OTR-Queueposition").get(0));
+			try {Thread.sleep(31*1000);}
+			catch (InterruptedException e) {e.printStackTrace();}
+			return Status.Queue;
+		}
+		
 		BufferedInputStream in = null;
 		FileOutputStream fout = null;
 	    try
@@ -69,5 +100,6 @@ public class OtrFileDownloader
 			if (in != null){in.close();}
 	    	if (fout != null){fout.close();}
 	    }
+	    return Status.Finished;
 	}
 }
