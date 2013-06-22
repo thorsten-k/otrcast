@@ -7,6 +7,8 @@ import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +29,8 @@ public class TestImlProcessor extends AbstractUtilTest
 		imlProcessor.laod(new File(fPlist));
 		imlProcessor.parse();
 	}
+	
+	@Test @Ignore public void dummy(){}
 	
 	public static void main(String args[]) throws Exception
 	{
