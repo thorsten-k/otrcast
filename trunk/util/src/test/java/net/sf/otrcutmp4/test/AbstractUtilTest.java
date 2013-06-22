@@ -1,7 +1,5 @@
 package net.sf.otrcutmp4.test;
 
-import java.util.Random;
-
 import net.sf.ahtutils.test.AbstractAhtUtilsTest;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -14,8 +12,6 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractUtilTest extends AbstractAhtUtilsTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractUtilTest.class);
-	
-	protected static Random rnd;
 	
 	@BeforeClass
 	public static void initPrefixMapper()
