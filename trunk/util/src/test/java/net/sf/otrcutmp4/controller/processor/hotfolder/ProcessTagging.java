@@ -1,7 +1,8 @@
-package net.sf.otrcutmp4.controller.tagger;
+package net.sf.otrcutmp4.controller.processor.hotfolder;
 
 import java.io.File;
 
+import net.sf.otrcutmp4.controller.tagger.Mp4Tagger;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -12,7 +13,8 @@ import org.apache.camel.component.file.GenericFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ProcessTagging implements Processor{
+public class ProcessTagging implements Processor
+{
 
 		final static Logger logger = LoggerFactory.getLogger(ProcessTagging.class);
 	
