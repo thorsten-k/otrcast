@@ -13,10 +13,10 @@ import org.apache.camel.component.file.GenericFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ProcessTagging implements Processor
+public class TagFromFilenameProcessor implements Processor
 {
 
-		final static Logger logger = LoggerFactory.getLogger(ProcessTagging.class);
+		final static Logger logger = LoggerFactory.getLogger(TagFromFilenameProcessor.class);
 	
 		private Mp4Tagger tagger;
 		
