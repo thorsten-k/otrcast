@@ -21,6 +21,7 @@ import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
@@ -55,11 +56,11 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		debugAppleTvEpisodeBox(apple);
 		debugAppleTvSeasonBox(apple);
 		debugAppleShowBox(apple);
+		debugAppleMediaTypeBox(apple);
 		
 		fcr.close();
 		raf.close();
 	}
-	
 	
 	private void debugAppleTrackTitleBoxd(AppleItemListBox apple)
 	{
@@ -129,6 +130,23 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		}
 	}
 	
+	private void debugAppleMediaTypeBox(AppleItemListBox apple)
+	{
+		logger.debug("***** "+AppleMediaTypeBox.class.getSimpleName()+" "+apple.getBoxes(AppleMediaTypeBox.class).size());
+		if (!apple.getBoxes(AppleMediaTypeBox.class).isEmpty())
+		{
+			for(AppleMediaTypeBox mtEpisodeBox : apple.getBoxes(AppleMediaTypeBox.class))
+			{
+			logger.debug(mtEpisodeBox.getType()+" "+mtEpisodeBox.getValue());
+				for(Box box : mtEpisodeBox.getBoxes())
+				{
+					logger.debug("\t"+box.getClass().getSimpleName());
+					if(box instanceof AppleDataBox){debugAppleDataBox((AppleDataBox)box);}
+				}
+			}
+		}
+	}
+	
 	private void debugAppleDataBox(AppleDataBox db)
 	{
 		logger.debug("\t\t"+db.getType()+" "+db.getVersion()+" "+db.getSize()+" "+new String(db.getData()));
@@ -143,7 +161,7 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		
 		List<String> files = new ArrayList<String>();
 		files.add("AviCutMp4.mp4"); //... Transcoded AVI to MP4 by AviCutMp4
-		files.add("OtrCutMp4.mp4"); //... Transcoded by onlinetvrecorder.com
+		files.add("iTunes.mp4"); //... Transcoded by onlinetvrecorder.com
 		
 		DebugAppleBoxes test = new DebugAppleBoxes();
 		for(String s : files)
