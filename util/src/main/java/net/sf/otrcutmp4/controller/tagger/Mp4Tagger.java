@@ -167,7 +167,7 @@ public class Mp4Tagger
 		}
 		else
 		{
-			box = (AppleShowBox) apple.getBoxes(AppleShowBox.class).get(0);
+			box = apple.getBoxes(AppleShowBox.class).get(0);
 			logger.debug(AppleShowBox.class.getSimpleName()+" exists: "+box.getValue());
 		}
 		box.setValue(series.getName());

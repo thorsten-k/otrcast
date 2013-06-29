@@ -169,6 +169,21 @@
 			<artifactId>freemarker</artifactId>
 		</dependency>
 
+		 <dependency>
+		      <groupId>org.jboss.resteasy</groupId>
+		      <artifactId>resteasy-netty</artifactId>
+		      <version>3.0.1.Final</version>
+		  </dependency>
+        <dependency>
+        	<groupId>org.jboss.resteasy</groupId>
+        	<artifactId>resteasy-jaxrs</artifactId>
+        	<version>3.0.1.Final</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.resteasy</groupId>
+        	<artifactId>jaxrs-api</artifactId>
+        	<version>3.0.1.Final</version>
+        </dependency>
 	</dependencies>
    
 </project>
