@@ -70,6 +70,7 @@
 		<module>client</module>
 		<module>xml</module>
 		<module>util</module>
+		<module>interfaces</module>
 	</modules>
  
 	<dependencyManagement>
@@ -84,6 +85,11 @@
 				<artifactId>otrcutmp4-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>net.sf.otrcutmp4</groupId>
+				<artifactId>otrcutmp4-interfacesl</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			
 			<dependency>
 				<groupId>net.sf.ahtutils</groupId>
@@ -92,7 +98,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
+			
 			<dependency>
 		  		<groupId>com.googlecode.mp4parser</groupId> 
 		  		<artifactId>isoparser</artifactId> 
