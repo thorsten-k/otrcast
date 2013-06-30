@@ -28,7 +28,6 @@ public class WebAviScanner
 		String host = otrConfig.getUrl(OtrConfig.Url.OTR);
 		logger.info("Connecting to "+host);
 		
-		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
 				otrConfig.getCredential(Credential.EMAIL,""),
 				otrConfig.getCredential(Credential.PWD,""));

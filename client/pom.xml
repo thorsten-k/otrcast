@@ -158,10 +158,15 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.1.Final</version>
 			<exclusions>
             	<exclusion>
             		<artifactId>commons-logging</artifactId>
             		<groupId>commons-logging</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>slf4j-simple</artifactId>
+            		<groupId>org.slf4j</groupId>
             	</exclusion>
 			</exclusions>
 		</dependency>
@@ -180,11 +185,6 @@
 		      <artifactId>resteasy-netty</artifactId>
 		      <version>3.0.1.Final</version>
 		  </dependency>
-        <dependency>
-        	<groupId>org.jboss.resteasy</groupId>
-        	<artifactId>resteasy-jaxrs</artifactId>
-        	<version>3.0.1.Final</version>
-        </dependency>
         <dependency>
         	<groupId>org.jboss.resteasy</groupId>
         	<artifactId>jaxrs-api</artifactId>

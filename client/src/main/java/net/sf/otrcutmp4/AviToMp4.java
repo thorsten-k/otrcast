@@ -262,7 +262,7 @@ public class AviToMp4
 		System.exit(0);
 	}
 	
-	private void initLogger(String logConfig)
+	public static void initLogger(String logConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(logConfig);	
 		loggerInit.addAltPath("src/main/resources/otrcutmp4");

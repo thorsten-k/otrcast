@@ -32,10 +32,11 @@ public class OtrCutMp4Bootstrap
 		return ConfigLoader.init();
 	}
 	
-	public static void initLogger()
+	public static void initLogger(){initLogger("log4j.xml");}
+	public static void initLogger(String log4jConfig)
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("otrcutmp4-client");
+		LoggerInit loggerInit = new LoggerInit(log4jConfig);
+		loggerInit.addAltPath("config.otrcutmp4-client");
 		loggerInit.init();
 	}
 }
