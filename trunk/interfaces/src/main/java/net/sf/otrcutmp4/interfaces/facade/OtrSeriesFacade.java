@@ -1,9 +1,10 @@
 package net.sf.otrcutmp4.interfaces.facade;
 
-import net.sf.ahtutils.controller.interfaces.UtilsFacade;
 import net.sf.otrcutmp4.interfaces.model.Season;
+import net.sf.otrcutmp4.interfaces.model.Series;
 
-public interface OtrSeriesFacade extends UtilsFacade
+public interface OtrSeriesFacade 
 {	
 	<T extends Season> T load(Class<T> type, T season);
+	<T extends Series> T load(Class<T> type, T series);
 }

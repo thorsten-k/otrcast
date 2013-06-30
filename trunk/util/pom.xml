@@ -82,6 +82,16 @@
 			<artifactId>ahtutils-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		   <groupId>org.jboss.spec</groupId>
+		   <artifactId>jboss-javaee-6.0</artifactId>
+		   <type>pom</type>
+		   <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.otrcutmp4</groupId>
+			<artifactId>otrcutmp4-interfaces</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<build>
