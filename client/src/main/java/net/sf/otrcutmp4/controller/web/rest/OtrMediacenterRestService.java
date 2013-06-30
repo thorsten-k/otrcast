@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
+import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
@@ -34,7 +35,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}
-		if(osfb==null){osfb = new OtrSeriesFacadeBean(em);}
+		if(osfb==null){osfb = new OtrSeriesFacadeBean(em,ufb);}
 	}
 	
 	@Override
@@ -57,11 +58,13 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	@GET @Path("/series/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	public Series getSeason(@PathParam("id") long seriesId)
+	public Series getSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException
 	{
 		init();
-		Series xml = new Series();
-		xml.setId(seriesId);
-		return xml;
+		XmlSeriesFactory f = new XmlSeriesFactory(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
+		OtrSeries ejb = ufb.find(OtrSeries.class, seriesId);
+		ejb = osfb.load(OtrSeries.class, ejb);
+		Series series = f.build(ejb);
+		return series;
 	}	
 }
