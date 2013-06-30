@@ -29,6 +29,15 @@ public class XmlSeriesFactory
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		if(q.isSetKey()){xml.setKey(ejb.getCode());}
 		
+		if(q.isSetSeason())
+		{
+			XmlSeasonFactory f = new XmlSeasonFactory(q.getSeason().get(0));
+//			for(net.sf.otrcutmp4.interfaces.model.Season season : ejb.getSeasons())
+			{
+				
+			}
+		}
+		
 		return xml;
 	}
 	

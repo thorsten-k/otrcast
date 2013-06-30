@@ -10,9 +10,12 @@ import javax.persistence.EntityManager;
 
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.controller.tag.Mp4TagReader;
+import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.series.Video;
 
@@ -31,6 +34,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private Mp4TagReader tagReader;
 	private UtilsFacadeBean ufb;
+	private OtrSeriesFacadeBean osfb;
 	private EntityManager em;
 	
 	public MediaCenterScanner(EntityManager em)
@@ -38,6 +42,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		this.em=em;
 		tagReader = new Mp4TagReader();
 		ufb = new UtilsFacadeBean(em);
+		osfb = new OtrSeriesFacadeBean(em,ufb);
 	}
 	
 	private static IOFileFilter filter()
@@ -82,7 +87,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private void handleEpisode(Episode xmlEpisode)
 	{
 		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
-		
+		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
 	}
 	
 	private OtrSeries getSeries(Series xmlSeries)
@@ -101,5 +106,25 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	        em.getTransaction().commit();
 		}
 		return series;
+	}
+	
+	private OtrSeason getSeason(OtrSeries series, Season xml)
+	{
+		OtrSeason season=null;
+		try
+		{
+			season = osfb.fSeason(OtrSeason.class, series, xml.getNr());
+		}
+		catch (UtilsNotFoundException e)
+		{
+			season = new OtrSeason();
+			season.setName(xml.getName());
+			season.setNr(xml.getNr());
+			season.setSeries(series);
+	        em.getTransaction().begin();
+	        em.persist(series);
+	        em.getTransaction().commit();
+		}
+		return season;	
 	}
 }
