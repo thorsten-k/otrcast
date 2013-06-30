@@ -122,8 +122,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 			season.setNr(xml.getNr());
 			season.setSeries(series);
 	        em.getTransaction().begin();
-	        em.persist(series);
+	        em.persist(season);
 	        em.getTransaction().commit();
+	        
 		}
 		return season;	
 	}
