@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.model.xml.container;
+package net.sf.otrcutmp4.model.xml.otr;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlQuery extends AbstractXmlContainerTest
+public class TestXmlQuery extends AbstractXmlOtrTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlQuery.class);
 	
