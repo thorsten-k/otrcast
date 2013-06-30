@@ -15,4 +15,6 @@ public class XmlSeriesFactory
 		
 		return xml;
 	}
+	
+	
 }

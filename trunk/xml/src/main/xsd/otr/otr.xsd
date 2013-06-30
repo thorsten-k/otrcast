@@ -5,6 +5,13 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
     <xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
+    <xsd:element name="query">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="c:videoFile" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="recording">
         <xsd:complexType>
         	<xsd:sequence>
