@@ -1,34 +1,43 @@
 package net.sf.otrcutmp4.util.query;
 
+import java.util.Hashtable;
+import java.util.Map;
+
+import net.sf.otrcutmp4.model.xml.otr.Query;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
 public class SeriesQuery
 {
-	public static enum QueryKey {ProjectStatus, Project, ProjectWithCountry}
-/*	
-	private static Map<QueryKey,AhtQuery> mQueries;
+	public static enum Key {Series}
 	
-	public static AhtQuery get(QueryKey key)
+	private static Map<Key,Query> mQueries;
+	
+	public static Query get(Key key)
 	{
-		if(mQueries==null){mQueries = new Hashtable<QueryKey,AhtQuery>();}
+		if(mQueries==null){mQueries = new Hashtable<Key,Query>();}
 		if(!mQueries.containsKey(key))
 		{
-			AhtQuery q = new AhtQuery();
-	    	q.setLang("de");
-	    	
+			Query q = new Query();
 			switch(key)
 			{
-				case ProjectStatus: q.setProjectStatus(createProjectStatus());mQueries.put(key, q);break;
-				case Project: mQueries.put(key, createProject());break;
-				case ProjectWithCountry: mQueries.put(key, createProjectWithCountry());break;
+				case Series: q.setSeries(series());break;
 			}
+			mQueries.put(key, q);
 		}
 		
 		return mQueries.get(key);
 	}
-*/	
+	
+	public static Series series()
+	{
+		Series xml = new Series();
+		xml.setId(0);
+		xml.setName("");
+		return xml;
+	}
+	
 	public static Episode episodeInfo()
 	{
 		Series series = new Series();

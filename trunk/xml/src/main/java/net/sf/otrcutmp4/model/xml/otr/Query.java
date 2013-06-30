@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
 
 
 /**
@@ -21,6 +23,8 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFile;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFile"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,7 +35,9 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFile;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "videoFile"
+    "videoFile",
+    "series",
+    "season"
 })
 @XmlRootElement(name = "query")
 public class Query
@@ -41,6 +47,10 @@ public class Query
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/cut", required = true)
     protected VideoFile videoFile;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    protected Series series;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    protected Season season;
 
     /**
      * Gets the value of the videoFile property.
@@ -68,6 +78,62 @@ public class Query
 
     public boolean isSetVideoFile() {
         return (this.videoFile!= null);
+    }
+
+    /**
+     * Gets the value of the series property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Series }
+     *     
+     */
+    public Series getSeries() {
+        return series;
+    }
+
+    /**
+     * Sets the value of the series property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Series }
+     *     
+     */
+    public void setSeries(Series value) {
+        this.series = value;
+    }
+
+    public boolean isSetSeries() {
+        return (this.series!= null);
+    }
+
+    /**
+     * Gets the value of the season property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Season }
+     *     
+     */
+    public Season getSeason() {
+        return season;
+    }
+
+    /**
+     * Sets the value of the season property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Season }
+     *     
+     */
+    public void setSeason(Season value) {
+        this.season = value;
+    }
+
+    public boolean isSetSeason() {
+        return (this.season!= null);
     }
 
 }

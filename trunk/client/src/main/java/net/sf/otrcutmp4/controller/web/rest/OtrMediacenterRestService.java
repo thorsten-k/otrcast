@@ -12,10 +12,12 @@ import javax.ws.rs.core.MediaType;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
+import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrMediacenterRest;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.series.Series;
+import net.sf.otrcutmp4.util.query.SeriesQuery;
 
 @Path("/rest/mediacenter")
 public class OtrMediacenterRestService implements OtrMediacenterRest
@@ -42,13 +44,11 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Otr allSeries()
 	{
 		init();
+		XmlSeriesFactory f = new XmlSeriesFactory(SeriesQuery.get(SeriesQuery.Key.Series));
 		Otr otr = new Otr();
 		for(OtrSeries ejb : ufb.all(OtrSeries.class))
 		{
-			Series xml = new Series();
-			xml.setId(ejb.getId());
-			xml.setName(ejb.getName());
-			otr.getSeries().add(xml);
+			otr.getSeries().add(f.build(ejb));
 		}
 		return otr;
 	}

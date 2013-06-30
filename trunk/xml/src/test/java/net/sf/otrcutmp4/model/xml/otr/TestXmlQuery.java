@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.cut.TestXmlVideoFile;
+import net.sf.otrcutmp4.model.xml.series.TestXmlSeason;
+import net.sf.otrcutmp4.model.xml.series.TestXmlSeries;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -36,6 +38,8 @@ public class TestXmlQuery extends AbstractXmlOtrTest
     	if(withChilds)
     	{
     		xml.setVideoFile(TestXmlVideoFile.create(false));
+    		xml.setSeries(TestXmlSeries.create(false));
+    		xml.setSeason(TestXmlSeason.create(false));
     	}
     	
     	return xml;
