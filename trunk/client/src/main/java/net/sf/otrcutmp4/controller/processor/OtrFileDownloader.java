@@ -13,7 +13,7 @@ import java.util.Map;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.controller.factory.xml.XmlVideoFileFactory;
+import net.sf.otrcutmp4.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 
 import org.slf4j.Logger;

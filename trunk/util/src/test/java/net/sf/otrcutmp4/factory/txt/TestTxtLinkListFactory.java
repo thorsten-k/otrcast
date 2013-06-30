@@ -1,12 +1,13 @@
-package net.sf.otrcutmp4.controller.factory.txt;
+package net.sf.otrcutmp4.factory.txt;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.controller.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.controller.processor.exlp.LinklistConverter;
+import net.sf.otrcutmp4.factory.txt.TxtLinkListFactory;
+import net.sf.otrcutmp4.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Link;

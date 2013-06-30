@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory.xml;
+package net.sf.otrcutmp4.factory.xml;
 
 import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpConfigurationException;

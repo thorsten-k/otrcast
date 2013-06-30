@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory.xml.series;
+package net.sf.otrcutmp4.factory.xml.series;
 
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;

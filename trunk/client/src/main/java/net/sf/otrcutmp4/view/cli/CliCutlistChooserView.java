@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.view.cli;
 
-import net.sf.otrcutmp4.controller.factory.txt.TxtFilenameFactory;
+import net.sf.otrcutmp4.factory.txt.TxtFilenameFactory;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;

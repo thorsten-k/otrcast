@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.sf.otrcutmp4.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
+import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.FileName;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.otr.Format;

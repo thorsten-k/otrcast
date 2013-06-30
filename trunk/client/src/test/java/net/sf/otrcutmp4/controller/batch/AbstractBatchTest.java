@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.batch;
 
 import java.io.IOException;
 
-import net.sf.otrcutmp4.controller.factory.xml.otr.XmlOtrIdFactory;
+import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
