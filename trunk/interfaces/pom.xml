@@ -11,7 +11,7 @@
 	
 	<artifactId>otrcutmp4-interfaces</artifactId>
     <packaging>jar</packaging>
-    <name>OTR: Interfaces</name>
+    <name>OTR - Interfaces</name>
 	
 	<dependencies>
 		<dependency>
