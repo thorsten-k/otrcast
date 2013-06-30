@@ -1,6 +1,7 @@
-package net.sf.otrcutmp4.controller.factory.txt;
+package net.sf.otrcutmp4.factory.txt;
 
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
+import net.sf.otrcutmp4.factory.txt.TxtLinkListFactory;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
 import net.sf.otrcutmp4.test.AbstractUtilTest;

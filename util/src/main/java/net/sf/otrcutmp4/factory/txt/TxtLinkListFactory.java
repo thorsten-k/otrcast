@@ -1,10 +1,10 @@
-package net.sf.otrcutmp4.controller.factory.txt;
+package net.sf.otrcutmp4.factory.txt;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.controller.factory.xml.XmlQualityFactory;
+import net.sf.otrcutmp4.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.model.xml.otr.Quality;

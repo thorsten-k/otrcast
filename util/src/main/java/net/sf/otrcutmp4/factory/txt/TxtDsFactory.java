@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory.txt;
+package net.sf.otrcutmp4.factory.txt;
 
 import java.util.HashSet;
 import java.util.Hashtable;

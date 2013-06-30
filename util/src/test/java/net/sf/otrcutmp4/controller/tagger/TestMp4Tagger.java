@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.otrcutmp4.controller.cover.FileSystemCoverManager;
-import net.sf.otrcutmp4.controller.factory.xml.series.XmlEpisodeFactory;
+import net.sf.otrcutmp4.factory.xml.series.XmlEpisodeFactory;
 import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.test.AbstractUtilTest;

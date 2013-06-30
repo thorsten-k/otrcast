@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory.xml.otr;
+package net.sf.otrcutmp4.factory.xml.otr;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;

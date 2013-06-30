@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.factory.xml.otr;
+package net.sf.otrcutmp4.factory.xml.otr;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
