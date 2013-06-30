@@ -1,5 +1,11 @@
 package net.sf.otrcutmp4;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 
@@ -30,6 +36,16 @@ public class OtrCutMp4Bootstrap
 	{
 		ConfigLoader.add(configFile);
 		return ConfigLoader.init();
+	}
+	
+	public static EntityManagerFactory buildEmf()
+	{
+		Map<String,String> properties = new HashMap<String,String>();
+		properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:mem:db");
+		
+		properties.put("hibernate.hbm2ddl.auto", "create-drop");
+		
+		return Persistence.createEntityManagerFactory("otr-mediacenter", properties);
 	}
 	
 	public static void initLogger(){initLogger("log4j.xml");}
