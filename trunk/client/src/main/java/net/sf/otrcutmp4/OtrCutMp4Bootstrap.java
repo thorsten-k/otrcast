@@ -17,6 +17,8 @@ public class OtrCutMp4Bootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrCutMp4Bootstrap.class);
 	
+	private static EntityManagerFactory emf;
+	
 	public static Configuration init()
 	{
 		String configFile = "src/main/resources/otrcutmp4-client/tg.xml";
@@ -40,12 +42,16 @@ public class OtrCutMp4Bootstrap
 	
 	public static EntityManagerFactory buildEmf()
 	{
-		Map<String,String> properties = new HashMap<String,String>();
-		properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:mem:db");
+		if(emf==null)
+		{
+			Map<String,String> properties = new HashMap<String,String>();
+			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:mem:db");
 		
-		properties.put("hibernate.hbm2ddl.auto", "create-drop");
+			properties.put("hibernate.hbm2ddl.auto", "create-drop");
 		
-		return Persistence.createEntityManagerFactory("otr-mediacenter", properties);
+			emf = Persistence.createEntityManagerFactory("otr-mediacenter", properties);
+		}
+		return emf;
 	}
 	
 	public static void initLogger(){initLogger("log4j.xml");}

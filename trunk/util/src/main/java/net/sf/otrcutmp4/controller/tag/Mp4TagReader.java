@@ -23,7 +23,6 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
-import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
 public class Mp4TagReader
@@ -75,7 +74,7 @@ public class Mp4TagReader
 			AppleTvSeasonBox box = apple.getBoxes(AppleTvSeasonBox.class).get(0);
 			episode.getSeason().setNr(new Integer(box.getValue()));
 		}
-		if (!apple.getBoxes(AppleTvEpisodeBox.class).isEmpty())
+		if (!apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
 		{
 			AppleTvSeasonBox box = apple.getBoxes(AppleTvSeasonBox.class).get(0);
 			episode.setNr(new Integer(box.getValue()));
