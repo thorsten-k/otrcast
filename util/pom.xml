@@ -11,7 +11,7 @@
 	
 	<artifactId>otrcutmp4-util</artifactId>
     <packaging>jar</packaging>
-    <name>OTR AVI cut to MP4: Util</name>
+    <name>OTR - Util</name>
 	
 	<dependencies>
 		<dependency>

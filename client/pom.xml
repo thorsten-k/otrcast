@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>otrcutmp4-client</artifactId>
-	<name>OTR AVI cut to MP4: Client</name>
+	<name>OTR - Client</name>
   
 	<build>
 		<plugins>
@@ -42,6 +42,12 @@
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
 			<artifactId>otrcutmp4-xml</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.otrcutmp4</groupId>
+			<artifactId>otrcutmp4-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

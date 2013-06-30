@@ -87,7 +87,7 @@
 			</dependency>
 			<dependency>
 				<groupId>net.sf.otrcutmp4</groupId>
-				<artifactId>otrcutmp4-interfacesl</artifactId>
+				<artifactId>otrcutmp4-interfaces</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
