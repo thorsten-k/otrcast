@@ -76,8 +76,10 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 			logger.info("File: "+file.getAbsolutePath());
 			try
 			{
+				em.getTransaction().begin();
 				Video video = tagReader.read(file);
 				if(video.isSetEpisode()){handleEpisode(video.getEpisode());}
+				em.getTransaction().commit();
 			}
 			catch (IOException e) {e.printStackTrace();}
 		    results.add(file);
@@ -101,9 +103,8 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		{
 			series = new OtrSeries();
 			series.setName(xmlSeries.getName());
-	        em.getTransaction().begin();
+
 	        em.persist(series);
-	        em.getTransaction().commit();
 		}
 		return series;
 	}
@@ -121,10 +122,8 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 			season.setName(xml.getName());
 			season.setNr(xml.getNr());
 			season.setSeries(series);
-	        em.getTransaction().begin();
-	        em.persist(season);
-	        em.getTransaction().commit();
-	        
+
+	        em.persist(season);	       
 		}
 		return season;	
 	}
