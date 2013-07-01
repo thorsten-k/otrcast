@@ -27,7 +27,6 @@ public class SeriesQuery
 				case SeriesWithSeason: q.setSeries(seriesWithSeason());break;
 			}
 			mQueries.put(key, q);
-			JaxbUtil.info(q);
 		}
 		
 		return mQueries.get(key);

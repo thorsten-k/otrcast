@@ -15,12 +15,13 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE>, SEAS
 	public net.sf.otrcutmp4.model.xml.series.Season build(Season<SERIES,SEASON,EPISODE> ejb)
 	{
 		net.sf.otrcutmp4.model.xml.series.Season xml = new net.sf.otrcutmp4.model.xml.series.Season();
+		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		
 		if(q.isSetSeries())
 		{
-			XmlSeriesFactory f = new XmlSeriesFactory(q.getSeries());
+			XmlSeriesFactory<SERIES,SEASON,EPISODE> f = new XmlSeriesFactory<SERIES,SEASON,EPISODE>(q.getSeries());
 			xml.setSeries(f.build(ejb.getSeries()));
 		}
 		
