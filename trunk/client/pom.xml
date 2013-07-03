@@ -173,14 +173,9 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>3.0.1.Final</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-		</dependency>
-
-		 <dependency>
 		      <groupId>org.jboss.resteasy</groupId>
 		      <artifactId>resteasy-netty</artifactId>
 		      <version>3.0.1.Final</version>
@@ -190,7 +185,9 @@
         	<artifactId>jaxrs-api</artifactId>
         	<version>3.0.1.Final</version>
         </dependency>
-        <dependency>
+
+		<!-- Hibernate -->
+		<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.3.0.Beta3</version>
@@ -206,11 +203,16 @@
         	<version>4.3.0.Beta3</version>
         	<type>jar</type>
         </dependency>
-
         <dependency>
         	<groupId>org.hibernate</groupId>
         	<artifactId>hibernate-validator</artifactId>
         </dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+
 	</dependencies>
    
 </project>
