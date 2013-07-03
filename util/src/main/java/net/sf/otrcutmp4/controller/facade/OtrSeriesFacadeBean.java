@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
-import net.sf.ahtutils.controller.interfaces.UtilsFacade;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 import net.sf.otrcutmp4.interfaces.facade.OtrSeriesFacade;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
