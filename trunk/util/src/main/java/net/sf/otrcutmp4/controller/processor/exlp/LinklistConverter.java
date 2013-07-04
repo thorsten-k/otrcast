@@ -1,10 +1,10 @@
 package net.sf.otrcutmp4.controller.processor.exlp;
 
-import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.handler.EhResultContainer;
+import net.sf.exlp.interfaces.LogEvent;
+import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerString;
-import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;

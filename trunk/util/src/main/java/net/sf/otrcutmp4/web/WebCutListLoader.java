@@ -2,9 +2,9 @@ package net.sf.otrcutmp4.web;
 
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.event.impl.JaxbEvent;
+import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerHttp;
-import net.sf.exlp.parser.LogParser;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
 
