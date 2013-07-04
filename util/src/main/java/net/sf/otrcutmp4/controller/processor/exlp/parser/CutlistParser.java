@@ -3,11 +3,11 @@ package net.sf.otrcutmp4.controller.processor.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.event.LogEvent;
-import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.event.impl.JaxbEvent;
+import net.sf.exlp.interfaces.LogEvent;
+import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.parser.AbstractLogParser;
-import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.otrcutmp4.model.xml.cut.Author;
 import net.sf.otrcutmp4.model.xml.cut.Cut;
