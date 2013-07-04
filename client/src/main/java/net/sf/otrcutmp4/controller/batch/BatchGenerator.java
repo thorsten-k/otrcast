@@ -4,8 +4,8 @@ import java.io.File;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.shell.cmd.ShellCmdRm;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-import net.sf.exlp.util.os.shell.ShellCmdRm;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.audio.Ac3ToAac;
 import net.sf.otrcutmp4.controller.batch.audio.Mp3ToAac;

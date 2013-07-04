@@ -7,8 +7,8 @@ import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.shell.cmd.ShellCmdCopy;
 import net.sf.exlp.util.io.FilenameIllegalCharRemover;
-import net.sf.exlp.util.os.shell.ShellCmdCopy;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
