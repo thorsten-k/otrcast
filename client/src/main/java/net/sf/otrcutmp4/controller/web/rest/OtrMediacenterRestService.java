@@ -38,7 +38,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	
 	private EntityManager em;
 	private UtilsFacadeBean ufb;
-	private OtrSeriesFacadeBean osfb;
+	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode> osfb;
 	
 	private void init()
 	{
@@ -48,7 +48,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}
-		if(osfb==null){osfb = new OtrSeriesFacadeBean(em,ufb);}
+		if(osfb==null){osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode>(em,ufb);}
 	}
 	
 	@Override

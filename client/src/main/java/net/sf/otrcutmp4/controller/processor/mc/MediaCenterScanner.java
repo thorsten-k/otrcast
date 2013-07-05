@@ -35,7 +35,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private Mp4TagReader tagReader;
 	private UtilsFacadeBean ufb;
-	private OtrSeriesFacadeBean osfb;
+	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode> osfb;
 	private EntityManager em;
 	
 	public MediaCenterScanner(EntityManager em)
@@ -43,7 +43,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		this.em=em;
 		tagReader = new Mp4TagReader();
 		ufb = new UtilsFacadeBean(em);
-		osfb = new OtrSeriesFacadeBean(em,ufb);
+		osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode>(em,ufb);
 	}
 	
 	private static IOFileFilter filter()
