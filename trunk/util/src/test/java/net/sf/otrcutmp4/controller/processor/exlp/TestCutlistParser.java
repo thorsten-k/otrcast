@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 
 import junit.framework.Assert;
 
-import net.sf.exlp.event.handler.EhResultContainer;
-import net.sf.exlp.event.impl.JaxbEvent;
+import net.sf.exlp.core.event.JaxbEvent;
+import net.sf.exlp.core.handler.EhResultContainer;
+import net.sf.exlp.core.listener.LogListenerFile;
+import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.listener.LogListener;
-import net.sf.exlp.listener.impl.LogListenerFile;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.CutlistParser;
 import net.sf.otrcutmp4.model.xml.cut.CutList;
