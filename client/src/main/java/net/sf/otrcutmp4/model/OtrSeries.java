@@ -12,18 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
-import net.sf.ahtutils.model.qualifier.EjbErNode;
 import net.sf.otrcutmp4.interfaces.model.Series;
 
 @Entity
-@Table(name="Series")
-@EjbErNode(name="Series")
 public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithName,
 									Series<OtrSeries,OtrSeason,OtrEpisode>
 {

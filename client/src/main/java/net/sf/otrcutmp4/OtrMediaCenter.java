@@ -2,13 +2,13 @@ package net.sf.otrcutmp4;
 
 import java.io.File;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
+import net.sf.exlp.util.config.ConfigKey;
+import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.mc.MediaCenterScanner;
 import net.sf.otrcutmp4.controller.web.rest.OtrMediacenterRestService;
 
+import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.slf4j.Logger;
@@ -18,19 +18,18 @@ public class OtrMediaCenter
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrMediaCenter.class);
 	
-	private EntityManagerFactory emf;
+	private Configuration config;
 	
-	public OtrMediaCenter()
+	public OtrMediaCenter(Configuration config)
 	{
-		emf = OtrCutMp4Bootstrap.buildEmf();
-        EntityManager em = emf.createEntityManager();
+		this.config=config;
 	}
 	
-	public void scanMediathek()
+	public void scanMediathek(String path)
 	{
 		logger.info("Scanning for MP4");
-		File f = new File("/Volumes/Volume/Series");
-		MediaCenterScanner mcs = new MediaCenterScanner(emf.createEntityManager());
+		File f = new File("/Volumes/ramdisk");
+		MediaCenterScanner mcs = new MediaCenterScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
 	
@@ -41,19 +40,19 @@ public class OtrMediaCenter
     	
     	NettyJaxrsServer netty = new NettyJaxrsServer();
     	netty.setDeployment(deployment);
-    	netty.setPort(18080);
+    	netty.setPort(config.getInt(ConfigKey.netRestPort));
     	netty.setRootResourcePath("");
     	netty.setSecurityDomain(null);
     	netty.start();
     }
 	
-	
 
 	public static void main(String args[]) throws OtrInternalErrorException
 	{		
-		OtrCutMp4Bootstrap.initLogger("log4j.debug.xml");
-		OtrMediaCenter otrMc = new OtrMediaCenter();
-		otrMc.scanMediathek();
+		Configuration config = OtrCutMp4Bootstrap.init();
+		OtrCutMp4Bootstrap.buildEmf().createEntityManager();
+		OtrMediaCenter otrMc = new OtrMediaCenter(config);
+		otrMc.scanMediathek("");
 		otrMc.rest();
 	}
 }

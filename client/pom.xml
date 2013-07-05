@@ -77,8 +77,6 @@
    		<dependency>
       		<groupId>commons-jxpath</groupId>
       		<artifactId>commons-jxpath</artifactId>
-     		<type>jar</type>
-      		<scope>test</scope>
      	</dependency>
    		<dependency>
   			<groupId>commons-lang</groupId>
