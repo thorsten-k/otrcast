@@ -3,15 +3,18 @@ package net.sf.otrcutmp4.util.query;
 import java.util.Hashtable;
 import java.util.Map;
 
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SeriesQuery
 {
-	public static enum Key {Series,SeriesWithSeason}
+	final static Logger logger = LoggerFactory.getLogger(SeriesQuery.class);
+	public static enum Key {Series,SeriesWithSeason,SeasonWithEpisodes}
 	
 	private static Map<Key,Query> mQueries;
 	
@@ -25,7 +28,10 @@ public class SeriesQuery
 			{
 				case Series: q.setSeries(series());break;
 				case SeriesWithSeason: q.setSeries(seriesWithSeason());break;
+				case SeasonWithEpisodes: q.setSeason(seasonWithEpisodes());break;
 			}
+//			logger.info("Query for key: "+key);
+//			JaxbUtil.info(q);
 			mQueries.put(key, q);
 		}
 		
@@ -56,7 +62,24 @@ public class SeriesQuery
 		return xml;
 	}
 	
-	public static Episode episodeInfo()
+	public static Season seasonWithEpisodes()
+	{
+		Season xml = season();
+		xml.setSeries(series());
+		xml.getEpisode().add(episode());
+		return xml;
+	}
+	
+	public static Episode episode()
+	{
+		Episode xml = new Episode();
+		xml.setId(0);
+		xml.setNr(0);
+		xml.setName("");
+		return xml;
+	}
+	
+	public static Episode episodeWithSeasonandSeries()
 	{
 		Series series = new Series();
 		series.setName("");
@@ -67,14 +90,9 @@ public class SeriesQuery
 		season.setName("");
 		season.setSeries(series);
 		
-		Episode episode = new Episode();
-		episode.setId(0);
-		episode.setNr(0);
-		episode.setName("");
-		episode.setSeason(season);
+		Episode xml = episode();
+		xml.setSeason(season);
 		
-    	return episode;
+    	return xml;
 	}
-	
-	
 }

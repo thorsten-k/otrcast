@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 import net.sf.otrcutmp4.interfaces.facade.OtrSeriesFacade;
+import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 
@@ -42,6 +43,12 @@ public class OtrSeriesFacadeBean implements OtrSeriesFacade,Serializable
 	public <SEASON extends Season, SERIES extends Series> SEASON fSeason(Class<SEASON> type, SERIES series, int nr) throws UtilsNotFoundException
 	{
 		return ufb.fByNr(type, "series", series, nr);
+	}
+
+	@Override
+	public <EPISODE extends Episode, SEASON extends Season> EPISODE fEpisode(Class<EPISODE> type, SEASON season, int nr) throws UtilsNotFoundException
+	{
+		return ufb.fByNr(type, "season", season, nr);
 	}
 	
 }

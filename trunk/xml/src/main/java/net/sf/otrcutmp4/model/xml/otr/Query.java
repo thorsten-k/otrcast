@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
@@ -25,6 +26,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFile"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +39,8 @@ import net.sf.otrcutmp4.model.xml.series.Series;
 @XmlType(name = "", propOrder = {
     "videoFile",
     "series",
-    "season"
+    "season",
+    "episode"
 })
 @XmlRootElement(name = "query")
 public class Query
@@ -51,6 +54,8 @@ public class Query
     protected Series series;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected Season season;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    protected Episode episode;
 
     /**
      * Gets the value of the videoFile property.
@@ -134,6 +139,34 @@ public class Query
 
     public boolean isSetSeason() {
         return (this.season!= null);
+    }
+
+    /**
+     * Gets the value of the episode property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Episode }
+     *     
+     */
+    public Episode getEpisode() {
+        return episode;
+    }
+
+    /**
+     * Sets the value of the episode property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Episode }
+     *     
+     */
+    public void setEpisode(Episode value) {
+        this.episode = value;
+    }
+
+    public boolean isSetEpisode() {
+        return (this.episode!= null);
     }
 
 }

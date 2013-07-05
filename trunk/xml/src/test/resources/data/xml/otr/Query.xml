@@ -3,4 +3,5 @@
     <c:videoFile/>
     <s:series name="Test Name" key="KEY"/>
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
+    <s:episode id="1" nr="1" name="Test Name"/>
 </o:query>

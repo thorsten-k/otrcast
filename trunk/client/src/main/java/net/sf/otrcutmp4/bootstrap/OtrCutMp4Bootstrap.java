@@ -10,6 +10,8 @@ import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -53,6 +55,7 @@ public class OtrCutMp4Bootstrap
 		LoggerInit loggerInit = new LoggerInit(log4jConfig);
 		loggerInit.addAltPath("config.otrcutmp4-client");
 		loggerInit.init();
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
 	public static EntityManagerFactory buildEmf()
