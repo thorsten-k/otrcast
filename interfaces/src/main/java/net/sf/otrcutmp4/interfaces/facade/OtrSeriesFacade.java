@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.interfaces.facade;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 
@@ -10,4 +11,5 @@ public interface OtrSeriesFacade
 	<T extends Series> T load(Class<T> type, T series);
 	
 	<SEASON extends Season, SERIES extends Series> SEASON fSeason(Class<SEASON> type,SERIES series, int nr) throws UtilsNotFoundException;
+	<EPISODE extends Episode, SEASON extends Season> EPISODE fEpisode(Class<EPISODE> type,SEASON season, int nr) throws UtilsNotFoundException;
 }

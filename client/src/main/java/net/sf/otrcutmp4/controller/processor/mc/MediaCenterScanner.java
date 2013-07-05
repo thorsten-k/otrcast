@@ -12,6 +12,7 @@ import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.controller.tag.Mp4TagReader;
+import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.series.Episode;
@@ -90,6 +91,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	{
 		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
 		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
+		getEpisode(season,xmlEpisode);
 	}
 	
 	private OtrSeries getSeries(Series xmlSeries)
@@ -126,5 +128,24 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	        em.persist(season);	       
 		}
 		return season;	
+	}
+	
+	private OtrEpisode getEpisode(OtrSeason season, Episode xml)
+	{
+		OtrEpisode episode=null;
+		try
+		{
+			episode = osfb.fEpisode(OtrEpisode.class, season, xml.getNr());
+		}
+		catch (UtilsNotFoundException e)
+		{
+			episode = new OtrEpisode();
+			episode.setName(xml.getName());
+			episode.setNr(xml.getNr());
+			episode.setSeason(season);
+
+	        em.persist(episode);	       
+		}
+		return episode;	
 	}
 }

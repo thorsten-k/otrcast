@@ -16,6 +16,7 @@ import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.util.DateUtil;
 import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
+import net.sf.otrcutmp4.factory.xml.series.XmlSeasonFactory;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrMediacenterRest;
 import net.sf.otrcutmp4.model.OtrEpisode;
@@ -23,12 +24,18 @@ import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.mc.ServerStatus;
+import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.util.query.SeriesQuery;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/rest/mediacenter")
 public class OtrMediacenterRestService implements OtrMediacenterRest
 {
+	final static Logger logger = LoggerFactory.getLogger(OtrMediacenterRestService.class);
+	
 	private EntityManager em;
 	private UtilsFacadeBean ufb;
 	private OtrSeriesFacadeBean osfb;
@@ -64,7 +71,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	@GET @Path("/series/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	public Series getSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException
+	public Series seriesWithSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException
 	{
 		init();
 		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
@@ -72,6 +79,20 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 		ejb = osfb.load(OtrSeries.class, ejb);
 		Series series = f.build(ejb);
 		return series;
+	}
+	
+	@Override
+	@GET @Path("/series/season/{id}")
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.TEXT_PLAIN)
+	public Season seasonWithEpisode(@PathParam("id") long seasonId) throws UtilsNotFoundException
+	{
+		init();
+		XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeasonWithEpisodes));
+		OtrSeason ejb = ufb.find(OtrSeason.class, seasonId);
+		ejb = osfb.load(OtrSeason.class, ejb);
+		Season season = f.build(ejb);
+		return season;
 	}
 
 	@Override

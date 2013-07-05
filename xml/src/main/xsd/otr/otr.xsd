@@ -13,6 +13,7 @@
                 <xsd:element ref="c:videoFile" maxOccurs="1"/>
                 <xsd:element ref="s:series" maxOccurs="1"/>
                 <xsd:element ref="s:season" maxOccurs="1"/>
+                <xsd:element ref="s:episode" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

@@ -25,6 +25,15 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE>, SEAS
 			xml.setSeries(f.build(ejb.getSeries()));
 		}
 		
+		if(q.isSetEpisode())
+		{
+			XmlEpisodeFactory<SERIES,SEASON,EPISODE> f = new XmlEpisodeFactory<SERIES,SEASON,EPISODE>(q.getEpisode().get(0));
+			for(EPISODE e : ejb.getEpisodes())
+			{
+				xml.getEpisode().add(f.build(e));
+			}
+		}
+		
 		return xml;
 	}
 }

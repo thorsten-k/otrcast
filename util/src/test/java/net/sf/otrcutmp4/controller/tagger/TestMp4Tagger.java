@@ -29,7 +29,8 @@ public class TestMp4Tagger extends AbstractUtilTest
 	{
 		CoverManager coverManager = new FileSystemCoverManager(dirCovers);
 		
-		episode = XmlEpisodeFactory.create("mySeries", 11, 22, "myEpisode");
+		
+		episode = XmlEpisodeFactory.build("mySeries", 11, 22, "myEpisode");
 		episode.getSeason().getSeries().setKey("TEST");
 		tagger = new Mp4Tagger(coverManager);
 	}
