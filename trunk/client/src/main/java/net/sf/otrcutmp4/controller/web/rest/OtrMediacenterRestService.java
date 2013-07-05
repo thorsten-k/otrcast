@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.exlp.util.DateUtil;
 import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
@@ -21,6 +22,7 @@ import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.container.Otr;
+import net.sf.otrcutmp4.model.xml.mc.ServerStatus;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.util.query.SeriesQuery;
 
@@ -73,11 +75,12 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	}
 
 	@Override
-	@GET @Path("/last/restart")
-	@Produces(MediaType.TEXT_PLAIN)
-	public Date lastRestart()
+	@GET @Path("/status")
+	@Produces(MediaType.APPLICATION_XML)
+	public ServerStatus status()
 	{
-		// TODO Auto-generated method stub
-		return new Date();
+		ServerStatus status = new ServerStatus();
+		status.setLastRestart(DateUtil.toXmlGc(new Date()));
+		return status;
 	}	
 }
