@@ -1,7 +1,5 @@
 package net.sf.otrcutmp4.interfaces.rest;
 
-import java.util.Date;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,14 +9,15 @@ import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.model.xml.container.Otr;
+import net.sf.otrcutmp4.model.xml.mc.ServerStatus;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
 @Path("/rest/mediacenter")
 public interface OtrMediacenterRest
 {
-	@GET @Path("/last/restart")
-	@Produces(MediaType.TEXT_PLAIN)
-	Date lastRestart();
+	@GET @Path("/status")
+	@Produces(MediaType.APPLICATION_XML)
+	ServerStatus status();
 	
 	@GET @Path("/series/all")
 	@Produces(MediaType.APPLICATION_XML)
