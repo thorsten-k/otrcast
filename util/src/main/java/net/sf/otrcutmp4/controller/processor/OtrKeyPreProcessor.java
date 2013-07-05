@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.processor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.parser.PatternLibrary;
+import net.sf.exlp.interfaces.util.PatternLibrary;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

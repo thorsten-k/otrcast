@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.controller.processor.exlp.event;
 
-import net.sf.exlp.event.AbstractEvent;
+import net.sf.exlp.core.event.AbstractEvent;
 import net.sf.exlp.interfaces.LogEvent;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 
