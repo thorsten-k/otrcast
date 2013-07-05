@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+	<net>
+		<jboss host="localhost" port="1099" context=""/>
+		<rest>
+			<url>http://localhost:8080/erp</url>
+			<port>18300</port>
+		</rest>
+	</net>
+</config>

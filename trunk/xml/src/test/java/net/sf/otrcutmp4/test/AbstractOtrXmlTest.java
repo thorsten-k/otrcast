@@ -18,18 +18,21 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractOtrXmlTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrXmlTest.class);
+	
 	@BeforeClass
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
 		loggerInit.addAltPath("config.otrcutmp4-xml.test");
 		loggerInit.init();
+		
     }
 	
 	@BeforeClass
-	public static void initPrefixMapper()
+	public static void initXml()
 	{
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		DateUtil.ignoreTimeZone=true;
 	}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)

@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -11,10 +13,12 @@ import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
-import net.sf.otrcutmp4.OtrCutMp4Bootstrap;
+import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrMediacenterRest;
+import net.sf.otrcutmp4.model.OtrEpisode;
+import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -45,7 +49,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Otr allSeries()
 	{
 		init();
-		XmlSeriesFactory f = new XmlSeriesFactory(SeriesQuery.get(SeriesQuery.Key.Series));
+		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.Series));
 		Otr otr = new Otr();
 		for(OtrSeries ejb : ufb.all(OtrSeries.class))
 		{
@@ -61,10 +65,19 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Series getSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException
 	{
 		init();
-		XmlSeriesFactory f = new XmlSeriesFactory(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
+		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
 		OtrSeries ejb = ufb.find(OtrSeries.class, seriesId);
 		ejb = osfb.load(OtrSeries.class, ejb);
 		Series series = f.build(ejb);
 		return series;
+	}
+
+	@Override
+	@GET @Path("/last/restart")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Date lastRestart()
+	{
+		// TODO Auto-generated method stub
+		return new Date();
 	}	
 }
