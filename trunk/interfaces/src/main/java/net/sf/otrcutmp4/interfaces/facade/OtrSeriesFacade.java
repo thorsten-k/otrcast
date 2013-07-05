@@ -5,11 +5,11 @@ import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 
-public interface OtrSeriesFacade 
+public interface OtrSeriesFacade <SERIES extends Series<SERIES,SEASON,EPISODE>, SEASON extends Season<SERIES,SEASON,EPISODE>, EPISODE extends Episode<SERIES,SEASON,EPISODE>>
 {	
-	<T extends Season> T load(Class<T> type, T season);
-	<T extends Series> T load(Class<T> type, T series);
+	SEASON load(Class<SEASON> type, SEASON season);
+	SERIES load(Class<SERIES> type, SERIES series);
 	
-	<SEASON extends Season, SERIES extends Series> SEASON fSeason(Class<SEASON> type,SERIES series, int nr) throws UtilsNotFoundException;
-	<EPISODE extends Episode, SEASON extends Season> EPISODE fEpisode(Class<EPISODE> type,SEASON season, int nr) throws UtilsNotFoundException;
+	SEASON fSeason(Class<SEASON> type, SERIES series, int nr) throws UtilsNotFoundException;
+	EPISODE fEpisode(Class<EPISODE> type, SEASON season, int nr) throws UtilsNotFoundException;
 }
