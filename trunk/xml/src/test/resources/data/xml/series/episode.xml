@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<s:episode xmlns:s="http://otrcutmp4.sf.net/series" id="1" nr="1" name="Test Name">
+<s:episode xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series" id="1" nr="1" name="Test Name">
+    <mc:cover type="png"/>
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
 </s:episode>

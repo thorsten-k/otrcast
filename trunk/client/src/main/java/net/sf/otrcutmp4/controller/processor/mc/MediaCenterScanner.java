@@ -12,6 +12,7 @@ import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.controller.tag.Mp4TagReader;
+import net.sf.otrcutmp4.model.OtrCover;
 import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
@@ -35,15 +36,15 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private Mp4TagReader tagReader;
 	private UtilsFacadeBean ufb;
-	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode> osfb;
+	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
 	private EntityManager em;
 	
 	public MediaCenterScanner(EntityManager em)
 	{
 		this.em=em;
-		tagReader = new Mp4TagReader();
+		tagReader = new Mp4TagReader(true);
 		ufb = new UtilsFacadeBean(em);
-		osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode>(em,ufb);
+		osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
 	}
 	
 	private static IOFileFilter filter()

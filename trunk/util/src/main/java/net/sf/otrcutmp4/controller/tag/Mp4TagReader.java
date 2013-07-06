@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
 import net.sf.otrcutmp4.controller.tagger.Mp4BoxManager;
+import net.sf.otrcutmp4.model.xml.mc.Cover;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
@@ -19,6 +20,8 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
+import com.coremedia.iso.boxes.apple.AppleCoverBox;
+import com.coremedia.iso.boxes.apple.AppleDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
@@ -31,9 +34,11 @@ public class Mp4TagReader
 
 	private static enum Type {UNKNOWN,MOVIE,SERIES}
 	
-	public Mp4TagReader()
+	private boolean withCover;
+	
+	public Mp4TagReader(boolean withCover)
 	{
-
+		this.withCover=withCover;
 	}
 	
 	public Video read(File fSource) throws IOException
@@ -89,6 +94,14 @@ public class Mp4TagReader
 			AppleTrackTitleBox box = apple.getBoxes(AppleTrackTitleBox.class).get(0);
 			episode.setName(box.getValue());
 		}
+		if(withCover && !apple.getBoxes(AppleCoverBox.class).isEmpty())
+		{
+			try
+			{
+				episode.setCover(getCover(apple.getBoxes(AppleCoverBox.class).get(0)));
+			}
+			catch (NoSuchFieldException e) {}
+		}
 		
 		return episode;
 	}
@@ -132,5 +145,20 @@ public class Mp4TagReader
 			if(box.getValue().length()>0){return Type.SERIES;}
 		}
 		return Type.MOVIE;
+	}
+	
+	private Cover getCover(AppleCoverBox box) throws NoSuchFieldException
+	{
+		if(box.getBoxes(AppleDataBox.class).size()==0){throw new NoSuchFieldException();}	
+		AppleDataBox adb = box.getBoxes(AppleDataBox.class).get(0);
+		
+		Cover cover = new Cover();
+		
+		//see source of AppleCoverBox.java
+		if(adb.getFlags()==0xe){cover.setType("png");}
+		else if(adb.getFlags()==0xd){cover.setType("jpg");}
+		else {logger.warn("Unknown flag for cover "+adb.getFlags());}
+//		cover.setData(adb.getData());
+		return cover;
 	}
 }
