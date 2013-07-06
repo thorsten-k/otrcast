@@ -6,7 +6,7 @@ import java.io.IOException;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class CliOtrDownloader
 		
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrClientTestBootstrap.init();
 				
 		CliOtrDownloader cli = new CliOtrDownloader(config);
 		cli.test();

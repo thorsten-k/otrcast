@@ -12,6 +12,7 @@ import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
+import net.sf.otrcutmp4.util.OtrBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -22,11 +23,11 @@ public class OtrCutMp4Bootstrap
 	final static Logger logger = LoggerFactory.getLogger(OtrCutMp4Bootstrap.class);
 	
 	private static EntityManagerFactory emf;
+	public static String configXml = "config.otrcutmp4-client/otr.xml";
 	
 	public static Configuration init()
-	{
-		String configFile = "config.otrcutmp4-client/otr.xml";
-		return init(configFile);
+	{;
+		return init(configXml);
 	}
 	
 	public static Configuration init(String configFile)
@@ -34,10 +35,9 @@ public class OtrCutMp4Bootstrap
 		initLogger();
 		try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile("otrcutmp4","client").getAbsolutePath();
+			String cfn = ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath();
 			ConfigLoader.add(cfn);
 			logger.info("Using additional config in: "+cfn );
-			
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		ConfigLoader.add(configFile);

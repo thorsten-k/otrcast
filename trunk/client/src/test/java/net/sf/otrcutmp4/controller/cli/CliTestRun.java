@@ -22,7 +22,7 @@ import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 import net.sf.otrcutmp4.util.OtrBootstrap;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Credential;
@@ -163,7 +163,7 @@ public class CliTestRun
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrClientTestBootstrap.init();
 				
 		CliTestRun test = new CliTestRun(config);
 //		test.srcDirProcessor();

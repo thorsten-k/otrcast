@@ -11,7 +11,7 @@ import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Tags;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
@@ -74,7 +74,7 @@ public class TestSeriesRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		OtrClientTstBootstrap.init();
+		OtrClientTestBootstrap.init();
 		TestSeriesRest rest = new TestSeriesRest();
 //		rest.single();
 //		rest.multi();

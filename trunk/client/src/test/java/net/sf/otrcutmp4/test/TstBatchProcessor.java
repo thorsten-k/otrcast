@@ -48,7 +48,7 @@ public class TstBatchProcessor
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrClientTestBootstrap.init();
 		
 		TstBatchProcessor test = new TstBatchProcessor();
 		test.setConfig(config);
