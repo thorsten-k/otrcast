@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<o:query xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:s="http://otrcutmp4.sf.net/series">
+<o:query xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series">
     <c:videoFile/>
     <s:series name="Test Name" key="KEY"/>
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
     <s:episode id="1" nr="1" name="Test Name"/>
+    <mc:cover id="123" type="png"/>
 </o:query>

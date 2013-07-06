@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.controller.tag.Mp4TagReader;
+import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.model.OtrCover;
 import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrSeason;
@@ -36,8 +38,10 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private Mp4TagReader tagReader;
 	private UtilsFacadeBean ufb;
-	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
 	private EntityManager em;
+	
+	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
+	private EjbCoverFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> efCover;
 	
 	public MediaCenterScanner(EntityManager em)
 	{
@@ -45,6 +49,8 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		tagReader = new Mp4TagReader(true);
 		ufb = new UtilsFacadeBean(em);
 		osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
+		
+		efCover=EjbCoverFactory.factory(OtrCover.class);
 	}
 	
 	private static IOFileFilter filter()
@@ -93,6 +99,14 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
 		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
 		getEpisode(season,xmlEpisode);
+		
+		if(xmlEpisode.isSetCover() && season.getCover()==null)
+		{
+			OtrCover cover = efCover.build(xmlEpisode.getCover());
+			em.persist(cover);
+			season.setCover(cover);
+			em.merge(season);
+		}
 	}
 	
 	private OtrSeries getSeries(Series xmlSeries)

@@ -32,6 +32,7 @@ public class TestXmlCover extends AbstractXmlMcTest
     public static Cover create(boolean withChilds)
     {
     	Cover xml = new Cover();
+    	xml.setId(123);
     	xml.setType("png");
     	
     	if(withChilds)

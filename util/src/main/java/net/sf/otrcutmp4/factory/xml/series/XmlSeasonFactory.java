@@ -1,13 +1,19 @@
 package net.sf.otrcutmp4.factory.xml.series;
 
+import net.sf.otrcutmp4.factory.xml.mc.XmlCoverFactory;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
 {	
+	final static Logger logger = LoggerFactory.getLogger(XmlSeasonFactory.class);
+	
 	private net.sf.otrcutmp4.model.xml.series.Season q;
 	
 	public XmlSeasonFactory(Query query){this(query.getSeason());}
@@ -33,6 +39,12 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 			{
 				xml.getEpisode().add(f.build(e));
 			}
+		}
+		
+		if(q.isSetCover() && ejb.getCover()!=null)
+		{
+			XmlCoverFactory f = new XmlCoverFactory(q.getCover());
+			xml.setCover(f.build(ejb.getCover()));
 		}
 		
 		return xml;
