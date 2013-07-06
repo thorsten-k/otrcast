@@ -19,6 +19,7 @@ import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeasonFactory;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrMediacenterRest;
+import net.sf.otrcutmp4.model.OtrCover;
 import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
@@ -38,7 +39,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	
 	private EntityManager em;
 	private UtilsFacadeBean ufb;
-	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode> osfb;
+	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
 	
 	private void init()
 	{
@@ -48,7 +49,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}
-		if(osfb==null){osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode>(em,ufb);}
+		if(osfb==null){osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);}
 	}
 	
 	@Override
@@ -68,7 +69,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Otr allSeries()
 	{
 		init();
-		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.Series));
+		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(SeriesQuery.get(SeriesQuery.Key.Series));
 		Otr otr = new Otr();
 		for(OtrSeries ejb : ufb.all(OtrSeries.class))
 		{
@@ -84,7 +85,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Series seriesWithSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException
 	{
 		init();
-		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
+		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
 		OtrSeries ejb = ufb.find(OtrSeries.class, seriesId);
 		ejb = osfb.load(OtrSeries.class, ejb);
 		Series series = f.build(ejb);
@@ -98,7 +99,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Season seasonWithEpisode(@PathParam("id") long seasonId) throws UtilsNotFoundException
 	{
 		init();
-		XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeasonWithEpisodes));
+		XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> f = new XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(SeriesQuery.get(SeriesQuery.Key.SeasonWithEpisodes));
 		OtrSeason ejb = ufb.find(OtrSeason.class, seasonId);
 		ejb = osfb.load(OtrSeason.class, ejb);
 		Season season = f.build(ejb);
@@ -111,7 +112,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Otr all()
 	{
 		init();
-		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeriesAll));
+		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(SeriesQuery.get(SeriesQuery.Key.SeriesAll));
 		Otr otr = new Otr();
 		for(OtrSeries ejb : ufb.all(OtrSeries.class))
 		{

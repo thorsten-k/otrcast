@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import net.sf.otrcutmp4.model.xml.mc.Cover;
 
 
 /**
@@ -20,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -34,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "cover",
     "season"
 })
 @XmlRootElement(name = "episode")
@@ -42,6 +45,8 @@ public class Episode
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
+    protected Cover cover;
     @XmlElement(required = true)
     protected Season season;
     @XmlAttribute(name = "id")
@@ -50,6 +55,34 @@ public class Episode
     protected Integer nr;
     @XmlAttribute(name = "name")
     protected String name;
+
+    /**
+     * Gets the value of the cover property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Cover }
+     *     
+     */
+    public Cover getCover() {
+        return cover;
+    }
+
+    /**
+     * Sets the value of the cover property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Cover }
+     *     
+     */
+    public void setCover(Cover value) {
+        this.cover = value;
+    }
+
+    public boolean isSetCover() {
+        return (this.cover!= null);
+    }
 
     /**
      * Gets the value of the season property.

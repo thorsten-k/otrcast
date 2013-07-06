@@ -16,7 +16,7 @@ import net.sf.otrcutmp4.interfaces.model.Episode;
 
 @Entity
 public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWithNr,
-									Episode<OtrSeries,OtrSeason,OtrEpisode>
+									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrCover>
 {
 	public static final long serialVersionUID=1;
 	

@@ -27,7 +27,7 @@ public class TestMp4TagReader extends AbstractUtilTest
 	@Before
 	public void init()
 	{
-		tagReader = new Mp4TagReader();
+		tagReader = new Mp4TagReader(true);
 	}
 	
 	private Mp4TagReader tagReader;
@@ -53,6 +53,8 @@ public class TestMp4TagReader extends AbstractUtilTest
 		files.add("Movie-guess.mp4");
 		files.add("Series-guess.mp4");
 		files.add("Series-mt.mp4");
+		files.clear();
+		files.add("AviCutMp4.mp4");
 		
 		for(String file : files)
 		{

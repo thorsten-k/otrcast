@@ -22,7 +22,7 @@ import net.sf.otrcutmp4.interfaces.model.Season;
 
 @Entity
 public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithNr,
-									Season<OtrSeries,OtrSeason,OtrEpisode>
+									Season<OtrSeries,OtrSeason,OtrEpisode,OtrCover>
 {
 	public static final long serialVersionUID=1;
 	
