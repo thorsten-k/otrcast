@@ -87,8 +87,13 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 			{
 				em.getTransaction().begin();
 				Video video = tagReader.read(file);
+				
 				if(video.isSetEpisode()){handleEpisode(video.getEpisode());}
-				else if(video.isSetMovie()){handleMovie(video.getMovie());}
+				else if(video.isSetMovie())
+				{
+					logger.info("\t"+video.getMovie().getName());
+					handleMovie(video.getMovie());
+				}
 				em.getTransaction().commit();
 			}
 			catch (IOException e) {e.printStackTrace();}

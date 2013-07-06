@@ -14,16 +14,18 @@ public class EjbMovieFactory<MOVIE extends Movie<COVER>,SERIES extends Series<SE
 	final static Logger logger = LoggerFactory.getLogger(EjbMovieFactory.class);
 	
 	final Class<MOVIE> movieClass;
+	final Class<COVER> coverClass;
 	
-	 public EjbMovieFactory(final Class<MOVIE> movieClass)
+	 public EjbMovieFactory(final Class<MOVIE> movieClass,final Class<COVER> coverClass)
 	 {
-	        this.movieClass=movieClass;
+		 this.movieClass=movieClass;
+	     this.coverClass=coverClass;
 	 }
 	 
 	 public static <MOVIE extends Movie<COVER>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
-	 	EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER> factory(final Class<MOVIE> movieClass)
+	 	EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER> factory(final Class<MOVIE> movieClass,final Class<COVER> coverClass)
 	 {
-		 return new EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER>(movieClass);
+		 return new EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER>(movieClass,coverClass);
 	 }
 	
 	public MOVIE build(net.sf.otrcutmp4.model.xml.series.Movie movie)
@@ -36,6 +38,12 @@ public class EjbMovieFactory<MOVIE extends Movie<COVER>,SERIES extends Series<SE
 		
 		ejb.setName(movie.getName());
 		ejb.setYear(movie.getYear());
+		
+		if(movie.isSetCover())
+		{
+			EjbCoverFactory<COVER> f = EjbCoverFactory.factory(coverClass);
+			ejb.setCover(f.build(movie.getCover()));
+		}
 		
 		return ejb;
 	}

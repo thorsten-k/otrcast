@@ -16,8 +16,13 @@ import org.slf4j.LoggerFactory;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Box;
+import com.coremedia.iso.boxes.MediaBox;
+import com.coremedia.iso.boxes.MediaHeaderBox;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
+import com.coremedia.iso.boxes.MovieHeaderBox;
+import com.coremedia.iso.boxes.TrackBox;
+import com.coremedia.iso.boxes.TrackHeaderBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
@@ -42,10 +47,18 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		
 		//Get the MovieBox
 		MovieBox moov = Mp4BoxManager.movieBox(isoFile);
+		logger.info("***** "+MovieBox.class.getSimpleName());
+		for(Box box : moov.getBoxes()){debugBox(box);}
 		
 		//Get the Meta Data from the UserDataBox and get the Apple meta-data
 		UserDataBox udta = moov.getBoxes(UserDataBox.class).get(0);
+		logger.info("***** "+UserDataBox.class.getSimpleName());
+		for(Box box : udta.getBoxes()){debugBox(box);}
+		
 		MetaBox meta = udta.getBoxes(MetaBox.class).get(0);
+		logger.info("***** "+MetaBox.class.getSimpleName());
+		for(Box box : udta.getBoxes()){debugBox(box);}
+		
 		AppleItemListBox apple = meta.getBoxes(AppleItemListBox.class).get(0);
 		
 		for(Box box : apple.getBoxes())
@@ -169,6 +182,58 @@ public class DebugAppleBoxes extends AbstractUtilTest
 	private void debugAppleDataBox(AppleDataBox db)
 	{
 		logger.debug("\t\t"+db.getType()+" "+db.getVersion()+" "+db.getSize()+" "+new String(db.getData()));
+	}
+	
+	private void debugBox(Box box)
+	{
+		logger.debug(box.getClass().getSimpleName()+" "+box.getType());
+		if(box instanceof TrackBox){debugTrackBox((TrackBox) box);}
+		else if(box instanceof MediaBox){debugMediaBox((MediaBox) box);}
+		else if(box instanceof TrackHeaderBox){debugTrackHeaderBox((TrackHeaderBox) box);}
+		else if(box instanceof MovieHeaderBox){debugMovieHeaderBox((MovieHeaderBox) box);}
+		else if(box instanceof MetaBox){debugMetaBox((MetaBox) box);}
+		else if(box instanceof MediaHeaderBox){debugMediaHeaderBox((MediaHeaderBox)box);}
+		else {logger.warn("no handling");}
+	}
+	
+	private void debugTrackBox(TrackBox box)
+	{
+		logger.info("\t"+box.getType());
+		for(Box child : box.getBoxes()){debugBox(child);}
+	}
+	
+	private void debugTrackHeaderBox(TrackHeaderBox box)
+	{
+		logger.info("\t"+box.getType());
+		logger.info("\t"+box.getWidth()+"x"+box.getHeight());
+	}
+	
+	private void debugMovieHeaderBox(MovieHeaderBox box)
+	{
+		logger.info("\t"+box.getType());
+		logger.info("\t"+box.getSize()+"");
+	}
+	
+	private void debugMediaHeaderBox(MediaHeaderBox box)
+	{
+		logger.debug(box.getType());
+	}
+	
+	private void debugMetaBox(MetaBox box)
+	{
+		for(Box child : box.getBoxes())
+		{
+			debugBox(child);
+		}
+	}
+	
+	private void debugMediaBox(MediaBox box)
+	{
+
+		for(Box child : box.getBoxes())
+		{
+			debugBox(child);
+		}
 	}
 	
 	public static void main(String args[]) throws Exception
