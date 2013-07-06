@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.lang.SystemUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public class TestMp4TagReader extends AbstractUtilTest
 	@Before
 	public void init()
 	{
-		tagReader = new Mp4TagReader(true);
+		tagReader = new Mp4TagReader(false);
 	}
 	
 	private Mp4TagReader tagReader;
@@ -47,7 +47,7 @@ public class TestMp4TagReader extends AbstractUtilTest
 		test.init();
 		
 		String src = config.getString("test.mp4Tagger.dst");
-		String fs = SystemUtils.FILE_SEPARATOR;
+		logger.info("Using src dir: "+src);
 		
 		List<String> files = new ArrayList<String>();
 		files.add("Movie-guess.mp4");
@@ -58,7 +58,7 @@ public class TestMp4TagReader extends AbstractUtilTest
 		
 		for(String file : files)
 		{
-			test.read(src+fs+file);
+			test.read(src+File.separator+file);
 		}
 	}
  }

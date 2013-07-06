@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.mc.TestXmlCover;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -24,22 +25,27 @@ public class TestXmlMovie extends AbstractXmlSeriesTest
     @Test
     public void testAclContainer() throws FileNotFoundException
     {
-    	Movie test = create();
-    	Movie ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Movie.class);
+    	Movie test = create(true);
+    	Movie ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Movie.class);
     	assertJaxbEquals(ref, test);
     }
     
-    private static Movie create(){return create(true);}
     public static Movie create(boolean withChilds)
     {
     	Movie xml = new Movie();
     	xml.setId(123);
     	xml.setName("Test Name");
+    	xml.setYear(2103);
+    	
+    	if(withChilds)
+    	{
+    		xml.setCover(TestXmlCover.create(false));
+    	}
     	
     	return xml;
     }
     
-    public void save() {save(create(), fXml);}
+    public void save() {save(create(true), fXml);}
 	
 	public static void main(String[] args)
     {

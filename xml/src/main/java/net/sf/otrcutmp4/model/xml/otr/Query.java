@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.mc.Cover;
 import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
@@ -28,6 +29,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -43,6 +45,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
     "series",
     "season",
     "episode",
+    "movie",
     "cover"
 })
 @XmlRootElement(name = "query")
@@ -59,6 +62,8 @@ public class Query
     protected Season season;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected Episode episode;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    protected Movie movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Cover cover;
 
@@ -172,6 +177,34 @@ public class Query
 
     public boolean isSetEpisode() {
         return (this.episode!= null);
+    }
+
+    /**
+     * Gets the value of the movie property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Movie }
+     *     
+     */
+    public Movie getMovie() {
+        return movie;
+    }
+
+    /**
+     * Sets the value of the movie property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Movie }
+     *     
+     */
+    public void setMovie(Movie value) {
+        this.movie = value;
+    }
+
+    public boolean isSetMovie() {
+        return (this.movie!= null);
     }
 
     /**

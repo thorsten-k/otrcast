@@ -15,7 +15,7 @@ import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.util.DateUtil;
 import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
-import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
+import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeasonFactory;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeriesFactory;
 import net.sf.otrcutmp4.interfaces.rest.OtrMediacenterRest;
@@ -39,7 +39,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	
 	private EntityManager em;
 	private UtilsFacadeBean ufb;
-	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
+	private OtrMediacenterFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
 	
 	private void init()
 	{
@@ -49,7 +49,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}
-		if(osfb==null){osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);}
+		if(osfb==null){osfb = new OtrMediacenterFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);}
 	}
 	
 	@Override

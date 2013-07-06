@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.tagger;
+package net.sf.otrcutmp4.controller.tag;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -6,7 +6,6 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.otrcutmp4.controller.tag.Mp4BoxManager;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
@@ -23,6 +22,7 @@ import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
+import com.coremedia.iso.boxes.apple.AppleRecordingYearBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
@@ -54,6 +54,7 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		}
 		
 		debugAppleTrackTitleBoxd(apple);
+		debugAppleRecordingYearBox(apple);
 		debugAppleTvEpisodeBox(apple);
 		debugAppleTvSeasonBox(apple);
 		debugAppleShowBox(apple);
@@ -148,6 +149,23 @@ public class DebugAppleBoxes extends AbstractUtilTest
 		}
 	}
 	
+	private void debugAppleRecordingYearBox(AppleItemListBox apple)
+	{
+		logger.debug("***** "+AppleRecordingYearBox.class.getSimpleName()+" "+apple.getBoxes(AppleRecordingYearBox.class).size());
+		if (!apple.getBoxes(AppleRecordingYearBox.class).isEmpty())
+		{
+			for(AppleRecordingYearBox ryEpisodeBox : apple.getBoxes(AppleRecordingYearBox.class))
+			{
+			logger.debug(ryEpisodeBox.getValue());
+				for(Box box : ryEpisodeBox.getBoxes())
+				{
+					logger.debug("\t"+box.getClass().getSimpleName());
+					if(box instanceof AppleDataBox){debugAppleDataBox((AppleDataBox)box);}
+				}
+			}
+		}
+	}
+	
 	private void debugAppleDataBox(AppleDataBox db)
 	{
 		logger.debug("\t\t"+db.getType()+" "+db.getVersion()+" "+db.getSize()+" "+new String(db.getData()));
@@ -157,12 +175,12 @@ public class DebugAppleBoxes extends AbstractUtilTest
 	{
 		Configuration config = OtrUtilTestBootstrap.init();
 		
-		String src = config.getString("test.mp4Tagger.src");
+		String src = config.getString("test.mp4Tagger.dst");
 		String fs = SystemUtils.FILE_SEPARATOR;
 		
 		List<String> files = new ArrayList<String>();
 		files.add("AviCutMp4.mp4"); //... Transcoded AVI to MP4 by AviCutMp4
-		files.add("iTunes.mp4"); //... Transcoded by onlinetvrecorder.com
+//		files.add("iTunes.mp4"); //... Transcoded by onlinetvrecorder.com
 		
 		DebugAppleBoxes test = new DebugAppleBoxes();
 		for(String s : files)

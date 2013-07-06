@@ -10,15 +10,16 @@ import javax.persistence.EntityManager;
 
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.facade.OtrSeriesFacadeBean;
-import net.sf.otrcutmp4.controller.tag.Mp4TagReader;
+import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
+import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.model.OtrCover;
 import net.sf.otrcutmp4.model.OtrEpisode;
+import net.sf.otrcutmp4.model.OtrMovie;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.series.Video;
@@ -40,7 +41,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private UtilsFacadeBean ufb;
 	private EntityManager em;
 	
-	private OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
+	private OtrMediacenterFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
 	private EjbCoverFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> efCover;
 	
 	public MediaCenterScanner(EntityManager em)
@@ -48,7 +49,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
 		ufb = new UtilsFacadeBean(em);
-		osfb = new OtrSeriesFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
+		osfb = new OtrMediacenterFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
 	}
@@ -87,11 +88,43 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 				em.getTransaction().begin();
 				Video video = tagReader.read(file);
 				if(video.isSetEpisode()){handleEpisode(video.getEpisode());}
+				else if(video.isSetMovie()){handleMovie(video.getMovie());}
 				em.getTransaction().commit();
 			}
 			catch (IOException e) {e.printStackTrace();}
 		    results.add(file);
 		}
+	}
+	
+	private void handleMovie(Movie xmlMovie)
+	{
+		OtrMovie movie = getMovie(xmlMovie);
+		
+		if(xmlMovie.isSetCover() && movie.getCover()==null)
+		{
+			OtrCover cover = efCover.build(xmlMovie.getCover());
+			em.persist(cover);
+			movie.setCover(cover);
+			em.merge(movie);
+		}
+	}
+	
+	private OtrMovie getMovie(Movie xmlMovie)
+	{
+		OtrMovie movie;
+		try
+		{
+			movie = ufb.fByName(OtrMovie.class, xmlMovie.getName());
+		}
+		catch (UtilsNotFoundException e)
+		{
+			movie = new OtrMovie();
+			movie.setName(xmlMovie.getName());
+			movie.setYear(xmlMovie.getYear());
+			
+	        em.persist(movie);
+		}
+		return movie;
 	}
 	
 	private void handleEpisode(Episode xmlEpisode)

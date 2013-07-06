@@ -7,6 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.cut.TestXmlVideoFile;
 import net.sf.otrcutmp4.model.xml.mc.TestXmlCover;
 import net.sf.otrcutmp4.model.xml.series.TestXmlEpisode;
+import net.sf.otrcutmp4.model.xml.series.TestXmlMovie;
 import net.sf.otrcutmp4.model.xml.series.TestXmlSeason;
 import net.sf.otrcutmp4.model.xml.series.TestXmlSeries;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
@@ -44,6 +45,7 @@ public class TestXmlQuery extends AbstractXmlOtrTest
     		xml.setSeason(TestXmlSeason.create(false));
     		xml.setEpisode(TestXmlEpisode.create(false));
     		xml.setCover(TestXmlCover.create(false));
+    		xml.setMovie(TestXmlMovie.create(false));
     	}
     	
     	return xml;

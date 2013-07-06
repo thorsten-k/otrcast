@@ -23,7 +23,7 @@ public class TestXmlVideo extends AbstractXmlSeriesTest
 	}
     
     @Test
-    public void testAclContainer() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Video test = create(true);
     	Video ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Video.class);
