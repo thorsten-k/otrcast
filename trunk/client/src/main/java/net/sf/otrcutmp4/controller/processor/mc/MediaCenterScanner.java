@@ -41,15 +41,15 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private UtilsFacadeBean ufb;
 	private EntityManager em;
 	
-	private OtrMediacenterFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
-	private EjbCoverFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> efCover;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
+	private EjbCoverFactory<OtrCover> efCover;
 	
 	public MediaCenterScanner(EntityManager em)
 	{
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
 		ufb = new UtilsFacadeBean(em);
-		osfb = new OtrMediacenterFacadeBean<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
+		osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
 	}
@@ -131,7 +131,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	{
 		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
 		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
-		getEpisode(season,xmlEpisode);
+		OtrEpisode episode = getEpisode(season,xmlEpisode);
+		
+		season.getEpisodes().add(episode);
 		
 		if(xmlEpisode.isSetCover() && season.getCover()==null)
 		{

@@ -27,6 +27,7 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 	
 	public net.sf.otrcutmp4.model.xml.series.Series build(Series<SERIES,SEASON,EPISODE,COVER> ejb)
 	{
+		logger.trace(ejb.toString());
 		net.sf.otrcutmp4.model.xml.series.Series xml = new net.sf.otrcutmp4.model.xml.series.Series();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
@@ -42,6 +43,5 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		}
 		
 		return xml;
-	}
-	
+	}	
 }

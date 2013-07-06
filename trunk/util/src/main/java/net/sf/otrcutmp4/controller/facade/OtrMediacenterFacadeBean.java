@@ -9,11 +9,12 @@ import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 import net.sf.otrcutmp4.interfaces.facade.OtrMediacenterFacade;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
+import net.sf.otrcutmp4.interfaces.model.Movie;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 
-public class OtrMediacenterFacadeBean<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
-				implements OtrMediacenterFacade<SERIES,SEASON,EPISODE,COVER>,Serializable
+public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
+				implements OtrMediacenterFacade<MOVIE,SERIES,SEASON,EPISODE,COVER>,Serializable
 {	
 	static final long serialVersionUID=1;
 
@@ -40,6 +41,11 @@ public class OtrMediacenterFacadeBean<SERIES extends Series<SERIES,SEASON,EPISOD
 		season.getEpisodes().size();
 		return season;
 	}
+	
+	@Override public MOVIE fMovie(Class<MOVIE> type, String name, int year) throws UtilsNotFoundException
+	{
+		return ufb.fByName(type, name);
+	}
 
 	@Override
 	public SEASON fSeason(Class<SEASON> type, SERIES series, int nr) throws UtilsNotFoundException
@@ -52,5 +58,10 @@ public class OtrMediacenterFacadeBean<SERIES extends Series<SERIES,SEASON,EPISOD
 	{
 		return ufb.fByNr(type, "season", season, nr);
 	}
-	
+
+	@Override
+	public SERIES fSeries(Class<SERIES> type, String name) throws UtilsNotFoundException
+	{
+		return ufb.fByName(type, name);
+	}
 }

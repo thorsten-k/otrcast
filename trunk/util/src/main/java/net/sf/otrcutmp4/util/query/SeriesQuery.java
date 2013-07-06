@@ -6,6 +6,7 @@ import java.util.Map;
 import net.sf.otrcutmp4.model.xml.mc.Cover;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class SeriesQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesQuery.class);
-	public static enum Key {SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes}
+	public static enum Key {SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes,Movie,MovieAll}
 	
 	private static Map<Key,Query> mQueries;
 	
@@ -31,6 +32,8 @@ public class SeriesQuery
 				case SeriesWithSeason: q.setSeries(seriesWithSeason());break;
 				case SeasonWithEpisodes: q.setSeason(seasonWithEpisodes());break;
 				case SeriesAll: q.setSeries(seriesAll());break;
+				case Movie: q.setMovie(movie());break;
+				case MovieAll: q.setMovie(movieAll());break;
 			}
 //			logger.info("Query for key: "+key);
 //			JaxbUtil.info(q);
@@ -56,6 +59,22 @@ public class SeriesQuery
 		Series xml = series();
 		xml.getSeason().add(season);
 		xml.getSeason().get(0).getEpisode().add(episode());
+		return xml;
+	}
+	
+	public static Movie movie()
+	{
+		Movie xml = new Movie();
+		xml.setId(0);
+		xml.setName("");
+		xml.setYear(0);
+		return xml;
+	}
+	
+	public static Movie movieAll()
+	{
+		Movie xml = movie();
+		xml.setCover(cover());
 		return xml;
 	}
 	

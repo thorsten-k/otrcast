@@ -21,6 +21,7 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 	
 	public net.sf.otrcutmp4.model.xml.series.Season build(Season<SERIES,SEASON,EPISODE,COVER> ejb)
 	{
+		logger.trace("\t"+ejb.toString());
 		net.sf.otrcutmp4.model.xml.series.Season xml = new net.sf.otrcutmp4.model.xml.series.Season();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
@@ -35,9 +36,9 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		if(q.isSetEpisode())
 		{
 			XmlEpisodeFactory<SERIES,SEASON,EPISODE,COVER> f = new XmlEpisodeFactory<SERIES,SEASON,EPISODE,COVER>(q.getEpisode().get(0));
-			for(EPISODE e : ejb.getEpisodes())
+			for(EPISODE episode : ejb.getEpisodes())
 			{
-				xml.getEpisode().add(f.build(e));
+				xml.getEpisode().add(f.build(episode));
 			}
 		}
 		

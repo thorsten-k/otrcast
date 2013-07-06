@@ -52,4 +52,13 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover>
              ? id == ((OtrMovie) object).getId()
              : (object == this);
     }
+	
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(year);
+		sb.append(" ").append(name);
+		return sb.toString();
+	}
 }

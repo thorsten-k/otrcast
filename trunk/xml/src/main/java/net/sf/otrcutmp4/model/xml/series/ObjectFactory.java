@@ -62,19 +62,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Video }
-     * 
-     */
-    public Video createVideo() {
-        return new Video();
-    }
-
-    /**
      * Create an instance of {@link Movie }
      * 
      */
     public Movie createMovie() {
         return new Movie();
+    }
+
+    /**
+     * Create an instance of {@link Video }
+     * 
+     */
+    public Video createVideo() {
+        return new Video();
     }
 
     /**

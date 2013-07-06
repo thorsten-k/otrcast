@@ -59,4 +59,12 @@ public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	{
         return (object instanceof OtrSeries) ? id == ((OtrSeries) object).getId() : (object == this);
     }
+	
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(name);
+		return sb.toString();
+	}
 }

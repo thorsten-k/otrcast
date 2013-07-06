@@ -50,19 +50,19 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
-	public String toString()
-	{
-		StringBuffer sb = new StringBuffer();
-		sb.append(id);
-		sb.append(" ").append(nr);
-		sb.append(" ").append(name);
-		return sb.toString();
-	}
-	
 	public boolean equals(Object object)
 	{
         return (object instanceof OtrEpisode)
              ? id == ((OtrEpisode) object).getId()
              : (object == this);
     }
+	
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(nr);
+		sb.append(" ").append(name);
+		return sb.toString();
+	}
 }

@@ -20,6 +20,7 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 	
 	public net.sf.otrcutmp4.model.xml.series.Episode build(Episode<SERIES,SEASON,EPISODE,COVER> ejb)
 	{
+		logger.trace("\t\t"+ejb.toString());
 		net.sf.otrcutmp4.model.xml.series.Episode xml = new net.sf.otrcutmp4.model.xml.series.Episode();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
