@@ -4,5 +4,6 @@
     <s:series name="Test Name" key="KEY"/>
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
     <s:episode id="1" nr="1" name="Test Name"/>
+    <s:movie id="123" name="Test Name" year="2103"/>
     <mc:cover id="123" type="png"/>
 </o:query>

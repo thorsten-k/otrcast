@@ -27,8 +27,12 @@
 	</xsd:element>
 	<xsd:element name="movie">
 		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="mc:cover" maxOccurs="1"/>
+			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 			<xsd:attribute name="name" type="xsd:string"/>
+			<xsd:attribute name="year" type="xsd:int"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:element name="category">

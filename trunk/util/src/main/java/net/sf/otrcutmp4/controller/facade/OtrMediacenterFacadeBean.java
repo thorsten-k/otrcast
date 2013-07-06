@@ -6,21 +6,21 @@ import javax.persistence.EntityManager;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
-import net.sf.otrcutmp4.interfaces.facade.OtrSeriesFacade;
+import net.sf.otrcutmp4.interfaces.facade.OtrMediacenterFacade;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 
-public class OtrSeriesFacadeBean<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
-				implements OtrSeriesFacade<SERIES,SEASON,EPISODE,COVER>,Serializable
+public class OtrMediacenterFacadeBean<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
+				implements OtrMediacenterFacade<SERIES,SEASON,EPISODE,COVER>,Serializable
 {	
 	static final long serialVersionUID=1;
 
 	protected EntityManager em;
 	private UtilsFacade ufb;
 	
-	public OtrSeriesFacadeBean(EntityManager em,UtilsFacade ufb)
+	public OtrMediacenterFacadeBean(EntityManager em,UtilsFacade ufb)
 	{
 		this.em=em;
 		this.ufb=ufb;
