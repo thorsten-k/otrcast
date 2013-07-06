@@ -29,6 +29,10 @@ public class MovieTagReader extends AbstractTagReader
 			AppleTrackTitleBox box = apple.getBoxes(AppleTrackTitleBox.class).get(0);
 			movie.setName(box.getValue());
 		}
+		else
+		{
+			logger.warn("Strange ... no TrackTitleBox");
+		}
 		if (!apple.getBoxes(AppleRecordingYearBox.class).isEmpty())
 		{
 			AppleRecordingYearBox box = apple.getBoxes(AppleRecordingYearBox.class).get(0);
