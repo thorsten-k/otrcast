@@ -2,7 +2,6 @@ package net.sf.otrcutmp4.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,7 +41,9 @@ public class OtrCover implements Serializable,Cover
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-			sb.append(id);
+			sb.append("[").append(id).append("]");
+			sb.append(" type=").append(type);
+			sb.append(" size=").append(data.length);
 		return sb.toString();
 	}
 }

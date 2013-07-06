@@ -153,12 +153,13 @@ public class Mp4TagReader
 		AppleDataBox adb = box.getBoxes(AppleDataBox.class).get(0);
 		
 		Cover cover = new Cover();
+		cover.setData(adb.getData());
 		
 		//see source of AppleCoverBox.java
 		if(adb.getFlags()==0xe){cover.setType("png");}
 		else if(adb.getFlags()==0xd){cover.setType("jpg");}
 		else {logger.warn("Unknown flag for cover "+adb.getFlags());}
-//		cover.setData(adb.getData());
+		
 		return cover;
 	}
 }

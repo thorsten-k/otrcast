@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.util.query;
 import java.util.Hashtable;
 import java.util.Map;
 
+import net.sf.otrcutmp4.model.xml.mc.Cover;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
@@ -49,8 +50,11 @@ public class SeriesQuery
 	
 	public static Series seriesAll()
 	{
+		Season season = season();
+		season.setCover(cover());
+		
 		Series xml = series();
-		xml.getSeason().add(season());
+		xml.getSeason().add(season);
 		xml.getSeason().get(0).getEpisode().add(episode());
 		return xml;
 	}
@@ -104,4 +108,14 @@ public class SeriesQuery
 		
     	return xml;
 	}
+	
+	public static Cover cover()
+	{
+		Cover xml = new Cover();
+		xml.setId(0);
+		xml.setType("");
+		xml.setData("x".getBytes());
+		return xml;
+	}
+	
 }

@@ -28,7 +28,9 @@ public class OtrMediaCenter
 	public void scanMediathek(String path)
 	{
 		logger.info("Scanning for MP4");
-		File f = new File("/Volumes/ramdisk/dev/otr/mp4");
+		File f;
+		f = new File("/Volumes/ramdisk/dev/otr/mp4");
+		f = new File("/Volumes/Volume/Series");
 		MediaCenterScanner mcs = new MediaCenterScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}

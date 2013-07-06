@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.cut.TestXmlVideoFile;
+import net.sf.otrcutmp4.model.xml.mc.TestXmlCover;
 import net.sf.otrcutmp4.model.xml.series.TestXmlEpisode;
 import net.sf.otrcutmp4.model.xml.series.TestXmlSeason;
 import net.sf.otrcutmp4.model.xml.series.TestXmlSeries;
@@ -42,6 +43,7 @@ public class TestXmlQuery extends AbstractXmlOtrTest
     		xml.setSeries(TestXmlSeries.create(false));
     		xml.setSeason(TestXmlSeason.create(false));
     		xml.setEpisode(TestXmlEpisode.create(false));
+    		xml.setCover(TestXmlCover.create(false));
     	}
     	
     	return xml;

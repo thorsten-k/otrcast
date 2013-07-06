@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
+import java.io.File;
+
 import net.sf.exlp.util.config.ConfigKey;
 import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -31,7 +33,8 @@ public class CliMediaCenterRest
 	public void all()
 	{
 		Otr otr = rest.all();
-		JaxbUtil.info(otr);
+		File f = new File("/Volumes/ramdisk/otr.xml");
+		JaxbUtil.save(f, otr, true);
 	}
 	
 	public static void main(String[] args) throws ExlpConfigurationException

@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
+import net.sf.otrcutmp4.model.xml.mc.Cover;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -27,6 +28,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +42,8 @@ import net.sf.otrcutmp4.model.xml.series.Series;
     "videoFile",
     "series",
     "season",
-    "episode"
+    "episode",
+    "cover"
 })
 @XmlRootElement(name = "query")
 public class Query
@@ -56,6 +59,8 @@ public class Query
     protected Season season;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected Episode episode;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
+    protected Cover cover;
 
     /**
      * Gets the value of the videoFile property.
@@ -167,6 +172,34 @@ public class Query
 
     public boolean isSetEpisode() {
         return (this.episode!= null);
+    }
+
+    /**
+     * Gets the value of the cover property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Cover }
+     *     
+     */
+    public Cover getCover() {
+        return cover;
+    }
+
+    /**
+     * Sets the value of the cover property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Cover }
+     *     
+     */
+    public void setCover(Cover value) {
+        this.cover = value;
+    }
+
+    public boolean isSetCover() {
+        return (this.cover!= null);
     }
 
 }

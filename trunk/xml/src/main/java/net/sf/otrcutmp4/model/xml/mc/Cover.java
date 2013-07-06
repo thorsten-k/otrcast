@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *           &lt;/simpleType>
  *         &lt;/element>
  *       &lt;/sequence>
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -50,6 +51,8 @@ public class Cover
     @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     protected byte[] data;
+    @XmlAttribute(name = "id")
+    protected Long id;
     @XmlAttribute(name = "type")
     protected String type;
 
@@ -79,6 +82,38 @@ public class Cover
 
     public boolean isSetData() {
         return (this.data!= null);
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setId(long value) {
+        this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
     }
 
     /**
