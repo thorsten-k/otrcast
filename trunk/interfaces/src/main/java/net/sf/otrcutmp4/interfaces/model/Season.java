@@ -12,6 +12,9 @@ public interface Season<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASO
 	SERIES getSeries();
 	void setSeries(SERIES series);
 	
+	COVER getCover();
+	void setCover(COVER cover);
+	
 	List<EPISODE> getEpisodes();
 	void setEpisodes(List<EPISODE> episodes);
 }
