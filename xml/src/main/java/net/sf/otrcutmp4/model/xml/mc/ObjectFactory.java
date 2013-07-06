@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Cover }
+     * 
+     */
+    public Cover createCover() {
+        return new Cover();
+    }
+
+    /**
      * Create an instance of {@link ServerStatus }
      * 
      */
