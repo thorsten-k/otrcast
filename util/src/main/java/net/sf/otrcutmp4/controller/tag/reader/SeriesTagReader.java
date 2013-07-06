@@ -12,6 +12,7 @@ import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
 public class SeriesTagReader extends AbstractTagReader
@@ -36,9 +37,9 @@ public class SeriesTagReader extends AbstractTagReader
 			AppleTvSeasonBox box = apple.getBoxes(AppleTvSeasonBox.class).get(0);
 			episode.getSeason().setNr(new Integer(box.getValue()));
 		}
-		if (!apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
+		if (!apple.getBoxes(AppleTvEpisodeBox.class).isEmpty())
 		{
-			AppleTvSeasonBox box = apple.getBoxes(AppleTvSeasonBox.class).get(0);
+			AppleTvEpisodeBox box = apple.getBoxes(AppleTvEpisodeBox.class).get(0);
 			episode.setNr(new Integer(box.getValue()));
 		}		
 		if (!apple.getBoxes(AppleShowBox.class).isEmpty())

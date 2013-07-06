@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.series.Category;
+import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
 
@@ -27,6 +28,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}category" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/otr}quality" maxOccurs="unbounded"/>
  *       &lt;/sequence>
@@ -41,6 +43,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
 @XmlType(name = "", propOrder = {
     "series",
     "category",
+    "movie",
     "format",
     "quality"
 })
@@ -54,6 +57,8 @@ public class Otr
     protected List<Series> series;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected List<Category> category;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    protected List<Movie> movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/otr", required = true)
     protected List<Format> format;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/otr", required = true)
@@ -131,6 +136,43 @@ public class Otr
 
     public void unsetCategory() {
         this.category = null;
+    }
+
+    /**
+     * Gets the value of the movie property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the movie property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getMovie().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Movie }
+     * 
+     * 
+     */
+    public List<Movie> getMovie() {
+        if (movie == null) {
+            movie = new ArrayList<Movie>();
+        }
+        return this.movie;
+    }
+
+    public boolean isSetMovie() {
+        return ((this.movie!= null)&&(!this.movie.isEmpty()));
+    }
+
+    public void unsetMovie() {
+        this.movie = null;
     }
 
     /**

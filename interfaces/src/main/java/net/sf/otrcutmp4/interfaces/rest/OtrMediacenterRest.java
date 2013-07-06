@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.mc.ServerStatus;
+import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
@@ -20,20 +21,32 @@ public interface OtrMediacenterRest
 	@Produces(MediaType.APPLICATION_XML)
 	ServerStatus status();
 	
-	@GET @Path("/all")
+	// ---------------------- Movies ----------------------
+	@GET @Path("/movies")
 	@Produces(MediaType.APPLICATION_XML)
-	Otr all();
+	Otr allMovies();
 	
-	@GET @Path("/series/all")
+	@GET @Path("/movies/{id}")
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.TEXT_PLAIN)
+	Movie movie(@PathParam("id") long movieId) throws UtilsNotFoundException;
+	
+	// ---------------------- Series ----------------------
+	@GET @Path("/series")
 	@Produces(MediaType.APPLICATION_XML)
 	Otr allSeries();
 	
 	@GET @Path("/series/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
+	Series seriesAll(@PathParam("id") long seriesId) throws UtilsNotFoundException;
+	
+	@GET @Path("/series/{id}/season")
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.TEXT_PLAIN)
 	Series seriesWithSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException;
 	
-	@GET @Path("/series/season/{id}")
+	@GET @Path("/series/{id}/season/episode")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
 	Season seasonWithEpisode(@PathParam("id") long seasonId) throws UtilsNotFoundException;

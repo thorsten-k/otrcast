@@ -85,4 +85,12 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
              ? id == ((OtrSeason) object).getId()
              : (object == this);
     }
+	
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("[").append(id).append("]");
+		sb.append(" ").append(nr);
+		return sb.toString();
+	}
 }
