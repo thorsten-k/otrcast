@@ -2,11 +2,13 @@
 	xmlns:s="http://otrcutmp4.sf.net/series"
 	xmlns:o="http://otrcutmp4.sf.net/otr"
 	xmlns:c="http://otrcutmp4.sf.net/cut"
+	xmlns:mc="http://otrcutmp4.sf.net/mc"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
 	<xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
+	<xsd:import namespace="http://otrcutmp4.sf.net/mc" schemaLocation="mc.xsd"/>
 	<xsd:element name="videos">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -52,6 +54,7 @@
 	<xsd:element name="season">
 		<xsd:complexType>
 			<xsd:sequence>
+				<xsd:element ref="mc:cover" maxOccurs="1"/>
 				<xsd:element ref="s:series" maxOccurs="1"/>
 				<xsd:element ref="s:episode" maxOccurs="unbounded"/>
 			</xsd:sequence>

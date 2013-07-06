@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<season xmlns="http://otrcutmp4.sf.net/series" id="123" nr="1" name="myName" showNr="true" showName="true">
-    <series name="Test Name" key="KEY"/>
-    <episode id="1" nr="1" name="Test Name"/>
-    <episode id="1" nr="1" name="Test Name"/>
-</season>
+<s:season xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series" id="123" nr="1" name="myName" showNr="true" showName="true">
+    <mc:cover type="png"/>
+    <s:series name="Test Name" key="KEY"/>
+    <s:episode id="1" nr="1" name="Test Name"/>
+    <s:episode id="1" nr="1" name="Test Name"/>
+</s:season>
