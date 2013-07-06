@@ -7,7 +7,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
-import net.sf.otrcutmp4.controller.tagger.Mp4Tagger;
+import net.sf.otrcutmp4.controller.tag.Mp4Tagger;
 import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.series.Video;

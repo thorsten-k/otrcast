@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.tagger;
+package net.sf.otrcutmp4.controller.tag;
 
 import java.io.File;
 import java.io.IOException;
