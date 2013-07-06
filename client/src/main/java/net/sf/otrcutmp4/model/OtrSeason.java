@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
@@ -43,6 +44,9 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	
 	private boolean showName;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private OtrCover cover;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="season")
 	@OrderBy("nr ASC")
 	private List<OtrEpisode> episodes;
@@ -66,6 +70,9 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	
 	public boolean isShowName() {return showName;}
 	public void setShowName(boolean showName) {this.showName = showName;}
+	
+	public OtrCover getCover() {return cover;}
+	public void setCover(OtrCover cover) {this.cover = cover;}
 	
 	public List<OtrEpisode> getEpisodes() {if(episodes==null){episodes = new ArrayList<OtrEpisode>();} return episodes;}
 	public void setEpisodes(List<OtrEpisode> episodes) {this.episodes = episodes;}
