@@ -52,6 +52,16 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	}
 	
 	@Override
+	@GET @Path("/status")
+	@Produces(MediaType.APPLICATION_XML)
+	public ServerStatus status()
+	{
+		ServerStatus status = new ServerStatus();
+		status.setLastRestart(DateUtil.toXmlGc(new Date()));
+		return status;
+	}
+	
+	@Override
 	@GET @Path("/series/all")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
@@ -96,12 +106,17 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	}
 
 	@Override
-	@GET @Path("/status")
+	@GET @Path("/all")
 	@Produces(MediaType.APPLICATION_XML)
-	public ServerStatus status()
+	public Otr all()
 	{
-		ServerStatus status = new ServerStatus();
-		status.setLastRestart(DateUtil.toXmlGc(new Date()));
-		return status;
+		init();
+		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode>(SeriesQuery.get(SeriesQuery.Key.SeriesAll));
+		Otr otr = new Otr();
+		for(OtrSeries ejb : ufb.all(OtrSeries.class))
+		{
+			otr.getSeries().add(f.build(ejb));
+		}
+		return otr;
 	}	
 }

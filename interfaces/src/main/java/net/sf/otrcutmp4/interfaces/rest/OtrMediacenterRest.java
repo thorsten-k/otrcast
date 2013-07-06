@@ -20,6 +20,10 @@ public interface OtrMediacenterRest
 	@Produces(MediaType.APPLICATION_XML)
 	ServerStatus status();
 	
+	@GET @Path("/all")
+	@Produces(MediaType.APPLICATION_XML)
+	Otr all();
+	
 	@GET @Path("/series/all")
 	@Produces(MediaType.APPLICATION_XML)
 	Otr allSeries();

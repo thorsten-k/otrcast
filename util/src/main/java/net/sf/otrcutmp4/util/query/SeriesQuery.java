@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 public class SeriesQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesQuery.class);
-	public static enum Key {Series,SeriesWithSeason,SeasonWithEpisodes}
+	public static enum Key {SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes}
 	
 	private static Map<Key,Query> mQueries;
 	
@@ -29,6 +29,7 @@ public class SeriesQuery
 				case Series: q.setSeries(series());break;
 				case SeriesWithSeason: q.setSeries(seriesWithSeason());break;
 				case SeasonWithEpisodes: q.setSeason(seasonWithEpisodes());break;
+				case SeriesAll: q.setSeries(seriesAll());break;
 			}
 //			logger.info("Query for key: "+key);
 //			JaxbUtil.info(q);
@@ -43,6 +44,14 @@ public class SeriesQuery
 		Series xml = new Series();
 		xml.setId(0);
 		xml.setName("");
+		return xml;
+	}
+	
+	public static Series seriesAll()
+	{
+		Series xml = series();
+		xml.getSeason().add(season());
+		xml.getSeason().get(0).getEpisode().add(episode());
 		return xml;
 	}
 	

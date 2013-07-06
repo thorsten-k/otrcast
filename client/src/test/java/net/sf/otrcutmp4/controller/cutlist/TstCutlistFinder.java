@@ -13,7 +13,7 @@ import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.model.xml.cut.CutLists;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.test.OtrClientTstBootstrap;
+import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 
 import org.apache.commons.configuration.Configuration;
@@ -79,7 +79,7 @@ public class TstCutlistFinder
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrClientTstBootstrap.init();
+		Configuration config = OtrClientTestBootstrap.init();
 		
 		TstCutlistFinder test = new TstCutlistFinder(config);
 //		test.findCl();
