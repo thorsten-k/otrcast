@@ -1,0 +1,56 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net/rss"
+    xmlns:rss="http://otrcutmp4.sf.net/rss"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:element name="rss">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="rss:channel" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="channel">
+        <xsd:complexType>
+        	<xsd:sequence>
+               <xsd:element ref="rss:title" maxOccurs="1"/>
+               <xsd:element ref="rss:link" maxOccurs="1"/>
+               <xsd:element ref="rss:description" maxOccurs="1"/>
+               <xsd:element ref="rss:language" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="title">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="link">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="description">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+        <xsd:element name="language">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+</xsd:schema>
