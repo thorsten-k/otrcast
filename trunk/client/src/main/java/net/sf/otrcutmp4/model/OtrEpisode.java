@@ -33,6 +33,8 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	private String name;
 	
 	private int nr;
+	
+	private long size;
 				
 	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 		
@@ -47,6 +49,9 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	
 	public int getNr() {return nr;}
 	public void setNr(int nr) {this.nr = nr;}
+	
+	public long getSize() {return size;}
+	public void setSize(long size) {this.size = size;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
