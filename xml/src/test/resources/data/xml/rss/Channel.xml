@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<channel xmlns="http://otrcutmp4.sf.net/rss">
+    <title>myTitle</title>
+    <link>myLink</link>
+    <description>myDescription</description>
+    <language>myLink</language>
+</channel>

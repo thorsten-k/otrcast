@@ -15,6 +15,7 @@
     <xsd:import namespace="http://otrcutmp4.sf.net/user" schemaLocation="otr/user.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="otr/series.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr/otr.xsd"/>
+    <xsd:import namespace="http://otrcutmp4.sf.net/rss" schemaLocation="otr/rss.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>
             <jaxb:globalBindings generateIsSetMethod="true">
