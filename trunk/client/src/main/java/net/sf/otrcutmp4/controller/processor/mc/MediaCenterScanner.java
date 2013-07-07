@@ -18,6 +18,7 @@ import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrMovie;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
+import net.sf.otrcutmp4.model.OtrStorage;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
@@ -41,7 +42,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private UtilsFacadeBean ufb;
 	private EntityManager em;
 	
-	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> osfb;
 	private EjbCoverFactory<OtrCover> efCover;
 	
 	public MediaCenterScanner(EntityManager em)
@@ -49,7 +50,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
 		ufb = new UtilsFacadeBean(em);
-		osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);
+		osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,ufb);
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
 	}

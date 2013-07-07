@@ -4,7 +4,7 @@ import net.sf.ahtutils.interfaces.model.with.EjbWithSize;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
-public interface Movie<COVER extends Cover>
+public interface Movie<COVER extends Cover,STORAGE extends Storage>
 					extends EjbWithId,EjbWithName,EjbWithSize
 {	
 	int getYear();
@@ -12,4 +12,7 @@ public interface Movie<COVER extends Cover>
 	
 	COVER getCover();
 	void setCover(COVER cover);
+	
+	STORAGE getStorage();
+	void setStorage(STORAGE storage);
 }
