@@ -4,4 +4,6 @@
     <link>myLink</link>
     <description>myDescription</description>
     <language>myLink</language>
+    <copyright>myCopyright</copyright>
+    <pubDate>myPubDate</pubDate>
 </channel>

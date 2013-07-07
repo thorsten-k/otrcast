@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}link"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}description"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}language"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}copyright"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}pubDate"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,7 +38,9 @@ import javax.xml.bind.annotation.XmlType;
     "title",
     "link",
     "description",
-    "language"
+    "language",
+    "copyright",
+    "pubDate"
 })
 @XmlRootElement(name = "channel")
 public class Channel
@@ -52,6 +56,10 @@ public class Channel
     protected Description description;
     @XmlElement(required = true)
     protected Language language;
+    @XmlElement(required = true)
+    protected Copyright copyright;
+    @XmlElement(required = true)
+    protected PubDate pubDate;
 
     /**
      * Gets the value of the title property.
@@ -163,6 +171,62 @@ public class Channel
 
     public boolean isSetLanguage() {
         return (this.language!= null);
+    }
+
+    /**
+     * Gets the value of the copyright property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Copyright }
+     *     
+     */
+    public Copyright getCopyright() {
+        return copyright;
+    }
+
+    /**
+     * Sets the value of the copyright property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Copyright }
+     *     
+     */
+    public void setCopyright(Copyright value) {
+        this.copyright = value;
+    }
+
+    public boolean isSetCopyright() {
+        return (this.copyright!= null);
+    }
+
+    /**
+     * Gets the value of the pubDate property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link PubDate }
+     *     
+     */
+    public PubDate getPubDate() {
+        return pubDate;
+    }
+
+    /**
+     * Sets the value of the pubDate property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link PubDate }
+     *     
+     */
+    public void setPubDate(PubDate value) {
+        this.pubDate = value;
+    }
+
+    public boolean isSetPubDate() {
+        return (this.pubDate!= null);
     }
 
 }

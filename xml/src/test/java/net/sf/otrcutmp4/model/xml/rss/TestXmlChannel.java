@@ -39,6 +39,8 @@ public class TestXmlChannel extends AbstractXmlRssTest
     		xml.setLink(TestXmlLink.create());
     		xml.setDescription(TestXmlDescription.create());
     		xml.setLanguage(TestXmlLanguage.create());
+    		xml.setCopyright(TestXmlCopyright.create());
+    		xml.setPubDate(TestXmlPubDate.create());
     	}
     	
     	return xml;
