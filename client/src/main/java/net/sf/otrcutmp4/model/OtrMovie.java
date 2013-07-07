@@ -34,20 +34,20 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover>
 			
 	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 		
-	public long getId() {return id;}
-	public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 	
-	public int getYear() {return year;}
-	public void setYear(int year) {this.year = year;}
+	@Override public int getYear() {return year;}
+	@Override public void setYear(int year) {this.year = year;}
 	
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
-	public OtrCover getCover() {return cover;}
-	public void setCover(OtrCover cover) {this.cover = cover;}
+	@Override public OtrCover getCover() {return cover;}
+	@Override public void setCover(OtrCover cover) {this.cover = cover;}
 	
-	public long getSize() {return size;}
-	public void setSize(long size) {this.size = size;}
+	@Override public long getSize() {return size;}
+	@Override public void setSize(long size) {this.size = size;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	

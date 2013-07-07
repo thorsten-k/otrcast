@@ -27,14 +27,14 @@ public class OtrCover implements Serializable,Cover
 	
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<<<<<<<<<<<<<	
 	
-	public void setId(long id) {this.id = id;}
-	public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
 	
-	public String getType() {return type;}
-	public void setType(String type) {this.type = type;}
+	@Override public String getType() {return type;}
+	@Override public void setType(String type) {this.type = type;}
 	
-	public byte[] getData() {return data;}
-	public void setData(byte[] data) {this.data = data;}
+	@Override public byte[] getData() {return data;}
+	@Override public void setData(byte[] data) {this.data = data;}
 	
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<<<<<<<<<<<<<	
 	

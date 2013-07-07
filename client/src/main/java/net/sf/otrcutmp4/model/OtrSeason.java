@@ -53,17 +53,17 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 			
 	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 		
-	public long getId() {return id;}
-	public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 	
-	public OtrSeries getSeries() {return series;}
-	public void setSeries(OtrSeries series) {this.series = series;}
+	@Override public OtrSeries getSeries() {return series;}
+	@Override public void setSeries(OtrSeries series) {this.series = series;}
 	
-	public int getNr() {return nr;}
-	public void setNr(int nr) {this.nr = nr;}
+	@Override public int getNr() {return nr;}
+	@Override public void setNr(int nr) {this.nr = nr;}
 	
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
 	public boolean isShowNr() {return showNr;}
 	public void setShowNr(boolean showNr) {this.showNr = showNr;}
@@ -71,11 +71,11 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	public boolean isShowName() {return showName;}
 	public void setShowName(boolean showName) {this.showName = showName;}
 	
-	public OtrCover getCover() {return cover;}
-	public void setCover(OtrCover cover) {this.cover = cover;}
+	@Override public OtrCover getCover() {return cover;}
+	@Override public void setCover(OtrCover cover) {this.cover = cover;}
 	
-	public List<OtrEpisode> getEpisodes() {if(episodes==null){episodes = new ArrayList<OtrEpisode>();} return episodes;}
-	public void setEpisodes(List<OtrEpisode> episodes) {this.episodes = episodes;}
+	@Override public List<OtrEpisode> getEpisodes() {if(episodes==null){episodes = new ArrayList<OtrEpisode>();} return episodes;}
+	@Override public void setEpisodes(List<OtrEpisode> episodes) {this.episodes = episodes;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	

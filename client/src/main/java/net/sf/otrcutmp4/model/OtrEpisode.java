@@ -38,20 +38,20 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 				
 	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 		
-	public long getId() {return id;}
-	public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
-	public OtrSeason getSeason() {return season;}
-	public void setSeason(OtrSeason season) {this.season = season;}
+	@Override public OtrSeason getSeason() {return season;}
+	@Override public void setSeason(OtrSeason season) {this.season = season;}
 	
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
-	public int getNr() {return nr;}
-	public void setNr(int nr) {this.nr = nr;}
+	@Override public int getNr() {return nr;}
+	@Override public void setNr(int nr) {this.nr = nr;}
 	
-	public long getSize() {return size;}
-	public void setSize(long size) {this.size = size;}
+	@Override public long getSize() {return size;}
+	@Override public void setSize(long size) {this.size = size;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
