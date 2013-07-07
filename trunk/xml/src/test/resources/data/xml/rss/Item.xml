@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<item xmlns="http://otrcutmp4.sf.net/rss">
+<item>
     <title>myTitle</title>
     <description>myDescription</description>
     <pubDate>myPubDate</pubDate>
