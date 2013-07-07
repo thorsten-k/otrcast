@@ -17,6 +17,8 @@
                <xsd:element ref="rss:link" maxOccurs="1"/>
                <xsd:element ref="rss:description" maxOccurs="1"/>
                <xsd:element ref="rss:language" maxOccurs="1"/>
+               <xsd:element ref="rss:copyright" maxOccurs="1"/>
+               <xsd:element ref="rss:pubDate" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -44,7 +46,7 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
-        <xsd:element name="language">
+    <xsd:element name="language">
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">
@@ -52,5 +54,20 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
-    
+    <xsd:element name="copyright">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="pubDate">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

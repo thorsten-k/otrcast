@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PubDate }
+     * 
+     */
+    public PubDate createPubDate() {
+        return new PubDate();
+    }
+
+    /**
      * Create an instance of {@link Title }
      * 
      */
@@ -75,6 +83,14 @@ public class ObjectFactory {
      */
     public Language createLanguage() {
         return new Language();
+    }
+
+    /**
+     * Create an instance of {@link Copyright }
+     * 
+     */
+    public Copyright createCopyright() {
+        return new Copyright();
     }
 
 }
