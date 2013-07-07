@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.mc.Cover;
+import net.sf.otrcutmp4.model.xml.mc.Storage;
 
 
 /**
@@ -21,8 +22,9 @@ import net.sf.otrcutmp4.model.xml.mc.Cover;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}int" />
@@ -36,8 +38,9 @@ import net.sf.otrcutmp4.model.xml.mc.Cover;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "season",
     "cover",
-    "season"
+    "storage"
 })
 @XmlRootElement(name = "episode")
 public class Episode
@@ -45,16 +48,46 @@ public class Episode
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
-    protected Cover cover;
     @XmlElement(required = true)
     protected Season season;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
+    protected Cover cover;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
+    protected Storage storage;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "nr")
     protected Integer nr;
     @XmlAttribute(name = "name")
     protected String name;
+
+    /**
+     * Gets the value of the season property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Season }
+     *     
+     */
+    public Season getSeason() {
+        return season;
+    }
+
+    /**
+     * Sets the value of the season property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Season }
+     *     
+     */
+    public void setSeason(Season value) {
+        this.season = value;
+    }
+
+    public boolean isSetSeason() {
+        return (this.season!= null);
+    }
 
     /**
      * Gets the value of the cover property.
@@ -85,31 +118,31 @@ public class Episode
     }
 
     /**
-     * Gets the value of the season property.
+     * Gets the value of the storage property.
      * 
      * @return
      *     possible object is
-     *     {@link Season }
+     *     {@link Storage }
      *     
      */
-    public Season getSeason() {
-        return season;
+    public Storage getStorage() {
+        return storage;
     }
 
     /**
-     * Sets the value of the season property.
+     * Sets the value of the storage property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Season }
+     *     {@link Storage }
      *     
      */
-    public void setSeason(Season value) {
-        this.season = value;
+    public void setStorage(Storage value) {
+        this.storage = value;
     }
 
-    public boolean isSetSeason() {
-        return (this.season!= null);
+    public boolean isSetStorage() {
+        return (this.storage!= null);
     }
 
     /**

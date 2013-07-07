@@ -38,6 +38,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Storage }
+     * 
+     */
+    public Storage createStorage() {
+        return new Storage();
+    }
+
+    /**
      * Create an instance of {@link ServerStatus }
      * 
      */

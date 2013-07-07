@@ -1,6 +1,5 @@
 package net.sf.otrcutmp4.factory.xml.mc;
 
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 

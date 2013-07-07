@@ -1,15 +1,12 @@
 
-package net.sf.otrcutmp4.model.xml.series;
+package net.sf.otrcutmp4.model.xml.mc;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.otrcutmp4.model.xml.mc.Cover;
-import net.sf.otrcutmp4.model.xml.mc.Storage;
 
 
 /**
@@ -21,13 +18,10 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/>
- *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="year" type="{http://www.w3.org/2001/XMLSchema}int" />
+ *       &lt;attribute name="hash" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="size" type="{http://www.w3.org/2001/XMLSchema}long" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,82 +30,21 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "cover",
-    "storage"
-})
-@XmlRootElement(name = "movie")
-public class Movie
+@XmlType(name = "")
+@XmlRootElement(name = "storage")
+public class Storage
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
-    protected Cover cover;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
-    protected Storage storage;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "name")
     protected String name;
-    @XmlAttribute(name = "year")
-    protected Integer year;
-
-    /**
-     * Gets the value of the cover property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Cover }
-     *     
-     */
-    public Cover getCover() {
-        return cover;
-    }
-
-    /**
-     * Sets the value of the cover property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Cover }
-     *     
-     */
-    public void setCover(Cover value) {
-        this.cover = value;
-    }
-
-    public boolean isSetCover() {
-        return (this.cover!= null);
-    }
-
-    /**
-     * Gets the value of the storage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Storage }
-     *     
-     */
-    public Storage getStorage() {
-        return storage;
-    }
-
-    /**
-     * Sets the value of the storage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Storage }
-     *     
-     */
-    public void setStorage(Storage value) {
-        this.storage = value;
-    }
-
-    public boolean isSetStorage() {
-        return (this.storage!= null);
-    }
+    @XmlAttribute(name = "hash")
+    protected String hash;
+    @XmlAttribute(name = "size")
+    protected Long size;
 
     /**
      * Gets the value of the id property.
@@ -174,35 +107,63 @@ public class Movie
     }
 
     /**
-     * Gets the value of the year property.
+     * Gets the value of the hash property.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public int getYear() {
-        return year;
+    public String getHash() {
+        return hash;
     }
 
     /**
-     * Sets the value of the year property.
+     * Sets the value of the hash property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setYear(int value) {
-        this.year = value;
+    public void setHash(String value) {
+        this.hash = value;
     }
 
-    public boolean isSetYear() {
-        return (this.year!= null);
+    public boolean isSetHash() {
+        return (this.hash!= null);
     }
 
-    public void unsetYear() {
-        this.year = null;
+    /**
+     * Gets the value of the size property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public long getSize() {
+        return size;
+    }
+
+    /**
+     * Sets the value of the size property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setSize(long value) {
+        this.size = value;
+    }
+
+    public boolean isSetSize() {
+        return (this.size!= null);
+    }
+
+    public void unsetSize() {
+        this.size = null;
     }
 
 }

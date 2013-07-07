@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.mc.TestXmlCover;
+import net.sf.otrcutmp4.model.xml.mc.TestXmlStorage;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -40,6 +41,7 @@ public class TestXmlMovie extends AbstractXmlSeriesTest
     	if(withChilds)
     	{
     		xml.setCover(TestXmlCover.create(false));
+    		xml.setStorage(TestXmlStorage.create());
     	}
     	
     	return xml;

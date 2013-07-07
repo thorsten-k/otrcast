@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.factory.xml.series;
 
 import net.sf.otrcutmp4.factory.xml.mc.XmlCoverFactory;
+import net.sf.otrcutmp4.factory.xml.mc.XmlStorageFactory;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Movie;
 import net.sf.otrcutmp4.interfaces.model.Storage;
@@ -29,6 +30,12 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Co
 		{
 			XmlCoverFactory f = new XmlCoverFactory(q.getCover());
 			xml.setCover(f.build(ejb.getCover()));
+		}
+		
+		if(q.isSetStorage() && ejb.getStorage()!=null)
+		{
+			XmlStorageFactory f = new XmlStorageFactory(q.getStorage());
+			xml.setStorage(f.build(ejb.getStorage()));
 		}
 		
 		return xml;
