@@ -41,17 +41,17 @@ public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 		
 	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 			
-	public long getId() {return id;}
-	public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
-	public String getCode() {return code;}
-	public void setCode(String code) {this.code = code;}
+	@Override public String getCode() {return code;}
+	@Override public void setCode(String code) {this.code = code;}
 	
-	public List<OtrSeason> getSeasons() {if(seasons==null){seasons = new ArrayList<OtrSeason>();} return seasons;}
-	public void setSeasons(List<OtrSeason> seasons) {this.seasons = seasons;}
+	@Override public List<OtrSeason> getSeasons() {if(seasons==null){seasons = new ArrayList<OtrSeason>();} return seasons;}
+	@Override public void setSeasons(List<OtrSeason> seasons) {this.seasons = seasons;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
