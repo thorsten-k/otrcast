@@ -62,6 +62,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Image }
+     * 
+     */
+    public Image createImage() {
+        return new Image();
+    }
+
+    /**
+     * Create an instance of {@link Url }
+     * 
+     */
+    public Url createUrl() {
+        return new Url();
+    }
+
+    /**
      * Create an instance of {@link Rss }
      * 
      */

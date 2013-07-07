@@ -19,6 +19,16 @@
                <xsd:element ref="rss:language" maxOccurs="1"/>
                <xsd:element ref="rss:copyright" maxOccurs="1"/>
                <xsd:element ref="rss:pubDate" maxOccurs="1"/>
+               <xsd:element ref="rss:image" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="image">
+        <xsd:complexType>
+        	<xsd:sequence>
+        		<xsd:element ref="rss:url" maxOccurs="1"/>
+            	<xsd:element ref="rss:title" maxOccurs="1"/>
+            	<xsd:element ref="rss:link" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -63,6 +73,14 @@
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="pubDate">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="url">
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">

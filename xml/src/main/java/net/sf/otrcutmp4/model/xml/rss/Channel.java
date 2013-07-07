@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}language"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}copyright"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}pubDate"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}image"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +41,8 @@ import javax.xml.bind.annotation.XmlType;
     "description",
     "language",
     "copyright",
-    "pubDate"
+    "pubDate",
+    "image"
 })
 @XmlRootElement(name = "channel")
 public class Channel
@@ -60,6 +62,8 @@ public class Channel
     protected Copyright copyright;
     @XmlElement(required = true)
     protected PubDate pubDate;
+    @XmlElement(required = true)
+    protected Image image;
 
     /**
      * Gets the value of the title property.
@@ -227,6 +231,34 @@ public class Channel
 
     public boolean isSetPubDate() {
         return (this.pubDate!= null);
+    }
+
+    /**
+     * Gets the value of the image property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Image }
+     *     
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * Sets the value of the image property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Image }
+     *     
+     */
+    public void setImage(Image value) {
+        this.image = value;
+    }
+
+    public boolean isSetImage() {
+        return (this.image!= null);
     }
 
 }
