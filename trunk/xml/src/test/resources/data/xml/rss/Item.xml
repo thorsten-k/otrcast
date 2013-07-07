@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<item xmlns="http://otrcutmp4.sf.net/rss">
+    <title>myTitle</title>
+    <description>myDescription</description>
+    <pubDate>myPubDate</pubDate>
+    <enclosure url="myUrl" type="myType" length="123"/>
+    <guid>myGuid</guid>
+</item>
