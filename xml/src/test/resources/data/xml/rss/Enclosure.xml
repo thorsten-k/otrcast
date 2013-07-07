@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<enclosure xmlns="http://otrcutmp4.sf.net/rss" url="myUrl" type="myType" length="123"/>
+<enclosure url="myUrl" type="myType" length="123"/>
