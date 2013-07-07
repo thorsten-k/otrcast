@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Guid }
+     * 
+     */
+    public Guid createGuid() {
+        return new Guid();
+    }
+
+    /**
      * Create an instance of {@link PubDate }
      * 
      */
@@ -43,6 +51,14 @@ public class ObjectFactory {
      */
     public Title createTitle() {
         return new Title();
+    }
+
+    /**
+     * Create an instance of {@link Enclosure }
+     * 
+     */
+    public Enclosure createEnclosure() {
+        return new Enclosure();
     }
 
     /**
