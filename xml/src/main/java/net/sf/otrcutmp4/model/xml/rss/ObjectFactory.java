@@ -30,14 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Guid }
-     * 
-     */
-    public Guid createGuid() {
-        return new Guid();
-    }
-
-    /**
      * Create an instance of {@link PubDate }
      * 
      */
@@ -46,27 +38,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Title }
-     * 
-     */
-    public Title createTitle() {
-        return new Title();
-    }
-
-    /**
      * Create an instance of {@link Enclosure }
      * 
      */
     public Enclosure createEnclosure() {
         return new Enclosure();
-    }
-
-    /**
-     * Create an instance of {@link Description }
-     * 
-     */
-    public Description createDescription() {
-        return new Description();
     }
 
     /**
@@ -94,6 +70,46 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Title }
+     * 
+     */
+    public Title createTitle() {
+        return new Title();
+    }
+
+    /**
+     * Create an instance of {@link Copyright }
+     * 
+     */
+    public Copyright createCopyright() {
+        return new Copyright();
+    }
+
+    /**
+     * Create an instance of {@link Guid }
+     * 
+     */
+    public Guid createGuid() {
+        return new Guid();
+    }
+
+    /**
+     * Create an instance of {@link Description }
+     * 
+     */
+    public Description createDescription() {
+        return new Description();
+    }
+
+    /**
+     * Create an instance of {@link Item }
+     * 
+     */
+    public Item createItem() {
+        return new Item();
+    }
+
+    /**
      * Create an instance of {@link Rss }
      * 
      */
@@ -115,14 +131,6 @@ public class ObjectFactory {
      */
     public Language createLanguage() {
         return new Language();
-    }
-
-    /**
-     * Create an instance of {@link Copyright }
-     * 
-     */
-    public Copyright createCopyright() {
-        return new Copyright();
     }
 
 }

@@ -11,38 +11,35 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlChannel extends AbstractXmlRssTest
+public class TestXmlItem extends AbstractXmlRssTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlChannel.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlItem.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Channel.class.getSimpleName()+".xml");
+		fXml = new File(rootDir,Item.class.getSimpleName()+".xml");
 	}
     
     @Test
     public void xml() throws FileNotFoundException
     {
-    	Channel actual = create(true);
-    	Channel expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Channel.class);
+    	Item actual = create(true);
+    	Item expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Item.class);
     	assertJaxbEquals(expected, actual);
     }
      
-    public static Channel create(boolean withChilds)
+    public static Item create(boolean withChilds)
     {
-    	Channel xml = new Channel();
+    	Item xml = new Item();
     	
     	if(withChilds)
     	{
     		xml.setTitle(TestXmlTitle.create());
-    		xml.setLink(TestXmlLink.create());
     		xml.setDescription(TestXmlDescription.create());
-    		xml.setLanguage(TestXmlLanguage.create());
-    		xml.setCopyright(TestXmlCopyright.create());
     		xml.setPubDate(TestXmlPubDate.create());
-    		xml.setImage(TestXmlImage.create(false));
-    		xml.getItem().add(TestXmlItem.create(false));xml.getItem().add(TestXmlItem.create(false));
+    		xml.setEnclosure(TestXmlEnclosure.create());
+    		xml.setGuid(TestXmlGuid.create());
     	}
     	
     	return xml;
@@ -54,8 +51,8 @@ public class TestXmlChannel extends AbstractXmlRssTest
     {
 		OtrXmlTstBootstrap.init();
 		
-		TestXmlChannel.initFiles();	
-		TestXmlChannel test = new TestXmlChannel();
+		TestXmlItem.initFiles();	
+		TestXmlItem test = new TestXmlItem();
 		test.save();
     }
 }
