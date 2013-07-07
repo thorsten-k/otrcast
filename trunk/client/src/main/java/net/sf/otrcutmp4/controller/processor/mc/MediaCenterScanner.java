@@ -13,6 +13,7 @@ import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
+import net.sf.otrcutmp4.factory.ejb.mc.EjbStorageFactory;
 import net.sf.otrcutmp4.model.OtrCover;
 import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrMovie;
@@ -44,6 +45,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> osfb;
 	private EjbCoverFactory<OtrCover> efCover;
+	private EjbStorageFactory<OtrStorage> efStorage;
 	
 	public MediaCenterScanner(EntityManager em)
 	{
@@ -53,6 +55,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,ufb);
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
+		efStorage=EjbStorageFactory.factory(OtrStorage.class);
 	}
 	
 	private static IOFileFilter filter()
@@ -87,13 +90,20 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 			try
 			{
 				em.getTransaction().begin();
+				
+				OtrStorage storage = efStorage.build(file.getAbsolutePath(), null, file.length());
+				em.persist(storage);
+				
 				Video video = tagReader.read(file);
 				
-				if(video.isSetEpisode()){handleEpisode(video.getEpisode());}
+				if(video.isSetEpisode())
+				{
+					handleEpisode(video.getEpisode(),storage);
+				}
 				else if(video.isSetMovie())
 				{
 					logger.info("\t"+video.getMovie().getName());
-					handleMovie(video.getMovie());
+					handleMovie(video.getMovie(),storage);
 				}
 				em.getTransaction().commit();
 			}
@@ -102,9 +112,11 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		}
 	}
 	
-	private void handleMovie(Movie xmlMovie)
+	private void handleMovie(Movie xmlMovie,OtrStorage storage)
 	{
 		OtrMovie movie = getMovie(xmlMovie);
+		movie.setStorage(storage);
+		em.merge(movie);
 		
 		if(xmlMovie.isSetCover() && movie.getCover()==null)
 		{
@@ -133,11 +145,12 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		return movie;
 	}
 	
-	private void handleEpisode(Episode xmlEpisode)
+	private void handleEpisode(Episode xmlEpisode,OtrStorage storage)
 	{
 		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
 		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
 		OtrEpisode episode = getEpisode(season,xmlEpisode);
+		
 		
 		season.getEpisodes().add(episode);
 		

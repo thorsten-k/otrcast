@@ -29,6 +29,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="mc:cover" maxOccurs="1"/>
+				<xsd:element ref="mc:storage" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 			<xsd:attribute name="name" type="xsd:string"/>
@@ -72,8 +73,9 @@
 	<xsd:element name="episode">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="mc:cover" maxOccurs="1"/>
 				<xsd:element ref="s:season" maxOccurs="1"/>
+				<xsd:element ref="mc:cover" maxOccurs="1"/>
+				<xsd:element ref="mc:storage" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 			<xsd:attribute name="nr" type="xsd:int"/>

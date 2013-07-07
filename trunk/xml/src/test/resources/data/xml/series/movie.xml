@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <s:movie xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series" id="123" name="Test Name" year="2103">
     <mc:cover id="123" type="png"/>
+    <mc:storage id="123" name="myName" hash="myHash" size="123"/>
 </s:movie>

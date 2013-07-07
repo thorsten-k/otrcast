@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import net.sf.otrcutmp4.model.xml.mc.Cover;
+import net.sf.otrcutmp4.model.xml.mc.Storage;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Movie;
@@ -75,6 +76,7 @@ public class SeriesQuery
 	{
 		Movie xml = movie();
 		xml.setCover(cover());
+		xml.setStorage(storage());
 		return xml;
 	}
 	
@@ -134,6 +136,16 @@ public class SeriesQuery
 		xml.setId(0);
 		xml.setType("");
 		xml.setData("x".getBytes());
+		return xml;
+	}
+	
+	public static Storage storage()
+	{
+		Storage xml = new Storage();
+		xml.setId(0);
+		xml.setName("");
+		xml.setHash("");
+		xml.setSize(0);
 		return xml;
 	}
 	
