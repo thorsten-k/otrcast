@@ -3,12 +3,13 @@ package net.sf.otrcutmp4.factory.xml.series;
 import net.sf.otrcutmp4.factory.xml.mc.XmlCoverFactory;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Movie;
+import net.sf.otrcutmp4.interfaces.model.Storage;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlMovieFactory<MOVIE extends Movie<COVER>,COVER extends Cover>
+public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlMovieFactory.class);
 	
@@ -17,7 +18,7 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER>,COVER extends Cover>
 	public XmlMovieFactory(Query query){this(query.getMovie());}
 	public XmlMovieFactory(net.sf.otrcutmp4.model.xml.series.Movie q){this.q=q;}
 	
-	public net.sf.otrcutmp4.model.xml.series.Movie build(Movie<COVER> ejb)
+	public net.sf.otrcutmp4.model.xml.series.Movie build(Movie<COVER,STORAGE> ejb)
 	{
 		net.sf.otrcutmp4.model.xml.series.Movie xml = new net.sf.otrcutmp4.model.xml.series.Movie();
 		if(q.isSetId()){xml.setId(ejb.getId());}

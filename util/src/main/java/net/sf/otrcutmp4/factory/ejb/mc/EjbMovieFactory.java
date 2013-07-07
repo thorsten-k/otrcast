@@ -5,11 +5,12 @@ import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Movie;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
+import net.sf.otrcutmp4.interfaces.model.Storage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbMovieFactory<MOVIE extends Movie<COVER>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
+public class EjbMovieFactory<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(EjbMovieFactory.class);
 	
@@ -22,10 +23,10 @@ public class EjbMovieFactory<MOVIE extends Movie<COVER>,SERIES extends Series<SE
 	     this.coverClass=coverClass;
 	 }
 	 
-	 public static <MOVIE extends Movie<COVER>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
-	 	EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER> factory(final Class<MOVIE> movieClass,final Class<COVER> coverClass)
+	 public static <MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover,STORAGE extends Storage>
+	 	EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE> factory(final Class<MOVIE> movieClass,final Class<COVER> coverClass)
 	 {
-		 return new EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER>(movieClass,coverClass);
+		 return new EjbMovieFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE>(movieClass,coverClass);
 	 }
 	
 	public MOVIE build(net.sf.otrcutmp4.model.xml.series.Movie movie)

@@ -25,6 +25,7 @@ import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrMovie;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
+import net.sf.otrcutmp4.model.OtrStorage;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.mc.ServerStatus;
 import net.sf.otrcutmp4.model.xml.series.Movie;
@@ -42,7 +43,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	
 	private EntityManager em;
 	private UtilsFacadeBean ufb;
-	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover> osfb;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> osfb;
 	
 	private void init()
 	{
@@ -52,7 +53,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}
-		if(osfb==null){osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover>(em,ufb);}
+		if(osfb==null){osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,ufb);}
 	}
 	
 	@Override
@@ -72,7 +73,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Otr allMovies()
 	{
 		init();
-		XmlMovieFactory<OtrMovie,OtrCover> fMovie = new XmlMovieFactory<OtrMovie,OtrCover>(SeriesQuery.get(SeriesQuery.Key.Movie));
+		XmlMovieFactory<OtrMovie,OtrCover,OtrStorage> fMovie = new XmlMovieFactory<OtrMovie,OtrCover,OtrStorage>(SeriesQuery.get(SeriesQuery.Key.Movie));
 		Otr otr = new Otr();
 		for(OtrMovie ejb : ufb.all(OtrMovie.class))
 		{
@@ -88,7 +89,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 	public Movie movie(@PathParam("id") long movieId) throws UtilsNotFoundException
 	{
 		init();
-		XmlMovieFactory<OtrMovie,OtrCover> f = new XmlMovieFactory<OtrMovie,OtrCover>(SeriesQuery.get(SeriesQuery.Key.MovieAll));
+		XmlMovieFactory<OtrMovie,OtrCover,OtrStorage> f = new XmlMovieFactory<OtrMovie,OtrCover,OtrStorage>(SeriesQuery.get(SeriesQuery.Key.MovieAll));
 		OtrMovie ejb = ufb.find(OtrMovie.class, movieId);
 		return f.build(ejb);
 	}
