@@ -25,6 +25,8 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover>
 	
 	private int year;
 	
+	private long size;
+
 	private String name;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
@@ -43,6 +45,9 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover>
 	
 	public OtrCover getCover() {return cover;}
 	public void setCover(OtrCover cover) {this.cover = cover;}
+	
+	public long getSize() {return size;}
+	public void setSize(long size) {this.size = size;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
