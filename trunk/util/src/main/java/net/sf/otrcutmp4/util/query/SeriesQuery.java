@@ -1,8 +1,10 @@
 package net.sf.otrcutmp4.util.query;
 
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import net.sf.exlp.util.DateUtil;
 import net.sf.otrcutmp4.model.xml.mc.Cover;
 import net.sf.otrcutmp4.model.xml.mc.Storage;
 import net.sf.otrcutmp4.model.xml.otr.Query;
@@ -146,6 +148,7 @@ public class SeriesQuery
 		xml.setName("");
 		xml.setHash("");
 		xml.setSize(0);
+		xml.setLastModified(DateUtil.getXmlGc4D(new Date()));
 		return xml;
 	}
 	

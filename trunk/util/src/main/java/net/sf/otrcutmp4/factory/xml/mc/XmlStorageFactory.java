@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.factory.xml.mc;
 
+import net.sf.exlp.util.DateUtil;
 import net.sf.otrcutmp4.interfaces.model.Storage;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class XmlStorageFactory
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		if(q.isSetHash()){xml.setHash(ejb.getHash());}
 		if(q.isSetSize()){xml.setSize(ejb.getSize());}
+		if(q.isSetLastModified()){xml.setLastModified(DateUtil.toXmlGc(ejb.getRecord()));}
 		return xml;
 	}
 }
