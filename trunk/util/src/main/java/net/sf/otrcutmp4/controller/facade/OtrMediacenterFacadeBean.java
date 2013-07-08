@@ -29,10 +29,16 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES 
 	}
 	
     @Override
-	public SERIES load(Class<SERIES> type, SERIES series)
+	public SERIES load(Class<SERIES> type, SERIES series,boolean withEpisodes)
 	{
 		series = em.find(type, series.getId());
-		series.getSeasons().size();
+		if(series.getSeasons().size()>0)
+		{
+			for(SEASON season : series.getSeasons())
+			{
+				season.getEpisodes().size();
+			}
+		}
 		return series;
 	}
     

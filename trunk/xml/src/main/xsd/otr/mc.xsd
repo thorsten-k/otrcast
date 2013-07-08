@@ -27,6 +27,7 @@
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="hash" type="xsd:string"/>
             <xsd:attribute name="size" type="xsd:long"/>
+            <xsd:attribute name="lastModified" type="xsd:dateTime"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
