@@ -4,12 +4,13 @@ import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
+import net.sf.otrcutmp4.interfaces.model.Storage;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
+public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlEpisodeFactory.class);
 	
@@ -18,7 +19,7 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 	public XmlEpisodeFactory(Query query){this(query.getEpisode());}
 	public XmlEpisodeFactory(net.sf.otrcutmp4.model.xml.series.Episode q){this.q=q;}
 	
-	public net.sf.otrcutmp4.model.xml.series.Episode build(Episode<SERIES,SEASON,EPISODE,COVER> ejb)
+	public net.sf.otrcutmp4.model.xml.series.Episode build(Episode<SERIES,SEASON,EPISODE,COVER,STORAGE> ejb)
 	{
 		logger.trace("\t\t"+ejb.toString());
 		net.sf.otrcutmp4.model.xml.series.Episode xml = new net.sf.otrcutmp4.model.xml.series.Episode();
@@ -28,7 +29,7 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		
 		if(q.isSetSeason())
 		{
-			XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER> f = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER>(q.getSeason());
+			XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> f = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(q.getSeason());
 			xml.setSeason(f.build(ejb.getSeason()));
 		}
 		

@@ -2,11 +2,14 @@ package net.sf.otrcutmp4.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
@@ -16,7 +19,7 @@ import net.sf.otrcutmp4.interfaces.model.Episode;
 
 @Entity
 public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWithNr,
-									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrCover>
+									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>
 {
 	public static final long serialVersionUID=1;
 	
@@ -36,6 +39,9 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	
 	private long size;
 				
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private OtrStorage storage;
+	
 	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 		
 	@Override public long getId() {return id;}
@@ -52,6 +58,9 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	
 	@Override public long getSize() {return size;}
 	@Override public void setSize(long size) {this.size = size;}
+	
+	@Override public OtrStorage getStorage() {return storage;}
+	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
