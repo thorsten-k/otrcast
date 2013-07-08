@@ -4,11 +4,12 @@ import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
+import net.sf.otrcutmp4.interfaces.model.Storage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
+public class EjbEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(EjbEpisodeFactory.class);
 	
@@ -19,10 +20,10 @@ public class EjbEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		this.clEpisode=clEpisode;
 	}
 	 
-	public static <SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover>
-		EjbEpisodeFactory<SERIES,SEASON,EPISODE,COVER> factory(final Class<EPISODE> clEpisode)
+	public static <SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
+		EjbEpisodeFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> factory(final Class<EPISODE> clEpisode)
 	{
-		return new EjbEpisodeFactory<SERIES,SEASON,EPISODE,COVER>(clEpisode);
+		return new EjbEpisodeFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(clEpisode);
 	}
 	
 	public EPISODE build(SEASON season, net.sf.otrcutmp4.model.xml.series.Episode xml)
