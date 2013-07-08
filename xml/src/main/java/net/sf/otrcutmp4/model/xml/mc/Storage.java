@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -22,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="hash" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="size" type="{http://www.w3.org/2001/XMLSchema}long" />
+ *       &lt;attribute name="lastModified" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -45,6 +48,9 @@ public class Storage
     protected String hash;
     @XmlAttribute(name = "size")
     protected Long size;
+    @XmlAttribute(name = "lastModified")
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar lastModified;
 
     /**
      * Gets the value of the id property.
@@ -164,6 +170,34 @@ public class Storage
 
     public void unsetSize() {
         this.size = null;
+    }
+
+    /**
+     * Gets the value of the lastModified property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getLastModified() {
+        return lastModified;
+    }
+
+    /**
+     * Sets the value of the lastModified property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setLastModified(XMLGregorianCalendar value) {
+        this.lastModified = value;
+    }
+
+    public boolean isSetLastModified() {
+        return (this.lastModified!= null);
     }
 
 }

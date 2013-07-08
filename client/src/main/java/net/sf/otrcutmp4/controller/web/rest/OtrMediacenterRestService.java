@@ -119,7 +119,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 		init();
 		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(SeriesQuery.get(SeriesQuery.Key.SeriesAll));
 		OtrSeries ejb = ufb.find(OtrSeries.class, seriesId);
-		ejb = osfb.load(OtrSeries.class, ejb);
+		ejb = osfb.load(OtrSeries.class, ejb, false);
 		return f.build(ejb);
 	}
 
@@ -132,7 +132,7 @@ public class OtrMediacenterRestService implements OtrMediacenterRest
 		init();
 		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrCover>(SeriesQuery.get(SeriesQuery.Key.SeriesWithSeason));
 		OtrSeries ejb = ufb.find(OtrSeries.class, seriesId);
-		ejb = osfb.load(OtrSeries.class, ejb);
+		ejb = osfb.load(OtrSeries.class, ejb, false);
 		return f.build(ejb);
 	}
 	

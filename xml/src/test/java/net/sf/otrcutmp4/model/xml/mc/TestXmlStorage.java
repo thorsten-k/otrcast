@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.model.xml.mc;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
@@ -36,6 +37,7 @@ public class TestXmlStorage extends AbstractXmlMcTest
     	xml.setHash("myHash");
     	xml.setSize(123);
     	xml.setName("myName");
+    	xml.setLastModified(getDefaultXmlDate());
     	
     	return xml;
     }
@@ -45,7 +47,8 @@ public class TestXmlStorage extends AbstractXmlMcTest
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-			
+		DateUtil.ignoreTimeZone=true;	
+		
 		TestXmlStorage.initXml();	
 		TestXmlStorage.initFiles();
 		TestXmlStorage test = new TestXmlStorage();

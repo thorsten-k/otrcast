@@ -11,7 +11,7 @@ import net.sf.otrcutmp4.interfaces.model.Storage;
 public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER>,COVER extends Cover,STORAGE extends Storage>
 {	
 	SEASON load(Class<SEASON> type, SEASON season);
-	SERIES load(Class<SERIES> type, SERIES series);
+	SERIES load(Class<SERIES> type, SERIES series, boolean withEpisodes);
 	
 	MOVIE fMovie(Class<MOVIE> type, String name, int year) throws UtilsNotFoundException;
 	

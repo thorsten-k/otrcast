@@ -9,7 +9,7 @@ import org.jboss.resteasy.spi.ResteasyDeployment;
 
 public class CliRssRestServer
 {
-    public CliRssRestServer()
+    public CliRssRestServer(Configuration config)
     {
 
     }
@@ -30,6 +30,7 @@ public class CliRssRestServer
     public static void main(String[] args) throws ExlpConfigurationException
     {
     	Configuration config = OtrClientTestBootstrap.init();
-        new CliRssRestServer().rest();
+    	CliRssRestServer cli = new CliRssRestServer(config);
+    	cli.rest();
     }
 }
