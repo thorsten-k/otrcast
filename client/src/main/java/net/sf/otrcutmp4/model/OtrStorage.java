@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,8 @@ public class OtrStorage implements Serializable,Storage
 
 	private String hash;
 	
+	private Date record;
+	
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<<<<<<<<<<<<<	
 	
 	@Override public void setId(long id) {this.id = id;}
@@ -40,6 +43,9 @@ public class OtrStorage implements Serializable,Storage
 	
 	@Override public String getHash() {return hash;}
 	@Override public void setHash(String hash) {this.hash = hash;}
+	
+	@Override public Date getRecord() {return record;}
+	@Override public void setRecord(Date record) {this.record = record;}
 	
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<<<<<<<<<<<<<	
 	

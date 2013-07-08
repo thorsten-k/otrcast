@@ -45,7 +45,7 @@ final static Logger logger = LoggerFactory.getLogger(EjbStorageFactory.class);
 		ejb.setName(name);
 		ejb.setHash(hash);
 		ejb.setSize(size);
-	
+		ejb.setRecord(lastModifed);
 		
 		return ejb;
 	}
