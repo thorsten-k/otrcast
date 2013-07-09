@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.AviToMp4.Profile;

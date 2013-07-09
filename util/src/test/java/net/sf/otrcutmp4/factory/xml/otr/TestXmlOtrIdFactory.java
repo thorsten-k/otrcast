@@ -1,7 +1,7 @@
 package net.sf.otrcutmp4.factory.xml.otr;
 
 import junit.framework.Assert;
-import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;

@@ -1,7 +1,7 @@
 package net.sf.otrcutmp4.model.xml.xpath.otr;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;

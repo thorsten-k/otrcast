@@ -39,7 +39,7 @@
    	   	<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
    	   		<artifactId>jaxb-impl</artifactId>
-   	   		<type>jar</type>
+   	   		<scope>provided</scope>
    	   	</dependency>
    	   	<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
@@ -65,23 +65,24 @@
    	   			</exclusion>
    	   		</exclusions>
    	   	</dependency>
+
+		<!-- ExLP -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-interfaces</artifactId>
+		</dependency>
+		
+		<!-- Test & Logging -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<type>jar</type>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-util</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

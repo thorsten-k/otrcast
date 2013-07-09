@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.processor.exlp;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;

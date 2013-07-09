@@ -4,5 +4,5 @@
     <description>myDescription</description>
     <pubDate>myPubDate</pubDate>
     <enclosure url="myUrl" type="myType" length="123"/>
-    <guid>myGuid</guid>
+    <guid isPermaLink="false">myGuid</guid>
 </item>
