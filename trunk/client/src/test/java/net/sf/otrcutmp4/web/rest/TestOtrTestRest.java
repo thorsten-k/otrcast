@@ -1,7 +1,7 @@
 package net.sf.otrcutmp4.web.rest;
 
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.interfaces.rest.OtrTestRest;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 

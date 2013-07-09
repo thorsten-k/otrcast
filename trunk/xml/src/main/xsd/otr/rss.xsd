@@ -104,6 +104,7 @@
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">
+                	<xsd:attribute name="isPermaLink" type="xsd:boolean"/>
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>

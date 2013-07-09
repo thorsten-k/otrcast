@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
-import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;

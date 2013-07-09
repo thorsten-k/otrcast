@@ -20,7 +20,9 @@ public class XmlItemFactory<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Se
 		Item xml = new Item();
 		xml.setTitle(XmlTitleFactory.build(episode.getName()));
 		xml.setDescription(XmlDescriptionFactory.build(episode.getNr()+""));
-//		xml.setEnclosure(XmlEnclosureFactory.build(episode.getStorage()));
+		xml.setEnclosure(XmlEnclosureFactory.build(episode.getStorage()));
+		xml.setGuid(XmlGuidFactory.build(episode.getStorage()));
+		xml.setPubDate(XmlPubDateFactory.build(episode.getStorage().getRecord()));
 		return xml;
 	}
 	
@@ -30,6 +32,8 @@ public class XmlItemFactory<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Se
 		xml.setTitle(XmlTitleFactory.build(movie.getName()));
 		xml.setDescription(XmlDescriptionFactory.build(movie.getYear()+""));
 		xml.setEnclosure(XmlEnclosureFactory.build(movie.getStorage()));
+		xml.setGuid(XmlGuidFactory.build(movie.getStorage()));
+		xml.setPubDate(XmlPubDateFactory.build(movie.getStorage().getRecord()));
 		return xml;
 	}
 }

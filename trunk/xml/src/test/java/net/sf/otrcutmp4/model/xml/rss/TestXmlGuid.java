@@ -32,6 +32,7 @@ public class TestXmlGuid extends AbstractXmlRssTest
     public static Guid create()
     {
     	Guid xml = new Guid();
+    	xml.setIsPermaLink(false);
     	xml.setValue("myGuid");
     	return xml;
     }

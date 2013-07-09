@@ -3,8 +3,8 @@ package net.sf.otrcutmp4.controller.web.rest;
 import java.io.File;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigKey;
-import net.sf.exlp.util.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.rest.OtrMediacenterRest;
 import net.sf.otrcutmp4.model.xml.container.Otr;

@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.processor;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.exlp.util.exception.ExlpConfigurationException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
