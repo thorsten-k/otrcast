@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<item>
+<item xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
     <title>myTitle</title>
     <description>myDescription</description>
+    <itunes:summary>mySummary</itunes:summary>
+    <itunes:image href="myImage"/>
     <pubDate>myPubDate</pubDate>
     <enclosure url="myUrl" type="myType" length="123"/>
     <guid isPermaLink="false">myGuid</guid>

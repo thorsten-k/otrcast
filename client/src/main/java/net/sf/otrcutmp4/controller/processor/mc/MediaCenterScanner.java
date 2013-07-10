@@ -92,6 +92,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 				em.getTransaction().begin();
 				
 				OtrStorage storage = efStorage.build(file);
+				logger.info("Storage: "+storage);
 				em.persist(storage);
 				
 				Video video = tagReader.read(file);

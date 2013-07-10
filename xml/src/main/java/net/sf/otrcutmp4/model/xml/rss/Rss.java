@@ -4,6 +4,7 @@ package net.sf.otrcutmp4.model.xml.rss;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -21,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}channel"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,6 +42,8 @@ public class Rss
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected Channel channel;
+    @XmlAttribute(name = "version")
+    protected String version;
 
     /**
      * Gets the value of the channel property.
@@ -67,6 +71,34 @@ public class Rss
 
     public boolean isSetChannel() {
         return (this.channel!= null);
+    }
+
+    /**
+     * Gets the value of the version property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets the value of the version property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVersion(String value) {
+        this.version = value;
+    }
+
+    public boolean isSetVersion() {
+        return (this.version!= null);
     }
 
 }

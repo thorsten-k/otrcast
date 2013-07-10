@@ -22,7 +22,7 @@
         		<executions>
 					<execution>
 						<id>attach-sources</id>
-							<goals><goal>jar</goal></goals>
+						<goals><goal>jar</goal></goals>
 					</execution>
 				</executions>
       		</plugin>
@@ -30,24 +30,8 @@
 	</build>
    
 	<dependencies>
+		<!-- JAXB-XML -->
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-   	   		<artifactId>jaxb-api</artifactId>
-   	   		<type>jar</type>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-xjc</artifactId>
-   	   		<type>jar</type>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
    	   		<groupId>net.sf.exlp</groupId>
    	   		<artifactId>exlp-xml</artifactId>
    	   		<type>jar</type>
@@ -58,15 +42,9 @@
    	   		<artifactId>ahtutils-xml</artifactId>
    	   		<type>jar</type>
    	   		<scope>compile</scope>
-   	   		<exclusions>
-   	   			<exclusion>
-   	   				<artifactId>commons-logging</artifactId>
-   	   				<groupId>commons-logging</groupId>
-   	   			</exclusion>
-   	   		</exclusions>
    	   	</dependency>
-
-		<!-- ExLP -->
+   	   	
+   	   	<!-- ExLP -->
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
@@ -76,7 +54,26 @@
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-interfaces</artifactId>
 		</dependency>
-		
+	
+		<!-- XML -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+   	   		<artifactId>jaxb-api</artifactId>
+   	   		<type>jar</type>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-impl</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-xjc</artifactId>
+   	   		<type>jar</type>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+   	   	
 		<!-- Test & Logging -->
 		<dependency>
 			<groupId>junit</groupId>
