@@ -1,5 +1,7 @@
 package net.sf.otrcutmp4.factory.xml.rss;
 
+import net.sf.otrcutmp4.factory.xml.itunes.XmlImageFactory;
+import net.sf.otrcutmp4.factory.xml.itunes.XmlSummaryFactory;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Movie;
@@ -20,6 +22,7 @@ public class XmlItemFactory<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Se
 		Item xml = new Item();
 		xml.setTitle(XmlTitleFactory.build(episode.getName()));
 		xml.setDescription(XmlDescriptionFactory.build(episode.getNr()+""));
+		xml.setSummary(XmlSummaryFactory.build(episode.getNr()+""));
 		xml.setEnclosure(XmlEnclosureFactory.build(episode.getStorage()));
 		xml.setGuid(XmlGuidFactory.build(episode.getStorage()));
 		xml.setPubDate(XmlPubDateFactory.build(episode.getStorage().getRecord()));
@@ -31,9 +34,11 @@ public class XmlItemFactory<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Se
 		Item xml = new Item();
 		xml.setTitle(XmlTitleFactory.build(movie.getName()));
 		xml.setDescription(XmlDescriptionFactory.build(movie.getYear()+""));
-		xml.setEnclosure(XmlEnclosureFactory.build(movie.getStorage()));
-		xml.setGuid(XmlGuidFactory.build(movie.getStorage()));
+		xml.setSummary(XmlSummaryFactory.build(movie.getYear()+" itunes"));
 		xml.setPubDate(XmlPubDateFactory.build(movie.getStorage().getRecord()));
+		xml.setImage(XmlImageFactory.build("http://localhost:8080/erp/image/mcMovie/1.png"));
+		xml.setGuid(XmlGuidFactory.build(movie.getStorage()));
+		xml.setEnclosure(XmlEnclosureFactory.build(movie.getStorage()));
 		return xml;
 	}
 }

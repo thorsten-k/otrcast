@@ -36,8 +36,6 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	private String name;
 	
 	private int nr;
-	
-	private long size;
 				
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private OtrStorage storage;
@@ -55,9 +53,6 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	
 	@Override public int getNr() {return nr;}
 	@Override public void setNr(int nr) {this.nr = nr;}
-	
-	@Override public long getSize() {return size;}
-	@Override public void setSize(long size) {this.size = size;}
 	
 	@Override public OtrStorage getStorage() {return storage;}
 	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}

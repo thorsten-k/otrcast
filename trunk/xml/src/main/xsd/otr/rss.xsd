@@ -1,13 +1,16 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/rss"
     xmlns:rss="http://otrcutmp4.sf.net/rss"
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:import namespace="http://www.itunes.com/dtds/podcast-1.0.dtd" schemaLocation="itunes.xsd"/>
     <xsd:element name="rss">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="rss:channel" maxOccurs="1"/>
             </xsd:sequence>
+            <xsd:attribute name="version" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="channel">
@@ -38,6 +41,8 @@
         	<xsd:sequence>
         		<xsd:element ref="rss:title" maxOccurs="1"/>
             	<xsd:element ref="rss:description" maxOccurs="1"/>
+            	<xsd:element ref="itunes:summary" maxOccurs="1"/>
+            	<xsd:element ref="itunes:image" maxOccurs="1"/>
             	<xsd:element ref="rss:pubDate" maxOccurs="1"/>
             	<xsd:element ref="rss:enclosure" maxOccurs="1"/>
             	<xsd:element ref="rss:guid" maxOccurs="1"/>

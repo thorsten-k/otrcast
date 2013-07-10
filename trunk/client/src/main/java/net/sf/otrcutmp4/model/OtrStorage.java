@@ -52,7 +52,10 @@ public class OtrStorage implements Serializable,Storage
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-			sb.append(id);
+			sb.append("[").append(id).append("]");
+			sb.append(" ").append(size);
+			sb.append(" ").append(hash);
+			sb.append(" ").append(record);
 		return sb.toString();
 	}
 }

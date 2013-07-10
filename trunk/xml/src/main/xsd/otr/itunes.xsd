@@ -1,0 +1,19 @@
+<xsd:schema targetNamespace="http://www.itunes.com/dtds/podcast-1.0.dtd"
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <xsd:element name="summary">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="image">
+        <xsd:complexType>
+            <xsd:attribute name="href" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

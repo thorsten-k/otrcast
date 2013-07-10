@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.itunes.TestXmlSummary;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -37,6 +38,8 @@ public class TestXmlItem extends AbstractXmlRssTest
     	{
     		xml.setTitle(TestXmlTitle.create());
     		xml.setDescription(TestXmlDescription.create());
+    		xml.setSummary(TestXmlSummary.create());
+    		xml.setImage(net.sf.otrcutmp4.model.xml.itunes.TestXmlImage.create());
     		xml.setPubDate(TestXmlPubDate.create());
     		xml.setEnclosure(TestXmlEnclosure.create());
     		xml.setGuid(TestXmlGuid.create());

@@ -16,8 +16,13 @@ public class XmlPubDateFactory
 	
 	public static PubDate build(Date date)
 	{
+		return build(getSdf().format(date));
+	}
+	
+	public static PubDate build(String pubDate)
+	{
 		PubDate xml = new PubDate();
-		xml.setValue(getSdf().format(date));
+		xml.setValue(pubDate);
 		return xml;
 	}
 	

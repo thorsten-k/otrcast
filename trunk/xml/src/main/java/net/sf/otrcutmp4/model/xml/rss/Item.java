@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import net.sf.otrcutmp4.model.xml.itunes.Image;
+import net.sf.otrcutmp4.model.xml.itunes.Summary;
 
 
 /**
@@ -21,6 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}title"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}description"/>
+ *         &lt;element ref="{http://www.itunes.com/dtds/podcast-1.0.dtd}summary"/>
+ *         &lt;element ref="{http://www.itunes.com/dtds/podcast-1.0.dtd}image"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}pubDate"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}enclosure"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/rss}guid"/>
@@ -36,6 +40,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "title",
     "description",
+    "summary",
+    "image",
     "pubDate",
     "enclosure",
     "guid"
@@ -50,6 +56,10 @@ public class Item
     protected Title title;
     @XmlElement(required = true)
     protected Description description;
+    @XmlElement(namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", required = true)
+    protected Summary summary;
+    @XmlElement(namespace = "http://www.itunes.com/dtds/podcast-1.0.dtd", required = true)
+    protected Image image;
     @XmlElement(required = true)
     protected PubDate pubDate;
     @XmlElement(required = true)
@@ -111,6 +121,62 @@ public class Item
 
     public boolean isSetDescription() {
         return (this.description!= null);
+    }
+
+    /**
+     * Gets the value of the summary property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Summary }
+     *     
+     */
+    public Summary getSummary() {
+        return summary;
+    }
+
+    /**
+     * Sets the value of the summary property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Summary }
+     *     
+     */
+    public void setSummary(Summary value) {
+        this.summary = value;
+    }
+
+    public boolean isSetSummary() {
+        return (this.summary!= null);
+    }
+
+    /**
+     * Gets the value of the image property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Image }
+     *     
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * Sets the value of the image property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Image }
+     *     
+     */
+    public void setImage(Image value) {
+        this.image = value;
+    }
+
+    public boolean isSetImage() {
+        return (this.image!= null);
     }
 
     /**

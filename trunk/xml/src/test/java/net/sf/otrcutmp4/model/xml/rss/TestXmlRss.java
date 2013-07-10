@@ -32,6 +32,7 @@ public class TestXmlRss extends AbstractXmlRssTest
     public static Rss create(boolean withChilds)
     {
     	Rss xml = new Rss();
+    	xml.setVersion("myVersion");
     	
     	if(withChilds)
     	{

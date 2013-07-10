@@ -8,11 +8,13 @@ public class OtrCutNsPrefixMapper extends NamespacePrefixMapper implements NsPre
 {
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {
-    	if("http://otrcutmp4.sf.net".equals(namespaceUri) ){return "otr";}
-        if("http://otrcutmp4.sf.net/series".equals(namespaceUri) ){return "s";}
-        if("http://otrcutmp4.sf.net/cut".equals(namespaceUri) ){return "c";}
-        if("http://otrcutmp4.sf.net/otr".equals(namespaceUri) ){return "o";}
-        if("http://otrcutmp4.sf.net/mc".equals(namespaceUri) ){return "mc";}
+    	if     ("http://otrcutmp4.sf.net".equals(namespaceUri) ){return "otr";}
+    	else if("http://otrcutmp4.sf.net/series".equals(namespaceUri) ){return "s";}
+    	else if("http://otrcutmp4.sf.net/cut".equals(namespaceUri) ){return "c";}
+    	else if("http://otrcutmp4.sf.net/otr".equals(namespaceUri) ){return "o";}
+    	else if("http://otrcutmp4.sf.net/mc".equals(namespaceUri) ){return "mc";}
+    	else if("http://otrcutmp4.sf.net/rss".equals(namespaceUri) ){return "rss";}
+    	else if("http://www.itunes.com/dtds/podcast-1.0.dtd".equals(namespaceUri) ){return "itunes";}
         
         return suggestion;
     }

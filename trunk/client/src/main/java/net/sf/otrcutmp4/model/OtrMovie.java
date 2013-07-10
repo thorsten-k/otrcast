@@ -24,8 +24,6 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover,OtrS
 	private long id;
 	
 	private int year;
-	
-	private long size;
 
 	private String name;
 	
@@ -48,9 +46,6 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover,OtrS
 	
 	@Override public OtrCover getCover() {return cover;}
 	@Override public void setCover(OtrCover cover) {this.cover = cover;}
-	
-	@Override public long getSize() {return size;}
-	@Override public void setSize(long size) {this.size = size;}
 	
 	@Override public OtrStorage getStorage() {return storage;}
 	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}
