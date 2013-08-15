@@ -20,6 +20,7 @@ public class FileSystemCoverManager implements CoverManager
 	public FileSystemCoverManager(File coverDir)
 	{
 		this.coverDir=coverDir;
+		logger.debug("Using FS CoverManager");
 	}
 
 	@Override
@@ -36,11 +37,19 @@ public class FileSystemCoverManager implements CoverManager
 			return false;
 		}
 
-		File dirSeason = new File(coverDir,season.getSeries().getKey());
-		if(!dirSeason.exists()){return false;}
+		File dir = new File(coverDir,season.getSeries().getKey());
+		if(!dir.exists())
+		{
+			logger.warn("No covers for "+season.getSeries().getKey()+": "+season.getSeries().getName());
+			return false;
+		}
 		
-		fCover = new File(dirSeason,season.getNr()+".png");
-		if(!fCover.exists()){return false;}
+		fCover = new File(dir,season.getNr()+".png");
+		if(!fCover.exists())
+		{
+			logger.warn("No covers Season "+season.getNr());
+			return false;
+		}
 		
 		
 		return true;
