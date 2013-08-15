@@ -14,9 +14,14 @@ import net.sf.otrcutmp4.interfaces.model.Season;
 import net.sf.otrcutmp4.interfaces.model.Series;
 import net.sf.otrcutmp4.interfaces.model.Storage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
 				implements OtrMediacenterFacade<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE>,Serializable
 {	
+	final static Logger logger = LoggerFactory.getLogger(OtrMediacenterFacadeBean.class);
+	
 	static final long serialVersionUID=1;
 
 	protected EntityManager em;

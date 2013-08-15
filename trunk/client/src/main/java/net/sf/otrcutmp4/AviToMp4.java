@@ -19,6 +19,7 @@ import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
+import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
@@ -113,7 +114,6 @@ public class AviToMp4
         }
         
         CoverManager coverManager = null;
-
         if(line.hasOption(oCover.getOpt()))
         {
         	String type = line.getOptionValue(oCover.getOpt());
@@ -176,7 +176,7 @@ public class AviToMp4
 	        }
 	    	
 	    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
-	    	JaxbUtil.warn(videos);
+	    	JaxbUtil.debug(videos);
 	    	
 	    	CutlistLoader cutlistLoader = new DefaultCutlistLoader();;
 	    	cutlistLoader.loadCuts(videos);       
@@ -265,11 +265,11 @@ public class AviToMp4
 	public static void initLogger(String logConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(logConfig);	
-		loggerInit.addAltPath("src/main/resources/otrcutmp4");
-		loggerInit.addAltPath("otrcutmp4");
+		loggerInit.addAltPath("src/main/resources/config.otrcutmp4-client");
+		loggerInit.addAltPath("config.otrcutmp4-client");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
-//		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
 	public static void main(String args[]) throws OtrInternalErrorException
