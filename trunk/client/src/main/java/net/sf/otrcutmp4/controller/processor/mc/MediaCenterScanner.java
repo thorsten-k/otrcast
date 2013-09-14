@@ -92,7 +92,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 				em.getTransaction().begin();
 				
 				OtrStorage storage = efStorage.build(file);
-				logger.info("Storage: "+storage);
+				logger.trace("Storage: "+storage);
 				em.persist(storage);
 				
 				Video video = tagReader.read(file);
@@ -103,7 +103,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 				}
 				else if(video.isSetMovie())
 				{
-					logger.info("\t"+video.getMovie().getName());
+					logger.trace("\t"+video.getMovie().getName());
 					handleMovie(video.getMovie(),storage);
 				}
 				em.getTransaction().commit();

@@ -63,8 +63,8 @@ public class OtrCutMp4Bootstrap
 		if(emf==null)
 		{
 			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:mem:db");	
-			properties.put("hibernate.hbm2ddl.auto", "create-drop");
+			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:db/db");	
+//			properties.put("hibernate.hbm2ddl.auto", "create-drop");
 		
 			emf = Persistence.createEntityManagerFactory("otr-mediacenter");
 		}
