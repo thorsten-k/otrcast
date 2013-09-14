@@ -2,7 +2,7 @@ package net.sf.otrcutmp4;
 
 import java.io.File;
 
-import net.sf.exlp.util.config.ConfigKey;
+import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.mc.MediaCenterScanner;
@@ -30,7 +30,7 @@ public class OtrMediaCenter
 		logger.info("Scanning for MP4");
 		File f;
 //		f = new File("/Volumes/ramdisk/dev/otr/mp4");
-		f = new File("/Volumes/Volume/MP4");
+		f = new File("/Volumes/R5-8T/iTunes");
 		MediaCenterScanner mcs = new MediaCenterScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
