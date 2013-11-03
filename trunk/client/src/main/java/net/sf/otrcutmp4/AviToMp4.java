@@ -69,9 +69,7 @@ public class AviToMp4
 		options = createOptions();
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(options , args); 
-	    
-        String configFile = line.getOptionValue("config",OtrConfig.otrConfigName);
-        
+	     
         if(line.hasOption(oHelp.getOpt())) {printHelp();}
         
         if(line.hasOption(oDebug.getOpt())) {initLogger("log4j.debug.xml");}
@@ -92,12 +90,12 @@ public class AviToMp4
         }
         logger.debug("Using Profile :"+profile);
         
+        String configFile = line.getOptionValue("config",OtrConfig.otrConfigName);
         if(line.hasOption("createConfig")){otrConfig.createDefault(configFile);}
-        
         otrConfig.readConfig(configFile);
         
         if(line.hasOption("createDirs")){otrConfig.createDirs();}
-        otrConfig.checkConfigSettings();
+        otrConfig.checkCutSettings();
          
         ViewSrcDirProcessor view = new CliSrcDirProcessorView();
         

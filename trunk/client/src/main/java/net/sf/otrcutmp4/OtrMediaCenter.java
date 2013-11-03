@@ -2,12 +2,24 @@ package net.sf.otrcutmp4;
 
 import java.io.File;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
+import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
+import net.sf.otrcutmp4.controller.hotfolder.McIncomingHotfolder;
 import net.sf.otrcutmp4.controller.processor.mc.MediaCenterScanner;
 import net.sf.otrcutmp4.controller.web.rest.OtrMediacenterRestService;
+import net.sf.otrcutmp4.util.OtrConfig;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
@@ -18,13 +30,38 @@ public class OtrMediaCenter
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrMediaCenter.class);
 	
+	public static final String exeName = "OtrCutMp4-<version>.jar";
+	
 	private Configuration config;
+	private OtrConfig otrConfig;
+	
+	private Options options;
+	private Option oHelp,oConfig;
 	
 	public OtrMediaCenter(Configuration config)
 	{
+		otrConfig = new OtrConfig();
 		this.config=config;
 	}
 	
+	public void parseArguments(String args[]) throws Exception
+	{
+		options = createOptions();
+		CommandLineParser parser = new PosixParser();
+		CommandLine line = parser.parse(options , args); 
+	     
+        if(line.hasOption(oHelp.getOpt())) {printHelp();}
+        
+        String configFile = line.getOptionValue(oConfig.getOpt(),OtrConfig.otrConfigName);
+
+        otrConfig.readConfig(configFile);
+        otrConfig.checkMcSettings();
+        
+        McIncomingHotfolder hot = new McIncomingHotfolder(otrConfig);
+		hot.addRoute();
+		hot.startHotFolder();
+	}
+
 	public void scanMediathek(String path)
 	{
 		logger.info("Scanning for MP4");
@@ -34,7 +71,7 @@ public class OtrMediaCenter
 		MediaCenterScanner mcs = new MediaCenterScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
-	
+
 	public void rest()
     {
     	ResteasyDeployment deployment = new ResteasyDeployment();
@@ -48,13 +85,42 @@ public class OtrMediaCenter
     	netty.start();
     }
 	
+	private void printHelp()
+	{
+		HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp( "java -jar "+exeName, options );
+		System.exit(0);
+	}
+	
+	@SuppressWarnings("static-access")
+	private Options createOptions()
+	{
+		oHelp = new Option("help", "Print this message" );
+		
+		oConfig  = OptionBuilder.withArgName("FILENAME")
+				  .hasArg()
+				  .withDescription( "Use configuration file FILENAME (optional, default is "+OtrConfig.otrConfigName+")")
+				  .create("config"); 
+		
+		Options options = new Options();
+		options.addOption(oHelp);
+		options.addOption(oConfig);
+		
+		return options;
+	}
 
-	public static void main(String args[]) throws OtrInternalErrorException
+	public static void main(String args[]) throws Exception
 	{		
 		Configuration config = OtrCutMp4Bootstrap.init();
-		OtrCutMp4Bootstrap.buildEmf().createEntityManager();
+//		OtrCutMp4Bootstrap.buildEmf().createEntityManager();
+		
 		OtrMediaCenter otrMc = new OtrMediaCenter(config);
-		otrMc.scanMediathek("");
-		otrMc.rest();
+		try {otrMc.parseArguments(args);}
+		catch (ParseException e) {logger.error(e.getMessage());otrMc.printHelp();}
+		catch (OtrConfigurationException e) {logger.error(e.getMessage());otrMc.printHelp();}
+		catch (UtilsProcessingException e) {e.printStackTrace();}
+		
+//		otrMc.scanMediathek("");
+//		otrMc.rest();
 	}
 }

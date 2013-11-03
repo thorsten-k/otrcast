@@ -90,12 +90,12 @@ public class TestOtrConfig extends AbstractClientTest
 	public void checkFail() throws OtrConfigurationException
 	{
 		otrConfig = new OtrConfig(new PropertiesConfiguration());
-		otrConfig.checkConfigSettings();
+		otrConfig.checkCutSettings();
 	}
 	
 	@Test
 	public void check() throws OtrConfigurationException
 	{
-		otrConfig.checkConfigSettings();
+		otrConfig.checkCutSettings();
 	}
 }

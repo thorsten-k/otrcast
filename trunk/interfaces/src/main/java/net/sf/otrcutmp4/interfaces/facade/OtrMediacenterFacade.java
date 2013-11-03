@@ -18,4 +18,8 @@ public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,SERIES 
 	SERIES fSeries(Class<SERIES> type, String name) throws UtilsNotFoundException;
 	SEASON fSeason(Class<SEASON> type, SERIES series, int nr) throws UtilsNotFoundException;
 	EPISODE fEpisode(Class<EPISODE> type, SEASON season, int nr) throws UtilsNotFoundException;
+	
+	EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<COVER> clCover, net.sf.otrcutmp4.model.xml.series.Episode episode);
+	SEASON fcSeason(Class<SEASON> clSeason, SERIES series, net.sf.otrcutmp4.model.xml.series.Season season);
+	SERIES fcSeries(Class<SERIES> clSeries, net.sf.otrcutmp4.model.xml.series.Series series);
 }

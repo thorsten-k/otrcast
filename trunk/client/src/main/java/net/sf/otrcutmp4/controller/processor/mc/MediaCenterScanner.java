@@ -40,10 +40,11 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	final static Logger logger = LoggerFactory.getLogger(MediaCenterScanner.class);
 	
 	private Mp4TagReader tagReader;
-	private UtilsFacadeBean ufb;
-	private EntityManager em;
 	
-	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> osfb;
+	private EntityManager em;
+	private UtilsFacadeBean fUtils;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> fOtrMc;
+	
 	private EjbCoverFactory<OtrCover> efCover;
 	private EjbStorageFactory<OtrStorage> efStorage;
 	
@@ -51,8 +52,8 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	{
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
-		ufb = new UtilsFacadeBean(em);
-		osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,ufb);
+		fUtils = new UtilsFacadeBean(em);
+		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,fUtils);
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
 		efStorage=EjbStorageFactory.factory(OtrStorage.class);
@@ -133,7 +134,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrMovie movie;
 		try
 		{
-			movie = ufb.fByName(OtrMovie.class, xmlMovie.getName());
+			movie = fUtils.fByName(OtrMovie.class, xmlMovie.getName());
 		}
 		catch (UtilsNotFoundException e)
 		{
@@ -169,7 +170,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrSeries series;
 		try
 		{
-			series = ufb.fByName(OtrSeries.class, xmlSeries.getName());
+			series = fUtils.fByName(OtrSeries.class, xmlSeries.getName());
 		}
 		catch (UtilsNotFoundException e)
 		{
@@ -186,7 +187,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrSeason season=null;
 		try
 		{
-			season = osfb.fSeason(OtrSeason.class, series, xml.getNr());
+			season = fOtrMc.fSeason(OtrSeason.class, series, xml.getNr());
 		}
 		catch (UtilsNotFoundException e)
 		{
@@ -205,7 +206,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrEpisode episode=null;
 		try
 		{
-			episode = osfb.fEpisode(OtrEpisode.class, season, xml.getNr());
+			episode = fOtrMc.fEpisode(OtrEpisode.class, season, xml.getNr());
 		}
 		catch (UtilsNotFoundException e)
 		{
