@@ -20,7 +20,7 @@ public class OtrConfig
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
-	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER};
+	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER,MC,IN};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
@@ -30,6 +30,8 @@ public class OtrConfig
 	
 	public static String otrConfigName = "properties.txt";
 		
+	public static final String dirMc = "dir.mc.media";
+	public static final String dirIncoming = "dir.mc.incoming";
 	public static final String dirAvi = "dir.avi";
 	public static final String dirMp4 = "dir.mp4";
 	public static final String dirTmp = "dir.tmp";
@@ -65,7 +67,7 @@ public class OtrConfig
 	private Map<Template,String> mapTemplate;
 	private Map<Cmd,String> mapCmd;
 	
-	private List<String> lDirectotries,lTools;
+	private List<String> lCutDirectotries,lMcDirectotries,lTools;
 	private Configuration config;
 	
 	public OtrConfig(){this(null);}
@@ -84,15 +86,19 @@ public class OtrConfig
 	private void initDirectoryList()
 	{
 		mapDir = new Hashtable<Dir,String>();
-		lDirectotries = new ArrayList<String>();
-		lDirectotries.add(dirAvi);mapDir.put(Dir.AVI, dirAvi);
-		lDirectotries.add(dirMp4);mapDir.put(Dir.MP4, dirMp4);
-		lDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
-		lDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
-		lDirectotries.add(dirTools);mapDir.put(Dir.TOOLS, dirTools);
-		lDirectotries.add(dirCover);mapDir.put(Dir.COVER, dirCover);
+		lCutDirectotries = new ArrayList<String>();
+		lCutDirectotries.add(dirAvi);mapDir.put(Dir.AVI, dirAvi);
+		lCutDirectotries.add(dirMp4);mapDir.put(Dir.MP4, dirMp4);
+		lCutDirectotries.add(dirTmp);mapDir.put(Dir.TMP, dirTmp);
+		lCutDirectotries.add(dirBat);mapDir.put(Dir.BAT, dirBat);
+		lCutDirectotries.add(dirTools);mapDir.put(Dir.TOOLS, dirTools);
+		lCutDirectotries.add(dirCover);mapDir.put(Dir.COVER, dirCover);
 //		lDirectotries.add(dirCutlists);
-		lDirectotries.add(dirRename);mapDir.put(Dir.RENAME, dirRename);
+		lCutDirectotries.add(dirRename);mapDir.put(Dir.RENAME, dirRename);
+		
+		lMcDirectotries = new ArrayList<String>();
+		mapDir.put(Dir.MC, dirMc);
+		lMcDirectotries.add(dirIncoming);mapDir.put(Dir.IN, dirIncoming);
 	}
 	
 	private void initToolList()
@@ -202,7 +208,7 @@ public class OtrConfig
 	
 	public void createDirs() throws OtrConfigurationException
 	{
-		for(String dirKey : lDirectotries)
+		for(String dirKey : lCutDirectotries)
 		{
 			String dirName = config.getString(dirKey);
 			if(dirName!=null){createDir(dirName);}
@@ -229,27 +235,31 @@ public class OtrConfig
 		}
 	}
 	
-	public void checkConfigSettings() throws OtrConfigurationException
+	public void checkCutSettings() throws OtrConfigurationException
 	{
-		checkDirs();
+		checkDirs(lCutDirectotries);
 		checkTools();
 		checkParameter();
 		checkTemplates();
 		checkCmds();
 	}
 	
-	public void checkEmailPwd() throws OtrConfigurationException
+	public void checkMcSettings() throws OtrConfigurationException
 	{
-		for(Credential credential : mapCredential.keySet())
+		checkDirs(lMcDirectotries);
+		
+		String key = mapDir.get(Dir.MC);
+		List<Object> list = config.getList(key);
+		for(Object o : list)
 		{
-			String value = config.getString(mapCredential.get(credential));
-			if(value==null){throw new OtrConfigurationException("Entry in properties file missing : "+mapCredential.get(credential));}
-		}
+			String dir = (String)o;
+			checkDir(key,dir);
+		}		
 	}
 	
-	private void checkDirs() throws OtrConfigurationException
+	private void checkDirs(List<String> list) throws OtrConfigurationException
 	{
-		for(String dirKey : lDirectotries)
+		for(String dirKey : list)
 		{
 			String dirName = config.getString(dirKey);
 			if(dirName!=null){checkDir(dirKey, dirName);}
@@ -268,6 +278,15 @@ public class OtrConfig
 		else if(!f.isDirectory())
 		{
 			throw new OtrConfigurationException("File already exists. But it should be a directory: "+FilenameUtils.normalize(f.getAbsolutePath()));
+		}
+	}
+	
+	public void checkEmailPwd() throws OtrConfigurationException
+	{
+		for(Credential credential : mapCredential.keySet())
+		{
+			String value = config.getString(mapCredential.get(credential));
+			if(value==null){throw new OtrConfigurationException("Entry in properties file missing : "+mapCredential.get(credential));}
 		}
 	}
 	

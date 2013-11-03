@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
+import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.interfaces.facade.OtrMediacenterFacade;
 import net.sf.otrcutmp4.interfaces.model.Cover;
 import net.sf.otrcutmp4.interfaces.model.Episode;
@@ -75,5 +76,92 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES 
 	public SERIES fSeries(Class<SERIES> type, String name) throws UtilsNotFoundException
 	{
 		return ufb.fByName(type, name);
+	}
+
+	@Override
+	public EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<COVER> clCover, net.sf.otrcutmp4.model.xml.series.Episode xmlEpisode)
+	{
+		SERIES series = fcSeries(clSeries,xmlEpisode.getSeason().getSeries());
+		SEASON season = fcSeason(clSeason, series, xmlEpisode.getSeason());
+
+		EPISODE episode=null;
+		try
+		{
+			episode = fEpisode(clEpisode, season, xmlEpisode.getNr());
+		}
+		catch (UtilsNotFoundException e)
+		{
+			try
+			{
+				episode = clEpisode.newInstance();
+				episode.setName(xmlEpisode.getName());
+				episode.setNr(xmlEpisode.getNr());
+				episode.setSeason(season);
+
+		        em.persist(episode);
+			}
+			catch (InstantiationException e1) {e1.printStackTrace();}
+			catch (IllegalAccessException e1) {e1.printStackTrace();}
+		}
+		
+		season.getEpisodes().add(episode);
+		
+		if(xmlEpisode.isSetCover() && season.getCover()==null)
+		{
+			EjbCoverFactory<COVER> efCover = EjbCoverFactory.factory(clCover);
+			COVER cover = efCover.build(xmlEpisode.getCover());
+			em.persist(cover);
+			season.setCover(cover);
+			em.merge(season);
+		}
+		
+		return episode;	
+	}
+
+	@Override
+	public SERIES fcSeries(Class<SERIES> clSeries, net.sf.otrcutmp4.model.xml.series.Series xmlSeries)
+	{
+		SERIES series = null;
+		try
+		{
+			series = ufb.fByName(clSeries, xmlSeries.getName());
+		}
+		catch (UtilsNotFoundException e)
+		{
+			try
+			{
+				series = clSeries.newInstance();
+				series.setName(xmlSeries.getName());
+		        em.persist(series);
+			}
+			catch (InstantiationException e1) {e1.printStackTrace();}
+			catch (IllegalAccessException e1) {e1.printStackTrace();}
+		}
+		return series;
+	}
+	
+	@Override
+	public SEASON fcSeason(Class<SEASON> clSeason, SERIES series, net.sf.otrcutmp4.model.xml.series.Season xmlSeason)
+	{
+		SEASON season=null;
+		try
+		{
+			season = fSeason(clSeason, series, xmlSeason.getNr());
+		}
+		catch (UtilsNotFoundException e)
+		{
+			try
+			{
+				season = clSeason.newInstance();
+				season.setName(xmlSeason.getName());
+				season.setNr(xmlSeason.getNr());
+				season.setSeries(series);
+
+		        em.persist(season);	       
+			}
+			catch (InstantiationException e1) {e1.printStackTrace();}
+			catch (IllegalAccessException e1) {e1.printStackTrace();}
+		}
+		return season;	
 	}
 }
