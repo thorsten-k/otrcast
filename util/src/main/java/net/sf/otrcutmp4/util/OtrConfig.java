@@ -341,8 +341,9 @@ public class OtrConfig
 	public File getDir(Dir dir)
 	{
 		checkPreconditions();
-		
-		return new File(config.getString(mapDir.get(dir)));
+		String key = mapDir.get(dir);
+		String fName = config.getString(key);
+		return new File(fName);
 	}
 	
 	public String getTool(Tool tool)

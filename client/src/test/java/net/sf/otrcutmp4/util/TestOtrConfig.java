@@ -24,7 +24,7 @@ public class TestOtrConfig extends AbstractClientTest
 	
 	private OtrConfig otrConfig;
 
-	private static File fRoot,fAvi,fMp4,fTmp,fBat,fTools,fCover,fRename;
+	private static File fRoot,fAvi,fMp4,fTmp,fBat,fTools,fCover,fRename,fMcIncoming,fMcMedia;
 	private static File tMp4Box,tLame,tFfmpeg,tFaac,tEac3to,tNeroAac;
 	
 	public static TestOtrConfig factory() throws IOException
@@ -46,6 +46,8 @@ public class TestOtrConfig extends AbstractClientTest
 		fTools = new File(fRoot,OtrConfig.dirTools);fTools.mkdirs();
 		fCover = new File(fRoot,OtrConfig.dirCover);fCover.mkdirs();
 		fRename = new File(fRoot,OtrConfig.dirRename);fRename.mkdirs();
+		fMcIncoming = new File(fRoot,OtrConfig.dirIncoming);fMcIncoming.mkdirs();
+		fMcMedia = new File(fRoot,OtrConfig.dirMc);fMcMedia.mkdirs();
 		
 		tMp4Box = new File(fTools,OtrConfig.toolMp4Box);tMp4Box.createNewFile();
 		tLame = new File(fTools,OtrConfig.toolLame);tLame.createNewFile();
@@ -53,7 +55,6 @@ public class TestOtrConfig extends AbstractClientTest
 		tFaac = new File(fTools,OtrConfig.toolFaac);tFaac.createNewFile();
 		tEac3to = new File(fTools,OtrConfig.toolEac3to);tEac3to.createNewFile();
 		tNeroAac = new File(fTools,OtrConfig.toolNeroAac);tNeroAac.createNewFile();
-		
 	}
 	
 	@Before
@@ -68,6 +69,8 @@ public class TestOtrConfig extends AbstractClientTest
 		config.addProperty(OtrConfig.dirTools, fTools.getAbsolutePath());
 		config.addProperty(OtrConfig.dirCover, fCover.getAbsolutePath());
 		config.addProperty(OtrConfig.dirRename, fRename.getAbsolutePath());
+		config.addProperty(OtrConfig.dirIncoming, fMcIncoming.getAbsolutePath());
+		config.addProperty(OtrConfig.dirMc, fMcMedia.getAbsolutePath());
 		
 		config.addProperty(OtrConfig.toolMp4Box, tMp4Box.getName());
 		config.addProperty(OtrConfig.toolLame, tLame.getName());
