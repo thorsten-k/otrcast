@@ -4,7 +4,7 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.Linklist;
-import net.sf.otrcutmp4.model.xml.xpath.OtrXpath;
+import net.sf.otrcutmp4.xml.xpath.OtrXpath;
 import net.sf.otrcutmp4.test.AbstractOtrXmlTest;
 
 import org.junit.Assert;

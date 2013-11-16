@@ -10,14 +10,10 @@ public class XmlEnclosureFactory
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlEnclosureFactory.class);
 	
-	public static String baseUrl = "http://localhost";
-	
 	public static Enclosure build(Storage storage)
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append(baseUrl);
-		sb.append("/").append(storage.getHash());
-		sb.append(".mp4");
+		sb.append(storage.getId()).append(".mp4");
 		
 		return build(sb.toString(),storage.getSize(),"video/mp4");
 	}

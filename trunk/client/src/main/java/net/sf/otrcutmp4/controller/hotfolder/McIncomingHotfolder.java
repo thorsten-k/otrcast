@@ -1,10 +1,9 @@
 package net.sf.otrcutmp4.controller.hotfolder;
 
-import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
+import net.sf.otrcutmp4.controller.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.processor.mc.McImportProcessor;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
@@ -35,7 +34,7 @@ public class McIncomingHotfolder
 		context.addRoutes(new RouteBuilder()
 		{
 		    public void configure() {
-		        from(sb.toString()).process(new McImportProcessor(config,OtrCutMp4Bootstrap.buildEmf().createEntityManager()));
+		        from(sb.toString()).process(new McImportProcessor(config,OtrCutMp4Bootstrap.buildEmf(config).createEntityManager()));
 		    }
 		});
 	}

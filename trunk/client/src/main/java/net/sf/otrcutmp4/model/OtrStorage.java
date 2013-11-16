@@ -1,15 +1,14 @@
 package net.sf.otrcutmp4.model;
 
-import java.io.Serializable;
-import java.util.Date;
+import net.sf.otrcutmp4.interfaces.model.Storage;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-
-import net.sf.otrcutmp4.interfaces.model.Storage;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class OtrStorage implements Serializable,Storage
@@ -54,7 +53,6 @@ public class OtrStorage implements Serializable,Storage
 		StringBuffer sb = new StringBuffer();
 			sb.append("[").append(id).append("]");
 			sb.append(" ").append(size);
-			sb.append(" ").append(hash);
 			sb.append(" ").append(record);
 		return sb.toString();
 	}

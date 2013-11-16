@@ -1,13 +1,6 @@
 package net.sf.otrcutmp4.util;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
-
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -16,11 +9,17 @@ import org.apache.commons.lang.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
 public class OtrConfig
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
-	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER,MC,IN};
+	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER,MC,IN,DB};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
@@ -40,6 +39,7 @@ public class OtrConfig
 	public static final String dirCutlists = "dir.cutlists";
 	public static final String dirRename = "dir.rename";
 	public static final String dirCover = "dir.cover";
+    public static final String dirDb = "dir.db";
 	
 	public static final String toolMp4Box = "tool.mp4box";
 	public static final String toolLame = "tool.lame";
@@ -99,6 +99,7 @@ public class OtrConfig
 		lMcDirectotries = new ArrayList<String>();
 		mapDir.put(Dir.MC, dirMc);
 		lMcDirectotries.add(dirIncoming);mapDir.put(Dir.IN, dirIncoming);
+        lMcDirectotries.add(dirDb);mapDir.put(Dir.DB, dirDb);
 	}
 	
 	private void initToolList()
@@ -171,6 +172,7 @@ public class OtrConfig
 				config.setProperty(dirTools, "OtrCutMp4.Tools");
 //				config.setProperty(dirCutlists, "Cutlists");
 				config.setProperty(dirRename, "Mp4.Rename");
+                config.setProperty(dirDb, "DB");
 				
 				config.setProperty(toolMp4Box, "MP4Box.exe");
 				config.setProperty(toolLame, "lame.exe");

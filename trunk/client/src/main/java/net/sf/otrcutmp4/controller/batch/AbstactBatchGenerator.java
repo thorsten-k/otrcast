@@ -1,15 +1,14 @@
 package net.sf.otrcutmp4.controller.batch;
 
-import java.io.File;
-
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Tool;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
 
 public class AbstactBatchGenerator
 {
@@ -26,12 +25,7 @@ public class AbstactBatchGenerator
 	{
 		this.cfg=cfg;
 		this.profile=profile;
-		
-		for(Dir dir : Dir.values())
-		{
-			logger.trace(dir+" "+cfg.getDir(dir));
-		}
-		
+
 		rpf = new RelativePathFactory(cfg.getDir(Dir.BAT),RelativePathFactory.PathSeparator.CURRENT,true);
 		
 		cmdLame = rpf.relativate(new File(cfg.getDir(Dir.TOOLS),cfg.getTool(Tool.LAME)));
