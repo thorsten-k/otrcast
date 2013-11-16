@@ -12,8 +12,7 @@ public class XmlGuidFactory
 	
 	public static Guid build(Storage storage)
 	{
-//		return build(false,storage.getHash());
-		return build(false,"Movie-"+storage.getId());
+		return build(false,""+storage.getId());
 	}
 	
 	public static Guid build(boolean isPermaLink, String url)

@@ -1,29 +1,21 @@
 package net.sf.otrcutmp4;
 
-import java.io.File;
-
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
+import net.sf.otrcutmp4.controller.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.hotfolder.McIncomingHotfolder;
 import net.sf.otrcutmp4.controller.processor.mc.MediaCenterScanner;
 import net.sf.otrcutmp4.controller.web.rest.OtrMediacenterRestService;
 import net.sf.otrcutmp4.util.OtrConfig;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
+import org.apache.commons.cli.*;
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
 
 public class OtrMediaCenter
 {
@@ -56,8 +48,6 @@ public class OtrMediaCenter
         otrConfig.readConfig(configFile);
         otrConfig.checkMcSettings();
         
-        rest();
-        
         McIncomingHotfolder hot = new McIncomingHotfolder(otrConfig);
 		hot.addRoute();
 		hot.startHotFolder();
@@ -75,8 +65,6 @@ public class OtrMediaCenter
 
 	public void rest()
     {
-		logger.info("Starting REST service on port "+config.getInt(ConfigKey.netRestPort));
-		
     	ResteasyDeployment deployment = new ResteasyDeployment();
     	deployment.getActualResourceClasses().add(OtrMediacenterRestService.class);
     	
@@ -122,7 +110,6 @@ public class OtrMediaCenter
 		catch (ParseException e) {logger.error(e.getMessage());otrMc.printHelp();}
 		catch (OtrConfigurationException e) {logger.error(e.getMessage());otrMc.printHelp();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
-		
 		
 //		otrMc.scanMediathek("");
 //		otrMc.rest();
