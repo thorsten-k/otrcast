@@ -29,13 +29,17 @@ public class CliMediaCenterRest
 	
 	public CliMediaCenterRest(Configuration config)
 	{		
+		String restUrl = config.getString(ConfigKey.netRestUrl);
+		logger.info("Connection to "+restUrl);
+		
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget target = client.target(config.getString(ConfigKey.netRestUrl));
+		ResteasyWebTarget target = client.target(restUrl);
 
 		rest = target.proxy(OtrMediacenterRest.class);
 		fMcExport = new File(config.getString("test.mediacenter.export"));
 		fMcSeries = new File(fMcExport,"series");fMcSeries.mkdir();
 		fMcMovies = new File(fMcExport,"movies");fMcMovies.mkdir();
+		logger.info("Export Directory: "+fMcExport.getAbsolutePath());
 	}
 	
 	public void export()
@@ -71,6 +75,7 @@ public class CliMediaCenterRest
 			try
 			{
 				series = rest.seriesAll(series.getId());
+				logger.info("Series "+series.getName());
 				File f = new File(fMcSeries,series.getId()+".xml");
 				JaxbUtil.save(f, series, true);
 			}

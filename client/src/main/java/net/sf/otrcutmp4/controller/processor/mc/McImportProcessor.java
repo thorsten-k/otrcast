@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
+import net.sf.otrcutmp4.controller.hotfolder.McTargetFactory;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.model.OtrCover;
 import net.sf.otrcutmp4.model.OtrEpisode;
@@ -16,6 +17,7 @@ import net.sf.otrcutmp4.model.OtrSeries;
 import net.sf.otrcutmp4.model.OtrStorage;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Video;
+import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -29,14 +31,16 @@ public class McImportProcessor implements Processor
 
 	private EntityManager em;
 	private Mp4TagReader tagReader;
+	private McTargetFactory mcTarget;
 	
 	private UtilsFacadeBean fUtils;
 	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> fOtrMc;
 	
-	public McImportProcessor(EntityManager em)
+	public McImportProcessor(OtrConfig config,EntityManager em)
 	{
 		this.em=em;
 		tagReader = new Mp4TagReader(false);
+		mcTarget = new McTargetFactory(config);
 		fUtils = new UtilsFacadeBean(em);
 		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,fUtils);
 	}
@@ -72,5 +76,7 @@ public class McImportProcessor implements Processor
 	{
 		OtrEpisode episode = fOtrMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrCover.class, xmlEpisode);
 		logger.info("Persisted Episode "+episode.getId());
+		mcTarget.getTarget();
+		
 	}
 }
