@@ -35,7 +35,7 @@ public class McIncomingHotfolder
 		context.addRoutes(new RouteBuilder()
 		{
 		    public void configure() {
-		        from(sb.toString()).process(new McImportProcessor(OtrCutMp4Bootstrap.buildEmf().createEntityManager()));
+		        from(sb.toString()).process(new McImportProcessor(config,OtrCutMp4Bootstrap.buildEmf().createEntityManager()));
 		    }
 		});
 	}

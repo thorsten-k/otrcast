@@ -6,7 +6,6 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.otrcutmp4.bootstrap.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.hotfolder.McIncomingHotfolder;
 import net.sf.otrcutmp4.controller.processor.mc.MediaCenterScanner;
 import net.sf.otrcutmp4.controller.web.rest.OtrMediacenterRestService;
@@ -57,6 +56,8 @@ public class OtrMediaCenter
         otrConfig.readConfig(configFile);
         otrConfig.checkMcSettings();
         
+        rest();
+        
         McIncomingHotfolder hot = new McIncomingHotfolder(otrConfig);
 		hot.addRoute();
 		hot.startHotFolder();
@@ -74,6 +75,8 @@ public class OtrMediaCenter
 
 	public void rest()
     {
+		logger.info("Starting REST service on port "+config.getInt(ConfigKey.netRestPort));
+		
     	ResteasyDeployment deployment = new ResteasyDeployment();
     	deployment.getActualResourceClasses().add(OtrMediacenterRestService.class);
     	
@@ -119,6 +122,7 @@ public class OtrMediaCenter
 		catch (ParseException e) {logger.error(e.getMessage());otrMc.printHelp();}
 		catch (OtrConfigurationException e) {logger.error(e.getMessage());otrMc.printHelp();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
+		
 		
 //		otrMc.scanMediathek("");
 //		otrMc.rest();
