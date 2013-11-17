@@ -4,7 +4,6 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.otrcutmp4.controller.OtrCutMp4Bootstrap;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.controller.hotfolder.McIncomingHotfolder;
 import net.sf.otrcutmp4.controller.processor.mc.MediaCenterScanner;
 import net.sf.otrcutmp4.controller.web.rest.OtrMediacenterRestService;
 import net.sf.otrcutmp4.util.OtrConfig;
@@ -47,18 +46,18 @@ public class OtrMediaCenter
 
         otrConfig.readConfig(configFile);
         otrConfig.checkMcSettings();
-        
-        McIncomingHotfolder hot = new McIncomingHotfolder(otrConfig);
-		hot.addRoute();
-		hot.startHotFolder();
+
+        scanMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
+
+//        McIncomingHotfolder hot = new McIncomingHotfolder(otrConfig);
+//		hot.addRoute();
+//		hot.startHotFolder();
+        Thread.sleep(1000);
 	}
 
-	public void scanMediathek(String path)
+	public void scanMediathek(File f)
 	{
 		logger.info("Scanning for MP4");
-		File f;
-//		f = new File("/Volumes/ramdisk/dev/otr/mp4");
-		f = new File("/Volumes/R5-8T/iTunes");
 		MediaCenterScanner mcs = new MediaCenterScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
@@ -103,15 +102,12 @@ public class OtrMediaCenter
 	public static void main(String args[]) throws Exception
 	{		
 		Configuration config = OtrCutMp4Bootstrap.init();
-//		OtrCutMp4Bootstrap.buildEmf().createEntityManager();
+		OtrCutMp4Bootstrap.buildEmf(config).createEntityManager();
 		
 		OtrMediaCenter otrMc = new OtrMediaCenter(config);
 		try {otrMc.parseArguments(args);}
 		catch (ParseException e) {logger.error(e.getMessage());otrMc.printHelp();}
 		catch (OtrConfigurationException e) {logger.error(e.getMessage());otrMc.printHelp();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
-		
-//		otrMc.scanMediathek("");
-//		otrMc.rest();
 	}
 }
