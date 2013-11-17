@@ -31,7 +31,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private Mp4TagReader tagReader;
 	
 	private EntityManager em;
-	private UtilsFacadeBean fUtils;
+	private UtilsFacadeBean ufb;
 	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> fOtrMc;
 	
 	private EjbCoverFactory<OtrCover> efCover;
@@ -41,8 +41,8 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	{
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
-		fUtils = new UtilsFacadeBean(em);
-		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,fUtils);
+		ufb = new UtilsFacadeBean(em);
+		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em, ufb);
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
 		efStorage=EjbStorageFactory.factory(OtrStorage.class);
@@ -52,7 +52,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 
     public void debugStats()
     {
-        logger.debug(Series.class.getSimpleName()+": "+fUtils.all(OtrSeries.class).size());
+        logger.debug(Series.class.getSimpleName() + ": " + ufb.all(OtrSeries.class).size());
     }
 	
 	private static IOFileFilter filter()
@@ -83,31 +83,44 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	{
 		if(file.getAbsolutePath().endsWith(".mp4"))
 		{
-			logger.info("File: "+file.getAbsolutePath());
-			try
-			{
-				em.getTransaction().begin();
-				
-				OtrStorage storage = efStorage.build(file);
-				logger.trace("Storage: "+storage);
-				em.persist(storage);
-				
-				Video video = tagReader.read(file);
-				
-				if(video.isSetEpisode()){handleEpisode(video.getEpisode(),storage);}
-				else if(video.isSetMovie()){handleMovie(video.getMovie(),storage);}
-				em.getTransaction().commit();
-			}
-			catch (IOException e) {e.printStackTrace();}
+            boolean inspectFile = false;
+            try
+            {
+                OtrStorage storage = ufb.fByName(OtrStorage.class,file.getAbsolutePath());
+                //TODO Last Modified
+            }
+            catch (UtilsNotFoundException e1){inspectFile=true;}
+            if(inspectFile)
+            {
+                logger.info("File: "+file.getAbsolutePath());
+                try
+                {
+
+                    em.getTransaction().begin();
+
+                    Video video = tagReader.read(file);
+
+                    if(video.isSetEpisode()){handleEpisode(video.getEpisode(),file);}
+                    else if(video.isSetMovie()){handleMovie(video.getMovie(),file);}
+                    em.getTransaction().commit();
+                }
+                catch (IOException e2) {e2.printStackTrace();}
+            }
+
 		    results.add(file);
 		}
 	}
 	
-	private void handleMovie(Movie xmlMovie,OtrStorage storage)
+	private void handleMovie(Movie xmlMovie,File file)
 	{
 		OtrMovie movie = getMovie(xmlMovie);
-		movie.setStorage(storage);
-		em.merge(movie);
+
+        if(movie.getStorage()==null)
+        {
+            OtrStorage storage = efStorage.build(file);
+            movie.setStorage(storage);
+            em.merge(movie);
+        }
 		
 		if(xmlMovie.isSetCover() && movie.getCover()==null)
 		{
@@ -123,7 +136,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrMovie movie;
 		try
 		{
-			movie = fUtils.fByName(OtrMovie.class, xmlMovie.getName());
+			movie = ufb.fByName(OtrMovie.class, xmlMovie.getName());
 		}
 		catch (UtilsNotFoundException e)
 		{
@@ -136,14 +149,22 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		return movie;
 	}
 	
-	private void handleEpisode(Episode xmlEpisode,OtrStorage storage)
+	private void handleEpisode(Episode xmlEpisode,File file)
 	{
 		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
 		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
 		OtrEpisode episode = getEpisode(season,xmlEpisode);
-        episode.setStorage(storage);
+
 		season.getEpisodes().add(episode);
-		
+
+        if(episode.getStorage()==null)
+        {
+            OtrStorage storage = efStorage.build(file);
+            em.persist(storage);
+            episode.setStorage(storage);
+            em.merge(episode);
+        }
+
 		if(xmlEpisode.isSetCover() && season.getCover()==null)
 		{
 			OtrCover cover = efCover.build(xmlEpisode.getCover());
@@ -158,7 +179,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrSeries series;
 		try
 		{
-			series = fUtils.fByName(OtrSeries.class, xmlSeries.getName());
+			series = ufb.fByName(OtrSeries.class, xmlSeries.getName());
 		}
 		catch (UtilsNotFoundException e)
 		{

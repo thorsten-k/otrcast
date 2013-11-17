@@ -1,19 +1,21 @@
 package net.sf.otrcutmp4.controller.tag;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class Mp4BoxManager
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4BoxManager.class);
+
+    public static enum Type {UNKNOWN,MOVIE,SERIES}
+    public static final String typeSeries = "10";
 
 	public static MovieBox movieBox(IsoFile isoFile)
 	{
