@@ -85,12 +85,11 @@ public class Mp4TagReader
 
         return type;
     }
-	
 	public Mp4BoxManager.Type getMediaType(AppleItemListBox apple) throws UtilsNotFoundException
     {
 		if (apple.getBoxes(AppleMediaTypeBox.class).isEmpty())
 		{
-            logger.warn(AppleMediaTypeBox.class.getSimpleName()+" not set");
+            logger.trace(AppleMediaTypeBox.class.getSimpleName()+" not set");
             throw new UtilsNotFoundException(AppleMediaTypeBox.class.getSimpleName()+" not set");
 		}
 		else
@@ -106,7 +105,27 @@ public class Mp4TagReader
 			}		
 		}
 	}
-	
+
+    public Mp4BoxManager.Type guessType(File file) throws IOException
+    {
+        RandomAccessFile rafR = new RandomAccessFile(file, "r");
+        FileChannel fcr = rafR.getChannel();
+        IsoFile isoFile = new IsoFile(fcr);
+
+        MovieBox moov = Mp4BoxManager.movieBox(isoFile);
+        UserDataBox udta = Mp4BoxManager.userDataBox(moov);
+        MetaBox meta = Mp4BoxManager.metaBox(udta);
+        AppleItemListBox apple = Mp4BoxManager.appleItemListBox(meta);
+
+        Mp4BoxManager.Type type;
+        type = guessType(apple);
+
+        isoFile.close();
+        fcr.close();
+        rafR.close();
+
+        return type;
+    }
 	public Mp4BoxManager.Type guessType(AppleItemListBox apple)
 	{
 		if (!apple.getBoxes(AppleShowBox.class).isEmpty())

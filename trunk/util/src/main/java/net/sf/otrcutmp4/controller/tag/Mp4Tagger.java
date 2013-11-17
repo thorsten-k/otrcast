@@ -47,6 +47,8 @@ public class Mp4Tagger
 	public void tagEpisode(File srcFile, Episode episode, File dstFile) throws IOException
 	{
 //		JaxbUtil.info(episode);
+        Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
+
 		RandomAccessFile rafR = new RandomAccessFile(srcFile, "r");
 		RandomAccessFile rafW = new RandomAccessFile(dstFile, "rw");
 		
@@ -56,14 +58,12 @@ public class Mp4Tagger
 		IsoFile isoFile = new IsoFile(fcr);
 		
 		MovieBox moov = Mp4BoxManager.movieBox(isoFile);
-		long sizeBefore = moov.getSize();
-		
 		UserDataBox udta = Mp4BoxManager.userDataBox(moov);
 		MetaBox meta = Mp4BoxManager.metaBox(udta);
 		AppleItemListBox apple = Mp4BoxManager.appleItemListBox(meta);
-		
-		//TODO Write a method to make this code DRY-compatible!
-		
+
+        mdb.saveInitialState(moov);
+
 		writeEpisodeName(apple, episode);
 		writeEpisodeNr(apple, episode);
 		writeSeason(apple, episode.getSeason());
@@ -73,17 +73,9 @@ public class Mp4Tagger
         Mp4MediaTypeWriter mtw = new Mp4MediaTypeWriter();
         mtw.writeMediaType(apple,Mp4BoxManager.Type.SERIES);
 					
-		Mp4MetadataBalancer mdb = new Mp4MetadataBalancer();
-		boolean needsCorrection = mdb.needsOffsetCorrection(isoFile);
-		
-		long sizeAfter = moov.getSize();
-		logger.debug(UserDataBox.class.getSimpleName()+" "+sizeBefore);
-		logger.debug(UserDataBox.class.getSimpleName()+" "+sizeAfter);
-		logger.debug(UserDataBox.class.getSimpleName()+" needs corrction:"+needsCorrection);
-		if (needsCorrection)
-        {
-            mdb.correctChunkOffsets(isoFile, sizeAfter - sizeBefore);
-        }
+        mdb.saveFinalState(moov);
+
+        mdb.correctChunkOffsets(isoFile);
 		
 		isoFile.getBox(fcw);
 		fcw.force(true);fcw.close();rafW.close();
@@ -138,17 +130,17 @@ public class Mp4Tagger
 	
 	private void writeSeries(AppleItemListBox apple, Series series)
 	{
-		logger.debug("Writing Series");
+		logger.trace("Writing Series");
 		AppleShowBox box = null;
 		if(apple.getBoxes(AppleShowBox.class).isEmpty())
 		{
-			logger.debug(AppleShowBox.class.getSimpleName()+" is empty");
+			logger.trace(AppleShowBox.class.getSimpleName()+" is empty");
 			box = new AppleShowBox();
 		}
 		else
 		{
 			box = apple.getBoxes(AppleShowBox.class).get(0);
-			logger.debug(AppleShowBox.class.getSimpleName()+" exists: "+box.getValue());
+			logger.trace(AppleShowBox.class.getSimpleName()+" exists: "+box.getValue());
 		}
 		box.setValue(series.getName());
 		apple.addBox(box);
@@ -157,15 +149,15 @@ public class Mp4Tagger
 	private void writeCover(AppleItemListBox apple, Season season) throws IOException
 	{
 		boolean abortNoCoverManager = (coverManager==null);
-		boolean aboirtNoSeriesKey = !season.getSeries().isSetKey();
+		boolean abortNoSeriesKey = !season.getSeries().isSetKey();
 		
-		logger.trace("Aboirt because no coverManager?"+abortNoCoverManager);
-		logger.trace("Aboirt because no series@key?"+aboirtNoSeriesKey);
+		logger.trace("Abort because no coverManager?"+abortNoCoverManager);
+		logger.trace("Abort because no series@key?"+abortNoSeriesKey);
 		
-		if(abortNoCoverManager || aboirtNoSeriesKey){return;}
+		if(abortNoCoverManager || abortNoSeriesKey){return;}
 		
 		boolean coverAvailable = coverManager.isAvailable(season);
-		logger.info("Available: "+coverAvailable);
+		logger.info("Cover available: "+coverAvailable);
 		if(coverAvailable)
 		{
 			logger.debug("Writing Cover "+season.getSeries().getKey());
