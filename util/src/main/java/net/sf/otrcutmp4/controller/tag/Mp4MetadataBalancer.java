@@ -1,5 +1,13 @@
 package net.sf.otrcutmp4.controller.tag;
 
+import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.*;
+import com.googlecode.mp4parser.util.Path;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,31 +15,28 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.coremedia.iso.IsoFile;
-import com.coremedia.iso.boxes.Box;
-import com.coremedia.iso.boxes.ChunkOffsetBox;
-import com.coremedia.iso.boxes.MetaBox;
-import com.coremedia.iso.boxes.StaticChunkOffsetBox;
-import com.coremedia.iso.boxes.UserDataBox;
-import com.coremedia.iso.boxes.XmlBox;
-import com.googlecode.mp4parser.util.Path;
-
 /**
  * taken from https://mp4parser.googlecode.com/svn/trunk/examples/src/main/java/com/googlecode/mp4parser/stuff/ChangeMetaData.java
  */
 public class Mp4MetadataBalancer
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4MetadataBalancer.class);
-		
+
+    private long sizeBefore,sizeAfter;
+
 	public Mp4MetadataBalancer()
 	{
 		
 	}
+
+    public void saveInitialState(MovieBox moov)
+    {
+        sizeBefore = moov.getSize();
+    }
+    public void saveFinalState(MovieBox moov)
+    {
+        sizeAfter = moov.getSize();
+    }
 	
     public boolean needsOffsetCorrection(IsoFile isoFile)
     {
@@ -63,9 +68,19 @@ public class Mp4MetadataBalancer
         throw new RuntimeException("Hmmm - shouldn't happen");
     }
 
+    public void correctChunkOffsets(IsoFile isoFile)
+    {
+        if(needsOffsetCorrection(isoFile))
+        {
+            long correction = sizeAfter - sizeBefore;
+            correctChunkOffsets(isoFile, correction);
+        }
+    }
+
     public void correctChunkOffsets(IsoFile tempIsoFile, long correction)
     {
-    	logger.debug("Correcting ChunkOffset: "+correction);
+        long correctionInternal = sizeAfter - sizeBefore;
+    	logger.debug("Correcting ChunkOffset: "+correction+" (internal computation ="+correctionInternal+")");
         List<Box> chunkOffsetBoxes = Path.getPaths(tempIsoFile, "/moov[0]/trak/mdia[0]/minf[0]/stbl[0]/stco[0]");
         for (Box chunkOffsetBox : chunkOffsetBoxes)
         {

@@ -27,8 +27,7 @@ public class TestMp4TagWriter extends AbstractUtilTest
 	public void init(File dirCovers)
 	{
 		CoverManager coverManager = new FileSystemCoverManager(dirCovers);
-		
-		
+
 		episode = XmlEpisodeFactory.build("mySeries", 11, 22, "myEpisode");
 		episode.getSeason().getSeries().setKey("TEST");
 		tagger = new Mp4Tagger(coverManager);
@@ -45,18 +44,24 @@ public class TestMp4TagWriter extends AbstractUtilTest
 	public static void main(String args[]) throws Exception
 	{
 		Configuration config = OtrUtilTestBootstrap.init();
-		
+
+        String src = config.getString("test.mp4Tagger.src");
+        String dst = config.getString("test.mp4Tagger.dst");
 		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
-		TestMp4TagWriter test = new TestMp4TagWriter();
+
+        logger.info("SRC DIR: "+src);
+        logger.info("DST DIR: "+dst);
+        logger.info("Covers: "+dirCovers.getAbsolutePath());
+
+        TestMp4TagWriter test = new TestMp4TagWriter();
 		test.init(dirCovers);
 		
-		String src = config.getString("test.mp4Tagger.src");
-		String dst = config.getString("test.mp4Tagger.dst");
+
 		String fs = SystemUtils.FILE_SEPARATOR;
 		
 		List<String> files = new ArrayList<String>();
-		files.add("AviCutMp4.mp4"); //... Transcoded AVI to MP4 by AviCutMp4
-		files.add("OtrCutMp4.mp4"); //... Transcoded by onlinetvrecorder.com
+		files.add("AviCutMp4.mp4");                         //... Transcoded AVI to MP4 by AviCutMp4
+		files.add("Serientitel-S01-E01-Episodenname.mp4");  //... Transcoded by onlinetvrecorder.com
 		
 		for(String file : files)
 		{

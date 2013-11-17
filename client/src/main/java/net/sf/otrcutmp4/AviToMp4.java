@@ -28,19 +28,11 @@ import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
+import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AviToMp4
+public class AviToMp4 extends AbstractCommandLine
 {
 	final static Logger logger = LoggerFactory.getLogger(AviToMp4.class);
 	
@@ -48,13 +40,13 @@ public class AviToMp4
 	
 	public static final String exeName = "OtrCutMp4-<version>.jar";
 	
-	private Option oHelp,oDebug,oProfile,oWeb;
+	private Option oProfile,oWeb;
 	private Option oAc3,oRename,oMp4;
 	private Option oCover;
 	private Option oTagMp4,oTag;
 	private Option oScan;
 	private Option oHotfolder;
-	private Options options;
+
 	private OtrConfig otrConfig;
 	
 	private Profile profile;
@@ -70,10 +62,7 @@ public class AviToMp4
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(options , args); 
 	     
-        if(line.hasOption(oHelp.getOpt())) {printHelp();}
-        
-        if(line.hasOption(oDebug.getOpt())) {initLogger("log4j.debug.xml");}
-        else{initLogger("log4j.xml");}
+        super.parseArguments(line);
         
         if(line.hasOption(oProfile.getOpt()))
         {
@@ -185,12 +174,10 @@ public class AviToMp4
         
         logger.info("... finished.");
 	}
-	
-	@SuppressWarnings("static-access")
+
 	private Options createOptions()
 	{
-		oHelp = new Option("help", "Print this message" );
-		oDebug = new Option("debug", "Debug output");
+        super.buildOptions();
 		oRename = new Option("rename", "Rename downloaded HQ.MP4.cut");
 		oMp4 = new Option("mp4", "Converts AVI to MP4"); 
 		oWeb = new Option("web", "Web GUI Interface");
@@ -200,12 +187,7 @@ public class AviToMp4
 		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
-		
-		Option oConfig  = OptionBuilder.withArgName("FILENAME")
-						  .hasArg()
-						  .withDescription( "Use configuration file FILENAME (optional, default is "+OtrConfig.otrConfigName+")")
-						  .create("config");
-		
+
 		oTagMp4  = OptionBuilder.withArgName("TOKEN")
 				  .hasArg()
 				  .withDescription("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
@@ -232,14 +214,12 @@ public class AviToMp4
 				  .hasArg()
 				  .withDescription("Use (optional) experimental PROFILE: "+sb.toString())
 				  .create("profile"); 
-		
-		Options options = new Options();
+
 		options.addOption(oHelp);
 		options.addOption(oDebug);
 		options.addOption(oWeb);
 		options.addOption(oAc3);
 		options.addOption(oMp4);
-		options.addOption(oRename);
 		options.addOption(oScan);
 		options.addOption(oCreate);
 		options.addOption(oDir);
@@ -253,14 +233,7 @@ public class AviToMp4
 		return options;
 	}
 	
-	private void printHelp()
-	{
-		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp( "java -jar "+exeName, options );
-		System.exit(0);
-	}
-	
-	public static void initLogger(String logConfig)
+	public void initLogger(String logConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(logConfig);	
 		loggerInit.addAltPath("src/main/resources/config.otrcutmp4-client");

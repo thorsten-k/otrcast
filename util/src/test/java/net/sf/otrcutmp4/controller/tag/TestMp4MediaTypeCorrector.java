@@ -1,7 +1,5 @@
 package net.sf.otrcutmp4.controller.tag;
 
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
-import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import org.apache.commons.configuration.Configuration;
@@ -25,22 +23,15 @@ public class TestMp4MediaTypeCorrector extends AbstractUtilTest
 	@Before
 	public void init()
 	{
-		tagReader = new Mp4TagReader(false);
+        mtc = new Mp4MediaTypeCorrector();
 	}
 	
-	private Mp4TagReader tagReader;
+	private Mp4MediaTypeCorrector mtc;
 		
 	public void read(String src) throws IOException
     {
-        try
-        {
-            File f = new File(src);
-            Mp4BoxManager.Type type = tagReader.readMediaType(f);
-        }
-        catch (UtilsNotFoundException e)
-        {
-            logger.info("MediaType not set");
-        }
+        File f = new File(src);
+        mtc.correct(f);
     }
 	
 	public static void main(String args[]) throws Exception

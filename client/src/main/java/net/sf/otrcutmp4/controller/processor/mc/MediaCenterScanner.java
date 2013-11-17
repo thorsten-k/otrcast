@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.controller.processor.mc;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
+import net.sf.otrcutmp4.controller.tag.Mp4MediaTypeCorrector;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbStorageFactory;
@@ -36,6 +37,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private EjbCoverFactory<OtrCover> efCover;
 	private EjbStorageFactory<OtrStorage> efStorage;
+    private Mp4MediaTypeCorrector mtc;
 	
 	public MediaCenterScanner(EntityManager em)
 	{
@@ -46,6 +48,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		
 		efCover=EjbCoverFactory.factory(OtrCover.class);
 		efStorage=EjbStorageFactory.factory(OtrStorage.class);
+        mtc = new Mp4MediaTypeCorrector();
 
         if(logger.isDebugEnabled()){debugStats();}
 	}
@@ -90,12 +93,20 @@ public class MediaCenterScanner extends DirectoryWalker<File>
                 //TODO Last Modified
             }
             catch (UtilsNotFoundException e1){inspectFile=true;}
+
+            logger.info("File (inspect="+inspectFile+"): "+file.getAbsolutePath());
             if(inspectFile)
             {
-                logger.info("File: "+file.getAbsolutePath());
                 try
                 {
+                    mtc.correct(file);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
 
+/*                try
+                {
                     em.getTransaction().begin();
 
                     Video video = tagReader.read(file);
@@ -105,7 +116,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
                     em.getTransaction().commit();
                 }
                 catch (IOException e2) {e2.printStackTrace();}
-            }
+*/            }
 
 		    results.add(file);
 		}

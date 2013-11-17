@@ -26,7 +26,7 @@ public class OtrCutMp4Bootstrap
 	public static String configXml = "config.otrcutmp4-client/otr.xml";
 	
 	public static Configuration init()
-	{;
+	{
 		return init(configXml);
 	}
 	
@@ -37,15 +37,14 @@ public class OtrCutMp4Bootstrap
 		{
 			String cfn = ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath();
 			ConfigLoader.add(cfn);
-			logger.info("Using additional config in: "+cfn );
+			logger.info("Using additional config in: "+cfn);
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		ConfigLoader.add(configFile);
 		
 		Configuration config = ConfigLoader.init();			
-						
-		
-		logger.debug("Config and Logger initialized");
+
+		logger.debug("Config and Logger initialized with "+configFile);
 		return config;
 	}
 	
