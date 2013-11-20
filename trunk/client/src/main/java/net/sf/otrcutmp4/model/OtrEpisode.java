@@ -13,12 +13,10 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
-import net.sf.ahtutils.model.interfaces.with.EjbWithId;
-import net.sf.ahtutils.model.interfaces.with.EjbWithNr;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 
 @Entity
-public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWithNr,
+public class OtrEpisode implements Serializable,EjbPersistable,
 									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>
 {
 	public static final long serialVersionUID=1;
@@ -36,6 +34,8 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	private String name;
 	
 	private int nr;
+	@Override public int getNr() {return nr;}
+	@Override public void setNr(int nr) {this.nr = nr;}
 				
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private OtrStorage storage;
@@ -51,8 +51,7 @@ public class OtrEpisode implements Serializable,EjbWithId,EjbPersistable,EjbWith
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
 	
-	@Override public int getNr() {return nr;}
-	@Override public void setNr(int nr) {this.nr = nr;}
+
 	
 	@Override public OtrStorage getStorage() {return storage;}
 	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}

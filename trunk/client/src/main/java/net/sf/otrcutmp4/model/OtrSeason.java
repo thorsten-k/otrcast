@@ -17,12 +17,10 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
 import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
-import net.sf.ahtutils.model.interfaces.with.EjbWithId;
-import net.sf.ahtutils.model.interfaces.with.EjbWithNr;
 import net.sf.otrcutmp4.interfaces.model.Season;
 
 @Entity
-public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithNr,
+public class OtrSeason implements Serializable,EjbPersistable,
 									Season<OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>
 {
 	public static final long serialVersionUID=1;
@@ -37,6 +35,8 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	private OtrSeries series;
 	
 	private int nr;
+	@Override public int getNr() {return nr;}
+	@Override public void setNr(int nr) {this.nr = nr;}
 	
 	private String name;
 	
@@ -58,9 +58,6 @@ public class OtrSeason implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	
 	@Override public OtrSeries getSeries() {return series;}
 	@Override public void setSeries(OtrSeries series) {this.series = series;}
-	
-	@Override public int getNr() {return nr;}
-	@Override public void setNr(int nr) {this.nr = nr;}
 	
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
