@@ -64,7 +64,7 @@
 				<xsd:element ref="s:episode" maxOccurs="unbounded"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
-			<xsd:attribute name="nr" type="xsd:int"/>
+			<xsd:attribute name="nr" type="xsd:long"/>
 			<xsd:attribute name="name" type="xsd:string"/>
 			<xsd:attribute name="showNr" type="xsd:boolean"/>
 			<xsd:attribute name="showName" type="xsd:boolean"/>
@@ -78,7 +78,7 @@
 				<xsd:element ref="mc:storage" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
-			<xsd:attribute name="nr" type="xsd:int"/>
+			<xsd:attribute name="nr" type="xsd:long"/>
 			<xsd:attribute name="name" type="xsd:string"/>
 		</xsd:complexType>
 	</xsd:element>

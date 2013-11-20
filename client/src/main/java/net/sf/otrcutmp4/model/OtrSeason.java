@@ -34,9 +34,9 @@ public class OtrSeason implements Serializable,EjbPersistable,
 	@ManyToOne
 	private OtrSeries series;
 	
-	private int nr;
-	@Override public int getNr() {return nr;}
-	@Override public void setNr(int nr) {this.nr = nr;}
+	private long nr;
+	@Override public long getNr() {return nr;}
+	@Override public void setNr(long nr) {this.nr = nr;}
 	
 	private String name;
 	

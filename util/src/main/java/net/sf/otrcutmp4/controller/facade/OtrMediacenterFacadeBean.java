@@ -61,13 +61,13 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES 
 	}
 
 	@Override
-	public SEASON fSeason(Class<SEASON> type, SERIES series, int nr) throws UtilsNotFoundException
+	public SEASON fSeason(Class<SEASON> type, SERIES series, long nr) throws UtilsNotFoundException
 	{
 		return ufb.fByNr(type, "series", series, nr);
 	}
 
 	@Override
-	public EPISODE fEpisode(Class<EPISODE> type, SEASON season, int nr) throws UtilsNotFoundException
+	public EPISODE fEpisode(Class<EPISODE> type, SEASON season, long nr) throws UtilsNotFoundException
 	{
 		return ufb.fByNr(type, "season", season, nr);
 	}

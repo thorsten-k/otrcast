@@ -28,7 +28,7 @@ import net.sf.otrcutmp4.model.xml.mc.Cover;
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}int" />
+ *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="showNr" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="showName" type="{http://www.w3.org/2001/XMLSchema}boolean" />
@@ -60,7 +60,7 @@ public class Season
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "nr")
-    protected Integer nr;
+    protected Long nr;
     @XmlAttribute(name = "name")
     protected String name;
     @XmlAttribute(name = "showNr")
@@ -198,10 +198,10 @@ public class Season
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link Long }
      *     
      */
-    public int getNr() {
+    public long getNr() {
         return nr;
     }
 
@@ -210,10 +210,10 @@ public class Season
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link Long }
      *     
      */
-    public void setNr(int value) {
+    public void setNr(long value) {
         this.nr = value;
     }
 
