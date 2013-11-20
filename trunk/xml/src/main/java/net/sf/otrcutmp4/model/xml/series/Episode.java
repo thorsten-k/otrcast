@@ -27,7 +27,7 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}int" />
+ *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -57,7 +57,7 @@ public class Episode
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "nr")
-    protected Integer nr;
+    protected Long nr;
     @XmlAttribute(name = "name")
     protected String name;
 
@@ -182,10 +182,10 @@ public class Episode
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link Long }
      *     
      */
-    public int getNr() {
+    public long getNr() {
         return nr;
     }
 
@@ -194,10 +194,10 @@ public class Episode
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link Long }
      *     
      */
-    public void setNr(int value) {
+    public void setNr(long value) {
         this.nr = value;
     }
 

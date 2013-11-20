@@ -33,9 +33,9 @@ public class OtrEpisode implements Serializable,EjbPersistable,
 	@NotNull
 	private String name;
 	
-	private int nr;
-	@Override public int getNr() {return nr;}
-	@Override public void setNr(int nr) {this.nr = nr;}
+	private long nr;
+	@Override public long getNr() {return nr;}
+	@Override public void setNr(long nr) {this.nr = nr;}
 				
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private OtrStorage storage;
