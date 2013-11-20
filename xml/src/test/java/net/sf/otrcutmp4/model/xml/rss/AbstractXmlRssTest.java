@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractXmlRssTest extends AbstractOtrXmlTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractXmlRssTest.class);
-	
+
+    protected static final String dirSuffix = "rss";
+
 	protected static final String rootDir = "src/test/resources/data/xml/rss";
 	protected static File fXml;
 }

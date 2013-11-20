@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<image>
-    <url>myUrl</url>
-    <title>myTitle</title>
-    <link>myLink</link>
-</image>
+<rss:image xmlns:rss="http://otrcutmp4.sf.net/rss">
+    <rss:url>myUrl</rss:url>
+    <rss:title>myTitle</rss:title>
+    <rss:link>myLink</rss:link>
+</rss:image>

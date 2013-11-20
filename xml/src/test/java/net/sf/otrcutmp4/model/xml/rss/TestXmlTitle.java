@@ -18,7 +18,7 @@ public class TestXmlTitle extends AbstractXmlRssTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Title.class.getSimpleName()+".xml");
+        fXml = new File(getXmlDir(dirSuffix),Title.class.getSimpleName()+".xml");
 	}
     
     @Test

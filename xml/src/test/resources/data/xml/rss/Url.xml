@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<url>myUrl</url>
+<rss:url xmlns:rss="http://otrcutmp4.sf.net/rss">myUrl</rss:url>

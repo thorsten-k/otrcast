@@ -18,7 +18,7 @@ public class TestXmlEnclosure extends AbstractXmlRssTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Enclosure.class.getSimpleName()+".xml");
+        fXml = new File(getXmlDir(dirSuffix),Enclosure.class.getSimpleName()+".xml");
 	}
     
     @Test
