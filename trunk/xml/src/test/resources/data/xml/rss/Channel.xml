@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<channel>
-    <title>myTitle</title>
-    <link>myLink</link>
-    <description>myDescription</description>
-    <language>myLink</language>
-    <copyright>myCopyright</copyright>
-    <pubDate>myPubDate</pubDate>
-    <image/>
-    <item/>
-    <item/>
-</channel>
+<rss:channel xmlns:rss="http://otrcutmp4.sf.net/rss" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+    <rss:title>myTitle</rss:title>
+    <rss:link>myLink</rss:link>
+    <rss:description>myDescription</rss:description>
+    <rss:language>myLink</rss:language>
+    <rss:copyright>myCopyright</rss:copyright>
+    <rss:pubDate>myPubDate</rss:pubDate>
+    <rss:image/>
+    <rss:item/>
+    <rss:item/>
+</rss:channel>

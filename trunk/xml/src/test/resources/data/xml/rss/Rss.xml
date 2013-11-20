@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rss version="myVersion">
-    <channel/>
-</rss>
+<rss:rss xmlns:rss="http://otrcutmp4.sf.net/rss" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="myVersion">
+    <rss:channel/>
+</rss:rss>

@@ -18,7 +18,7 @@ public class TestXmlCopyright extends AbstractXmlRssTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Copyright.class.getSimpleName()+".xml");
+        fXml = new File(getXmlDir(dirSuffix),Copyright.class.getSimpleName()+".xml");
 	}
     
     @Test

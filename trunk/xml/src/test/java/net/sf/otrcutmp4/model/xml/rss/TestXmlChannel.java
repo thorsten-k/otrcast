@@ -18,7 +18,7 @@ public class TestXmlChannel extends AbstractXmlRssTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Channel.class.getSimpleName()+".xml");
+        fXml = new File(getXmlDir(dirSuffix),Channel.class.getSimpleName()+".xml");
 	}
     
     @Test

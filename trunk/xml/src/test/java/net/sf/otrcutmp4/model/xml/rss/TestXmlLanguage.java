@@ -18,7 +18,7 @@ public class TestXmlLanguage extends AbstractXmlRssTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Language.class.getSimpleName()+".xml");
+        fXml = new File(getXmlDir(dirSuffix),Language.class.getSimpleName()+".xml");
 	}
     
     @Test

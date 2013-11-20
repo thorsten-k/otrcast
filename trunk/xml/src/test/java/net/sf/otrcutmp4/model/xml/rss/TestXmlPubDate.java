@@ -18,7 +18,7 @@ public class TestXmlPubDate extends AbstractXmlRssTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,PubDate.class.getSimpleName()+".xml");
+        fXml = new File(getXmlDir(dirSuffix),PubDate.class.getSimpleName()+".xml");
 	}
     
     @Test
