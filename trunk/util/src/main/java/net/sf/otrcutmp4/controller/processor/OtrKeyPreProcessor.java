@@ -11,7 +11,8 @@ import org.slf4j.LoggerFactory;
 public class OtrKeyPreProcessor
 {	
 	final static Logger logger = LoggerFactory.getLogger(OtrKeyPreProcessor.class);
-	
+
+    private static String prefixDatenkeller = "http://otr.datenkeller.at";
 	private Pattern pOtrDownload;
 	
 	public OtrKeyPreProcessor()
@@ -21,19 +22,21 @@ public class OtrKeyPreProcessor
 	
 	public String guess(String input)
 	{
-/*		if(input.endsWith(".otrkey"))
+		if(input.endsWith(".otrkey"))
 		{
 			int index = input.lastIndexOf(".otrkey");
 			input = input.substring(0,index);
 		}
-*/		
-		if(input.startsWith("http://otr.datenkeller.at/?getFile="))
+
+		if(input.startsWith(prefixDatenkeller))
 		{
-			int index = "http://otr.datenkeller.at/?getFile=".length();
+            input = input.substring(prefixDatenkeller.length(),input.length());
+
+			int index = input.indexOf("?getFile=")+"?getFile=".length();
 			return input.substring(index,input.length());
 		}
 		
-		logger.error("Matching? "+input);
+		logger.trace("Matching? " + input);
 		Matcher m = pOtrDownload.matcher(input);
 		if(m.matches())
 		{
