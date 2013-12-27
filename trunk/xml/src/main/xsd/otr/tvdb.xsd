@@ -1,0 +1,12 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net/tvdb"
+            xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="meta">
+		<xsd:complexType>
+			<xsd:sequence>
+
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:long"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

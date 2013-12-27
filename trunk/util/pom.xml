@@ -38,6 +38,12 @@
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
    	   	</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>

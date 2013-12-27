@@ -1,6 +1,5 @@
 package net.sf.otrcutmp4.model.xml.series;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -18,7 +17,7 @@ public class TestXmlSeries extends AbstractXmlSeriesTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"series.xml");
+        setXmlFile(dirSuffix,"series");
 	}
     
     @Test

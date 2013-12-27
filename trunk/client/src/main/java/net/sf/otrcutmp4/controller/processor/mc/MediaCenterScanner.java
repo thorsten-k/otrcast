@@ -1,5 +1,13 @@
 package net.sf.otrcutmp4.controller.processor.mc;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
@@ -7,8 +15,17 @@ import net.sf.otrcutmp4.controller.tag.Mp4MediaTypeCorrector;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbStorageFactory;
-import net.sf.otrcutmp4.model.*;
-import net.sf.otrcutmp4.model.xml.series.*;
+import net.sf.otrcutmp4.model.OtrCover;
+import net.sf.otrcutmp4.model.OtrEpisode;
+import net.sf.otrcutmp4.model.OtrMovie;
+import net.sf.otrcutmp4.model.OtrSeason;
+import net.sf.otrcutmp4.model.OtrSeries;
+import net.sf.otrcutmp4.model.OtrStorage;
+import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Movie;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
+
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
@@ -17,13 +34,6 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.EntityManager;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class MediaCenterScanner extends DirectoryWalker<File>
 {
@@ -101,8 +111,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
                 {
                     mtc.correct(file);
                 }
-                catch (IOException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                catch (IOException e)
+                {
+                    e.printStackTrace();
                 }
 
 /*                try
