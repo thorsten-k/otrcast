@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import net.sf.otrcutmp4.model.xml.tvdb.Meta;
 
 
 /**
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}category"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}meta"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -38,7 +40,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "category",
-    "season"
+    "season",
+    "meta"
 })
 @XmlRootElement(name = "series")
 public class Series
@@ -50,6 +53,8 @@ public class Series
     protected Category category;
     @XmlElement(required = true)
     protected List<Season> season;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
+    protected Meta meta;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "name")
@@ -120,6 +125,34 @@ public class Series
 
     public void unsetSeason() {
         this.season = null;
+    }
+
+    /**
+     * Gets the value of the meta property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Meta }
+     *     
+     */
+    public Meta getMeta() {
+        return meta;
+    }
+
+    /**
+     * Sets the value of the meta property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Meta }
+     *     
+     */
+    public void setMeta(Meta value) {
+        this.meta = value;
+    }
+
+    public boolean isSetMeta() {
+        return (this.meta!= null);
     }
 
     /**

@@ -11,36 +11,35 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlMeta extends AbstractXmlSeriesTest
+public class TestXmlBanners extends AbstractXmlSeriesTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlMeta.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlBanners.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-        setXmlFile(dirSuffix,Meta.class);
+        setXmlFile(dirSuffix,Banners.class);
 	}
     
     @Test
     public void jaxb() throws FileNotFoundException
     {
-        Meta test = create(true);
-        Meta ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Meta.class);
-    	assertJaxbEquals(ref, test);
+        Banners actual = create(true);
+        Banners expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Banners.class);
+    	assertJaxbEquals(expected, actual);
     }
     
-    public static Meta create(boolean withChilds)
+    public static Banners create(boolean withChilds)
     {
-        Meta xml = new Meta();
-        xml.setId(123);
+        Banners xml = new Banners();
 
-        if(withChilds)
+    	if(withChilds)
         {
-            xml.setBanners(TestXmlBanners.create(false));
+            xml.getBanner().add(TestXmlBanner.create(false));
+            xml.getBanner().add(TestXmlBanner.create(false));
         }
 
-
-        return xml;
+    	return xml;
     }
     
     public void save() {save(create(true), fXml);}
@@ -49,8 +48,8 @@ public class TestXmlMeta extends AbstractXmlSeriesTest
     {
 		OtrXmlTstBootstrap.init();
 		
-		TestXmlMeta.initFiles();
-		TestXmlMeta test = new TestXmlMeta();
+		TestXmlBanners.initFiles();
+		TestXmlBanners test = new TestXmlBanners();
 		test.save();
     }
 }

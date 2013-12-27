@@ -12,7 +12,7 @@ public class CliTvDbSeriesQuery extends AbstractUtilTest
         Configuration config = OtrUtilTestBootstrap.init();
 
         TvDbSeriesQuery dbQuery = new TvDbSeriesQuery(config.getString("tvDbApiKey"));
-        dbQuery.findSeries("Bully_macht_Buddy");
+        dbQuery.findSeries("Lost");
 
 //        dbQuery.querySeries(274058l);
     }
