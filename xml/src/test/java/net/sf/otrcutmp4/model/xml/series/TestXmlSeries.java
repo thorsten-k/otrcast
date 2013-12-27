@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.model.xml.series;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.tvdb.TestXmlMeta;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -38,6 +39,7 @@ public class TestXmlSeries extends AbstractXmlSeriesTest
     	{
     		xml.getSeason().add(TestXmlSeason.create(false));
     		xml.getSeason().add(TestXmlSeason.create(false));
+            xml.setMeta(TestXmlMeta.create(false));
     	}
     	
     	return xml;

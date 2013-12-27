@@ -37,4 +37,20 @@ public class ObjectFactory {
         return new Meta();
     }
 
+    /**
+     * Create an instance of {@link Banners }
+     * 
+     */
+    public Banners createBanners() {
+        return new Banners();
+    }
+
+    /**
+     * Create an instance of {@link Banner }
+     * 
+     */
+    public Banner createBanner() {
+        return new Banner();
+    }
+
 }

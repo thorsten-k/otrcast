@@ -9,6 +9,13 @@ import java.io.Reader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.factory.xml.tvdb.XmlBannerFactory;
+import net.sf.otrcutmp4.factory.xml.tvdb.XmlMetaFactory;
+import net.sf.otrcutmp4.model.xml.container.Otr;
+import net.sf.otrcutmp4.model.xml.series.Series;
+import net.sf.otrcutmp4.model.xml.tvdb.Banners;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -35,18 +42,34 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
         super(apiKey);
 	}
 	
-	public void findSeries(String name)
+	public Otr findSeries(String name)
 	{
-        XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
+        Otr otr = new Otr();
+
         Document doc = fetch(url+"/GetSeries.php?seriesname="+name);
+
+        XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
+//        logger.info(serializer.outputString(doc));
 
         XPathFactory xPathFactory = XPathFactory.instance();
         XPathExpression<Element> xPathExpression = xPathFactory.compile("/Data/Series", Filters.element());
         for(Element e : xPathExpression.evaluate(doc))
         {
+            Series series = new Series();
 
-            logger.info(serializer.outputString(e));
+            series.setName(e.getChildText("SeriesName"));
+            series.setMeta(XmlMetaFactory.build(e.getChildText("id")));
+
+            if(e.getChildText("banner")!=null)
+            {
+                series.getMeta().setBanners(new Banners());
+                series.getMeta().getBanners().getBanner().add(XmlBannerFactory.build(e.getChildText("banner")));
+            }
+
+            otr.getSeries().add(series);
         }
+        JaxbUtil.info(otr);
+        return otr;
 	}
 
     public void querySeries(long tvDbSeriesId) throws JDOMException

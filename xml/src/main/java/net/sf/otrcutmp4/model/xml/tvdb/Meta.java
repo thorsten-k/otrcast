@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banners"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *     &lt;/restriction>
@@ -29,15 +31,47 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
+@XmlType(name = "", propOrder = {
+    "banners"
+})
 @XmlRootElement(name = "meta")
 public class Meta
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlElement(required = true)
+    protected Banners banners;
     @XmlAttribute(name = "id")
     protected Long id;
+
+    /**
+     * Gets the value of the banners property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Banners }
+     *     
+     */
+    public Banners getBanners() {
+        return banners;
+    }
+
+    /**
+     * Sets the value of the banners property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Banners }
+     *     
+     */
+    public void setBanners(Banners value) {
+        this.banners = value;
+    }
+
+    public boolean isSetBanners() {
+        return (this.banners!= null);
+    }
 
     /**
      * Gets the value of the id property.
