@@ -16,6 +16,7 @@
     <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="otr/series.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr/otr.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/rss" schemaLocation="otr/rss.xsd"/>
+	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="otr/tvdb.xsd"/>
     <xsd:import namespace="http://www.itunes.com/dtds/podcast-1.0.dtd" schemaLocation="otr/itunes.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>

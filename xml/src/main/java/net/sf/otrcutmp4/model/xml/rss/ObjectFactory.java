@@ -30,11 +30,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Guid }
+     * 
+     */
+    public Guid createGuid() {
+        return new Guid();
+    }
+
+    /**
      * Create an instance of {@link PubDate }
      * 
      */
     public PubDate createPubDate() {
         return new PubDate();
+    }
+
+    /**
+     * Create an instance of {@link Title }
+     * 
+     */
+    public Title createTitle() {
+        return new Title();
     }
 
     /**
@@ -46,11 +62,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Description }
+     * 
+     */
+    public Description createDescription() {
+        return new Description();
+    }
+
+    /**
      * Create an instance of {@link Link }
      * 
      */
     public Link createLink() {
         return new Link();
+    }
+
+    /**
+     * Create an instance of {@link Item }
+     * 
+     */
+    public Item createItem() {
+        return new Item();
     }
 
     /**
@@ -67,46 +99,6 @@ public class ObjectFactory {
      */
     public Url createUrl() {
         return new Url();
-    }
-
-    /**
-     * Create an instance of {@link Title }
-     * 
-     */
-    public Title createTitle() {
-        return new Title();
-    }
-
-    /**
-     * Create an instance of {@link Copyright }
-     * 
-     */
-    public Copyright createCopyright() {
-        return new Copyright();
-    }
-
-    /**
-     * Create an instance of {@link Guid }
-     * 
-     */
-    public Guid createGuid() {
-        return new Guid();
-    }
-
-    /**
-     * Create an instance of {@link Description }
-     * 
-     */
-    public Description createDescription() {
-        return new Description();
-    }
-
-    /**
-     * Create an instance of {@link Item }
-     * 
-     */
-    public Item createItem() {
-        return new Item();
     }
 
     /**
@@ -131,6 +123,14 @@ public class ObjectFactory {
      */
     public Language createLanguage() {
         return new Language();
+    }
+
+    /**
+     * Create an instance of {@link Copyright }
+     * 
+     */
+    public Copyright createCopyright() {
+        return new Copyright();
     }
 
 }
