@@ -29,7 +29,7 @@ final static Logger logger = LoggerFactory.getLogger(EjbCoverFactory.class);
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		
-		ejb.setFileType(cover.getType());
+		ejb.setFileType(cover.getFileType());
 		ejb.setData(cover.getData());
 		
 		return ejb;

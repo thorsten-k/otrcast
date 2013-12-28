@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;/element>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="fileType" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -53,8 +53,8 @@ public class Image
     protected byte[] data;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "type")
-    protected String type;
+    @XmlAttribute(name = "fileType")
+    protected String fileType;
 
     /**
      * Gets the value of the data property.
@@ -117,31 +117,31 @@ public class Image
     }
 
     /**
-     * Gets the value of the type property.
+     * Gets the value of the fileType property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getType() {
-        return type;
+    public String getFileType() {
+        return fileType;
     }
 
     /**
-     * Sets the value of the type property.
+     * Sets the value of the fileType property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setType(String value) {
-        this.type = value;
+    public void setFileType(String value) {
+        this.fileType = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
+    public boolean isSetFileType() {
+        return (this.fileType!= null);
     }
 
 }

@@ -26,8 +26,8 @@ public class AbstractTagReader
 		cover.setData(adb.getData());
 		
 		//see source of AppleCoverBox.java
-		if(adb.getFlags()==0xe){cover.setType("png");}
-		else if(adb.getFlags()==0xd){cover.setType("jpg");}
+		if(adb.getFlags()==0xe){cover.setFileType("png");}
+		else if(adb.getFlags()==0xd){cover.setFileType("jpg");}
 		else {logger.warn("Unknown flag for cover "+adb.getFlags());}
 		
 		return cover;
