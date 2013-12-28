@@ -14,7 +14,7 @@ import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
 import net.sf.otrcutmp4.interfaces.model.Movie;
 
 @Entity
-public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover,OtrStorage>
+public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrStorage>
 {
 	public static final long serialVersionUID=1;
 	
@@ -28,7 +28,7 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover,OtrS
 	private String name;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private OtrCover cover;
+	private OtrImage cover;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private OtrStorage storage;
@@ -44,8 +44,8 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrCover,OtrS
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
 	
-	@Override public OtrCover getCover() {return cover;}
-	@Override public void setCover(OtrCover cover) {this.cover = cover;}
+	@Override public OtrImage getCover() {return cover;}
+	@Override public void setCover(OtrImage cover) {this.cover = cover;}
 	
 	@Override public OtrStorage getStorage() {return storage;}
 	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}

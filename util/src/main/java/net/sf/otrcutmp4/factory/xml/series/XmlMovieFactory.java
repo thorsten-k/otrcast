@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.factory.xml.series;
 
 import net.sf.otrcutmp4.factory.xml.mc.XmlCoverFactory;
 import net.sf.otrcutmp4.factory.xml.mc.XmlStorageFactory;
-import net.sf.otrcutmp4.interfaces.model.Cover;
+import net.sf.otrcutmp4.interfaces.model.Image;
 import net.sf.otrcutmp4.interfaces.model.Movie;
 import net.sf.otrcutmp4.interfaces.model.Storage;
 import net.sf.otrcutmp4.model.xml.otr.Query;
@@ -10,7 +10,7 @@ import net.sf.otrcutmp4.model.xml.otr.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
+public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Image,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlMovieFactory.class);
 	

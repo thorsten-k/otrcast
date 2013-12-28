@@ -8,7 +8,7 @@ import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.interfaces.facade.OtrMediacenterFacade;
-import net.sf.otrcutmp4.interfaces.model.Cover;
+import net.sf.otrcutmp4.interfaces.model.Image;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Movie;
 import net.sf.otrcutmp4.interfaces.model.Season;
@@ -18,7 +18,7 @@ import net.sf.otrcutmp4.interfaces.model.Storage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Cover,STORAGE extends Storage>
+public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Image,STORAGE extends Storage>
 				implements OtrMediacenterFacade<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE>,Serializable
 {	
 	final static Logger logger = LoggerFactory.getLogger(OtrMediacenterFacadeBean.class);

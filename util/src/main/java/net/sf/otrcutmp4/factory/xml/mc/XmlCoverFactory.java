@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.factory.xml.mc;
 
-import net.sf.otrcutmp4.interfaces.model.Cover;
+import net.sf.otrcutmp4.interfaces.model.Image;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ public class XmlCoverFactory
 	public XmlCoverFactory(Query query){this(query.getCover());}
 	public XmlCoverFactory(net.sf.otrcutmp4.model.xml.mc.Cover q){this.q=q;}
 	
-	public net.sf.otrcutmp4.model.xml.mc.Cover build(Cover ejb)
+	public net.sf.otrcutmp4.model.xml.mc.Cover build(Image ejb)
 	{
 		net.sf.otrcutmp4.model.xml.mc.Cover xml = new net.sf.otrcutmp4.model.xml.mc.Cover();
 		

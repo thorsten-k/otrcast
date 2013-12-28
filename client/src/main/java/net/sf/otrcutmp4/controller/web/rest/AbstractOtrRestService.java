@@ -16,7 +16,7 @@ public class AbstractOtrRestService
 	
 	protected EntityManager em;
     protected UtilsFacadeBean ufb;
-    protected OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> osfb;
+    protected OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> osfb;
 	
 	protected void init()
 	{
@@ -26,6 +26,6 @@ public class AbstractOtrRestService
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}
-		if(osfb==null){osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,ufb);}
+		if(osfb==null){osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em,ufb);}
 	}
 }

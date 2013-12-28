@@ -21,7 +21,7 @@ import net.sf.otrcutmp4.interfaces.model.Season;
 
 @Entity
 public class OtrSeason implements Serializable,EjbPersistable,
-									Season<OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>
+									Season<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>
 {
 	public static final long serialVersionUID=1;
 	
@@ -45,7 +45,7 @@ public class OtrSeason implements Serializable,EjbPersistable,
 	private boolean showName;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private OtrCover cover;
+	private OtrImage cover;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="season")
 	@OrderBy("nr ASC")
@@ -68,8 +68,8 @@ public class OtrSeason implements Serializable,EjbPersistable,
 	public boolean isShowName() {return showName;}
 	public void setShowName(boolean showName) {this.showName = showName;}
 	
-	@Override public OtrCover getCover() {return cover;}
-	@Override public void setCover(OtrCover cover) {this.cover = cover;}
+	@Override public OtrImage getCover() {return cover;}
+	@Override public void setCover(OtrImage cover) {this.cover = cover;}
 	
 	@Override public List<OtrEpisode> getEpisodes() {if(episodes==null){episodes = new ArrayList<OtrEpisode>();} return episodes;}
 	@Override public void setEpisodes(List<OtrEpisode> episodes) {this.episodes = episodes;}
