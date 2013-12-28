@@ -42,7 +42,7 @@ public class MovieTagReader extends AbstractTagReader
 		{
 			try
 			{
-				movie.setCover(getCover(apple.getBoxes(AppleCoverBox.class).get(0)));
+				movie.setImage(getCover(apple.getBoxes(AppleCoverBox.class).get(0)));
 			}
 			catch (NoSuchFieldException e) {}
 		}

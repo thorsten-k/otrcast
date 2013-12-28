@@ -18,8 +18,8 @@ import net.sf.otrcutmp4.interfaces.model.Storage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Image,STORAGE extends Storage>
-				implements OtrMediacenterFacade<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE>,Serializable
+public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,IMAGE extends Image,STORAGE extends Storage>
+				implements OtrMediacenterFacade<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>,Serializable
 {	
 	final static Logger logger = LoggerFactory.getLogger(OtrMediacenterFacadeBean.class);
 	
@@ -79,7 +79,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES 
 	}
 
 	@Override
-	public EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<COVER> clCover, net.sf.otrcutmp4.model.xml.series.Episode xmlEpisode)
+	public EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<IMAGE> clImage, net.sf.otrcutmp4.model.xml.series.Episode xmlEpisode)
 	{
 		SERIES series = fcSeries(clSeries,xmlEpisode.getSeason().getSeries());
 		SEASON season = fcSeason(clSeason, series, xmlEpisode.getSeason());
@@ -106,10 +106,10 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<COVER,STORAGE>,SERIES 
 		
 		season.getEpisodes().add(episode);
 		
-		if(xmlEpisode.isSetCover() && season.getCover()==null)
+		if(xmlEpisode.isSetImage() && season.getCover()==null)
 		{
-			EjbCoverFactory<COVER> efCover = EjbCoverFactory.factory(clCover);
-			COVER cover = efCover.build(xmlEpisode.getCover());
+			EjbCoverFactory<IMAGE> efCover = EjbCoverFactory.factory(clImage);
+			IMAGE cover = efCover.build(xmlEpisode.getImage());
 			em.persist(cover);
 			season.setCover(cover);
 			em.merge(season);

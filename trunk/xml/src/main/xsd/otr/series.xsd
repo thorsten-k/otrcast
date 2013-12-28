@@ -28,7 +28,7 @@
 	<xsd:element name="movie">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="mc:cover" maxOccurs="1"/>
+				<xsd:element ref="mc:image" maxOccurs="1"/>
 				<xsd:element ref="mc:storage" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
@@ -60,7 +60,7 @@
 	<xsd:element name="season">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="mc:cover" maxOccurs="1"/>
+				<xsd:element ref="mc:image" maxOccurs="1"/>
 				<xsd:element ref="s:series" maxOccurs="1"/>
 				<xsd:element ref="s:episode" maxOccurs="unbounded"/>
 			</xsd:sequence>
@@ -75,7 +75,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="s:season" maxOccurs="1"/>
-				<xsd:element ref="mc:cover" maxOccurs="1"/>
+				<xsd:element ref="mc:image" maxOccurs="1"/>
 				<xsd:element ref="mc:storage" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>

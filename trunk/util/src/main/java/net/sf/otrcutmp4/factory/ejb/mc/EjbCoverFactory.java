@@ -5,27 +5,27 @@ import net.sf.otrcutmp4.interfaces.model.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbCoverFactory<COVER extends Image>
+public class EjbCoverFactory<IMAGE extends Image>
 {	
 final static Logger logger = LoggerFactory.getLogger(EjbCoverFactory.class);
 	
-	final Class<COVER> coverClass;
+	final Class<IMAGE> imageClass;
 	
-	 public EjbCoverFactory(final Class<COVER> coverClass)
+	 public EjbCoverFactory(final Class<IMAGE> imageClass)
 	 {
-	        this.coverClass=coverClass;
+	        this.imageClass=imageClass;
 	 }
 	 
-	 public static <COVER extends Image> EjbCoverFactory<COVER> factory(final Class<COVER> coverClass)
+	 public static <IMAGE extends Image> EjbCoverFactory<IMAGE> factory(final Class<IMAGE> imageClass)
 	 {
-		 return new EjbCoverFactory<COVER>(coverClass);
+		 return new EjbCoverFactory<IMAGE>(imageClass);
 	 }
 	
-	public COVER build(net.sf.otrcutmp4.model.xml.mc.Cover cover)
+	public IMAGE build(net.sf.otrcutmp4.model.xml.mc.Image cover)
 	{
-		COVER ejb = null;
+		IMAGE ejb = null;
 		
-		try{ejb = coverClass.newInstance();}
+		try{ejb = imageClass.newInstance();}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		

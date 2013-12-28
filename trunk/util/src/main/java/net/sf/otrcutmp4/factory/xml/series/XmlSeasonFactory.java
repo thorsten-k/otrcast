@@ -43,10 +43,10 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 			}
 		}
 		
-		if(q.isSetCover() && ejb.getCover()!=null)
+		if(q.isSetImage() && ejb.getCover()!=null)
 		{
-			XmlCoverFactory f = new XmlCoverFactory(q.getCover());
-			xml.setCover(f.build(ejb.getCover()));
+			XmlCoverFactory f = new XmlCoverFactory(q.getImage());
+			xml.setImage(f.build(ejb.getCover()));
 		}
 		
 		return xml;

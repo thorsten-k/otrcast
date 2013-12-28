@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.otrcutmp4.model.xml.mc.Cover;
+import net.sf.otrcutmp4.model.xml.mc.Image;
 import net.sf.otrcutmp4.model.xml.mc.Storage;
 
 
@@ -22,7 +22,7 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}cover"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -37,7 +37,7 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "cover",
+    "image",
     "storage"
 })
 @XmlRootElement(name = "movie")
@@ -47,7 +47,7 @@ public class Movie
 
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
-    protected Cover cover;
+    protected Image image;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Storage storage;
     @XmlAttribute(name = "id")
@@ -58,31 +58,31 @@ public class Movie
     protected Integer year;
 
     /**
-     * Gets the value of the cover property.
+     * Gets the value of the image property.
      * 
      * @return
      *     possible object is
-     *     {@link Cover }
+     *     {@link Image }
      *     
      */
-    public Cover getCover() {
-        return cover;
+    public Image getImage() {
+        return image;
     }
 
     /**
-     * Sets the value of the cover property.
+     * Sets the value of the image property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Cover }
+     *     {@link Image }
      *     
      */
-    public void setCover(Cover value) {
-        this.cover = value;
+    public void setImage(Image value) {
+        this.image = value;
     }
 
-    public boolean isSetCover() {
-        return (this.cover!= null);
+    public boolean isSetImage() {
+        return (this.image!= null);
     }
 
     /**

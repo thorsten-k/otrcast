@@ -17,7 +17,7 @@
                 <xsd:element ref="s:season" maxOccurs="1"/>
                 <xsd:element ref="s:episode" maxOccurs="1"/>
                 <xsd:element ref="s:movie" maxOccurs="1"/>
-                <xsd:element ref="mc:cover" maxOccurs="1"/>
+                <xsd:element ref="mc:image" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

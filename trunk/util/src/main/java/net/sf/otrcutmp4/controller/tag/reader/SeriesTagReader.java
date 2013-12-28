@@ -56,7 +56,7 @@ public class SeriesTagReader extends AbstractTagReader
 		{
 			try
 			{
-				episode.setCover(getCover(apple.getBoxes(AppleCoverBox.class).get(0)));
+				episode.setImage(getCover(apple.getBoxes(AppleCoverBox.class).get(0)));
 			}
 			catch (NoSuchFieldException e) {}
 		}

@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.controller.tag.reader;
 
-import net.sf.otrcutmp4.model.xml.mc.Cover;
+import net.sf.otrcutmp4.model.xml.mc.Image;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +17,12 @@ public class AbstractTagReader
 
 	}
 	
-	protected Cover getCover(AppleCoverBox box) throws NoSuchFieldException
+	protected Image getCover(AppleCoverBox box) throws NoSuchFieldException
 	{
 		if(box.getBoxes(AppleDataBox.class).size()==0){throw new NoSuchFieldException();}	
 		AppleDataBox adb = box.getBoxes(AppleDataBox.class).get(0);
 		
-		Cover cover = new Cover();
+		Image cover = new Image();
 		cover.setData(adb.getData());
 		
 		//see source of AppleCoverBox.java
