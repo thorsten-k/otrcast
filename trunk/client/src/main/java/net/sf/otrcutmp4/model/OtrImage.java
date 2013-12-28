@@ -19,20 +19,15 @@ public class OtrImage implements Serializable,Image
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	
-	private String type;
-
-	@Lob
-	private byte[] data;
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<<<<<<<<<<<<<	
-	
 	@Override public void setId(long id) {this.id = id;}
 	@Override public long getId() {return id;}
 	
-	@Override public String getType() {return type;}
-	@Override public void setType(String type) {this.type = type;}
-	
+	private String fileType;
+	@Override public String getFileType() {return fileType;}
+	@Override public void setFileType(String fileType) {this.fileType = fileType;}
+
+	@Lob
+	private byte[] data;
 	@Override public byte[] getData() {return data;}
 	@Override public void setData(byte[] data) {this.data = data;}
 	
@@ -42,7 +37,7 @@ public class OtrImage implements Serializable,Image
 	{
 		StringBuffer sb = new StringBuffer();
 			sb.append("[").append(id).append("]");
-			sb.append(" type=").append(type);
+			sb.append(" fileType=").append(fileType);
 			sb.append(" size=").append(data.length);
 		return sb.toString();
 	}

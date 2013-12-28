@@ -20,7 +20,7 @@ public class XmlCoverFactory
 		net.sf.otrcutmp4.model.xml.mc.Image xml = new net.sf.otrcutmp4.model.xml.mc.Image();
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetType()){xml.setType(ejb.getType());}
+		if(q.isSetType()){xml.setType(ejb.getFileType());}
 		if(q.isSetData()){xml.setData(ejb.getData());}
 		return xml;
 	}
