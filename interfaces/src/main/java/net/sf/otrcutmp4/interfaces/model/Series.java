@@ -11,4 +11,7 @@ public interface Series<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAG
 {
 	List<SEASON> getSeasons();
 	void setSeasons(List<SEASON> seasons);
+	
+	IMAGE getBanner();
+	void setBanner(IMAGE image);
 }

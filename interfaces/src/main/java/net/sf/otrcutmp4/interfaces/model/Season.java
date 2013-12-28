@@ -13,7 +13,7 @@ public interface Season<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAG
 	void setSeries(SERIES series);
 	
 	IMAGE getCover();
-	void setCover(IMAGE cover);
+	void setCover(IMAGE image);
 	
 	List<EPISODE> getEpisodes();
 	void setEpisodes(List<EPISODE> episodes);
