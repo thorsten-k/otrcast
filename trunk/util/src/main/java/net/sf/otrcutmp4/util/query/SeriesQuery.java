@@ -136,7 +136,7 @@ public class SeriesQuery
 	{
 		Image xml = new Image();
 		xml.setId(0);
-		xml.setType("");
+		xml.setFileType("");
 		xml.setData("x".getBytes());
 		return xml;
 	}

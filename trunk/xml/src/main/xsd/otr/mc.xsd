@@ -18,7 +18,7 @@
 		        </xsd:element>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="type" type="xsd:string"/>
+            <xsd:attribute name="fileType" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="storage">

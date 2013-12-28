@@ -33,7 +33,7 @@ public class TestXmlImage extends AbstractXmlMcTest
     {
     	Image xml = new Image();
     	xml.setId(123);
-    	xml.setType("png");
+    	xml.setFileType("png");
     	
     	if(withChilds)
     	{
