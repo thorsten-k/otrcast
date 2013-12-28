@@ -11,27 +11,27 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlCover extends AbstractXmlMcTest
+public class TestXmlImage extends AbstractXmlMcTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlCover.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlImage.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,Cover.class.getSimpleName()+".xml");
+		fXml = new File(rootDir,Image.class.getSimpleName()+".xml");
 	}
     
     @Test
     public void xml() throws FileNotFoundException
     {
-    	Cover actual = create(true);
-    	Cover expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Cover.class);
+    	Image actual = create(true);
+    	Image expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Image.class);
     	assertJaxbEquals(expected, actual);
     }
     
-    public static Cover create(boolean withChilds)
+    public static Image create(boolean withChilds)
     {
-    	Cover xml = new Cover();
+    	Image xml = new Image();
     	xml.setId(123);
     	xml.setType("png");
     	
@@ -49,9 +49,9 @@ public class TestXmlCover extends AbstractXmlMcTest
     {
 		OtrXmlTstBootstrap.init();
 			
-		TestXmlCover.initXml();	
-		TestXmlCover.initFiles();
-		TestXmlCover test = new TestXmlCover();
+		TestXmlImage.initXml();	
+		TestXmlImage.initFiles();
+		TestXmlImage test = new TestXmlImage();
 		test.save();
     }
 }

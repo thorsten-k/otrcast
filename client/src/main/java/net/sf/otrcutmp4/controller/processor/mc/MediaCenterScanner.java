@@ -144,9 +144,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
             em.merge(movie);
         }
 		
-		if(xmlMovie.isSetCover() && movie.getCover()==null)
+		if(xmlMovie.isSetImage() && movie.getCover()==null)
 		{
-			OtrImage cover = efCover.build(xmlMovie.getCover());
+			OtrImage cover = efCover.build(xmlMovie.getImage());
 			em.persist(cover);
 			movie.setCover(cover);
 			em.merge(movie);
@@ -187,9 +187,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
             em.merge(episode);
         }
 
-		if(xmlEpisode.isSetCover() && season.getCover()==null)
+		if(xmlEpisode.isSetImage() && season.getCover()==null)
 		{
-			OtrImage cover = efCover.build(xmlEpisode.getCover());
+			OtrImage cover = efCover.build(xmlEpisode.getImage());
 			em.persist(cover);
 			season.setCover(cover);
 			em.merge(season);

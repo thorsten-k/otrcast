@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Cover }
+     * Create an instance of {@link Image }
      * 
      */
-    public Cover createCover() {
-        return new Cover();
+    public Image createImage() {
+        return new Image();
     }
 
     /**

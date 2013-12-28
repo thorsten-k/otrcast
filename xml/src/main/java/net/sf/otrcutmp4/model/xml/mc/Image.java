@@ -42,8 +42,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "", propOrder = {
     "data"
 })
-@XmlRootElement(name = "cover")
-public class Cover
+@XmlRootElement(name = "image")
+public class Image
     implements Serializable
 {
 

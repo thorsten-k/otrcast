@@ -5,7 +5,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import net.sf.exlp.util.DateUtil;
-import net.sf.otrcutmp4.model.xml.mc.Cover;
+import net.sf.otrcutmp4.model.xml.mc.Image;
 import net.sf.otrcutmp4.model.xml.mc.Storage;
 import net.sf.otrcutmp4.model.xml.otr.Query;
 import net.sf.otrcutmp4.model.xml.series.Episode;
@@ -57,7 +57,7 @@ public class SeriesQuery
 	public static Series seriesAll()
 	{
 		Season season = season();
-		season.setCover(cover());
+		season.setImage(image());
 		
 		Series xml = series();
 		xml.getSeason().add(season);
@@ -77,7 +77,7 @@ public class SeriesQuery
 	public static Movie movieAll()
 	{
 		Movie xml = movie();
-		xml.setCover(cover());
+		xml.setImage(image());
 		xml.setStorage(storage());
 		return xml;
 	}
@@ -132,9 +132,9 @@ public class SeriesQuery
     	return xml;
 	}
 	
-	public static Cover cover()
+	public static Image image()
 	{
-		Cover xml = new Cover();
+		Image xml = new Image();
 		xml.setId(0);
 		xml.setType("");
 		xml.setData("x".getBytes());

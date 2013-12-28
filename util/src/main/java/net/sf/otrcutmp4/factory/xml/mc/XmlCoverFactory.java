@@ -10,14 +10,14 @@ public class XmlCoverFactory
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlCoverFactory.class);
 	
-	private net.sf.otrcutmp4.model.xml.mc.Cover q;
+	private net.sf.otrcutmp4.model.xml.mc.Image q;
 	
-	public XmlCoverFactory(Query query){this(query.getCover());}
-	public XmlCoverFactory(net.sf.otrcutmp4.model.xml.mc.Cover q){this.q=q;}
+	public XmlCoverFactory(Query query){this(query.getImage());}
+	public XmlCoverFactory(net.sf.otrcutmp4.model.xml.mc.Image q){this.q=q;}
 	
-	public net.sf.otrcutmp4.model.xml.mc.Cover build(Image ejb)
+	public net.sf.otrcutmp4.model.xml.mc.Image build(Image ejb)
 	{
-		net.sf.otrcutmp4.model.xml.mc.Cover xml = new net.sf.otrcutmp4.model.xml.mc.Cover();
+		net.sf.otrcutmp4.model.xml.mc.Image xml = new net.sf.otrcutmp4.model.xml.mc.Image();
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetType()){xml.setType(ejb.getType());}

@@ -26,10 +26,10 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		if(q.isSetYear()){xml.setYear(ejb.getYear());}
 		
-		if(q.isSetCover() && ejb.getCover()!=null)
+		if(q.isSetImage() && ejb.getCover()!=null)
 		{
-			XmlCoverFactory f = new XmlCoverFactory(q.getCover());
-			xml.setCover(f.build(ejb.getCover()));
+			XmlCoverFactory f = new XmlCoverFactory(q.getImage());
+			xml.setImage(f.build(ejb.getCover()));
 		}
 		
 		if(q.isSetStorage() && ejb.getStorage()!=null)

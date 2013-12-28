@@ -8,7 +8,7 @@
             <xsd:attribute name="lastRestart" type="xsd:dateTime"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="cover">
+    <xsd:element name="image">
         <xsd:complexType>
             <xsd:sequence>
 	           	<xsd:element name="data">
