@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
@@ -29,29 +30,28 @@ public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
 	@NotNull
 	private String name;
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
 	private String code;
+	@Override public String getCode() {return code;}
+	@Override public void setCode(String code) {this.code = code;}
 			
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="series")
 	@OrderBy("nr ASC")
 	private List<OtrSeason> seasons;
-		
-	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
-			
-	@Override public long getId() {return id;}
-	@Override public void setId(long id) {this.id = id;}
-
-	@Override public String getName() {return name;}
-	@Override public void setName(String name) {this.name = name;}
-	
-	@Override public String getCode() {return code;}
-	@Override public void setCode(String code) {this.code = code;}
-	
 	@Override public List<OtrSeason> getSeasons() {if(seasons==null){seasons = new ArrayList<OtrSeason>();} return seasons;}
 	@Override public void setSeasons(List<OtrSeason> seasons) {this.seasons = seasons;}
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private OtrImage banner;
+	@Override public OtrImage getBanner() {return banner;}
+	@Override public void setBanner(OtrImage banner) {this.banner = banner;}
 	
 	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	

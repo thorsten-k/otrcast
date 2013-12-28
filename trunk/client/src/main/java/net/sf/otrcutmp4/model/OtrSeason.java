@@ -46,6 +46,8 @@ public class OtrSeason implements Serializable,EjbPersistable,
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private OtrImage cover;
+	@Override public OtrImage getCover() {return cover;}
+	@Override public void setCover(OtrImage cover) {this.cover = cover;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="season")
 	@OrderBy("nr ASC")
@@ -68,8 +70,7 @@ public class OtrSeason implements Serializable,EjbPersistable,
 	public boolean isShowName() {return showName;}
 	public void setShowName(boolean showName) {this.showName = showName;}
 	
-	@Override public OtrImage getCover() {return cover;}
-	@Override public void setCover(OtrImage cover) {this.cover = cover;}
+
 	
 	@Override public List<OtrEpisode> getEpisodes() {if(episodes==null){episodes = new ArrayList<OtrEpisode>();} return episodes;}
 	@Override public void setEpisodes(List<OtrEpisode> episodes) {this.episodes = episodes;}
