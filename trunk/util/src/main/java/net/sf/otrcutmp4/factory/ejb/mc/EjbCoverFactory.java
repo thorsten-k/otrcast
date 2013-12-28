@@ -1,11 +1,11 @@
 package net.sf.otrcutmp4.factory.ejb.mc;
 
-import net.sf.otrcutmp4.interfaces.model.Cover;
+import net.sf.otrcutmp4.interfaces.model.Image;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbCoverFactory<COVER extends Cover>
+public class EjbCoverFactory<COVER extends Image>
 {	
 final static Logger logger = LoggerFactory.getLogger(EjbCoverFactory.class);
 	
@@ -16,7 +16,7 @@ final static Logger logger = LoggerFactory.getLogger(EjbCoverFactory.class);
 	        this.coverClass=coverClass;
 	 }
 	 
-	 public static <COVER extends Cover> EjbCoverFactory<COVER> factory(final Class<COVER> coverClass)
+	 public static <COVER extends Image> EjbCoverFactory<COVER> factory(final Class<COVER> coverClass)
 	 {
 		 return new EjbCoverFactory<COVER>(coverClass);
 	 }

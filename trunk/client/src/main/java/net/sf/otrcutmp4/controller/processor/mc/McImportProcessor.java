@@ -9,7 +9,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
 import net.sf.otrcutmp4.controller.hotfolder.McTargetFactory;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
-import net.sf.otrcutmp4.model.OtrCover;
+import net.sf.otrcutmp4.model.OtrImage;
 import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrMovie;
 import net.sf.otrcutmp4.model.OtrSeason;
@@ -34,7 +34,7 @@ public class McImportProcessor implements Processor
 	private McTargetFactory mcTarget;
 	
 	private UtilsFacadeBean fUtils;
-	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> fOtrMc;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fOtrMc;
 	
 	public McImportProcessor(OtrConfig config,EntityManager em)
 	{
@@ -42,7 +42,7 @@ public class McImportProcessor implements Processor
 		tagReader = new Mp4TagReader(false);
 		mcTarget = new McTargetFactory(config);
 		fUtils = new UtilsFacadeBean(em);
-		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,fUtils);
+		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em,fUtils);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -74,7 +74,7 @@ public class McImportProcessor implements Processor
 	
 	private void handleEpisode(Episode xmlEpisode)
 	{
-		OtrEpisode episode = fOtrMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrCover.class, xmlEpisode);
+		OtrEpisode episode = fOtrMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrImage.class, xmlEpisode);
 		logger.info("Persisted Episode "+episode.getId());
 		mcTarget.getTarget();
 		

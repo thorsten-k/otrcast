@@ -15,7 +15,7 @@ import net.sf.otrcutmp4.controller.tag.Mp4MediaTypeCorrector;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbStorageFactory;
-import net.sf.otrcutmp4.model.OtrCover;
+import net.sf.otrcutmp4.model.OtrImage;
 import net.sf.otrcutmp4.model.OtrEpisode;
 import net.sf.otrcutmp4.model.OtrMovie;
 import net.sf.otrcutmp4.model.OtrSeason;
@@ -43,9 +43,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private EntityManager em;
 	private UtilsFacadeBean ufb;
-	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> fOtrMc;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fOtrMc;
 	
-	private EjbCoverFactory<OtrCover> efCover;
+	private EjbCoverFactory<OtrImage> efCover;
 	private EjbStorageFactory<OtrStorage> efStorage;
     private Mp4MediaTypeCorrector mtc;
 	
@@ -54,9 +54,9 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
 		ufb = new UtilsFacadeBean(em);
-		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em, ufb);
+		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em, ufb);
 		
-		efCover=EjbCoverFactory.factory(OtrCover.class);
+		efCover=EjbCoverFactory.factory(OtrImage.class);
 		efStorage=EjbStorageFactory.factory(OtrStorage.class);
         mtc = new Mp4MediaTypeCorrector();
 
@@ -146,7 +146,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		
 		if(xmlMovie.isSetCover() && movie.getCover()==null)
 		{
-			OtrCover cover = efCover.build(xmlMovie.getCover());
+			OtrImage cover = efCover.build(xmlMovie.getCover());
 			em.persist(cover);
 			movie.setCover(cover);
 			em.merge(movie);
@@ -189,7 +189,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 
 		if(xmlEpisode.isSetCover() && season.getCover()==null)
 		{
-			OtrCover cover = efCover.build(xmlEpisode.getCover());
+			OtrImage cover = efCover.build(xmlEpisode.getCover());
 			em.persist(cover);
 			season.setCover(cover);
 			em.merge(season);

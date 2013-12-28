@@ -18,12 +18,12 @@ public class CliItemFactory extends AbstractClientTest
 	final static Logger logger = LoggerFactory.getLogger(CliItemFactory.class);
 
     private UtilsFacadeBean fUtils;
-    private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage> fOtrMc;
+    private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fOtrMc;
 
 	public CliItemFactory(EntityManager em)
     {
         fUtils = new UtilsFacadeBean(em);
-        fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrCover,OtrStorage>(em,fUtils);
+        fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em,fUtils);
     }
 
     private void xmlEpisode()

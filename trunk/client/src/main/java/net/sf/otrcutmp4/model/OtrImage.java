@@ -8,10 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import net.sf.otrcutmp4.interfaces.model.Cover;
+import net.sf.otrcutmp4.interfaces.model.Image;
 
 @Entity
-public class OtrCover implements Serializable,Cover
+public class OtrImage implements Serializable,Image
 {
 	private static final long serialVersionUID = 1L;
 	
