@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Meta }
+     * Create an instance of {@link Sync }
      * 
      */
-    public Meta createMeta() {
-        return new Meta();
+    public Sync createSync() {
+        return new Sync();
     }
 
     /**

@@ -3,7 +3,6 @@ package net.sf.otrcutmp4.model.xml.tvdb;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.series.AbstractXmlSeriesTest;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -11,27 +10,27 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlMeta extends AbstractXmlSeriesTest
+public class TestXmlSync extends AbstractXmlTvDbTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlMeta.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlSync.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-        setXmlFile(dirSuffix,Meta.class);
+        setXmlFile(dirSuffix,Sync.class);
 	}
     
     @Test
     public void jaxb() throws FileNotFoundException
     {
-        Meta test = create(true);
-        Meta ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Meta.class);
+        Sync test = create(true);
+        Sync ref =JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Sync.class);
     	assertJaxbEquals(ref, test);
     }
     
-    public static Meta create(boolean withChilds)
+    public static Sync create(boolean withChilds)
     {
-        Meta xml = new Meta();
+        Sync xml = new Sync();
         xml.setId(123);
 
         if(withChilds)
@@ -49,8 +48,8 @@ public class TestXmlMeta extends AbstractXmlSeriesTest
     {
 		OtrXmlTstBootstrap.init();
 		
-		TestXmlMeta.initFiles();
-		TestXmlMeta test = new TestXmlMeta();
+		TestXmlSync.initFiles();
+		TestXmlSync test = new TestXmlSync();
 		test.save();
     }
 }
