@@ -2,5 +2,5 @@
 <s:series xmlns:s="http://otrcutmp4.sf.net/series" xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:tvdb="http://otrcutmp4.sf.net/tvdb" name="Test Name" key="KEY">
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
-    <tvdb:meta id="123"/>
+    <tvdb:sync id="123"/>
 </s:series>
