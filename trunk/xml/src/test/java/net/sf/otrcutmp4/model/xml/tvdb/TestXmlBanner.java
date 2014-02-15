@@ -3,7 +3,6 @@ package net.sf.otrcutmp4.model.xml.tvdb;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.series.AbstractXmlSeriesTest;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -11,7 +10,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlBanner extends AbstractXmlSeriesTest
+public class TestXmlBanner extends AbstractXmlTvDbTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlBanner.class);
 	

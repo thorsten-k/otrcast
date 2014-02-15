@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "banners"
 })
-@XmlRootElement(name = "meta")
-public class Meta
+@XmlRootElement(name = "sync")
+public class Sync
     implements Serializable
 {
 

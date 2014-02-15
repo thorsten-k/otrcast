@@ -11,7 +11,7 @@ import java.util.zip.ZipInputStream;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.factory.xml.tvdb.XmlBannerFactory;
-import net.sf.otrcutmp4.factory.xml.tvdb.XmlMetaFactory;
+import net.sf.otrcutmp4.factory.xml.tvdb.XmlSyncFactory;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.tvdb.Banners;
@@ -58,12 +58,12 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
             Series series = new Series();
 
             series.setName(e.getChildText("SeriesName"));
-            series.setMeta(XmlMetaFactory.build(e.getChildText("id")));
+            series.setSync(XmlSyncFactory.build(e.getChildText("id")));
 
             if(e.getChildText("banner")!=null)
             {
-                series.getMeta().setBanners(new Banners());
-                series.getMeta().getBanners().getBanner().add(XmlBannerFactory.build(e.getChildText("banner")));
+                series.getSync().setBanners(new Banners());
+                series.getSync().getBanners().getBanner().add(XmlBannerFactory.build(e.getChildText("banner")));
             }
 
             otr.getSeries().add(series);
