@@ -52,4 +52,13 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		
 		return xml;
 	}
+	
+	public static net.sf.otrcutmp4.model.xml.series.Episode build(int nr, String name)
+	{		
+		net.sf.otrcutmp4.model.xml.series.Episode xml = new net.sf.otrcutmp4.model.xml.series.Episode();
+		xml.setName(name);
+		xml.setNr(nr);
+		
+		return xml;
+	}
 }

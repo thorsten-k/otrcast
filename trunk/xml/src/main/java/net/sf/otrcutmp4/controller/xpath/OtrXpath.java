@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.xml.xpath;
+package net.sf.otrcutmp4.controller.xpath;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;

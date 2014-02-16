@@ -63,6 +63,7 @@
 				<xsd:element ref="mc:image" maxOccurs="1"/>
 				<xsd:element ref="s:series" maxOccurs="1"/>
 				<xsd:element ref="s:episode" maxOccurs="unbounded"/>
+				<xsd:element ref="tvdb:sync" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 			<xsd:attribute name="nr" type="xsd:long"/>
@@ -77,6 +78,7 @@
 				<xsd:element ref="s:season" maxOccurs="1"/>
 				<xsd:element ref="mc:image" maxOccurs="1"/>
 				<xsd:element ref="mc:storage" maxOccurs="1"/>
+				<xsd:element ref="tvdb:sync" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 			<xsd:attribute name="nr" type="xsd:long"/>

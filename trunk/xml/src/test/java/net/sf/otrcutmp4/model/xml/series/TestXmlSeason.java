@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.model.xml.mc.TestXmlImage;
+import net.sf.otrcutmp4.model.xml.tvdb.TestXmlSync;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -44,6 +45,7 @@ public class TestXmlSeason extends AbstractXmlSeriesTest
     		xml.setImage(TestXmlImage.create(false));
     		xml.getEpisode().add(TestXmlEpisode.create(false));
     		xml.getEpisode().add(TestXmlEpisode.create(false));
+    		xml.setSync(TestXmlSync.create(false));
     	}
     	
     	return xml;

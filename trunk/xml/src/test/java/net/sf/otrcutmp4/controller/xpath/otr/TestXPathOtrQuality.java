@@ -1,10 +1,10 @@
-package net.sf.otrcutmp4.model.xml.xpath.otr;
+package net.sf.otrcutmp4.controller.xpath.otr;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.otrcutmp4.model.xml.otr.Download;
+import net.sf.otrcutmp4.controller.xpath.OtrXpath;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
-import net.sf.otrcutmp4.xml.xpath.OtrXpath;
+import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.test.AbstractOtrXmlTest;
 
 import org.junit.Assert;
@@ -13,52 +13,52 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXPathOtrOtrId extends AbstractOtrXmlTest
+public class TestXPathOtrQuality extends AbstractOtrXmlTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXPathOtrOtrId.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXPathOtrQuality.class);
     
-	private Download download;
+	private OtrId otrId;
 	private final String typeOk = "myType";
 	private final String typeDuplicated = "myDupe";
 	
 	@Before
 	public void initLinkList()
 	{
-		download = new Download();
+		otrId = new OtrId();
 		
-		OtrId d1 = new OtrId();
-		d1.setKey(typeOk);
-		download.getOtrId().add(d1);
+		Quality d1 = new Quality();
+		d1.setType(typeOk);
+		otrId.getQuality().add(d1);
 		
-		OtrId d2 = new OtrId();
-		d2.setKey("dummy");
-		download.getOtrId().add(d2);
+		Quality d2 = new Quality();
+		d2.setType("dummy");
+		otrId.getQuality().add(d2);
 		
-		OtrId d3 = new OtrId();
-		d3.setKey(typeDuplicated);
-		download.getOtrId().add(d3);
+		Quality d3 = new Quality();
+		d3.setType(typeDuplicated);
+		otrId.getQuality().add(d3);
 		
-		OtrId d4 = new OtrId();
-		d4.setKey(typeDuplicated);
-		download.getOtrId().add(d4);
+		Quality d4 = new Quality();
+		d4.setType(typeDuplicated);
+		otrId.getQuality().add(d4);
 	}
 	
 	@Test
 	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
-		OtrId test = OtrXpath.getOtrIdByKey(download, typeOk);
-	    Assert.assertEquals(typeOk,test.getKey());
+		Quality test = OtrXpath.getQualityByKey(otrId, typeOk);
+	    Assert.assertEquals(typeOk,test.getType());
 	}
 
 	@Test(expected=ExlpXpathNotFoundException.class)
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
-		OtrXpath.getOtrIdByKey(download, "-1");
+		OtrXpath.getQualityByKey(otrId, "-1");
 	}
 	
 	@Test(expected=ExlpXpathNotUniqueException.class)
 	public void testDuplicate() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
-		OtrXpath.getOtrIdByKey(download, typeDuplicated);
+		OtrXpath.getQualityByKey(otrId, typeDuplicated);
 	}
 }

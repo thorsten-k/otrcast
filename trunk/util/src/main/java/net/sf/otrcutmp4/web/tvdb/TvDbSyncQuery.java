@@ -12,11 +12,11 @@ import org.jdom2.xpath.XPathFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TvDbMetaQuery extends AbstractTvDbQuery
+public class TvDbSyncQuery extends AbstractTvDbQuery
 {
-	final static Logger logger = LoggerFactory.getLogger(TvDbMetaQuery.class);
+	final static Logger logger = LoggerFactory.getLogger(TvDbSyncQuery.class);
 
-	public TvDbMetaQuery(String apiKey)
+	public TvDbSyncQuery(String apiKey)
 	{
         super(apiKey);
 	}

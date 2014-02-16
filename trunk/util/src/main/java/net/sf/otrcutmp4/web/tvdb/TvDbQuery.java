@@ -16,7 +16,7 @@ public class TvDbQuery extends AbstractTvDbQuery
 	
 	public Date getLastModificationTime()
 	{
-        TvDbMetaQuery q = new TvDbMetaQuery(apiKey);
+        TvDbSyncQuery q = new TvDbSyncQuery(apiKey);
         return q.debug();
 	}
 }

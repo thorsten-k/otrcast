@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.mc.Image;
 import net.sf.otrcutmp4.model.xml.mc.Storage;
+import net.sf.otrcutmp4.model.xml.tvdb.Sync;
 
 
 /**
@@ -25,6 +26,7 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -40,7 +42,8 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
 @XmlType(name = "", propOrder = {
     "season",
     "image",
-    "storage"
+    "storage",
+    "sync"
 })
 @XmlRootElement(name = "episode")
 public class Episode
@@ -54,6 +57,8 @@ public class Episode
     protected Image image;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Storage storage;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
+    protected Sync sync;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "nr")
@@ -143,6 +148,34 @@ public class Episode
 
     public boolean isSetStorage() {
         return (this.storage!= null);
+    }
+
+    /**
+     * Gets the value of the sync property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Sync }
+     *     
+     */
+    public Sync getSync() {
+        return sync;
+    }
+
+    /**
+     * Sets the value of the sync property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Sync }
+     *     
+     */
+    public void setSync(Sync value) {
+        this.sync = value;
+    }
+
+    public boolean isSetSync() {
+        return (this.sync!= null);
     }
 
     /**
