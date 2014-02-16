@@ -5,13 +5,13 @@ import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 
-public class CliTvDbMetaQuery extends AbstractUtilTest
+public class CliTvDbSyncQuery extends AbstractUtilTest
 {
     public static void main(String args[]) throws Exception
     {
         Configuration config = OtrUtilTestBootstrap.init();
 
-        TvDbMetaQuery dbQuery = new TvDbMetaQuery(config.getString("tvDbApiKey"));
+        TvDbSyncQuery dbQuery = new TvDbSyncQuery(config.getString("tvDbApiKey"));
         dbQuery.debug();
     }
  }

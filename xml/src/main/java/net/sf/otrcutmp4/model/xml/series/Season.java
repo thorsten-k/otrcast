@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.mc.Image;
+import net.sf.otrcutmp4.model.xml.tvdb.Sync;
 
 
 /**
@@ -26,6 +27,7 @@ import net.sf.otrcutmp4.model.xml.mc.Image;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -43,7 +45,8 @@ import net.sf.otrcutmp4.model.xml.mc.Image;
 @XmlType(name = "", propOrder = {
     "image",
     "series",
-    "episode"
+    "episode",
+    "sync"
 })
 @XmlRootElement(name = "season")
 public class Season
@@ -57,6 +60,8 @@ public class Season
     protected Series series;
     @XmlElement(required = true)
     protected List<Episode> episode;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
+    protected Sync sync;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "nr")
@@ -159,6 +164,34 @@ public class Season
 
     public void unsetEpisode() {
         this.episode = null;
+    }
+
+    /**
+     * Gets the value of the sync property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Sync }
+     *     
+     */
+    public Sync getSync() {
+        return sync;
+    }
+
+    /**
+     * Sets the value of the sync property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Sync }
+     *     
+     */
+    public void setSync(Sync value) {
+        this.sync = value;
+    }
+
+    public boolean isSetSync() {
+        return (this.sync!= null);
     }
 
     /**

@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.web.tvdb;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,12 +10,14 @@ import java.io.Reader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.factory.xml.tvdb.XmlBannerFactory;
 import net.sf.otrcutmp4.factory.xml.tvdb.XmlSyncFactory;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.tvdb.Banners;
+import net.sf.otrcutmp4.web.tvdb.processor.TvDbSeriesStructureFactory;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -48,7 +51,7 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
 
         Document doc = fetch(url+"/GetSeries.php?seriesname="+name);
 
-        XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
+//        XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
 //        logger.info(serializer.outputString(doc));
 
         XPathFactory xPathFactory = XPathFactory.instance();
@@ -105,8 +108,6 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
                     {
                         output.write( data );
                     }
-
-                    // The ZipEntry is extracted in the output
                     output.close();
 
                     Document doc = null;
@@ -114,8 +115,16 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
 
                     Reader reader = new InputStreamReader(new ByteArrayInputStream(output.toByteArray()));
                     doc = builder.build(reader);
-                    XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
-                    logger.info(serializer.outputString(doc));
+                    File file = new File("/Volumes/ramdisk/",ze.getName());
+                    JDomUtil.save(doc, file, Format.getPrettyFormat());
+                    
+                    
+                    if(ze.getName().equals("de.xml"))
+                    {
+                    	TvDbSeriesStructureFactory f = new TvDbSeriesStructureFactory(doc);
+                    	f.debugDocument();
+                    }
+//                    
 
                 }
                 catch (IllegalStateException e) {e.printStackTrace();}

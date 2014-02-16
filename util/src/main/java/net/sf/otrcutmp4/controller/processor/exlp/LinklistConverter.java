@@ -10,13 +10,13 @@ import net.sf.exlp.interfaces.LogParser;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.controller.processor.exlp.event.DownloadEvent;
 import net.sf.otrcutmp4.controller.processor.exlp.parser.LinkListParser;
+import net.sf.otrcutmp4.controller.xpath.OtrXpath;
 import net.sf.otrcutmp4.factory.xml.otr.XmlTvFactory;
 import net.sf.otrcutmp4.model.xml.otr.Download;
 import net.sf.otrcutmp4.model.xml.otr.Linklist;
 import net.sf.otrcutmp4.model.xml.otr.OtrId;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.otr.Recording;
-import net.sf.otrcutmp4.xml.xpath.OtrXpath;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

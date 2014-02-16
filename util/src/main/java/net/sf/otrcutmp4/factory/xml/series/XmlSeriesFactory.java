@@ -19,7 +19,7 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 	public XmlSeriesFactory(Query query){this(query.getSeries());}
 	public XmlSeriesFactory(net.sf.otrcutmp4.model.xml.series.Series q){this.q=q;}
 	
-	public net.sf.otrcutmp4.model.xml.series.Series create(String format)
+	public net.sf.otrcutmp4.model.xml.series.Series create2(String format)
 	{
 		net.sf.otrcutmp4.model.xml.series.Series xml = new net.sf.otrcutmp4.model.xml.series.Series();
 		
