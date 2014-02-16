@@ -30,7 +30,6 @@ import org.jdom2.JDOMException;
 import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.slf4j.Logger;
@@ -75,7 +74,7 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
         return otr;
 	}
 
-    public void querySeries(long tvDbSeriesId) throws JDOMException
+    public Otr querySeries(long tvDbSeriesId) throws JDOMException
     {
         HttpGet get = new HttpGet(url+"/"+apiKey+"/series/"+tvDbSeriesId+"/all/de.zip");
         HttpResponse result = null;
@@ -89,6 +88,8 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
         catch (ClientProtocolException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}
 
+        Otr otr = new Otr();
+        
         try
         {
             InputStream is = result.getEntity().getContent();
@@ -122,7 +123,7 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
                     if(ze.getName().equals("de.xml"))
                     {
                     	TvDbSeriesStructureFactory f = new TvDbSeriesStructureFactory(doc);
-                    	f.debugDocument();
+                    	otr.getSeries().add(f.build());
                     }
 //                    
 
@@ -137,5 +138,6 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
         {
             e.printStackTrace();
         }
+        return otr;
     }
 }

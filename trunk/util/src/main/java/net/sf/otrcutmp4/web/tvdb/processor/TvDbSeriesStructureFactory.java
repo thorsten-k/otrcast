@@ -1,7 +1,10 @@
 package net.sf.otrcutmp4.web.tvdb.processor;
 
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.xpath.SeriesXpath;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeasonFactory;
 import net.sf.otrcutmp4.factory.xml.tvdb.XmlSyncFactory;
 import net.sf.otrcutmp4.model.xml.series.Episode;
@@ -23,10 +26,12 @@ public class TvDbSeriesStructureFactory
 	final static Logger logger = LoggerFactory.getLogger(TvDbSeriesStructureFactory.class);
 
 	private Document doc;
+	private Series series;
 	
 	public TvDbSeriesStructureFactory(Document doc)
 	{
         this.doc=doc;
+        series = new Series();
 	}
 	
 	public void debugDocument()
@@ -37,25 +42,43 @@ public class TvDbSeriesStructureFactory
 	
 	public Series build()
 	{
-		Series series = new Series();
-	
 		XPathFactory xPathFactory = XPathFactory.instance();
         XPathExpression<Element> xPathExpression = xPathFactory.compile("/Data/Episode", Filters.element());
         for(Element e : xPathExpression.evaluate(doc))
         {
         	handleEpisode(e);
-        	break;
+     //   	break;
         }
 		return series;
 	}
 	
-	private void handleEpisode(Element e)
+	private void handleEpisode(Element element)
 	{
-		Episode episode = buildEpisode(e);
-		episode.setSeason(buildSeason(e));
+		Episode episode = buildEpisode(element);
+		episode.setSeason(buildSeason(element));
 	
-		JaxbUtil.info(episode);
-		JDomUtil.debug(e);
+		Season season = null;
+		try
+		{
+			season = SeriesXpath.getSeason(series, episode.getSeason().getNr());
+		}
+		catch (ExlpXpathNotFoundException e1)
+		{
+			season = episode.getSeason();
+			series.getSeason().add(episode.getSeason());
+		}
+		catch (ExlpXpathNotUniqueException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		episode.setSeason(null);
+		season.getEpisode().add(episode);
+		
+		
+//		JaxbUtil.info(episode);
+//		JDomUtil.debug(element);
 	}
 	
 	private Season buildSeason(Element e)

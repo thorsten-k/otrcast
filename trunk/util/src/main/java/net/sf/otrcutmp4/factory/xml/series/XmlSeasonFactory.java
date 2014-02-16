@@ -52,7 +52,7 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 		return xml;
 	}
 	
-	public static net.sf.otrcutmp4.model.xml.series.Season build(int nr)
+	public static net.sf.otrcutmp4.model.xml.series.Season build(long nr)
 	{
 		net.sf.otrcutmp4.model.xml.series.Season season = new net.sf.otrcutmp4.model.xml.series.Season();
 		season.setNr(nr);
