@@ -3,6 +3,8 @@ package net.sf.otrcutmp4.web.tvdb.processor;
 import java.io.File;
 
 import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import net.sf.otrcutmp4.web.tvdb.TvDbQuery;
@@ -30,7 +32,8 @@ public class CliTvDbSeriesStructureFactory extends AbstractUtilTest
 		Document doc = JDomUtil.load(f);
 		
 		TvDbSeriesStructureFactory fStructure = new TvDbSeriesStructureFactory(doc);
-		fStructure.build();
+		Series series = fStructure.build();
+		JaxbUtil.info(series);
 	}
 	
     public static void main(String args[]) throws Exception

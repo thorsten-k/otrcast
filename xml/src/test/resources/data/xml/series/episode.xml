@@ -3,4 +3,5 @@
     <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
     <mc:image id="123" fileType="png"/>
     <mc:storage id="123" name="myName" hash="myHash" size="123" lastModified="2011-11-11T11:11:11"/>
+    <tvdb:sync id="123"/>
 </s:episode>
