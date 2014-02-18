@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tvdb:banners xmlns:tvdb="http://otrcutmp4.sf.net/tvdb">
-    <tvdb:banner url="myUrl"/>
-    <tvdb:banner url="myUrl"/>
+<tvdb:banners xmlns:tvdb="http://otrcutmp4.sf.net/tvdb" xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series">
+    <tvdb:banner url="myUrl" type="myType"/>
+    <tvdb:banner url="myUrl" type="myType"/>
+    <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
+    <s:season id="123" nr="1" name="myName" showNr="true" showName="true"/>
 </tvdb:banners>

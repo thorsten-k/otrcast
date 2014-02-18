@@ -5,4 +5,5 @@
     <s:episode id="1" nr="1" name="Test Name"/>
     <s:episode id="1" nr="1" name="Test Name"/>
     <tvdb:sync id="123"/>
+    <tvdb:banners/>
 </s:season>

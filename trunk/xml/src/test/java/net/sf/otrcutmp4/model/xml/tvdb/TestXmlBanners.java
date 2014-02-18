@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.model.xml.tvdb;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.series.TestXmlSeason;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 import org.junit.BeforeClass;
@@ -34,8 +35,8 @@ public class TestXmlBanners extends AbstractXmlTvDbTest
 
     	if(withChilds)
         {
-            xml.getBanner().add(TestXmlBanner.create(false));
-            xml.getBanner().add(TestXmlBanner.create(false));
+            xml.getBanner().add(TestXmlBanner.create(false));xml.getBanner().add(TestXmlBanner.create(false));         
+            xml.getSeason().add(TestXmlSeason.create(false)); xml.getSeason().add(TestXmlSeason.create(false));
         }
 
     	return xml;

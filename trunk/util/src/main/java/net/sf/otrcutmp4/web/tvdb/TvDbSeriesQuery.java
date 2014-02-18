@@ -17,6 +17,7 @@ import net.sf.otrcutmp4.factory.xml.tvdb.XmlSyncFactory;
 import net.sf.otrcutmp4.model.xml.container.Otr;
 import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.model.xml.tvdb.Banners;
+import net.sf.otrcutmp4.web.tvdb.processor.TvDbBannerFactory;
 import net.sf.otrcutmp4.web.tvdb.processor.TvDbSeriesStructureFactory;
 
 import org.apache.http.HttpResponse;
@@ -124,6 +125,11 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
                     {
                     	TvDbSeriesStructureFactory f = new TvDbSeriesStructureFactory(doc);
                     	otr.getSeries().add(f.build());
+                    }
+                    else if(ze.getName().equals("banners.xml"))
+                    {
+                    	TvDbBannerFactory f = new TvDbBannerFactory(doc);
+                    	otr.getBanners().add(f.build());
                     }
 //                    
 

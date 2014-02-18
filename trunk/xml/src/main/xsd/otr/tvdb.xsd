@@ -1,6 +1,8 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/tvdb"
-            xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
+        xmlns:s="http://otrcutmp4.sf.net/series"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
 	<xsd:element name="sync">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -13,6 +15,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="tvdb:banner" maxOccurs="unbounded"/>
+				<xsd:element ref="s:season" maxOccurs="unbounded"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -22,6 +25,7 @@
 
 			</xsd:sequence>
 			<xsd:attribute name="url" type="xsd:string"/>
+			<xsd:attribute name="type" type="xsd:string"/>
 		</xsd:complexType>
 	</xsd:element>
 </xsd:schema>

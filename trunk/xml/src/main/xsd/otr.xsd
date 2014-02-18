@@ -5,6 +5,7 @@
     xmlns:s="http://otrcutmp4.sf.net/series"
     xmlns:o="http://otrcutmp4.sf.net/otr"
     xmlns:mc="http://otrcutmp4.sf.net/mc"
+    xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
@@ -29,6 +30,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="s:series" maxOccurs="unbounded"/>
+                <xsd:element ref="tvdb:banners" maxOccurs="unbounded"/>
                 <xsd:element ref="s:category" maxOccurs="unbounded"/>
                 <xsd:element ref="s:movie" maxOccurs="unbounded"/>
                 <xsd:element ref="o:format" maxOccurs="unbounded"/>

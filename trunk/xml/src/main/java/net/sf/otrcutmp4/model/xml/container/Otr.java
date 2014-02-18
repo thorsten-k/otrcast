@@ -14,6 +14,7 @@ import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.series.Category;
 import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Series;
+import net.sf.otrcutmp4.model.xml.tvdb.Banners;
 
 
 /**
@@ -27,6 +28,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banners" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}category" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format" maxOccurs="unbounded"/>
@@ -42,6 +44,7 @@ import net.sf.otrcutmp4.model.xml.series.Series;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "series",
+    "banners",
     "category",
     "movie",
     "format",
@@ -55,6 +58,8 @@ public class Otr
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected List<Series> series;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
+    protected List<Banners> banners;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected List<Category> category;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
@@ -99,6 +104,43 @@ public class Otr
 
     public void unsetSeries() {
         this.series = null;
+    }
+
+    /**
+     * Gets the value of the banners property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the banners property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBanners().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Banners }
+     * 
+     * 
+     */
+    public List<Banners> getBanners() {
+        if (banners == null) {
+            banners = new ArrayList<Banners>();
+        }
+        return this.banners;
+    }
+
+    public boolean isSetBanners() {
+        return ((this.banners!= null)&&(!this.banners.isEmpty()));
+    }
+
+    public void unsetBanners() {
+        this.banners = null;
     }
 
     /**
