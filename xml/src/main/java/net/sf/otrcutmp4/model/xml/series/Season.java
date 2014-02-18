@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.otrcutmp4.model.xml.mc.Image;
+import net.sf.otrcutmp4.model.xml.tvdb.Banners;
 import net.sf.otrcutmp4.model.xml.tvdb.Sync;
 
 
@@ -28,6 +29,7 @@ import net.sf.otrcutmp4.model.xml.tvdb.Sync;
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banners"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}long" />
@@ -46,7 +48,8 @@ import net.sf.otrcutmp4.model.xml.tvdb.Sync;
     "image",
     "series",
     "episode",
-    "sync"
+    "sync",
+    "banners"
 })
 @XmlRootElement(name = "season")
 public class Season
@@ -62,6 +65,8 @@ public class Season
     protected List<Episode> episode;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
     protected Sync sync;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
+    protected Banners banners;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "nr")
@@ -192,6 +197,34 @@ public class Season
 
     public boolean isSetSync() {
         return (this.sync!= null);
+    }
+
+    /**
+     * Gets the value of the banners property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Banners }
+     *     
+     */
+    public Banners getBanners() {
+        return banners;
+    }
+
+    /**
+     * Sets the value of the banners property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Banners }
+     *     
+     */
+    public void setBanners(Banners value) {
+        this.banners = value;
+    }
+
+    public boolean isSetBanners() {
+        return (this.banners!= null);
     }
 
     /**

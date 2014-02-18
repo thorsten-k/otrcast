@@ -2,8 +2,6 @@ package net.sf.otrcutmp4.web.tvdb.processor;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.xpath.SeriesXpath;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeasonFactory;
 import net.sf.otrcutmp4.factory.xml.tvdb.XmlSyncFactory;
@@ -93,6 +91,7 @@ public class TvDbSeriesStructureFactory
 		Episode episode = new Episode();
 		episode.setName(e.getChild("EpisodeName").getValue());
 		episode.setNr(new Long(e.getChild("EpisodeNumber").getValue()));
+		
 		episode.setSync(XmlSyncFactory.build(new Long(e.getChild("id").getValue())));
 		return episode;
 	}

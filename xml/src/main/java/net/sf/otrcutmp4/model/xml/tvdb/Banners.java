@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import net.sf.otrcutmp4.model.xml.series.Season;
 
 
 /**
@@ -22,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banner" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}season" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,7 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "banner"
+    "banner",
+    "season"
 })
 @XmlRootElement(name = "banners")
 public class Banners
@@ -42,6 +45,8 @@ public class Banners
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Banner> banner;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    protected List<Season> season;
 
     /**
      * Gets the value of the banner property.
@@ -78,6 +83,43 @@ public class Banners
 
     public void unsetBanner() {
         this.banner = null;
+    }
+
+    /**
+     * Gets the value of the season property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the season property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSeason().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Season }
+     * 
+     * 
+     */
+    public List<Season> getSeason() {
+        if (season == null) {
+            season = new ArrayList<Season>();
+        }
+        return this.season;
+    }
+
+    public boolean isSetSeason() {
+        return ((this.season!= null)&&(!this.season.isEmpty()));
+    }
+
+    public void unsetSeason() {
+        this.season = null;
     }
 
 }
