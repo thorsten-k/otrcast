@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tvdb:banner xmlns:tvdb="http://otrcutmp4.sf.net/tvdb" url="myUrl" type="myType"/>
+<tvdb:banner xmlns:tvdb="http://otrcutmp4.sf.net/tvdb" id="123" url="myUrl" type="myType"/>
