@@ -14,7 +14,7 @@ public class CliTvDbSeriesQuery extends AbstractUtilTest
         Configuration config = OtrUtilTestBootstrap.init();
 
         TvDbSeriesQuery dbQuery = new TvDbSeriesQuery(config.getString("tvDbApiKey"));
-//        dbQuery.findSeries("Lost");
+//      dbQuery.findSeries("Lost");
 
         Otr otr = dbQuery.querySeries(73739);
         JaxbUtil.info(otr);
