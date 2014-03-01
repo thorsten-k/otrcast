@@ -19,6 +19,12 @@
 			<artifactId>otrcutmp4-xml</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>ahtutils-xml</artifactId>
+					<groupId>net.sf.ahtutils</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ahtutils</groupId>
@@ -76,6 +82,11 @@
 			<groupId>net.sf.ahtutils</groupId>
 			<artifactId>ahtutils-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ahtutils</groupId>
+			<artifactId>ahtutils-xml</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	
