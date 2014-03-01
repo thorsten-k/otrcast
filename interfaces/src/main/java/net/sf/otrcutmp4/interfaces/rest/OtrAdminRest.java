@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.xml.access.Access;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.model.xml.series.Category;
@@ -40,4 +41,9 @@ public interface OtrAdminRest
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	Episode addEpisode(Episode episode);
+	
+	@POST @Path("security")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	String applySecurity(Access views, Access roles);
 }
