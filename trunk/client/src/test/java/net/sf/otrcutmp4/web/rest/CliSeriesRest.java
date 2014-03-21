@@ -22,9 +22,9 @@ import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
 
-public class TestSeriesRest
+public class CliSeriesRest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestSeriesRest.class);
+	final static Logger logger = LoggerFactory.getLogger(CliSeriesRest.class);
 	
 	private OtrSeriesRest rest;
 	
@@ -33,7 +33,7 @@ public class TestSeriesRest
 	
 	private String template = "${seriesName} ${seasonNr}x${episodeNr} ${episodeName}";
 	
-	public TestSeriesRest()
+	public CliSeriesRest()
 	{	
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
@@ -75,7 +75,7 @@ public class TestSeriesRest
 	public static void main(String[] args) throws Exception
 	{
 		OtrClientTestBootstrap.init();
-		TestSeriesRest rest = new TestSeriesRest();
+		CliSeriesRest rest = new CliSeriesRest();
 //		rest.single();
 //		rest.multi();
 		rest.episode();
