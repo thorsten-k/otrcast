@@ -1,6 +1,5 @@
 package net.sf.otrcutmp4.factory.xml;
 
-import junit.framework.Assert;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
@@ -8,6 +7,7 @@ import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

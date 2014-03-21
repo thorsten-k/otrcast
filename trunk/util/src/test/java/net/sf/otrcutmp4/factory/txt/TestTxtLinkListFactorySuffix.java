@@ -1,13 +1,12 @@
 package net.sf.otrcutmp4.factory.txt;
 
-import junit.framework.Assert;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.factory.txt.TxtLinkListFactory;
 import net.sf.otrcutmp4.factory.xml.XmlQualityFactory;
 import net.sf.otrcutmp4.model.xml.otr.Format;
 import net.sf.otrcutmp4.model.xml.otr.Quality;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
