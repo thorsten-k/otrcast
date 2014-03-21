@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import junit.framework.Assert;
-
 import net.sf.exlp.core.event.JaxbEvent;
 import net.sf.exlp.core.handler.EhResultContainer;
 import net.sf.exlp.core.listener.LogListenerFile;
@@ -20,6 +18,7 @@ import net.sf.otrcutmp4.model.xml.cut.CutList;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;

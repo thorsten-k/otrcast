@@ -71,7 +71,7 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
 
             otr.getSeries().add(series);
         }
-        JaxbUtil.info(otr);
+        JaxbUtil.trace(otr);
         return otr;
 	}
 
