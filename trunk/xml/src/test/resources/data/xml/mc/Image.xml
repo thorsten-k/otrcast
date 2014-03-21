@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mc:image xmlns:mc="http://otrcutmp4.sf.net/mc" id="123" fileType="png">
+    <url>myURL</url>
     <data>6D7942696E61727944617461</data>
 </mc:image>

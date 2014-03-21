@@ -6,14 +6,14 @@ import net.sf.otrcutmp4.model.xml.otr.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlCoverFactory
+public class XmlImageFactory
 {	
-	final static Logger logger = LoggerFactory.getLogger(XmlCoverFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlImageFactory.class);
 	
 	private net.sf.otrcutmp4.model.xml.mc.Image q;
 	
-	public XmlCoverFactory(Query query){this(query.getImage());}
-	public XmlCoverFactory(net.sf.otrcutmp4.model.xml.mc.Image q){this.q=q;}
+	public XmlImageFactory(Query query){this(query.getImage());}
+	public XmlImageFactory(net.sf.otrcutmp4.model.xml.mc.Image q){this.q=q;}
 	
 	public net.sf.otrcutmp4.model.xml.mc.Image build(Image ejb)
 	{
@@ -22,6 +22,7 @@ public class XmlCoverFactory
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetFileType()){xml.setFileType(ejb.getFileType());}
 		if(q.isSetData()){xml.setData(ejb.getData());}
+		if(q.isSetUrl()){xml.setUrl(ejb.getUrl());}
 		return xml;
 	}
 }

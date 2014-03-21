@@ -7,4 +7,7 @@ public interface Image extends EjbWithId,EjbWithFileType
 {
 	byte[] getData();
 	void setData(byte[] data);
+	
+	public String getUrl();
+    public void setUrl(String url);
 }

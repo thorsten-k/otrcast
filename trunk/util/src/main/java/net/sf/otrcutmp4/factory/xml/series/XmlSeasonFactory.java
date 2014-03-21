@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.factory.xml.series;
 
-import net.sf.otrcutmp4.factory.xml.mc.XmlCoverFactory;
+import net.sf.otrcutmp4.factory.xml.mc.XmlImageFactory;
 import net.sf.otrcutmp4.interfaces.model.Image;
 import net.sf.otrcutmp4.interfaces.model.Episode;
 import net.sf.otrcutmp4.interfaces.model.Season;
@@ -45,7 +45,7 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 		
 		if(q.isSetImage() && ejb.getCover()!=null)
 		{
-			XmlCoverFactory f = new XmlCoverFactory(q.getImage());
+			XmlImageFactory f = new XmlImageFactory(q.getImage());
 			xml.setImage(f.build(ejb.getCover()));
 		}
 		
