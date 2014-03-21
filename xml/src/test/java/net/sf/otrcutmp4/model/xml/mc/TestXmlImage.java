@@ -38,6 +38,7 @@ public class TestXmlImage extends AbstractXmlMcTest
     	if(withChilds)
     	{
     		xml.setData("myBinaryData".getBytes());
+    		xml.setUrl("myURL");
     	}
     	
     	return xml;

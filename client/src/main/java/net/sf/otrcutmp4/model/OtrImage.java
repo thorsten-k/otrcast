@@ -26,6 +26,10 @@ public class OtrImage implements Serializable,Image
 	@Override public String getFileType() {return fileType;}
 	@Override public void setFileType(String fileType) {this.fileType = fileType;}
 
+    private String url;
+    @Override public String getUrl(){return url;}
+    @Override public void setUrl(String url){this.url = url;}
+	
 	@Lob
 	private byte[] data;
 	@Override public byte[] getData() {return data;}
