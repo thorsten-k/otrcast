@@ -175,8 +175,8 @@ public class Mp4Tagger
 			switch(coverManager.getFormat())
 			{
 				case PNG:	box.setPng(coverManager.getImageStream());break;
-				default:   logger.warn("IMAGE Format "+coverManager.getFormat()+" not handled");
-							  return;
+				case JPEG:	box.setJpg(coverManager.getImageStream());break;
+				default:    logger.warn("IMAGE Format "+coverManager.getFormat()+" not handled");return;
 			}
 			apple.addBox(box);
 		}
