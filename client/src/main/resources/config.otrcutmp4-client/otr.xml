@@ -7,4 +7,9 @@
 			<port>18300</port>
 		</rest>
 	</net>
+	<io>
+		<dir>
+			<cover>target</cover>
+		</dir>
+	</io>
 </config>

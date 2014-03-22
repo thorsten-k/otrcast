@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -16,16 +17,23 @@ public class FileSystemCoverManager implements CoverManager
 	
 	private File coverDir;
 	private File fCover;
+	private Format format;
 	
 	public FileSystemCoverManager(File coverDir)
 	{
 		this.coverDir=coverDir;
-		logger.debug("Using FS CoverManager");
+		logger.debug("Using FS CoverManager in "+coverDir.getAbsolutePath());
 	}
 
 	@Override
 	public boolean isAvailable(Season season)
 	{
+		if(!season.isSetSeries())
+		{
+			logger.warn(Season.class.getSimpleName()+" does not have a "+Series.class.getSimpleName());
+			return false;
+		}
+		
 		if(!coverDir.exists())
 		{
 			logger.warn("Cover folder does not exist: "+coverDir.getAbsolutePath());
@@ -40,25 +48,28 @@ public class FileSystemCoverManager implements CoverManager
 		File dir = new File(coverDir,season.getSeries().getKey());
 		if(!dir.exists())
 		{
-			logger.warn("No covers for "+season.getSeries().getKey()+": "+season.getSeries().getName());
+			logger.warn("No cover for "+Season.class.getSimpleName()+" "+season.getSeries().getKey()+" and "+Season.class.getSimpleName()+" "+season.getSeries().getName());
 			return false;
 		}
 		
-		fCover = new File(dir,season.getNr()+".png");
-		if(!fCover.exists())
+		for(Format f : Format.values())
 		{
-			logger.warn("No covers Season "+season.getNr());
-			return false;
+			fCover = new File(dir,season.getNr()+"."+f.toString().toLowerCase());
+			if(fCover.exists())
+			{
+				format = f;
+				return true;
+			}
 		}
-		
-		
-		return true;
+		logger.warn("No covers Season "+season.getNr());
+		format = null;
+		return false;
 	}
 
 	@Override
 	public Format getFormat()
 	{
-		return Format.PNG;
+		return format;
 	}
 
 	@Override
@@ -66,5 +77,16 @@ public class FileSystemCoverManager implements CoverManager
 	{
 		return FileUtils.readFileToByteArray(fCover);
 	}
-		
+	
+	public static Format toFormat(String fileName)
+	{
+		if(fileName.toLowerCase().endsWith(".png")){return Format.PNG;}
+		else if(fileName.toLowerCase().endsWith(".jpeg")){return Format.JPEG;}
+		else if(fileName.toLowerCase().endsWith(".jpg")){return Format.JPEG;}
+		else
+		{
+			logger.warn("Unknown Image format: "+fileName);
+			return null;
+		}
+	}
 }

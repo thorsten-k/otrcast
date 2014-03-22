@@ -1,9 +1,11 @@
 package net.sf.otrcutmp4.web.rest;
 
+import java.io.File;
 import java.io.IOException;
 
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.cover.FileSystemWebCoverManager;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.factory.FileNameFactoy;
 import net.sf.otrcutmp4.factory.txt.TxtDsFactory;
@@ -13,6 +15,7 @@ import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Tags;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
+import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
@@ -26,6 +29,7 @@ public class CliSeriesRest
 {
 	final static Logger logger = LoggerFactory.getLogger(CliSeriesRest.class);
 	
+	private Configuration config;
 	private OtrSeriesRest rest;
 	
 	private String fnS = "12345_The_Big_Bang_Theory_11.12.15_12-50_pro7_25_TVOON_DE.mpg.HQ.cut.mp4";
@@ -33,8 +37,9 @@ public class CliSeriesRest
 	
 	private String template = "${seriesName} ${seasonNr}x${episodeNr} ${episodeName}";
 	
-	public CliSeriesRest()
+	public CliSeriesRest(Configuration config)
 	{	
+		this.config=config;
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
 		rest = ProxyFactory.create(OtrSeriesRest.class, "http://localhost:8080/otr",clientExecutor);
@@ -72,12 +77,22 @@ public class CliSeriesRest
 		JaxbUtil.info(xml);
 	}
 	
+	public void episodeWithCover()
+	{
+		Episode xml = rest.getEpisode(12);
+		JaxbUtil.info(xml);
+		File dCover = new File (config.getString("io.dir.cover"));
+		FileSystemWebCoverManager fsw = new FileSystemWebCoverManager(dCover);
+		logger.info("Cover available: "+fsw.isAvailable(xml.getSeason()));
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
-		OtrClientTestBootstrap.init();
-		CliSeriesRest rest = new CliSeriesRest();
+		Configuration config = OtrClientTestBootstrap.init();
+		CliSeriesRest rest = new CliSeriesRest(config);
 //		rest.single();
 //		rest.multi();
-		rest.episode();
+//		rest.episode();
+		rest.episodeWithCover();
 	}
 }

@@ -7,6 +7,7 @@ import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
 import net.sf.otrcutmp4.controller.cover.FileSystemCoverManager;
+import net.sf.otrcutmp4.controller.cover.FileSystemWebCoverManager;
 import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
@@ -28,7 +29,14 @@ import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
-import org.apache.commons.cli.*;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,6 +117,7 @@ public class AviToMp4 extends AbstractCommandLine
         	switch(cmType)
         	{
         		case FS:	coverManager = new FileSystemCoverManager(otrConfig.getDir(Dir.COVER));break;
+        		case FSW:	coverManager = new FileSystemWebCoverManager(otrConfig.getDir(Dir.COVER));break;
         		default: coverManager=null;break;
         	}
         }
