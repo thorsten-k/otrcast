@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.cover.FileSystemWebCoverManager;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
@@ -40,9 +41,12 @@ public class CliSeriesRest
 	public CliSeriesRest(Configuration config)
 	{	
 		this.config=config;
+		String url = config.getString(ConfigKey.netRestUrl);
+		logger.info("Connection to "+url);
+		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrSeriesRest.class, "http://localhost:8080/otr",clientExecutor);
+		rest = ProxyFactory.create(OtrSeriesRest.class, url,clientExecutor);
 	}
 	
 	public void single() throws OtrProcessingException, IOException, TemplateException
