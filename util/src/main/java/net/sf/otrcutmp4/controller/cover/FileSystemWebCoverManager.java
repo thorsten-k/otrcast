@@ -23,7 +23,7 @@ public class FileSystemWebCoverManager implements CoverManager
 	public FileSystemWebCoverManager(File coverDir)
 	{
 		this.coverDir=coverDir;
-		logger.debug("Using FSW CoverManager");
+		logger.info("Using FSW CoverManager");
 		cmFs = new FileSystemCoverManager(coverDir);
 	}
 

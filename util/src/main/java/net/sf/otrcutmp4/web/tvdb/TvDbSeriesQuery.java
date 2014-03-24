@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -31,6 +33,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.slf4j.Logger;
@@ -39,20 +42,24 @@ import org.slf4j.LoggerFactory;
 public class TvDbSeriesQuery extends AbstractTvDbQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(TvDbSeriesQuery.class);
-
+	
 	public TvDbSeriesQuery(String apiKey)
 	{
         super(apiKey);
 	}
 	
+	public Otr findSeriesUrlEncode(String name) throws UnsupportedEncodingException{return findSeries(URLEncoder.encode(name,"UTF-8"));}
 	public Otr findSeries(String name)
 	{
         Otr otr = new Otr();
 
         Document doc = fetch(url+"/GetSeries.php?seriesname="+name);
 
-//        XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
-//        logger.info(serializer.outputString(doc));
+        if(debugPlainResponses)
+        {
+        	XMLOutputter serializer= new XMLOutputter(Format.getPrettyFormat());
+        	logger.debug(serializer.outputString(doc));
+        }
 
         XPathFactory xPathFactory = XPathFactory.instance();
         XPathExpression<Element> xPathExpression = xPathFactory.compile("/Data/Series", Filters.element());

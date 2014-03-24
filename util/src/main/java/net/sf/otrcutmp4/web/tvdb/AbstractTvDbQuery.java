@@ -20,10 +20,14 @@ public class AbstractTvDbQuery
 
 	protected static final String url = "http://thetvdb.com/api";
     protected String apiKey;
+    protected boolean debugPlainResponses;
+
+
 
 	public AbstractTvDbQuery(String apiKey)
 	{
         this.apiKey=apiKey;
+        debugPlainResponses=false;
 	}
 
     protected Document fetch(String queryUrl)
@@ -61,4 +65,7 @@ public class AbstractTvDbQuery
         catch (IOException e) {e.printStackTrace();}
         return doc;
     }
+    
+	public boolean isDebugPlainResponses() {return debugPlainResponses;}
+	public void setDebugPlainResponses(boolean debugPlainResponses) {this.debugPlainResponses = debugPlainResponses;}
 }
