@@ -37,6 +37,10 @@ public class OtrRestSeedData
 		String restUrl = config.getString("url.otrseries");
 		logger.info("Connectiong to "+restUrl);
 		
+//		ResteasyClient client = new ResteasyClientBuilder().build();
+//		ResteasyWebTarget target = client.target(restUrl);
+//		restAdmin = target.proxy(OtrAdminRest.class);
+		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
 		restAdmin = ProxyFactory.create(OtrAdminRest.class, restUrl,clientExecutor);
