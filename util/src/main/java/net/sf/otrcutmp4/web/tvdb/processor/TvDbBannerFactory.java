@@ -2,7 +2,6 @@ package net.sf.otrcutmp4.web.tvdb.processor;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.xpath.SeriesXpath;
 import net.sf.otrcutmp4.factory.xml.series.XmlSeasonFactory;
 import net.sf.otrcutmp4.model.xml.series.Season;
