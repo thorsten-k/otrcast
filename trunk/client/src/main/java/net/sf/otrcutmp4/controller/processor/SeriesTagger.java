@@ -1,6 +1,5 @@
 package net.sf.otrcutmp4.controller.processor;
 
-import java.io.File;
 import java.io.IOException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
@@ -13,7 +12,6 @@ import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Credential;
-import net.sf.otrcutmp4.util.OtrConfig.Dir;
 
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
