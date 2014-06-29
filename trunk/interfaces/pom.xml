@@ -74,10 +74,7 @@
 	  		<groupId>com.googlecode.mp4parser</groupId> 
 	  		<artifactId>isoparser</artifactId> 
 		</dependency>
-		<dependency>
-  			<groupId>org.apache.camel</groupId>
-  			<artifactId>camel-core</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>net.sf.ahtutils</groupId>
 			<artifactId>ahtutils-test</artifactId>
