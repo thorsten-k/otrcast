@@ -25,6 +25,13 @@
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
+	<xsd:element name="movies">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:movie" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
 	<xsd:element name="movie">
 		<xsd:complexType>
 			<xsd:sequence>

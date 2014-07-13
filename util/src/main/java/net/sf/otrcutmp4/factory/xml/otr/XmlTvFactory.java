@@ -67,6 +67,7 @@ public class XmlTvFactory
 	
 	private static String buildName(String name)
 	{
+		name = name.replace("__", " ");
 		name = name.replace("_", " ");
 		return name;
 	}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<s:movies xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series">
+    <s:movie id="123" name="Test Name" year="2103"/>
+    <s:movie id="123" name="Test Name" year="2103"/>
+</s:movies>

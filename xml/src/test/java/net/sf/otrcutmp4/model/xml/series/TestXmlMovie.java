@@ -16,11 +16,7 @@ public class TestXmlMovie extends AbstractXmlSeriesTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlMovie.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-        setXmlFile(dirSuffix,"movie");
-	}
+	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix,"movie");}
     
     @Test
     public void xml() throws FileNotFoundException
