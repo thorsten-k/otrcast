@@ -40,4 +40,13 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 		
 		return xml;
 	}
+	
+	public static net.sf.otrcutmp4.model.xml.series.Movie build(String title, int year)
+	{
+		net.sf.otrcutmp4.model.xml.series.Movie xml = new net.sf.otrcutmp4.model.xml.series.Movie();
+		xml.setName(title);
+		xml.setYear(year);
+		return xml;
+		
+	}
 }

@@ -94,6 +94,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Movies }
+     * 
+     */
+    public Movies createMovies() {
+        return new Movies();
+    }
+
+    /**
      * Create an instance of {@link Videos }
      * 
      */
