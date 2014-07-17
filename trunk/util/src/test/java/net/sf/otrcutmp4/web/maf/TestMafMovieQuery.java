@@ -1,6 +1,9 @@
 package net.sf.otrcutmp4.web.maf;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.factory.xml.XmlVideoFileFactory;
 import net.sf.otrcutmp4.interfaces.web.WebMovieFinder;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -34,16 +37,21 @@ public class TestMafMovieQuery extends AbstractUtilTest
 		Assert.assertEquals(2005, maf.year("4 Feb. 2005"));
     }
 	
-	public static void main(String args[]) throws Exception
+	public static void main(String args[]) throws ExlpConfigurationException, OtrProcessingException
     {
         OtrUtilTestBootstrap.init();
-
-        VideoFile vf = XmlVideoFileFactory.create("Captain_America__The_First_Avenger_14.03.16_20-15_pro7_145_TVOON_DE.mpg.HQ.avi");
-        JaxbUtil.info(vf);
-        
-        WebMovieFinder maf = new MafMovieQuery();
-        Movies movies = maf.find(vf);
-        JaxbUtil.info(movies);
+ 
+		try
+		{
+			VideoFile vf = XmlVideoFileFactory.create("Captain_America__The_First_Avenger_14.03.16_20-15_pro7_145_TVOON_DE.mpg.HQ.avi");
+	        JaxbUtil.info(vf);
+	        
+			WebMovieFinder maf = new MafMovieQuery();
+	        Movies movies = maf.find(vf);
+	        JaxbUtil.info(movies);
+		}
+		catch (UtilsProcessingException e) {logger.error(e.getMessage());}
+       
         
     }
  }
