@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.factory.xml.series.XmlMovieFactory;
 import net.sf.otrcutmp4.interfaces.web.WebMovieFinder;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
@@ -36,13 +37,13 @@ public class MafMovieQuery extends AbstractMafQuery implements WebMovieFinder
 	}
 	
 	@Override
-	public Movies find(VideoFile videoFile)
+	public Movies find(VideoFile videoFile) throws UtilsProcessingException
 	{
 		return find(videoFile.getOtrId().getTv().getName());
 	}
 	
 	@Override
-	public Movies find(String title)
+	public Movies find(String title) throws UtilsProcessingException
 	{
 		Movies movies = new Movies();
 		try
@@ -55,8 +56,10 @@ public class MafMovieQuery extends AbstractMafQuery implements WebMovieFinder
 		return  movies;
 	}
 	
-	public List<Movie> parseResponse(Document doc)
+	public List<Movie> parseResponse(Document doc) throws UtilsProcessingException
 	{
+		super.checkForError(doc);
+		
 		List<Movie> list = new ArrayList<Movie>();
 		
 //		JDomUtil.debug(doc);
