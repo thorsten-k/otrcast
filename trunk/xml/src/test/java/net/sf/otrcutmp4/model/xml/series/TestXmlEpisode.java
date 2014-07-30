@@ -17,11 +17,7 @@ public class TestXmlEpisode extends AbstractXmlSeriesTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlEpisode.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-        setXmlFile(dirSuffix,"episode");
-	}
+	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix,"episode");}
     
     @Test
     public void testEpisode() throws FileNotFoundException

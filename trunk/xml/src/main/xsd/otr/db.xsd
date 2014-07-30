@@ -1,0 +1,15 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net/db"
+        xmlns:db="http://otrcutmp4.sf.net/db"
+        xmlns:s="http://otrcutmp4.sf.net/series"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
+	<xsd:element name="db">
+		<xsd:complexType>
+			<xsd:sequence>
+				
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string"/>
+			<xsd:attribute name="source" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

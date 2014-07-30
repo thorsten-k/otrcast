@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.web.maf;
+package net.sf.otrcutmp4.web.imdb;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.web.util.AbstractHttpXmlQuery;
@@ -7,16 +7,13 @@ import org.jdom2.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractMafQuery extends AbstractHttpXmlQuery
+public class AbstractImdbQuery extends AbstractHttpXmlQuery
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractMafQuery.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractImdbQuery.class);
 
-	public AbstractMafQuery()
+	public AbstractImdbQuery()
 	{
-		super("http://www.myapifilms.com/imdb");
-		httpProtocol = "http";
-		httpHost = "www.myapifilms.com";
-		httpContext = "/imdb";
+		super("http","www.imdb.com","/xml/find");
 	}
 	
 	protected void checkForError(Document doc) throws UtilsProcessingException

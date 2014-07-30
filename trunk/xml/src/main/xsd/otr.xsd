@@ -6,6 +6,7 @@
     xmlns:o="http://otrcutmp4.sf.net/otr"
     xmlns:mc="http://otrcutmp4.sf.net/mc"
     xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
+    xmlns:db="http://otrcutmp4.sf.net/db"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
@@ -18,6 +19,7 @@
     <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr/otr.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/rss" schemaLocation="otr/rss.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="otr/tvdb.xsd"/>
+	<xsd:import namespace="http://otrcutmp4.sf.net/db" schemaLocation="otr/db.xsd"/>
     <xsd:import namespace="http://www.itunes.com/dtds/podcast-1.0.dtd" schemaLocation="otr/itunes.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>
