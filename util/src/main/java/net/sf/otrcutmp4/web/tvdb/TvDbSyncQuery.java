@@ -2,6 +2,8 @@ package net.sf.otrcutmp4.web.tvdb;
 
 import java.util.Date;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;
@@ -21,7 +23,7 @@ public class TvDbSyncQuery extends AbstractTvDbQuery
         super(apiKey);
 	}
 	
-	public Date debug()
+	public Date debug() throws UtilsProcessingException
 	{
         Document doc = fetch(url+"/Updates.php?type=none");
 

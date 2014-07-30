@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import net.sf.otrcutmp4.model.xml.db.Db;
 import net.sf.otrcutmp4.model.xml.mc.Image;
 import net.sf.otrcutmp4.model.xml.mc.Storage;
 
@@ -24,6 +25,7 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
  *       &lt;sequence>
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/db}db"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -38,7 +40,8 @@ import net.sf.otrcutmp4.model.xml.mc.Storage;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "image",
-    "storage"
+    "storage",
+    "db"
 })
 @XmlRootElement(name = "movie")
 public class Movie
@@ -50,6 +53,8 @@ public class Movie
     protected Image image;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Storage storage;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/db", required = true)
+    protected Db db;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "name")
@@ -111,6 +116,34 @@ public class Movie
 
     public boolean isSetStorage() {
         return (this.storage!= null);
+    }
+
+    /**
+     * Gets the value of the db property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Db }
+     *     
+     */
+    public Db getDb() {
+        return db;
+    }
+
+    /**
+     * Sets the value of the db property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Db }
+     *     
+     */
+    public void setDb(Db value) {
+        this.db = value;
+    }
+
+    public boolean isSetDb() {
+        return (this.db!= null);
     }
 
     /**

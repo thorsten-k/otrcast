@@ -25,4 +25,11 @@ public class XmlImageFactory
 		if(q.isSetUrl()){xml.setUrl(ejb.getUrl());}
 		return xml;
 	}
+	
+	public static net.sf.otrcutmp4.model.xml.mc.Image build(String url)
+	{
+		net.sf.otrcutmp4.model.xml.mc.Image xml = new net.sf.otrcutmp4.model.xml.mc.Image();
+		xml.setUrl(url);
+		return xml;
+	}
 }

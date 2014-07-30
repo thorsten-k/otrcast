@@ -45,6 +45,7 @@
 			<scope>compile</scope>
 		</dependency>
 		
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -56,12 +57,10 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
+		
+		
+		
+		<!-- REST -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
@@ -73,23 +72,23 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
+		
+		<!-- MP4 -->
 		<dependency>
 	  		<groupId>com.googlecode.mp4parser</groupId> 
 	  		<artifactId>isoparser</artifactId> 
 		</dependency>
+		
 		<dependency>
   			<groupId>org.apache.camel</groupId>
   			<artifactId>camel-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		
 		<dependency>
 		   <groupId>org.jboss.spec</groupId>
 		   <artifactId>jboss-javaee-6.0</artifactId>
@@ -99,6 +98,19 @@
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
 			<artifactId>otrcutmp4-interfaces</artifactId>
+		</dependency>
+		
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ahtutils</groupId>
+			<artifactId>ahtutils-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	

@@ -51,6 +51,12 @@
 			<jxb:package name="net.sf.otrcutmp4.model.xml.tvdb"/>
 		</jxb:schemaBindings>
 	</jxb:bindings>
+	
+	<jxb:bindings schemaLocation="../xsd/otr/db.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="net.sf.otrcutmp4.model.xml.db"/>
+		</jxb:schemaBindings>
+	</jxb:bindings>	
 
     <jxb:bindings schemaLocation="../xsd/otr/itunes.xsd" node="/xsd:schema">
         <jxb:schemaBindings>

@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.model.xml.series;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.model.xml.db.TestXmlDb;
 import net.sf.otrcutmp4.model.xml.mc.TestXmlImage;
 import net.sf.otrcutmp4.model.xml.mc.TestXmlStorage;
 import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
@@ -37,6 +38,7 @@ public class TestXmlMovie extends AbstractXmlSeriesTest
     	{
     		xml.setImage(TestXmlImage.create(false));
     		xml.setStorage(TestXmlStorage.create());
+    		xml.setDb(TestXmlDb.create());
     	}
     	
     	return xml;

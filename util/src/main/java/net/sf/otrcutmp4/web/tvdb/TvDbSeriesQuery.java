@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.factory.xml.tvdb.XmlBannerFactory;
@@ -48,8 +49,11 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
         super(apiKey);
 	}
 	
-	public Otr findSeriesUrlEncode(String name) throws UnsupportedEncodingException{return findSeries(URLEncoder.encode(name,"UTF-8"));}
-	public Otr findSeries(String name)
+	public Otr findSeriesUrlEncode(String name) throws UnsupportedEncodingException, UtilsProcessingException
+	{
+		return findSeries(URLEncoder.encode(name,"UTF-8"));
+	}
+	public Otr findSeries(String name) throws UtilsProcessingException
 	{
         Otr otr = new Otr();
 
@@ -103,7 +107,7 @@ public class TvDbSeriesQuery extends AbstractTvDbQuery
             InputStream is = result.getEntity().getContent();
             ZipInputStream zis = new ZipInputStream(is);
             ZipEntry ze;
-            byte[] buff = new byte[1024];
+//            byte[] buff = new byte[1024];
             while((ze=zis.getNextEntry())!=null)
             {
 

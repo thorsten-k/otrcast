@@ -1,6 +1,7 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/series"
 	xmlns:s="http://otrcutmp4.sf.net/series"
 	xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
+	xmlns:db="http://otrcutmp4.sf.net/db"
 	xmlns:o="http://otrcutmp4.sf.net/otr"
 	xmlns:c="http://otrcutmp4.sf.net/cut"
 	xmlns:mc="http://otrcutmp4.sf.net/mc"
@@ -9,6 +10,7 @@
 	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/mc" schemaLocation="mc.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="tvdb.xsd"/>
+	<xsd:import namespace="http://otrcutmp4.sf.net/db" schemaLocation="db.xsd"/>
 	<xsd:element name="videos">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -37,6 +39,7 @@
 			<xsd:sequence>
 				<xsd:element ref="mc:image" maxOccurs="1"/>
 				<xsd:element ref="mc:storage" maxOccurs="1"/>
+				<xsd:element ref="db:db" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 			<xsd:attribute name="name" type="xsd:string"/>
