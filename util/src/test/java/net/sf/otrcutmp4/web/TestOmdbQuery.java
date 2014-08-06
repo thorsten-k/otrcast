@@ -13,6 +13,7 @@ import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import net.sf.otrcutmp4.web.omdbapi.OmdbMovieQuery;
 import net.sf.otrcutmp4.web.omdbapi.OmdbMovieSearch;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,8 @@ public class TestOmdbQuery extends AbstractUtilTest
 {
     final static Logger logger = LoggerFactory.getLogger(TestOmdbQuery.class);
 		
+    @Test public void dummy(){}
+    
 	public static void main(String args[]) throws ExlpConfigurationException, OtrProcessingException
     {
         OtrUtilTestBootstrap.init();

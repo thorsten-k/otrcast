@@ -12,6 +12,7 @@ import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import net.sf.otrcutmp4.web.imdb.ImdbMovieQuery;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,8 @@ public class TestImdbQuery extends AbstractUtilTest
 {
     final static Logger logger = LoggerFactory.getLogger(TestImdbQuery.class);
 		
+    @Test public void dummy(){}
+    
 	public static void main(String args[]) throws ExlpConfigurationException, OtrProcessingException
     {
         OtrUtilTestBootstrap.init();
