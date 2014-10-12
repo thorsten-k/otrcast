@@ -44,6 +44,10 @@ public class TestOtrKeyPreProcessor extends AbstractUtilTest
         test = "http://otr.datenkeller.at//?getFile="+expected;
         actual = kpp.guess(test);
         Assert.assertEquals(expected,actual);
+        
+        test = "https://otr.datenkeller.at//?getFile="+expected;
+        actual = kpp.guess(test);
+        Assert.assertEquals(expected,actual);
     }
 
 	
