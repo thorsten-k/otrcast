@@ -73,6 +73,11 @@
    	   		<type>jar</type>
    	   		<scope>provided</scope>
    	   	</dependency>
+		<dependency>
+		    <groupId>commons-jxpath</groupId>
+		    <artifactId>commons-jxpath</artifactId>
+		    <scope>provided</scope>
+		</dependency>
    	   	
 		<!-- Test & Logging -->
 		<dependency>
