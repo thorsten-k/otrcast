@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.shell.cmd.ShellCmdMove;
 import net.sf.exlp.util.io.RelativePathFactory;

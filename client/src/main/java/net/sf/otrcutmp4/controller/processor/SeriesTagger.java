@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.processor;
 import java.io.IOException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.otrcutmp4.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
 import net.sf.otrcutmp4.controller.tag.Mp4Tagger;

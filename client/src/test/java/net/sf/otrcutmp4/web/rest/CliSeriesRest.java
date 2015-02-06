@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.web.rest;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.cover.FileSystemWebCoverManager;

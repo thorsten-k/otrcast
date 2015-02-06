@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.controller.web;
 import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.AbstractCutlistChooserController;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
