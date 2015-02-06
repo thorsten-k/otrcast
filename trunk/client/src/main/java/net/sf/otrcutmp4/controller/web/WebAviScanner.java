@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.controller.web;
 
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.interfaces.rest.OtrUserRest;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;

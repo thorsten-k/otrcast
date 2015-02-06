@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.interfaces.rest.OtrAdminRest;

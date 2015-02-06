@@ -1,6 +1,6 @@
 package net.sf.otrcutmp4.web.rest;
 
-import net.sf.ahtutils.web.rest.RestEasyPreemptiveClientExecutor;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.otrcutmp4.interfaces.rest.OtrUserRest;
 
 import org.jboss.resteasy.client.ClientExecutor;
