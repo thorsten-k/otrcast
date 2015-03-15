@@ -26,15 +26,17 @@ public class WebAviScanner
 		String host = otrConfig.getUrl(OtrConfig.Url.OTR);
 		logger.info("Connecting to "+host);
 		
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
-				otrConfig.getCredential(Credential.EMAIL,""),
-				otrConfig.getCredential(Credential.PWD,""));
+		String user = otrConfig.getCredential(Credential.EMAIL,"");
+		String pwd = otrConfig.getCredential(Credential.PWD,"");
+		
+		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(user,pwd);
 		rest = ProxyFactory.create(OtrUserRest.class, host,clientExecutor);
 	}
 	
-	public void scan(SrcDirProcessor srcDirProcessor)
+	public VideoFiles scan(SrcDirProcessor srcDirProcessor)
 	{
 		VideoFiles vf = srcDirProcessor.scan(otrConfig.getDir(Dir.AVI),true);
 		rest.scan(vf);
+		return vf;
 	}
 }

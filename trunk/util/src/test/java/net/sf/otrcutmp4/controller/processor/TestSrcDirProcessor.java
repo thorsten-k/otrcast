@@ -70,9 +70,9 @@ public class TestSrcDirProcessor extends AbstractUtilTest
     @Test
     public void isValidSrcFileName()
     {
-    	//MP4
-    	Assert.assertFalse(SrcDirProcessor.isValidSrcFileName("xxx.mp4"));
-    	Assert.assertTrue(SrcDirProcessor.isValidSrcFileName("66128_Der_Tatortreiniger_12.05.17_21-45_ard_30_TVOON_DE.mpg.HQ.cut.mp4"));
+    	SrcDirProcessor sdp = new SrcDirProcessor(null);
+    	Assert.assertFalse(sdp.isValidSrcFileName("xxx.mp4"));
+    	Assert.assertTrue(sdp.isValidSrcFileName("66128_Der_Tatortreiniger_12.05.17_21-45_ard_30_TVOON_DE.mpg.HQ.cut.mp4"));
     }
     
     @Test

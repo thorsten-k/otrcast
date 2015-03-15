@@ -16,6 +16,7 @@ import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebAviScanner;
+import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
@@ -146,8 +147,10 @@ public class CliTestRun
 	public void scan() throws OtrConfigurationException, ExlpConfigurationException, FileNotFoundException, OtrInternalErrorException
 	{
 		SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
+		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
 		WebAviScanner scanner = new WebAviScanner(otrConfig);
-		scanner.scan(srcDirProcessor);
+		VideoFiles vf = scanner.scan(srcDirProcessor);
+		JaxbUtil.info(vf);
 	}
 	
 	public void rename()
@@ -170,12 +173,12 @@ public class CliTestRun
 //		test.cutlistFinder();
 
 //		test.cliChooser();
-		test.restChooser();
+//		test.restChooser();
 		
 //		test.cutLoader();
 //		test.batch();
 		
-//		test.scan();
+		test.scan();
 		
 //		test.rename();
 	}

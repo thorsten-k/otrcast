@@ -15,6 +15,7 @@ import net.sf.otrcutmp4.controller.processor.SeriesTagger;
 import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
 import net.sf.otrcutmp4.controller.web.WebAviScanner;
 import net.sf.otrcutmp4.controller.web.WebCutlistChooserController;
+import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
@@ -105,6 +106,7 @@ public class AviToMp4 extends AbstractCommandLine
     	{
     		otrConfig.checkEmailPwd();
     		WebAviScanner was = new WebAviScanner(otrConfig);
+    		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
     		was.scan(srcDirProcessor);
         }
         
