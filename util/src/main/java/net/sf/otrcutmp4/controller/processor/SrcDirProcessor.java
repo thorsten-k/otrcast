@@ -1,6 +1,8 @@
 package net.sf.otrcutmp4.controller.processor;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
@@ -19,9 +21,15 @@ public class SrcDirProcessor
 		
 	private ViewSrcDirProcessor view;
 	
+	private List<String> validFileSuffix;
+	
 	public SrcDirProcessor(ViewSrcDirProcessor view)
 	{
 		this.view=view;
+		validFileSuffix = new ArrayList<String>();
+		validFileSuffix.add(XmlOtrIdFactory.typeAviHq);
+		validFileSuffix.add(XmlOtrIdFactory.typeAviHd);
+		validFileSuffix.add(XmlOtrIdFactory.typeMp4Hq);
 	}
 	
 	public VideoFiles scan(File srcDir)
@@ -45,30 +53,34 @@ public class SrcDirProcessor
 		VideoFiles result = new VideoFiles();
 		for(File f : srcDir.listFiles())
 		{
-			boolean valid = isValidSrcFileName(f.getName());
-			logger.trace("Testing: "+f.getName()+" valid?"+valid);
-			if(valid)
+			if(f.isFile())
 			{
-				try
-				{
-					VideoFile vf = XmlVideoFileFactory.create(f.getName());
-					if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHd))
-					{
-						File fAc3 = new File(f.getParentFile(),vf.getOtrId().getKey()+"."+XmlOtrIdFactory.typeAc3Hd);
-						vf.getOtrId().getFormat().setAc3(fAc3.exists());
-					}
-					result.getVideoFile().add(vf);
-				}
-				catch (OtrProcessingException e) {logger.error("Error processing file: "+e.getMessage());}
-			}
-			else if(f.isDirectory()){}
-			else
-			{
-				if(!f.getName().endsWith(XmlOtrIdFactory.typeAc3Hd))
-				{
-					logger.debug("File "+f.getName()+" is not a valid source file. Ignoring it.");
-				}
+				String fileName = f.getName();
 				
+				boolean valid = isValidSrcFileName(fileName);
+				logger.trace("Testing: "+f.getName()+" valid?"+valid);
+				if(valid)
+				{
+					try
+					{
+						VideoFile vf = XmlVideoFileFactory.create(fileName);
+						if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHd))
+						{
+							File fAc3 = new File(f.getParentFile(),vf.getOtrId().getKey()+"."+XmlOtrIdFactory.typeAc3Hd);
+							vf.getOtrId().getFormat().setAc3(fAc3.exists());
+						}
+						result.getVideoFile().add(vf);
+					}
+					catch (OtrProcessingException e) {logger.error("Error processing file: "+e.getMessage());}
+				}
+				else
+				{
+					if(!f.getName().endsWith(XmlOtrIdFactory.typeAc3Hd))
+					{
+						logger.trace("File "+f.getName()+" is not a valid source file. Ignoring it.");
+					}
+					
+				}	
 			}
 		}
 		if(rekursive)
@@ -85,11 +97,17 @@ public class SrcDirProcessor
 		return result;
 	}
 	
-	protected static boolean isValidSrcFileName(String fileName)
+	protected boolean isValidSrcFileName(String fileName)
 	{
-		if(fileName.endsWith(XmlOtrIdFactory.typeAviHq)){return true;}
-		if(fileName.endsWith(XmlOtrIdFactory.typeAviHd)){return true;}
-		if(fileName.endsWith(XmlOtrIdFactory.typeMp4Hq)){return true;}
+		for(String suffix : validFileSuffix)
+		{
+			if(fileName.endsWith(suffix)){return true;}
+		}
 		return false;
+	}
+	
+	public void addValidSuffix(String suffix)
+	{
+		validFileSuffix.add(suffix);
 	}
 }
