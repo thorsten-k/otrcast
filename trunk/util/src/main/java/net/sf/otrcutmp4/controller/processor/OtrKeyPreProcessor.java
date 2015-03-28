@@ -12,8 +12,8 @@ public class OtrKeyPreProcessor
 {	
 	final static Logger logger = LoggerFactory.getLogger(OtrKeyPreProcessor.class);
 
-    private static String prefixDatenkeller = "http://otr.datenkeller.at";
-    private static String prefixDatenkellerS = "https://otr.datenkeller.at";
+    private static String prefixDatenkeller = "http://otr.datenkeller.net";
+    private static String prefixDatenkellerS = "https://otr.datenkeller.net";
     
 	private Pattern pOtrDownload;
 	
