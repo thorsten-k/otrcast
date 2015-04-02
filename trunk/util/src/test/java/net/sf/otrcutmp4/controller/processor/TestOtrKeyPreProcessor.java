@@ -33,19 +33,23 @@ public class TestOtrKeyPreProcessor extends AbstractUtilTest
     @Test
 	public void testDatenkeller() 
     {
-		String test = "http://otr.datenkeller.at/?getFile="+expected;
+		String test = OtrKeyPreProcessor.prefixDatenkeller+OtrKeyPreProcessor.getFile+expected;
 		String actual = kpp.guess(test);
     	Assert.assertEquals(expected,actual);
+    	
+    	test = OtrKeyPreProcessor.prefixDatenkellerS+OtrKeyPreProcessor.getFile+expected;
+		actual = kpp.guess(test);
+    	Assert.assertEquals(expected,actual);
 
-        test = "http://otr.datenkeller.at/?getFile="+expected+".otrkey";
+        test = OtrKeyPreProcessor.prefixDatenkeller+OtrKeyPreProcessor.getFile+expected+".otrkey";
         actual = kpp.guess(test);
         Assert.assertEquals(expected,actual);
 
-        test = "http://otr.datenkeller.at//?getFile="+expected;
+        test = OtrKeyPreProcessor.prefixDatenkeller+OtrKeyPreProcessor.getFile+expected;
         actual = kpp.guess(test);
         Assert.assertEquals(expected,actual);
         
-        test = "https://otr.datenkeller.at//?getFile="+expected;
+        test = OtrKeyPreProcessor.prefixDatenkeller+OtrKeyPreProcessor.getFile+expected;
         actual = kpp.guess(test);
         Assert.assertEquals(expected,actual);
     }

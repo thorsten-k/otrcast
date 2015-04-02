@@ -12,8 +12,10 @@ public class OtrKeyPreProcessor
 {	
 	final static Logger logger = LoggerFactory.getLogger(OtrKeyPreProcessor.class);
 
-    private static String prefixDatenkeller = "http://otr.datenkeller.net";
-    private static String prefixDatenkellerS = "https://otr.datenkeller.net";
+    protected static String prefixDatenkeller = "http://otr.datenkeller.net";
+    protected static String prefixDatenkellerS = "https://otr.datenkeller.net";
+    
+    protected static String getFile = "?getFile=";
     
 	private Pattern pOtrDownload;
 	
@@ -34,7 +36,7 @@ public class OtrKeyPreProcessor
 		{
             input = input.substring(prefixDatenkeller.length(),input.length());
 
-			int index = input.indexOf("?getFile=")+"?getFile=".length();
+			int index = input.indexOf(getFile)+getFile.length();
 			return input.substring(index,input.length());
 		}
 		
@@ -42,7 +44,7 @@ public class OtrKeyPreProcessor
 		{
             input = input.substring(prefixDatenkellerS.length(),input.length());
 
-			int index = input.indexOf("?getFile=")+"?getFile=".length();
+			int index = input.indexOf(getFile)+getFile.length();
 			return input.substring(index,input.length());
 		}
 		
