@@ -14,8 +14,7 @@ import net.sf.otrcutmp4.interfaces.model.Image;
 public class OtrImage implements Serializable,Image
 {
 	private static final long serialVersionUID = 1L;
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>Fields<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -34,8 +33,7 @@ public class OtrImage implements Serializable,Image
 	private byte[] data;
 	@Override public byte[] getData() {return data;}
 	@Override public void setData(byte[] data) {this.data = data;}
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+
 	
 	public String toString()
 	{

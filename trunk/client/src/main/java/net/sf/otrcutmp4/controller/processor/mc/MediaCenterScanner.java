@@ -4,19 +4,26 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
+import org.apache.commons.io.DirectoryWalker;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.exlp.util.io.HashUtil;
 import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
-import net.sf.otrcutmp4.controller.tag.Mp4MediaTypeCorrector;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbCoverFactory;
 import net.sf.otrcutmp4.factory.ejb.mc.EjbStorageFactory;
-import net.sf.otrcutmp4.model.OtrImage;
 import net.sf.otrcutmp4.model.OtrEpisode;
+import net.sf.otrcutmp4.model.OtrImage;
 import net.sf.otrcutmp4.model.OtrMovie;
 import net.sf.otrcutmp4.model.OtrSeason;
 import net.sf.otrcutmp4.model.OtrSeries;
@@ -25,15 +32,9 @@ import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
-
-import org.apache.commons.io.DirectoryWalker;
-import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.commons.io.filefilter.IOFileFilter;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.format.PeriodFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.sf.otrcutmp4.model.xml.series.Video;
+import net.sf.otrcutmp4.util.McJaxb;
+import net.sf.otrcutmp4.util.query.io.FileQuery;
 
 public class MediaCenterScanner extends DirectoryWalker<File>
 {
@@ -42,39 +43,28 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private Mp4TagReader tagReader;
 	
 	private EntityManager em;
-	private UtilsFacadeBean ufb;
-	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fOtrMc;
+	private OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fMc;
 	
 	private EjbCoverFactory<OtrImage> efCover;
 	private EjbStorageFactory<OtrStorage> efStorage;
-    private Mp4MediaTypeCorrector mtc;
 	
 	public MediaCenterScanner(EntityManager em)
 	{
+		super(FileQuery.mp4FileFilter(),-1);
 		this.em=em;
 		tagReader = new Mp4TagReader(true);
-		ufb = new UtilsFacadeBean(em);
-		fOtrMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em, ufb);
+		fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em);
 		
 		efCover=EjbCoverFactory.factory(OtrImage.class);
 		efStorage=EjbStorageFactory.factory(OtrStorage.class);
-        mtc = new Mp4MediaTypeCorrector();
 
         if(logger.isDebugEnabled()){debugStats();}
 	}
 
     public void debugStats()
     {
-        logger.debug(Series.class.getSimpleName() + ": " + ufb.all(OtrSeries.class).size());
+        logger.debug(Series.class.getSimpleName() + ": " + fMc.all(OtrSeries.class).size());
     }
-	
-	private static IOFileFilter filter()
-	{
-		IOFileFilter ioFfFile = FileFilterUtils.fileFileFilter();
-		IOFileFilter ioFfMp4 = FileFilterUtils.suffixFileFilter("mp4");
-		IOFileFilter ioFf1 = FileFilterUtils.and(ioFfFile,ioFfMp4);
-		return ioFfMp4;
-	}
 	
 	public void scan(File startDirectory)
 	{
@@ -91,46 +81,47 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	    logger.info("Processed "+results.size()+" files in "+PeriodFormat.getDefault().print(period));
 	}
 
-	@Override
-	protected void handleFile(File file, int depth, Collection<File> results)
+	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
+	
+	@Override protected void handleFile(File file, int depth, Collection<File> results)
 	{
-		if(file.getAbsolutePath().endsWith(".mp4"))
-		{
-            boolean inspectFile = false;
+		boolean inspectFile = false;
+        try
+        {
+        	boolean removeStorage = false;
+            OtrStorage storage = fMc.fByName(OtrStorage.class,file.getAbsolutePath());
+            Date modified = new Date(file.lastModified());
+            if(!modified.equals(storage.getRecord()))
+            {
+            	try{if(!HashUtil.hash(file).equals(storage.getHash())){removeStorage=true;}}
+            	catch (IOException e) {removeStorage=true;}
+            }
+            if(removeStorage)
+            {
+            	logger.info("Will remove storage");
+            }
+        }
+        catch (UtilsNotFoundException e){inspectFile=true;}
+
+        logger.info("File (inspect="+inspectFile+"): "+file.getAbsolutePath());
+        if(inspectFile)
+        {
             try
             {
-                OtrStorage storage = ufb.fByName(OtrStorage.class,file.getAbsolutePath());
-                //TODO Last Modified
+                em.getTransaction().begin();
+
+                Video video = tagReader.read(file);
+                
+                McJaxb.debug(video);
+
+                if(video.isSetEpisode()){handleEpisode(video.getEpisode(),file);}
+//                   else if(video.isSetMovie()){handleMovie(video.getMovie(),file);}
+                em.getTransaction().commit();
             }
-            catch (UtilsNotFoundException e1){inspectFile=true;}
+            catch (IOException e2) {e2.printStackTrace();}
+        }
 
-            logger.info("File (inspect="+inspectFile+"): "+file.getAbsolutePath());
-            if(inspectFile)
-            {
-                try
-                {
-                    mtc.correct(file);
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-
-/*                try
-                {
-                    em.getTransaction().begin();
-
-                    Video video = tagReader.read(file);
-
-                    if(video.isSetEpisode()){handleEpisode(video.getEpisode(),file);}
-                    else if(video.isSetMovie()){handleMovie(video.getMovie(),file);}
-                    em.getTransaction().commit();
-                }
-                catch (IOException e2) {e2.printStackTrace();}
-*/            }
-
-		    results.add(file);
-		}
+	    results.add(file);
 	}
 	
 	private void handleMovie(Movie xmlMovie,File file)
@@ -158,7 +149,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 		OtrMovie movie;
 		try
 		{
-			movie = ufb.fByName(OtrMovie.class, xmlMovie.getName());
+			movie = fMc.fByName(OtrMovie.class, xmlMovie.getName());
 		}
 		catch (UtilsNotFoundException e)
 		{
@@ -173,7 +164,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	
 	private void handleEpisode(Episode xmlEpisode,File file)
 	{
-		OtrSeries series = getSeries(xmlEpisode.getSeason().getSeries());
+		OtrSeries series = fMc.fcSeries(OtrSeries.class,xmlEpisode.getSeason().getSeries());
 		OtrSeason season = getSeason(series, xmlEpisode.getSeason());
 		OtrEpisode episode = getEpisode(season,xmlEpisode);
 
@@ -195,31 +186,11 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 			em.merge(season);
 		}
 	}
-	
-	private OtrSeries getSeries(Series xmlSeries)
-	{
-		OtrSeries series;
-		try
-		{
-			series = ufb.fByName(OtrSeries.class, xmlSeries.getName());
-		}
-		catch (UtilsNotFoundException e)
-		{
-			series = new OtrSeries();
-			series.setName(xmlSeries.getName());
-
-	        em.persist(series);
-		}
-		return series;
-	}
-	
+		
 	private OtrSeason getSeason(OtrSeries series, Season xml)
 	{
 		OtrSeason season=null;
-		try
-		{
-			season = fOtrMc.fSeason(OtrSeason.class, series, xml.getNr());
-		}
+		try{season = fMc.fSeason(OtrSeason.class, series, xml.getNr());}
 		catch (UtilsNotFoundException e)
 		{
 			season = new OtrSeason();
@@ -235,10 +206,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private OtrEpisode getEpisode(OtrSeason season, Episode xml)
 	{
 		OtrEpisode episode=null;
-		try
-		{
-			episode = fOtrMc.fEpisode(OtrEpisode.class, season, xml.getNr());
-		}
+		try{episode = fMc.fEpisode(OtrEpisode.class, season, xml.getNr());}
 		catch (UtilsNotFoundException e)
 		{
 			episode = new OtrEpisode();

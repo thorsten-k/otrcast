@@ -3,7 +3,7 @@ package net.sf.otrcutmp4.test;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.AviToMp4.Profile;
+import net.sf.otrcutmp4.app.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;

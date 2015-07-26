@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.otrcutmp4.AviToMp4.Profile;
+import net.sf.otrcutmp4.app.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;

@@ -10,6 +10,7 @@ public interface CoverManager
 	public static enum Format {PNG,JPEG}
 	
 	boolean isAvailable(Season season);
+	
 	Format getFormat();
 	byte[] getImageStream() throws IOException;
 }

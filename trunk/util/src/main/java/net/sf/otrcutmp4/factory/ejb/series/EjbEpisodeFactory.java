@@ -9,7 +9,10 @@ import net.sf.otrcutmp4.interfaces.model.Storage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Image,STORAGE extends Storage>
+public class EjbEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+								SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+								EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+								COVER extends Image,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(EjbEpisodeFactory.class);
 	

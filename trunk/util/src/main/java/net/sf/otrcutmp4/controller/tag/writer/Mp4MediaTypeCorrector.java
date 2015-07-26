@@ -1,7 +1,9 @@
-package net.sf.otrcutmp4.controller.tag;
+package net.sf.otrcutmp4.controller.tag.writer;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.otrcutmp4.controller.tag.reader.Mp4TagReader;
+import net.sf.otrcutmp4.controller.tag.util.Mp4BoxManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

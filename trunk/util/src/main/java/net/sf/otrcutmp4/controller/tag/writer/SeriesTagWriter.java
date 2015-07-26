@@ -1,36 +1,43 @@
-package net.sf.otrcutmp4.controller.tag;
-
-import com.coremedia.iso.IsoFile;
-import com.coremedia.iso.boxes.MetaBox;
-import com.coremedia.iso.boxes.MovieBox;
-import com.coremedia.iso.boxes.UserDataBox;
-import com.coremedia.iso.boxes.apple.*;
-import net.sf.otrcutmp4.controller.tag.writer.Mp4MediaTypeWriter;
-import net.sf.otrcutmp4.interfaces.controller.CoverManager;
-import net.sf.otrcutmp4.model.xml.series.Episode;
-import net.sf.otrcutmp4.model.xml.series.Season;
-import net.sf.otrcutmp4.model.xml.series.Series;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package net.sf.otrcutmp4.controller.tag.writer;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
-public class Mp4Tagger
-{
-	final static Logger logger = LoggerFactory.getLogger(Mp4Tagger.class);
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-	private CoverManager coverManager;
+import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.MetaBox;
+import com.coremedia.iso.boxes.MovieBox;
+import com.coremedia.iso.boxes.UserDataBox;
+import com.coremedia.iso.boxes.apple.AppleCoverBox;
+import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.coremedia.iso.boxes.apple.AppleShowBox;
+import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
+import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
+
+import net.sf.otrcutmp4.controller.tag.util.Mp4BoxManager;
+import net.sf.otrcutmp4.controller.tag.util.Mp4MetadataBalancer;
+import net.sf.otrcutmp4.interfaces.controller.CoverManager;
+import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
+
+public class SeriesTagWriter extends AbstractTagWriter
+{
+	final static Logger logger = LoggerFactory.getLogger(SeriesTagWriter.class);
 	
-	public Mp4Tagger()
+	public SeriesTagWriter()
 	{
-		coverManager = null;
+		super(null);
 	}
-	public Mp4Tagger(CoverManager coverManager)
+	public SeriesTagWriter(CoverManager coverManager)
 	{
-		this.coverManager=coverManager;
+		super(coverManager);
 	}
 	
 	public void tagEpisode(String srcFileName, Episode episode, String dstFileName) throws IOException
@@ -66,6 +73,7 @@ public class Mp4Tagger
 
 		writeEpisodeName(apple, episode);
 		writeEpisodeNr(apple, episode);
+		writeEpisodeId(apple,episode);
 		writeSeason(apple, episode.getSeason());
 		writeSeries(apple, episode.getSeason().getSeries());
 		writeCover(apple, episode.getSeason());
@@ -111,6 +119,25 @@ public class Mp4Tagger
 		}
 		episodeBox.setValue(episode.getNr() +"");
 		apple.addBox(episodeBox);
+	}
+	
+	private void writeEpisodeId(AppleItemListBox apple, Episode episode)
+	{
+		if(episode.isSetId())
+		{
+			AppleTvEpisodeNumberBox idBox = null;
+			if (apple.getBoxes(AppleTvEpisodeNumberBox.class).isEmpty())
+			{
+				idBox = new AppleTvEpisodeNumberBox();
+			}
+			else
+			{
+				idBox = apple.getBoxes(AppleTvEpisodeNumberBox.class).get(0);
+				
+			}
+			idBox.setValue(episode.getId() +"");
+			apple.addBox(idBox);
+		}
 	}
 	
 	private void writeSeason(AppleItemListBox apple, Season season)

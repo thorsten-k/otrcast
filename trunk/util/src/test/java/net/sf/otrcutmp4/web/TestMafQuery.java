@@ -1,5 +1,11 @@
 package net.sf.otrcutmp4.web;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -11,13 +17,6 @@ import net.sf.otrcutmp4.model.xml.series.Movies;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import net.sf.otrcutmp4.web.myapifilms.MafMovieQuery;
-
-import org.apache.commons.configuration.Configuration;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestMafQuery extends AbstractUtilTest
 {

@@ -1,12 +1,12 @@
 package net.sf.otrcutmp4.controller.tag.reader;
 
-import net.sf.otrcutmp4.model.xml.mc.Image;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleDataBox;
+
+import net.sf.otrcutmp4.model.xml.mc.Image;
 
 public class AbstractTagReader
 {

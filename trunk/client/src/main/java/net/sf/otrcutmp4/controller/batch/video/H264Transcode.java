@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.otrcutmp4.app.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;

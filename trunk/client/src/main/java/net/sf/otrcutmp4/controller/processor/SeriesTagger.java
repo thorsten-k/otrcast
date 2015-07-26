@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.otrcutmp4.app.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.video.TagGenerator;
-import net.sf.otrcutmp4.controller.tag.Mp4Tagger;
+import net.sf.otrcutmp4.controller.tag.writer.SeriesTagWriter;
 import net.sf.otrcutmp4.interfaces.controller.CoverManager;
 import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
 import net.sf.otrcutmp4.model.xml.series.Video;
@@ -52,7 +52,7 @@ public class SeriesTagger
 		if(dstFile.endsWith("\"")){dstFile = dstFile.substring(0,dstFile.length()-1);}
 		
 		logger.info("Tagging "+srcFile+" to "+dstFile);
-		Mp4Tagger mp4Tagger = new Mp4Tagger(coverManager);
+		SeriesTagWriter mp4Tagger = new SeriesTagWriter(coverManager);
 		try
 		{
 			mp4Tagger.tagEpisode(srcFile, video.getEpisode(), dstFile);

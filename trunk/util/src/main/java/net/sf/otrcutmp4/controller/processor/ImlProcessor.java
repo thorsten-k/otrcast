@@ -54,6 +54,7 @@ public class ImlProcessor
 				switch(type)
 				{
 					case Series: logger.debug("Series");break;
+					default: logger.warn("NYI");break;
 				}
 			}
 		}

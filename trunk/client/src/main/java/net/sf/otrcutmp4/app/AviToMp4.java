@@ -1,7 +1,15 @@
-package net.sf.otrcutmp4;
+package net.sf.otrcutmp4.app;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.batch.BatchGenerator;
 import net.sf.otrcutmp4.controller.batch.RenameGenerator;
@@ -21,7 +29,6 @@ import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
 import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
 import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
 import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
-import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;
 import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.model.xml.series.Videos;
@@ -30,16 +37,6 @@ import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 import net.sf.otrcutmp4.view.web.WebCutlistChooserView;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AviToMp4 extends AbstractCommandLine
 {
@@ -68,7 +65,7 @@ public class AviToMp4 extends AbstractCommandLine
 	public void parseArguments(String args[]) throws ParseException, OtrConfigurationException, OtrInternalErrorException, UtilsProcessingException
 	{
 		options = createOptions();
-		CommandLineParser parser = new PosixParser();
+		CommandLineParser parser = new DefaultParser();
 		CommandLine line = parser.parse(options , args); 
 	     
         super.parseArguments(line);
@@ -199,20 +196,17 @@ public class AviToMp4 extends AbstractCommandLine
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
 
-		oTagMp4  = OptionBuilder.withArgName("TOKEN")
-				  .hasArg()
-				  .withDescription("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
-				  .create("tagMp4");
-		
-		oHotfolder = OptionBuilder.withArgName("TASKS")
-				  .hasArg()
-				  .withDescription("Activate hotfolder with comma separated tasks (tag)")
-				  .create("hotfolder");
-		
-		oCover  = OptionBuilder.withArgName("TYPE")
-				  .hasArg()
-				  .withDescription("CoverManager: (FS) FileSystem")
-				  .create("cover");
+		oTagMp4  = Option.builder("tagMp4").required(false)
+					.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
+					.build();
+			
+		oHotfolder = Option.builder("hotfolder").required(false)
+					.hasArg(true).argName("TASKS").desc("Activate hotfolder with comma separated tasks (tag)")
+					.build();
+
+		oCover  = Option.builder("cover").required(false)
+				.hasArg(true).argName("TYPE").desc("CoverManager: (FS) FileSystem")
+				.build();
 		
 		StringBuffer sb = new StringBuffer();
 		for(int i=1;i<Profile.values().length;i++)
@@ -221,10 +215,9 @@ public class AviToMp4 extends AbstractCommandLine
 		}
 		sb.delete(sb.length()-2, sb.length());
 		
-		oProfile  = OptionBuilder.withArgName("PROFILE")
-				  .hasArg()
-				  .withDescription("Use (optional) experimental PROFILE: "+sb.toString())
-				  .create("profile"); 
+		oProfile  = Option.builder("profile").required(false)
+				.hasArg(true).argName("PROFILE").desc("Use (optional) experimental PROFILE: "+sb.toString())
+				.build();
 
 		options.addOption(oHelp);
 		options.addOption(oDebug);
@@ -243,17 +236,7 @@ public class AviToMp4 extends AbstractCommandLine
 		
 		return options;
 	}
-	
-	public void initLogger(String logConfig)
-	{
-		LoggerInit loggerInit = new LoggerInit(logConfig);	
-		loggerInit.addAltPath("src/main/resources/config.otrcutmp4-client");
-		loggerInit.addAltPath("config.otrcutmp4-client");
-		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
-		loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
-	}
-	
+		
 	public static void main(String args[]) throws OtrInternalErrorException
 	{		
 		AviToMp4 avi2Mp4 = new AviToMp4();	

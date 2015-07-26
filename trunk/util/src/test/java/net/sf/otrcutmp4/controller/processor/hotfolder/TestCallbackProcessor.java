@@ -60,6 +60,7 @@ public class TestCallbackProcessor extends AbstractUtilTest implements CallbackI
 		logger.error("Target is: "+fTarget.getAbsolutePath());
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception
 	{
 		Configuration config = OtrUtilTestBootstrap.init();

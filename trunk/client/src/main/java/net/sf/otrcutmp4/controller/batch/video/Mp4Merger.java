@@ -10,7 +10,7 @@ import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.shell.cmd.ShellCmdCopy;
 import net.sf.exlp.util.io.FilenameIllegalCharRemover;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.otrcutmp4.app.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
 import net.sf.otrcutmp4.factory.FileNameFactoy;

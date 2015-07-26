@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.processor.hotfolder;
 
 import java.io.File;
 
-import net.sf.otrcutmp4.controller.tag.Mp4Tagger;
+import net.sf.otrcutmp4.controller.tag.writer.SeriesTagWriter;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
@@ -18,7 +18,7 @@ public class TagFromFilenameProcessor implements Processor
 
 		final static Logger logger = LoggerFactory.getLogger(TagFromFilenameProcessor.class);
 	
-		private Mp4Tagger tagger;
+		private SeriesTagWriter tagger;
 		
 		@SuppressWarnings("rawtypes")
 		@Override
@@ -28,7 +28,7 @@ public class TagFromFilenameProcessor implements Processor
 			
 			
 			Episode episode = createEpisodeFromFilename(file.getFileName());
-			tagger = new Mp4Tagger();
+			tagger = new SeriesTagWriter();
 			tagger.tagEpisode(jFile, episode, new File("target/test.mp4"));		
 		}
 		

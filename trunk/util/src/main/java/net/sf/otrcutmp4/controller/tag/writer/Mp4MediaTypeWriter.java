@@ -1,20 +1,22 @@
 package net.sf.otrcutmp4.controller.tag.writer;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
-import net.sf.otrcutmp4.controller.tag.Mp4BoxManager;
-import net.sf.otrcutmp4.controller.tag.Mp4MetadataBalancer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
+import net.sf.otrcutmp4.controller.tag.util.Mp4BoxManager;
+import net.sf.otrcutmp4.controller.tag.util.Mp4MetadataBalancer;
 
 public class Mp4MediaTypeWriter
 {

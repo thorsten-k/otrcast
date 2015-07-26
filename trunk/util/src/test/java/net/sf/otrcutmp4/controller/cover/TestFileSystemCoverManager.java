@@ -3,19 +3,17 @@ package net.sf.otrcutmp4.controller.cover;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.otrcutmp4.interfaces.controller.CoverManager.Format;
-import net.sf.otrcutmp4.model.xml.series.Season;
-import net.sf.otrcutmp4.model.xml.series.Series;
-import net.sf.otrcutmp4.test.AbstractUtilTest;
-import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
-
-import org.apache.commons.configuration.Configuration;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.otrcutmp4.interfaces.controller.CoverManager.Format;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
+import net.sf.otrcutmp4.test.AbstractUtilTest;
 
 public class TestFileSystemCoverManager extends AbstractUtilTest
 {
@@ -24,7 +22,6 @@ public class TestFileSystemCoverManager extends AbstractUtilTest
 	private File dirCover;
 	private FileSystemCoverManager cmFs;
 	
-	private Series series;
 	private Season season;	
 	
 	@Before

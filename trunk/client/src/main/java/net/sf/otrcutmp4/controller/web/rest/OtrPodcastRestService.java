@@ -1,18 +1,12 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
-import net.sf.otrcutmp4.controller.rss.RssLinkProcessor;
-import net.sf.otrcutmp4.factory.xml.rss.XmlChannelFactory;
-import net.sf.otrcutmp4.factory.xml.rss.XmlItemFactory;
-import net.sf.otrcutmp4.factory.xml.rss.XmlRssFactory;
-import net.sf.otrcutmp4.interfaces.rest.OtrPodcastRest;
-import net.sf.otrcutmp4.model.OtrEpisode;
-import net.sf.otrcutmp4.model.xml.rss.Rss;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.Path;
+import net.sf.otrcutmp4.factory.xml.rss.XmlRssFactory;
+import net.sf.otrcutmp4.interfaces.rest.OtrPodcastRest;
+import net.sf.otrcutmp4.model.xml.rss.Rss;
 
-@Path("/")
 public class OtrPodcastRestService extends AbstractOtrRestService implements OtrPodcastRest
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrPodcastRestService.class);
@@ -22,7 +16,7 @@ public class OtrPodcastRestService extends AbstractOtrRestService implements Otr
 	{
         init();
 		Rss rss = XmlRssFactory.build();
-        rss.setChannel(XmlChannelFactory.build5("test"));
+		/*        rss.setChannel(XmlChannelFactory.build5("test"));
 
         OtrEpisode episode = ufb.all(OtrEpisode.class).get(0);
         logger.info(episode.toString());
@@ -31,7 +25,7 @@ public class OtrPodcastRestService extends AbstractOtrRestService implements Otr
         rss.getChannel().getItem().add(XmlItemFactory.build(episode));
 
         RssLinkProcessor.getFileByKey(rss,"http://localhost:8080/x");
-
+*/
         return rss;
 	}
 }

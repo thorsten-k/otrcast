@@ -1,13 +1,14 @@
 package net.sf.otrcutmp4.factory.ejb.mc;
 
-import net.sf.exlp.util.io.FileIO;
-import net.sf.otrcutmp4.interfaces.model.Storage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.HashUtil;
+import net.sf.otrcutmp4.interfaces.model.Storage;
 
 public class EjbStorageFactory<STORAGE extends Storage>
 {	
@@ -33,7 +34,7 @@ final static Logger logger = LoggerFactory.getLogger(EjbStorageFactory.class);
 	public STORAGE build(File f)
 	{
 		String hash=null;
-		try {hash = FileIO.getHash(f);}
+		try {hash = HashUtil.hash(f);}
 		catch (IOException e)
 		{
 			logger.error("Error during hasing: "+e.getMessage());
