@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.processor.hotfolder;
 
 import java.io.File;
 
-import net.sf.otrcutmp4.controller.tag.Mp4Tagger;
+import net.sf.otrcutmp4.controller.tag.writer.SeriesTagWriter;
 import net.sf.otrcutmp4.model.xml.series.Episode;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 
@@ -26,7 +26,7 @@ public class TestTagFromFilenameProcessor extends AbstractUtilTest
 		Episode episode = processor.createEpisodeFromFilename(input.getName());
 		logger.info("Episode: " +episode.toString());
 		
-		Mp4Tagger tagger = new Mp4Tagger();
+		SeriesTagWriter tagger = new SeriesTagWriter();
 		tagger.tagEpisode(input, episode, new File("target/new4" +input.getName()));
 	}
 	

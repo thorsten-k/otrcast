@@ -30,6 +30,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Episode }
+     * 
+     */
+    public Episode createEpisode() {
+        return new Episode();
+    }
+
+    /**
+     * Create an instance of {@link Season }
+     * 
+     */
+    public Season createSeason() {
+        return new Season();
+    }
+
+    /**
      * Create an instance of {@link Series }
      * 
      */
@@ -43,22 +59,6 @@ public class ObjectFactory {
      */
     public Category createCategory() {
         return new Category();
-    }
-
-    /**
-     * Create an instance of {@link Season }
-     * 
-     */
-    public Season createSeason() {
-        return new Season();
-    }
-
-    /**
-     * Create an instance of {@link Episode }
-     * 
-     */
-    public Episode createEpisode() {
-        return new Episode();
     }
 
     /**

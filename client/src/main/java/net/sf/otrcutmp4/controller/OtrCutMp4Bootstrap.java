@@ -22,14 +22,21 @@ public class OtrCutMp4Bootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrCutMp4Bootstrap.class);
 	
-	private static EntityManagerFactory emf;
 	public static String configXml = "config.otrcutmp4-client/otr.xml";
 	
-	public static Configuration init()
+	private static EntityManagerFactory emf;
+	private static Configuration config;
+	
+	public static void initLogger(){initLogger("log4j.debug.xml");}
+	public static void initLogger(String log4jConfig)
 	{
-		return init(configXml);
+		LoggerInit loggerInit = new LoggerInit(log4jConfig);
+		loggerInit.addAltPath("config.otrcutmp4-client");
+		loggerInit.init();
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
+	public static Configuration init(){return init(configXml);}
 	public static Configuration init(String configFile)
 	{
 		initLogger();
@@ -42,20 +49,13 @@ public class OtrCutMp4Bootstrap
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		ConfigLoader.add(configFile);
 		
-		Configuration config = ConfigLoader.init();			
+		OtrCutMp4Bootstrap.config = ConfigLoader.init();			
 
 		logger.debug("Config and Logger initialized with "+configFile);
-		return config;
+		return OtrCutMp4Bootstrap.config;
 	}
 	
-	public static void initLogger(){initLogger("log4j.debug.xml");}
-	public static void initLogger(String log4jConfig)
-	{
-		LoggerInit loggerInit = new LoggerInit(log4jConfig);
-		loggerInit.addAltPath("config.otrcutmp4-client");
-		loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
-	}
+	public static Configuration getConfiguration(){return config;}
 
     public static EntityManagerFactory buildEmf(){return buildEmfForFile(null);}
     public static EntityManagerFactory buildEmf(OtrConfig config){return buildEmfForFile(config.getDir(OtrConfig.Dir.DB));}
@@ -71,7 +71,7 @@ public class OtrCutMp4Bootstrap
                 logger.error("f is null !!");
             }
 			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:"+f.getAbsolutePath()+"/db");
+			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:"+f.getAbsolutePath()+"/mc");
 //			properties.put("hibernate.hbm2ddl.auto", "update");
 		
 			emf = Persistence.createEntityManagerFactory("otr-mediacenter",properties);

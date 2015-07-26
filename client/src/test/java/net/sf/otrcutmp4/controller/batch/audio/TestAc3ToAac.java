@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.IOException;
 
-import net.sf.otrcutmp4.AviToMp4.Profile;
+import net.sf.otrcutmp4.app.AviToMp4.Profile;
 import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.FileName;

@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.controller.tag;
 
+import net.sf.otrcutmp4.controller.tag.writer.Mp4MediaTypeCorrector;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
 import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 import org.apache.commons.configuration.Configuration;

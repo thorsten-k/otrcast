@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4;
+package net.sf.otrcutmp4.app;
 
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -25,10 +25,9 @@ public class AbstractCommandLine
         oHelp = new Option("help", "Prints this message" );
         oDebug = new Option("debug", "Debug output");
 
-        oConfig  = OptionBuilder.withArgName("FILENAME")
-                .hasArg()
-                .withDescription( "Use configuration file FILENAME (optional, default is "+ OtrConfig.otrConfigName+")")
-                .create("config");
+        oConfig  = Option.builder("config").required(false)
+				.hasArg(true).argName("FILENAME").desc("Use configuration file FILENAME (optional, default is "+ OtrConfig.otrConfigName+")")
+				.build();
     }
 
     protected void parseArguments(CommandLine line)
@@ -42,7 +41,7 @@ public class AbstractCommandLine
     protected void printHelp()
 	{
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp( "java -jar "+exeName, options );
+		formatter.printHelp(100, "java -jar "+exeName, "", options, "",true);
 		System.exit(0);
 	}
 

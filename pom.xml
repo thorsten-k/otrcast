@@ -12,8 +12,19 @@
 	<description>otrcutmp4 is a utility for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
 	<url>https://sourceforge.net/projects/otrcutmp4/</url>
 
+	<modules>
+		<module>client</module>
+		<module>xml</module>
+		<module>util</module>
+		<module>interfaces</module>
+	</modules>
+
     <properties>
     	<my.build.directory>target</my.build.directory>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<version.jetty>8.1.17.v20150415</version.jetty>
+    	<version.jdk>1.6</version.jdk>
+    	
     	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
 
     	<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
@@ -57,11 +68,11 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<inherited>true</inherited>
-				<version>${maven-compiler-plugin.version}</version>
+				<version>2.3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>UTF-8</encoding>
+					<source>${version.jdk}</source>
+					<target>${version.jdk}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -90,13 +101,6 @@
 	
 	<issueManagement>
 	</issueManagement>
-
-	<modules>
-		<module>client</module>
-		<module>xml</module>
-		<module>util</module>
-		<module>interfaces</module>
-	</modules>
  
 	<dependencyManagement>
 		<dependencies>
@@ -162,10 +166,10 @@
 	</repositories>
 	
 	<pluginRepositories>
-	  <pluginRepository>
-	    <id>onejar.googlecode.com</id>
-	    <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
-	  </pluginRepository>
+		<pluginRepository>
+			<id>onejar.googlecode.com</id>
+			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+		</pluginRepository>
 	</pluginRepositories>
 	
 	<distributionManagement>

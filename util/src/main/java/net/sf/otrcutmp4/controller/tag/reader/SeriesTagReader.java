@@ -1,10 +1,5 @@
 package net.sf.otrcutmp4.controller.tag.reader;
 
-import net.sf.otrcutmp4.model.xml.series.Episode;
-import net.sf.otrcutmp4.model.xml.series.Movie;
-import net.sf.otrcutmp4.model.xml.series.Season;
-import net.sf.otrcutmp4.model.xml.series.Series;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +8,13 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
+
+import net.sf.otrcutmp4.model.xml.series.Episode;
+import net.sf.otrcutmp4.model.xml.series.Movie;
+import net.sf.otrcutmp4.model.xml.series.Season;
+import net.sf.otrcutmp4.model.xml.series.Series;
 
 public class SeriesTagReader extends AbstractTagReader
 {
@@ -51,6 +52,11 @@ public class SeriesTagReader extends AbstractTagReader
 		{
 			AppleTrackTitleBox box = apple.getBoxes(AppleTrackTitleBox.class).get(0);
 			episode.setName(box.getValue());
+		}
+		if(!apple.getBoxes(AppleTvEpisodeNumberBox.class).isEmpty())
+		{
+			AppleTvEpisodeNumberBox box = apple.getBoxes(AppleTvEpisodeNumberBox.class).get(0);
+			episode.setId(new Long(box.getValue()));
 		}
 		if(withCover && !apple.getBoxes(AppleCoverBox.class).isEmpty())
 		{

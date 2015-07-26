@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.tag;
+package net.sf.otrcutmp4.controller.tag.util;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;

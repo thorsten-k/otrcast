@@ -31,6 +31,7 @@
     <xsd:element name="otr">
         <xsd:complexType>
             <xsd:sequence>
+            	<xsd:element ref="s:episode" maxOccurs="unbounded"/>
                 <xsd:element ref="s:series" maxOccurs="unbounded"/>
                 <xsd:element ref="tvdb:banners" maxOccurs="unbounded"/>
                 <xsd:element ref="s:category" maxOccurs="unbounded"/>

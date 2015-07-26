@@ -1,7 +1,7 @@
 package net.sf.otrcutmp4.controller.batch;
 
 import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.otrcutmp4.app.AviToMp4;
 import net.sf.otrcutmp4.util.OtrConfig;
 import net.sf.otrcutmp4.util.OtrConfig.Dir;
 import net.sf.otrcutmp4.util.OtrConfig.Tool;

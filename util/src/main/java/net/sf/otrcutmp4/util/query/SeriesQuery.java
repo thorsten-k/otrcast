@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.exlp.util.DateUtil;
 import net.sf.otrcutmp4.model.xml.mc.Image;
 import net.sf.otrcutmp4.model.xml.mc.Storage;
@@ -13,13 +16,10 @@ import net.sf.otrcutmp4.model.xml.series.Movie;
 import net.sf.otrcutmp4.model.xml.series.Season;
 import net.sf.otrcutmp4.model.xml.series.Series;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class SeriesQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesQuery.class);
-	public static enum Key {SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes,Movie,MovieAll}
+	public static enum Key {EpisodeWithSeasonAndSeries,SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes,Movie,MovieAll}
 	
 	private static Map<Key,Query> mQueries;
 	
@@ -31,6 +31,7 @@ public class SeriesQuery
 			Query q = new Query();
 			switch(key)
 			{
+				case EpisodeWithSeasonAndSeries : q.setEpisode(episodeWithSeasonandSeries());break;
 				case Series: q.setSeries(series());break;
 				case SeriesWithSeason: q.setSeries(seriesWithSeason());break;
 				case SeasonWithEpisodes: q.setSeason(seasonWithEpisodes());break;
@@ -118,6 +119,7 @@ public class SeriesQuery
 	public static Episode episodeWithSeasonandSeries()
 	{
 		Series series = new Series();
+		series.setId(0);
 		series.setName("");
 		series.setKey("");
 		

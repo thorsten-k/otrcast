@@ -1,6 +1,10 @@
 package net.sf.otrcutmp4.controller.processor;
 
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
+import net.sf.otrcutmp4.factory.xml.TestXmlVideoFileFactory;
 import net.sf.otrcutmp4.test.AbstractUtilTest;
+import net.sf.otrcutmp4.test.OtrUtilTestBootstrap;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,5 +66,24 @@ public class TestOtrKeyPreProcessor extends AbstractUtilTest
 		String actual = kpp.guess(test);
     	Assert.assertEquals(expected,actual);
 	}
+	
+	@Test
+	public void testDatenkeller2()
+	{
+		String x = "https://otr.datenkeller.net/?getFile=S02_E07_The_Blacklist_15.03.20_00-30_rtl_55_TVOON_DE.mpg.HQ.avi.otrkey";
+		String actual = kpp.guess(x);
+		logger.info(actual);
+	}
+	
+	public static void main(String[] args) throws ExlpConfigurationException, OtrProcessingException
+    {
+		OtrUtilTestBootstrap.init();		
+			
+		TestXmlVideoFileFactory.initPrefixMapper();
+	
+		TestOtrKeyPreProcessor cli = new TestOtrKeyPreProcessor();
+		cli.init();
+		cli.testDatenkeller2();
+    }
 	
  }

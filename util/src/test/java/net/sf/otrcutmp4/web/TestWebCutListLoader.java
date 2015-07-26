@@ -11,7 +11,7 @@ public class TestWebCutListLoader extends AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWebCutListLoader.class);
 	
-	private static final String id ="9552334";
+//	private static final String id ="9552334";
 	
 	@Test @Ignore public void dummy(){}
  }

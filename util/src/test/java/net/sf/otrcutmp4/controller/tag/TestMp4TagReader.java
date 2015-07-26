@@ -21,7 +21,11 @@ public class TestMp4TagReader extends AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestMp4TagReader.class);
 	
-	public TestMp4TagReader(){}
+	public TestMp4TagReader()
+	{
+		
+	}
+	
 	@Test public void dummy(){}
 	
 	@Before
@@ -35,6 +39,7 @@ public class TestMp4TagReader extends AbstractUtilTest
 	public void read(String src) throws IOException
 	{
 		File f = new File(src);
+		logger.info("Testing "+f.getAbsolutePath());
 		Video video = tagReader.read(f);
 		JaxbUtil.info(video);
 	}
@@ -46,19 +51,23 @@ public class TestMp4TagReader extends AbstractUtilTest
 		TestMp4TagReader test = new TestMp4TagReader();
 		test.init();
 		
-		String src = config.getString("test.mp4Tagger.dst");
-		logger.info("Using src dir: "+src);
+		String srcFolder;
+		srcFolder = config.getString("test.mp4Tagger.dst");
+//		srcFolder = config.getString("test.mp4Tagger.src");
+		logger.info("Using src dir: "+srcFolder);
 		
 		List<String> files = new ArrayList<String>();
 		files.add("Movie-guess.mp4");
 		files.add("Series-guess.mp4");
 		files.add("Series-mt.mp4");
+		
 		files.clear();
-		files.add("AviCutMp4.mp4");
+		files.add("OtrCutMp4.mp4");
+//		files.add("Vatertag.mp4");
 		
 		for(String file : files)
 		{
-			test.read(src+File.separator+file);
+			test.read(srcFolder+File.separator+file);
 		}
 	}
  }

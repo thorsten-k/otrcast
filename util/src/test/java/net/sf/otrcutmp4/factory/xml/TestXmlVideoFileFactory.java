@@ -32,6 +32,17 @@ public class TestXmlVideoFileFactory extends AbstractUtilTest
     	
     }
     
+    @Test public void testAvi2() throws OtrProcessingException
+    {
+    	fileName = "S02_E07_The_Blacklist_15.03.20_00-30_rtl_55_TVOON_DE.mpg.HQ.avi";
+    	VideoFile xml = XmlVideoFileFactory.create(fileName);
+    	JaxbUtil.debug(xml);
+    	Assert.assertTrue(xml.isSetOtrId());
+    	Assert.assertTrue(xml.isSetFileName());
+    	Assert.assertTrue(xml.getFileName().isSetValue());
+    	Assert.assertEquals(fileName, xml.getFileName().getValue());
+    }
+    
     public static void main(String[] args) throws ExlpConfigurationException, OtrProcessingException
     {
 		OtrUtilTestBootstrap.init();		
@@ -40,5 +51,6 @@ public class TestXmlVideoFileFactory extends AbstractUtilTest
 	
 		TestXmlVideoFileFactory test = new TestXmlVideoFileFactory();
 		test.testAvi();
+		test.testAvi2();
     }
  }

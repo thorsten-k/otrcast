@@ -14,8 +14,8 @@ public class OtrXmlTstBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("config.otrcutmp4-xml.test");
-			loggerInit.init();
+		loggerInit.addAltPath("config.otrcutmp4-xml.test");
+		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 }

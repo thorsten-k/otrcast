@@ -8,7 +8,7 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
-import net.sf.otrcutmp4.controller.tag.Mp4BoxManager;
+import net.sf.otrcutmp4.controller.tag.util.Mp4BoxManager;
 import net.sf.otrcutmp4.model.xml.series.Video;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +22,6 @@ public class Mp4TagReader
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4TagReader.class);
 
-
-	
 	private SeriesTagReader trSeries;
 	private MovieTagReader trMovie;
 	
@@ -53,7 +51,7 @@ public class Mp4TagReader
 		{
 			case SERIES:	video.setEpisode(trSeries.readEpisode(apple));break;
 			case MOVIE:		video.setMovie(trMovie.readMovie(apple));break;
-			default: logger.warn("UNKNOWN handling");
+			default: logger.warn("UNKNOWN handling for "+fSource);
 		}
 		
 		isoFile.close();
@@ -87,14 +85,16 @@ public class Mp4TagReader
     }
 	public Mp4BoxManager.Type getMediaType(AppleItemListBox apple) throws UtilsNotFoundException
     {
+		logger.info("Getting "+AppleMediaTypeBox.class.getSimpleName());
 		if (apple.getBoxes(AppleMediaTypeBox.class).isEmpty())
 		{
-            logger.trace(AppleMediaTypeBox.class.getSimpleName()+" not set");
+            logger.info(AppleMediaTypeBox.class.getSimpleName()+" not set");
             throw new UtilsNotFoundException(AppleMediaTypeBox.class.getSimpleName()+" not set");
 		}
 		else
 		{
 			AppleMediaTypeBox box = apple.getBoxes(AppleMediaTypeBox.class).get(0);
+			logger.info("Value "+box.getValue());
 			if(box.getValue().equals(Mp4BoxManager.typeSeries)){return Mp4BoxManager.Type.SERIES;}
 			else
 			{

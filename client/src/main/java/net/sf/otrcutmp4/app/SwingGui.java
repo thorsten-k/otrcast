@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4;
+package net.sf.otrcutmp4.app;
 
 import javax.swing.*;
 import java.awt.*;

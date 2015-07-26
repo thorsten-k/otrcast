@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.File;
 
-import net.sf.otrcutmp4.AviToMp4;
+import net.sf.otrcutmp4.app.AviToMp4;
 import net.sf.otrcutmp4.controller.batch.AbstactBatchGenerator;
 import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
 import net.sf.otrcutmp4.model.xml.cut.VideoFile;

@@ -2,14 +2,13 @@ package net.sf.otrcutmp4.model.xml.db;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.itunes.Image;
-import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.test.OtrXmlTstBootstrap;
 
 public class TestXmlDb extends AbstractXmlDbTest
 {

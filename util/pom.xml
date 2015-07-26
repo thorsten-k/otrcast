@@ -31,6 +31,12 @@
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-core</artifactId>
 		</dependency>
+		<dependency>
+   	   		<groupId>net.sf.ahtutils</groupId>
+   	   		<artifactId>ahtutils-ejb</artifactId>
+   	   		<type>jar</type>
+   	   		<scope>compile</scope>
+   	   	</dependency>
 		
 		<!-- XML -->
 		<dependency>
