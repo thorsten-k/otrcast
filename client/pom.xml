@@ -257,6 +257,12 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5</version>
 			<scope>test</scope>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
   
