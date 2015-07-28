@@ -9,7 +9,7 @@
 	<name>OTR Cast</name>
 	<packaging>pom</packaging>
     
-	<description>OTR CAST is a utility for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
+	<description>OTR CAST is a mc for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
 	<url>https://sourceforge.net/projects/otrcutmp4/</url>
 
 	<modules>
