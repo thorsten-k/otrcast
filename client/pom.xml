@@ -3,30 +3,30 @@
 
 	<parent>
 		<groupId>net.sf.otrcutmp4</groupId>
-		<artifactId>otrcutmp4</artifactId>
+		<artifactId>otrcast</artifactId>
   		<version>0.2.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>otrcutmp4-client</artifactId>
+	<artifactId>otrcast-client</artifactId>
 	<name>OTR - Client</name>
   
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
-			<artifactId>otrcutmp4-util</artifactId>
+			<artifactId>otrcast-util</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
-			<artifactId>otrcutmp4-xml</artifactId>
+			<artifactId>otrcast-xml</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.otrcutmp4</groupId>
-			<artifactId>otrcutmp4-interfaces</artifactId>
+			<artifactId>otrcast-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

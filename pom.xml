@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>     
 	
 	<groupId>net.sf.otrcutmp4</groupId>
-	<artifactId>otrcutmp4</artifactId>
+	<artifactId>otrcast</artifactId>
 	<version>0.2.0-SNAPSHOT</version>
-	<name>OTR AVI cut to MP4</name>
+	<name>OTR Cast</name>
 	<packaging>pom</packaging>
     
 	<description>OTR CAST is a utility for the onlinetvrecorder.com to convert HQ.AVI files to MP4 and cut the file using public available cutlists.</description>
@@ -34,6 +34,92 @@
 	<prerequisites>
 		<maven>2.0.9</maven>
 	</prerequisites>
+	
+	<issueManagement>
+	</issueManagement>
+ 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.sf.otrcutmp4</groupId>
+				<artifactId>otrcast-xml</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.otrcutmp4</groupId>
+				<artifactId>otrcast-util</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.otrcutmp4</groupId>
+				<artifactId>otrcast-interfaces</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>net.sf.ahtutils</groupId>
+				<artifactId>ahtutils-bom</artifactId>
+				<version>0.2.6-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+			<dependency>
+		  		<groupId>com.googlecode.mp4parser</groupId> 
+		  		<artifactId>isoparser</artifactId> 
+		  		<version>1.0-RC-23-SNAPSHOT</version> 
+			</dependency>
+			
+			<dependency>
+	  			<groupId>org.apache.camel</groupId>
+	  			<artifactId>camel-core</artifactId>
+	  			<version>2.11.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<scm>
+		<url>https://github.com/thorsten-k/otrcast</url>
+		<connection>scm:git:git://github.com/thorsten-k/otrcast.git</connection>
+		<developerConnection>scm:git:git@github.com/thorsten-k/otrcast.git</developerConnection>
+	</scm>
+
+  	<repositories>
+		<repository>
+			<id>sonatype.snapshot</id>
+			<name>Sonatype Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+  		<repository>
+  			<id>aht-public</id>
+  			<name>AHT public</name>
+  			<url>https://www.aht-group.com/nexus/content/groups/public/</url>
+  			<releases><enabled>true</enabled></releases>
+  			<snapshots><enabled>false</enabled></snapshots>
+  		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>onejar.googlecode.com</id>
+			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<distributionManagement>
+		<repository>
+			<id>aht-releases</id>
+			<name>Internal Releases</name>
+			<url>https://www.aht-group.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>aht-snapshots</id>
+			<name>Internal Snapshots</name>
+			<url>https://www.aht-group.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<pluginManagement>
@@ -98,92 +184,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<issueManagement>
-	</issueManagement>
- 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>net.sf.otrcutmp4</groupId>
-				<artifactId>otrcutmp4-xml</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sf.otrcutmp4</groupId>
-				<artifactId>otrcutmp4-util</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sf.otrcutmp4</groupId>
-				<artifactId>otrcutmp4-interfaces</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>net.sf.ahtutils</groupId>
-				<artifactId>ahtutils-bom</artifactId>
-				<version>0.2.6-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			
-			<dependency>
-		  		<groupId>com.googlecode.mp4parser</groupId> 
-		  		<artifactId>isoparser</artifactId> 
-		  		<version>1.0-RC-23-SNAPSHOT</version> 
-			</dependency>
-			
-			<dependency>
-	  			<groupId>org.apache.camel</groupId>
-	  			<artifactId>camel-core</artifactId>
-	  			<version>2.11.0</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<scm>
-		<connection>scm:svn:https://otrcutmp4.svn.sourceforge.net/svnroot/otrcutmp4/trunk</connection>
-		<developerConnection>scm:svn:https://otrcutmp4.svn.sourceforge.net/svnroot/otrcutmp4/trunk</developerConnection>
-		<url>https://otrcutmp4.svn.sourceforge.net/svnroot/otrcutmp4/trunk/</url>
-	</scm>
-
-  	<repositories>
-		<repository>
-			<id>sonatype.snapshot</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</repository>
-  		<repository>
-  			<id>aht-public</id>
-  			<name>AHT public</name>
-  			<url>https://www.aht-group.com/nexus/content/groups/public/</url>
-  			<releases><enabled>true</enabled></releases>
-  			<snapshots><enabled>false</enabled></snapshots>
-  		</repository>
-	</repositories>
-	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>onejar.googlecode.com</id>
-			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
-		</pluginRepository>
-	</pluginRepositories>
-	
-	<distributionManagement>
-		<repository>
-			<id>aht-releases</id>
-			<name>Internal Releases</name>
-			<url>https://www.aht-group.com/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>aht-snapshots</id>
-			<name>Internal Snapshots</name>
-			<url>https://www.aht-group.com/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<profiles>
     	<profile>

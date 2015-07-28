@@ -4,28 +4,34 @@
 	
 	<parent>
     	<groupId>net.sf.otrcutmp4</groupId>
-		<artifactId>otrcutmp4</artifactId>
+		<artifactId>otrcast</artifactId>
   		<version>0.2.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
-	<artifactId>otrcutmp4-util</artifactId>
+	<artifactId>otrcast-util</artifactId>
     <packaging>jar</packaging>
     <name>OTR - Util</name>
 	
 	<dependencies>
+		<dependency>
+			<groupId>net.sf.otrcutmp4</groupId>
+			<artifactId>otrcast-interfaces</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.otrcutmp4</groupId>
+			<artifactId>otrcast-xml</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>net.sf.ahtutils</groupId>
 			<artifactId>ahtutils-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.otrcutmp4</groupId>
-			<artifactId>otrcutmp4-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
@@ -100,10 +106,6 @@
 		   <artifactId>jboss-javaee-6.0</artifactId>
 		   <type>pom</type>
 		   <scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.otrcutmp4</groupId>
-			<artifactId>otrcutmp4-interfaces</artifactId>
 		</dependency>
 		
 		<!-- Testing -->
