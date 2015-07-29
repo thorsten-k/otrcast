@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-    	<groupId>net.sf.otrcutmp4</groupId>
+    	<groupId>de.kisner.otrcast</groupId>
 		<artifactId>otrcast</artifactId>
-  		<version>0.2.0-SNAPSHOT</version>
+  		<version>0.2.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
@@ -15,7 +15,7 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>net.sf.otrcutmp4</groupId>
+			<groupId>de.kisner.otrcast</groupId>
 			<artifactId>otrcast-xml</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>

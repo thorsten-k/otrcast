@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>net.sf.otrcutmp4</groupId>
+		<groupId>de.kisner.otrcast</groupId>
 		<artifactId>otrcast</artifactId>
-  		<version>0.2.0-SNAPSHOT</version>
+  		<version>0.2.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -13,19 +13,19 @@
   
 	<dependencies>
 		<dependency>
-			<groupId>net.sf.otrcutmp4</groupId>
+			<groupId>de.kisner.otrcast</groupId>
 			<artifactId>otrcast-util</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.otrcutmp4</groupId>
+			<groupId>de.kisner.otrcast</groupId>
 			<artifactId>otrcast-xml</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.otrcutmp4</groupId>
+			<groupId>de.kisner.otrcast</groupId>
 			<artifactId>otrcast-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -275,7 +275,7 @@
 			  <executions>
 			    <execution>
 			      <configuration>
-			        <mainClass>net.sf.otrcutmp4.AviToMp4</mainClass>
+			        <mainClass>de.kisner.otrcast.AviToMp4</mainClass>
 			        <filename>OtrCutMp4-${project.version}.jar</filename>
 			      </configuration>
 			      <goals>
@@ -294,7 +294,7 @@
 	                        <addClasspath>true</addClasspath>
 	                        <classpathPrefix>lib/</classpathPrefix>
 	                        <useUniqueVersions>false</useUniqueVersions>
-	                      	<mainClass>net.sf.otrcutmp4.OtrMediaCenter</mainClass>
+	                      	<mainClass>de.kisner.otrcast.OtrMediaCenter</mainClass>
 	                    </manifest>
 	                </archive>
 	            </configuration>
@@ -342,7 +342,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
