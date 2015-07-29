@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.series.Category;

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import de.kisner.otrcast.model.xml.mc.Image;
 import de.kisner.otrcast.model.xml.mc.Storage;
 import de.kisner.otrcast.model.xml.tvdb.Sync;
