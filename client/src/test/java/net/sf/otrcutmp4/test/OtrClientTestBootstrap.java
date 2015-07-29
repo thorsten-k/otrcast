@@ -5,14 +5,15 @@ import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.OtrCutMp4Bootstrap;
-import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
-import net.sf.otrcutmp4.util.OtrBootstrap;
-import net.sf.otrcutmp4.util.OtrConfig;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.util.OtrBootstrap;
+import de.kisner.otrcast.util.OtrConfig;
 
 public class OtrClientTestBootstrap
 {

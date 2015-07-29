@@ -7,9 +7,9 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.interfaces.rest.OtrSimpleRest;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.otrcutmp4.interfaces.rest.OtrSimpleRest;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 public class CliSimpleRest

@@ -2,17 +2,18 @@ package net.sf.otrcutmp4.controller.batch;
 
 import java.io.IOException;
 
-import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
-import net.sf.otrcutmp4.model.xml.cut.Cut;
-import net.sf.otrcutmp4.model.xml.cut.CutList;
-import net.sf.otrcutmp4.model.xml.cut.VideoFile;
-import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.model.xml.otr.Format;
-import net.sf.otrcutmp4.model.xml.otr.OtrId;
-import net.sf.otrcutmp4.model.xml.series.Video;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 
 import org.junit.Before;
+
+import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.model.xml.cut.Cut;
+import de.kisner.otrcast.model.xml.cut.CutList;
+import de.kisner.otrcast.model.xml.cut.VideoFile;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.model.xml.otr.Format;
+import de.kisner.otrcast.model.xml.otr.OtrId;
+import de.kisner.otrcast.model.xml.series.Video;
 
 public class AbstractBatchTest extends AbstractClientTest
 {

@@ -5,11 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.Assert;
-import net.sf.otrcutmp4.factory.FileNameFactoy;
-import net.sf.otrcutmp4.factory.txt.TxtDsFactory;
-import net.sf.otrcutmp4.model.xml.series.Episode;
-import net.sf.otrcutmp4.model.xml.series.Season;
-import net.sf.otrcutmp4.model.xml.series.Series;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 
 import org.junit.Before;
@@ -17,6 +12,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.factory.FileNameFactoy;
+import de.kisner.otrcast.factory.txt.TxtDsFactory;
+import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.series.Season;
+import de.kisner.otrcast.model.xml.series.Series;
 import freemarker.template.TemplateException;
 
 public class TestFileNameFactory extends AbstractClientTest

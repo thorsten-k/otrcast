@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.controller.exception.OtrConfigurationException;
+import de.kisner.otrcast.controller.exception.OtrProcessingException;
+import de.kisner.otrcast.controller.processor.OtrFileDownloader;
 
 public class CliOtrDownloader
 {

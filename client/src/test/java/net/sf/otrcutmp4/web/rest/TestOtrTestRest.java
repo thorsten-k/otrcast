@@ -2,7 +2,6 @@ package net.sf.otrcutmp4.web.rest;
 
 import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.otrcutmp4.interfaces.rest.OtrTestRest;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.jboss.resteasy.client.ClientExecutor;
@@ -11,6 +10,8 @@ import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.interfaces.rest.OtrTestRest;
 
 public class TestOtrTestRest
 {

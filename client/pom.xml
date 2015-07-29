@@ -276,7 +276,7 @@
 			    <execution>
 			      <configuration>
 			        <mainClass>de.kisner.otrcast.AviToMp4</mainClass>
-			        <filename>OtrCutMp4-${project.version}.jar</filename>
+			        <filename>otrcast-${project.version}.jar</filename>
 			      </configuration>
 			      <goals>
 			        <goal>one-jar</goal>

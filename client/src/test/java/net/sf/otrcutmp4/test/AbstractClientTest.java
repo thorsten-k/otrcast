@@ -5,12 +5,13 @@ import java.util.Date;
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.model.xml.OtrCutNsPrefixMapper;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 
 public abstract class AbstractClientTest
 {

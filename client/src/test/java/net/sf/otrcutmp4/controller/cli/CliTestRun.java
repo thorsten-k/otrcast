@@ -9,26 +9,7 @@ import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.app.AviToMp4.Profile;
-import net.sf.otrcutmp4.controller.batch.BatchGenerator;
-import net.sf.otrcutmp4.controller.cutlist.DefaultCutlistLoader;
-import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
-import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
-import net.sf.otrcutmp4.controller.processor.SrcDirProcessor;
-import net.sf.otrcutmp4.controller.web.WebAviScanner;
-import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
-import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
-import net.sf.otrcutmp4.interfaces.controller.CutlistLoader;
-import net.sf.otrcutmp4.interfaces.rest.OtrCutRest;
-import net.sf.otrcutmp4.interfaces.view.ViewSrcDirProcessor;
-import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
-import net.sf.otrcutmp4.model.xml.series.Videos;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
-import net.sf.otrcutmp4.util.OtrBootstrap;
-import net.sf.otrcutmp4.util.OtrConfig;
-import net.sf.otrcutmp4.util.OtrConfig.Credential;
-import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
-import net.sf.otrcutmp4.view.cli.CliSrcDirProcessorView;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
@@ -37,6 +18,27 @@ import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.app.AviToMp4.Profile;
+import de.kisner.otrcast.controller.batch.BatchGenerator;
+import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
+import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
+import de.kisner.otrcast.controller.exception.OtrConfigurationException;
+import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.controller.processor.SrcDirProcessor;
+import de.kisner.otrcast.controller.web.WebAviScanner;
+import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.controller.CutlistChooser;
+import de.kisner.otrcast.interfaces.controller.CutlistLoader;
+import de.kisner.otrcast.interfaces.rest.OtrCutRest;
+import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.util.OtrBootstrap;
+import de.kisner.otrcast.util.OtrConfig;
+import de.kisner.otrcast.util.OtrConfig.Credential;
+import de.kisner.otrcast.view.cli.CliCutlistChooserView;
+import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
 
 public class CliTestRun
 {

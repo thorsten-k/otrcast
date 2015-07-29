@@ -1,12 +1,12 @@
 package net.sf.otrcutmp4.controller.hotfolder;
 
-import net.sf.otrcutmp4.controller.processor.hotfolder.TagFromFilenameProcessor;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.controller.processor.hotfolder.TagFromFilenameProcessor;
 
 public class TestOtrHotFolder
 {	

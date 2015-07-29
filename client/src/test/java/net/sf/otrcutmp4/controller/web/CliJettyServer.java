@@ -2,7 +2,8 @@ package net.sf.otrcutmp4.controller.web;
 
 import org.apache.commons.configuration.Configuration;
 
-import net.sf.otrcutmp4.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.web.JettyServer;
 
 public class CliJettyServer
 {

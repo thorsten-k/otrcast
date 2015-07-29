@@ -19,24 +19,24 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
+import de.kisner.otrcast.controller.processor.RssXmlProcessor;
+import de.kisner.otrcast.controller.web.rss.OtrCastUrlGenerator;
+import de.kisner.otrcast.interfaces.facade.OtrMediacenterFacade;
+import de.kisner.otrcast.interfaces.rest.OtrPodcastRest;
+import de.kisner.otrcast.interfaces.web.UrlGenerator;
+import de.kisner.otrcast.model.OtrEpisode;
+import de.kisner.otrcast.model.OtrImage;
+import de.kisner.otrcast.model.OtrMovie;
+import de.kisner.otrcast.model.OtrSeason;
+import de.kisner.otrcast.model.OtrSeries;
+import de.kisner.otrcast.model.OtrStorage;
+import de.kisner.otrcast.model.xml.rss.Rss;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.OtrCutMp4Bootstrap;
-import net.sf.otrcutmp4.controller.facade.OtrMediacenterFacadeBean;
-import net.sf.otrcutmp4.controller.processor.RssXmlProcessor;
-import net.sf.otrcutmp4.controller.web.rss.OtrCastUrlGenerator;
-import net.sf.otrcutmp4.interfaces.facade.OtrMediacenterFacade;
-import net.sf.otrcutmp4.interfaces.rest.OtrPodcastRest;
-import net.sf.otrcutmp4.interfaces.web.UrlGenerator;
-import net.sf.otrcutmp4.model.OtrEpisode;
-import net.sf.otrcutmp4.model.OtrImage;
-import net.sf.otrcutmp4.model.OtrMovie;
-import net.sf.otrcutmp4.model.OtrSeason;
-import net.sf.otrcutmp4.model.OtrSeries;
-import net.sf.otrcutmp4.model.OtrStorage;
-import net.sf.otrcutmp4.model.xml.rss.Rss;
 
 public class CliPodcastRest
 {

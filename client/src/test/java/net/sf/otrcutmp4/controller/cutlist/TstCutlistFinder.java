@@ -5,20 +5,22 @@ import java.io.FileNotFoundException;
 
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.cli.CliCutlistChooserController;
-import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.factory.xml.XmlVideoFileFactory;
-import net.sf.otrcutmp4.interfaces.controller.CutlistChooser;
-import net.sf.otrcutmp4.interfaces.view.ViewCutlistChooser;
-import net.sf.otrcutmp4.model.xml.cut.CutLists;
-import net.sf.otrcutmp4.model.xml.cut.VideoFile;
-import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
-import net.sf.otrcutmp4.view.cli.CliCutlistChooserView;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
+import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
+import de.kisner.otrcast.controller.exception.OtrProcessingException;
+import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
+import de.kisner.otrcast.interfaces.controller.CutlistChooser;
+import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
+import de.kisner.otrcast.model.xml.cut.CutLists;
+import de.kisner.otrcast.model.xml.cut.VideoFile;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 
 public class TstCutlistFinder
 { 

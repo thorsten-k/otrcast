@@ -7,13 +7,6 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.interfaces.rest.OtrAdminRest;
-import net.sf.otrcutmp4.model.xml.container.Otr;
-import net.sf.otrcutmp4.model.xml.otr.Format;
-import net.sf.otrcutmp4.model.xml.otr.Quality;
-import net.sf.otrcutmp4.model.xml.series.Category;
-import net.sf.otrcutmp4.model.xml.series.Series;
-import net.sf.otrcutmp4.util.OtrBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
@@ -22,6 +15,14 @@ import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.interfaces.rest.OtrAdminRest;
+import de.kisner.otrcast.model.xml.container.Otr;
+import de.kisner.otrcast.model.xml.otr.Format;
+import de.kisner.otrcast.model.xml.otr.Quality;
+import de.kisner.otrcast.model.xml.series.Category;
+import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class OtrRestSeedData
 {

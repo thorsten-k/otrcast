@@ -3,15 +3,16 @@ package net.sf.otrcutmp4.test;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.app.AviToMp4.Profile;
-import net.sf.otrcutmp4.controller.batch.BatchGenerator;
-import net.sf.otrcutmp4.controller.batch.RenameGenerator;
-import net.sf.otrcutmp4.controller.exception.OtrInternalErrorException;
-import net.sf.otrcutmp4.model.xml.cut.VideoFiles;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.app.AviToMp4.Profile;
+import de.kisner.otrcast.controller.batch.BatchGenerator;
+import de.kisner.otrcast.controller.batch.RenameGenerator;
+import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
 
 public class TstBatchProcessor
 { 

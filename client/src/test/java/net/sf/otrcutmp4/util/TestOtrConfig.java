@@ -3,7 +3,6 @@ package net.sf.otrcutmp4.util;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.otrcutmp4.controller.exception.OtrConfigurationException;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 
 import org.apache.commons.configuration.Configuration;
@@ -13,6 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.controller.exception.OtrConfigurationException;
+import de.kisner.otrcast.util.OtrConfig;
 
 public class TestOtrConfig extends AbstractClientTest
 { 

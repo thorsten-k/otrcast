@@ -9,9 +9,9 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.otrcutmp4.controller.tag.Mp4LibraryTagger;
-import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
-import net.sf.otrcutmp4.util.OtrBootstrap;
+import de.kisner.otrcast.controller.tag.Mp4LibraryTagger;
+import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class TestMp4LibraryTagger
 {

@@ -6,14 +6,6 @@ import java.io.IOException;
 import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.cover.FileSystemWebCoverManager;
-import net.sf.otrcutmp4.controller.exception.OtrProcessingException;
-import net.sf.otrcutmp4.factory.FileNameFactoy;
-import net.sf.otrcutmp4.factory.txt.TxtDsFactory;
-import net.sf.otrcutmp4.factory.xml.otr.XmlOtrIdFactory;
-import net.sf.otrcutmp4.interfaces.rest.OtrSeriesRest;
-import net.sf.otrcutmp4.model.xml.series.Episode;
-import net.sf.otrcutmp4.model.xml.series.Tags;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
@@ -24,6 +16,14 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
+import de.kisner.otrcast.controller.exception.OtrProcessingException;
+import de.kisner.otrcast.factory.FileNameFactoy;
+import de.kisner.otrcast.factory.txt.TxtDsFactory;
+import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
+import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.series.Tags;
 import freemarker.template.TemplateException;
 
 public class CliSeriesRest
