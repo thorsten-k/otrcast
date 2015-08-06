@@ -2,34 +2,28 @@ package de.kisner.otrcast.controller.tag;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
+import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.test.AbstractUtilTest;
 import de.kisner.otrcast.test.OtrUtilTestBootstrap;
-import net.sf.exlp.util.xml.JaxbUtil;
+import de.kisner.otrcast.util.query.io.FileQuery;
 
-public class TestMp4TagWriter extends AbstractUtilTest
+public class CliMp4TagWriter
 {
-	final static Logger logger = LoggerFactory.getLogger(TestMp4TagWriter.class);
+	final static Logger logger = LoggerFactory.getLogger(CliMp4TagWriter.class);
 	
-	@Test public void dummy(){}
-	
-	public TestMp4TagWriter()
+	public CliMp4TagWriter()
 	{
 		
 	}
-	
 	
 	public void init(File dirCovers)
 	{
@@ -46,7 +40,7 @@ public class TestMp4TagWriter extends AbstractUtilTest
 	public void tag(File src, File dst) throws IOException
 	{
 		episode.setId(334455);
-		JaxbUtil.debug(episode);
+		logger.info("Tagging: "+TxtEpisodeFactory.build(episode));
 		tagger.tagEpisode(src, episode, dst);
 	}
 	
@@ -54,26 +48,21 @@ public class TestMp4TagWriter extends AbstractUtilTest
 	{
 		Configuration config = OtrUtilTestBootstrap.init();
 
-        String src = config.getString("test.mp4Tagger.src");
-        String dst = config.getString("test.mp4Tagger.dst");
+		File srcMp4 = new File(config.getString("test.mp4Tagger.src"));
+		File dstMp4 = new File(config.getString("test.mp4Tagger.dst"));
 		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
 
-        logger.info("src-dir: "+src);
-        logger.info("dst-dir: "+dst);
+        logger.info("src-dir: "+srcMp4);
+        logger.info("dst-dir: "+dstMp4);
         logger.info("Covers: "+dirCovers.getAbsolutePath());
 
-        TestMp4TagWriter test = new TestMp4TagWriter();
+        CliMp4TagWriter test = new CliMp4TagWriter();
 		test.init(dirCovers);
 		
-		
-		List<String> files = new ArrayList<String>();
-		files.add("by-Cut.mp4");
-		files.add("by-OTR.mp4");
-
-		for(String file : files)
+		for(File file : srcMp4.listFiles(FileQuery.mp4FileFilter()))
 		{
-			test.tag(new File(src,file),new File(dst,file));
-			
+			test.tag(file,new File(dstMp4,file.getName()));
+
 			// This tests the balancer directly
 //			Mp4MetadataBalancer balancer = new Mp4MetadataBalancer();
 //			File fSrc = new File(src+fs+file);

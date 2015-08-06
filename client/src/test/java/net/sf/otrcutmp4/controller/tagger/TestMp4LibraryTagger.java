@@ -31,7 +31,6 @@ public class TestMp4LibraryTagger
 		ResteasyWebTarget target = client.target(restUrl); 
 		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);;
 		
-		
 		Mp4LibraryTagger tagger = new Mp4LibraryTagger(rest,fBackup);
 		tagger.scan(fLibrary);
 	}
