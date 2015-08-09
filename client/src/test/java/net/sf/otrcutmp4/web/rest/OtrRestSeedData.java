@@ -89,6 +89,7 @@ public class OtrRestSeedData
 	public void addSeries() throws FileNotFoundException, UtilsProcessingException
 	{
 		File dirEpisodes = new File(config.getString(OtrBootstrap.cfgXmlEpisodes));
+		logger.info("Adding Episodes from "+dirEpisodes.getAbsolutePath());
 		for(File f : dirEpisodes.listFiles())
 		{
 			if(f.getAbsolutePath().endsWith(".xml"))
