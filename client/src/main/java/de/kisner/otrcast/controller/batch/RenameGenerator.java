@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.AviToMp4;
-import de.kisner.otrcast.factory.FileNameFactoy;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
@@ -41,14 +41,14 @@ public class RenameGenerator extends AbstactBatchGenerator
 	private OtrSeriesRest rest;
 	
 	private TxtDsFactory fTemplateDs;
-	private FileNameFactoy fnfSeries;
+	private TxtFileNameFactoy fnfSeries;
 	
 	public RenameGenerator(OtrConfig cfg, AviToMp4.Profile profile)
 	{
 		super(cfg,profile);
 		
 		fTemplateDs = new TxtDsFactory();
-		fnfSeries = new FileNameFactoy();
+		fnfSeries = new TxtFileNameFactoy();
 		fnfSeries.initTemplate(cfg.getTemplate(Template.fnSeries));
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());

@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.FileNameFactoy;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Season;
@@ -23,7 +23,7 @@ public class TestFileNameFactory extends AbstractClientTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestFileNameFactory.class);
 	
-	private FileNameFactoy fnf;
+	private TxtFileNameFactoy fnf;
 	private Map<String,String>  ds;
 	
 	private static String seriesName = "My Series";
@@ -36,7 +36,7 @@ public class TestFileNameFactory extends AbstractClientTest
 	@Before
 	public void init()
 	{
-		fnf = new FileNameFactoy();
+		fnf = new TxtFileNameFactoy();
 		
 		ds = new HashMap<String,String>();
 		ds.put(TxtDsFactory.Key.seriesName.toString(), seriesName);

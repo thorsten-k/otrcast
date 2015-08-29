@@ -1,4 +1,4 @@
-package de.kisner.otrcast.factory;
+package de.kisner.otrcast.factory.txt;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -9,19 +9,18 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.model.xml.series.Episode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-public class FileNameFactoy
+public class TxtFileNameFactoy
 {
-	final static Logger logger = LoggerFactory.getLogger(FileNameFactoy.class);
+	final static Logger logger = LoggerFactory.getLogger(TxtFileNameFactoy.class);
 	
 	private Template t;
 	
-	public FileNameFactoy()
+	public TxtFileNameFactoy()
 	{
 		
 	}

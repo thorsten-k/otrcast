@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
-import de.kisner.otrcast.factory.FileNameFactoy;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.otr.Format;
@@ -132,7 +132,7 @@ public class Mp4Merger extends AbstactBatchGenerator
 		{
 			try
 			{
-				FileNameFactoy fnf = new FileNameFactoy();
+				TxtFileNameFactoy fnf = new TxtFileNameFactoy();
 				fnf.initTemplate(cfg.getTemplate(Template.fnSeries));
 				fileName = fnf.convert(video.getEpisode())+".mp4";
 			}

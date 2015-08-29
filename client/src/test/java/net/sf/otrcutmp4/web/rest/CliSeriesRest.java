@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
-import de.kisner.otrcast.factory.FileNameFactoy;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
@@ -56,7 +56,7 @@ public class CliSeriesRest
 		JaxbUtil.debug(tags);
 		
 		TxtDsFactory fDs = new TxtDsFactory();
-		FileNameFactoy fnf = new FileNameFactoy();
+		TxtFileNameFactoy fnf = new TxtFileNameFactoy();
 		fnf.initTemplate(template);
 		
 		logger.debug(fnf.convert(fDs.build(tags)));
@@ -69,7 +69,7 @@ public class CliSeriesRest
 		JaxbUtil.debug(tags);
 		
 		TxtDsFactory fDs = new TxtDsFactory();
-		FileNameFactoy fnf = new FileNameFactoy();
+		TxtFileNameFactoy fnf = new TxtFileNameFactoy();
 		fnf.initTemplate(template);
 		
 		logger.debug(fnf.convert(fDs.build(tags)));
