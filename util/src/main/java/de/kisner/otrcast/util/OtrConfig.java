@@ -30,7 +30,7 @@ public class OtrConfig
 	
 	public static String otrConfigName = "properties.txt";
 		
-	public static final String dirMc = "dir.mc.libraray";
+	public static final String dirMc = "dir.mc.library";
 	public static final String dirIncoming = "dir.mc.incoming";
 	public static final String dirAvi = "dir.avi";
 	public static final String dirMp4 = "dir.mp4";

@@ -35,6 +35,8 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	private SeriesTagWriter tagWriter;
 	private IoFileFactory fFile;
 	
+	private int nrOfFiles;
+	
 	public McLibraryTagger(OtrSeriesRest rest, File fBackup)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
@@ -56,7 +58,9 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		}
 	    catch (IOException e) {e.printStackTrace();}
 	    
-	    logger.info("Processed "+results.size()+" files in "+ptt.toTotalPeriod());
+	    logger.info("*************************************************");
+	    logger.info("Processing time: "+ptt.toTotalPeriod());
+	    logger.info("Files: "+nrOfFiles);
 	}
 	
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
@@ -64,7 +68,8 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	@Override protected void handleFile(File file, int depth, Collection<File> results)
 	{
 		logger.info("File :"+file);
-		boolean processed = false;
+		nrOfFiles++;
+		boolean processed = true;
 		/*		try
 		{
 			Video video = tagReader.read(file);
