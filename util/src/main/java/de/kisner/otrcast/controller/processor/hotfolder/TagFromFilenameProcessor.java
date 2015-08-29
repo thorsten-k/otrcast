@@ -8,7 +8,7 @@ import org.apache.camel.component.file.GenericFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
+import de.kisner.otrcast.controller.tag.deprecated.SeriesTagWriter2;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;
@@ -18,7 +18,7 @@ public class TagFromFilenameProcessor implements Processor
 
 		final static Logger logger = LoggerFactory.getLogger(TagFromFilenameProcessor.class);
 	
-		private SeriesTagWriter tagger;
+		private SeriesTagWriter2 tagger;
 		
 		@SuppressWarnings("rawtypes")
 		@Override
@@ -28,7 +28,7 @@ public class TagFromFilenameProcessor implements Processor
 			
 			
 			Episode episode = createEpisodeFromFilename(file.getFileName());
-			tagger = new SeriesTagWriter();
+			tagger = new SeriesTagWriter2();
 			tagger.tagEpisode(jFile, episode, new File("target/test.mp4"));		
 		}
 		

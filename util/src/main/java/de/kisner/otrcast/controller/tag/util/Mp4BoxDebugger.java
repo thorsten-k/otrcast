@@ -183,7 +183,6 @@ public class Mp4BoxDebugger
 		{
 			debug(lvl,"Data","<100");
 		}
-		
 	}
 	
 	private static void debug(int lvl, String key, long value){debug(lvl,key,""+value);}

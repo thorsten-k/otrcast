@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.tag.writer;
+package de.kisner.otrcast.controller.tag.deprecated;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +14,6 @@ import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
-
-import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
-import de.kisner.otrcast.controller.tag.util.Mp4MetadataBalancer;
 
 public class Mp4MediaTypeWriter
 {

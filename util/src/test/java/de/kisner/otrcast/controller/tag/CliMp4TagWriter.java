@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
-import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
+import de.kisner.otrcast.controller.tag.deprecated.SeriesTagWriter2;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
@@ -31,10 +31,10 @@ public class CliMp4TagWriter
 
 		episode = XmlEpisodeFactory.build("mySeries", 11, 22, "myEpisode");
 		episode.getSeason().getSeries().setKey("TEST");
-		tagger = new SeriesTagWriter(coverManager);
+		tagger = new SeriesTagWriter2(coverManager);
 	}
 	
-	private SeriesTagWriter tagger;
+	private SeriesTagWriter2 tagger;
 	private Episode episode;
 		
 	public void tag(File src, File dst) throws IOException

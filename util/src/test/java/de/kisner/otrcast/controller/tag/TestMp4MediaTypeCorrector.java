@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.tag.writer.Mp4MediaTypeCorrector;
+import de.kisner.otrcast.controller.tag.deprecated.Mp4MediaTypeCorrector;
 import de.kisner.otrcast.test.AbstractUtilTest;
 import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 

@@ -8,7 +8,7 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 
-import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
+import de.kisner.otrcast.controller.tag.deprecated.Mp4BoxManager;
 import de.kisner.otrcast.model.xml.series.Video;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 

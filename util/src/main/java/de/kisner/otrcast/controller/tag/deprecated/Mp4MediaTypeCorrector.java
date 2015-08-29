@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.tag.writer;
+package de.kisner.otrcast.controller.tag.deprecated;
 
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
-import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 
 import java.io.File;
 import java.io.IOException;

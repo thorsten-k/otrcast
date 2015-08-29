@@ -14,8 +14,8 @@ import org.joda.time.format.PeriodFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.tag.deprecated.SeriesTagWriter2;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
-import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.container.Otr;
@@ -31,7 +31,7 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 	private OtrSeriesRest rest;
 	
 	private Mp4TagReader tagReader;
-	private SeriesTagWriter tagWriter;
+	private SeriesTagWriter2 tagWriter;
 	private IoFileFactory fFile;
 	
 	public Mp4LibraryTagger(OtrSeriesRest rest, File fBackup)
@@ -39,7 +39,7 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 		super(FileQuery.mp4FileFilter(),-1);
 		this.rest=rest;
 		tagReader = new Mp4TagReader(false);
-		tagWriter = new SeriesTagWriter();
+		tagWriter = new SeriesTagWriter2();
 		fFile = new IoFileFactory(fBackup);
 	}
 	

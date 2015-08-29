@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.video.TagGenerator;
-import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
+import de.kisner.otrcast.controller.tag.deprecated.SeriesTagWriter2;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.series.Video;
@@ -53,7 +53,7 @@ public class SeriesTagger
 		if(dstFile.endsWith("\"")){dstFile = dstFile.substring(0,dstFile.length()-1);}
 		
 		logger.info("Tagging "+srcFile+" to "+dstFile);
-		SeriesTagWriter mp4Tagger = new SeriesTagWriter(coverManager);
+		SeriesTagWriter2 mp4Tagger = new SeriesTagWriter2(coverManager);
 		try
 		{
 			mp4Tagger.tagEpisode(srcFile, video.getEpisode(), dstFile);
