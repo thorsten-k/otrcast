@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ofx:section xmlns:ofx="http://www.openfuxml.org"
+		xmlns:text="http://www.openfuxml.org/text"
+		id="section.introduction">
+	<ofx:title lang="en">Configuration</ofx:title>
+	
+	<ofx:paragraph lang="en" version="1">
+		xx
+	</ofx:paragraph>
+	
+	<t:table id="table.admin.system.logs.type">
+	    <ofx:title>Logger Levels</ofx:title>
+	    <t:specification>
+	        <t:columns>
+	            <t:column><layout:width unit="percentage" flex="true" narrow="true">25.0</layout:width></t:column>
+				<t:column><layout:width unit="percentage" flex="true" narrow="false">75.0</layout:width></t:column>
+	        </t:columns>
+	    </t:specification>
+	    <t:content>
+	        <t:head>
+	            <t:row>
+	                <t:cell><ofx:paragraph lang="en">Parameter</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph lang="en">Description</ofx:paragraph></t:cell>
+	            </t:row>
+	        </t:head>
+	        <t:body>
+	            <t:row>
+	                <t:cell><ofx:paragraph lang="en">dir.mc.incoming</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph lang="en">Directory where new files can be deployed</ofx:paragraph></t:cell>
+	            </t:row>
+	            <t:row>
+	                <t:cell><ofx:paragraph lang="en">library</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph lang="en">Directory where the MP4 Library is located</ofx:paragraph></t:cell>
+	            </t:row>
+	        </t:body>
+	    </t:content>
+	</t:table>
+	
+</ofx:section>

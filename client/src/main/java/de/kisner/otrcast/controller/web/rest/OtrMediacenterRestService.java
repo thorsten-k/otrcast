@@ -16,7 +16,7 @@ import de.kisner.otrcast.model.xml.mc.ServerStatus;
 import de.kisner.otrcast.model.xml.series.Movie;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;
-import de.kisner.otrcast.util.query.SeriesQuery;
+import de.kisner.otrcast.util.query.xml.SeriesQuery;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;

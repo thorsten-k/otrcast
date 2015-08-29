@@ -24,7 +24,7 @@ public class OtrCutMp4Bootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrCutMp4Bootstrap.class);
 	
-	public static String configXml = "config.otrcutmp4-client/otr.xml";
+	public static String xmlConfig = "config.otrcast-client/otr.xml";
 	
 	private static EntityManagerFactory emf;
 	private static Configuration config;
@@ -38,7 +38,7 @@ public class OtrCutMp4Bootstrap
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
 	
-	public static Configuration init(){return init(configXml);}
+	public static Configuration init(){return init(xmlConfig);}
 	public static Configuration init(String configFile)
 	{
 		initLogger();

@@ -36,9 +36,9 @@ import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.util.io.HashUtil;
 
-public class MediaCenterScanner extends DirectoryWalker<File>
+public class McScanner extends DirectoryWalker<File>
 {
-	final static Logger logger = LoggerFactory.getLogger(MediaCenterScanner.class);
+	final static Logger logger = LoggerFactory.getLogger(McScanner.class);
 	
 	private Mp4TagReader tagReader;
 	
@@ -48,7 +48,7 @@ public class MediaCenterScanner extends DirectoryWalker<File>
 	private EjbCoverFactory<OtrImage> efCover;
 	private EjbStorageFactory<OtrStorage> efStorage;
 	
-	public MediaCenterScanner(EntityManager em)
+	public McScanner(EntityManager em)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
 		this.em=em;

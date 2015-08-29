@@ -1,4 +1,4 @@
-package de.kisner.otrcast.util.query;
+package de.kisner.otrcast.util.query.xml;
 
 import java.util.Date;
 import java.util.Hashtable;

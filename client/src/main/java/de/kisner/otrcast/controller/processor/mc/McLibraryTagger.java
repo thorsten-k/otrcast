@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.tag;
+package de.kisner.otrcast.controller.processor.mc;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +22,12 @@ import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
+import net.sf.ahtutils.monitor.ProcessingTimeTracker;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class Mp4LibraryTagger extends DirectoryWalker<File>
+public class McLibraryTagger extends DirectoryWalker<File>
 {
-	final static Logger logger = LoggerFactory.getLogger(Mp4LibraryTagger.class);
+	final static Logger logger = LoggerFactory.getLogger(McLibraryTagger.class);
 	
 	private OtrSeriesRest rest;
 	
@@ -34,7 +35,7 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 	private SeriesTagWriter tagWriter;
 	private IoFileFactory fFile;
 	
-	public Mp4LibraryTagger(OtrSeriesRest rest, File fBackup)
+	public McLibraryTagger(OtrSeriesRest rest, File fBackup)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
 		this.rest=rest;
@@ -46,7 +47,7 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 	public void scan(File startDirectory)
 	{
 		logger.info("Scanning "+startDirectory);
-		DateTime startDate = new DateTime();
+		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		
 		List<File> results = new ArrayList<File>();
 	    try
@@ -55,18 +56,16 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 		}
 	    catch (IOException e) {e.printStackTrace();}
 	    
-	    Period period = new Period(startDate, new DateTime());
-	    
-	    logger.info("Processed "+results.size()+" files in "+PeriodFormat.getDefault().print(period));
+	    logger.info("Processed "+results.size()+" files in "+ptt.toTotalPeriod());
 	}
 	
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
 
 	@Override protected void handleFile(File file, int depth, Collection<File> results)
 	{
-		logger.trace("File :"+file);
+		logger.info("File :"+file);
 		boolean processed = false;
-		try
+		/*		try
 		{
 			Video video = tagReader.read(file);
 			if(video.isSetEpisode() && !video.getEpisode().isSetId())
@@ -75,13 +74,13 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 			}
 		}
 		catch (IOException e) {e.printStackTrace();}
-		if(processed){results.add(file);}
+*/		if(processed){results.add(file);}
 	}
 	
 	private boolean handleEpisode(Episode episodeRequest, File fSrc)
 	{
 		JaxbUtil.info(episodeRequest);
-		Otr otr = rest.episodeInfo(episodeRequest);
+/*		Otr otr = rest.episodeInfo(episodeRequest);
 		if(otr.getEpisode().size()==1)
 		{
 			Episode eInfo = otr.getEpisode().get(0);
@@ -98,7 +97,7 @@ public class Mp4LibraryTagger extends DirectoryWalker<File>
 			
 			return true;
 		}
-		
+*/		
 		return false;
 	}
 }

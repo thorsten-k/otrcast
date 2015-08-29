@@ -9,7 +9,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.tag.Mp4LibraryTagger;
+import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.util.OtrBootstrap;
 
@@ -31,7 +31,7 @@ public class TestMp4LibraryTagger
 		ResteasyWebTarget target = client.target(restUrl); 
 		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);;
 		
-		Mp4LibraryTagger tagger = new Mp4LibraryTagger(rest,fBackup);
+		McLibraryTagger tagger = new McLibraryTagger(rest,fBackup);
 		tagger.scan(fLibrary);
 	}
  }

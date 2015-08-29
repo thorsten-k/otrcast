@@ -30,7 +30,7 @@ public class OtrConfig
 	
 	public static String otrConfigName = "properties.txt";
 		
-	public static final String dirMc = "dir.mc.media";
+	public static final String dirMc = "dir.mc.libraray";
 	public static final String dirIncoming = "dir.mc.incoming";
 	public static final String dirAvi = "dir.avi";
 	public static final String dirMp4 = "dir.mp4";
@@ -82,6 +82,23 @@ public class OtrConfig
 		initTemplateList();
 		initCredentialList();
 		initCmdList();
+	}
+	
+	public void readConfig(String configFile) throws OtrConfigurationException
+	{
+		config = null;
+		
+		File f = new File(configFile);
+		if(!f.exists()){throw new OtrConfigurationException("Configuration file does not exist: "+f.getAbsolutePath());}
+		if(!f.isFile()){throw new OtrConfigurationException("Configuration file is not a file: "+f.getAbsolutePath());}
+		
+		try{config = new PropertiesConfiguration(configFile);}
+		catch (ConfigurationException e) {throw new OtrConfigurationException(e.getMessage());}
+	}
+	
+	public void readConfig(Configuration config)
+	{
+		this.config=config;
 	}
 	
 	private void initDirectoryList()
@@ -196,19 +213,7 @@ public class OtrConfig
 			catch (ConfigurationException e) {logger.error("",e);}
 		}
 	}
-	
-	public void readConfig(String configFile) throws OtrConfigurationException
-	{
-		config = null;
 		
-		File f = new File(configFile);
-		if(!f.exists()){throw new OtrConfigurationException("Configuration file does not exist: "+f.getAbsolutePath());}
-		if(!f.isFile()){throw new OtrConfigurationException("Configuration file is not a file: "+f.getAbsolutePath());}
-		
-		try{config = new PropertiesConfiguration(configFile);}
-		catch (ConfigurationException e) {throw new OtrConfigurationException(e.getMessage());}
-	}
-	
 	public void createDirs() throws OtrConfigurationException
 	{
 		for(String dirKey : lCutDirectotries)

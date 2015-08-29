@@ -1,19 +1,24 @@
 package de.kisner.otrcast.app;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import java.io.File;
 
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
-import de.kisner.otrcast.controller.processor.mc.MediaCenterScanner;
+import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
+import de.kisner.otrcast.controller.processor.mc.McScanner;
 import de.kisner.otrcast.util.OtrConfig;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.util.cli.UtilsCliOption;
 
-import java.io.File;
-
-public class OtrMediaCenter extends AbstractCommandLine
+public class OtrMediaCenter
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrMediaCenter.class);
 	
@@ -21,27 +26,27 @@ public class OtrMediaCenter extends AbstractCommandLine
 
 	private static enum McMode {managed,unmanged}
 	
+	private UtilsCliOption uOption;
 	private OtrConfig otrConfig;
 	
 	private Option oMediaCenter,oMediaCenterMode,oRetagger;
 	
-	public OtrMediaCenter()
+	public OtrMediaCenter(UtilsCliOption uOption)
 	{
+		this.uOption=uOption;
 		otrConfig = new OtrConfig();
 	}
 	
 	public void parseArguments(String args[]) throws Exception
 	{
-		
 		createOptions();
 		CommandLineParser parser = new DefaultParser();
-		CommandLine cmd = parser.parse(options , args);
+		CommandLine cmd = parser.parse(uOption.getOptions(), args);
 
-        super.parseArguments(cmd);
+		uOption.handleHelp(cmd);
+		uOption.handleLogger(cmd);
        
-        String configFile = cmd.getOptionValue(oConfig.getOpt(),OtrConfig.otrConfigName);
-        
-        otrConfig.readConfig(configFile);
+        otrConfig.readConfig(uOption.initConfig(cmd, OtrCutMp4Bootstrap.xmlConfig));
         otrConfig.checkMcSettings();
         
         if(cmd.hasOption(oMediaCenter.getOpt()))
@@ -59,30 +64,24 @@ public class OtrMediaCenter extends AbstractCommandLine
         }
         else if(cmd.hasOption(oRetagger.getOpt()))
         {
-        	OtrCutMp4Bootstrap.buildEmf(otrConfig).createEntityManager();
-        	scanMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
+        	McLibraryTagger tagger = new McLibraryTagger(null,null);
+        	tagger.scan(otrConfig.getDir(OtrConfig.Dir.MC));
         }
-       
-
-//        McIncomingHotfolder hot = new McIncomingHotfolder(otrConfig);
-//		hot.addRoute();
-//		hot.startHotFolder();
-        Thread.sleep(1000);
 	}
 
 	public void scanMediathek(File f)
 	{
+		OtrCutMp4Bootstrap.buildEmf(otrConfig).createEntityManager();
 		logger.info("Scanning for MP4 in "+f.getAbsolutePath());
-		MediaCenterScanner mcs = new MediaCenterScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
+		McScanner mcs = new McScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
 
 	private void createOptions()
 	{
-        super.buildOptions();
-
-		options.addOption(oHelp);
-        options.addOption(oConfig);
+		uOption.buildHelp();
+        uOption.buildDebug();
+        uOption.buildConfig();
         
         oMediaCenter  = Option.builder("mc").required(false).desc("Starts Mediacenter").build();
         oRetagger  = Option.builder("tag").required(false).desc("Re-Tags the MP4 Library").build();
@@ -91,17 +90,20 @@ public class OtrMediaCenter extends AbstractCommandLine
 				.hasArg(true).argName("MODE").desc("only for mc, MODE can be "+McMode.managed+" or "+McMode.unmanged)
 				.build();
         
-        options.addOption(oMediaCenter);
-        options.addOption(oMediaCenterMode);
-        options.addOption(oRetagger);
+        uOption.getOptions().addOption(oMediaCenter);
+        uOption.getOptions().addOption(oMediaCenterMode);
+        uOption.getOptions().addOption(oRetagger);
 	}
 
 	public static void main(String args[]) throws Exception
 	{
-		OtrMediaCenter otrMc = new OtrMediaCenter();
+		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.interfaces.Version.class.getPackage().getImplementationVersion());
+		uOption.setLog4jPaths("config.otrcast-client");
+		
+		OtrMediaCenter otrMc = new OtrMediaCenter(uOption);
 		try {otrMc.parseArguments(args);}
-		catch (ParseException e) {logger.error(e.getMessage());otrMc.printHelp();}
-		catch (OtrConfigurationException e) {logger.error(e.getMessage());otrMc.printHelp();}
+		catch (ParseException e) {logger.error(e.getMessage());uOption.help();}
+		catch (OtrConfigurationException e) {logger.error(e.getMessage());uOption.help();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
 	}
 }

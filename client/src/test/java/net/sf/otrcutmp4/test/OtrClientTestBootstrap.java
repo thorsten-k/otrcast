@@ -27,7 +27,7 @@ public class OtrClientTestBootstrap
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 		
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
-		ConfigLoader.add(OtrCutMp4Bootstrap.configXml);
+		ConfigLoader.add(OtrCutMp4Bootstrap.xmlConfig);
 		Configuration config = ConfigLoader.init();
 		return config;
 	}
