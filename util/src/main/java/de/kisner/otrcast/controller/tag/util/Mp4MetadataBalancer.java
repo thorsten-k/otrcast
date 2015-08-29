@@ -1,6 +1,5 @@
 package de.kisner.otrcast.controller.tag.util;
 
-
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.*;
 import com.googlecode.mp4parser.util.Path;
@@ -67,6 +66,14 @@ public class Mp4MetadataBalancer
             }
         }
         throw new RuntimeException("Hmmm - shouldn't happen");
+    }
+    
+    public void correctOffsetsIfRequired(IsoFile isoFile)
+    {
+    	if(needsOffsetCorrection(isoFile))
+    	{
+    		correctChunkOffsets(isoFile);
+    	}
     }
 
     public void correctChunkOffsets(IsoFile isoFile)

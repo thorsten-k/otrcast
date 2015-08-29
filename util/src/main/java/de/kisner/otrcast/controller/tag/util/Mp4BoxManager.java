@@ -4,7 +4,13 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
+import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.coremedia.iso.boxes.apple.AppleShowBox;
+import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
+import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,5 +71,76 @@ public class Mp4BoxManager
 			metaBox.addBox(apple);
 			return apple;
 		}
+	}
+	
+	// Series
+	public static AppleTrackTitleBox fcAppleTrackTitleBox(AppleItemListBox apple)
+	{
+		AppleTrackTitleBox titleBox = null;
+		if (apple.getBoxes(AppleTrackTitleBox.class).isEmpty())
+		{
+			titleBox = new AppleTrackTitleBox();
+		}
+		else
+		{
+			titleBox = (AppleTrackTitleBox) apple.getBoxes(AppleTrackTitleBox.class).get(0);
+		}
+		return titleBox;
+	}
+	
+	public static AppleTvEpisodeBox fcAppleTvEpisodeBox(AppleItemListBox apple)
+	{
+		AppleTvEpisodeBox episodeBox = null;
+		if (apple.getBoxes(AppleTvEpisodeBox.class).isEmpty())
+		{
+			episodeBox = new AppleTvEpisodeBox();
+		}
+		else
+		{
+			episodeBox = (AppleTvEpisodeBox) apple.getBoxes(AppleTvEpisodeBox.class).get(0);
+		}
+		return episodeBox;
+	}
+	
+	public static AppleTvSeasonBox fcAppleTvSeasonBox(AppleItemListBox apple)
+	{
+		AppleTvSeasonBox seasonBox = null;
+		if(apple.getBoxes(AppleTvSeasonBox.class).isEmpty())
+		{
+			seasonBox = new AppleTvSeasonBox();
+		}
+		else
+		{
+			seasonBox = (AppleTvSeasonBox) apple.getBoxes(AppleTvSeasonBox.class).get(0);
+		}
+		return seasonBox;
+	}
+	
+	public static AppleShowBox fcAppleShowBox(AppleItemListBox apple)
+	{
+		AppleShowBox box = null;
+		if(apple.getBoxes(AppleShowBox.class).isEmpty())
+		{
+			box = new AppleShowBox();
+		}
+		else
+		{
+			box = (AppleShowBox) apple.getBoxes(AppleShowBox.class).get(0);
+		}
+		return box;
+	}
+	
+	public static AppleCoverBox fcAppleCoverBox(AppleItemListBox apple)
+	{
+		AppleCoverBox box = null;
+		if(apple.getBoxes(AppleCoverBox.class).isEmpty())
+		{
+			box = new AppleCoverBox();
+		}
+		else
+		{
+			box = (AppleCoverBox) apple.getBoxes(AppleCoverBox.class).get(0);
+		}
+		return box;
 	}
 }
