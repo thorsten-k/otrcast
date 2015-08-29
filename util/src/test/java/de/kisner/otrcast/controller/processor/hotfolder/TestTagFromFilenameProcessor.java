@@ -7,8 +7,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.processor.hotfolder.TagFromFilenameProcessor;
-import de.kisner.otrcast.controller.tag.deprecated.SeriesTagWriter2;
+import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.test.AbstractUtilTest;
 
@@ -27,7 +26,7 @@ public class TestTagFromFilenameProcessor extends AbstractUtilTest
 		Episode episode = processor.createEpisodeFromFilename(input.getName());
 		logger.info("Episode: " +episode.toString());
 		
-		SeriesTagWriter2 tagger = new SeriesTagWriter2();
+		SeriesTagWriter tagger = new SeriesTagWriter();
 		tagger.tagEpisode(input, episode, new File("target/new4" +input.getName()));
 	}
 	
