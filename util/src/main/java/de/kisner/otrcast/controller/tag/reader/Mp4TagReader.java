@@ -24,6 +24,13 @@ public class Mp4TagReader
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4TagReader.class);
 
+	private RandomAccessFile raf;
+	private FileChannel fc;
+	private IsoFile isoFile;
+	
+	private AppleItemListBox apple;
+
+	
 	private SeriesTagReader trSeries;
 	private MovieTagReader trMovie;
 	
@@ -33,16 +40,28 @@ public class Mp4TagReader
 		trMovie = new MovieTagReader(withCover);
 	}
 	
-	public Video read(File fSource) throws IOException
+	private void readAppleBox(File fSource) throws IOException
 	{
-		RandomAccessFile rafR = new RandomAccessFile(fSource, "r");		
-		FileChannel fcr = rafR.getChannel();
-		IsoFile isoFile = new IsoFile(fcr);
+		raf = new RandomAccessFile(fSource, "r");		
+		fc = raf.getChannel();
+		isoFile = new IsoFile(fc);
 		
 		MovieBox moov = Mp4BoxManager.movieBox(isoFile);		
 		UserDataBox udta = Mp4BoxManager.userDataBox(moov);
 		MetaBox meta = Mp4BoxManager.metaBox(udta);
-		AppleItemListBox apple = Mp4BoxManager.appleItemListBox(meta);
+		apple = Mp4BoxManager.appleItemListBox(meta);
+	}
+	
+	private void closeFile() throws IOException
+	{
+		isoFile.close();
+		fc.close();
+		raf.close();
+	}
+	
+	public Video read(File fSource) throws IOException
+	{
+		readAppleBox(fSource);
 
         Mp4BoxManager.Type type;
         try{type = getMediaType(apple);}
@@ -55,36 +74,26 @@ public class Mp4TagReader
 			case MOVIE:		video.setMovie(trMovie.readMovie(apple));break;
 			default: logger.warn("UNKNOWN handling for "+fSource);
 		}
-		
-		isoFile.close();
-		fcr.close();
-		rafR.close();
+		closeFile();
+
 		return video;
 	}
 
-    public Mp4BoxManager.Type readMediaType(File file) throws IOException,UtilsNotFoundException
+    public Mp4BoxManager.Type readMediaType(File fSource) throws IOException,UtilsNotFoundException
     {
-        RandomAccessFile rafR = new RandomAccessFile(file, "r");
-        FileChannel fcr = rafR.getChannel();
-        IsoFile isoFile = new IsoFile(fcr);
-
-        MovieBox moov = Mp4BoxManager.movieBox(isoFile);
-        UserDataBox udta = Mp4BoxManager.userDataBox(moov);
-        MetaBox meta = Mp4BoxManager.metaBox(udta);
-        AppleItemListBox apple = Mp4BoxManager.appleItemListBox(meta);
+    	readAppleBox(fSource);
 
         Mp4BoxManager.Type type;
         try{type = getMediaType(apple);}
         catch (UtilsNotFoundException e) {throw e;}
         finally
         {
-            isoFile.close();
-            fcr.close();
-            rafR.close();
+        	closeFile();
         }
 
         return type;
     }
+    
 	public Mp4BoxManager.Type getMediaType(AppleItemListBox apple) throws UtilsNotFoundException
     {
 		logger.info("Getting "+AppleMediaTypeBox.class.getSimpleName());

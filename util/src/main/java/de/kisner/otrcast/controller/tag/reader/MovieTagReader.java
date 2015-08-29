@@ -16,7 +16,7 @@ public class MovieTagReader extends AbstractTagReader
 	
 	private boolean withCover;
 	
-	public MovieTagReader(boolean withCover)
+	protected MovieTagReader(boolean withCover)
 	{
 		this.withCover=withCover;
 	}

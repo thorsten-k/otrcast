@@ -22,7 +22,7 @@ public class SeriesTagReader extends AbstractTagReader
 	
 	private boolean withCover;
 	
-	public SeriesTagReader(boolean withCover)
+	protected SeriesTagReader(boolean withCover)
 	{
 		this.withCover=withCover;
 	}

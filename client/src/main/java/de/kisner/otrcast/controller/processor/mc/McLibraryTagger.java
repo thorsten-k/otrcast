@@ -7,21 +7,20 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.DirectoryWalker;
-import org.apache.commons.io.FileUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.format.PeriodFormat;
+import org.apache.commons.lang.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
+import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
-import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
+import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.ahtutils.monitor.BucketSizeCounter;
+import net.sf.ahtutils.monitor.ProcessingEventCounter;
 import net.sf.ahtutils.monitor.ProcessingTimeTracker;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -29,13 +28,16 @@ public class McLibraryTagger extends DirectoryWalker<File>
 {
 	final static Logger logger = LoggerFactory.getLogger(McLibraryTagger.class);
 	
+	private enum CodeTotal {total}
+	
+	private ProcessingEventCounter pecMediaType,pecTotal;
+	private BucketSizeCounter bsc;
+	
 	private OtrSeriesRest rest;
 	
 	private Mp4TagReader tagReader;
 	private SeriesTagWriter tagWriter;
 	private IoFileFactory fFile;
-	
-	private int nrOfFiles;
 	
 	public McLibraryTagger(OtrSeriesRest rest, File fBackup)
 	{
@@ -44,6 +46,10 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		tagReader = new Mp4TagReader(false);
 		tagWriter = new SeriesTagWriter();
 		fFile = new IoFileFactory(fBackup);
+		
+		bsc = new BucketSizeCounter("Files");
+		pecMediaType = new ProcessingEventCounter("MediaType");
+		pecTotal = new ProcessingEventCounter("Files");
 	}
 	
 	public void scan(File startDirectory)
@@ -60,26 +66,43 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	    
 	    logger.info("*************************************************");
 	    logger.info("Processing time: "+ptt.toTotalPeriod());
-	    logger.info("Files: "+nrOfFiles);
+	    pecTotal.debug();
+	    pecMediaType.debug();
+	    bsc.debugAsFileSize();
 	}
 	
-	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
+	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results)
+	{
+//		if(pecTotal.events(CodeTotal.total.toString())>100){return false;}
+		return true;
+	}
 
 	@Override protected void handleFile(File file, int depth, Collection<File> results)
 	{
 		logger.info("File :"+file);
-		nrOfFiles++;
+		bsc.add(CodeTotal.total.toString(),file.length());
+		pecTotal.add(CodeTotal.total.toString());
 		boolean processed = true;
-		/*		try
+		try
 		{
-			Video video = tagReader.read(file);
+			try
+			{
+				Mp4BoxManager.Type type = tagReader.readMediaType(file);
+				pecMediaType.add("mediaType"+WordUtils.capitalize(type.toString()));
+			}
+			catch (UtilsNotFoundException e)
+			{
+				pecMediaType.add("mediaTypeMissing");
+			}
+			
+/*			Video video = tagReader.read(file);
 			if(video.isSetEpisode() && !video.getEpisode().isSetId())
 			{
 				processed = handleEpisode(video.getEpisode(), file);
 			}
-		}
+*/		}
 		catch (IOException e) {e.printStackTrace();}
-*/		if(processed){results.add(file);}
+		if(processed){results.add(file);}
 	}
 	
 	private boolean handleEpisode(Episode episodeRequest, File fSrc)

@@ -7,7 +7,6 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.factory.txt.TxtVideoFactory;
 import de.kisner.otrcast.model.xml.series.Video;
