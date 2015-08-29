@@ -20,7 +20,7 @@ public class OtrConfig
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
-	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER,MC,IN,DB};
+	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER,MC,BACKUP,IN,DB};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
@@ -32,6 +32,7 @@ public class OtrConfig
 		
 	public static final String dirMc = "dir.mc.library";
 	public static final String dirIncoming = "dir.mc.incoming";
+	public static final String dirMcBackup = "dir.mc.backup";
 	public static final String dirAvi = "dir.avi";
 	public static final String dirMp4 = "dir.mp4";
 	public static final String dirTmp = "dir.tmp";
@@ -118,6 +119,7 @@ public class OtrConfig
 		mapDir.put(Dir.MC, dirMc);
 		lMcDirectotries.add(dirIncoming);mapDir.put(Dir.IN, dirIncoming);
         lMcDirectotries.add(dirDb);mapDir.put(Dir.DB, dirDb);
+        lMcDirectotries.add(dirMcBackup);mapDir.put(Dir.BACKUP, dirMcBackup);
 	}
 	
 	private void initToolList()

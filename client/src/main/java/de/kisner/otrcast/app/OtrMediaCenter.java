@@ -15,6 +15,7 @@ import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.mc.McScanner;
 import de.kisner.otrcast.util.OtrConfig;
+import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
 
@@ -64,7 +65,7 @@ public class OtrMediaCenter
         }
         else if(cmd.hasOption(oRetagger.getOpt()))
         {
-        	McLibraryTagger tagger = new McLibraryTagger(null,null);
+        	McLibraryTagger tagger = new McLibraryTagger(null,otrConfig.getDir(Dir.TMP),otrConfig.getDir(Dir.BACKUP));
         	tagger.scan(otrConfig.getDir(OtrConfig.Dir.MC));
         }
 	}

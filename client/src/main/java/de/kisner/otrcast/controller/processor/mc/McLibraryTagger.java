@@ -37,15 +37,17 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	private Mp4TagReader tagReader;
 	private SeriesTagWriter tagWriter;
-	private IoFileFactory fFile;
+	private IoFileFactory iofTmp,iofBackup;
 	
-	public McLibraryTagger(OtrSeriesRest rest, File fBackup)
+	public McLibraryTagger(OtrSeriesRest rest, File fTmp, File fBackup)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
 		this.rest=rest;
 		tagReader = new Mp4TagReader(false);
 		tagWriter = new SeriesTagWriter();
-		fFile = new IoFileFactory(fBackup);
+		
+		if(fTmp!=null){iofTmp = new IoFileFactory(fTmp);}
+		if(fBackup!=null){iofBackup = new IoFileFactory(fBackup);}
 		
 		bsc = new BucketSizeCounter("Files");
 		pecMediaType = new ProcessingEventCounter("MediaType");
@@ -54,7 +56,10 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	public void scan(File startDirectory)
 	{
+		if(iofTmp!=null){logger.debug("Tmp Directory: "+iofTmp.getfRoot().getAbsolutePath());}
+		if(iofBackup!=null){logger.debug("Backup Directory: "+iofBackup.getfRoot().getAbsolutePath());}
 		logger.info("Scanning "+startDirectory);
+		
 		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		
 		List<File> results = new ArrayList<File>();
@@ -73,15 +78,15 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results)
 	{
-//		if(pecTotal.events(CodeTotal.total.toString())>100){return false;}
+		if(pecTotal.events(CodeTotal.total)>100){return false;}
 		return true;
 	}
 
 	@Override protected void handleFile(File file, int depth, Collection<File> results)
 	{
 		logger.info("File :"+file);
-		bsc.add(CodeTotal.total.toString(),file.length());
-		pecTotal.add(CodeTotal.total.toString());
+		bsc.add(CodeTotal.total,file.length());
+		pecTotal.add(CodeTotal.total);
 		boolean processed = true;
 		try
 		{

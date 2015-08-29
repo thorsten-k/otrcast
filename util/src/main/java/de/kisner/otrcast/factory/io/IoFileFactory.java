@@ -17,7 +17,7 @@ public class IoFileFactory
 	final static Logger logger = LoggerFactory.getLogger(IoFileFactory.class);
 	
 	private File fRoot;
-	
+
 	public IoFileFactory(File fRoot)
 	{
 		this.fRoot=fRoot;
@@ -44,4 +44,6 @@ public class IoFileFactory
 		sb.append(SystemUtils.FILE_SEPARATOR).append(episode.getNr()).append(" ").append(episode.getName());
 		return new File(fRoot,sb.toString());
 	}
+	
+	public File getfRoot() {return fRoot;}
 }

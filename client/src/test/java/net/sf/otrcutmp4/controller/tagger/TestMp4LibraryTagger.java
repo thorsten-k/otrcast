@@ -31,7 +31,7 @@ public class TestMp4LibraryTagger
 		ResteasyWebTarget target = client.target(restUrl); 
 		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);;
 		
-		McLibraryTagger tagger = new McLibraryTagger(rest,fBackup);
+		McLibraryTagger tagger = new McLibraryTagger(rest,fBackup,null);
 		tagger.scan(fLibrary);
 	}
  }
