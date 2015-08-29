@@ -1,14 +1,14 @@
 package de.kisner.otrcast.controller.tag.deprecated;
 
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import java.io.File;
+import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
-
-import java.io.File;
-import java.io.IOException;
+import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
+import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class Mp4MediaTypeCorrector
 {

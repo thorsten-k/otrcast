@@ -1,5 +1,13 @@
 package de.kisner.otrcast.controller.tag.reader;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
@@ -8,17 +16,9 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 
-import de.kisner.otrcast.controller.tag.deprecated.Mp4BoxManager;
+import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.model.xml.series.Video;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
 
 public class Mp4TagReader
 {

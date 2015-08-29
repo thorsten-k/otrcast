@@ -41,8 +41,8 @@ import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
-import de.kisner.otrcast.controller.tag.deprecated.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxDebugger;
+import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.test.AbstractUtilTest;
 import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 
