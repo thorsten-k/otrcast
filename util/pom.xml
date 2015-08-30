@@ -20,7 +20,7 @@
 		</dependency>
 		<dependency>
 			<groupId>de.kisner.otrcast</groupId>
-			<artifactId>otrcast-xml</artifactId>
+			<artifactId>otrcast-entities</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

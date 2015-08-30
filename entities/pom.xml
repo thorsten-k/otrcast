@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
-	<artifactId>otrcast-xml</artifactId>
+	<artifactId>otrcast-entities</artifactId>
     <packaging>jar</packaging>
     <name>OTR - XML</name>
    

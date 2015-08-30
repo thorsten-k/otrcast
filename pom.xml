@@ -14,9 +14,9 @@
 
 	<modules>
 		<module>client</module>
-		<module>xml</module>
+		<module>entities</module>
 		<module>util</module>
-		<module>interfaces</module>
+		<module>api</module>
 	</modules>
 
     <properties>
@@ -42,7 +42,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.kisner.otrcast</groupId>
-				<artifactId>otrcast-xml</artifactId>
+				<artifactId>otrcast-entities</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -52,7 +52,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.kisner.otrcast</groupId>
-				<artifactId>otrcast-interfaces</artifactId>
+				<artifactId>otrcast-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
