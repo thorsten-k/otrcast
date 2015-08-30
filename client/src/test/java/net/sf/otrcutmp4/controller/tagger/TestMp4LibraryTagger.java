@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
+import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.util.OtrBootstrap;
 
@@ -21,8 +22,8 @@ public class TestMp4LibraryTagger
 	{
 		Configuration config = OtrBootstrap.init();
 
-		File fLibrary = new File(config.getString("test.mp4Tagger.library"));
-		File fBackup = new File(config.getString("test.mp4Tagger.backup"));
+		File fLibrary = new File(config.getString(TestPropertyKeys.dirTaggerDst));
+		File fBackup = new File(config.getString(TestPropertyKeys.dirMcBackup));
 		
 		String restUrl = config.getString("url.otrseries");
 		logger.info("Connectiong to "+restUrl);

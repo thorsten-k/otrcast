@@ -11,29 +11,26 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import de.kisner.otrcast.test.AbstractOtrJsonTest;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestJsonVideoIdentifier extends AbstractOtrJsonTest
+public class TestJsonMovie extends AbstractOtrJsonTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestJsonVideoIdentifier.class);
+	final static Logger logger = LoggerFactory.getLogger(TestJsonMovie.class);
 	
 //    @Test
     public void test() throws JsonGenerationException, JsonMappingException, IOException
-    {
-    	JsonVideoIdentifier json = create(true);
-    	
-    	jom.writeValue(System.out, json);
-    }
-    
-    public static JsonVideoIdentifier create(boolean withChildren)
     {
     	JsonVideoIdentifier json = new JsonVideoIdentifier();
     	json.setScheme("myScheme");
     	json.setType("myType");
     	json.setId(123);
     	
-    	if(withChildren)
-    	{
-    		json.setMovie(TestJsonMovie.build(false));
-    	}
+    	jom.writeValue(System.out, json);
+    }
+    
+    public static JsonMovie build(boolean withChildren)
+    {
+    	JsonMovie json = new JsonMovie();
+    	json.setId(123);
+    	json.setYear(2015);
     	return json;
     }
   
@@ -41,8 +38,8 @@ public class TestJsonVideoIdentifier extends AbstractOtrJsonTest
     {
 		OtrXmlTstBootstrap.init();
 			
-		TestJsonVideoIdentifier test = new TestJsonVideoIdentifier();
-		TestJsonVideoIdentifier.initJson();
+		TestJsonMovie test = new TestJsonMovie();
+		TestJsonMovie.initJson();
 		test.test();
     }
 }

@@ -11,12 +11,16 @@ import org.apache.commons.lang.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.coremedia.iso.boxes.apple.AppleItemListBox;
+
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
+import de.kisner.otrcast.model.json.JsonVideoIdentifier;
 import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.monitor.BucketSizeCounter;
@@ -28,7 +32,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 {
 	final static Logger logger = LoggerFactory.getLogger(McLibraryTagger.class);
 	
-	private enum CodeTotal {total}
+	private enum CodeTotal {total,withId,withoutId}
 	
 	private ProcessingEventCounter pecMediaType,pecTotal;
 	private BucketSizeCounter bsc;
@@ -42,12 +46,24 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	public McLibraryTagger(OtrSeriesRest rest, File fTmp, File fBackup)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
+		logger.info("Starting ...");
+		
 		this.rest=rest;
 		tagReader = new Mp4TagReader(false);
 		tagWriter = new SeriesTagWriter();
 		
-		if(fTmp!=null){iofTmp = new IoFileFactory(fTmp);}
-		if(fBackup!=null){iofBackup = new IoFileFactory(fBackup);}
+		logger.info("Tmp Directory: "+fTmp.getAbsolutePath());
+		iofTmp = new IoFileFactory(fTmp);
+		
+		if(fBackup!=null)
+		{
+			logger.info("Backup Directory: "+fBackup.getAbsolutePath());
+			iofBackup = new IoFileFactory(fBackup);
+		}
+		else
+		{
+			logger.warn("Backups are deactivated!!");
+		}
 		
 		bsc = new BucketSizeCounter("Files");
 		pecMediaType = new ProcessingEventCounter("MediaType");
@@ -56,8 +72,6 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	public void scan(File startDirectory)
 	{
-		if(iofTmp!=null){logger.debug("Tmp Directory: "+iofTmp.getfRoot().getAbsolutePath());}
-		if(iofBackup!=null){logger.debug("Backup Directory: "+iofBackup.getfRoot().getAbsolutePath());}
 		logger.info("Scanning "+startDirectory);
 		
 		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
@@ -84,15 +98,18 @@ public class McLibraryTagger extends DirectoryWalker<File>
 
 	@Override protected void handleFile(File file, int depth, Collection<File> results)
 	{
-		logger.info("File :"+file);
+		logger.trace("File :"+file);
 		bsc.add(CodeTotal.total,file.length());
 		pecTotal.add(CodeTotal.total);
-		boolean processed = true;
+		
+		Mp4BoxManager.Type type = Mp4BoxManager.Type.UNKNOWN;
+		JsonVideoIdentifier vidIdentifier = null;
 		try
 		{
+			AppleItemListBox apple = tagReader.readAppleBox(file);
 			try
 			{
-				Mp4BoxManager.Type type = tagReader.readMediaType(file);
+				type = tagReader.getMediaType(apple);
 				pecMediaType.add("mediaType"+WordUtils.capitalize(type.toString()));
 			}
 			catch (UtilsNotFoundException e)
@@ -100,14 +117,43 @@ public class McLibraryTagger extends DirectoryWalker<File>
 				pecMediaType.add("mediaTypeMissing");
 			}
 			
-/*			Video video = tagReader.read(file);
-			if(video.isSetEpisode() && !video.getEpisode().isSetId())
+			try 
 			{
-				processed = handleEpisode(video.getEpisode(), file);
+				vidIdentifier = tagReader.getVideoIdentifier(apple);
+				pecTotal.add(CodeTotal.withId);
 			}
-*/		}
+			catch (UtilsNotFoundException e)
+			{
+				pecTotal.add(CodeTotal.withoutId);
+			}
+			
+		}
 		catch (IOException e) {e.printStackTrace();}
-		if(processed){results.add(file);}
+		finally
+		{
+			try {tagReader.closeFile();} catch (IOException e) {logger.error(e.getMessage());}
+		}
+		
+		
+		boolean withoutMediaType = type.equals(Mp4BoxManager.Type.UNKNOWN);
+		boolean withoutIdentifier = (vidIdentifier==null);
+		
+		if(withoutMediaType || withoutIdentifier)
+		{
+			try {tagFile(file);}
+			catch (IOException e) {logger.error(e.getMessage());}
+		}
+	}
+	
+	private void tagFile(File file) throws IOException
+	{
+		logger.info("Tagging "+file.getAbsolutePath());
+		Video video = tagReader.read(file);
+		JaxbUtil.info(video);
+		if(video.isSetEpisode() && !video.getEpisode().isSetId())
+		{
+//			processed = handleEpisode(video.getEpisode(), file);
+		}
 	}
 	
 	private boolean handleEpisode(Episode episodeRequest, File fSrc)

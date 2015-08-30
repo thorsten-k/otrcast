@@ -2,10 +2,13 @@ package de.kisner.otrcast.model.json;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"scheme", "type", "id"})
+@JsonInclude(Include.NON_NULL)
 public class JsonVideoIdentifier implements Serializable
 {
 	public static final long serialVersionUID=1;
@@ -24,7 +27,12 @@ public class JsonVideoIdentifier implements Serializable
 	private long id;
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
-
+	
+	@JsonProperty("movie")
+	private JsonMovie movie;
+	public JsonMovie getMovie() {return movie;}
+	public void setMovie(JsonMovie movie) {this.movie = movie;}
+	
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

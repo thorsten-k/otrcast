@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ofx:section xmlns:ofx="http://www.openfuxml.org"
+		xmlns:text="http://www.openfuxml.org/text"
+		id="section.introduction">
+	<ofx:title lang="en">Media Center</ofx:title>
+	
+	<ofx:paragraph lang="en" version="1">
+		Managed folder structure is handled by mc
+		Unmanaged: folders are scanned regularity for changes
+	</ofx:paragraph>
+	
+	
+	
+</ofx:section>

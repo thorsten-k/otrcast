@@ -13,6 +13,7 @@ import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
+import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Movie;
 import de.kisner.otrcast.test.OtrUtilTestBootstrap;
@@ -65,8 +66,8 @@ public class CliMp4TagWriter
 	{
 		Configuration config = OtrUtilTestBootstrap.init();
 
-		File srcMp4 = new File(config.getString("test.mp4Tagger.src"));
-		File dstMp4 = new File(config.getString("test.mp4Tagger.dst"));
+		File srcMp4 = new File(config.getString(TestPropertyKeys.dirTaggerSrc));
+		File dstMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));
 		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
 
         logger.info("src-dir: "+srcMp4);
