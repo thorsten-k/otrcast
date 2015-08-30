@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>de.kisner.otrcast</groupId>
-			<artifactId>otrcast-interfaces</artifactId>
+			<artifactId>otrcast-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.kisner.otrcast</groupId>

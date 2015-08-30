@@ -18,18 +18,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>de.kisner.otrcast</groupId>
-			<artifactId>otrcast-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.kisner.otrcast</groupId>
-			<artifactId>otrcast-interfaces</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
 		
 		<!-- Utils -->
 		<dependency>
