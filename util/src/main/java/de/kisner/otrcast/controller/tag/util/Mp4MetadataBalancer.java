@@ -76,13 +76,10 @@ public class Mp4MetadataBalancer
     	}
     }
 
-    public void correctChunkOffsets(IsoFile isoFile)
+    private void correctChunkOffsets(IsoFile isoFile)
     {
-        if(needsOffsetCorrection(isoFile))
-        {
-            long correction = sizeAfter - sizeBefore;
-            correctChunkOffsets(isoFile, correction);
-        }
+    	long correction = sizeAfter - sizeBefore;
+        correctChunkOffsets(isoFile, correction);
     }
 
     public void correctChunkOffsets(IsoFile tempIsoFile, long correction)

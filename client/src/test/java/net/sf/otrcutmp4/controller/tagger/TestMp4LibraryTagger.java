@@ -34,4 +34,4 @@ public class TestMp4LibraryTagger
 		McLibraryTagger tagger = new McLibraryTagger(rest,fBackup,null);
 		tagger.scan(fLibrary);
 	}
- }
+}

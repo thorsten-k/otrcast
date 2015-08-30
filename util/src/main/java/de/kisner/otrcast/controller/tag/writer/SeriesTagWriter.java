@@ -10,6 +10,7 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
@@ -43,8 +44,9 @@ public class SeriesTagWriter extends AbstractTagWriter
 		writeEpisodeNr(apple, new Long(episode.getNr()).intValue());
 		writeSeasonNr(apple, new Long(episode.getSeason().getNr()).intValue());
 		writeSeries(apple, episode.getSeason().getSeries().getName());
-		writeMediaType(apple, "10");
+		writeMediaType(apple, Mp4BoxManager.typeSeries);
 		writeCover(apple, episode.getSeason());
+		if(episode.isSetId()){writeEpisodeId(apple, episode.getId()+"");}
 					
 		writeMp4(dstFile);
 	}
@@ -75,6 +77,13 @@ public class SeriesTagWriter extends AbstractTagWriter
 		AppleShowBox box = Mp4BoxManager.fcAppleShowBox(apple);
 		box.setValue(show);
 		apple.addBox(box);
+	}
+	
+	private void writeEpisodeId(AppleItemListBox apple, String id)
+	{
+		AppleTvEpisodeNumberBox idBox = Mp4BoxManager.fcAppleTvEpisodeNumberBox(apple);
+		idBox.setValue(id);
+		apple.addBox(idBox);
 	}
 	
 	private void writeCover(AppleItemListBox apple, Season season) throws IOException

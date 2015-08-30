@@ -10,6 +10,7 @@ import com.coremedia.iso.boxes.apple.AppleCustomGenreBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 
+import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.model.xml.series.Movie;
 
 public class MovieTagWriter extends AbstractTagWriter
@@ -28,7 +29,7 @@ public class MovieTagWriter extends AbstractTagWriter
 		writeMovieTitle(apple, movie.getName());
 		writeGenre(apple, movie.getName());
 //		writeCover(apple, movie.getCoverFile());
-		writeMediaType(apple, "9");
+		writeMediaType(apple, Mp4BoxManager.typeMovie);
 					
 		writeMp4(dstFile);
 	}

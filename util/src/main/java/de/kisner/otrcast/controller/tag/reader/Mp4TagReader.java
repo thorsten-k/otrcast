@@ -30,7 +30,6 @@ public class Mp4TagReader
 	
 	private AppleItemListBox apple;
 
-	
 	private SeriesTagReader trSeries;
 	private MovieTagReader trMovie;
 	

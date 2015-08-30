@@ -47,8 +47,7 @@ public class Mp4MediaTypeWriter
         mdb.saveInitialState(moov);
         writeMediaType(apple,Mp4BoxManager.Type.SERIES);
         mdb.saveFinalState(moov);
-
-        mdb.correctChunkOffsets(isoFile);
+        mdb.correctOffsetsIfRequired(isoFile);
 
         isoFile.getBox(fcw);
         fcw.force(true);fcw.close();rafW.close();

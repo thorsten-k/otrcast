@@ -1,5 +1,10 @@
 package de.kisner.otrcast.controller.tag.util;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
@@ -9,18 +14,15 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
+import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class Mp4BoxManager
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4BoxManager.class);
 
     public static enum Type {UNKNOWN,MOVIE,SERIES}
+    public static final String typeMovie = "9";
     public static final String typeSeries = "10";
 
 	public static MovieBox movieBox(IsoFile isoFile)
@@ -126,6 +128,20 @@ public class Mp4BoxManager
 		else
 		{
 			box = (AppleShowBox) apple.getBoxes(AppleShowBox.class).get(0);
+		}
+		return box;
+	}
+	
+	public static AppleTvEpisodeNumberBox fcAppleTvEpisodeNumberBox(AppleItemListBox apple)
+	{
+		AppleTvEpisodeNumberBox box = null;
+		if(apple.getBoxes(AppleTvEpisodeNumberBox.class).isEmpty())
+		{
+			box = new AppleTvEpisodeNumberBox();
+		}
+		else
+		{
+			box = (AppleTvEpisodeNumberBox) apple.getBoxes(AppleTvEpisodeNumberBox.class).get(0);
 		}
 		return box;
 	}

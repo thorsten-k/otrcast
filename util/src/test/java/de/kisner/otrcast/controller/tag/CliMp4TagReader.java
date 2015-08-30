@@ -40,13 +40,13 @@ public class CliMp4TagReader
 		File srcMp4 = new File(config.getString("test.mp4Tagger.src"));
 		File dstMp4 = new File(config.getString("test.mp4Tagger.dst"));
 		
-		logger.info("Source Folder");
+		logger.info("*************** Source Folder");
 		for(File file : srcMp4.listFiles(FileQuery.mp4FileFilter()))
 		{
 			test.read(file);
 		}
 		
-		logger.info("Destination Folder");
+		logger.info("*************** Destination Folder");
 		for(File file : dstMp4.listFiles(FileQuery.mp4FileFilter()))
 		{
 			test.read(file);
