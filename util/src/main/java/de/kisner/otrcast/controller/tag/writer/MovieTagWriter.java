@@ -29,7 +29,7 @@ public class MovieTagWriter extends AbstractTagWriter
 		writeMovieTitle(apple, movie.getName());
 		writeGenre(apple, movie.getName());
 //		writeCover(apple, movie.getCoverFile());
-		writeMediaType(apple, Mp4BoxManager.typeMovie);
+		writeMediaType(apple, Mp4BoxManager.Type.MOVIE);
 					
 		writeMp4(dstFile);
 	}

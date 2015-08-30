@@ -70,18 +70,15 @@ public abstract class AbstractTagWriter
 		rafR.close();
 	}
 	
-	protected void writeMediaType(AppleItemListBox apple, String type)
+	protected void writeMediaType(AppleItemListBox apple, Mp4BoxManager.Type type)
 	{
-		AppleMediaTypeBox box = null;
-		if(apple.getBoxes(AppleMediaTypeBox.class).isEmpty())
-		{
-			box = new AppleMediaTypeBox();
-		}
-		else
-		{
-			box = apple.getBoxes(AppleMediaTypeBox.class).get(0);
-		}
-		box.setValue(type);
+		AppleMediaTypeBox box = Mp4BoxManager.fcAppleMediaTypeBox(apple);
+		switch(type)
+        {
+            case SERIES: box.setValue(Mp4BoxManager.typeSeries);break;
+            case MOVIE: box.setValue(Mp4BoxManager.typeMovie);break;
+            default:    logger.warn("Type writing of "+type+" NYI");
+        }
 		apple.addBox(box);
 	}
 	

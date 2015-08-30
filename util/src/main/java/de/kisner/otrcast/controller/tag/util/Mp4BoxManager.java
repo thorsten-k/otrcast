@@ -11,6 +11,7 @@ import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
@@ -156,6 +157,20 @@ public class Mp4BoxManager
 		else
 		{
 			box = (AppleCoverBox) apple.getBoxes(AppleCoverBox.class).get(0);
+		}
+		return box;
+	}
+	
+	public static  AppleMediaTypeBox fcAppleMediaTypeBox(AppleItemListBox apple)
+	{
+		AppleMediaTypeBox box = null;
+		if(apple.getBoxes(AppleMediaTypeBox.class).isEmpty())
+		{
+			box = new AppleMediaTypeBox();
+		}
+		else
+		{
+			box = apple.getBoxes(AppleMediaTypeBox.class).get(0);
 		}
 		return box;
 	}

@@ -78,14 +78,8 @@ public class CliMp4TagWriter
 		
 		for(File file : srcMp4.listFiles(FileQuery.mp4FileFilter()))
 		{
-//			test.series(file,new File(dstMp4,file.getName()));
-			test.movie(file,new File(dstMp4,file.getName()));
-
-			// This tests the balancer directly
-//			Mp4MetadataBalancer balancer = new Mp4MetadataBalancer();
-//			File fSrc = new File(src+fs+file);
-//			File fDst = new File(dst+fs+"TMP-"+file);		
-//			balancer.writeRandomMetadata(fSrc, dst+fs+"MDB-"+file, "new data",fDst);
+			test.series(file,new File(dstMp4,file.getName()));
+//			test.movie(file,new File(dstMp4,file.getName()));
 		}
 	}
  }

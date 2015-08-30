@@ -44,7 +44,7 @@ public class SeriesTagWriter extends AbstractTagWriter
 		writeEpisodeNr(apple, new Long(episode.getNr()).intValue());
 		writeSeasonNr(apple, new Long(episode.getSeason().getNr()).intValue());
 		writeSeries(apple, episode.getSeason().getSeries().getName());
-		writeMediaType(apple, Mp4BoxManager.typeSeries);
+		writeMediaType(apple, Mp4BoxManager.Type.SERIES);
 		writeCover(apple, episode.getSeason());
 		if(episode.isSetId()){writeEpisodeId(apple, episode.getId()+"");}
 					
