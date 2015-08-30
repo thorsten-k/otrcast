@@ -13,12 +13,12 @@ import org.jdom2.xpath.XPathFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.xpath.SeriesXpath;
 import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.util.query.xpath.SeriesXpath;
 
 public class TvDbSeriesStructureFactory
 {

@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.xpath;
+package de.kisner.otrcast.util.query.xpath;
 
 import java.util.ArrayList;
 import java.util.List;

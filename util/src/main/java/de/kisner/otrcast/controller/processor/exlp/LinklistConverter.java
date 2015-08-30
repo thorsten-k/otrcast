@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.controller.processor.exlp.event.DownloadEvent;
 import de.kisner.otrcast.controller.processor.exlp.parser.LinkListParser;
-import de.kisner.otrcast.controller.xpath.OtrXpath;
 import de.kisner.otrcast.factory.xml.otr.XmlTvFactory;
 import de.kisner.otrcast.model.xml.otr.Download;
 import de.kisner.otrcast.model.xml.otr.Linklist;
 import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.otr.Recording;
+import de.kisner.otrcast.util.query.xpath.OtrXpath;
 
 public class LinklistConverter
 {

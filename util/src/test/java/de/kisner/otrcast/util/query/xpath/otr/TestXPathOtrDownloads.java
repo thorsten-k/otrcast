@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.xpath.otr;
+package de.kisner.otrcast.util.query.xpath.otr;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
@@ -9,10 +9,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.xpath.OtrXpath;
 import de.kisner.otrcast.model.xml.otr.Download;
 import de.kisner.otrcast.model.xml.otr.Linklist;
 import de.kisner.otrcast.test.AbstractOtrXmlTest;
+import de.kisner.otrcast.util.query.xpath.OtrXpath;
 
 public class TestXPathOtrDownloads extends AbstractOtrXmlTest
 {

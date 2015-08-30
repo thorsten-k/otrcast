@@ -12,11 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
-import de.kisner.otrcast.controller.xpath.OtrXpath;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.test.AbstractUtilTest;
 import de.kisner.otrcast.test.OtrUtilTestBootstrap;
+import de.kisner.otrcast.util.query.xpath.OtrXpath;
 import de.kisner.otrcast.view.noop.NoopSrcDirProcessorView;
 
 public class TestSrcDirProcessor extends AbstractUtilTest

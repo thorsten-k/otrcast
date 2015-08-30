@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.xpath;
+package de.kisner.otrcast.util.query.xpath;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
