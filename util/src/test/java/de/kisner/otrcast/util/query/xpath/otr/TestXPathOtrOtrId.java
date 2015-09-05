@@ -1,8 +1,5 @@
 package de.kisner.otrcast.util.query.xpath.otr;
 
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.otr.Download;
 import de.kisner.otrcast.model.xml.otr.OtrId;
-import de.kisner.otrcast.test.AbstractOtrXmlTest;
+import de.kisner.otrcast.test.AbstractUtilTest;
 import de.kisner.otrcast.util.query.xpath.OtrXpath;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
-public class TestXPathOtrOtrId extends AbstractOtrXmlTest
+public class TestXPathOtrOtrId extends AbstractUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXPathOtrOtrId.class);
     
