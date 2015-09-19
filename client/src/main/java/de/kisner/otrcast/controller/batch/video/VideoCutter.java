@@ -44,6 +44,7 @@ public class VideoCutter extends AbstactBatchGenerator
 			{
 				case P0: inVideo = rpf.relativate(new File(cfg.getDir(Dir.TMP),"mp4-"+indexVf+".mp4"));break;
 //				case P1: inVideo = rpf.relativate(new File(cfg.getDir(Dir.AVI),vf.getFileName().getValue()));break;
+				default: break;
 			}
 			result.addAll(applyCutList(indexVf,vf.getCutList(),inVideo,profile));
 			

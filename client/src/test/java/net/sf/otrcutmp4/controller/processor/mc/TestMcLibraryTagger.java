@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.tagger;
+package net.sf.otrcutmp4.controller.processor.mc;
 
 import java.io.File;
 
@@ -14,9 +14,9 @@ import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.util.OtrBootstrap;
 
-public class TestMp4LibraryTagger
+public class TestMcLibraryTagger
 {
-	final static Logger logger = LoggerFactory.getLogger(TestMp4LibraryTagger.class);
+	final static Logger logger = LoggerFactory.getLogger(TestMcLibraryTagger.class);
 	
 	public static void main(String args[]) throws Exception
 	{

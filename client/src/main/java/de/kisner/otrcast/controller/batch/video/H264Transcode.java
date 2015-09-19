@@ -53,6 +53,7 @@ public class H264Transcode extends AbstactBatchGenerator
 		switch(XmlOtrIdFactory.getType(vf.getOtrId().getFormat().getType()))
 		{
 			case hd: sb.append(" -fps 50 ");break;
+			default: break;
 		}
 		sb.append(" -add "+sH264+" -add "+sAudio+" "+sMp4);
 		return sb.toString();
