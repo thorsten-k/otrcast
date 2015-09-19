@@ -46,6 +46,7 @@ public class SeriesTagWriter extends AbstractTagWriter
 		writeSeries(apple, episode.getSeason().getSeries().getName());
 		writeMediaType(apple, Mp4BoxManager.Type.SERIES);
 		writeCover(apple, episode.getSeason());
+		writeOtrBox("myTest");
 		if(episode.isSetId()){writeEpisodeId(apple, episode.getId()+"");}
 					
 		writeMp4(dstFile);

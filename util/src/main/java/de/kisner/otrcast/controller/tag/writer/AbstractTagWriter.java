@@ -3,6 +3,7 @@ package de.kisner.otrcast.controller.tag.writer;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
+import com.coremedia.iso.boxes.UnknownBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
@@ -68,6 +70,14 @@ public abstract class AbstractTagWriter
 		fcw.force(true);fcw.close();rafW.close();
 		fcr.close();
 		rafR.close();
+	}
+	
+	protected void writeOtrBox(String data)
+	{
+		ByteBuffer bb = ByteBuffer.wrap(data.getBytes());
+		UnknownBox box = new UnknownBox("OTRC");
+		box.setData(bb);
+		moov.addBox(box);
 	}
 	
 	protected void writeMediaType(AppleItemListBox apple, Mp4BoxManager.Type type)

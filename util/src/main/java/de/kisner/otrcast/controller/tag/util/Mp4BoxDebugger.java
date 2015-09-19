@@ -2,6 +2,7 @@ package de.kisner.otrcast.controller.tag.util;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import org.apache.commons.lang.StringUtils;
@@ -40,6 +41,8 @@ import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
+
+import de.kisner.otrcast.interfaces.Version;
 
 public class Mp4BoxDebugger
 {
@@ -220,7 +223,14 @@ public class Mp4BoxDebugger
 	
 	public static void debug(int lvl, UnknownBox box)
 	{
-
+		if(box.getType().equals(Version.OtrCastMp4Box))
+		{
+			ByteBuffer bb = box.getData().duplicate();
+			bb.flip();
+			byte[] bytes = new byte[bb.remaining()];
+			bb.get(bytes);
+			debug(lvl,"OtrCast",new String(bytes));
+		}
 	}
 	
 	public static void debug(int lvl, FreeBox box)

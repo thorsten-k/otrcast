@@ -47,8 +47,6 @@ public class CliMp4TagWriter
 		seriesTagger = new SeriesTagWriter(coverManager);
 		movieTagger = new MovieTagWriter();
 	}
-	
-
 		
 	public void series(File src, File dst) throws IOException
 	{
@@ -68,7 +66,7 @@ public class CliMp4TagWriter
 
 		File srcMp4 = new File(config.getString(TestPropertyKeys.dirTaggerSrc));
 		File dstMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));
-		File dirCovers = new File(config.getString("test.mp4Tagger.cover"));
+		File dirCovers = new File(config.getString(TestPropertyKeys.dirCover));
 
         logger.info("src-dir: "+srcMp4);
         logger.info("dst-dir: "+dstMp4);
@@ -79,7 +77,9 @@ public class CliMp4TagWriter
 		
 		for(File file : srcMp4.listFiles(FileQuery.mp4FileFilter()))
 		{
-			test.series(file,new File(dstMp4,file.getName()));
+			File fTarget = new File(dstMp4,file.getName());
+			if(fTarget.exists()){fTarget.delete();}
+			test.series(file,fTarget);
 //			test.movie(file,new File(dstMp4,file.getName()));
 		}
 	}

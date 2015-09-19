@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"id","year"})
-public class JsonMovie implements Serializable
+public class JsonOtrMovie implements Serializable
 {
 	public static final long serialVersionUID=1;
 

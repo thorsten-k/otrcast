@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"scheme", "type", "id"})
 @JsonInclude(Include.NON_NULL)
-public class JsonVideoIdentifier implements Serializable
+public class JsonOtrtIdentifier implements Serializable
 {
 	public static final long serialVersionUID=1;
 
@@ -29,9 +29,9 @@ public class JsonVideoIdentifier implements Serializable
 	public void setId(long id) {this.id = id;}
 	
 	@JsonProperty("movie")
-	private JsonMovie movie;
-	public JsonMovie getMovie() {return movie;}
-	public void setMovie(JsonMovie movie) {this.movie = movie;}
+	private JsonOtrMovie movie;
+	public JsonOtrMovie getMovie() {return movie;}
+	public void setMovie(JsonOtrMovie movie) {this.movie = movie;}
 	
 	public String toString()
 	{

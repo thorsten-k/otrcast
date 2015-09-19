@@ -18,9 +18,6 @@ public class OtrUtilTestBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrUtilTestBootstrap.class);
 	
-	public static String mp4TestDst = "test.mp4Tagger.dst";
-	
-	
 	public static Configuration init() throws ExlpConfigurationException
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	

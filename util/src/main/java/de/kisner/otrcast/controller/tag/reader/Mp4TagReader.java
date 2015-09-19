@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
-import de.kisner.otrcast.model.json.JsonVideoIdentifier;
+import de.kisner.otrcast.model.json.JsonOtrtIdentifier;
 import de.kisner.otrcast.model.xml.series.Video;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
@@ -89,18 +89,6 @@ public class Mp4TagReader
 
 		return video;
 	}
-
-    public Mp4BoxManager.Type readMediaType(File fSource) throws IOException,UtilsNotFoundException
-    {
-    	readAppleBox(fSource);
-
-        Mp4BoxManager.Type type;
-        try{type = getMediaType(apple);}
-        catch (UtilsNotFoundException e) {throw e;}
-        finally{closeFile();}
-
-        return type;
-    }
     
 	public Mp4BoxManager.Type getMediaType(AppleItemListBox apple) throws UtilsNotFoundException
     {
@@ -125,7 +113,7 @@ public class Mp4TagReader
 		}
 	}
 	
-	public JsonVideoIdentifier getVideoIdentifier(AppleItemListBox apple) throws UtilsNotFoundException
+	public JsonOtrtIdentifier getVideoIdentifier(AppleItemListBox apple) throws UtilsNotFoundException
 	{
 		logger.trace("Getting "+AppleTvEpisodeNumberBox.class.getSimpleName());
 		if (apple.getBoxes(AppleTvEpisodeNumberBox.class).isEmpty())
@@ -139,7 +127,7 @@ public class Mp4TagReader
 			{
 				AppleTvEpisodeNumberBox box = apple.getBoxes(AppleTvEpisodeNumberBox.class).get(0);
 				logger.trace("Value "+box.getValue());
-				return jom.readValue(box.getValue(), JsonVideoIdentifier.class);
+				return jom.readValue(box.getValue(), JsonOtrtIdentifier.class);
 			}
 			catch (JsonParseException e) {}
 			catch (JsonMappingException e) {}

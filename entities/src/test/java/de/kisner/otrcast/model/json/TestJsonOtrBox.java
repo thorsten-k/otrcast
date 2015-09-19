@@ -1,6 +1,7 @@
 package de.kisner.otrcast.model.json;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,28 +12,26 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import de.kisner.otrcast.test.AbstractOtrJsonTest;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestJsonVideoIdentifier extends AbstractOtrJsonTest
+public class TestJsonOtrBox extends AbstractOtrJsonTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestJsonVideoIdentifier.class);
+	final static Logger logger = LoggerFactory.getLogger(TestJsonOtrBox.class);
 	
 //    @Test
     public void test() throws JsonGenerationException, JsonMappingException, IOException
     {
-    	JsonVideoIdentifier json = create(true);
-    	
+    	JsonOtrBox json = create(true);
     	jom.writeValue(System.out, json);
     }
     
-    public static JsonVideoIdentifier create(boolean withChildren)
+    public static JsonOtrBox create(boolean withChildren)
     {
-    	JsonVideoIdentifier json = new JsonVideoIdentifier();
-    	json.setScheme("myScheme");
-    	json.setType("myType");
-    	json.setId(123);
+    	JsonOtrBox json = new JsonOtrBox();
     	
     	if(withChildren)
     	{
-    		json.setMovie(TestJsonMovie.build(false));
+    		json.setIdentifier(new ArrayList<JsonOtrtIdentifier>());
+    		json.getIdentifier().add(TestJsonOtrIdentifier.create(false));
+    		json.getIdentifier().add(TestJsonOtrIdentifier.create(false));
     	}
     	return json;
     }
@@ -40,9 +39,8 @@ public class TestJsonVideoIdentifier extends AbstractOtrJsonTest
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException
     {
 		OtrXmlTstBootstrap.init();
-			
-		TestJsonVideoIdentifier test = new TestJsonVideoIdentifier();
-		TestJsonVideoIdentifier.initJson();
+		TestJsonOtrBox test = new TestJsonOtrBox();
+		TestJsonOtrBox.initJson();
 		test.test();
     }
 }

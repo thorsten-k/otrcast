@@ -18,7 +18,7 @@ import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
-import de.kisner.otrcast.model.json.JsonVideoIdentifier;
+import de.kisner.otrcast.model.json.JsonOtrtIdentifier;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
@@ -26,6 +26,7 @@ import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.monitor.BucketSizeCounter;
 import net.sf.ahtutils.monitor.ProcessingEventCounter;
 import net.sf.ahtutils.monitor.ProcessingTimeTracker;
+import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class McLibraryTagger extends DirectoryWalker<File>
@@ -46,7 +47,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	public McLibraryTagger(OtrSeriesRest rest, File fTmp, File fBackup)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
-		logger.info("Starting ...");
+		logger.info(StringUtil.stars());
 		
 		this.rest=rest;
 		tagReader = new Mp4TagReader(false);
@@ -64,6 +65,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		{
 			logger.warn("Backups are deactivated!!");
 		}
+		logger.info(StringUtil.stars());
 		
 		bsc = new BucketSizeCounter("Files");
 		pecMediaType = new ProcessingEventCounter("MediaType");
@@ -83,7 +85,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		}
 	    catch (IOException e) {e.printStackTrace();}
 	    
-	    logger.info("*************************************************");
+	    
 	    logger.info("Processing time: "+ptt.toTotalPeriod());
 	    pecTotal.debug();
 	    pecMediaType.debug();
@@ -103,7 +105,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		pecTotal.add(CodeTotal.total);
 		
 		Mp4BoxManager.Type type = Mp4BoxManager.Type.UNKNOWN;
-		JsonVideoIdentifier vidIdentifier = null;
+		JsonOtrtIdentifier vidIdentifier = null;
 		try
 		{
 			AppleItemListBox apple = tagReader.readAppleBox(file);
@@ -149,7 +151,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	{
 		logger.info("Tagging "+file.getAbsolutePath());
 		Video video = tagReader.read(file);
-		JaxbUtil.info(video);
+		JaxbUtil.trace(video);
 		if(video.isSetEpisode() && !video.getEpisode().isSetId())
 		{
 //			processed = handleEpisode(video.getEpisode(), file);
