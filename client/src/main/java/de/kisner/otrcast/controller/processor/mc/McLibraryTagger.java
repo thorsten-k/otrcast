@@ -18,7 +18,7 @@ import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
-import de.kisner.otrcast.model.json.JsonOtrtIdentifier;
+import de.kisner.otrcast.model.json.JsonOtrIdentifier;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
@@ -105,7 +105,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		pecTotal.add(CodeTotal.total);
 		
 		Mp4BoxManager.Type type = Mp4BoxManager.Type.UNKNOWN;
-		JsonOtrtIdentifier vidIdentifier = null;
+		JsonOtrIdentifier vidIdentifier = null;
 		try
 		{
 			AppleItemListBox apple = tagReader.readAppleBox(file);

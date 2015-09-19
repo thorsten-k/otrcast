@@ -17,6 +17,7 @@ import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleCoverBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.util.Mp4MetadataBalancer;
@@ -27,6 +28,7 @@ public abstract class AbstractTagWriter
 	final static Logger logger = LoggerFactory.getLogger(AbstractTagWriter.class);
 
 	protected CoverManager coverManager;
+	protected ObjectMapper jom;
 	
 	protected AppleItemListBox apple;
 	private MovieBox moov;
@@ -40,6 +42,7 @@ public abstract class AbstractTagWriter
 	public AbstractTagWriter(CoverManager coverManager)
 	{
 		this.coverManager=coverManager;
+		jom = new ObjectMapper();
 	}
 	
 	protected void readMp4Box(File srcFile) throws IOException
@@ -74,6 +77,7 @@ public abstract class AbstractTagWriter
 	
 	protected void writeOtrBox(String data)
 	{
+		logger.info("Writing "+data);
 		ByteBuffer bb = ByteBuffer.wrap(data.getBytes());
 		UnknownBox box = new UnknownBox("OTRC");
 		box.setData(bb);

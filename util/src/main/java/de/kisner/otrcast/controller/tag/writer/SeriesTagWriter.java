@@ -14,6 +14,7 @@ import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
+import de.kisner.otrcast.factory.json.JsonOtrBoxFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Season;
@@ -21,7 +22,7 @@ import de.kisner.otrcast.model.xml.series.Season;
 public class SeriesTagWriter extends AbstractTagWriter
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesTagWriter.class);
-
+	
 	public SeriesTagWriter()
 	{
 		super(null);
@@ -46,7 +47,7 @@ public class SeriesTagWriter extends AbstractTagWriter
 		writeSeries(apple, episode.getSeason().getSeries().getName());
 		writeMediaType(apple, Mp4BoxManager.Type.SERIES);
 		writeCover(apple, episode.getSeason());
-		writeOtrBox("myTest");
+		writeOtrBox(jom.writeValueAsString(JsonOtrBoxFactory.build(episode)));
 		if(episode.isSetId()){writeEpisodeId(apple, episode.getId()+"");}
 					
 		writeMp4(dstFile);

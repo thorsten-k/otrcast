@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
-import de.kisner.otrcast.model.json.JsonOtrtIdentifier;
+import de.kisner.otrcast.model.json.JsonOtrIdentifier;
 import de.kisner.otrcast.model.xml.series.Video;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
@@ -113,7 +113,7 @@ public class Mp4TagReader
 		}
 	}
 	
-	public JsonOtrtIdentifier getVideoIdentifier(AppleItemListBox apple) throws UtilsNotFoundException
+	public JsonOtrIdentifier getVideoIdentifier(AppleItemListBox apple) throws UtilsNotFoundException
 	{
 		logger.trace("Getting "+AppleTvEpisodeNumberBox.class.getSimpleName());
 		if (apple.getBoxes(AppleTvEpisodeNumberBox.class).isEmpty())
@@ -127,7 +127,7 @@ public class Mp4TagReader
 			{
 				AppleTvEpisodeNumberBox box = apple.getBoxes(AppleTvEpisodeNumberBox.class).get(0);
 				logger.trace("Value "+box.getValue());
-				return jom.readValue(box.getValue(), JsonOtrtIdentifier.class);
+				return jom.readValue(box.getValue(), JsonOtrIdentifier.class);
 			}
 			catch (JsonParseException e) {}
 			catch (JsonMappingException e) {}

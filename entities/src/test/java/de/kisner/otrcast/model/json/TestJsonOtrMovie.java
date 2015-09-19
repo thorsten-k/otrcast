@@ -18,7 +18,7 @@ public class TestJsonOtrMovie extends AbstractOtrJsonTest
 //    @Test
     public void test() throws JsonGenerationException, JsonMappingException, IOException
     {
-    	JsonOtrtIdentifier json = new JsonOtrtIdentifier();
+    	JsonOtrIdentifier json = new JsonOtrIdentifier();
     	json.setScheme("myScheme");
     	json.setType("myType");
     	json.setId(123);

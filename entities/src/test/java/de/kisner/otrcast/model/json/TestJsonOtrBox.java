@@ -29,7 +29,7 @@ public class TestJsonOtrBox extends AbstractOtrJsonTest
     	
     	if(withChildren)
     	{
-    		json.setIdentifier(new ArrayList<JsonOtrtIdentifier>());
+    		json.setIdentifier(new ArrayList<JsonOtrIdentifier>());
     		json.getIdentifier().add(TestJsonOtrIdentifier.create(false));
     		json.getIdentifier().add(TestJsonOtrIdentifier.create(false));
     	}

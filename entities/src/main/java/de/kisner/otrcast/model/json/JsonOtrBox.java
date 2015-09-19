@@ -13,9 +13,9 @@ public class JsonOtrBox implements Serializable
 	public static final long serialVersionUID=1;
 
 	@JsonProperty("identifier")
-	private List<JsonOtrtIdentifier> identifier;
-	public List<JsonOtrtIdentifier> getIdentifier() {return identifier;}
-	public void setIdentifier(List<JsonOtrtIdentifier> identifier) {this.identifier = identifier;}
+	private List<JsonOtrIdentifier> identifier;
+	public List<JsonOtrIdentifier> getIdentifier() {return identifier;}
+	public void setIdentifier(List<JsonOtrIdentifier> identifier) {this.identifier = identifier;}
 
 	public String toString()
 	{

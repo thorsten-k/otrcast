@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"scheme", "type", "id"})
 @JsonInclude(Include.NON_NULL)
-public class JsonOtrtIdentifier implements Serializable
+public class JsonOtrIdentifier implements Serializable
 {
 	public static final long serialVersionUID=1;
 

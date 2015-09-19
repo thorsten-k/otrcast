@@ -18,14 +18,14 @@ public class TestJsonOtrIdentifier extends AbstractOtrJsonTest
 //    @Test
     public void test() throws JsonGenerationException, JsonMappingException, IOException
     {
-    	JsonOtrtIdentifier json = create(true);
+    	JsonOtrIdentifier json = create(true);
     	
     	jom.writeValue(System.out, json);
     }
     
-    public static JsonOtrtIdentifier create(boolean withChildren)
+    public static JsonOtrIdentifier create(boolean withChildren)
     {
-    	JsonOtrtIdentifier json = new JsonOtrtIdentifier();
+    	JsonOtrIdentifier json = new JsonOtrIdentifier();
     	json.setScheme("myScheme");
     	json.setType("myType");
     	json.setId(123);
