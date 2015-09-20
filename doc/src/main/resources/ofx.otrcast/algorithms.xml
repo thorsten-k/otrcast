@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ofx:section xmlns:ofx="http://www.openfuxml.org"
+		xmlns:text="http://www.openfuxml.org/text"
+		id="section.introduction">
+	<ofx:title lang="en">Algorithms</ofx:title>
+	
+	
+	<ofx:paragraph lang="en" version="1">
+		the media type is quite important for handling the file correctly
+		1. MP4 OTRC Box is set
+		2. APPLE BOX with media Type
+		3. folder
+	</ofx:paragraph>
+	
+	<ofx:paragraph lang="en" version="1">
+		id,
+		then episode name, nr ...
+
+	</ofx:paragraph>
+	
+</ofx:section>

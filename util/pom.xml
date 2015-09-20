@@ -37,6 +37,10 @@
 			<artifactId>exlp-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
+		</dependency>
+		<dependency>
    	   		<groupId>net.sf.ahtutils</groupId>
    	   		<artifactId>ahtutils-ejb</artifactId>
    	   		<type>jar</type>

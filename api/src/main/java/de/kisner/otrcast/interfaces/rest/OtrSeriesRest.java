@@ -26,6 +26,6 @@ public interface OtrSeriesRest
 	Episode getEpisode(@PathParam("id") long episodeId);
 	
 	@POST @Path("/episode/info") @Consumes(MediaType.APPLICATION_XML) @Produces(MediaType.APPLICATION_XML)
-	Otr episodeInfo(Episode episode);
+	Otr resolveEpisode(Episode episode);
 	
 }

@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FileUtils;
@@ -12,8 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
+import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
+import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
@@ -22,6 +26,7 @@ import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.monitor.BucketSizeCounter;
 import net.sf.ahtutils.monitor.ProcessingEventCounter;
 import net.sf.ahtutils.monitor.ProcessingTimeTracker;
+import net.sf.exlp.shell.io.ConsoleInputChoice;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -61,7 +66,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		{
 			logger.warn("Backups are deactivated!!");
 		}
-		logger.info(StringUtil.stars());
+		
 		
 		bsc = new BucketSizeCounter("Files");
 		pecMediaType = new ProcessingEventCounter("MediaType");
@@ -71,6 +76,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	public void scan(File startDirectory)
 	{
 		logger.info("Scanning "+startDirectory);
+		logger.info(StringUtil.stars());
 		
 		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		
@@ -106,32 +112,65 @@ public class McLibraryTagger extends DirectoryWalker<File>
 			Video video = tagReader.read();
 			if(video.isSetEpisode())
 			{
-				boolean processed = handleEpisode(file, video.getEpisode());
+				pecMediaType.add(Mp4BoxManager.Type.SERIES);
+				handleEpisode(file, video.getEpisode());
 			}
-
+			else
+			{
+				pecMediaType.add(Mp4BoxManager.Type.UNKNOWN);
+			}
 		}
 		catch (IOException e) {e.printStackTrace();}
 		finally {try {tagReader.closeFile();} catch (IOException e) {logger.error(e.getMessage());}}
 		
 		pecTotal.add(CodeTotal.withId);
 		pecTotal.add(CodeTotal.withoutId);
-		
 	}
-
 	
 	private boolean handleEpisode(File fSrc, Episode episodeRequest)
 	{
-		JaxbUtil.info(episodeRequest);
-		Otr otr = rest.episodeInfo(episodeRequest);
+		JaxbUtil.trace(episodeRequest);
+		Otr otr = rest.resolveEpisode(episodeRequest);
+		
+		Episode episodeSelected;
+		if(otr.getEpisode().size()==0)
+		{
+			episodeSelected = otr.getEpisode().get(0);
+			logger.warn("Nothing found for "+TxtEpisodeFactory.build(episodeRequest));
+			return false;
+		}
+		else if(otr.getEpisode().size()==1){episodeSelected = otr.getEpisode().get(0);}
+		else if(otr.getEpisode().size()>1)
+		{
+			Map<Episode,String> map = new Hashtable<Episode,String>();
+			for(Episode e : otr.getEpisode()){map.put(e, TxtEpisodeFactory.build(e));}
+			System.out.println("Select Episode for "+TxtEpisodeFactory.build(episodeRequest));
+			episodeSelected = ConsoleInputChoice.getListItemForChoice(otr.getEpisode(),map);
+		}
+
+		/*
 		if(otr.getEpisode().size()==1)
 		{
-			Episode episodeOtr = otr.getEpisode().get(0);
-			JaxbUtil.info(episodeOtr);
+
 			File fTmp = iofTmp.build(episodeOtr);
+			
+			if(iofBackup!=null)
+			{
+				File fBackup = iofBackup.build(episodeOtr);
+				try
+				{
+					FileUtils.copyFile(fSrc, fBackup);
+				}
+				catch (IOException e)
+				{
+					logger.warn("Cannot create backup-file "+fBackup.getAbsolutePath());
+					return false;
+				}
+			}
 			
 			try
 			{
-				if(iofBackup!=null){FileUtils.copyFile(fSrc, iofBackup.build(episodeOtr));}
+				
 				FileUtils.moveFile(fSrc,fTmp);
 				tagWriter.tagEpisode(fTmp, episodeOtr, fSrc);
 			}
@@ -139,6 +178,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 				
 			return true;
 		}
+		*/
 		
 		return false;
 	}

@@ -32,11 +32,4 @@
 	    </t:content>
 	</t:table>
 	
-	<ofx:paragraph lang="en" version="1">
-		the media type is quite important for handling the file correctly
-		1. MP4 OTRC Box is set
-		2. APPLE BOX with media Type
-		3. folder
-	</ofx:paragraph>
-	
 </ofx:section>
