@@ -7,22 +7,18 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.DirectoryWalker;
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.coremedia.iso.boxes.apple.AppleItemListBox;
-
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
-import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
-import de.kisner.otrcast.model.json.JsonOtrIdentifier;
+import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.monitor.BucketSizeCounter;
 import net.sf.ahtutils.monitor.ProcessingEventCounter;
 import net.sf.ahtutils.monitor.ProcessingTimeTracker;
@@ -104,78 +100,46 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		bsc.add(CodeTotal.total,file.length());
 		pecTotal.add(CodeTotal.total);
 		
-		Mp4BoxManager.Type type = Mp4BoxManager.Type.UNKNOWN;
-		JsonOtrIdentifier vidIdentifier = null;
-		
 		try
 		{
 			tagReader.readMp4Boxes(file);
-			
-			Mp4BoxManager.Type typeOtr = tagReader.getTypeFromOtrBox();
-			Mp4BoxManager.Type typeApple = tagReader.getTypeFromAppleBox();
-			Mp4BoxManager.Type typeFile = tagReader.geTypeFromFilePath();
-			
-			
-			logger.info("Type-OTRC: "+typeOtr);
-			logger.info("Type-APPL: "+typeApple);
-			logger.info("Type-FILE: "+typeFile);
-			
-			if(type.equals(Mp4BoxManager.Type.UNKNOWN)) {pecMediaType.add("mediaTypeMissing");};
+			Video video = tagReader.read();
+			if(video.isSetEpisode())
+			{
+				boolean processed = handleEpisode(file, video.getEpisode());
+			}
+
 		}
 		catch (IOException e) {e.printStackTrace();}
-		finally
-		{
-			try {tagReader.closeFile();} catch (IOException e) {logger.error(e.getMessage());}
-		}
-		
+		finally {try {tagReader.closeFile();} catch (IOException e) {logger.error(e.getMessage());}}
 		
 		pecTotal.add(CodeTotal.withId);
 		pecTotal.add(CodeTotal.withoutId);
 		
-		
-		
-		boolean withoutMediaType = type.equals(Mp4BoxManager.Type.UNKNOWN);
-		boolean withoutIdentifier = (vidIdentifier==null);
-		
-		if(withoutMediaType || withoutIdentifier)
-		{
-			try {tagFile(file);}
-			catch (IOException e) {logger.error(e.getMessage());}
-		}
 	}
+
 	
-	private void tagFile(File file) throws IOException
-	{
-		logger.info("Tagging "+file.getAbsolutePath());
-		Video video = tagReader.read(file);
-		JaxbUtil.trace(video);
-		if(video.isSetEpisode() && !video.getEpisode().isSetId())
-		{
-//			processed = handleEpisode(video.getEpisode(), file);
-		}
-	}
-	
-	private boolean handleEpisode(Episode episodeRequest, File fSrc)
+	private boolean handleEpisode(File fSrc, Episode episodeRequest)
 	{
 		JaxbUtil.info(episodeRequest);
-/*		Otr otr = rest.episodeInfo(episodeRequest);
+		Otr otr = rest.episodeInfo(episodeRequest);
 		if(otr.getEpisode().size()==1)
 		{
-			Episode eInfo = otr.getEpisode().get(0);
-			JaxbUtil.info(eInfo);
+			Episode episodeOtr = otr.getEpisode().get(0);
+			JaxbUtil.info(episodeOtr);
+			File fTmp = iofTmp.build(episodeOtr);
+			
 			try
 			{
-				
-				File fBackup = fFile.build(eInfo);
-				FileUtils.moveFile(fSrc, fBackup);
-				
-				tagWriter.tagEpisode(fBackup, eInfo, fSrc);
+				if(iofBackup!=null){FileUtils.copyFile(fSrc, iofBackup.build(episodeOtr));}
+				FileUtils.moveFile(fSrc,fTmp);
+				tagWriter.tagEpisode(fTmp, episodeOtr, fSrc);
 			}
-			catch (IOException e){e.printStackTrace();}
-			
+			catch (IOException e) {e.printStackTrace();}
+				
 			return true;
 		}
-*/		
+		
 		return false;
 	}
 }

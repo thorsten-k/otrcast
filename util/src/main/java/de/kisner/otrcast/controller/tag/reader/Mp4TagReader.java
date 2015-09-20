@@ -14,16 +14,10 @@ import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UserDataBox;
 import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
-import com.coremedia.iso.boxes.apple.AppleShowBox;
-import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.model.json.JsonOtrIdentifier;
 import de.kisner.otrcast.model.xml.series.Video;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class Mp4TagReader extends AbstractTagReader
 {
@@ -40,13 +34,10 @@ public class Mp4TagReader extends AbstractTagReader
 	private SeriesTagReader trSeries;
 	private MovieTagReader trMovie;
 	
-	private ObjectMapper jom;
-	
 	public Mp4TagReader(boolean withCover)
 	{
 		trSeries = new SeriesTagReader(withCover);
 		trMovie = new MovieTagReader(withCover);
-		jom = new ObjectMapper();
 	}
 	
 	public void readMp4Boxes(File fSource) throws IOException
@@ -65,9 +56,15 @@ public class Mp4TagReader extends AbstractTagReader
 	public Video read(File fSource) throws IOException
 	{
 		readMp4Boxes(fSource);
+		return read();
+	}
+	
+	public Video read() throws IOException
+	{
+		readMp4Boxes(fSource);
 
 		Video video = new Video();
-		switch(guessType(fSource,apple))
+		switch(guessType())
 		{
 			case SERIES:	video.setEpisode(trSeries.readEpisode(apple,moov));break;
 			case MOVIE:		video.setMovie(trMovie.readMovie(apple));break;
@@ -84,48 +81,21 @@ public class Mp4TagReader extends AbstractTagReader
 		fc.close();
 		raf.close();
 	}
-	
 
-    	
-	public JsonOtrIdentifier getVideoIdentifier2(AppleItemListBox apple) throws UtilsNotFoundException
+	public JsonOtrIdentifier readOtrIdentifier() throws NoSuchFieldException
 	{
-		logger.trace("Getting "+AppleTvEpisodeNumberBox.class.getSimpleName());
-		if (apple.getBoxes(AppleTvEpisodeNumberBox.class).isEmpty())
-		{
-            logger.trace(AppleMediaTypeBox.class.getSimpleName()+" not set");
-            throw new UtilsNotFoundException(AppleTvEpisodeNumberBox.class.getSimpleName()+" not set");
-		}
-		else
-		{
-			try
-			{
-				AppleTvEpisodeNumberBox box = apple.getBoxes(AppleTvEpisodeNumberBox.class).get(0);
-				logger.trace("Value "+box.getValue());
-				return jom.readValue(box.getValue(), JsonOtrIdentifier.class);
-			}
-			catch (JsonParseException e) {}
-			catch (JsonMappingException e) {}
-			catch (IOException e) {}
-			throw new UtilsNotFoundException(AppleTvEpisodeNumberBox.class.getSimpleName()+" is set, but identifier cannot be read");
-		}
+		return readOtrIdentifier(moov);
 	}
-
-	public Mp4BoxManager.Type guessType(File file, AppleItemListBox apple)
+	
+	public Mp4BoxManager.Type guessType()
 	{
-		boolean containsItunes = file.getAbsolutePath().contains("iTunes");
-		boolean containsMovie = file.getAbsolutePath().contains("Movies");
-		boolean containsTvShow = file.getAbsolutePath().contains("TV Shows");
+		Mp4BoxManager.Type type = Mp4BoxManager.Type.UNKNOWN;
 		
-		if(containsItunes && containsMovie){return Mp4BoxManager.Type.MOVIE;}
-		else if(containsItunes && containsTvShow){return Mp4BoxManager.Type.SERIES;}
+		if(type.equals(Mp4BoxManager.Type.UNKNOWN)) {type = getTypeFromOtrBox();}
+		if(type.equals(Mp4BoxManager.Type.UNKNOWN)) {type = getTypeFromAppleBox();}
+		if(type.equals(Mp4BoxManager.Type.UNKNOWN)) {type = geTypeFromFilePath();}
 		
-		if (!apple.getBoxes(AppleShowBox.class).isEmpty())
-		{
-			AppleShowBox box = apple.getBoxes(AppleShowBox.class).get(0);
-			if(box.getValue().length()>0){return Mp4BoxManager.Type.SERIES;}
-		}
-		
-		return Mp4BoxManager.Type.UNKNOWN;
+		return type;
 	}
 	
 	public Mp4BoxManager.Type getTypeFromOtrBox()
