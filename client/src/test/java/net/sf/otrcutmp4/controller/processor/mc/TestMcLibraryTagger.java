@@ -13,6 +13,7 @@ import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.util.OtrBootstrap;
+import de.kisner.otrcast.util.OtrConfig;
 import net.sf.ahtutils.web.rest.RestUrlDelay;
 
 public class TestMcLibraryTagger
@@ -27,11 +28,11 @@ public class TestMcLibraryTagger
 		File fTmp = new File(config.getString(TestPropertyKeys.dirTaggerTmp));
 		File fBackup = new File(config.getString(TestPropertyKeys.dirMcBackup));
 		
-		String restUrl = RestUrlDelay.getUrl(config, "url.otrseries");
+		String restUrl = RestUrlDelay.getUrl(config, OtrConfig.urlOtrSeries);
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget target = client.target(restUrl); 
-		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);;
+		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);
 		
 		McLibraryTagger tagger = new McLibraryTagger(rest,fTmp,fBackup);
 		tagger.scan(fLibrary);

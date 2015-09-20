@@ -1,5 +1,6 @@
 package de.kisner.otrcast.controller.tag.reader;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -26,6 +27,10 @@ public class AbstractTagReader
 
 	private ObjectMapper jom;
 	
+	protected File file;
+	public File getFile() {return file;}
+	public void setFile(File file) {this.file = file;}
+
 	public AbstractTagReader()
 	{
 		jom = new ObjectMapper();

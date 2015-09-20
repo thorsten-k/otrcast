@@ -7,6 +7,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +17,7 @@ import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.mc.McScanner;
+import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
@@ -50,7 +54,7 @@ public class OtrMediaCenter
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCutMp4Bootstrap.xmlConfig));
         otrConfig.checkMcSettings();
         
-        if(cmd.hasOption(oMediaCenter.getOpt()))
+        if(cmd.hasOption(oMediaCenter.getOpt()) && uOption.allowAppStart())
         {
         	McMode mode = null;
         	if(cmd.hasOption(oMediaCenterMode.getOpt()))
@@ -63,10 +67,19 @@ public class OtrMediaCenter
         	OtrCutMp4Bootstrap.buildEmf(otrConfig).createEntityManager();
         	scanMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
         }
-        else if(cmd.hasOption(oRetagger.getOpt()))
+        else if(cmd.hasOption(oRetagger.getOpt()) && uOption.allowAppStart())
         {
-        	McLibraryTagger tagger = new McLibraryTagger(null,otrConfig.getDir(Dir.TMP),otrConfig.getDir(Dir.BACKUP));
+    		ResteasyClient client = new ResteasyClientBuilder().build();
+    		ResteasyWebTarget target = client.target(otrConfig.getKey(OtrConfig.urlOtrSeries)); 
+    		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);
+    		
+        	McLibraryTagger tagger = new McLibraryTagger(rest,otrConfig.getDir(Dir.TMP),otrConfig.getDir(Dir.BACKUP));
         	tagger.scan(otrConfig.getDir(OtrConfig.Dir.MC));
+        }
+        
+        if(!uOption.isAppStarted())
+        {
+        	uOption.help();
         }
 	}
 

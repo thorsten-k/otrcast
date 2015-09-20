@@ -31,7 +31,7 @@ public class MovieTagReader extends AbstractTagReader
 		}
 		else
 		{
-			logger.warn("Strange ... no TrackTitleBox");
+			logger.warn("Strange, no TrackTitleBox in "+file.getAbsolutePath());
 		}
 		if (!apple.getBoxes(AppleRecordingYearBox.class).isEmpty())
 		{

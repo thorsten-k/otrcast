@@ -64,6 +64,19 @@
       		<scope>compile</scope>
 		</dependency>
 		
+		<!-- HTTP -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+			</exclusions>
+		</dependency>
+		
 		<!-- XML -->
      	<dependency>
      		<groupId>javax.xml.bind</groupId>
@@ -180,13 +193,6 @@
         	<version>3.0.1.Final</version>
         </dependency>
 
-		<!-- REST ()-->
-		<dependency>
-		      <groupId>org.jboss.resteasy</groupId>
-		      <artifactId>resteasy-netty</artifactId>
-		      <version>3.0.1.Final</version>
-		</dependency>
-
 		<!-- Hibernate -->
 		<dependency>
         	<groupId>org.hsqldb</groupId>
@@ -240,18 +246,6 @@
       		<type>jar</type>
       		<scope>test</scope>
   		</dependency>
-  		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5</version>
-			<scope>test</scope>
-			<exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
-			</exclusions>
-		</dependency>
 	</dependencies>
   
 	<build>

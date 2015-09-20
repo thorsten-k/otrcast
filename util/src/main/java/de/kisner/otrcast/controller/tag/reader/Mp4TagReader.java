@@ -67,7 +67,7 @@ public class Mp4TagReader extends AbstractTagReader
 		switch(guessType())
 		{
 			case SERIES:	video.setEpisode(trSeries.readEpisode(apple,moov));break;
-			case MOVIE:		video.setMovie(trMovie.readMovie(apple));break;
+			case MOVIE:		trMovie.setFile(fSource);video.setMovie(trMovie.readMovie(apple));break;
 			default: logger.warn("UNKNOWN handling for "+fSource);
 		}
 		closeFile();

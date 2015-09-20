@@ -96,7 +96,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results)
 	{
-		if(pecTotal.events(CodeTotal.total)>100){return false;}
+//		if(pecTotal.events(CodeTotal.total)>100){return false;}
 		return true;
 	}
 
@@ -114,6 +114,10 @@ public class McLibraryTagger extends DirectoryWalker<File>
 			{
 				pecMediaType.add(Mp4BoxManager.Type.SERIES);
 				handleEpisode(file, video.getEpisode());
+			}
+			else if(video.isSetMovie())
+			{
+				pecMediaType.add(Mp4BoxManager.Type.MOVIE);
 			}
 			else
 			{
