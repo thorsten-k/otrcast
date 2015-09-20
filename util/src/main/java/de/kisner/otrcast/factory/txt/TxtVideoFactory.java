@@ -9,7 +9,8 @@ public class TxtVideoFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtVideoFactory.class);
 	
-	public static String build(Video video)
+	public static String build(Video video){return build(video,false);}
+	public static String build(Video video, boolean withId)
 	{
 		StringBuffer sb = new StringBuffer();
 		
@@ -20,7 +21,7 @@ public class TxtVideoFactory
 		else if(video.isSetEpisode())
 		{
 			sb.append("Series: ");
-			sb.append(TxtEpisodeFactory.build(video.getEpisode()));
+			sb.append(TxtEpisodeFactory.build(video.getEpisode(),withId));
 		}
 		
 		return sb.toString();

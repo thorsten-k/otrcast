@@ -10,7 +10,6 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleShowBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
-import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
@@ -48,7 +47,7 @@ public class SeriesTagWriter extends AbstractTagWriter
 		writeMediaType(apple, Mp4BoxManager.Type.SERIES);
 		writeCover(apple, episode.getSeason());
 		writeOtrBox(jom.writeValueAsString(JsonOtrBoxFactory.build(episode)));
-		if(episode.isSetId()){writeEpisodeId(apple, episode.getId()+"");}
+		writeOtrBox(jom.writeValueAsString(JsonOtrBoxFactory.build(episode)));
 					
 		writeMp4(dstFile);
 	}
@@ -80,14 +79,7 @@ public class SeriesTagWriter extends AbstractTagWriter
 		box.setValue(show);
 		apple.addBox(box);
 	}
-	
-	private void writeEpisodeId(AppleItemListBox apple, String id)
-	{
-		AppleTvEpisodeNumberBox idBox = Mp4BoxManager.fcAppleTvEpisodeNumberBox(apple);
-		idBox.setValue(id);
-		apple.addBox(idBox);
-	}
-	
+		
 	private void writeCover(AppleItemListBox apple, Season season) throws IOException
 	{
 		boolean abortNoCoverManager = (coverManager==null);

@@ -28,7 +28,7 @@ public class CliMp4TagReader
 	{
 		logger.debug("Testing "+f.getAbsolutePath());
 		Video video = tagReader.read(f);
-		logger.info(TxtVideoFactory.build(video));
+		logger.info(TxtVideoFactory.build(video,true));
 	}
 	
 	public static void main(String args[]) throws Exception

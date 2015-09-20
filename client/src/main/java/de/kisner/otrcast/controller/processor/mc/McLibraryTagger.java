@@ -106,35 +106,32 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		
 		Mp4BoxManager.Type type = Mp4BoxManager.Type.UNKNOWN;
 		JsonOtrIdentifier vidIdentifier = null;
+		
 		try
 		{
-			AppleItemListBox apple = tagReader.readAppleBox(file);
-			try
-			{
-				type = tagReader.getMediaType(apple);
-				pecMediaType.add("mediaType"+WordUtils.capitalize(type.toString()));
-			}
-			catch (UtilsNotFoundException e)
-			{
-				pecMediaType.add("mediaTypeMissing");
-			}
+			tagReader.readMp4Boxes(file);
 			
-			try 
-			{
-				vidIdentifier = tagReader.getVideoIdentifier(apple);
-				pecTotal.add(CodeTotal.withId);
-			}
-			catch (UtilsNotFoundException e)
-			{
-				pecTotal.add(CodeTotal.withoutId);
-			}
+			Mp4BoxManager.Type typeOtr = tagReader.getTypeFromOtrBox();
+			Mp4BoxManager.Type typeApple = tagReader.getTypeFromAppleBox();
+			Mp4BoxManager.Type typeFile = tagReader.geTypeFromFilePath();
 			
+			
+			logger.info("Type-OTRC: "+typeOtr);
+			logger.info("Type-APPL: "+typeApple);
+			logger.info("Type-FILE: "+typeFile);
+			
+			if(type.equals(Mp4BoxManager.Type.UNKNOWN)) {pecMediaType.add("mediaTypeMissing");};
 		}
 		catch (IOException e) {e.printStackTrace();}
 		finally
 		{
 			try {tagReader.closeFile();} catch (IOException e) {logger.error(e.getMessage());}
 		}
+		
+		
+		pecTotal.add(CodeTotal.withId);
+		pecTotal.add(CodeTotal.withoutId);
+		
 		
 		
 		boolean withoutMediaType = type.equals(Mp4BoxManager.Type.UNKNOWN);

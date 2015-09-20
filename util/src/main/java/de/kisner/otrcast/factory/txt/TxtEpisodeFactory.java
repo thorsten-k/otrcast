@@ -9,7 +9,8 @@ public class TxtEpisodeFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtEpisodeFactory.class);
 	
-	public static String build(Episode episode)
+	public static String build(Episode episode){return build(episode,false);}
+	public static String build(Episode episode, boolean withId)
 	{
 		StringBuffer sb = new StringBuffer();
 		
@@ -19,7 +20,9 @@ public class TxtEpisodeFactory
 			sb.append(" ").append(episode.getSeason().getNr());
 			sb.append("x").append(episode.getNr());
 			sb.append(" ").append(episode.getName());
+			
 		}
+		if(withId && episode.isSetId()){sb.append(" otrc:").append(episode.getId());}
 		
 		return sb.toString();
 	}

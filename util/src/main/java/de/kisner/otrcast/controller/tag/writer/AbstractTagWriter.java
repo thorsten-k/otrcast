@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.Box;
 import com.coremedia.iso.boxes.MetaBox;
 import com.coremedia.iso.boxes.MovieBox;
 import com.coremedia.iso.boxes.UnknownBox;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.util.Mp4MetadataBalancer;
+import de.kisner.otrcast.interfaces.Version;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 
 public abstract class AbstractTagWriter
@@ -77,11 +79,32 @@ public abstract class AbstractTagWriter
 	
 	protected void writeOtrBox(String data)
 	{
-		logger.info("Writing "+data);
+		UnknownBox box = null;
+		boolean addBox;
+		for(Box b : moov.getBoxes())
+		{
+			if(b.getType().equals(Version.OtrCastMp4Box))
+			{
+				box = (UnknownBox)b;
+				break;
+			}
+		}
+		
+		if(box==null)
+		{
+			logger.trace("Creating a new "+Version.OtrCastMp4Box+" Box");
+			box = new UnknownBox(Version.OtrCastMp4Box);
+			addBox = true;
+		}
+		else
+		{
+			logger.trace("Using existent "+Version.OtrCastMp4Box+" Box");
+			addBox = false;
+		}
+		
 		ByteBuffer bb = ByteBuffer.wrap(data.getBytes());
-		UnknownBox box = new UnknownBox("OTRC");
 		box.setData(bb);
-		moov.addBox(box);
+		if(addBox){moov.addBox(box);}
 	}
 	
 	protected void writeMediaType(AppleItemListBox apple, Mp4BoxManager.Type type)
