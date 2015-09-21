@@ -47,7 +47,6 @@ public class SeriesTagWriter extends AbstractTagWriter
 		writeMediaType(apple, Mp4BoxManager.Type.SERIES);
 		writeCover(apple, episode.getSeason());
 		writeOtrBox(jom.writeValueAsString(JsonOtrBoxFactory.build(episode)));
-		writeOtrBox(jom.writeValueAsString(JsonOtrBoxFactory.build(episode)));
 					
 		writeMp4(dstFile);
 	}

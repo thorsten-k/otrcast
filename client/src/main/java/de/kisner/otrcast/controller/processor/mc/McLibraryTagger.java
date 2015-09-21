@@ -18,6 +18,7 @@ import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
+import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
@@ -27,6 +28,7 @@ import net.sf.ahtutils.monitor.BucketSizeCounter;
 import net.sf.ahtutils.monitor.ProcessingEventCounter;
 import net.sf.ahtutils.monitor.ProcessingTimeTracker;
 import net.sf.exlp.shell.io.ConsoleInputChoice;
+import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -35,6 +37,9 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	final static Logger logger = LoggerFactory.getLogger(McLibraryTagger.class);
 	
 	private enum CodeTotal {total,withId,withoutId}
+	
+	protected CoverManager coverManager;
+	private RelativePathFactory rpf;
 	
 	private ProcessingEventCounter pecMediaType,pecTotal;
 	private BucketSizeCounter bsc;
@@ -72,26 +77,24 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		pecMediaType = new ProcessingEventCounter("MediaType");
 		pecTotal = new ProcessingEventCounter("Files");
 	}
-	
-	public void scan(File startDirectory)
+		
+	public void scan(File baseDirectory)
 	{
-		logger.info("Scanning "+startDirectory);
-		logger.info(StringUtil.stars());
+		rpf = new RelativePathFactory(baseDirectory);
+		logger.info("Scanning "+baseDirectory);
 		
 		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		
+		logger.info(StringUtil.stars());
 		List<File> results = new ArrayList<File>();
-	    try
-	    {
-			walk(startDirectory, results);
-		}
-	    catch (IOException e) {e.printStackTrace();}
-	    
-	    
-	    logger.info("Processing time: "+ptt.toTotalPeriod());
-	    pecTotal.debug();
-	    pecMediaType.debug();
-	    bsc.debugAsFileSize();
+		try{walk(baseDirectory, results);}
+		catch (IOException e) {e.printStackTrace();}
+		logger.info(StringUtil.stars());
+		
+		logger.info("Processing time: "+ptt.toTotalPeriod());
+		pecTotal.debug();
+		pecMediaType.debug();
+		bsc.debugAsFileSize();
 	}
 	
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results)
@@ -133,10 +136,12 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	private boolean handleEpisode(File fSrc, Episode episodeRequest)
 	{
+		logger.info("Handling "+rpf.relativate(fSrc));
+		logger.info("Resolving: "+TxtEpisodeFactory.build(episodeRequest,true));
 		JaxbUtil.trace(episodeRequest);
 		Otr otr = rest.resolveEpisode(episodeRequest);
 		
-		Episode episodeSelected;
+		Episode episodeSelected = null;
 		if(otr.getEpisode().size()==0)
 		{
 			episodeSelected = otr.getEpisode().get(0);
@@ -151,39 +156,46 @@ public class McLibraryTagger extends DirectoryWalker<File>
 			System.out.println("Select Episode for "+TxtEpisodeFactory.build(episodeRequest));
 			episodeSelected = ConsoleInputChoice.getListItemForChoice(otr.getEpisode(),map);
 		}
-
-		/*
-		if(otr.getEpisode().size()==1)
+		
+		logger.info("Tagging: "+TxtEpisodeFactory.build(episodeSelected,true));
+		if(coverManager!=null)
 		{
-
-			File fTmp = iofTmp.build(episodeOtr);
-			
-			if(iofBackup!=null)
-			{
-				File fBackup = iofBackup.build(episodeOtr);
-				try
-				{
-					FileUtils.copyFile(fSrc, fBackup);
-				}
-				catch (IOException e)
-				{
-					logger.warn("Cannot create backup-file "+fBackup.getAbsolutePath());
-					return false;
-				}
-			}
-			
+			boolean coverAvailable = coverManager.isAvailable(episodeSelected.getSeason());
+			logger.info("\tCover available: "+coverAvailable);
+		}
+		
+		
+		if(iofBackup!=null)
+		{
+			File fBackup = iofBackup.build(episodeSelected);
 			try
 			{
-				
-				FileUtils.moveFile(fSrc,fTmp);
-				tagWriter.tagEpisode(fTmp, episodeOtr, fSrc);
+				FileUtils.copyFile(fSrc, fBackup);
 			}
-			catch (IOException e) {e.printStackTrace();}
-				
-			return true;
+			catch (IOException e)
+			{
+				logger.warn("Cannot create backup-file "+fBackup.getAbsolutePath());
+				return false;
+			}
 		}
-		*/
+		
+		try
+		{
+			
+			File fTmp = iofTmp.build(episodeSelected);
+			FileUtils.moveFile(fSrc,fTmp);
+			tagWriter.tagEpisode(fTmp, episodeSelected, fSrc);
+			fTmp.delete();
+		}
+		catch (IOException e) {e.printStackTrace();}
 		
 		return false;
+	}
+	
+	public CoverManager getCoverManager() {return coverManager;}
+	public void setCoverManager(CoverManager coverManager)
+	{
+		this.coverManager = coverManager;
+		tagWriter.setCoverManager(coverManager);
 	}
 }

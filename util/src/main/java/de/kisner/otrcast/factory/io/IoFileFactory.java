@@ -32,7 +32,8 @@ public class IoFileFactory
 		StringBuffer sb = new StringBuffer();
 		sb.append(episode.getSeason().getSeries().getName()).append(" - ").append(episode.getSeason().getSeries().getId());
 		sb.append(SystemUtils.FILE_SEPARATOR).append(episode.getSeason().getNr());
-		sb.append(SystemUtils.FILE_SEPARATOR).append(episode.getNr()).append(" ").append(episode.getName()).append(".mp4");
+		sb.append(SystemUtils.FILE_SEPARATOR).append(episode.getNr()).append(" ").append(episode.getName());
+		sb.append(".mp4");
 		return new File(fRoot,sb.toString());
 	}
 	
@@ -42,6 +43,7 @@ public class IoFileFactory
 		sb.append(episode.getSeason().getSeries().getName()).append(" - ").append(episode.getSeason().getSeries().getId());
 		sb.append(SystemUtils.FILE_SEPARATOR).append(episode.getSeason().getNr());
 		sb.append(SystemUtils.FILE_SEPARATOR).append(episode.getNr()).append(" ").append(episode.getName());
+		sb.append(".mp4");
 		return new File(fRoot,sb.toString());
 	}
 	

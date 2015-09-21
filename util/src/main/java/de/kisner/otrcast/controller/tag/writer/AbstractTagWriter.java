@@ -129,4 +129,7 @@ public abstract class AbstractTagWriter
 		}
 		apple.addBox(box);
 	}
+	
+	public CoverManager getCoverManager() {return coverManager;}
+	public void setCoverManager(CoverManager coverManager) {this.coverManager = coverManager;}
 }
