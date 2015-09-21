@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.DirectoryWalker;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,15 +135,14 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	private boolean handleEpisode(File fSrc, Episode episodeRequest)
 	{
-		logger.info("Handling "+rpf.relativate(fSrc));
-		logger.info("Resolving: "+TxtEpisodeFactory.build(episodeRequest,true));
+		logger.trace("Handling "+rpf.relativate(fSrc));
+		logger.trace("Resolving: "+TxtEpisodeFactory.build(episodeRequest,true));
 		JaxbUtil.trace(episodeRequest);
 		Otr otr = rest.resolveEpisode(episodeRequest);
 		
 		Episode episodeSelected = null;
 		if(otr.getEpisode().size()==0)
 		{
-			episodeSelected = otr.getEpisode().get(0);
 			logger.warn("Nothing found for "+TxtEpisodeFactory.build(episodeRequest));
 			return false;
 		}
@@ -157,14 +155,14 @@ public class McLibraryTagger extends DirectoryWalker<File>
 			episodeSelected = ConsoleInputChoice.getListItemForChoice(otr.getEpisode(),map);
 		}
 		
-		logger.info("Tagging: "+TxtEpisodeFactory.build(episodeSelected,true));
+		logger.trace("Tagging: "+TxtEpisodeFactory.build(episodeSelected,true));
 		if(coverManager!=null)
 		{
 			boolean coverAvailable = coverManager.isAvailable(episodeSelected.getSeason());
-			logger.info("\tCover available: "+coverAvailable);
+			logger.trace("\tCover available: "+coverAvailable);
 		}
 		
-		
+/*		
 		if(iofBackup!=null)
 		{
 			File fBackup = iofBackup.build(episodeSelected);
@@ -181,14 +179,13 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		
 		try
 		{
-			
 			File fTmp = iofTmp.build(episodeSelected);
 			FileUtils.moveFile(fSrc,fTmp);
 			tagWriter.tagEpisode(fTmp, episodeSelected, fSrc);
 			fTmp.delete();
 		}
 		catch (IOException e) {e.printStackTrace();}
-		
+*/		
 		return false;
 	}
 	

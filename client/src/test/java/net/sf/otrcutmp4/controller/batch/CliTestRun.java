@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.cli;
+package net.sf.otrcutmp4.controller.batch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
