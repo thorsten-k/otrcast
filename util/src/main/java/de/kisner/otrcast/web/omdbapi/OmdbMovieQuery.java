@@ -4,11 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.xml.JDomUtil;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -20,6 +15,7 @@ import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
 import de.kisner.otrcast.factory.xml.series.XmlMovieFactory;
 import de.kisner.otrcast.model.xml.series.Movie;
 import de.kisner.otrcast.model.xml.series.Movies;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 public class OmdbMovieQuery extends AbstractOmdbQuery
 {

@@ -3,11 +3,6 @@ package net.sf.otrcutmp4.web.rest;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
@@ -23,6 +18,10 @@ import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.series.Category;
 import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.util.OtrBootstrap;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrRestSeedData
 {

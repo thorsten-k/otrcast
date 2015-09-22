@@ -1,11 +1,9 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -21,7 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
-import de.kisner.otrcast.controller.processor.RssXmlProcessor;
 import de.kisner.otrcast.controller.web.rss.OtrCastUrlGenerator;
 import de.kisner.otrcast.interfaces.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.interfaces.rest.OtrPodcastRest;
@@ -80,7 +77,7 @@ public class CliPodcastRest
 		    }
 		    HttpEntity entity = response.getEntity();
 		    
-		    InputStream in = entity.getContent();
+//		    InputStream in = entity.getContent();
 //		    IOUtils.copy(in,System.out);
 		    EntityUtils.consume(entity);
 		}

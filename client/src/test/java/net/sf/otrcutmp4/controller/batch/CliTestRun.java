@@ -4,13 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.ExlpCentralConfigPointer;
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
-
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
@@ -39,6 +32,12 @@ import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.io.ExlpCentralConfigPointer;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 public class CliTestRun
 {

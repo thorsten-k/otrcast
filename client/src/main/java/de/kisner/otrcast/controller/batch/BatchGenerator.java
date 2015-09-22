@@ -32,7 +32,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 	private VideoCutter videoCutter;
 	
 	private Mp3ToAac mp3ToAac;
-	private Ac3ToAac ac3ToAac;
+	@SuppressWarnings("unused") private Ac3ToAac ac3ToAac;
 	private H264Transcode h264Transcode;
 	private Mp4Merger mp4Merger;
 	private TagGenerator tagGenerator;

@@ -4,12 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.shell.cmd.ShellCmdMove;
-import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
@@ -18,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.AviToMp4;
-import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
@@ -29,6 +23,11 @@ import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.util.OtrConfig.Template;
 import de.kisner.otrcast.util.OtrConfig.Url;
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
+import net.sf.exlp.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.shell.cmd.ShellCmdMove;
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class RenameGenerator extends AbstactBatchGenerator
 {

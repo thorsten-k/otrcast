@@ -2,8 +2,6 @@ package de.kisner.otrcast.controller.hotfolder;
 
 import java.io.File;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +16,7 @@ public class McTargetFactory
 	public McTargetFactory(OtrConfig config)
 	{
 		this.config=config;
+		logger.info("Target ..."+this.config.toString());
 	}
 	
 	public File getTarget()

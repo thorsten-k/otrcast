@@ -13,7 +13,7 @@ public class AbstractTvDbQuery extends AbstractHttpXmlQuery
 
 	public AbstractTvDbQuery(String apiKey)
 	{
-		super("http://thetvdb.com/api");
+		super("http","thetvdb.com","api");
         this.apiKey=apiKey;
 	}
 }

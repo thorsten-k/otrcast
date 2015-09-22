@@ -16,7 +16,7 @@ public class RssXmlProcessor
 	private Namespace nsRss;
 	private Namespace nsContent;
 	private Namespace nsWfw;
-	private Namespace nsItunes;
+	@SuppressWarnings("unused") private Namespace nsItunes;
 	private Namespace nsDc;
 	
 	public RssXmlProcessor()

@@ -1,8 +1,6 @@
-package net.sf.otrcutmp4.test;
+package net.sf.otrcutmp4.controller.batch;
 
 import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -13,14 +11,16 @@ import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.batch.RenameGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
-public class TstBatchProcessor
+public class CliBatchProcessor
 { 
-	final static Logger logger = LoggerFactory.getLogger(TstBatchProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(CliBatchProcessor.class);
 	
 	private Configuration config;
 
-	public TstBatchProcessor()
+	public CliBatchProcessor()
 	{
 	}
 	
@@ -29,10 +29,10 @@ public class TstBatchProcessor
 		String xmlIn = config.getString("xml.test.cut.3");
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
+		JaxbUtil.trace(vFiles);
 		
 		BatchGenerator test = new BatchGenerator(null,Profile.P0,false);
-		logger.warn("NYI");
-//		test.create(vFiles);
+		logger.warn("NYI "+test.getClass().getSimpleName());
 	}
 	
 	public void renameGenerator() throws FileNotFoundException
@@ -51,7 +51,7 @@ public class TstBatchProcessor
 	{
 		Configuration config = OtrClientTestBootstrap.init();
 		
-		TstBatchProcessor test = new TstBatchProcessor();
+		CliBatchProcessor test = new CliBatchProcessor();
 		test.setConfig(config);
 		
 		test.renameGenerator();
