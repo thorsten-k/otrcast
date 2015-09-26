@@ -2,7 +2,7 @@ package de.kisner.otrcast.interfaces.model;
 
 import java.util.List;
 
-import net.sf.ahtutils.model.interfaces.with.EjbWithCode;
+import net.sf.ahtutils.interfaces.model.with.code.EjbWithCode;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
