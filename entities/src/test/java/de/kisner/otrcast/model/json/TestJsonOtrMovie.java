@@ -26,7 +26,7 @@ public class TestJsonOtrMovie extends AbstractOtrJsonTest
     	jom.writeValue(System.out, json);
     }
     
-    public static JsonOtrMovie build(boolean withChildren)
+    public static JsonOtrMovie create(boolean withChildren)
     {
     	JsonOtrMovie json = new JsonOtrMovie();
     	json.setId(123);

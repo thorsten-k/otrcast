@@ -32,7 +32,7 @@ public class TestJsonOtrIdentifier extends AbstractOtrJsonTest
     	
     	if(withChildren)
     	{
-    		json.setMovie(TestJsonOtrMovie.build(false));
+    		json.setMovie(TestJsonOtrMovie.create(false));
     	}
     	return json;
     }
