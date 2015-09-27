@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import de.kisner.otrcast.interfaces.model.Movie;
-import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
+import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 
 @Entity
 public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrStorage>

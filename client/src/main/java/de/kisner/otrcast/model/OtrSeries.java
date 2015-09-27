@@ -16,7 +16,7 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
 import de.kisner.otrcast.interfaces.model.Series;
-import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
+import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 

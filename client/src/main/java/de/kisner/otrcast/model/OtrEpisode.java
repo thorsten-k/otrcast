@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import de.kisner.otrcast.interfaces.model.Episode;
-import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
+import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 
 @Entity
 public class OtrEpisode implements Serializable,EjbPersistable,

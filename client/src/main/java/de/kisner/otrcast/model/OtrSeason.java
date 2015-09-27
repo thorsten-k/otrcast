@@ -17,7 +17,7 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
 import de.kisner.otrcast.interfaces.model.Season;
-import net.sf.ahtutils.model.interfaces.crud.EjbPersistable;
+import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 
 @Entity
 public class OtrSeason implements Serializable,EjbPersistable,
