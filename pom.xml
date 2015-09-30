@@ -93,7 +93,7 @@
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
   		<repository>
-  			<id>aht-public</id>
+  			<id>aht.public</id>
   			<name>AHT public</name>
   			<url>https://www.aht-group.com/nexus/content/groups/public/</url>
   			<releases><enabled>true</enabled></releases>
@@ -103,19 +103,19 @@
 	
 	<pluginRepositories>
 		<pluginRepository>
-			<id>onejar.googlecode.com</id>
+			<id>onejar</id>
 			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
 		</pluginRepository>
 	</pluginRepositories>
 	
 	<distributionManagement>
 		<repository>
-			<id>aht-releases</id>
+			<id>aht.releases</id>
 			<name>Internal Releases</name>
 			<url>https://www.aht-group.com/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>aht-snapshots</id>
+			<id>aht.snapshots</id>
 			<name>Internal Snapshots</name>
 			<url>https://www.aht-group.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
