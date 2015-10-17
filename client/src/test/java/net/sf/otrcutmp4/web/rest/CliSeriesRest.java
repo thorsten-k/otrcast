@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
-import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,6 @@ import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Tags;
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
@@ -43,9 +42,10 @@ public class CliSeriesRest
 		String url = config.getString(ConfigKey.netRestUrl);
 		logger.info("Connection to "+url);
 		
-		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrSeriesRest.class, url,clientExecutor);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication("user","pwd"));
+		ResteasyWebTarget restTarget = client.target(url);
+		rest = restTarget.proxy(OtrSeriesRest.class);
 	}
 	
 	public void single() throws OtrProcessingException, IOException, TemplateException

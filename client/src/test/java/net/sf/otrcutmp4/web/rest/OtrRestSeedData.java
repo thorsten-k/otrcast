@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
-import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,6 @@ import de.kisner.otrcast.model.xml.series.Category;
 import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.util.OtrBootstrap;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -27,7 +26,7 @@ public class OtrRestSeedData
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrRestSeedData.class);
 	
-	private OtrAdminRest restAdmin;
+	private OtrAdminRest rest;
 	private Configuration config;
 	
 	public OtrRestSeedData(Configuration config)
@@ -37,13 +36,11 @@ public class OtrRestSeedData
 		String restUrl = config.getString("url.otrseries");
 		logger.info("Connectiong to "+restUrl);
 		
-//		ResteasyClient client = new ResteasyClientBuilder().build();
-//		ResteasyWebTarget target = client.target(restUrl);
-//		restAdmin = target.proxy(OtrAdminRest.class);
 		
-		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		restAdmin = ProxyFactory.create(OtrAdminRest.class, restUrl,clientExecutor);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication("user","pwd"));
+		ResteasyWebTarget restTarget = client.target(restUrl);
+		rest = restTarget.proxy(OtrAdminRest.class);
 	}
 	
 	public void all()
@@ -59,7 +56,7 @@ public class OtrRestSeedData
 		JaxbUtil.debug(otr);
 		for(Category category : otr.getCategory())
 		{
-			restAdmin.addCategory(category);
+			rest.addCategory(category);
 		}
 	}
 	
@@ -69,7 +66,7 @@ public class OtrRestSeedData
 		JaxbUtil.debug(otr);
 		for(Format format : otr.getFormat())
 		{
-			Format response = restAdmin.addFormat(format);
+			Format response = rest.addFormat(format);
 			logger.debug("Updated "+response.getType());
 		}
 	}
@@ -80,7 +77,7 @@ public class OtrRestSeedData
 		JaxbUtil.debug(otr);
 		for(Quality quality : otr.getQuality())
 		{
-			Quality response = restAdmin.addQuality(quality);
+			Quality response = rest.addQuality(quality);
 			JaxbUtil.debug(response);
 		}
 	}
@@ -96,7 +93,7 @@ public class OtrRestSeedData
 				logger.debug("\file: "+f.getAbsolutePath());
 				Series series = (Series)JaxbUtil.loadJAXB(f.getAbsolutePath(), Series.class);
 				logger.debug("\tSeasons: "+series.getSeason().size());
-				series = restAdmin.addSeries(series);
+				series = rest.addSeries(series);
 				logger.debug("Updated "+series.getName());
 			}
 		}
