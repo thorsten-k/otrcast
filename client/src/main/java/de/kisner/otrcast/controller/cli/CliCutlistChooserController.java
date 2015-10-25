@@ -72,7 +72,11 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		List<Video> listVideos = new ArrayList<Video>();
 		Scanner sc = new Scanner(System.in);
 		String line = sc.nextLine();
-		if(line.length()==0){return listVideos;}
+		if(line.length()==0)
+		{
+			sc.close();
+			return listVideos;
+		}
 		
 		for(String token : line.split(","))
 		{			
@@ -105,7 +109,8 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 				clSelected.getCutList().add(vf.getCutLists().getCutList().get(id));
 			}
 		}
-*/		return listVideos;
+*/		sc.close();
+		return listVideos;
 	}
 	
 	private Video buildSingle(VideoFile vfInput, int index)
@@ -149,6 +154,7 @@ public class CliCutlistChooserController extends AbstractCutlistChooserControlle
 		vf.setOtrId(vf2.getOtrId());
 		video.getVideoFiles().getVideoFile().add(vf);
 		
+		sc.close();
 		return video;
 	}
 }

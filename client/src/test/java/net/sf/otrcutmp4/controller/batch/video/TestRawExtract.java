@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
-import net.sf.otrcutmp4.util.TestOtrConfig;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -18,6 +14,9 @@ import de.kisner.otrcast.app.AviToMp4.Profile;
 import de.kisner.otrcast.controller.batch.video.AviExtract;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
+import net.sf.otrcutmp4.util.TestOtrConfig;
 
 public class TestRawExtract extends AbstractBatchTest
 { 

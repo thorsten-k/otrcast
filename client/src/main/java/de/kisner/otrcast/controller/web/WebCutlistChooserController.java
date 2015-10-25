@@ -2,14 +2,10 @@ package de.kisner.otrcast.controller.web;
 
 import java.util.List;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
-import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +19,8 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class WebCutlistChooserController extends AbstractCutlistChooserController implements CutlistChooser
 {
@@ -37,13 +35,13 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		String host = otrConfig.getUrl(OtrConfig.Url.OTR);
 		logger.info("Connecting to "+host);
 		
-		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
-				otrConfig.getCredential(Credential.EMAIL,""),
-				otrConfig.getCredential(Credential.PWD,""));
-		rest = ProxyFactory.create(OtrCutRest.class, host,clientExecutor);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication(otrConfig.getCredential(Credential.EMAIL,""),otrConfig.getCredential(Credential.PWD,"")));
+		ResteasyWebTarget restTarget = client.target(host);
+		rest = restTarget.proxy(OtrCutRest.class);
 	}
 	
+	@SuppressWarnings("resource")
 	@Override public Videos chooseCutlists(VideoFiles vFiles) throws UtilsProcessingException
 	{
 		view.welcome(vFiles);

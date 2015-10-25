@@ -16,9 +16,15 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 
-public abstract class AbstractOtrXmlTest extends AbstractAhtUtilsXmlTest
+public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractAhtUtilsXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrXmlTest.class);
+	
+	public AbstractOtrXmlTest(){this(null,null);}
+	public AbstractOtrXmlTest(Class<T> cXml,String xmlDirSuffix)
+	{
+		super(cXml,xmlDirSuffix);
+	}
 	
 	@BeforeClass
     public static void initLogger()

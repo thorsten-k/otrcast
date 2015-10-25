@@ -1,9 +1,9 @@
 package de.kisner.otrcast.controller.web;
 
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
-
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,8 +30,10 @@ public class WebAviScanner
 		String user = otrConfig.getCredential(Credential.EMAIL,"");
 		String pwd = otrConfig.getCredential(Credential.PWD,"");
 		
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(user,pwd);
-		rest = ProxyFactory.create(OtrUserRest.class, host,clientExecutor);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication(user,pwd));
+		ResteasyWebTarget restTarget = client.target(host);
+		rest = restTarget.proxy(OtrUserRest.class);
 	}
 	
 	public VideoFiles scan(SrcDirProcessor srcDirProcessor)

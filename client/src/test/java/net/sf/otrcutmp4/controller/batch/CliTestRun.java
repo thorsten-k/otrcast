@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
-import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,6 @@ import de.kisner.otrcast.util.OtrConfig.Credential;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -62,11 +61,10 @@ public class CliTestRun
 		otrConfig = new OtrConfig();
 		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		
-		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
-				otrConfig.getCredential(Credential.EMAIL,""),
-				"test");
-		rest = ProxyFactory.create(OtrCutRest.class, "http://localhost:8080/otr",clientExecutor);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication(otrConfig.getCredential(Credential.EMAIL,""),"test"));
+		ResteasyWebTarget restTarget = client.target("http://localhost:8080/otr");
+		rest = restTarget.proxy(OtrCutRest.class);
 	}
 	
 	public void srcDirProcessor()
@@ -120,6 +118,7 @@ public class CliTestRun
 		String xmlOutput = config.getString(CliTestRun.testClChooser);
 		logger.debug("Saving to file: "+xmlOutput);
 		JaxbUtil.save(new File(xmlOutput), videos, true);
+		sc.close();
 	}
 	
 	public void cutLoader() throws FileNotFoundException

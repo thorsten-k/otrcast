@@ -14,6 +14,7 @@ public class CliUserRest
 {
 	final static Logger logger = LoggerFactory.getLogger(CliUserRest.class);
 	
+	@SuppressWarnings("unused")
 	private OtrUserRest rest;
 	
 	public CliUserRest()
@@ -26,7 +27,6 @@ public class CliUserRest
 	
 	public void test()
 	{
-		
 	}
 	
 	public static void main(String[] args)
