@@ -1,6 +1,10 @@
 package net.sf.otrcutmp4.controller.processor.mc;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -13,25 +17,34 @@ import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
+import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.web.rest.RestUrlDelay;
+import net.sf.exlp.util.io.StringUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliMcLibraryTagger
 {
 	final static Logger logger = LoggerFactory.getLogger(CliMcLibraryTagger.class);
 	
-	public static void main(String args[]) throws Exception
+	private Configuration config;
+	private OtrSeriesRest rest;
+	
+	private McLibraryTagger tagger;
+	private File fLibrary,fCovers,fMcXmlLib;
+	
+	public CliMcLibraryTagger(Configuration config)
 	{
-		Configuration config = OtrBootstrap.init();
-
-		File fLibrary = new File(config.getString(TestPropertyKeys.dirTaggerDst));
+		this.config=config;
+		fLibrary = new File(config.getString(TestPropertyKeys.dirTaggerDst));
 		File fTmp = new File(config.getString(TestPropertyKeys.dirTaggerTmp));
 		File fBackup = new File(config.getString(TestPropertyKeys.dirMcBackup));
-		File fCovers = new File(config.getString(OtrConfig.dirCover));
+		fCovers  = new File(config.getString(OtrConfig.dirCover));
 		
-		File fMcXmlLib = new File(config.getString(OtrConfig.fileMcXmlLib));
+		fMcXmlLib = new File(config.getString(OtrConfig.fileMcXmlLib));
 		
 		if(fLibrary.listFiles(FileQuery.mp4FileFilter()).length==0)
 		{
@@ -40,15 +53,61 @@ public class CliMcLibraryTagger
 			System.exit(-1);
 		}
 		
-		String restUrl = RestUrlDelay.getUrl(config, OtrConfig.urlOtrSeries);
-		
-		McLibraryTagger tagger = new McLibraryTagger(fTmp,fBackup);
+		tagger = new McLibraryTagger(fTmp,fBackup);
 		tagger.setCoverManager(new FileSystemCoverManager(fCovers));
+	}
+	
+	public void scan() throws IOException
+	{
 		tagger.scan(fLibrary);
 		tagger.saveToXml(fMcXmlLib);
+	}
+	
+	public void checkSeries() throws FileNotFoundException
+	{
+		logger.info(StringUtil.stars());
+		Videos videos = JaxbUtil.loadJAXB(fMcXmlLib, Videos.class);
+		Set<String> set = new HashSet<String>();
+		for(Video video : videos.getVideo())
+		{
+			if(video.isSetEpisode())
+			{
+				String seriesName = video.getEpisode().getSeason().getSeries().getName();
+				if(!set.contains(seriesName))
+				{
+					set.add(seriesName);
+				}
+			}
+		}
+		logger.info("Library contains "+set.size()+" Series");
+		for(String s : set)
+		{
+			logger.info(s);
+		}
+	}
+	
+	public void tag()
+	{
 		
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget target = client.target(restUrl); 
-		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);
+		
+	}
+	
+	private OtrSeriesRest getRest()
+	{
+		if(rest==null)
+		{
+			ResteasyClient client = new ResteasyClientBuilder().build();
+			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config, OtrConfig.urlOtrSeries)); 
+			rest = target.proxy(OtrSeriesRest.class);
+		}
+		return rest;
+	}
+	
+	public static void main(String args[]) throws Exception
+	{
+		Configuration config = OtrBootstrap.init();
+
+		CliMcLibraryTagger cli = new CliMcLibraryTagger(config);
+		cli.checkSeries();
 	}
 }

@@ -2,7 +2,6 @@ package de.kisner.otrcast.controller.tag;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
