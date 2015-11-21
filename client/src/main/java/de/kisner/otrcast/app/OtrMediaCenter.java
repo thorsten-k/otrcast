@@ -18,10 +18,12 @@ import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.mc.McScanner;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
+import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrMediaCenter
 {
@@ -73,8 +75,9 @@ public class OtrMediaCenter
     		ResteasyWebTarget target = client.target(otrConfig.getKey(OtrConfig.urlOtrSeries)); 
     		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);
     		
-        	McLibraryTagger tagger = new McLibraryTagger(rest,otrConfig.getDir(Dir.TMP),otrConfig.getDir(Dir.BACKUP));
+        	McLibraryTagger tagger = new McLibraryTagger(otrConfig.getDir(Dir.TMP),otrConfig.getDir(Dir.BACKUP));
         	tagger.scan(otrConfig.getDir(OtrConfig.Dir.MC));
+        	tagger.saveToXml(otrConfig.getFile(OtrConfig.fileMcXmlLib));
         }
         
         if(!uOption.isAppStarted())
@@ -83,7 +86,7 @@ public class OtrMediaCenter
         }
 	}
 
-	public void scanMediathek(File f)
+	private void scanMediathek(File f)
 	{
 		OtrCutMp4Bootstrap.buildEmf(otrConfig).createEntityManager();
 		logger.info("Scanning for MP4 in "+f.getAbsolutePath());
@@ -111,6 +114,8 @@ public class OtrMediaCenter
 
 	public static void main(String args[]) throws Exception
 	{
+		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		
 		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.interfaces.Version.class.getPackage().getImplementationVersion());
 		uOption.setLog4jPaths("config.otrcast-client");
 		

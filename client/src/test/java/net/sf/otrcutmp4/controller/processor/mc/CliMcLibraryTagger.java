@@ -31,6 +31,8 @@ public class CliMcLibraryTagger
 		File fBackup = new File(config.getString(TestPropertyKeys.dirMcBackup));
 		File fCovers = new File(config.getString(OtrConfig.dirCover));
 		
+		File fMcXmlLib = new File(config.getString(OtrConfig.fileMcXmlLib));
+		
 		if(fLibrary.listFiles(FileQuery.mp4FileFilter()).length==0)
 		{
 			logger.warn("No Files in directory "+fLibrary.getAbsolutePath());
@@ -40,12 +42,13 @@ public class CliMcLibraryTagger
 		
 		String restUrl = RestUrlDelay.getUrl(config, OtrConfig.urlOtrSeries);
 		
+		McLibraryTagger tagger = new McLibraryTagger(fTmp,fBackup);
+		tagger.setCoverManager(new FileSystemCoverManager(fCovers));
+		tagger.scan(fLibrary);
+		tagger.saveToXml(fMcXmlLib);
+		
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget target = client.target(restUrl); 
 		OtrSeriesRest rest = target.proxy(OtrSeriesRest.class);
-		
-		McLibraryTagger tagger = new McLibraryTagger(rest,fTmp,fBackup);
-		tagger.setCoverManager(new FileSystemCoverManager(fCovers));
-		tagger.scan(fLibrary);
 	}
 }

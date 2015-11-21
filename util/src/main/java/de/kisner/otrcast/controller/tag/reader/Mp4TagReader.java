@@ -16,6 +16,7 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
+import de.kisner.otrcast.factory.xml.video.XmlFileFactory;
 import de.kisner.otrcast.model.json.JsonOtrIdentifier;
 import de.kisner.otrcast.model.xml.series.Video;
 
@@ -61,9 +62,10 @@ public class Mp4TagReader extends AbstractTagReader
 	
 	public Video read() throws IOException
 	{
-		readMp4Boxes(fSource);
+//		readMp4Boxes(fSource);
 
 		Video video = new Video();
+		video.setFile(XmlFileFactory.buildPathName(fSource));
 		switch(guessType())
 		{
 			case SERIES:	video.setEpisode(trSeries.readEpisode(apple,moov));break;

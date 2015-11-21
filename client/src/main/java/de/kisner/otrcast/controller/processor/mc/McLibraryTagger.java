@@ -17,11 +17,13 @@ import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
+import de.kisner.otrcast.factory.xml.series.XmlVideosFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.monitor.BucketSizeCounter;
 import net.sf.ahtutils.monitor.ProcessingEventCounter;
@@ -49,12 +51,13 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	private SeriesTagWriter tagWriter;
 	private IoFileFactory iofTmp,iofBackup;
 	
-	public McLibraryTagger(OtrSeriesRest rest, File fTmp, File fBackup)
+	private List<File> results;
+	
+	public McLibraryTagger(File fTmp, File fBackup)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
 		logger.info(StringUtil.stars());
 		
-		this.rest=rest;
 		tagReader = new Mp4TagReader(false);
 		tagWriter = new SeriesTagWriter();
 		
@@ -71,7 +74,6 @@ public class McLibraryTagger extends DirectoryWalker<File>
 			logger.warn("Backups are deactivated!!");
 		}
 		
-		
 		bsc = new BucketSizeCounter("Files");
 		pecMediaType = new ProcessingEventCounter("MediaType");
 		pecTotal = new ProcessingEventCounter("Files");
@@ -85,11 +87,12 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		
 		logger.info(StringUtil.stars());
-		List<File> results = new ArrayList<File>();
+		results = new ArrayList<File>();
 		try{walk(baseDirectory, results);}
 		catch (IOException e) {e.printStackTrace();}
-		logger.info(StringUtil.stars());
+		logger.info("Directoy Listing complete in "+ptt.toTotalTime()+" with "+results.size()+" files");
 		
+		logger.info(StringUtil.stars());
 		logger.info("Processing time: "+ptt.toTotalPeriod());
 		pecTotal.debug();
 		pecMediaType.debug();
@@ -102,7 +105,26 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		return true;
 	}
 
-	@Override protected void handleFile(File file, int depth, Collection<File> results)
+	@Override protected void handleFile(File file, int depth, Collection<File> results){results.add(file);}
+	
+	public void saveToXml(File fXml) throws IOException
+	{
+		Videos videos = XmlVideosFactory.build();
+		for(File f : results)
+		{
+			tagReader.readMp4Boxes(f);
+			Video video = tagReader.read();
+			if(video.isSetEpisode())
+			{
+				videos.getVideo().add(video);
+			}
+//			if(videos.getVideo().size()>5){break;}
+		}
+//		JaxbUtil.info(videos);
+		JaxbUtil.save(fXml, videos, true);
+	}
+	
+	private void handle(File file)
 	{
 		logger.trace("File :"+file);
 		bsc.add(CodeTotal.total,file.length());

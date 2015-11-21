@@ -1,0 +1,14 @@
+<xsd:schema targetNamespace="http://otrcutmp4.sf.net/video"
+	xmlns:v="http://otrcutmp4.sf.net/video"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="file">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                	<xsd:attribute name="path" type="xsd:string"/>
+                	<xsd:attribute name="name" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

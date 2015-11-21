@@ -19,7 +19,7 @@ public class AbstractCommandLine
 	protected Option oHelp,oDebug,oConfig;
 
     protected Options options;
-
+    
 	protected void buildOptions()
 	{
         options = new Options();

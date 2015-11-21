@@ -42,6 +42,8 @@ public class OtrConfig
 	public static final String dirRename = "dir.rename";
 	public static final String dirCover = "dir.cover";
     public static final String dirDb = "dir.db";
+    
+    public static final String fileMcXmlLib = "file.mc.lib.xml";
 	
 	public static final String toolMp4Box = "tool.mp4box";
 	public static final String toolLame = "tool.lame";
@@ -354,6 +356,11 @@ public class OtrConfig
 		String key = mapDir.get(dir);
 		String fName = config.getString(key);
 		return new File(fName);
+	}
+	
+	public File getFile(String cfgKey)
+	{
+		return new File(config.getString(cfgKey));
 	}
 	
 	public String getTool(Tool tool)

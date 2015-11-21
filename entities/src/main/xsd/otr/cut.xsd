@@ -75,6 +75,8 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    
+    <!-- user series/video:fileName -->
     <xsd:element name="fileName">
         <xsd:complexType>
             <xsd:simpleContent>

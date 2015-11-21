@@ -2,6 +2,7 @@ package de.kisner.otrcast.controller.tag;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -68,14 +69,17 @@ public class CliMp4TagWriter
 		File dstMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));
 		File dirCovers = new File(config.getString(TestPropertyKeys.dirCover));
 
-        logger.info("src-dir: "+srcMp4);
-        logger.info("dst-dir: "+dstMp4);
+        logger.info("src-dir: "+srcMp4+" ("+TestPropertyKeys.dirTaggerSrc+")");
+        logger.info("dst-dir: "+dstMp4+" ("+TestPropertyKeys.dirTaggerDst+")");
         logger.info("Covers: "+dirCovers.getAbsolutePath());
 
         CliMp4TagWriter test = new CliMp4TagWriter();
 		test.init(dirCovers);
 		
-		for(File file : srcMp4.listFiles(FileQuery.mp4FileFilter()))
+		File[] files = srcMp4.listFiles(FileQuery.mp4FileFilter());
+		logger.info(files.length+" files for tagging found");
+		
+		for(File file : files)
 		{
 			File fTarget = new File(dstMp4,file.getName());
 			if(fTarget.exists()){fTarget.delete();}

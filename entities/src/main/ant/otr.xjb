@@ -56,12 +56,17 @@
 		<jxb:schemaBindings>
 			<jxb:package name="de.kisner.otrcast.model.xml.db"/>
 		</jxb:schemaBindings>
-	</jxb:bindings>	
+	</jxb:bindings>
 
     <jxb:bindings schemaLocation="../xsd/otr/itunes.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="de.kisner.otrcast.model.xml.itunes"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-        
+
+	<jxb:bindings schemaLocation="../xsd/otr/video.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="de.kisner.otrcast.model.xml.video"/>
+		</jxb:schemaBindings>
+	</jxb:bindings>
 </jxb:bindings>

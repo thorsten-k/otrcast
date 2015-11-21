@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.model.xml.video.File;
 
 
 /**
@@ -23,6 +24,7 @@ import de.kisner.otrcast.model.xml.cut.VideoFiles;
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie"/>
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFiles"/>
+ *         &lt;element ref="{http://otrcutmp4.sf.net/video}file"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +37,8 @@ import de.kisner.otrcast.model.xml.cut.VideoFiles;
 @XmlType(name = "", propOrder = {
     "episode",
     "movie",
-    "videoFiles"
+    "videoFiles",
+    "file"
 })
 @XmlRootElement(name = "video")
 public class Video
@@ -49,6 +52,8 @@ public class Video
     protected Movie movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/cut", required = true)
     protected VideoFiles videoFiles;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/video", required = true)
+    protected File file;
 
     /**
      * Gets the value of the episode property.
@@ -132,6 +137,34 @@ public class Video
 
     public boolean isSetVideoFiles() {
         return (this.videoFiles!= null);
+    }
+
+    /**
+     * Gets the value of the file property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link File }
+     *     
+     */
+    public File getFile() {
+        return file;
+    }
+
+    /**
+     * Sets the value of the file property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link File }
+     *     
+     */
+    public void setFile(File value) {
+        this.file = value;
+    }
+
+    public boolean isSetFile() {
+        return (this.file!= null);
     }
 
 }
