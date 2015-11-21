@@ -11,12 +11,12 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
-import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Tags;
 import freemarker.template.TemplateException;
@@ -29,7 +29,7 @@ public class CliSeriesRest
 	final static Logger logger = LoggerFactory.getLogger(CliSeriesRest.class);
 	
 	private Configuration config;
-	private OtrSeriesRest rest;
+	private OtrVideoRest rest;
 	
 	private String fnS = "12345_The_Big_Bang_Theory_11.12.15_12-50_pro7_25_TVOON_DE.mpg.HQ.cut.mp4";
 	private String fnM = "12345_Game_Of_Thrones_Das_Lied_von_Eis_und_Feuer_12.03.23_20-15_rtl2_200_TVOON_DE.mpg.HQ.cut.mp4";
@@ -45,7 +45,7 @@ public class CliSeriesRest
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("user","pwd"));
 		ResteasyWebTarget restTarget = client.target(url);
-		rest = restTarget.proxy(OtrSeriesRest.class);
+		rest = restTarget.proxy(OtrVideoRest.class);
 	}
 	
 	public void single() throws OtrProcessingException, IOException, TemplateException

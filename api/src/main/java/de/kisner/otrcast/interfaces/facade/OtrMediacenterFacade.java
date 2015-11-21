@@ -34,7 +34,8 @@ public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,
 	EPISODE fcEpisode(Class<EPISODE> clEpisode, SEASON season, de.kisner.otrcast.model.xml.series.Episode episode);
 	
 	
-	List<EPISODE> episodeFinder(Class<EPISODE> clEpiosode, Long otrId, String seriesName, Integer seasonNr, Integer episodeNr, String episodeName);
+	List<EPISODE> episodeFinder(Class<EPISODE> cEpiosode, Long otrId, String seriesName, Integer seasonNr, Integer episodeNr, String episodeName);
+	List<SERIES> seriesFinder(Class<SERIES> cSeries, String seriesName);
 	
 	Rss rss(SEASON season);
 }

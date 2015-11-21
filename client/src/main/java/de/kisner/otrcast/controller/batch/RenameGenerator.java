@@ -11,10 +11,10 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
-import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Tags;
@@ -37,7 +37,7 @@ public class RenameGenerator extends AbstactBatchGenerator
 	private ExlpTxtWriter txt;
 	
 	private RelativePathFactory rpf;
-	private OtrSeriesRest rest;
+	private OtrVideoRest rest;
 	
 	private TxtDsFactory fTemplateDs;
 	private TxtFileNameFactoy fnfSeries;
@@ -52,7 +52,7 @@ public class RenameGenerator extends AbstactBatchGenerator
 		
 		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrSeriesRest.class, cfg.getUrl(Url.OTR),clientExecutor);
+		rest = ProxyFactory.create(OtrVideoRest.class, cfg.getUrl(Url.OTR),clientExecutor);
 		
 		dirHqMp4 = cfg.getDir(Dir.MP4);
 		dirMp4Rename = cfg.getDir(Dir.RENAME);

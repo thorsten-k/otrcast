@@ -7,11 +7,11 @@ import org.jboss.resteasy.client.ProxyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.video.TagGenerator;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
-import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
@@ -22,7 +22,7 @@ public class SeriesTagger
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesTagger.class);
 	
-	private OtrSeriesRest rest;
+	private OtrVideoRest rest;
 	private TagGenerator tagGenerator;
 	private CoverManager coverManager;
 	
@@ -37,7 +37,7 @@ public class SeriesTagger
 		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory(
 				cfg.getCredential(Credential.EMAIL,""),
 				cfg.getCredential(Credential.PWD,""));
-		rest = ProxyFactory.create(OtrSeriesRest.class, host,clientExecutor);
+		rest = ProxyFactory.create(OtrVideoRest.class, host,clientExecutor);
 	}
 	
 	public void tag(long episodeId) throws UtilsProcessingException

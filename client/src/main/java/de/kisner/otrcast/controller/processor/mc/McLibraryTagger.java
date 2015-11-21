@@ -12,6 +12,7 @@ import org.apache.commons.io.DirectoryWalker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
@@ -19,7 +20,6 @@ import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlVideosFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
-import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
@@ -45,7 +45,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	private ProcessingEventCounter pecMediaType,pecTotal;
 	private BucketSizeCounter bsc;
 	
-	private OtrSeriesRest rest;
+	private OtrVideoRest rest;
 	
 	private Mp4TagReader tagReader;
 	private SeriesTagWriter tagWriter;

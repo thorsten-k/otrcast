@@ -13,10 +13,10 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
-import de.kisner.otrcast.interfaces.rest.OtrSeriesRest;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrBootstrap;
@@ -31,7 +31,7 @@ public class CliMcLibraryTagger
 	final static Logger logger = LoggerFactory.getLogger(CliMcLibraryTagger.class);
 	
 	private Configuration config;
-	private OtrSeriesRest rest;
+	private OtrVideoRest rest;
 	
 	private McLibraryTagger tagger;
 	private File fLibrary,fCovers,fMcXmlLib;
@@ -92,13 +92,13 @@ public class CliMcLibraryTagger
 		
 	}
 	
-	private OtrSeriesRest getRest()
+	private OtrVideoRest getRest()
 	{
 		if(rest==null)
 		{
 			ResteasyClient client = new ResteasyClientBuilder().build();
 			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config, OtrConfig.urlOtrSeries)); 
-			rest = target.proxy(OtrSeriesRest.class);
+			rest = target.proxy(OtrVideoRest.class);
 		}
 		return rest;
 	}

@@ -238,6 +238,11 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		
 		return em.createQuery(cQ).getResultList();
 	}
+	
+	@Override public List<SERIES> seriesFinder(Class<SERIES> cSeries, String seriesName)
+	{
+		return new ArrayList<SERIES>();
+	}
 
 	@Override
 	public Rss rss(SEASON season)
