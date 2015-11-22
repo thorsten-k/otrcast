@@ -16,7 +16,9 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
+import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
+import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrBootstrap;
@@ -82,7 +84,11 @@ public class CliMcLibraryTagger
 		logger.info("Library contains "+set.size()+" Series");
 		for(String s : set)
 		{
-			logger.info(s);
+			Otr otr = getRest().resolveSeries(XmlSeriesFactory.build(s));
+			if(otr.getSeries().size()!=1)
+			{
+				logger.info("Unknown "+s);
+			}
 		}
 	}
 	

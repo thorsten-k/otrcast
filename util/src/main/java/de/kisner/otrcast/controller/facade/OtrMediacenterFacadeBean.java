@@ -241,7 +241,21 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	
 	@Override public List<SERIES> seriesFinder(Class<SERIES> cSeries, String seriesName)
 	{
-		return new ArrayList<SERIES>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<SERIES> cQ = cB.createQuery(cSeries);
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		Root<SERIES> series = cQ.from(cSeries);
+		
+		if(seriesName!=null)
+		{
+			predicates.add(series.get("name").in(seriesName));
+		}
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(series);
+		
+		return em.createQuery(cQ).getResultList();
 	}
 
 	@Override

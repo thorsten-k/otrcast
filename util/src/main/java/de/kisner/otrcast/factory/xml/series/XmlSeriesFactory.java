@@ -44,5 +44,12 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 		}
 		
 		return xml;
+	}
+	
+	public static de.kisner.otrcast.model.xml.series.Series build(String name)
+	{
+		de.kisner.otrcast.model.xml.series.Series xml = new de.kisner.otrcast.model.xml.series.Series();
+		xml.setName(name);
+		return xml;
 	}	
 }
