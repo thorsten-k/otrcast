@@ -92,10 +92,12 @@ public class CliMcLibraryTagger
 		}
 	}
 	
-	public void tag()
+	public void tag() throws FileNotFoundException
 	{
-		
-		
+		logger.info(StringUtil.stars());
+		Videos videos = JaxbUtil.loadJAXB(fMcXmlLib, Videos.class);
+		tagger.setRest(getRest());
+		tagger.tagLibrary(videos);
 	}
 	
 	private OtrVideoRest getRest()
@@ -115,5 +117,6 @@ public class CliMcLibraryTagger
 
 		CliMcLibraryTagger cli = new CliMcLibraryTagger(config);
 		cli.checkSeries();
+		cli.tag();
 	}
 }

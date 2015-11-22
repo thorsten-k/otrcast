@@ -45,7 +45,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	private ProcessingEventCounter pecMediaType,pecTotal;
 	private BucketSizeCounter bsc;
 	
-	private OtrVideoRest rest;
+	private OtrVideoRest rest; public void setRest(OtrVideoRest rest) {this.rest = rest;}
 	
 	private Mp4TagReader tagReader;
 	private SeriesTagWriter tagWriter;
@@ -99,12 +99,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		bsc.debugAsFileSize();
 	}
 	
-	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results)
-	{
-//		if(pecTotal.events(CodeTotal.total)>100){return false;}
-		return true;
-	}
-
+	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
 	@Override protected void handleFile(File file, int depth, Collection<File> results){results.add(file);}
 	
 	public void saveToXml(File fXml) throws IOException
@@ -122,6 +117,30 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		}
 //		JaxbUtil.info(videos);
 		JaxbUtil.save(fXml, videos, true);
+	}
+	
+	public void tagLibrary(Videos videos)
+	{
+		logger.info(StringUtil.stars());
+		for(Video video : videos.getVideo())
+		{
+			if(video.isSetEpisode())
+			{
+				Episode episodeRequest = video.getEpisode();
+				Otr otr = rest.resolveEpisode(episodeRequest);
+				
+				if(otr.getEpisode().size()==0)
+				{
+					logger.warn("Nothing found for "+TxtEpisodeFactory.build(episodeRequest));
+				}
+				
+				else if(otr.getEpisode().size()>1)
+				{
+					logger.warn("Multiple found for "+TxtEpisodeFactory.build(episodeRequest));
+				}
+				else if(otr.getEpisode().size()==1){}
+			}
+		}
 	}
 	
 	private void handle(File file)
