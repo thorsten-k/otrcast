@@ -42,7 +42,7 @@ import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvEpisodeNumberBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
-import de.kisner.otrcast.interfaces.Version;
+import de.kisner.otrcast.api.Version;
 
 public class Mp4BoxDebugger
 {

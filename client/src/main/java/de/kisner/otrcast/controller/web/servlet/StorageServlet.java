@@ -15,9 +15,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
-import de.kisner.otrcast.interfaces.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.model.OtrEpisode;
 import de.kisner.otrcast.model.OtrImage;
 import de.kisner.otrcast.model.OtrMovie;

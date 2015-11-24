@@ -1,4 +1,4 @@
-package de.kisner.otrcast.interfaces;
+package de.kisner.otrcast.api;
 
 public class Version
 {

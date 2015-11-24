@@ -17,10 +17,10 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.controller.web.rss.OtrCastUrlGenerator;
-import de.kisner.otrcast.interfaces.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.interfaces.rest.OtrPodcastRest;
 import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.OtrEpisode;

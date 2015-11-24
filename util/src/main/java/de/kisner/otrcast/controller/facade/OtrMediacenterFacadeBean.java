@@ -1,24 +1,17 @@
 package de.kisner.otrcast.controller.facade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.web.rss.DefaultUrlGenerator;
 import de.kisner.otrcast.factory.ejb.mc.EjbCoverFactory;
 import de.kisner.otrcast.factory.xml.rss.XmlChannelFactory;
 import de.kisner.otrcast.factory.xml.rss.XmlRssFactory;
-import de.kisner.otrcast.interfaces.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;

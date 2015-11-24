@@ -1,6 +1,4 @@
-package de.kisner.otrcast.interfaces.facade;
-
-import java.util.List;
+package de.kisner.otrcast.api.facade;
 
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;

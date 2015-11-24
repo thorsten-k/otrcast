@@ -20,9 +20,9 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleMediaTypeBox;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.kisner.otrcast.api.Version;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.util.Mp4MetadataBalancer;
-import de.kisner.otrcast.interfaces.Version;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 
 public abstract class AbstractTagWriter

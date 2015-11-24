@@ -116,7 +116,7 @@ public class OtrMediaCenter
 	{
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 		
-		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.interfaces.Version.class.getPackage().getImplementationVersion());
+		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
 		uOption.setLog4jPaths("config.otrcast-client");
 		
 		OtrMediaCenter otrMc = new OtrMediaCenter(uOption);

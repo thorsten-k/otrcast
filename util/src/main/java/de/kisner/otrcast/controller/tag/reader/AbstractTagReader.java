@@ -16,7 +16,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.kisner.otrcast.interfaces.Version;
+import de.kisner.otrcast.api.Version;
 import de.kisner.otrcast.model.json.JsonOtrBox;
 import de.kisner.otrcast.model.json.JsonOtrIdentifier;
 import de.kisner.otrcast.model.xml.mc.Image;
