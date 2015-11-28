@@ -13,10 +13,11 @@
 	<url>https://sourceforge.net/projects/otrcast/</url>
 
 	<modules>
+		<module>api</module>
+		<module>app</module>
 		<module>client</module>
 		<module>entities</module>
 		<module>util</module>
-		<module>api</module>
 	</modules>
 
     <properties>
