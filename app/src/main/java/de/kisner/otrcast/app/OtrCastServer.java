@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.web;
+package de.kisner.otrcast.app;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -15,11 +15,11 @@ import de.kisner.otrcast.controller.web.servlet.ImageServlet;
 import de.kisner.otrcast.controller.web.servlet.PodcastServlet;
 import de.kisner.otrcast.controller.web.servlet.StorageServlet;
 
-public class JettyServer 
+public class OtrCastServer 
 {
-	final static Logger logger = LoggerFactory.getLogger(JettyServer.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrCastServer.class);
 	
-	public JettyServer() throws Exception
+	public OtrCastServer() throws Exception
 	{
 		logger.info("Starting Jetty Server");
 		

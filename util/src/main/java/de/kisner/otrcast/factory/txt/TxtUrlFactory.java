@@ -1,17 +1,17 @@
-package de.kisner.otrcast.controller.web.rss;
+package de.kisner.otrcast.factory.txt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.web.UrlGenerator;
 
-public class OtrCastUrlGenerator implements UrlGenerator
+public class TxtUrlFactory implements UrlGenerator
 {
-	final static Logger logger = LoggerFactory.getLogger(OtrCastUrlGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(TxtUrlFactory.class);
 
 	private String url;
 	
-	public OtrCastUrlGenerator()
+	public TxtUrlFactory()
 	{
 		this.url="http://localhost:8080/servlet";
 	}

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
-import de.kisner.otrcast.controller.web.rss.OtrCastUrlGenerator;
+import de.kisner.otrcast.factory.txt.TxtUrlFactory;
 import de.kisner.otrcast.interfaces.rest.OtrPodcastRest;
 import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.ejb.OtrEpisode;
@@ -87,7 +87,7 @@ public class CliPodcastRest
 	public void local() throws UtilsNotFoundException
 	{
 		OtrCastBootstrap.buildEmf(config);
-		UrlGenerator urlGenerator = new OtrCastUrlGenerator();
+		UrlGenerator urlGenerator = new TxtUrlFactory();
 
 		
 		OtrMediacenterFacade<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCastBootstrap.buildEmf().createEntityManager(),urlGenerator);

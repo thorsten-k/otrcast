@@ -18,7 +18,7 @@ import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.controller.processor.RssXmlProcessor;
-import de.kisner.otrcast.controller.web.rss.OtrCastUrlGenerator;
+import de.kisner.otrcast.factory.txt.TxtUrlFactory;
 import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.ejb.OtrEpisode;
 import de.kisner.otrcast.model.ejb.OtrImage;
@@ -40,7 +40,7 @@ public class PodcastServlet extends HttpServlet
 	
 	public PodcastServlet()
 	{
-		UrlGenerator urlGenerator = new OtrCastUrlGenerator();
+		UrlGenerator urlGenerator = new TxtUrlFactory();
 		fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCastBootstrap.buildEmf().createEntityManager(),urlGenerator);
 		rssProcessor = new RssXmlProcessor();
 	}
