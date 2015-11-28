@@ -43,6 +43,11 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.kisner.otrcast</groupId>
+				<artifactId>otrcast-app</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.kisner.otrcast</groupId>
 				<artifactId>otrcast-entities</artifactId>
 				<version>${project.version}</version>
 			</dependency>
