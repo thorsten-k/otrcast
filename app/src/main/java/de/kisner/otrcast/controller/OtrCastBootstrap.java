@@ -73,10 +73,10 @@ public class OtrCastBootstrap
                 logger.error("f is null !!");
             }
 			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:"+f.getAbsolutePath()+"/mc");
+//			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:"+f.getAbsolutePath()+"/mc");
 //			properties.put("hibernate.hbm2ddl.auto", "update");
 		
-			emf = Persistence.createEntityManagerFactory("otr-mediacenter",properties);
+			emf = Persistence.createEntityManagerFactory("otrcast",properties);
 		}
 
 		return emf;

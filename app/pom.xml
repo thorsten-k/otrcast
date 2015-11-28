@@ -40,10 +40,6 @@
   	   		<type>jar</type>
   	   		<scope>compile</scope>
    	  	</dependency>
-   	  	<dependency>
-  			<groupId>org.apache.camel</groupId>
-  			<artifactId>camel-core</artifactId>
-		</dependency>
 	  	
 		<!-- Commons -->
  		<dependency>

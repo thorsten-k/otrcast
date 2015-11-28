@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.processor.mc;
+package de.kisner.otrcast.controller.media;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.apache.commons.io.DirectoryWalker;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.format.PeriodFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,16 +26,16 @@ import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Movie;
 import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.McJaxb;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.ahtutils.monitor.ProcessingTimeTracker;
 import net.sf.exlp.util.io.HashUtil;
 
-public class McScanner extends DirectoryWalker<File>
+public class Mp4LibraryScanner extends DirectoryWalker<File>
 {
-	final static Logger logger = LoggerFactory.getLogger(McScanner.class);
+	final static Logger logger = LoggerFactory.getLogger(Mp4LibraryScanner.class);
 	
 	private Mp4TagReader tagReader;
 	
@@ -48,7 +45,7 @@ public class McScanner extends DirectoryWalker<File>
 	private EjbCoverFactory<OtrImage> efCover;
 	private EjbStorageFactory<OtrStorage> efStorage;
 	
-	public McScanner(EntityManager em)
+	public Mp4LibraryScanner(EntityManager em)
 	{
 		super(FileQuery.mp4FileFilter(),-1);
 		this.em=em;
@@ -57,28 +54,19 @@ public class McScanner extends DirectoryWalker<File>
 		
 		efCover=EjbCoverFactory.factory(OtrImage.class);
 		efStorage=EjbStorageFactory.factory(OtrStorage.class);
-
-        if(logger.isDebugEnabled()){debugStats();}
 	}
-
-    public void debugStats()
-    {
-        logger.debug(Series.class.getSimpleName() + ": " + fMc.all(OtrSeries.class).size());
-    }
 	
 	public void scan(File startDirectory)
 	{
-		DateTime startDate = new DateTime();
+		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		List<File> results = new ArrayList<File>();
 	    try
 	    {
 			walk(startDirectory, results);
 		}
 	    catch (IOException e) {e.printStackTrace();}
-	    
-	    Period period = new Period(startDate, new DateTime());
-	    
-	    logger.info("Processed "+results.size()+" files in "+PeriodFormat.getDefault().print(period));
+	     
+	    logger.info("Processed "+results.size()+" files in "+ptt.toTotalTime());
 	}
 
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
@@ -104,14 +92,12 @@ public class McScanner extends DirectoryWalker<File>
         catch (UtilsNotFoundException e){inspectFile=true;}
 
         logger.info("File (inspect="+inspectFile+"): "+file.getAbsolutePath());
-        if(inspectFile)
+        if(inspectFile && false)
         {
             try
             {
                 em.getTransaction().begin();
-
                 Video video = tagReader.read(file);
-                
                 McJaxb.debug(video);
 
                 if(video.isSetEpisode()){handleEpisode(video.getEpisode(),file);}

@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
+import de.kisner.otrcast.controller.media.Mp4LibraryScanner;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
-import de.kisner.otrcast.controller.processor.mc.McScanner;
 import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
@@ -90,7 +90,7 @@ public class OtrMediaCenter
 	{
 		OtrCastBootstrap.buildEmf(otrConfig).createEntityManager();
 		logger.info("Scanning for MP4 in "+f.getAbsolutePath());
-		McScanner mcs = new McScanner(OtrCastBootstrap.buildEmf().createEntityManager());
+		Mp4LibraryScanner mcs = new Mp4LibraryScanner(OtrCastBootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
 
