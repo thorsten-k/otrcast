@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.model.*;
+import de.kisner.otrcast.model.ejb.OtrEpisode;
+import de.kisner.otrcast.model.ejb.OtrImage;
+import de.kisner.otrcast.model.ejb.OtrMovie;
+import de.kisner.otrcast.model.ejb.OtrSeason;
+import de.kisner.otrcast.model.ejb.OtrSeries;
+import de.kisner.otrcast.model.ejb.OtrStorage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

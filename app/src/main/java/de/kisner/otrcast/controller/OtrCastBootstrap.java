@@ -1,10 +1,11 @@
 package de.kisner.otrcast.controller;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
-import net.sf.exlp.util.io.ExlpCentralConfigPointer;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
@@ -13,12 +14,11 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.config.ConfigLoader;
+import net.sf.exlp.util.io.ExlpCentralConfigPointer;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrCastBootstrap
 {

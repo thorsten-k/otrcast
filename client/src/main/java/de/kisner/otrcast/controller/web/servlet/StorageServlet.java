@@ -18,12 +18,12 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
-import de.kisner.otrcast.model.OtrEpisode;
-import de.kisner.otrcast.model.OtrImage;
-import de.kisner.otrcast.model.OtrMovie;
-import de.kisner.otrcast.model.OtrSeason;
-import de.kisner.otrcast.model.OtrSeries;
-import de.kisner.otrcast.model.OtrStorage;
+import de.kisner.otrcast.model.ejb.OtrEpisode;
+import de.kisner.otrcast.model.ejb.OtrImage;
+import de.kisner.otrcast.model.ejb.OtrMovie;
+import de.kisner.otrcast.model.ejb.OtrSeason;
+import de.kisner.otrcast.model.ejb.OtrSeries;
+import de.kisner.otrcast.model.ejb.OtrStorage;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class StorageServlet extends HttpServlet

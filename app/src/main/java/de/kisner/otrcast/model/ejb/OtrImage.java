@@ -1,4 +1,4 @@
-package de.kisner.otrcast.model;
+package de.kisner.otrcast.model.ejb;
 
 import java.io.Serializable;
 

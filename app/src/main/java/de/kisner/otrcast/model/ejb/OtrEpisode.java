@@ -1,4 +1,4 @@
-package de.kisner.otrcast.model;
+package de.kisner.otrcast.model.ejb;
 
 import java.io.Serializable;
 
@@ -8,13 +8,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
-import de.kisner.otrcast.interfaces.model.Movie;
+import de.kisner.otrcast.interfaces.model.Episode;
 import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 
 @Entity
-public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrStorage>
+public class OtrEpisode implements Serializable,EjbPersistable,
+									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>
 {
 	public static final long serialVersionUID=1;
 	
@@ -22,30 +25,33 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrS
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	
-	private int year;
 
+	@NotNull
+	@ManyToOne
+	private OtrSeason season;
+		
+	@NotNull
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private OtrImage cover;
-	
+	private long nr;
+	@Override public long getNr() {return nr;}
+	@Override public void setNr(long nr) {this.nr = nr;}
+				
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private OtrStorage storage;
-			
-	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
 	
+	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
+		
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
-	@Override public int getYear() {return year;}
-	@Override public void setYear(int year) {this.year = year;}
+
+	@Override public OtrSeason getSeason() {return season;}
+	@Override public void setSeason(OtrSeason season) {this.season = season;}
 	
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
 	
-	@Override public OtrImage getCover() {return cover;}
-	@Override public void setCover(OtrImage cover) {this.cover = cover;}
+
 	
 	@Override public OtrStorage getStorage() {return storage;}
 	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}
@@ -54,8 +60,8 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrS
 	
 	public boolean equals(Object object)
 	{
-        return (object instanceof OtrMovie)
-             ? id == ((OtrMovie) object).getId()
+        return (object instanceof OtrEpisode)
+             ? id == ((OtrEpisode) object).getId()
              : (object == this);
     }
 	
@@ -63,7 +69,7 @@ public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrS
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
-		sb.append(" ").append(year);
+		sb.append(" ").append(nr);
 		sb.append(" ").append(name);
 		return sb.toString();
 	}
