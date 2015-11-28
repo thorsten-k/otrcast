@@ -33,7 +33,7 @@ public class OtrCastBootstrap
 	public static void initLogger(String log4jConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(log4jConfig);
-		loggerInit.addAltPath("config.otrcutmp4-client");
+		loggerInit.addAltPath("config.otrcast-client");
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 	}
