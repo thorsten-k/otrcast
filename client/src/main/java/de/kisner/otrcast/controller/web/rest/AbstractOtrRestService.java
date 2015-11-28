@@ -5,7 +5,7 @@ import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.model.*;
 
@@ -24,7 +24,7 @@ public class AbstractOtrRestService
 	{
 		if(em==null)
 		{
-			EntityManagerFactory emf = OtrCutMp4Bootstrap.buildEmf();
+			EntityManagerFactory emf = OtrCastBootstrap.buildEmf();
 			em = emf.createEntityManager();
 		}
 		if(ufb==null){ufb = new UtilsFacadeBean(em);}

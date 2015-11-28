@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
-import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.mc.McScanner;
@@ -53,7 +53,7 @@ public class OtrMediaCenter
 		uOption.handleHelp(cmd);
 		uOption.handleLogger(cmd);
        
-        otrConfig.readConfig(uOption.initConfig(cmd, OtrCutMp4Bootstrap.xmlConfig));
+        otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
         otrConfig.checkMcSettings();
         
         if(cmd.hasOption(oMediaCenter.getOpt()) && uOption.allowAppStart())
@@ -66,7 +66,7 @@ public class OtrMediaCenter
         	}
         	logger.info("Starting with mode "+mode+" (NYI)");
         	
-        	OtrCutMp4Bootstrap.buildEmf(otrConfig).createEntityManager();
+        	OtrCastBootstrap.buildEmf(otrConfig).createEntityManager();
         	scanMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
         }
         else if(cmd.hasOption(oRetagger.getOpt()) && uOption.allowAppStart())
@@ -88,9 +88,9 @@ public class OtrMediaCenter
 
 	private void scanMediathek(File f)
 	{
-		OtrCutMp4Bootstrap.buildEmf(otrConfig).createEntityManager();
+		OtrCastBootstrap.buildEmf(otrConfig).createEntityManager();
 		logger.info("Scanning for MP4 in "+f.getAbsolutePath());
-		McScanner mcs = new McScanner(OtrCutMp4Bootstrap.buildEmf().createEntityManager());
+		McScanner mcs = new McScanner(OtrCastBootstrap.buildEmf().createEntityManager());
 		mcs.scan(f);
 	}
 

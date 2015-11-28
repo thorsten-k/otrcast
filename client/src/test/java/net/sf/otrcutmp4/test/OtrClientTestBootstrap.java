@@ -10,7 +10,7 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
@@ -27,7 +27,7 @@ public class OtrClientTestBootstrap
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 		
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
-		ConfigLoader.add(OtrCutMp4Bootstrap.xmlConfig);
+		ConfigLoader.add(OtrCastBootstrap.xmlConfig);
 		Configuration config = ConfigLoader.init();
 		return config;
 	}

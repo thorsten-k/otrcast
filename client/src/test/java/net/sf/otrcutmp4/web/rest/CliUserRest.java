@@ -7,7 +7,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.interfaces.rest.OtrUserRest;
 
 public class CliUserRest
@@ -31,7 +31,7 @@ public class CliUserRest
 	
 	public static void main(String[] args)
 	{
-		OtrCutMp4Bootstrap.initLogger();
+		OtrCastBootstrap.initLogger();
 		CliUserRest rest = new CliUserRest();
 		rest.test();
 	}

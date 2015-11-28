@@ -6,7 +6,7 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.processor.mc.McImportProcessor;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
@@ -35,7 +35,7 @@ public class McIncomingHotfolder
 		context.addRoutes(new RouteBuilder()
 		{
 		    public void configure() {
-		        from(sb.toString()).process(new McImportProcessor(config,OtrCutMp4Bootstrap.buildEmf(config).createEntityManager()));
+		        from(sb.toString()).process(new McImportProcessor(config,OtrCastBootstrap.buildEmf(config).createEntityManager()));
 		    }
 		});
 	}

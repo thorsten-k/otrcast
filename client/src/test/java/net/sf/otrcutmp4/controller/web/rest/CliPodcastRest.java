@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
-import de.kisner.otrcast.controller.OtrCutMp4Bootstrap;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.controller.web.rss.OtrCastUrlGenerator;
 import de.kisner.otrcast.interfaces.rest.OtrPodcastRest;
@@ -86,11 +86,11 @@ public class CliPodcastRest
 	
 	public void local() throws UtilsNotFoundException
 	{
-		OtrCutMp4Bootstrap.buildEmf(config);
+		OtrCastBootstrap.buildEmf(config);
 		UrlGenerator urlGenerator = new OtrCastUrlGenerator();
 
 		
-		OtrMediacenterFacade<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCutMp4Bootstrap.buildEmf().createEntityManager(),urlGenerator);
+		OtrMediacenterFacade<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCastBootstrap.buildEmf().createEntityManager(),urlGenerator);
 		for(OtrSeason s : fMc.all(OtrSeason.class))
 		{
 			logger.info(s.toString());
@@ -107,7 +107,7 @@ public class CliPodcastRest
 	
 	public static void main(String[] args) throws ExlpConfigurationException, MalformedURLException, IOException, UtilsNotFoundException
 	{
-		Configuration config = OtrCutMp4Bootstrap.init();		
+		Configuration config = OtrCastBootstrap.init();		
 		CliPodcastRest rest = new CliPodcastRest(config);
 		rest.reference();
 //		rest.remote();

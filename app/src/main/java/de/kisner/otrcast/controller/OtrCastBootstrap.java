@@ -20,9 +20,9 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OtrCutMp4Bootstrap
+public class OtrCastBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(OtrCutMp4Bootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrCastBootstrap.class);
 	
 	public static String xmlConfig = "config.otrcast-client/otr.xml";
 	
@@ -51,10 +51,10 @@ public class OtrCutMp4Bootstrap
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		ConfigLoader.add(configFile);
 		
-		OtrCutMp4Bootstrap.config = ConfigLoader.init();			
+		OtrCastBootstrap.config = ConfigLoader.init();			
 
 		logger.debug("Config and Logger initialized with "+configFile);
-		return OtrCutMp4Bootstrap.config;
+		return OtrCastBootstrap.config;
 	}
 	
 	public static Configuration getConfiguration(){return config;}
