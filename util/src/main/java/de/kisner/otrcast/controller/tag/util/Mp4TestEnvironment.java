@@ -14,7 +14,7 @@ public class Mp4TestEnvironment
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp4TestEnvironment.class);
 	
-	public static File mp4Libaray(Configuration config)
+	public static File mp4Libray(Configuration config)
 	{
 		File fMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));
 		File[] files = fMp4.listFiles(FileQuery.mp4FileFilter());

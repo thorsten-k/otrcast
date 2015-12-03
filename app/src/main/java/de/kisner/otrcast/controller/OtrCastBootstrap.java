@@ -68,10 +68,6 @@ public class OtrCastBootstrap
 	{
 		if(emf==null)
 		{
-            if(f==null)
-            {
-                logger.error("f is null !!");
-            }
 			Map<String,String> properties = new HashMap<String,String>();
 //			properties.put("javax.persistence.jdbc.url", "jdbc:hsqldb:file:"+f.getAbsolutePath()+"/mc");
 //			properties.put("hibernate.hbm2ddl.auto", "update");

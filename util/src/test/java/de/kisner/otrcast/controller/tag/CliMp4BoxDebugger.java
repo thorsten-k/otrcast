@@ -20,7 +20,7 @@ public class CliMp4BoxDebugger extends AbstractUtilTest
 	{
 		Configuration config = OtrUtilTestBootstrap.init();
 		
-		File fMp4Library = Mp4TestEnvironment.mp4Libaray(config);
+		File fMp4Library = Mp4TestEnvironment.mp4Libray(config);
 		
 		Mp4BoxDebugger debugger = new Mp4BoxDebugger();
 		for(File f : fMp4Library.listFiles(FileQuery.mp4FileFilter()))

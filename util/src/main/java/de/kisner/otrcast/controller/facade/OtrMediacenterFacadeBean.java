@@ -1,5 +1,6 @@
 package de.kisner.otrcast.controller.facade;
 
+import java.io.File;
 import java.io.Serializable;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
 import de.kisner.otrcast.controller.web.rss.DefaultUrlGenerator;
 import de.kisner.otrcast.factory.ejb.mc.EjbCoverFactory;
+import de.kisner.otrcast.factory.ejb.mc.EjbStorageFactory;
 import de.kisner.otrcast.factory.xml.rss.XmlChannelFactory;
 import de.kisner.otrcast.factory.xml.rss.XmlRssFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
@@ -22,6 +24,7 @@ import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.xml.rss.Channel;
 import de.kisner.otrcast.model.xml.rss.Rss;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
+import net.sf.ahtutils.exception.ejb.UtilsConstraintViolationException;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
@@ -45,6 +48,24 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	{
 		super(em);
 		this.urlGenerator=urlGenerator;
+	}
+	
+	@Override
+	public STORAGE fcStorage(Class<STORAGE> cStorage, File f)
+	{
+		STORAGE storage = null;
+		try {storage = this.fByName(cStorage, f.getAbsolutePath());}
+		catch (UtilsNotFoundException e)
+		{
+			try
+			{
+				EjbStorageFactory<STORAGE> efStorage = EjbStorageFactory.factory(cStorage);
+				storage = efStorage.build(f);
+				storage = this.persist(storage);
+			}
+			catch (UtilsConstraintViolationException e1) {e1.printStackTrace();}
+		}
+		return storage;
 	}
 	
     @Override

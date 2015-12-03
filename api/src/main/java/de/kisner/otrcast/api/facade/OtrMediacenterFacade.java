@@ -1,5 +1,7 @@
 package de.kisner.otrcast.api.facade;
 
+import java.io.File;
+
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;
@@ -17,6 +19,8 @@ public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,
 										COVER extends Image,STORAGE extends Storage>
 		extends UtilsFacade
 {	
+	STORAGE fcStorage(Class<STORAGE> cStorage, File f);
+	
 	SEASON load(Class<SEASON> type, SEASON season);
 	SERIES load(Class<SERIES> type, SERIES series, boolean withEpisodes);
 	

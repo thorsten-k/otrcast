@@ -16,7 +16,7 @@ public class CliMp4LibraryScanner
 	{
 		Configuration config = OtrCastBootstrap.init();
 		
-		Mp4LibraryScanner scanner = new Mp4LibraryScanner(OtrCastBootstrap.buildEmf(config).createEntityManager());
-		scanner.scan(Mp4TestEnvironment.mp4Libaray(config));
+		Mp4LibraryScanner scanner = new Mp4LibraryScanner(OtrCastBootstrap.buildEmf().createEntityManager());
+		scanner.scan(Mp4TestEnvironment.mp4Libray(config));
 	}
 }
