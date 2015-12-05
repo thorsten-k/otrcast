@@ -73,6 +73,27 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 	    logger.info("File scanner will start with "+results.size()+" files and "+setStorage.size()+" DB records");
 	    for(File f : results){scanFile(f);}
 	    logger.info("File scanner finished with "+fMc.all(OtrStorage.class).size()+" DB records");
+	    
+	    logger.info(StringUtil.stars());
+	    for(OtrStorage storage : fMc.all(OtrStorage.class))
+	    {
+	    	logger.info(storage.toString());
+	    	em.getTransaction().begin();
+	    	try
+	    	{
+				fMc.rm(storage);
+				em.getTransaction().commit();
+			}
+	    	catch (UtilsConstraintViolationException e)
+	    	{
+				e.printStackTrace();
+				em.getTransaction().rollback();
+			}
+	    }
+	    
+	    logger.info(StringUtil.stars());
+	    logger.info(OtrStorage.class.getSimpleName()+" "+fMc.all(OtrStorage.class).size()+" DB records");
+	    logger.info(OtrEpisode.class.getSimpleName()+" "+fMc.all(OtrEpisode.class).size()+" DB records");
 	}
 
 	@Override protected boolean handleDirectory(File directory, int depth, Collection<File> results) {return true;}
@@ -99,6 +120,25 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 		{
 			logger.warn("Cannot scan "+file.getAbsolutePath());
 			e.printStackTrace();
+		}
+	}
+	
+	private void handleEpisode(OtrStorage storage, Episode xmlEpisode,File file) throws UtilsConstraintViolationException
+	{
+		OtrEpisode episode = fMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrImage.class, xmlEpisode);
+
+        if(episode.getStorage()==null)
+        {
+            episode.setStorage(storage);
+            em.merge(episode);
+        }
+
+		if(xmlEpisode.isSetImage() && episode.getSeason().getCover()==null)
+		{
+			OtrImage cover = efCover.build(xmlEpisode.getImage());
+			em.persist(cover);
+			episode.getSeason().setCover(cover);
+			em.merge(episode.getSeason());
 		}
 	}
 	
@@ -138,28 +178,5 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 	        em.persist(movie);
 		}
 		return movie;
-	}
-	
-	private void handleEpisode(OtrStorage storage, Episode xmlEpisode,File file) throws UtilsConstraintViolationException
-	{
-		OtrEpisode episode = fMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrImage.class, xmlEpisode);
-
-        if(episode.getStorage()==null)
-        {
-            episode.setStorage(storage);
-            em.merge(episode);
-        }
-
-		if(xmlEpisode.isSetImage() && episode.getSeason().getCover()==null)
-		{
-			OtrImage cover = efCover.build(xmlEpisode.getImage());
-			em.persist(cover);
-			episode.getSeason().setCover(cover);
-			em.merge(episode.getSeason());
-		}
-	}
-		
-	
-	
-	
+	}	
 }
