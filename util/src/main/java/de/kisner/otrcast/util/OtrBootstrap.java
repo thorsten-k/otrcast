@@ -19,7 +19,6 @@ public class OtrBootstrap
 	public static final String appCode="otr";
 	public static final String confCode="cast.client";
 	
-	public static final String cfgUrlGae = "url.otrseries";
 	public static final String cfgXmlCategories = "xml.categories";
 	public static final String cfgXmlSeries = "xml.series";
 	public static final String cfgXmlEpisodes = "xml.episodes";

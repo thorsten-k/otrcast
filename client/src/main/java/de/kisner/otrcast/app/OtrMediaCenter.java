@@ -23,6 +23,7 @@ import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
+import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrMediaCenter
@@ -72,7 +73,7 @@ public class OtrMediaCenter
         else if(cmd.hasOption(oRetagger.getOpt()) && uOption.allowAppStart())
         {
     		ResteasyClient client = new ResteasyClientBuilder().build();
-    		ResteasyWebTarget target = client.target(otrConfig.getKey(OtrConfig.urlOtrSeries)); 
+    		ResteasyWebTarget target = client.target(otrConfig.getKey(ConfigKey.netRestUrl)); 
     		OtrVideoRest rest = target.proxy(OtrVideoRest.class);
     		
         	McLibraryTagger tagger = new McLibraryTagger(otrConfig.getDir(Dir.TMP),otrConfig.getDir(Dir.BACKUP));

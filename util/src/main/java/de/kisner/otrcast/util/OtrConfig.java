@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
+import net.sf.exlp.interfaces.util.ConfigKey;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,7 +60,6 @@ public class OtrConfig
 	
 	public static final String templateSeries = "template.series";
 	
-	public static final String urlOtrSeries = "url.otrseries";
 	
 	public static final String cmdTagger = "cmd.tagger";
 	
@@ -158,7 +158,7 @@ public class OtrConfig
 	private void initUrlList()
 	{
 		mapUrl = new Hashtable<Url,String>();
-		mapUrl.put(Url.OTR, urlOtrSeries);
+		mapUrl.put(Url.OTR, ConfigKey.netRestUrl);
 	}
 	
 	private void initCmdList()

@@ -19,7 +19,9 @@ import de.kisner.otrcast.model.xml.series.Category;
 import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.util.OtrBootstrap;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.web.rest.RestUrlDelay;
 import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrRestSeedData
@@ -32,14 +34,10 @@ public class OtrRestSeedData
 	public OtrRestSeedData(Configuration config)
 	{	
 		this.config=config;
-		
-		String restUrl = config.getString("url.otrseries");
-		logger.info("Connectiong to "+restUrl);
-		
-		
+				
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("user","pwd"));
-		ResteasyWebTarget restTarget = client.target(restUrl);
+		ResteasyWebTarget restTarget = client.target(RestUrlDelay.getUrl(config));
 		rest = restTarget.proxy(OtrAdminRest.class);
 	}
 	

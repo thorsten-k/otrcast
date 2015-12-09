@@ -105,7 +105,7 @@ public class CliMcLibraryTagger
 		if(rest==null)
 		{
 			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config, OtrConfig.urlOtrSeries)); 
+			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config)); 
 			rest = target.proxy(OtrVideoRest.class);
 		}
 		return rest;
