@@ -23,6 +23,7 @@ import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
+import net.sf.ahtutils.interfaces.model.ranking.UtilsRankedResult;
 
 public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 									SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
@@ -110,5 +111,12 @@ public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		cQ.select(series);
 		
 		return em.createQuery(cQ).getResultList();
+	}
+
+	@Override
+	public List<UtilsRankedResult<SERIES>> rankedSeries(Class<SERIES> cSeries, String seriesName)
+	{
+		logger.warn("rankedSeries is currently not implemented here");
+		return null;
 	}
 }
