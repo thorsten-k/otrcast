@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.controller.processor.mc;
+package de.kisner.otrcast.controller.media;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,14 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
-import de.kisner.otrcast.controller.processor.mc.McLibraryTagger;
 import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
-import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.web.rest.RestUrlDelay;
@@ -48,6 +47,12 @@ public class CliMcLibraryTagger
 		
 		fMcXmlLib = new File(config.getString(OtrConfig.fileMcXmlLib));
 		
+		tagger = new McLibraryTagger(fTmp,fBackup);
+		tagger.setCoverManager(new FileSystemCoverManager(fCovers));
+	}
+	
+	public void scan() throws IOException
+	{
 		if(fLibrary.listFiles(FileQuery.mp4FileFilter()).length==0)
 		{
 			logger.warn("No Files in directory "+fLibrary.getAbsolutePath());
@@ -55,12 +60,6 @@ public class CliMcLibraryTagger
 			System.exit(-1);
 		}
 		
-		tagger = new McLibraryTagger(fTmp,fBackup);
-		tagger.setCoverManager(new FileSystemCoverManager(fCovers));
-	}
-	
-	public void scan() throws IOException
-	{
 		tagger.scan(fLibrary);
 		tagger.saveToXml(fMcXmlLib);
 	}
@@ -87,7 +86,7 @@ public class CliMcLibraryTagger
 			Otr otr = getRest().resolveSeries(XmlSeriesFactory.build(s));
 			if(otr.getSeries().size()!=1)
 			{
-				logger.info("Unknown "+s);
+				logger.warn("Unknown "+s);
 			}
 		}
 	}
@@ -113,10 +112,10 @@ public class CliMcLibraryTagger
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrBootstrap.init();
+		Configuration config = OtrCastBootstrap.init();
 
 		CliMcLibraryTagger cli = new CliMcLibraryTagger(config);
 		cli.checkSeries();
-		cli.tag();
+//		cli.tag();
 	}
 }

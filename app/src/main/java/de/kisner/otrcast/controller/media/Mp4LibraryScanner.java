@@ -18,7 +18,6 @@ import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.factory.ejb.mc.EjbCoverFactory;
 import de.kisner.otrcast.factory.ejb.mc.EjbStorageFactory;
-import de.kisner.otrcast.factory.ejb.series.EjbEpisodeFactory;
 import de.kisner.otrcast.model.ejb.OtrEpisode;
 import de.kisner.otrcast.model.ejb.OtrImage;
 import de.kisner.otrcast.model.ejb.OtrMovie;
@@ -28,7 +27,6 @@ import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Movie;
 import de.kisner.otrcast.model.xml.series.Video;
-import de.kisner.otrcast.util.McJaxb;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.ahtutils.exception.ejb.UtilsConstraintViolationException;
 import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
@@ -142,6 +140,7 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void handleMovie(Movie xmlMovie,File file)
 	{
 		OtrMovie movie = getMovie(xmlMovie);

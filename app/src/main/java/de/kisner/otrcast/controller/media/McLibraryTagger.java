@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.processor.mc;
+package de.kisner.otrcast.controller.media;
 
 import java.io.File;
 import java.io.IOException;

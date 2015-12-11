@@ -6,7 +6,6 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.tag.CliMp4TagWriter;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
@@ -21,7 +20,7 @@ public class Mp4TestEnvironment
 		if(files.length==0)
 		{
 			logger.warn("No Files in directory "+fMp4.getAbsolutePath());
-			logger.info("Probably you need to create some test files with "+CliMp4TagWriter.class.getSimpleName());
+			logger.info("Probably you need to create some test files with CliMp4TagWriter");
 		}
 		return fMp4;
 	}
