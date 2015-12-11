@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +20,6 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.ahtutils.web.rest.RestUrlDelay;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -83,7 +79,7 @@ public class CliMcLibraryTagger
 		logger.info("Library contains "+set.size()+" Series");
 		for(String s : set)
 		{
-			Otr otr = getRest().resolveSeries(XmlSeriesFactory.build(s));
+			Otr otr = OtrCastBootstrap.rest(OtrVideoRest.class).resolveSeries(XmlSeriesFactory.build(s));
 			if(otr.getSeries().size()!=1)
 			{
 				logger.warn("Unknown "+s);
@@ -95,19 +91,8 @@ public class CliMcLibraryTagger
 	{
 		logger.info(StringUtil.stars());
 		Videos videos = JaxbUtil.loadJAXB(fMcXmlLib, Videos.class);
-		tagger.setRest(getRest());
+		tagger.setRest(OtrCastBootstrap.rest(OtrVideoRest.class));
 		tagger.tagLibrary(videos);
-	}
-	
-	private OtrVideoRest getRest()
-	{
-		if(rest==null)
-		{
-			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config)); 
-			rest = target.proxy(OtrVideoRest.class);
-		}
-		return rest;
 	}
 	
 	public static void main(String args[]) throws Exception
