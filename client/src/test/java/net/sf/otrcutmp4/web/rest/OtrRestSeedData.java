@@ -21,7 +21,6 @@ import de.kisner.otrcast.util.OtrBootstrap;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.web.rest.RestUrlDelay;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrRestSeedData
