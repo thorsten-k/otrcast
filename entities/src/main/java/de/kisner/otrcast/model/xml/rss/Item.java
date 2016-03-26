@@ -17,21 +17,21 @@ import de.kisner.otrcast.model.xml.itunes.Summary;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/rss}title"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/rss}description"/>
- *         &lt;element ref="{http://www.itunes.com/dtds/podcast-1.0.dtd}summary"/>
- *         &lt;element ref="{http://www.itunes.com/dtds/podcast-1.0.dtd}image"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/rss}pubDate"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/rss}enclosure"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/rss}guid"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}title"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}description"/&gt;
+ *         &lt;element ref="{http://www.itunes.com/dtds/podcast-1.0.dtd}summary"/&gt;
+ *         &lt;element ref="{http://www.itunes.com/dtds/podcast-1.0.dtd}image"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}pubDate"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}enclosure"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/rss}guid"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

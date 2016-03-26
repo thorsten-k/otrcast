@@ -21,20 +21,20 @@ import de.kisner.otrcast.model.xml.series.Series;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFile"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFile"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

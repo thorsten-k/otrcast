@@ -19,23 +19,23 @@ import de.kisner.otrcast.model.xml.series.Video;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}name"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}comment"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}author"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}cut" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}fileName"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}video" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rating" type="{http://www.w3.org/2001/XMLSchema}double" />
- *       &lt;attribute name="ratingCount" type="{http://www.w3.org/2001/XMLSchema}int" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}name"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}comment"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}author"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}cut" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}fileName"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}video" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="rating" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
+ *       &lt;attribute name="ratingCount" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

@@ -24,21 +24,21 @@ import de.kisner.otrcast.model.xml.tvdb.Banners;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}series" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banners" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}category" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}quality" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}series" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banners" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}category" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}quality" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

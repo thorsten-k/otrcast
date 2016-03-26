@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Guid }
+     * Create an instance of {@link Rss }
      * 
      */
-    public Guid createGuid() {
-        return new Guid();
+    public Rss createRss() {
+        return new Rss();
     }
 
     /**
-     * Create an instance of {@link PubDate }
+     * Create an instance of {@link Channel }
      * 
      */
-    public PubDate createPubDate() {
-        return new PubDate();
+    public Channel createChannel() {
+        return new Channel();
     }
 
     /**
@@ -54,11 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Enclosure }
+     * Create an instance of {@link Link }
      * 
      */
-    public Enclosure createEnclosure() {
-        return new Enclosure();
+    public Link createLink() {
+        return new Link();
     }
 
     /**
@@ -70,19 +70,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Link }
+     * Create an instance of {@link Language }
      * 
      */
-    public Link createLink() {
-        return new Link();
+    public Language createLanguage() {
+        return new Language();
     }
 
     /**
-     * Create an instance of {@link Item }
+     * Create an instance of {@link Copyright }
      * 
      */
-    public Item createItem() {
-        return new Item();
+    public Copyright createCopyright() {
+        return new Copyright();
+    }
+
+    /**
+     * Create an instance of {@link PubDate }
+     * 
+     */
+    public PubDate createPubDate() {
+        return new PubDate();
     }
 
     /**
@@ -102,35 +110,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Rss }
+     * Create an instance of {@link Item }
      * 
      */
-    public Rss createRss() {
-        return new Rss();
+    public Item createItem() {
+        return new Item();
     }
 
     /**
-     * Create an instance of {@link Channel }
+     * Create an instance of {@link Enclosure }
      * 
      */
-    public Channel createChannel() {
-        return new Channel();
+    public Enclosure createEnclosure() {
+        return new Enclosure();
     }
 
     /**
-     * Create an instance of {@link Language }
+     * Create an instance of {@link Guid }
      * 
      */
-    public Language createLanguage() {
-        return new Language();
-    }
-
-    /**
-     * Create an instance of {@link Copyright }
-     * 
-     */
-    public Copyright createCopyright() {
-        return new Copyright();
+    public Guid createGuid() {
+        return new Guid();
     }
 
 }

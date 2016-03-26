@@ -3,33 +3,57 @@
 <project name="OTR-XML"  basedir="../../..">
 
 	<property name="src.dir" location="${basedir}/src/main/java" />
-	<property name="xsd.dir" location="${basedir}/src/main/xsd"/>
+	<property name="rsrc.dir" location="${basedir}/src/main" />
+	<property name="xsd.dir" location="${rsrc.dir}/xsd" />
 	
-	<property name="jaxb.version" value="2.2.2"/>
-	<property name="jaxb-api.lib" value="${user.home}/.m2/repository/javax/xml/bind/jaxb-api/${jaxb.version}/jaxb-api-${jaxb.version}.jar"/>
-	<property name="jaxb-impl.lib" value="${user.home}/.m2/repository/com/sun/xml/bind/jaxb-impl/${jaxb.version}/jaxb-impl-${jaxb.version}.jar"/>
-	<property name="jaxb-xjc.lib" value="${user.home}/.m2/repository/com/sun/xml/bind/jaxb-xjc/${jaxb.version}/jaxb-xjc-${jaxb.version}.jar"/>	
+	<property name="jaxb.version" value="2.2.11"/>
+	
+	<property name="jaxb-xjc.lib" value="${user.home}/.m2/repository/org/glassfish/jaxb/jaxb-xjc/${jaxb.version}/jaxb-xjc-${jaxb.version}.jar"/>
+	<property name="jaxb-core.lib" value="${user.home}/.m2/repository/org/glassfish/jaxb/jaxb-core/${jaxb.version}/jaxb-core-${jaxb.version}.jar"/>
+	<property name="jaxb-runtime.lib" value="${user.home}/.m2/repository/org/glassfish/jaxb/jaxb-runtime/${jaxb.version}/jaxb-runtime-${jaxb.version}.jar"/>
+	<property name="codemodel.lib" value="${user.home}/.m2/repository/org/glassfish/jaxb/codemodel/${jaxb.version}/codemodel-${jaxb.version}.jar"/>
+	<property name="txw2.lib" value="${user.home}/.m2/repository/org/glassfish/jaxb/txw2/${jaxb.version}/txw2-${jaxb.version}.jar"/>
+	<property name="istack-tools.lib" value="${user.home}/.m2/repository/com/sun/istack/istack-commons-tools/2.21/istack-commons-tools-2.21.jar"/>
+	<property name="istack-runtime.lib" value="${user.home}/.m2/repository/com/sun/istack/istack-commons-runtime/2.21/istack-commons-runtime-2.21.jar"/>
+	<property name="xsom.lib" value="${user.home}/.m2/repository/com/sun/xsom/xsom/20140925/xsom-20140925.jar"/>
+	<property name="rngom.lib" value="${user.home}/.m2/repository/com/sun/xml/bind/external/rngom/${jaxb.version}/rngom-${jaxb.version}.jar"/>
+	<property name="relaxng.lib" value="${user.home}/.m2/repository/relaxngDatatype/relaxngDatatype/20020414/relaxngDatatype-20020414.jar"/>
 	
 	<target name="JAXB Class generation" description="Compiles all JAXB classes">
 		
 		<echo level="info">Using Maven-Repository: ${user.home}/.m2</echo>
-		<echo level="debug">    jaxb-api.lib=${jaxb-api.lib}</echo>
-		<echo level="debug">    jaxb-impl.lib=${jaxb-impl.lib}</echo>
-		<echo level="debug">    jaxb-xjc.lib=${jaxb-xjc.lib}</echo>
+		<echo level="info">      jaxb-xjc.lib=${jaxb-xjc.lib}</echo>
+		<echo level="info">     jaxb-core.lib=${jaxb-core.lib}</echo>
+		<echo level="info">     jaxb-runtime.lib=${jaxb-runtime.lib}</echo>
+		<echo level="info">     codemodel.lib=${codemodel.lib}</echo>
+		<echo level="info">     txw2.lib=${txw2.lib}</echo>
+		<echo level="info">  istack-tools.lib=${istack-tools.lib}</echo>
+		<echo level="info">istack-runtime.lib=${istack-runtime.lib}</echo>
+		<echo level="info">          xsom.lib=${xsom.lib}</echo>
+		<echo level="info">         rngom.lib=${rngom.lib}</echo>
+		<echo level="info">       relaxng.lib=${relaxng.lib}</echo>
 		<echo level="info">Creating JAXB</echo>
-		<echo level="info">    basedir = ${basedir}</echo>
-		<echo level="info">    src.dir = ${src.dir}</echo>
-		<echo level="info">    xsd.dir = ${xsd.dir}</echo>
-	    <java classname="com.sun.tools.xjc.XJCFacade" fork="true" failonerror="true"  maxmemory="128m">
+		<echo level="info">basedir = ${basedir}</echo>
+		<echo level="info">src.dir = ${src.dir}</echo>
+		<echo level="info">xsd.dir = ${xsd.dir}</echo>
+		<java classname="com.sun.tools.xjc.XJCFacade" fork="true" failonerror="true"  maxmemory="128m">
 			<arg value="-extension"/>
 			<arg value="${xsd.dir}/otr.xsd"/>
 			<arg value="-d"/><arg value="${src.dir}"/>
-	    	<arg value="-b"/><arg value="${basedir}/src/main/ant/otr.xjb"/>
+			<arg value="-b"/><arg value="${basedir}/src/main/ant/otr.xjb"/>
 	    	<arg value="-no-header"/>
+			<sysproperty key="user.language=" value="en"/>
 			<classpath>
-				<pathelement location="${jaxb-api.lib}"/>
-				<pathelement location="${jaxb-impl.lib}"/>
 				<pathelement location="${jaxb-xjc.lib}"/>
+				<pathelement location="${jaxb-core.lib}"/>
+				<pathelement location="${jaxb-runtime.lib}"/>
+				<pathelement location="${codemodel.lib}"/>
+				<pathelement location="${txw2.lib}"/>
+				<pathelement location="${istack-tools.lib}"/>
+				<pathelement location="${istack-runtime.lib}"/>
+				<pathelement location="${xsom.lib}"/>
+				<pathelement location="${rngom.lib}"/>
+				<pathelement location="${relaxng.lib}"/>
 			</classpath>
 		</java>
 	</target>

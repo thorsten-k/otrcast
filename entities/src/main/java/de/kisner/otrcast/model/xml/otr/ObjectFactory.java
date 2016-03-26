@@ -86,19 +86,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Linklist }
-     * 
-     */
-    public Linklist createLinklist() {
-        return new Linklist();
-    }
-
-    /**
      * Create an instance of {@link Download }
      * 
      */
     public Download createDownload() {
         return new Download();
+    }
+
+    /**
+     * Create an instance of {@link Linklist }
+     * 
+     */
+    public Linklist createLinklist() {
+        return new Linklist();
     }
 
 }

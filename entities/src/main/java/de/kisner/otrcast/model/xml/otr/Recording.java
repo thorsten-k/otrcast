@@ -17,19 +17,19 @@ import de.kisner.otrcast.model.xml.cut.CutList;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}otrId"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}link"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/cut}cutList"/>
- *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}otrId"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}link"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/cut}cutList"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

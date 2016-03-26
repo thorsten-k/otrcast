@@ -17,18 +17,18 @@ import de.kisner.otrcast.model.xml.otr.OtrId;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://otrcutmp4.sf.net/otr}otrId"/>
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/>
- *       &lt;/sequence>
- *       &lt;attribute name="withBegin" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="withEnd" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/otr}otrId"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="withBegin" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="withEnd" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

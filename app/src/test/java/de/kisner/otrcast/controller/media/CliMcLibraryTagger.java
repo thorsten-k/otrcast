@@ -63,6 +63,7 @@ public class CliMcLibraryTagger
 	public void checkSeries() throws FileNotFoundException
 	{
 		logger.info(StringUtil.stars());
+		logger.info("Using metadata file: "+fMcXmlLib.getPath());
 		Videos videos = JaxbUtil.loadJAXB(fMcXmlLib, Videos.class);
 		Set<String> set = new HashSet<String>();
 		for(Video video : videos.getVideo())
