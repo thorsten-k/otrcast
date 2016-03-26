@@ -15,6 +15,7 @@
 	<modules>
 		<module>api</module>
 		<module>app</module>
+		<module>doc</module>
 		<module>client</module>
 		<module>entities</module>
 		<module>util</module>
@@ -23,6 +24,8 @@
     <properties>
     	<my.build.directory>target</my.build.directory>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<maven.ignore>file://${basedir}/../doc/src/main/resources/otrcast/maven/maven-versions.xml</maven.ignore>
+    	
     	<version.jetty>8.1.17.v20150415</version.jetty>
     	<version.jdk>1.6</version.jdk>
     	
@@ -130,6 +133,21 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>net.sf.exlp</groupId>
+					<artifactId>exlp-maven</artifactId>
+					<version>0.1.11-SNAPSHOT</version>
+				</plugin>
+				<plugin>
+			        <groupId>net.sf.ahtutils</groupId>
+			        <artifactId>ahtutils-maven</artifactId>
+			        <version>0.2.6-SNAPSHOT</version>
+			    </plugin>
+				<plugin>
+			        <groupId>org.codehaus.mojo</groupId>
+			        <artifactId>versions-maven-plugin</artifactId>
+			        <version>2.2</version>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
