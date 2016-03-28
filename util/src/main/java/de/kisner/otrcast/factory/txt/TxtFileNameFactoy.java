@@ -3,12 +3,17 @@ package de.kisner.otrcast.factory.txt;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.exception.OtrProcessingException;
+import de.kisner.otrcast.model.xml.cut.CutList;
+import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.series.Episode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -54,5 +59,45 @@ public class TxtFileNameFactoy
         t.process(ds, sw);
         sw.flush();
         return sw.toString();
+	}
+	
+	
+	
+	public static String build(String name, String channel, int duration, Date airTime)
+	{
+		DateTime dt = new DateTime(airTime);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(name).append("_");
+		sb.append(dt.getYearOfCentury()).append(".");
+		sb.append(tZ(dt.getMonthOfYear())).append(".");
+		sb.append(tZ(dt.getDayOfMonth()));
+		sb.append("_");
+		sb.append(tZ(dt.getHourOfDay())).append("-").append(tZ(dt.getMinuteOfHour()));
+		sb.append("_");
+		sb.append(channel).append("_").append(duration).append("_");
+		sb.append("TVOON_DE.mpg.HQ.avi");
+		return sb.toString();
+	}
+	
+	private static String tZ(int in)
+	{
+		Integer i = new Integer(in);
+		if(i<10){return "0"+in;}
+		else{return ""+in;}
+	}
+	
+	public static String build(OtrId otrId)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append(otrId.getKey());
+		sb.append(".");
+		sb.append(otrId.getFormat().getType());
+		return sb.toString();
+	}
+	
+	public String create(CutList cl) throws OtrProcessingException
+	{
+		return "test";
 	}
 }

@@ -3,7 +3,7 @@ package de.kisner.otrcast.view.cli;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.txt.TxtFilenameFactory;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
@@ -28,7 +28,7 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 	public void showFileInfo(int index, VideoFile vFile)
 	{
 		logger.info("");
-		logger.info(TxtFilenameFactory.build(vFile.getOtrId()));
+		logger.info(TxtFileNameFactoy.build(vFile.getOtrId()));
 	}
 	
 	public void showCutlistInfo(int i, CutList cl, boolean showAuthor, boolean showRanking, boolean showComment, boolean showFile)
@@ -89,7 +89,7 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 		for(int i=1;i<=vFiles.getVideoFile().size();i++)
 		{
 			VideoFile vFile = vFiles.getVideoFile().get(i-1);
-			logger.info("\t"+i+" "+TxtFilenameFactory.build(vFile.getOtrId()));
+			logger.info("\t"+i+" "+TxtFileNameFactoy.build(vFile.getOtrId()));
 			for(int j=1;j<=vFile.getCutLists().getCutList().size();j++)
 			{
 				CutList cl = vFile.getCutLists().getCutList().get(j-1);

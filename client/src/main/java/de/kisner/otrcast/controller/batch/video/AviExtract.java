@@ -4,21 +4,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
-import de.kisner.otrcast.factory.txt.TxtFilenameFactory;
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AviExtract extends AbstactBatchGenerator
 {	
@@ -46,7 +45,7 @@ public class AviExtract extends AbstactBatchGenerator
 	private String rawExtract(int index, VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
 	{	
 		JaxbUtil.trace(vf);
-		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),TxtFilenameFactory.build(vf.getOtrId())));		
+		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),TxtFileNameFactoy.build(vf.getOtrId())));		
 		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+".h264"));
 		
 		StringBuffer sbVideo = new StringBuffer();

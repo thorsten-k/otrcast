@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.factory;
+package de.kisner.otrcast.factory.txt;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,15 +10,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.txt.TxtDsFactory;
-import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.test.AbstractUtilTest;
 import freemarker.template.TemplateException;
-import net.sf.otrcutmp4.test.AbstractClientTest;
 
-public class TestFileNameFactory extends AbstractClientTest
+public class TestFileNameFactory extends AbstractUtilTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestFileNameFactory.class);
 	
