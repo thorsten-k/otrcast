@@ -106,7 +106,7 @@ public class CliMcLibraryTagger
 				Otr otr = rest.resolveEpisode(e);
 				if(otr.getEpisode().size()!=1)
 				{
-					JaxbUtil.info(e);
+					JaxbUtil.trace(e);
 					logger.info(TxtEpisodeFactory.build(e, true));
 				}
 				
