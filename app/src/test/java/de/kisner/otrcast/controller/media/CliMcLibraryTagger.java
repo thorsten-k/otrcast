@@ -13,9 +13,11 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
+import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.container.Otr;
+import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
@@ -36,6 +38,9 @@ public class CliMcLibraryTagger
 	public CliMcLibraryTagger(Configuration config)
 	{
 		this.config=config;
+		
+		rest = OtrCastBootstrap.rest(OtrVideoRest.class);
+		
 		fLibrary = new File(config.getString(TestPropertyKeys.dirTaggerDst));
 		File fTmp = new File(config.getString(TestPropertyKeys.dirTaggerTmp));
 		File fBackup = new File(config.getString(TestPropertyKeys.dirMcBackup));
@@ -80,12 +85,34 @@ public class CliMcLibraryTagger
 		logger.info("Library contains "+set.size()+" Series");
 		for(String s : set)
 		{
-			Otr otr = OtrCastBootstrap.rest(OtrVideoRest.class).resolveSeries(XmlSeriesFactory.build(s));
+			Otr otr = rest.resolveSeries(XmlSeriesFactory.build(s));
 			if(otr.getSeries().size()!=1)
 			{
 				logger.warn("Unknown "+s);
 			}
 		}
+	}
+	
+	public void checkEpisode() throws FileNotFoundException
+	{
+		logger.info(StringUtil.stars());
+		logger.info("Using metadata file: "+fMcXmlLib.getPath());
+		Videos videos = JaxbUtil.loadJAXB(fMcXmlLib, Videos.class);
+		for(Video video : videos.getVideo())
+		{
+			if(video.isSetEpisode())
+			{
+				Episode e = video.getEpisode();
+				Otr otr = rest.resolveEpisode(e);
+				if(otr.getEpisode().size()!=1)
+				{
+					JaxbUtil.info(e);
+					logger.info(TxtEpisodeFactory.build(e, true));
+				}
+				
+			}
+		}
+		
 	}
 	
 	public void tag() throws FileNotFoundException
@@ -101,7 +128,8 @@ public class CliMcLibraryTagger
 		Configuration config = OtrCastBootstrap.init();
 
 		CliMcLibraryTagger cli = new CliMcLibraryTagger(config);
-		cli.checkSeries();
+//		cli.checkSeries();
+		cli.checkEpisode();
 //		cli.tag();
 	}
 }

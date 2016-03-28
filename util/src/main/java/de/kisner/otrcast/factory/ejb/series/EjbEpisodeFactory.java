@@ -21,7 +21,7 @@ public class EjbEpisodeFactory<MOVIE extends Movie<COVER,STORAGE>,
 	
 	final Class<EPISODE> cEpisode;
 	
-	private EjbSeasonFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE> efSeason;
+//	private EjbSeasonFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE> efSeason;
 	
 	public EjbEpisodeFactory(final Class<EPISODE> cEpisode)
 	{

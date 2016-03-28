@@ -3,15 +3,12 @@ package de.kisner.otrcast.factory.ejb.series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;
 import de.kisner.otrcast.interfaces.model.Season;
 import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
-import net.sf.ahtutils.exception.ejb.UtilsConstraintViolationException;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class EjbSeasonFactory<MOVIE extends Movie<COVER,STORAGE>,
 							SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
