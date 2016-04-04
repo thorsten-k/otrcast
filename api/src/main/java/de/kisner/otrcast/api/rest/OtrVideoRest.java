@@ -22,10 +22,12 @@ public interface OtrVideoRest
 	@GET @Path("/episode/{id}") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.TEXT_PLAIN)
 	Episode getEpisode(@PathParam("id") long episodeId);
 	
+	@GET @Path("/episode/{seriesId}/{seasonNr}/{episodeNr}") @Produces(MediaType.APPLICATION_XML)
+	Episode getEpisode(@PathParam("seriesId") long seriesId, @PathParam("seasonNr") long seasonNr, @PathParam("episodeNr") long episodeNr);
+	
 	@POST @Path("/episode/info") @Consumes(MediaType.APPLICATION_XML) @Produces(MediaType.APPLICATION_XML)
 	Otr resolveEpisode(Episode episode);
 	
 	@POST @Path("/series/info") @Consumes(MediaType.APPLICATION_XML) @Produces(MediaType.APPLICATION_XML)
 	Otr resolveSeries(Series series);
-	
 }

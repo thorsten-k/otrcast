@@ -48,7 +48,7 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		season.setNr(seasonNr);
 		season.setSeries(series);
 		
-		de.kisner.otrcast.model.xml.series.Episode xml = new de.kisner.otrcast.model.xml.series.Episode();
+		de.kisner.otrcast.model.xml.series.Episode xml = build();
 		xml.setName(name);
 		xml.setNr(nr);
 		xml.setSeason(season);
@@ -58,10 +58,15 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 	
 	public static de.kisner.otrcast.model.xml.series.Episode build(int nr, String name)
 	{		
-		de.kisner.otrcast.model.xml.series.Episode xml = new de.kisner.otrcast.model.xml.series.Episode();
+		de.kisner.otrcast.model.xml.series.Episode xml = build();
 		xml.setName(name);
 		xml.setNr(nr);
 		
 		return xml;
+	}
+	
+	public static de.kisner.otrcast.model.xml.series.Episode build()
+	{		
+		return new de.kisner.otrcast.model.xml.series.Episode();
 	}
 }

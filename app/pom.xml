@@ -259,20 +259,20 @@
 		        </configuration>
 			</plugin>
 			<plugin>
-			  <groupId>org.dstovall</groupId>
-			  <artifactId>onejar-maven-plugin</artifactId>
-			  <version>1.3.0</version>
-			  <executions>
-			    <execution>
-			      <configuration>
-			        <mainClass>de.kisner.otrcast.app.OtrMediaCenter</mainClass>
-			        <filename>OtrCast-${project.version}.jar</filename>
-			      </configuration>
-			      <goals>
-			        <goal>one-jar</goal>
-			      </goals>
-			    </execution>
-			  </executions>
+				<groupId>org.dstovall</groupId>
+				<artifactId>onejar-maven-plugin</artifactId>
+				<version>1.3.0</version>
+				<executions>
+				  <execution>
+				    <configuration>
+				      <mainClass>de.kisner.otrcast.app.OtrCastClient</mainClass>
+				      <filename>OtrCast-${project.version}.jar</filename>
+				    </configuration>
+				    <goals>
+				      <goal>one-jar</goal>
+				    </goals>
+				  </execution>
+				</executions>
 			</plugin>
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>

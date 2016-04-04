@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -42,6 +46,35 @@ public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	public OtrVideoResolverFacadeBean(EntityManager em)
 	{
 		super(em);
+	}
+	
+	@Override
+	public EPISODE fEpisode(Class<EPISODE> cEpiosode, long seriesId, long seasonNr, long episodeNr) throws UtilsNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<EPISODE> cQ = cB.createQuery(cEpiosode);
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		Root<EPISODE> root = cQ.from(cEpiosode);
+		
+		Join<EPISODE,SEASON> season = root.join("season");
+		Join<SEASON,SERIES> series = season.join("series");
+		
+		Path<Long> pSeriesId = series.get("id");
+		Path<Long> pSeasonNr = season.get("nr");
+		Path<Long> pEpisodeNr = root.get("nr");
+		
+		predicates.add(cB.equal(pSeriesId, seriesId));
+		predicates.add(cB.equal(pSeasonNr, seasonNr));
+		predicates.add(cB.equal(pEpisodeNr, episodeNr));
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(root);
+		
+		TypedQuery<EPISODE> q = em.createQuery(cQ); 
+		try	{return q.getSingleResult();}
+		catch (NoResultException ex){throw new UtilsNotFoundException("Nothing found "+cEpiosode.getSimpleName()+" for series="+seriesId+" seasonNr="+seasonNr+" episodeNr="+episodeNr);}
+		catch (NonUniqueResultException ex){throw new UtilsNotFoundException("Not Unique results for "+cEpiosode.getSimpleName()+" for series="+seriesId+" seasonNr="+seasonNr+" episodeNr="+episodeNr);}
 	}
 
 	@Override

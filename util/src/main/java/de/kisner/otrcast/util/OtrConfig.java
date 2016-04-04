@@ -119,9 +119,9 @@ public class OtrConfig
 		
 		lMcDirectotries = new ArrayList<String>();
 		mapDir.put(Dir.MC, dirMc);
-		lMcDirectotries.add(dirIncoming);mapDir.put(Dir.IN, dirIncoming);
-        lMcDirectotries.add(dirDb);mapDir.put(Dir.DB, dirDb);
-        lMcDirectotries.add(dirMcBackup);mapDir.put(Dir.BACKUP, dirMcBackup);
+//		lMcDirectotries.add(dirIncoming);mapDir.put(Dir.IN, dirIncoming);
+//        lMcDirectotries.add(dirDb);mapDir.put(Dir.DB, dirDb);
+//       lMcDirectotries.add(dirMcBackup);mapDir.put(Dir.BACKUP, dirMcBackup);
 	}
 	
 	private void initToolList()

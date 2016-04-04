@@ -28,7 +28,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrMediaCenter
 {
-	final static Logger logger = LoggerFactory.getLogger(OtrMediaCenter.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrCastClient.class);
 	
 	public static final String exeName = "OtrMediaCenter-<version>.jar";
 
@@ -120,7 +120,7 @@ public class OtrMediaCenter
 		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
 		uOption.setLog4jPaths("config.otrcast-client");
 		
-		OtrMediaCenter otrMc = new OtrMediaCenter(uOption);
+		OtrCastClient otrMc = new OtrCastClient(uOption);
 		try {otrMc.parseArguments(args);}
 		catch (ParseException e) {logger.error(e.getMessage());uOption.help();}
 		catch (OtrConfigurationException e) {logger.error(e.getMessage());uOption.help();}

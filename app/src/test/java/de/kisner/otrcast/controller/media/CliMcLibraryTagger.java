@@ -14,6 +14,7 @@ import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
+import de.kisner.otrcast.factory.txt.TxtSeriesFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.container.Otr;
@@ -22,6 +23,7 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
+import net.sf.ahtutils.factory.txt.security.TxtSecurityActionFactory;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -102,17 +104,25 @@ public class CliMcLibraryTagger
 		{
 			if(video.isSetEpisode())
 			{
-				Episode e = video.getEpisode();
-				Otr otr = rest.resolveEpisode(e);
-				if(otr.getEpisode().size()!=1)
+				Episode eMc = video.getEpisode();
+				Otr otrEpisode = rest.resolveEpisode(eMc);
+				if(otrEpisode.getEpisode().size()!=1)
 				{
-					JaxbUtil.trace(e);
-					logger.info(TxtEpisodeFactory.build(e, true));
+					Otr otr = rest.resolveSeries(XmlSeriesFactory.build(eMc.getSeason().getSeries().getName()));
+					if(otr.getSeries().size()!=1)
+					{
+						logger.warn("Unknown Series "+TxtSeriesFactory.build(eMc));
+					}
+					else if(otr.getSeries().size()==1)
+					{
+						logger.info(StringUtil.stars());
+						logger.info(TxtEpisodeFactory.build(eMc, true));
+						Episode eOtr = rest.getEpisode(otr.getSeries().get(0).getId(), eMc.getSeason().getNr(), eMc.getNr());
+						logger.info(TxtEpisodeFactory.build(eOtr, true));
+					}
 				}
-				
 			}
 		}
-		
 	}
 	
 	public void tag() throws FileNotFoundException
