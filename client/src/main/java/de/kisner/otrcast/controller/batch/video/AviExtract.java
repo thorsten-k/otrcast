@@ -44,8 +44,12 @@ public class AviExtract extends AbstactBatchGenerator
 	
 	private String rawExtract(int index, VideoFile vf) throws OtrInternalErrorException, UtilsProcessingException
 	{	
+		File f = new File(cfg.getDir(Dir.AVI),TxtFileNameFactoy.build(vf.getOtrId()));
 		JaxbUtil.trace(vf);
-		String inAvi = rpf.relativate(new File(cfg.getDir(Dir.AVI),TxtFileNameFactoy.build(vf.getOtrId())));		
+		logger.trace("Extracting "+f.getAbsolutePath());
+		if(!f.exists() || !f.isFile()){throw new UtilsProcessingException("File missing: "+f.getAbsolutePath());}
+		
+		String inAvi = rpf.relativate(f);		
 		String outH264 = rpf.relativate(new File(cfg.getDir(Dir.TMP), "raw-"+index+".h264"));
 		
 		StringBuffer sbVideo = new StringBuffer();

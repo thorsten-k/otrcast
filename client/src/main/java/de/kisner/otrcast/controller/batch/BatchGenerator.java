@@ -57,12 +57,11 @@ public class BatchGenerator extends AbstactBatchGenerator
 		txt = new ExlpTxtWriter();
 	}
 	
-	public void build(Videos videos) throws OtrInternalErrorException
+	public void build(Videos videos) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		for(Video video : videos.getVideo())
 		{
-			try {build(video);}
-			catch (UtilsProcessingException e) {e.printStackTrace();}
+			build(video);
 		}
 		
 		txt.debug();

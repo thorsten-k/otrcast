@@ -49,9 +49,8 @@ public class AbstractCommandLine
 
     protected void initLogger(String logConfig)
 	{
-		LoggerInit loggerInit = new LoggerInit(logConfig);	
-		loggerInit.addAltPath("src/main/resources/config.otrcutmp4-client");
-		loggerInit.addAltPath("config.otrcutmp4-client");
+		LoggerInit loggerInit = new LoggerInit(logConfig);
+		loggerInit.addAltPath("otrcast-client/config");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());

@@ -23,7 +23,6 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.ahtutils.factory.txt.security.TxtSecurityActionFactory;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -31,16 +30,13 @@ public class CliMcLibraryTagger
 {
 	final static Logger logger = LoggerFactory.getLogger(CliMcLibraryTagger.class);
 	
-	private Configuration config;
 	private OtrVideoRest rest;
 	
 	private McLibraryTagger tagger;
 	private File fLibrary,fCovers,fMcXmlLib;
 	
 	public CliMcLibraryTagger(Configuration config)
-	{
-		this.config=config;
-		
+	{		
 		rest = OtrCastBootstrap.rest(OtrVideoRest.class);
 		
 		fLibrary = new File(config.getString(TestPropertyKeys.dirTaggerDst));

@@ -12,6 +12,7 @@ import net.sf.exlp.core.listener.LogListenerHttp;
 import net.sf.exlp.core.parser.XmlParser;
 import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
+import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jdom2.Document;

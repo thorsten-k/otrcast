@@ -23,6 +23,7 @@ import de.kisner.otrcast.controller.web.WebAviScanner;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;
+import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.interfaces.rest.OtrCutRest;
 import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
@@ -41,12 +42,6 @@ import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 public class CliTestRun
 {
 	final static Logger logger = LoggerFactory.getLogger(CliTestRun.class);
-	
-	public static String testAviDir = "test.dir.avi";
-	public static String testSrcDirProcessor = "test.xml.scrDirProcessor";
-	public static String testClFinder = "test.xml.cutlistFinder";
-	public static String testClChooser = "test.xml.clChooser";
-	public static String testClLoader = "test.xml.clLoader";
 	
 	private Configuration config;
 	private OtrConfig otrConfig;
@@ -69,43 +64,45 @@ public class CliTestRun
 	
 	public void srcDirProcessor()
 	{
+		File f = new File(config.getString(TestPropertyKeys.testCutAviDir));
+		logger.info("SrcDirProcessor with "+f.getAbsolutePath());
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.scan(new File(config.getString(CliTestRun.testAviDir))); 
+		VideoFiles videoFiles = test.scan(f); 
 		JaxbUtil.debug(videoFiles);
 		
-		String xmlFile = config.getString(CliTestRun.testSrcDirProcessor);
+		String xmlFile = config.getString(TestPropertyKeys.testCutAviXml);
 		logger.debug("Saving to file: "+xmlFile);
 		JaxbUtil.save(new File(xmlFile), videoFiles, true);
 	}
 	
 	public void cutlistFinder() throws FileNotFoundException
 	{
-		VideoFiles input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testSrcDirProcessor),VideoFiles.class);
+		VideoFiles input = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutAviXml),VideoFiles.class);
 		
 		DefaultCutlistLoader finder = new DefaultCutlistLoader();
 		VideoFiles result = finder.searchCutlist(input);
 		JaxbUtil.debug(result);
 		
-		String xmlOutput = config.getString(CliTestRun.testClFinder);
+		String xmlOutput = config.getString(TestPropertyKeys.testCutXmlCutFinder);
 		logger.debug("Saving to file: "+xmlOutput);
 		JaxbUtil.save(new File(xmlOutput), result, true);
 	}
 	
-	public void cliChooser() throws FileNotFoundException, UtilsProcessingException
+	public void cutlistChooseCli() throws FileNotFoundException, UtilsProcessingException
 	{
-		VideoFiles input = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder),VideoFiles.class);
+		VideoFiles input = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutFinder),VideoFiles.class);
 		CutlistChooser chooser = new CliCutlistChooserController(new CliCutlistChooserView());
 		Videos videos = chooser.chooseCutlists(input);
 		JaxbUtil.debug(videos);
 		
-		String xmlOutput = config.getString(CliTestRun.testClChooser);
+		String xmlOutput = config.getString(TestPropertyKeys.testCutXmlCutSelected);
 		logger.debug("Saving to file: "+xmlOutput);
 		JaxbUtil.save(new File(xmlOutput), videos, true);
 	}
 	
-	public void restChooser() throws FileNotFoundException, UtilsProcessingException
+	public void cutlistChooseWeb() throws FileNotFoundException, UtilsProcessingException
 	{
-		VideoFiles vFiles = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClFinder), VideoFiles.class);
+		VideoFiles vFiles = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutFinder), VideoFiles.class);
 		JaxbUtil.debug(vFiles);
 		String token = rest.addCutPackage(vFiles);
 		logger.debug("Saved Request with token: "+token);
@@ -115,7 +112,7 @@ public class CliTestRun
 		Videos videos = rest.findCutPackage(token);
 		JaxbUtil.info(videos);
 		
-		String xmlOutput = config.getString(CliTestRun.testClChooser);
+		String xmlOutput = config.getString(TestPropertyKeys.testCutXmlCutSelected);
 		logger.debug("Saving to file: "+xmlOutput);
 		JaxbUtil.save(new File(xmlOutput), videos, true);
 		sc.close();
@@ -123,23 +120,23 @@ public class CliTestRun
 	
 	public void cutLoader() throws FileNotFoundException
 	{
-		Videos videos = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClChooser),Videos.class);
+		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutSelected),Videos.class);
 		
 		CutlistLoader cutlistLoader = new DefaultCutlistLoader();
 		cutlistLoader.loadCuts(videos);
 		JaxbUtil.debug(videos);
 		
-		String xmlOutput = config.getString(CliTestRun.testClLoader);
+		String xmlOutput = config.getString(TestPropertyKeys.testCutXmlCutLoaded);
 		logger.debug("Saving to file: "+xmlOutput);
 		JaxbUtil.save(new File(xmlOutput), videos, true);
 	}
 	
-	public void batch() throws OtrConfigurationException, ExlpConfigurationException, FileNotFoundException, OtrInternalErrorException
+	public void batch() throws OtrConfigurationException, ExlpConfigurationException, FileNotFoundException, OtrInternalErrorException, UtilsProcessingException
 	{
 		OtrConfig otrConfig = new OtrConfig();
 		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		
-		Videos videos = JaxbUtil.loadJAXB(config.getString(CliTestRun.testClLoader),Videos.class);
+		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutLoaded),Videos.class);
 		BatchGenerator batch = new BatchGenerator(otrConfig,Profile.P0,false);
     	batch.build(videos);
 	}
@@ -156,7 +153,8 @@ public class CliTestRun
 	public void rename()
 	{
 		SrcDirProcessor test = new SrcDirProcessor(view);
-		VideoFiles videoFiles = test.scan(new File(config.getString(OtrConfig.dirRename))); 
+		logger.warn("NYI: You need to set the file");
+		VideoFiles videoFiles = test.scan(new File("x")); 
 		
 		JaxbUtil.debug(videoFiles);
 		String xmlFile = config.getString("xml.test.rename.1");
@@ -172,13 +170,13 @@ public class CliTestRun
 //		test.srcDirProcessor();
 //		test.cutlistFinder();
 
-//		test.cliChooser();
-//		test.restChooser();
+//		test.cutlistChooseCli();
+//		test.cutlistChooseWeb();
 		
 //		test.cutLoader();
-//		test.batch();
+		test.batch();
 		
-		test.scan();
+//		test.scan();
 		
 //		test.rename();
 	}

@@ -55,7 +55,8 @@ public class RenameGenerator extends AbstactBatchGenerator
 		rest = ProxyFactory.create(OtrVideoRest.class, cfg.getUrl(Url.OTR),clientExecutor);
 		
 		dirHqMp4 = cfg.getDir(Dir.MP4);
-		dirMp4Rename = cfg.getDir(Dir.RENAME);
+		logger.warn("NYI: You need to set dirMp4Rename from somewhere!!");
+		//dirMp4Rename = cfg.getDir(Dir.RENAME);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT));

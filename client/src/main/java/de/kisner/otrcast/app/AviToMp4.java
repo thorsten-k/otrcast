@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.batch.BatchGenerator;
-import de.kisner.otrcast.controller.batch.RenameGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
@@ -47,11 +46,10 @@ public class AviToMp4 extends AbstractCommandLine
 	public static final String exeName = "OtrCutMp4-<version>.jar";
 	
 	private Option oProfile,oWeb;
-	private Option oAc3,oRename,oMp4;
+	private Option oAc3,oMp4;
 	private Option oCover;
 	private Option oTagMp4,oTag;
 	private Option oScan;
-	private Option oHotfolder;
 
 	private OtrConfig otrConfig;
 	
@@ -66,7 +64,7 @@ public class AviToMp4 extends AbstractCommandLine
 	{
 		options = createOptions();
 		CommandLineParser parser = new DefaultParser();
-		CommandLine line = parser.parse(options , args); 
+		CommandLine line = parser.parse(options,args); 
 	     
         super.parseArguments(line);
         
@@ -128,17 +126,6 @@ public class AviToMp4 extends AbstractCommandLine
         	tagger.tag(new Long(line.getOptionValue(oTagMp4.getOpt())));
         	return;
         }
-        
-        if(line.hasOption(oRename.getOpt()))
-        {
-        	vFiles = srcDirProcessor.scan(otrConfig.getDir(Dir.RENAME)); 
-            JaxbUtil.debug(vFiles);
-            
-        	RenameGenerator batchRen = new RenameGenerator(otrConfig,profile);	
-        	batchRen.create(vFiles);
-            logger.trace("RENAME finished");
-            return;
-        }
 
         if(line.hasOption(oMp4.getOpt()))
         {
@@ -186,7 +173,6 @@ public class AviToMp4 extends AbstractCommandLine
 	private Options createOptions()
 	{
         super.buildOptions();
-		oRename = new Option("rename", "Rename downloaded HQ.MP4.cut");
 		oMp4 = new Option("mp4", "Converts AVI to MP4"); 
 		oWeb = new Option("web", "Web GUI Interface");
 		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
@@ -198,10 +184,6 @@ public class AviToMp4 extends AbstractCommandLine
 
 		oTagMp4  = Option.builder("tagMp4").required(false)
 					.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
-					.build();
-			
-		oHotfolder = Option.builder("hotfolder").required(false)
-					.hasArg(true).argName("TASKS").desc("Activate hotfolder with comma separated tasks (tag)")
 					.build();
 
 		oCover  = Option.builder("cover").required(false)
@@ -232,7 +214,6 @@ public class AviToMp4 extends AbstractCommandLine
 		options.addOption(oProfile);
 		options.addOption(oTag);
 		options.addOption(oTagMp4);
-		options.addOption(oHotfolder);
 		
 		return options;
 	}

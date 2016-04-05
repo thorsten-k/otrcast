@@ -21,7 +21,7 @@ public class OtrConfig
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrConfig.class);
 	
-	public static enum Dir{TMP,BAT,RENAME,TOOLS,MP4,AVI,COVER,MC,BACKUP,IN,DB};
+	public static enum Dir{TMP,BAT,TOOLS,MP4,AVI,COVER,MC,BACKUP,IN,DB};
 	public static enum Tool{LAME,MP4BOX,FFMPEG,FAAC,EAC3TO,NEROAAC};
 	public static enum Audio{FAAC};
 	public static enum Url{OTR};
@@ -40,7 +40,6 @@ public class OtrConfig
 	public static final String dirBat = "dir.bat";
 	public static final String dirTools = "dir.tools";
 	public static final String dirCutlists = "dir.cutlists";
-	public static final String dirRename = "dir.rename";
 	public static final String dirCover = "dir.cover";
     public static final String dirDb = "dir.db";
     
@@ -115,7 +114,6 @@ public class OtrConfig
 		lCutDirectotries.add(dirTools);mapDir.put(Dir.TOOLS, dirTools);
 		lCutDirectotries.add(dirCover);mapDir.put(Dir.COVER, dirCover);
 //		lDirectotries.add(dirCutlists);
-		lCutDirectotries.add(dirRename);mapDir.put(Dir.RENAME, dirRename);
 		
 		lMcDirectotries = new ArrayList<String>();
 		mapDir.put(Dir.MC, dirMc);
@@ -193,7 +191,6 @@ public class OtrConfig
 				config.setProperty(dirBat, ".");
 				config.setProperty(dirTools, "OtrCutMp4.Tools");
 //				config.setProperty(dirCutlists, "Cutlists");
-				config.setProperty(dirRename, "Mp4.Rename");
                 config.setProperty(dirDb, "DB");
 				
 				config.setProperty(toolMp4Box, "MP4Box.exe");
