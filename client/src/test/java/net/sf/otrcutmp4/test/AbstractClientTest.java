@@ -1,5 +1,6 @@
 package net.sf.otrcutmp4.test;
 
+import java.io.File;
 import java.util.Date;
 
 import net.sf.exlp.util.DateUtil;
@@ -16,6 +17,18 @@ import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
 public abstract class AbstractClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractClientTest.class);
+	
+	protected static File fTarget;
+	
+	@BeforeClass
+	public static void initFile()
+	{
+		if(!LoggerInit.isLog4jInited()){initLogger();}
+		String dirTarget = System.getProperty("targetDir");
+		if(dirTarget==null){dirTarget="target";}
+		fTarget = new File(dirTarget);
+		logger.debug("Using targeDir "+fTarget.getAbsolutePath());
+	}
 	
 	@BeforeClass
 	public static void initPrefixMapper()

@@ -1,11 +1,13 @@
 package net.sf.otrcutmp4.controller.batch;
 
+import java.io.File;
 import java.io.IOException;
 
-import net.sf.otrcutmp4.test.AbstractClientTest;
-
 import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.model.xml.cut.Cut;
 import de.kisner.otrcast.model.xml.cut.CutList;
@@ -14,9 +16,13 @@ import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.series.Video;
+import net.sf.otrcutmp4.controller.batch.video.TestRawExtract;
+import net.sf.otrcutmp4.test.AbstractClientTest;
 
 public class AbstractBatchTest extends AbstractClientTest
 {
+	final static Logger logger = LoggerFactory.getLogger(TestRawExtract.class);
+	
 	protected Video video;
 	
 	@Before
@@ -26,6 +32,15 @@ public class AbstractBatchTest extends AbstractClientTest
 		video.setVideoFiles(new VideoFiles());
 		video.getVideoFiles().getVideoFile().add(createVideoFile("my-1"));
 		video.getVideoFiles().getVideoFile().add(createVideoFile("my-2"));
+		
+		File fAvi = new File(fTarget,"test/dir.avi");
+		if(!fAvi.exists()){fAvi.mkdir();}
+		for(VideoFile vf : video.getVideoFiles().getVideoFile())
+		{
+			File f = new File(fAvi,TxtFileNameFactoy.build(vf));
+			logger.info(f.getAbsolutePath()+" "+f.exists());
+			if(!f.exists()){f.createNewFile();}
+		}
 	}
 	
 	private VideoFile createVideoFile(String name)

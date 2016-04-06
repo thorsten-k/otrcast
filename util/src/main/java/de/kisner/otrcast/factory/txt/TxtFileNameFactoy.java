@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.model.xml.cut.CutList;
+import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.series.Episode;
 import freemarker.template.Configuration;
@@ -99,5 +100,14 @@ public class TxtFileNameFactoy
 	public String create(CutList cl) throws OtrProcessingException
 	{
 		return "test";
+	}
+	
+	public static String build(VideoFile vf)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append(vf.getOtrId().getKey());
+		sb.append(".");
+		sb.append(vf.getOtrId().getFormat().getType());
+		return sb.toString();
 	}
 }
