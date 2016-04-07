@@ -26,7 +26,6 @@ public class TestOtrConfig extends AbstractClientTest
 	
 	private OtrConfig otrConfig;
 
-	private static File fRoot,fAvi,fMp4,fTmp,fBat,fTools,fCover,fMcIncoming,fMcMedia;
 	private static File tMp4Box,tLame,tFfmpeg,tFaac,tEac3to,tNeroAac;
 	
 	public static TestOtrConfig factory() throws IOException
@@ -39,17 +38,7 @@ public class TestOtrConfig extends AbstractClientTest
 	
 	@BeforeClass
 	public static void initFiles() throws IOException
-	{
-		fRoot = new File("target/test");fRoot.mkdirs();
-		fAvi = new File(fRoot,OtrConfig.dirAvi);fAvi.mkdirs();
-		fMp4 = new File(fRoot,OtrConfig.dirMp4);fMp4.mkdirs();
-		fTmp = new File(fRoot,OtrConfig.dirTmp);fTmp.mkdirs();
-		fBat = fRoot;fBat.mkdirs();
-		fTools = new File(fRoot,OtrConfig.dirTools);fTools.mkdirs();
-		fCover = new File(fRoot,OtrConfig.dirCover);fCover.mkdirs();
-		fMcIncoming = new File(fRoot,OtrConfig.dirIncoming);fMcIncoming.mkdirs();
-		fMcMedia = new File(fRoot,OtrConfig.dirMc);fMcMedia.mkdirs();
-		
+	{		
 		tMp4Box = new File(fTools,OtrConfig.toolMp4Box);tMp4Box.createNewFile();
 		tLame = new File(fTools,OtrConfig.toolLame);tLame.createNewFile();
 		tFfmpeg = new File(fTools,OtrConfig.toolFfmpeg);tFfmpeg.createNewFile();
