@@ -3,6 +3,7 @@ package de.kisner.otrcast.factory.xml.series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Season;
@@ -56,10 +57,10 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Episode build(int nr, String name)
+	public static de.kisner.otrcast.model.xml.series.Episode build(long nr, String name)
 	{		
 		de.kisner.otrcast.model.xml.series.Episode xml = build();
-		xml.setName(name);
+		xml.setName(TxtEpisodeFactory.buld(name));
 		xml.setNr(nr);
 		
 		return xml;
