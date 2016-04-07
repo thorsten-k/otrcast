@@ -13,6 +13,7 @@ import org.jdom2.xpath.XPathFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.model.xml.series.Episode;
@@ -46,7 +47,6 @@ public class TvDbSeriesStructureFactory
         for(Element e : xPathExpression.evaluate(doc))
         {
         	handleEpisode(e);
-     //   	break;
         }
 		return series;
 	}
@@ -89,10 +89,7 @@ public class TvDbSeriesStructureFactory
 	
 	private Episode buildEpisode(Element e)
 	{
-		Episode episode = new Episode();
-		episode.setName(e.getChild("EpisodeName").getValue());
-		episode.setNr(new Long(e.getChild("EpisodeNumber").getValue()));
-		
+		Episode episode = XmlEpisodeFactory.build(new Long(e.getChild("EpisodeNumber").getValue()),e.getChild("EpisodeName").getValue());		
 		episode.setSync(XmlSyncFactory.build(new Long(e.getChild("id").getValue())));
 		return episode;
 	}

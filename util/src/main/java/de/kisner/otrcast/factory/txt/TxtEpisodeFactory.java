@@ -26,4 +26,10 @@ public class TxtEpisodeFactory
 		
 		return sb.toString();
 	}
+	
+	public static String buld(String name)
+	{
+		
+		return name;
+	}
 }
