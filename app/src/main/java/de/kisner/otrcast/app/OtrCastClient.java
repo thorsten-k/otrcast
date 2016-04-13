@@ -71,7 +71,7 @@ public class OtrCastClient
 		
 		McLibraryTagger tagger = new McLibraryTagger(fTmp,null);
 		tagger.scan(fMc);
-	tagger.saveToXml(fMcXmlLib);
+		tagger.saveToXml(fMcXmlLib);
 	}
 
 	private void createOptions()
@@ -90,7 +90,7 @@ public class OtrCastClient
 		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
 		
 		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
-		uOption.setLog4jPaths("config.otrcast-client");
+		uOption.setLog4jPaths("otrcast-app/config");
 		
 		OtrCastClient otrMc = new OtrCastClient(uOption);
 		try {otrMc.parseArguments(args);}
