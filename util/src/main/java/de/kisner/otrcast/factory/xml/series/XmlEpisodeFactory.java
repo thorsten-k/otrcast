@@ -29,7 +29,7 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		de.kisner.otrcast.model.xml.series.Episode xml = new de.kisner.otrcast.model.xml.series.Episode();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
-		if(q.isSetName()){xml.setName(ejb.getName());}
+		if(q.isSetName()){xml.setName(TxtEpisodeFactory.buld(ejb.getName()));}
 		
 		if(q.isSetSeason())
 		{
