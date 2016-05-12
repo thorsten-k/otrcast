@@ -1,5 +1,8 @@
 package de.kisner.otrcast.factory.txt;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +11,11 @@ import de.kisner.otrcast.model.xml.series.Episode;
 public class TxtEpisodeFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtEpisodeFactory.class);
+	
+	public static String dotPattern = "(.*)(\\w\\.\\.\\.)(.*)";
+	public static String dots = "...";
+	
+	private static Pattern p = Pattern.compile(TxtEpisodeFactory.dotPattern);
 	
 	public static String build(Episode episode){return build(episode,false);}
 	public static String build(Episode episode, boolean withId)
@@ -29,7 +37,18 @@ public class TxtEpisodeFactory
 	
 	public static String buld(String name)
 	{
-		
-		return name;
+		Matcher m = p.matcher(name);
+		if(!m.matches()){return name;}
+		else
+		{
+			logger.info("Start: "+m.start(2));
+			StringBuffer sb = new StringBuffer();
+			sb.append(name.substring(0, m.start(2)+1));
+			sb.append(" ...");
+			sb.append(name.substring(m.end(2),name.length()));
+			return buld(sb.toString());
+			
+			
+		}
 	}
 }

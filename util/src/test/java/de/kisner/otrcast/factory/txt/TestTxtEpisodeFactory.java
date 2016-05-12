@@ -1,45 +1,44 @@
 package de.kisner.otrcast.factory.txt;
 
-import java.io.IOException;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.test.AbstractUtilTest;
-import freemarker.template.TemplateException;
 
 public class TestTxtEpisodeFactory extends AbstractUtilTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestTxtEpisodeFactory.class);
 	
+	private static String txt = "This is a test";
+	
+	
 	@Test
-	public void simple() throws IOException, TemplateException
+	public void simple()
 	{
-		String expected = "This is a test";
-		Assert.assertEquals(expected, TxtEpisodeFactory.buld(expected));
+		Assert.assertEquals("No dots", txt, TxtEpisodeFactory.buld(txt));
+		Assert.assertEquals(txt+" "+TxtEpisodeFactory.dots, TxtEpisodeFactory.buld(txt+" "+TxtEpisodeFactory.dots));
+		Assert.assertEquals(TxtEpisodeFactory.dots+txt, TxtEpisodeFactory.buld(TxtEpisodeFactory.dots+txt));
+		Assert.assertEquals(TxtEpisodeFactory.dots+" "+txt, TxtEpisodeFactory.buld(TxtEpisodeFactory.dots+" "+txt));
 	}
 	
 	@Test
-	public void space() throws IOException, TemplateException
+	public void modifyWord()
 	{
-		String expected = "This is a test";
-		Assert.assertEquals(expected+"...", TxtEpisodeFactory.buld(expected+"..."));
+		Assert.assertEquals(txt+" "+TxtEpisodeFactory.dots, TxtEpisodeFactory.buld(txt+TxtEpisodeFactory.dots));
+		Assert.assertEquals(txt+" "+TxtEpisodeFactory.dots+"?", TxtEpisodeFactory.buld(txt+TxtEpisodeFactory.dots+"?"));
 	}
 	
 	@Test
-	public void noSpace() throws IOException, TemplateException
+	public void regex()
 	{
-		String expected = "This is a test";
-		Assert.assertEquals(expected+" ...", TxtEpisodeFactory.buld(expected+" ..."));
-	}
-	
-	@Test @Ignore
-	public void modify() throws IOException, TemplateException
-	{
-		String expected = "This is a test";
-		Assert.assertEquals(expected+"...", TxtEpisodeFactory.buld(expected+" ..."));
+		Pattern p = Pattern.compile(TxtEpisodeFactory.dotPattern);
+		Assert.assertTrue(p.matcher(txt+TxtEpisodeFactory.dots).matches());
+		Assert.assertTrue(p.matcher(txt+"0"+TxtEpisodeFactory.dots).matches());
+		Assert.assertTrue(p.matcher(txt+TxtEpisodeFactory.dots+"?").matches());
+		Assert.assertFalse(p.matcher(txt+" "+TxtEpisodeFactory.dots).matches());
 	}
 }
