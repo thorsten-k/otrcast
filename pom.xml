@@ -136,7 +136,7 @@
 				<plugin>
 					<groupId>net.sf.exlp</groupId>
 					<artifactId>exlp-maven</artifactId>
-					<version>0.1.11-SNAPSHOT</version>
+					<version>0.1.11</version>
 				</plugin>
 				<plugin>
 			        <groupId>net.sf.ahtutils</groupId>
