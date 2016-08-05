@@ -39,6 +39,28 @@
 		<maven>3.0</maven>
 	</prerequisites>
 	
+	<licenses>
+		<license>
+			<name>GNU General Public License</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
+	<scm>
+		<url>https://github.com/thorsten-k/otrcast.git</url>
+		<connection>scm:git:git://github.com/thorsten-k/otrcast.git</connection>
+		<developerConnection>scm:git:git@github.com/thorsten-k/otrcast.git</developerConnection>
+	</scm>
+	
+	<developers>
+		<developer>
+			<id>1</id>
+			<name>Thorsten Kisner</name>
+			<email>t.kisner@web.de</email>
+		</developer>
+	</developers>
+	
 	<issueManagement>
 	</issueManagement>
  
@@ -86,50 +108,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<scm>
-		<url>https://github.com/thorsten-k/otrcast</url>
-		<connection>scm:git:git://github.com/thorsten-k/otrcast.git</connection>
-		<developerConnection>scm:git:git@github.com/thorsten-k/otrcast.git</developerConnection>
-	</scm>
-
-  	<repositories>
-		<repository>
-			<id>sonatype.snapshot</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</repository>
-  		<repository>
-  			<id>aht.public</id>
-  			<name>AHT public</name>
-  			<url>https://www.aht-group.com/nexus/content/groups/public/</url>
-  			<releases><enabled>true</enabled></releases>
-  			<snapshots><enabled>false</enabled></snapshots>
-  		</repository>
-	</repositories>
 	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>onejar</id>
-			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
-		</pluginRepository>
-	</pluginRepositories>
-	
-	<distributionManagement>
-		<repository>
-			<id>aht.releases</id>
-			<name>Internal Releases</name>
-			<url>https://www.aht-group.com/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>aht.snapshots</id>
-			<name>Internal Snapshots</name>
-			<url>https://www.aht-group.com/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -219,12 +198,100 @@
 		</plugins>
 	</build>
 
+  	<repositories>
+		<repository>
+			<id>sonatype.snapshot</id>
+			<name>Sonatype Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+  		<repository>
+  			<id>aht.public</id>
+  			<name>AHT public</name>
+  			<url>https://www.aht-group.com/nexus/content/groups/public/</url>
+  			<releases><enabled>true</enabled></releases>
+  			<snapshots><enabled>false</enabled></snapshots>
+  		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>onejar</id>
+			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
 	<profiles>
     	<profile>
        		<id>ram</id>
        		<build>
        			<directory>${my.build.directory}</directory>
        		</build>
+   		</profile>
+   		<profile>
+       		<id>release</id>
+       		<build>
+       			<directory>${my.build.directory}</directory>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals><goal>sign</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.2.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals><goal>jar-no-fork</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9.1</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals><goal>jar</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.7</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>false</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
    		</profile>
 	</profiles>
 </project>
