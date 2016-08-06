@@ -21,14 +21,14 @@
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
-					<artifactId>ahtutils-xml</artifactId>
-					<groupId>net.sf.ahtutils</groupId>
+					<artifactId>jeesl-xml</artifactId>
+					<groupId>org.jeesl</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-interfaces</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -76,13 +76,13 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-test</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-xml</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-xml</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

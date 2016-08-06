@@ -45,8 +45,8 @@
    	   		<scope>compile</scope>
    	   	</dependency>
    	   	<dependency>
-   	   		<groupId>net.sf.ahtutils</groupId>
-   	   		<artifactId>ahtutils-xml</artifactId>
+   	   		<groupId>org.jeesl</groupId>
+   	   		<artifactId>jeesl-xml</artifactId>
    	   		<type>jar</type>
    	   		<scope>compile</scope>
    	   	</dependency>
@@ -112,8 +112,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-test</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	

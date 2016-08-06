@@ -26,8 +26,8 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-interfaces</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -41,8 +41,8 @@
 			<artifactId>exlp-util</artifactId>
 		</dependency>
 		<dependency>
-   	   		<groupId>net.sf.ahtutils</groupId>
-   	   		<artifactId>ahtutils-ejb</artifactId>
+   	   		<groupId>org.jeesl</groupId>
+   	   		<artifactId>jeesl-ejb</artifactId>
    	   		<type>jar</type>
    	   		<scope>compile</scope>
    	   	</dependency>
@@ -129,8 +129,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-test</artifactId>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -137,8 +137,8 @@
      	
      	<!-- JSF -->
 		<dependency>
-        	<groupId>net.sf.ahtutils</groupId>
-        	<artifactId>ahtutils-jsf</artifactId>
+        	<groupId>org.jeesl</groupId>
+        	<artifactId>jeesl-jsf</artifactId>
         </dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
