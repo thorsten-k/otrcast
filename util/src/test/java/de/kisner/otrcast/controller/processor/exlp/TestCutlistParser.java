@@ -20,12 +20,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.exlp.parser.CutlistParser;
 import de.kisner.otrcast.model.xml.cut.CutList;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 
-public class TestCutlistParser extends AbstractUtilTest
+public class TestCutlistParser extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestCutlistParser.class);
 	

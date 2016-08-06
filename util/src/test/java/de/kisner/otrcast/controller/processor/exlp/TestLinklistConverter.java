@@ -14,13 +14,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.exlp.LinklistConverter;
 import de.kisner.otrcast.controller.processor.exlp.parser.LinkListParser;
 import de.kisner.otrcast.model.xml.otr.Linklist;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 
-public class TestLinklistConverter extends AbstractUtilTest
+public class TestLinklistConverter extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestLinklistConverter.class);
 	

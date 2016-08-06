@@ -6,13 +6,13 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxDebugger;
 import de.kisner.otrcast.controller.tag.util.Mp4TestEnvironment;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
-public class CliMp4BoxDebugger extends AbstractUtilTest
+public class CliMp4BoxDebugger extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(CliMp4BoxDebugger.class);
 		

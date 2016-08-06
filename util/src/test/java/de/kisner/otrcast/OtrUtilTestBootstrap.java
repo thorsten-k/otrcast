@@ -1,4 +1,4 @@
-package de.kisner.otrcast.test;
+package de.kisner.otrcast;
 
 import java.io.File;
 

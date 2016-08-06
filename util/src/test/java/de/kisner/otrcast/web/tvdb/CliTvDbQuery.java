@@ -6,11 +6,11 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.web.tvdb.TvDbQuery;
 
-public class CliTvDbQuery extends AbstractUtilTest
+public class CliTvDbQuery extends AbstractOtrcastTest
 {
     final static Logger logger = LoggerFactory.getLogger(CliTvDbQuery.class);
 

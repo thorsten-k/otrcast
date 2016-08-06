@@ -4,12 +4,12 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.model.xml.container.Otr;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 import de.kisner.otrcast.web.tvdb.TvDbSeriesQuery;
 
-public class CliTvDbSeriesQuery extends AbstractUtilTest
+public class CliTvDbSeriesQuery extends AbstractOtrcastTest
 {
     public static void main(String args[]) throws Exception
     {

@@ -8,13 +8,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.model.xml.otr.OtrId;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 
-public class TestXmlOtrIdFactory extends AbstractUtilTest
+public class TestXmlOtrIdFactory extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlOtrIdFactory.class);
 	

@@ -9,11 +9,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.ImlProcessor;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 
-public class TestImlProcessor extends AbstractUtilTest
+public class TestImlProcessor extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestImlProcessor.class);
 	

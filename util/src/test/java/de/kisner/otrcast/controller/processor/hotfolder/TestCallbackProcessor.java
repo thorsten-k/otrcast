@@ -12,12 +12,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
+import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.hotfolder.CallbackProcessor;
 import de.kisner.otrcast.interfaces.processor.CallbackInterface;
-import de.kisner.otrcast.test.AbstractUtilTest;
-import de.kisner.otrcast.test.OtrUtilTestBootstrap;
 
-public class TestCallbackProcessor extends AbstractUtilTest implements CallbackInterface
+public class TestCallbackProcessor extends AbstractOtrcastTest implements CallbackInterface
 {
 	
 	final static Logger logger = LoggerFactory.getLogger(TestCallbackProcessor.class);

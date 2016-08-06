@@ -7,11 +7,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.test.AbstractUtilTest;
 
-public class TestTagFromFilenameProcessor extends AbstractUtilTest
+public class TestTagFromFilenameProcessor extends AbstractOtrcastTest
 {
 	
 	final static Logger logger = LoggerFactory.getLogger(TestTagFromFilenameProcessor.class);

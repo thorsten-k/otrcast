@@ -5,13 +5,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.AbstractOtrcastTest;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.txt.TxtLinkListFactory;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.otr.Recording;
-import de.kisner.otrcast.test.AbstractUtilTest;
 
-public class TestTxtLinkListFactoryXmlStructure extends AbstractUtilTest
+public class TestTxtLinkListFactoryXmlStructure extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestTxtLinkListFactoryXmlStructure.class);
 	

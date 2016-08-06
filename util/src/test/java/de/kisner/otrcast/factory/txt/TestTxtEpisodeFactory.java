@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.AbstractUtilTest;
+import de.kisner.otrcast.AbstractOtrcastTest;
 
-public class TestTxtEpisodeFactory extends AbstractUtilTest
+public class TestTxtEpisodeFactory extends AbstractOtrcastTest
 { 
 	final static Logger logger = LoggerFactory.getLogger(TestTxtEpisodeFactory.class);
 	

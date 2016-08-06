@@ -1,18 +1,17 @@
-package de.kisner.otrcast.test;
-
-import net.sf.ahtutils.test.AbstractAhtUtilsTest;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
+package de.kisner.otrcast;
 
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import net.sf.ahtutils.test.AbstractJeeslTest;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
-public abstract class AbstractUtilTest extends AbstractAhtUtilsTest
+public abstract class AbstractOtrcastTest extends AbstractJeeslTest
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractUtilTest.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractOtrcastTest.class);
 	
 	@BeforeClass
 	public static void initPrefixMapper()
