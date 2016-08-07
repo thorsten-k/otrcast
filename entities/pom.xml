@@ -12,30 +12,7 @@
 	<artifactId>otrcast-entities</artifactId>
     <packaging>jar</packaging>
     <name>OTR - XML</name>
-   
-	<build>
-		<plugins>
-			<plugin>
-        		<groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-source-plugin</artifactId>
-        		<version>2.1.2</version>
-        		<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals><goal>jar</goal></goals>
-					</execution>
-				</executions>
-      		</plugin>
-      		<plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>versions-maven-plugin</artifactId>
-		        <configuration>
-					<rulesUri>${maven.ignore}</rulesUri>
-		        </configuration>
-			</plugin>
-    	</plugins>
-	</build>
-   
+
 	<dependencies>
 		<!-- JAXB-XML -->
 		<dependency>
@@ -118,4 +95,25 @@
 		</dependency>
 	
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>versions-maven-plugin</artifactId>
+		        <configuration><rulesUri>${maven.ignore.verisons}</rulesUri></configuration>
+			</plugin>
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-source-plugin</artifactId>
+        		<version>2.1.2</version>
+        		<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals><goal>jar</goal></goals>
+					</execution>
+				</executions>
+      		</plugin>
+    	</plugins>
+	</build>
 </project>

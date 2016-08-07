@@ -92,9 +92,7 @@
 			<plugin>
 		        <groupId>org.codehaus.mojo</groupId>
 		        <artifactId>versions-maven-plugin</artifactId>
-		        <configuration>
-					<rulesUri>${maven.ignore}</rulesUri>
-		        </configuration>
+		        <configuration><rulesUri>${maven.ignore.verisons}</rulesUri></configuration>
 			</plugin>
 			<plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
