@@ -225,7 +225,7 @@
        			<directory>${my.build.directory}</directory>
        		</build>
    		</profile>
-   		   		<profile>
+		<profile>
 			<id>only-eclipse</id>
 			<activation><property><name>m2e.version</name></property></activation>
 			<build>
