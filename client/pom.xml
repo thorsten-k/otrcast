@@ -261,20 +261,33 @@
 		        <configuration><rulesUri>${maven.ignore.verisons}</rulesUri></configuration>
 			</plugin>
 			<plugin>
-			  <groupId>org.dstovall</groupId>
-			  <artifactId>onejar-maven-plugin</artifactId>
-			  <executions>
-			    <execution>
-			      <configuration>
-			        <mainClass>de.kisner.otrcast.app.AviToMp4</mainClass>
-			        <filename>OtrCast-${project.version}.jar</filename>
-			      </configuration>
-			      <goals>
-			        <goal>one-jar</goal>
-			      </goals>
-			    </execution>
-			  </executions>
+				<groupId>com.jolira</groupId>
+				<artifactId>onejar-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<configuration>
+							<mainClass>de.kisner.otrcast.app.AviToMp4</mainClass>
+							<filename>OtrCast-${project.version}.jar</filename>
+						</configuration><goals><goal>one-jar</goal></goals>
+					</execution>
+				</executions>
 			</plugin>
+			<!-- Maven Shade Plugin 
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <configuration>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>-->
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

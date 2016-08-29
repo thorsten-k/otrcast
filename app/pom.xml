@@ -257,7 +257,7 @@
 		        <configuration><rulesUri>${maven.ignore.verisons}</rulesUri></configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.dstovall</groupId>
+				<groupId>com.jolira</groupId>
 				<artifactId>onejar-maven-plugin</artifactId>
 				<executions>
 				  <execution>
@@ -265,9 +265,7 @@
 				      <mainClass>de.kisner.otrcast.app.OtrCastClient</mainClass>
 				      <filename>OtrCast-${project.version}.jar</filename>
 				    </configuration>
-				    <goals>
-				      <goal>one-jar</goal>
-				    </goals>
+				    <goals><goal>one-jar</goal></goals>
 				  </execution>
 				</executions>
 			</plugin>
@@ -285,20 +283,6 @@
 	                </archive>
 	            </configuration>
         	</plugin>
-<!--        	<plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
- -->		</plugins>
+        </plugins>
 	</build>   
 </project>
