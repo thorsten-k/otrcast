@@ -257,16 +257,28 @@
 		        <configuration><rulesUri>${maven.ignore.verisons}</rulesUri></configuration>
 			</plugin>
 			<plugin>
-				<groupId>com.jolira</groupId>
-				<artifactId>onejar-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<filters>
+				        <filter>
+				            <artifact>*:*</artifact>
+				            <excludes>
+				                <exclude>META-INF/*.SF</exclude>
+				                <exclude>META-INF/*.DSA</exclude>
+				                <exclude>META-INF/*.RSA</exclude>
+				            </excludes>
+				        </filter>
+				    </filters>
+					<transformers>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>de.kisner.otrcast.app.AviToMp4</mainClass>
+						</transformer>
+					</transformers>
+				</configuration>
 				<executions>
-				  <execution>
-				    <configuration>
-				      <mainClass>de.kisner.otrcast.app.OtrCastClient</mainClass>
-				      <filename>OtrCast-${project.version}.jar</filename>
-				    </configuration>
-				    <goals><goal>one-jar</goal></goals>
-				  </execution>
+					<execution><phase>package</phase><goals><goal>shade</goal></goals></execution>
 				</executions>
 			</plugin>
 			<plugin>
