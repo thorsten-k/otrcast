@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
 public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractAhtUtilsXmlTest<T>
 {
@@ -37,7 +37,7 @@ public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractAhtU
 	@BeforeClass
 	public static void initXml()
 	{
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		DateUtil.ignoreTimeZone=true;
 	}
 	

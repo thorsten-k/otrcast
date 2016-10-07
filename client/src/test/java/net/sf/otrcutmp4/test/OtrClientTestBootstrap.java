@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.OtrCastBootstrap;
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 
@@ -24,7 +24,7 @@ public class OtrClientTestBootstrap
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("otrcutmp4-client.test");
 			loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
 		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		ConfigLoader.add(OtrCastBootstrap.xmlConfig);

@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 
 public abstract class AbstractClientTest
@@ -51,7 +51,7 @@ public abstract class AbstractClientTest
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 	
 	@BeforeClass

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
@@ -87,7 +87,7 @@ public class OtrCastClient
 
 	public static void main(String args[]) throws Exception
 	{
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
 		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
 		uOption.setLog4jPaths("otrcast-app/config");

@@ -15,7 +15,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import net.sf.ahtutils.web.rest.RestUrlDelay;
@@ -40,7 +40,7 @@ public class OtrCastBootstrap
 		LoggerInit loggerInit = new LoggerInit(log4jConfig);
 		loggerInit.addAltPath("otrcast-app/config");
 		loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 	
 	public static Configuration init(){return init(xmlConfig);}

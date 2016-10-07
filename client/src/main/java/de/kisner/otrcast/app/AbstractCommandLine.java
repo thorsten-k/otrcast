@@ -7,7 +7,7 @@ import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 
 public class AbstractCommandLine
@@ -53,6 +53,6 @@ public class AbstractCommandLine
 		loggerInit.addAltPath("otrcast-client/config");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 }

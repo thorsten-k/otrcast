@@ -18,7 +18,7 @@ import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
 import de.kisner.otrcast.controller.media.Mp4LibraryScanner;
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
@@ -115,7 +115,7 @@ public class OtrMediaCenter
 
 	public static void main(String args[]) throws Exception
 	{
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
 		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
 		uOption.setLog4jPaths("config.otrcast-client");

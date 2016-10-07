@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import net.sf.ahtutils.test.AbstractJeeslTest;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -16,7 +16,7 @@ public abstract class AbstractOtrcastTest extends AbstractJeeslTest
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 	
 	@BeforeClass

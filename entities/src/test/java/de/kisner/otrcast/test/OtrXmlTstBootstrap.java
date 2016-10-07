@@ -6,7 +6,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
 public class OtrXmlTstBootstrap
 {
@@ -17,6 +17,6 @@ public class OtrXmlTstBootstrap
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 		loggerInit.addAltPath("config.otrcutmp4-xml.test");
 		loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 }

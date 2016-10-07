@@ -12,7 +12,7 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
 public class OtrUtilTestBootstrap
 {
@@ -25,7 +25,7 @@ public class OtrUtilTestBootstrap
 			loggerInit.addAltPath("src/test/resources/config.otrcutmp4-util.test");
 			loggerInit.init();
 		
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());	
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());	
 			
 		File fConfig = ExlpCentralConfigPointer.getFile("otr","util.test");
 		ConfigLoader.add(fConfig.getAbsolutePath());

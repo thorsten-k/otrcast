@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.kisner.otrcast.model.xml.OtrCutNsPrefixMapper;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
 public abstract class AbstractOtrJsonTest extends AbstractAhtUtilsXmlTest
 {
@@ -41,7 +41,7 @@ public abstract class AbstractOtrJsonTest extends AbstractAhtUtilsXmlTest
 	@BeforeClass
 	public static void initXml()
 	{
-		JaxbUtil.setNsPrefixMapper(new OtrCutNsPrefixMapper());
+		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		DateUtil.ignoreTimeZone=true;
 	}
 	

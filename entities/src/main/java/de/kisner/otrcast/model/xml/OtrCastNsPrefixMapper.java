@@ -2,9 +2,11 @@ package de.kisner.otrcast.model.xml;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
+import org.jeesl.model.xml.JeeslNsPrefixMapper;
+
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
-public class OtrCutNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
+public class OtrCastNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {
@@ -19,7 +21,8 @@ public class OtrCutNsPrefixMapper extends NamespacePrefixMapper implements NsPre
         else if("http://otrcutmp4.sf.net/video".equals(namespaceUri) ){return "v";}
     	else if("http://www.itunes.com/dtds/podcast-1.0.dtd".equals(namespaceUri) ){return "itunes";}
         
-        return suggestion;
+    	JeeslNsPrefixMapper jeeslPrefixMapper = new JeeslNsPrefixMapper();
+        return jeeslPrefixMapper.getPreferredPrefix(namespaceUri, suggestion, requirePrefix);
     }
 
     public String[] getPreDeclaredNamespaceUris()
