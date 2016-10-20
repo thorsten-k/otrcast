@@ -5,9 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.test.AbstractOtrXmlTest;
 
-public abstract class AbstractXmlSeriesTest extends AbstractOtrXmlTest
+public abstract class AbstractXmlSeriesTest <T extends Object> extends AbstractOtrXmlTest<T> 
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractXmlSeriesTest.class);
 
-    protected static final String dirSuffix = "series";
+	public AbstractXmlSeriesTest(Class<T> cXml)
+	{
+		super(cXml,"series");
+	}
 }

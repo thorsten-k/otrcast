@@ -1,53 +1,29 @@
 package de.kisner.otrcast.model.xml.mc;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.mc.ServerStatus;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlServerStatus extends AbstractXmlMcTest
+public class TestXmlServerStatus extends AbstractXmlMcTest<ServerStatus>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlServerStatus.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,ServerStatus.class.getSimpleName()+".xml");
-	}
+	public TestXmlServerStatus(){super(ServerStatus.class);}
+	public static ServerStatus create(boolean withChildren){return (new TestXmlServerStatus()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	ServerStatus actual = create(true);
-    	ServerStatus expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), ServerStatus.class);
-    	assertJaxbEquals(expected, actual);
-    }
-    
-    public static ServerStatus create(boolean withChilds)
+    public ServerStatus build(boolean withChilds)
     {
     	ServerStatus xml = new ServerStatus();
     	xml.setLastRestart(getDefaultXmlDate());
     	
     	return xml;
     }
-    
-    public void save() {save(create(true), fXml);}
 	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-			
-		TestXmlServerStatus.initXml();	
-		TestXmlServerStatus.initFiles();
 		TestXmlServerStatus test = new TestXmlServerStatus();
-		test.save();
+		test.saveReferenceXml();
     }
 }

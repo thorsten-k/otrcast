@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.test.AbstractOtrXmlTest;
 
-public abstract class AbstractXmlTvDbTest <T extends Object> extends AbstractOtrXmlTest<T> 
+public abstract class AbstractXmlTvDbTest <T extends Object> extends AbstractOtrXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractXmlTvDbTest.class);
 

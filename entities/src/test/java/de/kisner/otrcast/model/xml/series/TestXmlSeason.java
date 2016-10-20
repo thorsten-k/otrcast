@@ -1,39 +1,21 @@
 package de.kisner.otrcast.model.xml.series;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.mc.TestXmlImage;
-import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.tvdb.TestXmlBanners;
 import de.kisner.otrcast.model.xml.tvdb.TestXmlSync;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlSeason extends AbstractXmlSeriesTest
+public class TestXmlSeason extends AbstractXmlSeriesTest<Season>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlSeason.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-        setXmlFile(dirSuffix,"season");
-	}
+	public TestXmlSeason(){super(Season.class);}
+	public static Season create(boolean withChildren){return (new TestXmlSeason()).build(withChildren);}
     
-    @Test
-    public void testAclContainer() throws FileNotFoundException
-    {
-    	Season test = create(true);
-    	Season ref = (Season)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Season.class);
-    	assertJaxbEquals(ref, test);
-    }
-    
-    public static Season create(boolean withChilds)
+    public Season build(boolean withChilds)
     {
     	Season xml = new Season();
     	xml.setId(123);
@@ -54,15 +36,11 @@ public class TestXmlSeason extends AbstractXmlSeriesTest
     	
     	return xml;
     }
-	
-    public void save() {save(create(true), fXml);}
-    
+
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-		
-		TestXmlSeason.initFiles();	
 		TestXmlSeason test = new TestXmlSeason();
-		test.save();
+		test.saveReferenceXml();
     }
 }

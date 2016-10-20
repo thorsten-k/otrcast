@@ -1,16 +1,15 @@
 package de.kisner.otrcast.model.xml.container;
 
-import java.io.File;
-
+import org.jeesl.AbstractXmlTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.AbstractOtrXmlTest;
-
-public abstract class AbstractXmlContainerTest extends AbstractOtrXmlTest
+public abstract class AbstractXmlContainerTest <T extends Object> extends AbstractXmlTest<T> 
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractXmlContainerTest.class);
 	
-	protected static final String rootDir = "src/test/resources/data/xml/container";
-	protected static File fXml;
+	public AbstractXmlContainerTest(Class<T> cXml)
+	{
+		super(cXml,"container");
+	}
 }

@@ -1,32 +1,18 @@
 package de.kisner.otrcast.model.xml.series;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.series.Movies;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlMovies extends AbstractXmlSeriesTest
+public class TestXmlMovies extends AbstractXmlSeriesTest<Movies>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlMovies.class);
 	
-	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix,Movies.class);}
+	public TestXmlMovies(){super(Movies.class);}
+	public static Movies create(boolean withChildren){return (new TestXmlMovies()).build(withChildren);}
     
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Movies test = create(true);
-    	Movies ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Movies.class);
-    	assertJaxbEquals(ref, test);
-    }
-    
-    public static Movies create(boolean withChilds)
+    public Movies build(boolean withChilds)
     {
     	Movies xml = new Movies();
     	
@@ -44,9 +30,7 @@ public class TestXmlMovies extends AbstractXmlSeriesTest
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-		
-		TestXmlMovies.initFiles();	
 		TestXmlMovies test = new TestXmlMovies();
-		test.save();
+		test.saveReferenceXml();
     }
 }
