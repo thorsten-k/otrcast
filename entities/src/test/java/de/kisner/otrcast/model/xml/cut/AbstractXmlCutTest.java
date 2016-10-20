@@ -1,16 +1,16 @@
 package de.kisner.otrcast.model.xml.cut;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.test.AbstractOtrXmlTest;
 
-public abstract class AbstractXmlCutTest extends AbstractOtrXmlTest
+public abstract class AbstractXmlCutTest  <T extends Object> extends AbstractOtrXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractXmlCutTest.class);
 	
-	protected static final String rootDir = "src/test/resources/data/xml/cut";
-	protected static File fXml;
+	public AbstractXmlCutTest(Class<T> cXml)
+	{
+		super(cXml,"cut");
+	}
 }

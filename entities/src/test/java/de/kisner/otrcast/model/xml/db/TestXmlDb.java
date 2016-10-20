@@ -1,46 +1,29 @@
 package de.kisner.otrcast.model.xml.db;
 
-import java.io.FileNotFoundException;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.db.Db;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
-import net.sf.exlp.util.xml.JaxbUtil;
 
-public class TestXmlDb extends AbstractXmlDbTest
+public class TestXmlDb extends AbstractXmlDbTest<Db>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlDb.class);
 	
-	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix, Db.class);}
-    
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Db actual = create();
-    	Db expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Db.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlDb(){super(Db.class);}
+	public static Db create(boolean withChildren){return (new TestXmlDb()).build(withChildren);}
      
-    public static Db create()
+    public Db build(boolean withChilds)
     {
     	Db xml = new Db();
     	xml.setId("myImage");
     	xml.setSource("mySource");
     	return xml;
     }
-    
-    public void save() {save(create(), fXml);}
 	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-		
-		TestXmlDb.initFiles();	
 		TestXmlDb test = new TestXmlDb();
-		test.save();
+		test.saveReferenceXml();
     }
 }

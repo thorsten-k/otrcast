@@ -1,39 +1,19 @@
 package de.kisner.otrcast.model.xml.cut;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.series.TestXmlVideo;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlCutList extends AbstractXmlCutTest
+public class TestXmlCutList extends AbstractXmlCutTest<CutList>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlCutList.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,"cutList.xml");
-	}
+	public TestXmlCutList(){super(CutList.class);}
+	public static CutList create(boolean withChildren){return (new TestXmlCutList()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	CutList actual = create();
-    	CutList expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), CutList.class);
-    	assertJaxbEquals(expected, actual);
-    }
-    
-    private static CutList create(){return create(true);}
-    public static CutList create(boolean withChilds)
+    public CutList build(boolean withChilds)
     {
     	CutList xml = new CutList();
     	xml.setId("myId");
@@ -54,15 +34,11 @@ public class TestXmlCutList extends AbstractXmlCutTest
     	
     	return xml;
     }
-    
-    public void save() {save(create(), fXml);}
 	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-			
-		TestXmlCutList.initFiles();	
 		TestXmlCutList test = new TestXmlCutList();
-		test.save();
+		test.saveReferenceXml();
     }
 }

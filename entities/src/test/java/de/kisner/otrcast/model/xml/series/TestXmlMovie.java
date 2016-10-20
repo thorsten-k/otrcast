@@ -26,7 +26,7 @@ public class TestXmlMovie extends AbstractXmlSeriesTest<Movie>
     	{
     		xml.setImage(TestXmlImage.create(false));
     		xml.setStorage(TestXmlStorage.create(false));
-    		xml.setDb(TestXmlDb.create());
+    		xml.setDb(TestXmlDb.create(false));
     	}
     	
     	return xml;

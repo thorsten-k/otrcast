@@ -1,38 +1,19 @@
 package de.kisner.otrcast.model.xml.cut;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.otr.TestXmlOtrId;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlVideoFile extends AbstractXmlCutTest
+public class TestXmlVideoFile extends AbstractXmlCutTest<VideoFile>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlVideoFile.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,"videoFile.xml");
-	}
+	public TestXmlVideoFile(){super(VideoFile.class);}
+	public static VideoFile create(boolean withChildren){return (new TestXmlVideoFile()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	VideoFile actual = create(true);
-    	VideoFile expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), VideoFile.class);
-    	assertJaxbEquals(expected, actual);
-    }
-    
-    public static VideoFile create(boolean withChilds)
+    public VideoFile build(boolean withChilds)
     {
     	VideoFile xml = new VideoFile();
     	
@@ -46,15 +27,11 @@ public class TestXmlVideoFile extends AbstractXmlCutTest
     	
     	return xml;
     }
-    
-    public void save() {save(create(true), fXml);}
-	
+
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-			
-		TestXmlVideoFile.initFiles();	
 		TestXmlVideoFile test = new TestXmlVideoFile();
-		test.save();
+		test.saveReferenceXml();
     }
 }

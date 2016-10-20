@@ -40,8 +40,8 @@ public class TestXmlItem extends AbstractXmlRssTest
     	{
     		xml.setTitle(TestXmlTitle.create());
     		xml.setDescription(TestXmlDescription.create());
-    		xml.setSummary(TestXmlSummary.create());
-    		xml.setImage(de.kisner.otrcast.model.xml.itunes.TestXmlImage.create());
+    		xml.setSummary(TestXmlSummary.create(false));
+    		xml.setImage(de.kisner.otrcast.model.xml.itunes.TestXmlImage.create(false));
     		xml.setPubDate(TestXmlPubDate.create());
     		xml.setEnclosure(TestXmlEnclosure.create());
     		xml.setGuid(TestXmlGuid.create());
