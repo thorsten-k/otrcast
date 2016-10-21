@@ -1,37 +1,18 @@
 package de.kisner.otrcast.model.xml.rss;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.rss.Rss;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlRss extends AbstractXmlRssTest
+public class TestXmlRss extends AbstractXmlRssTest<Rss>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlRss.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-        fXml = new File(getXmlDir(dirSuffix),Rss.class.getSimpleName()+".xml");
-	}
-    
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Rss actual = create(true);
-    	Rss expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Rss.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlRss(){super(Rss.class);}
+	public static Rss create(boolean withChildren){return (new TestXmlRss()).build(withChildren);}
      
-    public static Rss create(boolean withChilds)
+    public Rss build(boolean withChilds)
     {
     	Rss xml = new Rss();
     	xml.setVersion("myVersion");
@@ -43,15 +24,12 @@ public class TestXmlRss extends AbstractXmlRssTest
     	
     	return xml;
     }
-    
-    public void save() {save(create(true), fXml);}
-	
+
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-		
-		TestXmlRss.initFiles();	
+
 		TestXmlRss test = new TestXmlRss();
-		test.save();
+		test.saveReferenceXml();
     }
 }

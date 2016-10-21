@@ -1,63 +1,40 @@
 package de.kisner.otrcast.model.xml.rss;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.rss.Channel;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlChannel extends AbstractXmlRssTest
+public class TestXmlChannel extends AbstractXmlRssTest<Channel>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlChannel.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-        fXml = new File(getXmlDir(dirSuffix),Channel.class.getSimpleName()+".xml");
-	}
-    
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Channel actual = create(true);
-    	Channel expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Channel.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlChannel(){super(Channel.class);}
+	public static Channel create(boolean withChildren){return (new TestXmlChannel()).build(withChildren);}
      
-    public static Channel create(boolean withChilds)
+    public Channel build(boolean withChilds)
     {
     	Channel xml = new Channel();
     	
     	if(withChilds)
     	{
-    		xml.setTitle(TestXmlTitle.create());
-    		xml.setLink(TestXmlLink.create());
-    		xml.setDescription(TestXmlDescription.create());
-    		xml.setLanguage(TestXmlLanguage.create());
-    		xml.setCopyright(TestXmlCopyright.create());
-    		xml.setPubDate(TestXmlPubDate.create());
+    		xml.setTitle(TestXmlTitle.create(false));
+    		xml.setLink(TestXmlLink.create(false));
+    		xml.setDescription(TestXmlDescription.create(false));
+    		xml.setLanguage(TestXmlLanguage.create(false));
+    		xml.setCopyright(TestXmlCopyright.create(false));
+    		xml.setPubDate(TestXmlPubDate.create(false));
     		xml.setImage(TestXmlImage.create(false));
     		xml.getItem().add(TestXmlItem.create(false));xml.getItem().add(TestXmlItem.create(false));
     	}
     	
     	return xml;
     }
-    
-    public void save() {save(create(true), fXml);}
 	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-		
-		TestXmlChannel.initFiles();	
 		TestXmlChannel test = new TestXmlChannel();
-		test.save();
+		test.saveReferenceXml();
     }
 }
