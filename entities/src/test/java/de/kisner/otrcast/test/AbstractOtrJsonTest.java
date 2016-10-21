@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
-public abstract class AbstractOtrJsonTest extends AbstractAhtUtilsXmlTest
+public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAhtUtilsXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrJsonTest.class);
 	

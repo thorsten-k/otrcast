@@ -1,38 +1,18 @@
 package de.kisner.otrcast.model.xml.otr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.otr.Download;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlDownload extends AbstractXmlOtrTest
+public class TestXmlDownload extends AbstractXmlOtrTest<Download>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlDownload.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,"download.xml");
-	}
+	public TestXmlDownload(){super(Download.class);}
+	public static Download create(boolean withChildren){return (new TestXmlDownload()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	Download test = create();
-    	Download ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Download.class);
-    	assertJaxbEquals(ref, test);
-    }
-    
-    private static Download create(){return create(true);}
-    public static Download create(boolean withChilds)
+    public Download build(boolean withChilds)
     {
     	Download xml = new Download();
     	xml.setId(1);
@@ -49,14 +29,10 @@ public class TestXmlDownload extends AbstractXmlOtrTest
     	return xml;
     }
     
-    public void save() {save(create(), fXml);}
-	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
-			
-		TestXmlDownload.initFiles();	
+		OtrXmlTstBootstrap.init();	
 		TestXmlDownload test = new TestXmlDownload();
-		test.save();
+		test.saveReferenceXml();
     }
 }

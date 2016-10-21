@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import de.kisner.otrcast.test.AbstractOtrJsonTest;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestJsonOtrIdentifier extends AbstractOtrJsonTest
+public class TestJsonOtrIdentifier extends AbstractOtrJsonTest<JsonOtrIdentifier>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestJsonOtrIdentifier.class);
 	

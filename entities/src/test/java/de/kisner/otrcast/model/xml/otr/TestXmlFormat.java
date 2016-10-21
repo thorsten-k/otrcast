@@ -1,37 +1,18 @@
 package de.kisner.otrcast.model.xml.otr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlFormat extends AbstractXmlOtrTest
+public class TestXmlFormat extends AbstractXmlOtrTest<Format>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlFormat.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,"format.xml");
-	}
+	public TestXmlFormat(){super(Format.class);}
+	public static Format create(boolean withChildren){return (new TestXmlFormat()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	Format test = create(true);
-    	Format ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Format.class);
-    	assertJaxbEquals(ref, test);
-    }
-    
-    public static Format create(boolean withChilds)
+    public Format build(boolean withChilds)
     {
     	Format xml = new Format();
     	xml.setId(1);
@@ -50,14 +31,10 @@ public class TestXmlFormat extends AbstractXmlOtrTest
     	return xml;
     }
     
-    public void save() {save(create(true), fXml);}
-	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();
-			
-		TestXmlFormat.initFiles();	
 		TestXmlFormat test = new TestXmlFormat();
-		test.save();
+		test.saveReferenceXml();
     }
 }

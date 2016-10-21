@@ -1,38 +1,18 @@
 package de.kisner.otrcast.model.xml.otr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.otr.Linklist;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlLinkList extends AbstractXmlOtrTest
+public class TestXmlLinkList extends AbstractXmlOtrTest<Linklist>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlOtrId.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,"linklist.xml");
-	}
+	public TestXmlLinkList(){super(Linklist.class);}
+	public static Linklist create(boolean withChildren){return (new TestXmlLinkList()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	Linklist test = create();
-    	Linklist ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Linklist.class);
-    	assertJaxbEquals(ref, test);
-    }
-    
-    private static Linklist create(){return create(true);}
-    public static Linklist create(boolean withChilds)
+    public Linklist build(boolean withChilds)
     {
     	Linklist xml = new Linklist();
     	
@@ -46,14 +26,10 @@ public class TestXmlLinkList extends AbstractXmlOtrTest
     	return xml;
     }
     
-    public void save() {save(create(), fXml);}
-	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();	
-			
-		TestXmlLinkList.initFiles();	
+		OtrXmlTstBootstrap.init();		
 		TestXmlLinkList test = new TestXmlLinkList();
-		test.save();
+		test.saveReferenceXml();
     }
 }

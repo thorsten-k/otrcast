@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import de.kisner.otrcast.test.AbstractOtrJsonTest;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestJsonOtrBox extends AbstractOtrJsonTest
+public class TestJsonOtrBox extends AbstractOtrJsonTest<JsonOtrBox>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestJsonOtrBox.class);
 	

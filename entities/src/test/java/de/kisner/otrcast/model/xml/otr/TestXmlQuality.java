@@ -1,38 +1,18 @@
 package de.kisner.otrcast.model.xml.otr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.test.OtrXmlTstBootstrap;
 
-public class TestXmlQuality extends AbstractXmlOtrTest
+public class TestXmlQuality extends AbstractXmlOtrTest<Quality>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlQuality.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		fXml = new File(rootDir,"quality.xml");
-	}
+	public TestXmlQuality(){super(Quality.class);}
+	public static Quality create(boolean withChildren){return (new TestXmlQuality()).build(withChildren);}
     
-    @Test
-    public void testDownload() throws FileNotFoundException
-    {
-    	Quality test = create();
-    	Quality ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Quality.class);
-    	assertJaxbEquals(ref, test);
-    }
-    
-    private static Quality create(){return create(true);}
-    public static Quality create(boolean withChilds)
+    public Quality build(boolean withChilds)
     {
     	Quality xml = new Quality();
     	xml.setId(1);
@@ -49,14 +29,10 @@ public class TestXmlQuality extends AbstractXmlOtrTest
     	return xml;
     }
     
-    public void save() {save(create(), fXml);}
-	
 	public static void main(String[] args)
     {
 		OtrXmlTstBootstrap.init();		
-			
-		TestXmlQuality.initFiles();	
 		TestXmlQuality test = new TestXmlQuality();
-		test.save();
+		test.saveReferenceXml();
     }
 }
