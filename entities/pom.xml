@@ -11,24 +11,29 @@
 	
 	<artifactId>otrcast-entities</artifactId>
     <packaging>jar</packaging>
-    <name>OTR - XML</name>
+    <name>OTR - Entities</name>
 
 	<dependencies>
-		<!-- JAXB-XML -->
-		<dependency>
-   	   		<groupId>net.sf.exlp</groupId>
-   	   		<artifactId>exlp-xml</artifactId>
-   	   		<type>jar</type>
-   	   		<scope>compile</scope>
-   	   	</dependency>
+		<!-- JEESL -->
    	   	<dependency>
    	   		<groupId>org.jeesl</groupId>
    	   		<artifactId>jeesl-xml</artifactId>
    	   		<type>jar</type>
    	   		<scope>compile</scope>
    	   	</dependency>
+   	   	<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-test</artifactId>
+			<scope>test</scope>
+		</dependency>
    	   	
    	   	<!-- ExLP -->
+   	   	<dependency>
+   	   		<groupId>net.sf.exlp</groupId>
+   	   		<artifactId>exlp-xml</artifactId>
+   	   		<type>jar</type>
+   	   		<scope>compile</scope>
+   	   	</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
@@ -87,13 +92,7 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	
+		</dependency>	
 	</dependencies>
 	
 	<build>

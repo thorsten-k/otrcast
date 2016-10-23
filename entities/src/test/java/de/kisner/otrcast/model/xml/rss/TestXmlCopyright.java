@@ -12,7 +12,7 @@ public class TestXmlCopyright extends AbstractXmlRssTest<Copyright>
 	public TestXmlCopyright(){super(Copyright.class);}
 	public static Copyright create(boolean withChildren){return (new TestXmlCopyright()).build(withChildren);}
      
-    public Copyright build()
+    @Override public Copyright build(boolean withChilds)
     {
     	Copyright xml = new Copyright();
     	xml.setValue("myCopyright");

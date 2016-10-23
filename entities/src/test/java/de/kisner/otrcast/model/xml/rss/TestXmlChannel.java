@@ -12,7 +12,7 @@ public class TestXmlChannel extends AbstractXmlRssTest<Channel>
 	public TestXmlChannel(){super(Channel.class);}
 	public static Channel create(boolean withChildren){return (new TestXmlChannel()).build(withChildren);}
      
-    public Channel build(boolean withChilds)
+    @Override public Channel build(boolean withChilds)
     {
     	Channel xml = new Channel();
     	
