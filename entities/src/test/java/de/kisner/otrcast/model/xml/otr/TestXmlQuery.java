@@ -9,7 +9,7 @@ import de.kisner.otrcast.model.xml.series.TestXmlEpisode;
 import de.kisner.otrcast.model.xml.series.TestXmlMovie;
 import de.kisner.otrcast.model.xml.series.TestXmlSeason;
 import de.kisner.otrcast.model.xml.series.TestXmlSeries;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlQuery extends AbstractXmlOtrTest<Query>
 {
@@ -36,7 +36,7 @@ public class TestXmlQuery extends AbstractXmlOtrTest<Query>
     
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlQuery test = new TestXmlQuery();
 		test.saveReferenceXml();
     }

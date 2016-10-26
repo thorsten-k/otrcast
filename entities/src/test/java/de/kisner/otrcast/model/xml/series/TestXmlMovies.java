@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlMovies extends AbstractXmlSeriesTest<Movies>
 {
@@ -24,12 +24,10 @@ public class TestXmlMovies extends AbstractXmlSeriesTest<Movies>
     	
     	return xml;
     }
-    
-    public void save() {save(create(true), fXml);}
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlMovies test = new TestXmlMovies();
 		test.saveReferenceXml();
     }

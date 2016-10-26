@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.tvdb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlSync extends AbstractXmlTvDbTest<Sync>
 {
@@ -27,7 +27,7 @@ public class TestXmlSync extends AbstractXmlTvDbTest<Sync>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlSync test = new TestXmlSync();
 		test.saveReferenceXml();
     }

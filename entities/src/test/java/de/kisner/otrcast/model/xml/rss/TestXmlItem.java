@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.itunes.TestXmlSummary;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlItem extends AbstractXmlRssTest<Item>
 {
@@ -31,7 +31,7 @@ public class TestXmlItem extends AbstractXmlRssTest<Item>
     
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlItem test = new TestXmlItem();
 		test.saveReferenceXml();
     }

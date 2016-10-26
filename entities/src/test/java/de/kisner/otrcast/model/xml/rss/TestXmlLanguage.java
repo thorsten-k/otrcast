@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.rss;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlLanguage extends AbstractXmlRssTest<Language>
 {
@@ -21,7 +21,7 @@ public class TestXmlLanguage extends AbstractXmlRssTest<Language>
     
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();	
+		OtrXmlTestBootstrap.init();	
 		TestXmlLanguage test = new TestXmlLanguage();
 		test.saveReferenceXml();
     }

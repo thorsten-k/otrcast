@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.itunes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlImage extends AbstractXmlItunesTest<Image>
 {
@@ -21,7 +21,7 @@ public class TestXmlImage extends AbstractXmlItunesTest<Image>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlImage test = new TestXmlImage();
 		test.saveReferenceXml();
     }

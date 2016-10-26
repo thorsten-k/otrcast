@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.db.TestXmlDb;
 import de.kisner.otrcast.model.xml.mc.TestXmlImage;
 import de.kisner.otrcast.model.xml.mc.TestXmlStorage;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlMovie extends AbstractXmlSeriesTest<Movie>
 {
@@ -34,7 +34,7 @@ public class TestXmlMovie extends AbstractXmlSeriesTest<Movie>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlMovie test = new TestXmlMovie();
 		test.saveReferenceXml();
     }

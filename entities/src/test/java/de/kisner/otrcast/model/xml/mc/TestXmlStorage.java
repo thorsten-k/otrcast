@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.mc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 import net.sf.exlp.util.DateUtil;
 
 public class TestXmlStorage extends AbstractXmlMcTest<Storage>
@@ -27,7 +27,7 @@ public class TestXmlStorage extends AbstractXmlMcTest<Storage>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		DateUtil.ignoreTimeZone=true;	
 		TestXmlStorage test = new TestXmlStorage();
 		test.saveReferenceXml();

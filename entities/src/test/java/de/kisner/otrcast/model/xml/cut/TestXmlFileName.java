@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.cut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlFileName extends AbstractXmlCutTest<FileName>
 {
@@ -22,7 +22,7 @@ public class TestXmlFileName extends AbstractXmlCutTest<FileName>
 
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlFileName test = new TestXmlFileName();
 		test.saveReferenceXml();
     }

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.tvdb.TestXmlSync;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlSeries extends AbstractXmlSeriesTest<Series>
 {
@@ -31,7 +31,7 @@ public class TestXmlSeries extends AbstractXmlSeriesTest<Series>
 
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlSeries test = new TestXmlSeries();
 		test.saveReferenceXml();
     }

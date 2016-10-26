@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.tvdb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlBanner extends AbstractXmlTvDbTest<Banner>
 {
@@ -24,7 +24,7 @@ public class TestXmlBanner extends AbstractXmlTvDbTest<Banner>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlBanner test = new TestXmlBanner();
 		test.saveReferenceXml();
     }

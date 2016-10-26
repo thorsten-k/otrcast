@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.cut.TestXmlCutList;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlRecording extends AbstractXmlOtrTest<Recording>
 {
@@ -31,7 +31,7 @@ public class TestXmlRecording extends AbstractXmlOtrTest<Recording>
     
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlRecording test = new TestXmlRecording();
 		test.saveReferenceXml();
     }

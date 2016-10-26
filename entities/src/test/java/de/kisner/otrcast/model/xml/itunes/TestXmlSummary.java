@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.itunes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlSummary extends AbstractXmlItunesTest<Summary>
 {
@@ -21,7 +21,7 @@ public class TestXmlSummary extends AbstractXmlItunesTest<Summary>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlSummary test = new TestXmlSummary();
 		test.saveReferenceXml();
     }

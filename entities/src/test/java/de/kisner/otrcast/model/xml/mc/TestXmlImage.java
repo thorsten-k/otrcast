@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.mc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlImage extends AbstractXmlMcTest<Image>
 {
@@ -29,7 +29,7 @@ public class TestXmlImage extends AbstractXmlMcTest<Image>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlImage test = new TestXmlImage();
 		test.saveReferenceXml();
     }

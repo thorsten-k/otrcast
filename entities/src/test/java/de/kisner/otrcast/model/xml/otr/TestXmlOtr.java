@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.TestXmlEpisode;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlOtr extends AbstractXmlOtrTest<Otr>
 {
@@ -28,7 +28,7 @@ public class TestXmlOtr extends AbstractXmlOtrTest<Otr>
     
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlOtr test = new TestXmlOtr();
 		test.saveReferenceXml();
     }

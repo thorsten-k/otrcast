@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import de.kisner.otrcast.test.AbstractOtrJsonTest;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestJsonOtrIdentifier extends AbstractOtrJsonTest<JsonOtrIdentifier>
 {
@@ -39,7 +39,7 @@ public class TestJsonOtrIdentifier extends AbstractOtrJsonTest<JsonOtrIdentifier
   
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 			
 		TestJsonOtrIdentifier test = new TestJsonOtrIdentifier();
 		TestJsonOtrIdentifier.initJson();

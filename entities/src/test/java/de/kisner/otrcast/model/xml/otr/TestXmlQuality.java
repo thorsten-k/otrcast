@@ -3,7 +3,7 @@ package de.kisner.otrcast.model.xml.otr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlQuality extends AbstractXmlOtrTest<Quality>
 {
@@ -31,7 +31,7 @@ public class TestXmlQuality extends AbstractXmlOtrTest<Quality>
     
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();		
+		OtrXmlTestBootstrap.init();		
 		TestXmlQuality test = new TestXmlQuality();
 		test.saveReferenceXml();
     }

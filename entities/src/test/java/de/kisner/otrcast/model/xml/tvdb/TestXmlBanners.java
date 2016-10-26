@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.series.TestXmlSeason;
-import de.kisner.otrcast.test.OtrXmlTstBootstrap;
+import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlBanners extends AbstractXmlTvDbTest<Banners>
 {
@@ -28,7 +28,7 @@ public class TestXmlBanners extends AbstractXmlTvDbTest<Banners>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTstBootstrap.init();
+		OtrXmlTestBootstrap.init();
 		TestXmlBanners test = new TestXmlBanners();
 		test.saveReferenceXml();
     }

@@ -8,14 +8,14 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
-public class OtrXmlTstBootstrap
+public class OtrXmlTestBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(OtrXmlTstBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrXmlTestBootstrap.class);
 		
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("config.otrcutmp4-xml.test");
+		loggerInit.addAltPath("otrcast-entities.test/config");
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}

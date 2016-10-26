@@ -4,33 +4,31 @@ import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.jeesl.test.AbstractJeeslXmlTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
+import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
-public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractAhtUtilsXmlTest<T>
+public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractJeeslXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrXmlTest.class);
 	
-	public AbstractOtrXmlTest(){this(null,null);}
 	public AbstractOtrXmlTest(Class<T> cXml,String xmlDirSuffix)
 	{
-		super(cXml,xmlDirSuffix);
+		super(cXml,"otrcast-entities.test/data/xml",xmlDirSuffix);
 	}
 	
 	@BeforeClass
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("config.otrcutmp4-xml.test");
+		loggerInit.addAltPath("otrcast-entities.test/config");
 		loggerInit.init();
     }
 	
