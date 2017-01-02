@@ -8,13 +8,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.interfaces.web.WebMovieFinder;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.series.Movies;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.web.omdbapi.OmdbMovieQuery;
 import de.kisner.otrcast.web.omdbapi.OmdbMovieSearch;
 
@@ -26,7 +26,7 @@ public class TestOmdbQuery extends AbstractOtrcastTest
     
 	public static void main(String args[]) throws ExlpConfigurationException, OtrProcessingException
     {
-        OtrUtilTestBootstrap.init();
+        OtrCastUtilTestBootstrap.init();
  
 		try
 		{

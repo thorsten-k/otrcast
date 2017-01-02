@@ -1,30 +1,29 @@
 package de.kisner.otrcast.factory.xml;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.xml.JaxbUtil;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
-import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestXmlVideoFileFactory extends AbstractOtrcastTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlVideoFileFactory.class);
-	
-	private String fileName;
-	
-//	@Rule public IgnoreOtherRule test = new IgnoreOtherRule("testHdAc3Key");
-	
-    @Test public void testAvi() throws OtrProcessingException
+		
+    private void test(String fileName) throws OtrProcessingException
     {
-    	fileName = "Hawaii_Five_0_11.08.25_21-15_sat1_60_TVOON_DE.mpg.HQ.avi";
     	VideoFile xml = XmlVideoFileFactory.create(fileName);
     	JaxbUtil.debug(xml);
     	Assert.assertTrue(xml.isSetOtrId());
@@ -33,26 +32,29 @@ public class TestXmlVideoFileFactory extends AbstractOtrcastTest
     	Assert.assertEquals(fileName, xml.getFileName().getValue());
     	
     }
-    
-    @Test public void testAvi2() throws OtrProcessingException
+     
+    @Test public void test() throws FileNotFoundException, IOException
     {
-    	fileName = "S02_E07_The_Blacklist_15.03.20_00-30_rtl_55_TVOON_DE.mpg.HQ.avi";
-    	VideoFile xml = XmlVideoFileFactory.create(fileName);
-    	JaxbUtil.debug(xml);
-    	Assert.assertTrue(xml.isSetOtrId());
-    	Assert.assertTrue(xml.isSetFileName());
-    	Assert.assertTrue(xml.getFileName().isSetValue());
-    	Assert.assertEquals(fileName, xml.getFileName().getValue());
+    	MultiResourceLoader mrl = new MultiResourceLoader();
+    	List<String> keys = IOUtils.readLines(mrl.searchIs("data/txt/otrkeys.txt"));
+    	for(String key : keys)
+    	{
+    		try
+    		{
+    			logger.debug("Testing"+key);
+				test(key);
+			}
+    		catch (OtrProcessingException e)
+    		{
+				e.printStackTrace();
+			}
+    	}
     }
     
-    public static void main(String[] args) throws ExlpConfigurationException, OtrProcessingException
+    public static void main(String[] args) throws ExlpConfigurationException, OtrProcessingException, FileNotFoundException, IOException
     {
-		OtrUtilTestBootstrap.init();		
-			
-		TestXmlVideoFileFactory.initPrefixMapper();
-	
+		OtrCastUtilTestBootstrap.init();		
 		TestXmlVideoFileFactory test = new TestXmlVideoFileFactory();
-		test.testAvi();
-		test.testAvi2();
+		test.test();
     }
  }

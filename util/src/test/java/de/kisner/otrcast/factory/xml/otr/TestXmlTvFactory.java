@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.otr.XmlTvFactory;
 import de.kisner.otrcast.model.xml.otr.Tv;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
 
 public class TestXmlTvFactory extends AbstractOtrcastTest
 {

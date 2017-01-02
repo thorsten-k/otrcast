@@ -6,10 +6,10 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxDebugger;
 import de.kisner.otrcast.controller.tag.util.Mp4TestEnvironment;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class CliMp4BoxDebugger extends AbstractOtrcastTest
@@ -18,7 +18,7 @@ public class CliMp4BoxDebugger extends AbstractOtrcastTest
 		
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrUtilTestBootstrap.init();
+		Configuration config = OtrCastUtilTestBootstrap.init();
 		
 		File fMp4Library = Mp4TestEnvironment.mp4Libray(config);
 		

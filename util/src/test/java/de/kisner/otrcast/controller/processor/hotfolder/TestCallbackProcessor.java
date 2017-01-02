@@ -12,10 +12,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.hotfolder.CallbackProcessor;
 import de.kisner.otrcast.interfaces.processor.CallbackInterface;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 
 public class TestCallbackProcessor extends AbstractOtrcastTest implements CallbackInterface
 {
@@ -64,7 +64,7 @@ public class TestCallbackProcessor extends AbstractOtrcastTest implements Callba
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrUtilTestBootstrap.init();
+		Configuration config = OtrCastUtilTestBootstrap.init();
 		TestCallbackProcessor.initTargetDirectory();
 		TestCallbackProcessor test = new TestCallbackProcessor();
 		

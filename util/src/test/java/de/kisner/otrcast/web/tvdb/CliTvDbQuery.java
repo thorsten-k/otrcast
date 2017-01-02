@@ -6,8 +6,8 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.web.tvdb.TvDbQuery;
 
 public class CliTvDbQuery extends AbstractOtrcastTest
@@ -16,7 +16,7 @@ public class CliTvDbQuery extends AbstractOtrcastTest
 
     public static void main(String args[]) throws Exception
     {
-        Configuration config = OtrUtilTestBootstrap.init();
+        Configuration config = OtrCastUtilTestBootstrap.init();
 
         TvDbQuery dbQuery = new TvDbQuery(config.getString("tvDbApiKey"));
 

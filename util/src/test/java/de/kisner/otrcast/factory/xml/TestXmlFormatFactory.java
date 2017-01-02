@@ -7,11 +7,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.factory.xml.XmlFormatFactory;
 import de.kisner.otrcast.factory.xml.XmlQualityFactory;
 import de.kisner.otrcast.model.xml.otr.Format;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 
 public class TestXmlFormatFactory extends AbstractOtrcastTest
 {
@@ -152,7 +152,7 @@ public class TestXmlFormatFactory extends AbstractOtrcastTest
     
     public static void main(String[] args) throws ExlpConfigurationException
     {
-		OtrUtilTestBootstrap.init();		
+		OtrCastUtilTestBootstrap.init();		
 			
 		TestXmlFormatFactory.initPrefixMapper();
 	

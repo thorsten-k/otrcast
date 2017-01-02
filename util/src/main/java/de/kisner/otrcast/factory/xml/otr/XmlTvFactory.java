@@ -18,7 +18,7 @@ public class XmlTvFactory
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlTvFactory.class);
 	
-	private static Pattern p = Pattern.compile("([\\w_\\d]+)_(\\d{2})\\.(\\d{2})\\.(\\d{2})_(\\d{2})-(\\d{2})_([a-zA-Z\\d]*)_(\\d+)_(.*)");
+	private static Pattern p = Pattern.compile("([-\\w_\\d]+)_(\\d{2})\\.(\\d{2})\\.(\\d{2})_(\\d{2})-(\\d{2})_([a-zA-Z\\d]*)_(\\d+)_(.*)");
 	
 	public static Tv createForFileName(String fileName) throws OtrProcessingException
 	{	

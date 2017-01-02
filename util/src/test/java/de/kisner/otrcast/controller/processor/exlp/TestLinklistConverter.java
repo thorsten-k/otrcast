@@ -14,11 +14,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.exlp.LinklistConverter;
 import de.kisner.otrcast.controller.processor.exlp.parser.LinkListParser;
 import de.kisner.otrcast.model.xml.otr.Linklist;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 
 public class TestLinklistConverter extends AbstractOtrcastTest
 {
@@ -65,7 +65,7 @@ public class TestLinklistConverter extends AbstractOtrcastTest
 	
 	public static void main(String[] args) throws ExlpConfigurationException
     {
-		Configuration config = OtrUtilTestBootstrap.init();		
+		Configuration config = OtrCastUtilTestBootstrap.init();		
 			
 		TestLinklistConverter.initPrefixMapper();
 		TestLinklistConverter.initFiles();

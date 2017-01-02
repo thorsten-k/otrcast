@@ -6,12 +6,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.txt.TxtLinkListFactory;
 import de.kisner.otrcast.factory.xml.XmlQualityFactory;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.Quality;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
 
 public class TestTxtLinkListFactorySuffix extends AbstractOtrcastTest
 {

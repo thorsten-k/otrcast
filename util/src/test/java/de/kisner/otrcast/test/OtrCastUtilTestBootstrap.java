@@ -1,4 +1,4 @@
-package de.kisner.otrcast;
+package de.kisner.otrcast.test;
 
 import java.io.File;
 
@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
-public class OtrUtilTestBootstrap
+public class OtrCastUtilTestBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(OtrUtilTestBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OtrCastUtilTestBootstrap.class);
 	
 	public static Configuration init() throws ExlpConfigurationException
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("config.otrcutmp4-util.test");
+			loggerInit.addAltPath("otrcast-util.test/config");
 			loggerInit.addAltPath("src/test/resources/config.otrcutmp4-util.test");
 			loggerInit.init();
 		

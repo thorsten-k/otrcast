@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.ImlProcessor;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 
 public class TestImlProcessor extends AbstractOtrcastTest
 {
@@ -35,7 +35,7 @@ public class TestImlProcessor extends AbstractOtrcastTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrUtilTestBootstrap.init();
+		Configuration config = OtrCastUtilTestBootstrap.init();
 		
 		String iml = config.getString("xml.itunes.lib");
 		

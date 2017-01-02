@@ -1,4 +1,4 @@
-package de.kisner.otrcast;
+package de.kisner.otrcast.test;
 
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ public abstract class AbstractOtrcastTest extends AbstractJeeslTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("config.otrcutmp4-util.test");
+		loggerInit.addAltPath("otrcast-util.test/config");
 		loggerInit.init();
     }
 }

@@ -20,10 +20,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.exlp.parser.CutlistParser;
 import de.kisner.otrcast.model.xml.cut.CutList;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 
 public class TestCutlistParser extends AbstractOtrcastTest
 {
@@ -104,7 +104,7 @@ public class TestCutlistParser extends AbstractOtrcastTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrUtilTestBootstrap.init();		
+		OtrCastUtilTestBootstrap.init();		
 		
 		int index = 1;
 		

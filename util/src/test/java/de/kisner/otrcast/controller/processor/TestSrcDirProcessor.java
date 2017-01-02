@@ -11,11 +11,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
-import de.kisner.otrcast.OtrUtilTestBootstrap;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
+import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.util.query.xpath.OtrXpath;
 import de.kisner.otrcast.view.noop.NoopSrcDirProcessorView;
 
@@ -86,7 +86,7 @@ public class TestSrcDirProcessor extends AbstractOtrcastTest
     
     public static void main(String[] args) throws Exception
     {
-    	OtrUtilTestBootstrap.init();
+    	OtrCastUtilTestBootstrap.init();
     	
     	TestSrcDirProcessor test = new TestSrcDirProcessor();
     	test.init();

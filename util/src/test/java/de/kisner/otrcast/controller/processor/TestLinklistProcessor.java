@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.AbstractOtrcastTest;
 import de.kisner.otrcast.controller.processor.LinklistProcessor;
+import de.kisner.otrcast.test.AbstractOtrcastTest;
 
 public class TestLinklistProcessor extends AbstractOtrcastTest
 {
