@@ -14,5 +14,8 @@ public interface TestPropertyKeys
 	public static String dirTaggerDst = "test.mp4Tagger.dst";
 	public static String dirTaggerTmp = "test.mp4Tagger.tmp";
 	
+	public static String dirMp4RenameSrc = "test.mp4.rename.src";
+	public static String dirMp4RenameDst = "test.mp4.rename.dst";
+	
 	public static String dirMcBackup  = "test.dir.mc.backup";
 }

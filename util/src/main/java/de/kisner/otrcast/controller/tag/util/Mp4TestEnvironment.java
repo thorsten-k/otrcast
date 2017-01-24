@@ -24,4 +24,26 @@ public class Mp4TestEnvironment
 		}
 		return fMp4;
 	}
+	
+	public static File mp4RenameDirectorySrc(Configuration config)
+	{
+		File fMp4 = new File(config.getString(TestPropertyKeys.dirMp4RenameSrc));
+		File[] files = fMp4.listFiles(FileQuery.mp4FileFilter());
+		if(files.length==0)
+		{
+			logger.warn("No Files in directory "+fMp4.getAbsolutePath());
+			logger.info("Probably you need to create some test files with CliMp4TagWriter");
+		}
+		return fMp4;
+	}
+	
+	public static File mp4RenameDirectoryDst(Configuration config)
+	{
+		File f = new File(config.getString(TestPropertyKeys.dirMp4RenameDst));
+		if(!f.exists() || !f.isDirectory())
+		{
+			logger.warn("Directory "+f.getAbsolutePath()+" does not exist");
+		}
+		return f;
+	}
 }
