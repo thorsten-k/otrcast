@@ -42,7 +42,6 @@ public class Mp4FileRenamer extends DirectoryWalker<File>
 	    try {walk(srcDirectory, results);}
 	    catch (IOException e) {e.printStackTrace();}
 	    
-	    
 	    logger.info(StringUtil.stars());
 	    logger.info(results.size()+" files in "+srcDirectory.getAbsolutePath());
 	    logger.info("Renamed files will be in "+dstDirectory.getAbsolutePath());
