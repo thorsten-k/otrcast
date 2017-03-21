@@ -29,7 +29,7 @@ public class OtrCastBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrCastBootstrap.class);
 	
-	public static String xmlConfig = "config.otrcast-client/otr.xml";
+	public static String xmlConfig = "otrcast-app/config/otr.xml";
 	
 	private static EntityManagerFactory emf;
 	private static Configuration config;

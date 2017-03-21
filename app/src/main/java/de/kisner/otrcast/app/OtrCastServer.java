@@ -1,5 +1,6 @@
 package de.kisner.otrcast.app;
 
+import org.apache.commons.cli.ParseException;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
@@ -11,9 +12,15 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.web.servlet.ImageServlet;
 import de.kisner.otrcast.controller.web.servlet.PodcastServlet;
 import de.kisner.otrcast.controller.web.servlet.StorageServlet;
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.ahtutils.util.cli.UtilsCliOption;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrCastServer 
 {
@@ -49,5 +56,12 @@ public class OtrCastServer
 
          server.start();
          server.join();
+	}
+	
+	public static void main(String args[]) throws Exception
+	{
+		OtrCastBootstrap.init();
+		
+		new OtrCastServer();
 	}
 }
