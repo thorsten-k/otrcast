@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf">
+	<f:view contentType="text/html" locale="#{userBean.localeCode}">
+		<h:head>
+			<title>OtrCast #{versionBean.snapshotVersion}</title>
+			<meta charset="utf-8"/>
+			<h:outputStylesheet library="ahtutilsCss" name="reset.css"/>
+			<h:outputStylesheet library="aupCss" name="aupGeometry.css"/>
+            <h:outputStylesheet library="css" name="screen.css"/>
+            <h:outputStylesheet library="css" name="aupOtr.css" />
+		</h:head>
+		<h:body>
+			<div id="container" class="clearfix"> 
+				<div class="header">
+					<h:graphicImage name="logo-header.png" library="gfx" styleClass="logo"/>
+					<ui:insert name="menu"/>
+				</div>
+				<div class="aupHeadline">
+					<p><ui:insert name="headline">OtrCast</ui:insert></p>
+				</div>
+				<div class="maincontent clearfix">
+					<ui:insert name="tracking"/>
+					<ui:insert name="content">
+						[Template content will be inserted here]
+					</ui:insert>
+				</div>
+			</div>
+			<div class="aupFooter clearfix">
+				<div class="aupFooterLeft">
+					Left footer
+				</div>
+				<div class="aupFooterRight">
+					<h:outputLink id="link1" value="#{request.contextPath}/impressum">
+						<h:outputText value="Impressum" />
+					</h:outputLink>
+				</div>
+			</div>
+		</h:body>
+	</f:view>
+</html>
