@@ -7,7 +7,7 @@
 
 	<managed-bean>
         <managed-bean-name>testBean</managed-bean-name>
-        <managed-bean-class>net.sf.otrcutmp4.controller.web.mbean.TestBean</managed-bean-class>
+        <managed-bean-class>de.kisner.otrcast.web.mbean.TestBean</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     

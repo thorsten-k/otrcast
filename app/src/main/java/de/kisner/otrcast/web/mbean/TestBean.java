@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.web.mbean;
+package de.kisner.otrcast.web.mbean;
 
 import java.io.Serializable;
 import java.util.Date;
