@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.DirectoryWalker;
+import org.jeesl.controller.monitor.BucketSizeCounter;
+import org.jeesl.controller.monitor.ProcessingEventCounter;
+import org.jeesl.controller.monitor.ProcessingTimeTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,9 +28,6 @@ import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.ahtutils.monitor.BucketSizeCounter;
-import net.sf.ahtutils.monitor.ProcessingEventCounter;
-import net.sf.ahtutils.monitor.ProcessingTimeTracker;
 import net.sf.exlp.shell.io.ConsoleInputChoice;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.StringUtil;
