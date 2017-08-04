@@ -8,6 +8,7 @@ import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,6 @@ import de.kisner.otrcast.model.xml.series.Category;
 import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.util.OtrBootstrap;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.ahtutils.web.rest.RestUrlDelay;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
