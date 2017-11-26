@@ -46,10 +46,23 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 		return xml;
 	}
 	
+	public static de.kisner.otrcast.model.xml.series.Series build()
+	{
+		return new de.kisner.otrcast.model.xml.series.Series();
+	}
+	
 	public static de.kisner.otrcast.model.xml.series.Series build(String name)
 	{
-		de.kisner.otrcast.model.xml.series.Series xml = new de.kisner.otrcast.model.xml.series.Series();
+		de.kisner.otrcast.model.xml.series.Series xml = build();
 		xml.setName(name);
 		return xml;
-	}	
+	}
+	
+	public static de.kisner.otrcast.model.xml.series.Series build(com.uwetrottmann.thetvdb.entities.Series json)
+	{
+		de.kisner.otrcast.model.xml.series.Series xml = build();
+		xml.setId(json.id);
+		xml.setName(json.seriesName);
+		return xml;
+	}
 }

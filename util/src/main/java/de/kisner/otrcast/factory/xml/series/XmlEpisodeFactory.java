@@ -70,4 +70,13 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 	{		
 		return new de.kisner.otrcast.model.xml.series.Episode();
 	}
+	
+	public static de.kisner.otrcast.model.xml.series.Episode build(com.uwetrottmann.thetvdb.entities.Episode json)
+	{
+		de.kisner.otrcast.model.xml.series.Episode xml = build();
+		xml.setName(json.episodeName);
+		xml.setNr(json.airedEpisodeNumber);
+		xml.setId(json.id);
+		return xml;
+	}
 }

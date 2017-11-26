@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.container.Otr;
+import de.kisner.otrcast.model.xml.series.Series;
 
 public class XmlOtrFactory
 {	
@@ -12,5 +13,12 @@ public class XmlOtrFactory
 	public static Otr build() 
 	{
 		return new Otr();
+	}
+	
+	public static Otr build(Series series)
+	{
+		Otr xml = build();
+		xml.getSeries().add(series);
+		return xml;
 	}
 }
