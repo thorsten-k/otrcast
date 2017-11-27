@@ -13,15 +13,20 @@ import com.uwetrottmann.thetvdb.entities.Episode;
 import com.uwetrottmann.thetvdb.entities.EpisodesResponse;
 import com.uwetrottmann.thetvdb.entities.EpisodesSummary;
 import com.uwetrottmann.thetvdb.entities.EpisodesSummaryResponse;
+import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResult;
+import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResultResponse;
 import com.uwetrottmann.thetvdb.entities.SeriesResponse;
 
 import de.kisner.otrcast.factory.xml.otr.XmlOtrFactory;
 import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
+import de.kisner.otrcast.factory.xml.tvdb.XmlBannerFactory;
+import de.kisner.otrcast.factory.xml.tvdb.XmlBannersFactory;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.tvdb.Banners;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import retrofit2.Response;
 
@@ -39,6 +44,11 @@ public class TvDb2Query
 	public TvDb2Query(TheTvdb theTvdb)
 	{
 		this.theTvdb=theTvdb;
+	}
+	
+	public Otr series(long id) throws UtilsProcessingException
+	{
+		return series(Long.valueOf(id).intValue());
 	}
 	
 	public Otr series(int id) throws UtilsProcessingException
@@ -116,5 +126,28 @@ public class TvDb2Query
 		}
         
 		return season;
+	}
+	
+	public Banners seasonCovers(long seriesId, long seasonNr) {return seasonCovers(Long.valueOf(seriesId).intValue(),Long.valueOf(seasonNr).intValue());}
+	public Banners seasonCovers(int seriesId, int seasonNr)
+	{
+		Banners xml = XmlBannersFactory.build();
+		try
+		{
+			Response<SeriesImageQueryResultResponse> r2 = theTvdb.series().imagesQuery(seriesId, "season", null, Integer.valueOf(seasonNr).toString(), null).execute();
+			if (r2.isSuccessful())
+	        {
+	        		for(SeriesImageQueryResult i : r2.body().data)
+	        		{
+	        			xml.getBanner().add(XmlBannerFactory.build(i));
+	        		}
+	        }
+			
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return xml;
 	}
 }

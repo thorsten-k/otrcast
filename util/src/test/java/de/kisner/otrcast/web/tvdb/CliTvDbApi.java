@@ -12,10 +12,13 @@ import com.uwetrottmann.thetvdb.entities.Episode;
 import com.uwetrottmann.thetvdb.entities.EpisodesResponse;
 import com.uwetrottmann.thetvdb.entities.EpisodesSummary;
 import com.uwetrottmann.thetvdb.entities.EpisodesSummaryResponse;
-import com.uwetrottmann.thetvdb.entities.Series;
-import com.uwetrottmann.thetvdb.entities.SeriesResponse;
+import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResult;
+import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResultResponse;
+import com.uwetrottmann.thetvdb.entities.SeriesImagesQueryParam;
+import com.uwetrottmann.thetvdb.entities.SeriesImagesQueryParamResponse;
 
 import de.kisner.otrcast.model.xml.container.Otr;
+import de.kisner.otrcast.model.xml.tvdb.Banners;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
@@ -27,7 +30,7 @@ public class CliTvDbApi extends AbstractOtrcastTest
     final static Logger logger = LoggerFactory.getLogger(CliTvDbApi.class);
 
     private TheTvdb theTvdb;
-    private final int seriesId = 83462;
+    private final int seriesId = 537;
     
     private CliTvDbApi( Configuration config)
     {
@@ -64,25 +67,34 @@ public class CliTvDbApi extends AbstractOtrcastTest
         }
     }
     
-    public void others() throws IOException
+    public void images() throws IOException
     {
-    		Response<SeriesResponse> response = theTvdb.series().series(83462, "de").execute();
-        if (response.isSuccessful())
+    		Response<SeriesImagesQueryParamResponse> r1 = theTvdb.series().imagesQueryParams(seriesId).execute();
+        if (r1.isSuccessful())
         {
-            Series series = response.body().data;
-           
-            System.out.println(series.seriesName + " is awesome!");
-        }
-        
-        Response<EpisodesResponse> r3 = theTvdb.series().episodesQuery(83462, null, 1, null, null, null, null, null, null, "de").execute();
-        if (r3.isSuccessful())
-        {
-        		List<Episode> summary = r3.body().data;
-        		for(Episode e : summary)
+        		List<SeriesImagesQueryParam> list = r1.body().data;
+        		for(SeriesImagesQueryParam i : list)
         		{
-        			System.out.println(e.airedSeason+" "+e.airedEpisodeNumber+" "+e.episodeName);
+        			System.out.println(i.keyType);
+        			for(String sub : i.subKey)
+        			{
+        				logger.info("\t"+sub);
+        			}
         		}
-            
+        }
+        Response<SeriesImageQueryResultResponse> r2 = theTvdb.series().imagesQuery(seriesId, "season", null, "1", null).execute();
+        if (r2.isSuccessful())
+        {
+        		List<SeriesImageQueryResult> list = r2.body().data;
+        		logger.info("Images: "+list.size());
+        		for(SeriesImageQueryResult i : list)
+        		{
+        			System.out.println(i.fileName+" "+i.thumbnail);
+        		}
+        }
+        else
+        {
+        		logger.info(r2.message());
         }
     }
     
@@ -90,7 +102,10 @@ public class CliTvDbApi extends AbstractOtrcastTest
     {
     		TvDb2Query query = new TvDb2Query(theTvdb);
     		Otr series = query.series(seriesId);
-    		JaxbUtil.info(series);
+    		JaxbUtil.trace(series);
+    		
+    		Banners covers = query.seasonCovers(seriesId, 1);
+    		JaxbUtil.info(covers);
     }
     
     public static void main(String args[]) throws Exception
@@ -100,6 +115,7 @@ public class CliTvDbApi extends AbstractOtrcastTest
 //    		cli.episodeSummary();
 //        cli.episodes();
         
-        cli.api();
+       cli.api();
+        cli.images();
     }
  }
