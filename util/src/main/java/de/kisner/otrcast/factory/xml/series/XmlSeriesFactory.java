@@ -3,6 +3,7 @@ package de.kisner.otrcast.factory.xml.series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Season;
@@ -61,7 +62,7 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,
 	public static de.kisner.otrcast.model.xml.series.Series build(com.uwetrottmann.thetvdb.entities.Series json)
 	{
 		de.kisner.otrcast.model.xml.series.Series xml = build();
-		xml.setId(json.id);
+		xml.setSync(XmlSyncFactory.build(json.id));
 		xml.setName(json.seriesName);
 		return xml;
 	}

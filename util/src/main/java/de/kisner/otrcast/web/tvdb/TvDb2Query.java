@@ -23,6 +23,7 @@ import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlBannerFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlBannersFactory;
+import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;
@@ -92,7 +93,6 @@ public class TvDb2Query
 		}	
 	    catch (IOException e) {e.printStackTrace();}
 		
-		
 		List<Season> list = new ArrayList<Season>();
 		List<Episode> episodesInSeason = new ArrayList<Episode>();
 		try
@@ -121,7 +121,7 @@ public class TvDb2Query
 		for(Episode e : episodes)
 		{
 			if(season.isSetId() && season.getId()!=e.airedSeasonID) {throw new UtilsProcessingException("Not all season Ids matching!!");}
-			else {season.setId(e.airedSeasonID);}
+			else {season.setSync(XmlSyncFactory.build(e.airedSeasonID));}
 			season.getEpisode().add(XmlEpisodeFactory.build(e));
 		}
         

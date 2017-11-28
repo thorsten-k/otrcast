@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
+import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Season;
@@ -62,7 +63,6 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		de.kisner.otrcast.model.xml.series.Episode xml = build();
 		xml.setName(TxtEpisodeFactory.buld(name));
 		xml.setNr(nr);
-		
 		return xml;
 	}
 	
@@ -74,9 +74,9 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 	public static de.kisner.otrcast.model.xml.series.Episode build(com.uwetrottmann.thetvdb.entities.Episode json)
 	{
 		de.kisner.otrcast.model.xml.series.Episode xml = build();
+		xml.setSync(XmlSyncFactory.build(json.id));
 		xml.setName(json.episodeName);
 		xml.setNr(json.airedEpisodeNumber);
-		xml.setId(json.id);
 		return xml;
 	}
 }
