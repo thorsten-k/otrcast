@@ -5,16 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import net.sf.exlp.core.event.JDomEvent;
-import net.sf.exlp.core.event.JaxbEvent;
-import net.sf.exlp.core.handler.EhResultContainer;
-import net.sf.exlp.core.listener.LogListenerHttp;
-import net.sf.exlp.core.parser.XmlParser;
-import net.sf.exlp.interfaces.LogListener;
-import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.util.io.StringUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;
@@ -35,6 +25,14 @@ import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
+import net.sf.exlp.core.event.JDomEvent;
+import net.sf.exlp.core.event.JaxbEvent;
+import net.sf.exlp.core.handler.EhResultContainer;
+import net.sf.exlp.core.listener.LogListenerHttp;
+import net.sf.exlp.core.parser.XmlParser;
+import net.sf.exlp.interfaces.LogListener;
+import net.sf.exlp.interfaces.LogParser;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class DefaultCutlistLoader implements CutlistLoader
 {
@@ -45,8 +43,7 @@ public class DefaultCutlistLoader implements CutlistLoader
 
 	}
 	
-	@Override
-	public void loadCuts(Videos videos)
+	@Override public void loadCuts(Videos videos)
 	{
 		for(Video video : videos.getVideo())
 		{

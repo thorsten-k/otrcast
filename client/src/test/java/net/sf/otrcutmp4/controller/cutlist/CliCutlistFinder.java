@@ -22,13 +22,13 @@ import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 
-public class TstCutlistFinder
+public class CliCutlistFinder
 { 
-	final static Logger logger = LoggerFactory.getLogger(TstCutlistFinder.class);
+	final static Logger logger = LoggerFactory.getLogger(CliCutlistFinder.class);
 	
 	private Configuration config;
 	
-	public TstCutlistFinder(Configuration config)
+	public CliCutlistFinder(Configuration config)
 	{
 		this.config=config;
 	}
@@ -65,7 +65,6 @@ public class TstCutlistFinder
 	public void find() throws OtrProcessingException
 	{
 		find("Supernatural_11.10.24_22-05_pro7_55_TVOON_DE.mpg.HQ.avi");
-		
 	}
 	
 	public void find(String clKey) throws OtrProcessingException
@@ -83,11 +82,11 @@ public class TstCutlistFinder
 	{
 		Configuration config = OtrClientTestBootstrap.init();
 		
-		TstCutlistFinder test = new TstCutlistFinder(config);
-//		test.findCl();
-//		test.findCl("rename");
-		test.chooseCl("cut");
-//		test.chooseCl("rename");
-		test.find();
+		CliCutlistFinder cli = new CliCutlistFinder(config);
+//		cli.findCl();
+//		cli.findCl("rename");
+//		cli.chooseCl("cut");
+//		cli.chooseCl("rename");
+		cli.find();
 	}
 }
