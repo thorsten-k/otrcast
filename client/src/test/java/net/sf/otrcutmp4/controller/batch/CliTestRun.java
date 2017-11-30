@@ -12,6 +12,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.app.AviToMp4.Profile;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
@@ -24,7 +25,6 @@ import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
-import de.kisner.otrcast.interfaces.rest.OtrCutRest;
 import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Videos;

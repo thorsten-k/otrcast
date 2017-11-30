@@ -9,9 +9,9 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.controller.AbstractCutlistChooserController;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
-import de.kisner.otrcast.interfaces.rest.OtrCutRest;
 import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
