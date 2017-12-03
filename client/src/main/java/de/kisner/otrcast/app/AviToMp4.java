@@ -18,8 +18,8 @@ import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.controller.processor.SeriesTagger;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
-import de.kisner.otrcast.controller.web.WebAviScanner;
 import de.kisner.otrcast.controller.web.WebCutlistChooserController;
+import de.kisner.otrcast.controller.web.rest.WebAviScanner;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
@@ -79,7 +79,7 @@ public class AviToMp4 extends AbstractCommandLine
         }
         else
         {
-        	profile = Profile.P0;
+        		profile = Profile.P0;
         }
         logger.debug("Using Profile :"+profile);
         
@@ -91,32 +91,31 @@ public class AviToMp4 extends AbstractCommandLine
         otrConfig.checkCutSettings();
          
         ViewSrcDirProcessor view = new CliSrcDirProcessorView();
-        
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
         DefaultCutlistLoader clFinder = new DefaultCutlistLoader();
         VideoFiles vFiles;
         
         if(line.hasOption(oScan.getOpt()))
-    	{
-    		otrConfig.checkEmailPwd();
-    		WebAviScanner was = new WebAviScanner(otrConfig);
-    		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
-    		was.scan(srcDirProcessor);
-        }
-        
-        CoverManager coverManager = null;
-        if(line.hasOption(oCover.getOpt()))
-        {
-        	String type = line.getOptionValue(oCover.getOpt());
-        	CoverManager.TYPE cmType = CoverManager.TYPE.valueOf(type);
-        	
-        	switch(cmType)
-        	{
-        		case FS:	coverManager = new FileSystemCoverManager(otrConfig.getDir(Dir.COVER));break;
-        		case FSW:	coverManager = new FileSystemWebCoverManager(otrConfig.getDir(Dir.COVER));break;
-        		default: coverManager=null;break;
-        	}
+	    	{
+	    		otrConfig.checkEmailPwd();
+	    		WebAviScanner was = new WebAviScanner(otrConfig);
+	    		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
+	    		was.scan(srcDirProcessor);
+	    	}
+	        
+	        CoverManager coverManager = null;
+	        if(line.hasOption(oCover.getOpt()))
+	        {
+	        	String type = line.getOptionValue(oCover.getOpt());
+	        	CoverManager.TYPE cmType = CoverManager.TYPE.valueOf(type);
+	        	
+	        	switch(cmType)
+	        	{
+	        		case FS:	coverManager = new FileSystemCoverManager(otrConfig.getDir(Dir.COVER));break;
+	        		case FSW:	coverManager = new FileSystemWebCoverManager(otrConfig.getDir(Dir.COVER));break;
+	        		default: coverManager=null;break;
+	        	}
         }
         
         if(line.hasOption(oTagMp4.getOpt()))

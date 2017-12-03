@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.web;
+package de.kisner.otrcast.controller.web.rest;
 
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;

@@ -14,6 +14,10 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
+import de.kisner.otrcast.controller.processor.SrcDirProcessor;
+import de.kisner.otrcast.controller.web.rest.WebAviScanner;
+import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrConfig;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
@@ -30,7 +34,7 @@ public class OtrCastClient
 	private UtilsCliOption uOption;
 	private OtrConfig otrConfig;
 	
-	private Option oScan;
+	private Option oTag,oScan;
 	
 	public OtrCastClient(UtilsCliOption uOption)
 	{
@@ -50,18 +54,29 @@ public class OtrCastClient
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
         otrConfig.checkMcSettings();
         
-        if(cmd.hasOption(oScan.getOpt()) && uOption.allowAppStart())
+        ViewSrcDirProcessor view = null;//= new CliSrcDirProcessorView();
+        SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
+        
+        if(cmd.hasOption(oTag.getOpt()) && uOption.allowAppStart())
         {
-        	scanMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
+        		tagMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
         }
+        
+        if(cmd.hasOption(oScan.getOpt()) && uOption.allowAppStart())
+	    	{
+	    		otrConfig.checkEmailPwd();
+	    		WebAviScanner was = new WebAviScanner(otrConfig);
+	    		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
+	    		was.scan(srcDirProcessor);
+	    	}
         
         if(!uOption.isAppStarted())
         {
-        	uOption.help();
+        		uOption.help();
         }
 	}
 
-	private void scanMediathek(File f) throws IOException
+	private void tagMediathek(File f) throws IOException
 	{
 		File fMc = otrConfig.getDir(OtrConfig.Dir.MC);
 		File fMcXmlLib = otrConfig.getFile(OtrConfig.fileMcXmlLib);
@@ -80,9 +95,8 @@ public class OtrCastClient
         uOption.buildDebug();
         uOption.buildConfig();
         
-        oScan  = Option.builder("tag").required(false).desc("Scan the MP4 Library").build();
-        
-        uOption.getOptions().addOption(oScan);
+        oTag = Option.builder("tag").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTag);
+        oScan = Option.builder("scan").required(false).desc("Scans the MP4 Library").build(); uOption.getOptions().addOption(oScan);
 	}
 
 	public static void main(String args[]) throws Exception

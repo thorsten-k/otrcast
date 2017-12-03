@@ -20,7 +20,7 @@ import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
-import de.kisner.otrcast.controller.web.WebAviScanner;
+import de.kisner.otrcast.controller.web.rest.WebAviScanner;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;

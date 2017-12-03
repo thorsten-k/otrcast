@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>otrcast-client</artifactId>
-	<name>OTR - Client</name>
+	<name>OTR - Client (Deprecated, will be moved to app)</name>
   
 	<dependencies>
 		<dependency>
