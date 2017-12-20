@@ -251,6 +251,16 @@
                 </archive>
             </configuration>
         	</plugin>
-        </plugins>
+        	<plugin>
+				<groupId>com.github.chrisdchristo</groupId>
+				<artifactId>capsule-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<configuration>
+					<appClass>de.kisner.otrcast.app.OtrCastClient</appClass>
+					<fileName>OtrCast</fileName><fileDesc></fileDesc>
+					<type>fat</type>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>   
 </project>

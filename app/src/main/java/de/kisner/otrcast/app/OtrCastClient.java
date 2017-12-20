@@ -72,9 +72,9 @@ public class OtrCastClient
 		uOption.handleLogger(cmd);
        
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
-        otrConfig.checkMcSettings();
+        otrConfig.checkCutSettings();
         
-        ViewSrcDirProcessor view = null;//= new CliSrcDirProcessorView();
+        ViewSrcDirProcessor view = new CliSrcDirProcessorView();
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
         
