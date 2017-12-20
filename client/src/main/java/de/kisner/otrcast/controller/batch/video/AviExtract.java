@@ -7,7 +7,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
