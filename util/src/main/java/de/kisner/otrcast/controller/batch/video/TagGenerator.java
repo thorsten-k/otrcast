@@ -5,16 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.shell.cmd.ShellCmdMove;
-import net.sf.exlp.util.io.FilenameIllegalCharRemover;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
@@ -25,6 +18,11 @@ import de.kisner.otrcast.util.OtrConfig.Cmd;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.util.OtrConfig.Template;
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.shell.cmd.ShellCmdMove;
+import net.sf.exlp.util.io.FilenameIllegalCharRemover;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TagGenerator extends AbstactBatchGenerator
 {	
