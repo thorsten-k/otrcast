@@ -6,20 +6,40 @@ import java.io.IOException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.controller.batch.BatchGenerator;
+import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
+import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
+import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
+import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
+import de.kisner.otrcast.controller.web.WebCutlistChooserController;
 import de.kisner.otrcast.controller.web.rest.WebAviScanner;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
+import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
+import de.kisner.otrcast.interfaces.controller.CoverManager;
+import de.kisner.otrcast.interfaces.controller.CutlistChooser;
+import de.kisner.otrcast.interfaces.controller.CutlistLoader;
+import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
 import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
+import de.kisner.otrcast.model.xml.cut.VideoFile;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
+import de.kisner.otrcast.util.OtrConfig.Dir;
+import de.kisner.otrcast.view.cli.CliCutlistChooserView;
+import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
+import de.kisner.otrcast.view.web.WebCutlistChooserView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -34,7 +54,7 @@ public class OtrCastClient
 	private UtilsCliOption uOption;
 	private OtrConfig otrConfig;
 	
-	private Option oTag,oScan;
+	private Option oTag,oScan,oProfile,oCover,oMp4,oWeb;
 	
 	public OtrCastClient(UtilsCliOption uOption)
 	{
@@ -57,6 +77,37 @@ public class OtrCastClient
         ViewSrcDirProcessor view = null;//= new CliSrcDirProcessorView();
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
+        
+        OtrCastInterface.Profile profile = null;
+        if(cmd.hasOption(oProfile.getOpt()))
+        {
+	        	try {profile = Profile.valueOf(cmd.getOptionValue(oProfile.getOpt()));}
+	        	catch (IllegalArgumentException e)
+	        	{
+	        		logger.warn("Profie "+cmd.getOptionValue(oProfile.getOpt())+" not available");
+	        		logger.warn("Maybe print a Help");
+	        	}
+        }
+        else
+        {
+        		profile = Profile.P0;
+        }
+        logger.debug("Using Profile :"+profile);
+        
+        CoverManager coverManager = null;
+        if(cmd.hasOption(oCover.getOpt()))
+	    {
+	        	String type = cmd.getOptionValue(oCover.getOpt());
+	        	CoverManager.TYPE cmType = CoverManager.TYPE.valueOf(type);
+	        	
+	        	switch(cmType)
+	        	{
+	        		case FS:	coverManager = new FileSystemCoverManager(otrConfig.getDir(Dir.COVER));break;
+	        		case FSW:	coverManager = new FileSystemWebCoverManager(otrConfig.getDir(Dir.COVER));break;
+	        		default: coverManager=null;break;
+	        	}
+        }
+        
         if(cmd.hasOption(oTag.getOpt()) && uOption.allowAppStart())
         {
         		tagMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
@@ -69,6 +120,49 @@ public class OtrCastClient
 	    		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
 	    		was.scan(srcDirProcessor);
 	    	}
+                
+        DefaultCutlistLoader clFinder = new DefaultCutlistLoader();
+        VideoFiles vFiles;
+        
+        if(cmd.hasOption(oMp4.getOpt()))
+        {
+	        vFiles = srcDirProcessor.scan(otrConfig.getDir(Dir.AVI));
+	        if(cmd.hasOption("ac3"))
+	        {
+		        	logger.warn("Remember, the option ac3 is EXPERIMENTAL");
+		        	logger.warn("http://otrcutmp4.sourceforge.net/future.html");
+		        	try {Thread.sleep(3000);} catch (InterruptedException e) {logger.error("",e);}
+	        }
+	        else
+	        {
+	        		for(VideoFile vf : vFiles.getVideoFile()){vf.getOtrId().getFormat().setAc3(false);}
+	        }
+	        
+	        vFiles = clFinder.searchCutlist(vFiles);
+	        
+	        ViewCutlistChooser viewCutlistChooser = null;
+	        CutlistChooser controllerCutlistChooser = null;
+	              
+	        if(cmd.hasOption(oWeb.getOpt()))
+	        {
+		        	viewCutlistChooser = new WebCutlistChooserView();
+		        	controllerCutlistChooser = new WebCutlistChooserController(viewCutlistChooser,otrConfig);
+	        }
+	        else
+	        {
+		        	viewCutlistChooser = new CliCutlistChooserView();
+		        	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
+	        }
+	    	
+		    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
+		    	JaxbUtil.debug(videos);
+		    	
+		    	CutlistLoader cutlistLoader = new DefaultCutlistLoader();;
+		    	cutlistLoader.loadCuts(videos);       
+		    	
+		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTag.getOpt()));
+		    	batch.build(videos);
+        }
         
         if(!uOption.isAppStarted())
         {
@@ -97,8 +191,24 @@ public class OtrCastClient
         
         oTag = Option.builder("tag").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTag);
         oScan = Option.builder("scan").required(false).desc("Scans the MP4 Library").build(); uOption.getOptions().addOption(oScan);
+        
+		oMp4 = new Option("mp4", "Converts AVI to MP4"); uOption.getOptions().addOption(oMp4);
+		oWeb = new Option("web", "Web GUI Interface"); uOption.getOptions().addOption(oWeb);
+        
+        StringBuffer sb = new StringBuffer();
+		for(int i=1;i<Profile.values().length;i++)
+		{
+			{sb.append(Profile.values()[i].toString()).append(", ");}
+		}
+        oProfile = Option.builder("profile").required(false)
+				.hasArg(true).argName("PROFILE").desc("Use (optional) experimental PROFILE: "+sb.toString())
+				.build();uOption.getOptions().addOption(oProfile);
+				
+		oCover  = Option.builder("cover").required(false)
+				.hasArg(true).argName("TYPE").desc("CoverManager: (FS) FileSystem")
+				.build();uOption.getOptions().addOption(oProfile);
 	}
-
+	
 	public static void main(String args[]) throws Exception
 	{
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
