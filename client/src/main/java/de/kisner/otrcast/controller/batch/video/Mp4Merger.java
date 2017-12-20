@@ -5,20 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.shell.cmd.ShellCmdCopy;
-import net.sf.exlp.util.io.FilenameIllegalCharRemover;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.series.Video;
@@ -26,12 +20,17 @@ import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.util.OtrConfig.Template;
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.exception.ExlpUnsupportedOsException;
+import net.sf.exlp.shell.cmd.ShellCmdCopy;
+import net.sf.exlp.util.io.FilenameIllegalCharRemover;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class Mp4Merger extends AbstactBatchGenerator
 {	
 	final static Logger logger = LoggerFactory.getLogger(Mp4Merger.class);
 	
-	public Mp4Merger(OtrConfig cfg, AviToMp4.Profile profile)
+	public Mp4Merger(OtrConfig cfg, OtrCastInterface.Profile profile)
 	{
 		super(cfg, profile);
 	}

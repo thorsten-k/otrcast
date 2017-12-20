@@ -4,22 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
-import net.sf.otrcutmp4.util.TestOtrConfig;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4.Profile;
 import de.kisner.otrcast.controller.batch.video.VideoCutter;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
+import net.sf.otrcutmp4.util.TestOtrConfig;
 
 public class TestVideoCutter extends AbstractBatchTest
 { 
@@ -31,7 +30,7 @@ public class TestVideoCutter extends AbstractBatchTest
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		videoCutter = new  VideoCutter(tC.getOtrConfig(),Profile.P0);
+		videoCutter = new  VideoCutter(tC.getOtrConfig(), OtrCastInterface.Profile.P0);
 	}
 	
 	@Test

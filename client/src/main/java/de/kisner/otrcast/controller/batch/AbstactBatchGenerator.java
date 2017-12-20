@@ -1,16 +1,15 @@
 package de.kisner.otrcast.controller.batch;
 
-import net.sf.exlp.util.io.RelativePathFactory;
+import java.io.File;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.util.OtrConfig.Tool;
-
-import java.io.File;
+import net.sf.exlp.util.io.RelativePathFactory;
 
 public class AbstactBatchGenerator
 {
@@ -21,9 +20,9 @@ public class AbstactBatchGenerator
 	protected String cmdMp4Box,cmdFfmpeg,cmdLame,cmdFaac,cmdEac3to,cmdNero;
 	
 	protected OtrConfig cfg;
-	protected AviToMp4.Profile profile;
+	protected OtrCastInterface.Profile profile;
 	
-	public AbstactBatchGenerator(OtrConfig cfg, AviToMp4.Profile profile)
+	public AbstactBatchGenerator(OtrConfig cfg, OtrCastInterface.Profile profile)
 	{
 		this.cfg=cfg;
 		this.profile=profile;

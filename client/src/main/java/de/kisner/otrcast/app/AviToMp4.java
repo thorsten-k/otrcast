@@ -21,6 +21,8 @@ import de.kisner.otrcast.controller.processor.SrcDirProcessor;
 import de.kisner.otrcast.controller.web.WebCutlistChooserController;
 import de.kisner.otrcast.controller.web.rest.WebAviScanner;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
+import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;
@@ -41,7 +43,7 @@ public class AviToMp4 extends AbstractCommandLine
 {
 	final static Logger logger = LoggerFactory.getLogger(AviToMp4.class);
 	
-	public static enum Profile {P0,P1}
+
 	
 	public static final String exeName = "OtrCutMp4-<version>.jar";
 	
@@ -53,7 +55,7 @@ public class AviToMp4 extends AbstractCommandLine
 
 	private OtrConfig otrConfig;
 	
-	private Profile profile;
+	private OtrCastInterface.Profile profile;
 	
 	public AviToMp4()
 	{

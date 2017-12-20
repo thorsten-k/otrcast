@@ -2,23 +2,22 @@ package net.sf.otrcutmp4.controller.batch.audio;
 
 import java.io.IOException;
 
-import net.sf.otrcutmp4.test.AbstractClientTest;
-import net.sf.otrcutmp4.util.TestOtrConfig;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4.Profile;
 import de.kisner.otrcast.controller.batch.audio.Ac3ToAac;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
 import de.kisner.otrcast.model.xml.cut.FileName;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.OtrId;
+import net.sf.otrcutmp4.test.AbstractClientTest;
+import net.sf.otrcutmp4.util.TestOtrConfig;
 
 public class TestAc3ToAac extends AbstractClientTest
 { 

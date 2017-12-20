@@ -10,10 +10,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4.Profile;
 import de.kisner.otrcast.controller.batch.video.AviExtract;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
@@ -28,7 +28,7 @@ public class TestRawExtract extends AbstractBatchTest
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		rawExtract = new  AviExtract(tC.getOtrConfig(),Profile.P0);
+		rawExtract = new AviExtract(tC.getOtrConfig(), OtrCastInterface.Profile.P0);
 	}
 	
 	@Test

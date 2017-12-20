@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.Cut;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
@@ -27,7 +28,7 @@ public class VideoCutter extends AbstactBatchGenerator
 	
 	private static DecimalFormat df;
 	
-	public VideoCutter(OtrConfig cfg, AviToMp4.Profile profile)
+	public VideoCutter(OtrConfig cfg, OtrCastInterface.Profile profile)
 	{
 		super(cfg, profile);
 	}
@@ -55,14 +56,14 @@ public class VideoCutter extends AbstactBatchGenerator
 		return result;
 	}
 	
-	private List<String> applyCutList(int indexVf,CutList cutList, String inVideo, AviToMp4.Profile profile)
+	private List<String> applyCutList(int indexVf,CutList cutList, String inVideo, OtrCastInterface.Profile profile)
 	{
 		List<String> result = new ArrayList<String>();
 		result.addAll(cutList(indexVf,cutList, inVideo, profile));
 		return result;
 	}
 	
-	private List<String> cutList(int indexVf, CutList cutList, String inVideo,AviToMp4.Profile profile)
+	private List<String> cutList(int indexVf, CutList cutList, String inVideo, OtrCastInterface.Profile profile)
 	{
 		List<String> result = new ArrayList<String>();
 		int counter = 1;

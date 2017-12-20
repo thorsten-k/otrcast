@@ -11,6 +11,7 @@ import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.video.TagGenerator;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.OtrConfig;
@@ -26,7 +27,7 @@ public class SeriesTagger
 	private TagGenerator tagGenerator;
 	private CoverManager coverManager;
 	
-	public SeriesTagger(OtrConfig cfg, AviToMp4.Profile profile, CoverManager coverManager)
+	public SeriesTagger(OtrConfig cfg, OtrCastInterface.Profile profile, CoverManager coverManager)
 	{
 		this.coverManager=coverManager;
 		tagGenerator = new TagGenerator(cfg,profile,false);

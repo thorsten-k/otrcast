@@ -12,6 +12,7 @@ import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.OtrConfig;
@@ -23,7 +24,7 @@ public class AviExtract extends AbstactBatchGenerator
 {	
 	final static Logger logger = LoggerFactory.getLogger(AviExtract.class);
 	
-	public AviExtract(OtrConfig cfg, AviToMp4.Profile profile)
+	public AviExtract(OtrConfig cfg, OtrCastInterface.Profile profile)
 	{
 		super(cfg, profile);
 	}

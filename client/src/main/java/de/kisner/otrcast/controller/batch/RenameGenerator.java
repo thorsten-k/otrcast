@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
-import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Tags;
@@ -42,7 +42,7 @@ public class RenameGenerator extends AbstactBatchGenerator
 	private TxtDsFactory fTemplateDs;
 	private TxtFileNameFactoy fnfSeries;
 	
-	public RenameGenerator(OtrConfig cfg, AviToMp4.Profile profile)
+	public RenameGenerator(OtrConfig cfg, OtrCastInterface.Profile profile)
 	{
 		super(cfg,profile);
 		

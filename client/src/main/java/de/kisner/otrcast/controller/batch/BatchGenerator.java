@@ -19,6 +19,7 @@ import de.kisner.otrcast.controller.batch.video.Mp4Merger;
 import de.kisner.otrcast.controller.batch.video.TagGenerator;
 import de.kisner.otrcast.controller.batch.video.VideoCutter;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
@@ -39,7 +40,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 	
 	private ExlpTxtWriter txt;
 	
-	public BatchGenerator(OtrConfig cfg,AviToMp4.Profile profile,boolean tagMp4) throws OtrInternalErrorException
+	public BatchGenerator(OtrConfig cfg, OtrCastInterface.Profile profile,boolean tagMp4) throws OtrInternalErrorException
 	{
 		super(cfg,profile);
 		
@@ -81,7 +82,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		crateForVideo(video,profile);
 	}
 	
-	private void crateForVideo(Video video, AviToMp4.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
+	private void crateForVideo(Video video, OtrCastInterface.Profile profile) throws OtrInternalErrorException, UtilsProcessingException
 	{
 		txt.add("echo Processing: "+video);
 		txt.add("");

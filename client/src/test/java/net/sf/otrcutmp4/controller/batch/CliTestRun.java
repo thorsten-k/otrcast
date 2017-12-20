@@ -9,11 +9,12 @@ import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrCutRest;
-import de.kisner.otrcast.app.AviToMp4.Profile;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
@@ -22,6 +23,7 @@ import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
 import de.kisner.otrcast.controller.web.rest.WebAviScanner;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
@@ -37,7 +39,6 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 public class CliTestRun
 {
@@ -58,7 +59,7 @@ public class CliTestRun
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication(otrConfig.getCredential(Credential.EMAIL,""),"test"));
-		ResteasyWebTarget restTarget = client.target("http://localhost:8080/otr");
+		ResteasyWebTarget restTarget = client.target(RestUrlDelay.getUrl(config));
 		rest = restTarget.proxy(OtrCutRest.class);
 	}
 	
@@ -137,7 +138,7 @@ public class CliTestRun
 		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		
 		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutLoaded),Videos.class);
-		BatchGenerator batch = new BatchGenerator(otrConfig,Profile.P0,false);
+		BatchGenerator batch = new BatchGenerator(otrConfig,OtrCastInterface.Profile.P0,false);
     	batch.build(videos);
 	}
 	
@@ -164,17 +165,18 @@ public class CliTestRun
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrClientTestBootstrap.init();
+		Configuration config = OtrCastBootstrap.init();
 				
 		CliTestRun test = new CliTestRun(config);
 //		test.srcDirProcessor();
+		
 //		test.cutlistFinder();
 
 //		test.cutlistChooseCli();
-//		test.cutlistChooseWeb();
+		test.cutlistChooseWeb();
 		
 //		test.cutLoader();
-		test.batch();
+//		test.batch();
 		
 //		test.scan();
 		

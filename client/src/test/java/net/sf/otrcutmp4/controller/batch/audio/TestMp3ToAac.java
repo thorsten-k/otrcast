@@ -4,20 +4,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
-import net.sf.otrcutmp4.util.TestOtrConfig;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4.Profile;
 import de.kisner.otrcast.controller.batch.audio.Mp3ToAac;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
+import net.sf.otrcutmp4.util.TestOtrConfig;
 
 public class TestMp3ToAac extends AbstractBatchTest
 { 
@@ -29,7 +28,7 @@ public class TestMp3ToAac extends AbstractBatchTest
 	public void init() throws IOException
 	{		
 		TestOtrConfig tC = TestOtrConfig.factory();
-		mp3ToAac = new  Mp3ToAac(tC.getOtrConfig(),Profile.P0);
+		mp3ToAac = new  Mp3ToAac(tC.getOtrConfig(), OtrCastInterface.Profile.P0);
 	}
 		
 	@Test

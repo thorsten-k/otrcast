@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.OtrConfig;
@@ -31,7 +32,7 @@ public class TagGenerator extends AbstactBatchGenerator
 	
 	private boolean tagMp4;
 	
-	public TagGenerator(OtrConfig cfg, AviToMp4.Profile profile,boolean tagMp4)
+	public TagGenerator(OtrConfig cfg, OtrCastInterface.Profile profile,boolean tagMp4)
 	{
 		super(cfg, profile);
 		this.tagMp4=tagMp4;

@@ -7,11 +7,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
+import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.util.OtrConfig;
@@ -23,7 +23,7 @@ public class Mp3ToAac extends AbstactBatchGenerator
 {
 	final static Logger logger = LoggerFactory.getLogger(Mp3ToAac.class);
 	
-	public Mp3ToAac(OtrConfig otrConfig,AviToMp4.Profile profile)
+	public Mp3ToAac(OtrConfig otrConfig, OtrCastInterface.Profile profile)
 	{
 		super(otrConfig,profile);
 	}
