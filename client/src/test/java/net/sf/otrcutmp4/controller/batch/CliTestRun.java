@@ -17,7 +17,7 @@ import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
-import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
+import de.kisner.otrcast.controller.cutlist.JdomCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
@@ -80,7 +80,7 @@ public class CliTestRun
 	{
 		VideoFiles input = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutAviXml),VideoFiles.class);
 		
-		DefaultCutlistLoader finder = new DefaultCutlistLoader();
+		JdomCutlistLoader finder = new JdomCutlistLoader();
 		VideoFiles result = finder.searchCutlist(input);
 		JaxbUtil.debug(result);
 		
@@ -123,7 +123,7 @@ public class CliTestRun
 	{
 		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutSelected),Videos.class);
 		
-		CutlistLoader cutlistLoader = new DefaultCutlistLoader();
+		CutlistLoader cutlistLoader = new JdomCutlistLoader();
 		cutlistLoader.loadCuts(videos);
 		JaxbUtil.debug(videos);
 		

@@ -34,11 +34,11 @@ import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class DefaultCutlistLoader implements CutlistLoader
+public class JdomCutlistLoader implements CutlistLoader
 {
-	final static Logger logger = LoggerFactory.getLogger(DefaultCutlistLoader.class);
+	final static Logger logger = LoggerFactory.getLogger(JdomCutlistLoader.class);
 		
-	public DefaultCutlistLoader()
+	public JdomCutlistLoader()
 	{
 
 	}
@@ -51,6 +51,8 @@ public class DefaultCutlistLoader implements CutlistLoader
 			{
 				for(VideoFile vf : video.getVideoFiles().getVideoFile())
 				{
+					logger.info("Loading");
+					JaxbUtil.info(vf);
 					CutList cl = loadCutlist(vf.getCutList().getId());
 					vf.setCutList(cl);
 				}

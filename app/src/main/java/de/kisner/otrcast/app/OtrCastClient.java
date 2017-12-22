@@ -17,7 +17,7 @@ import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
-import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
+import de.kisner.otrcast.controller.cutlist.JdomCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
@@ -121,7 +121,7 @@ public class OtrCastClient
 	    		was.scan(srcDirProcessor);
 	    	}
                 
-        DefaultCutlistLoader clFinder = new DefaultCutlistLoader();
+        JdomCutlistLoader clFinder = new JdomCutlistLoader();
         VideoFiles vFiles;
         
         if(cmd.hasOption(oMp4.getOpt()))
@@ -157,7 +157,7 @@ public class OtrCastClient
 		    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
 		    	JaxbUtil.debug(videos);
 		    	
-		    	CutlistLoader cutlistLoader = new DefaultCutlistLoader();;
+		    	CutlistLoader cutlistLoader = new JdomCutlistLoader();
 		    	cutlistLoader.loadCuts(videos);       
 		    	
 		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTag.getOpt()));

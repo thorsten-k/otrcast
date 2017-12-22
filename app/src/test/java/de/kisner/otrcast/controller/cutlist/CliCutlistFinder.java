@@ -1,18 +1,14 @@
-package net.sf.otrcutmp4.controller.cutlist;
+package de.kisner.otrcast.controller.cutlist;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
-import de.kisner.otrcast.controller.cutlist.DefaultCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
@@ -21,6 +17,8 @@ import de.kisner.otrcast.model.xml.cut.CutLists;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliCutlistFinder
 { 
@@ -39,7 +37,7 @@ public class CliCutlistFinder
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		DefaultCutlistLoader finder = new DefaultCutlistLoader();
+		JdomCutlistLoader finder = new JdomCutlistLoader();
 		vFiles = finder.searchCutlist(vFiles);
 		JaxbUtil.debug(vFiles);
 		
@@ -73,14 +71,14 @@ public class CliCutlistFinder
 		VideoFile vf = XmlVideoFileFactory.create(clKey);
 		JaxbUtil.debug(vf);
 		
-		DefaultCutlistLoader clf = new DefaultCutlistLoader();
+		JdomCutlistLoader clf = new JdomCutlistLoader();
 		CutLists cla = clf.searchCutlist(vf);
 		JaxbUtil.debug(cla);
 	}
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrClientTestBootstrap.init();
+		Configuration config = OtrCastBootstrap.init();
 		
 		CliCutlistFinder cli = new CliCutlistFinder(config);
 //		cli.findCl();
