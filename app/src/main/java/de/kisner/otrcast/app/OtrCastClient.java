@@ -9,9 +9,16 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jeesl.api.rest.system.JeeslTestRest;
+import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
@@ -21,8 +28,8 @@ import de.kisner.otrcast.controller.cutlist.JdomCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
-import de.kisner.otrcast.controller.web.WebCutlistChooserController;
 import de.kisner.otrcast.controller.web.rest.WebAviScanner;
+import de.kisner.otrcast.controller.web.rest.WebCutlistChooserController;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
@@ -72,7 +79,7 @@ public class OtrCastClient
 		uOption.handleLogger(cmd);
        
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
-        otrConfig.checkCutSettings();
+        otrConfig.checkCutSettings();        
         
         ViewSrcDirProcessor view = new CliSrcDirProcessorView();
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);

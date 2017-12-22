@@ -71,7 +71,7 @@ public class OtrConfig
 	private Map<Cmd,String> mapCmd;
 	
 	private List<String> lCutDirectotries,lMcDirectotries,lTools;
-	private Configuration config;
+	private Configuration config; public Configuration getConfig() {return config;}
 	
 	public OtrConfig(){this(null);}
 	public OtrConfig(Configuration config)

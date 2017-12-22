@@ -51,10 +51,13 @@ public class JdomCutlistLoader implements CutlistLoader
 			{
 				for(VideoFile vf : video.getVideoFiles().getVideoFile())
 				{
-					logger.info("Loading");
-					JaxbUtil.info(vf);
-					CutList cl = loadCutlist(vf.getCutList().getId());
-					vf.setCutList(cl);
+					if(vf.isSetCutList())
+					{
+						logger.info("Loading");
+						JaxbUtil.info(vf);
+						CutList cl = loadCutlist(vf.getCutList().getId());
+						vf.setCutList(cl);
+					}
 				}
 			}
 		}

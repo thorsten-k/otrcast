@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.web;
+package de.kisner.otrcast.controller.web.rest;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class WebCutlistChooserController extends AbstractCutlistChooserControlle
 		String token = rest.addCutPackage(vFiles);
 		view.srcFolderProcessed(token);
 		
-		logger.info("Press Any Key To Continue...");
+		logger.info("Press Any Key To Continue... ... waitning for "+token);
         new java.util.Scanner(System.in).nextLine();
 		
         Videos videos = rest.findCutPackage(token);
