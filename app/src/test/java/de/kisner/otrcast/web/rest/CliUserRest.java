@@ -11,34 +11,35 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
+import de.kisner.otrcast.factory.xml.cut.XmlVideoFilesFactory;
+import de.kisner.otrcast.interfaces.rest.OtrUserRest;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Videos;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class CliCutRest implements OtrCutRest
+public class CliUserRest implements OtrUserRest
 {
-	final static Logger logger = LoggerFactory.getLogger(CliCutRest.class);
+	final static Logger logger = LoggerFactory.getLogger(CliUserRest.class);
 	
-	private OtrCutRest rest;
+	private OtrUserRest rest;
 	
-	public CliCutRest(Configuration config)
+	public CliUserRest(Configuration config)
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("myUser","myPwd"));
 		ResteasyWebTarget restTarget = client.target(RestUrlDelay.getUrl(config));
-        rest = restTarget.proxy(OtrCutRest.class);
+        rest = restTarget.proxy(OtrUserRest.class);
 	}
 	
-	@Override
-	public String addCutPackage(VideoFiles vFiles) throws UtilsProcessingException {return null;}
+	@Override public String scan(VideoFiles vFiles) {return rest.scan(vFiles);}
 
-	@Override public Videos findCutPackage(String token) throws UtilsProcessingException {return rest.findCutPackage(token);}
 	
 	public static void main(String[] args) throws Exception
 	{
 		Configuration config = OtrCastBootstrap.init();	
-		CliCutRest rest = new CliCutRest(config);
-		JaxbUtil.info(rest.findCutPackage("mihaefe3ja"));
+		CliUserRest rest = new CliUserRest(config);
+		logger.info(rest.scan(XmlVideoFilesFactory.build()));
 	}
 }

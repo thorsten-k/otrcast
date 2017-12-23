@@ -67,11 +67,8 @@ public class AviToMp4 extends AbstractCommandLine
 
 		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
 
-		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
-
-
 
 		options.addOption(oHelp);
 		options.addOption(oDebug);
