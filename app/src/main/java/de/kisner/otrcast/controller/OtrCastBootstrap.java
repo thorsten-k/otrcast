@@ -29,7 +29,7 @@ public class OtrCastBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrCastBootstrap.class);
 	
-	public static String xmlConfig = "otrcast-app/config/otr.xml";
+	public static String xmlConfig = "otrcast/config/otr.xml";
 	
 	private static EntityManagerFactory emf;
 	private static Configuration config;
@@ -38,7 +38,7 @@ public class OtrCastBootstrap
 	public static void initLogger(String log4jConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(log4jConfig);
-		loggerInit.addAltPath("otrcast-app/config");
+		loggerInit.addAltPath("otrcast/config");
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}

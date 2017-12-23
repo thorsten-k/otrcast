@@ -257,7 +257,8 @@
 				<version>1.5.1</version>
 				<configuration>
 					<appClass>de.kisner.otrcast.app.OtrCastClient</appClass>
-					<fileName>OtrCast</fileName><fileDesc></fileDesc>
+					<fileName>OtrCast</fileName>
+					<fileDesc>-${project.version}</fileDesc>
 					<type>fat</type>
 				</configuration>
 			</plugin>

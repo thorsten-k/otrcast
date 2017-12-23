@@ -36,6 +36,7 @@ import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
@@ -55,7 +56,8 @@ public class OtrCastClient
 	private UtilsCliOption uOption;
 	private OtrConfig otrConfig;
 	
-	private Option oTagLib,oScan,oProfile,oCover,oMp4,oWeb,oTagMp4;
+	private Option oTagLib,oScan,oProfile,oCover,oMp4,oWeb;
+	private Option oTagMp4,oTagFile;
 	
 	public OtrCastClient(UtilsCliOption uOption)
 	{
@@ -65,19 +67,24 @@ public class OtrCastClient
 	
 	public void parseArguments(String args[]) throws Exception
 	{
+		for(String s : args)
+		{
+			System.out.println(s);
+		}
+		
 		createOptions();
 		CommandLineParser parser = new DefaultParser();
-		CommandLine cmd = parser.parse(uOption.getOptions(), args);
-
+		CommandLine cmd = parser.parse(uOption.getOptions(), args);	
+		
 		uOption.handleHelp(cmd);
+		uOption.setLog4jPaths("otrcast/config");
 		uOption.handleLogger(cmd);
-       
+
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
         otrConfig.checkCutSettings();        
         
         ViewSrcDirProcessor view = new CliSrcDirProcessorView();
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
-        
         
         OtrCastInterface.Profile profile = null;
         if(cmd.hasOption(oProfile.getOpt()))
@@ -182,7 +189,7 @@ public class OtrCastClient
 		    		
 		    	JaxbUtil.info(videos);
 		    	
-		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTagLib.getOpt()));
+		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTagFile.getOpt()));
 		    	batch.build(videos);
         }
         
@@ -219,7 +226,7 @@ public class OtrCastClient
         uOption.buildDebug();
         uOption.buildConfig();
         
-        oTagLib = Option.builder("tagLib").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTagLib);
+       
         oScan = Option.builder("scan").required(false).desc("Scans the MP4 Library").build(); uOption.getOptions().addOption(oScan);
         
 		oMp4 = new Option("mp4", "Converts AVI to MP4"); uOption.getOptions().addOption(oMp4);
@@ -240,7 +247,10 @@ public class OtrCastClient
 				
 		oTagMp4  = Option.builder("tagMp4").required(false)
 						.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
-						.build();
+						.build(); uOption.getOptions().addOption(oTagMp4);
+		
+		 oTagLib = Option.builder("tagLib").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTagLib);
+		 oTagFile = Option.builder("tagFile").required(false).desc("Include tagging in Batch").build(); uOption.getOptions().addOption(oTagFile);
 	}
 	
 	public static void main(String args[]) throws Exception

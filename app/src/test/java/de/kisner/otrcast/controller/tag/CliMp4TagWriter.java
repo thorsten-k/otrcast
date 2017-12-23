@@ -7,6 +7,7 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.tag.writer.MovieTagWriter;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
@@ -16,7 +17,6 @@ import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class CliMp4TagWriter
@@ -62,7 +62,7 @@ public class CliMp4TagWriter
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastUtilTestBootstrap.init();
+		Configuration config = OtrCastBootstrap.init();
 
 		File srcMp4 = new File(config.getString(TestPropertyKeys.dirTaggerSrc));
 		File dstMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));
@@ -80,6 +80,7 @@ public class CliMp4TagWriter
 		
 		for(File file : files)
 		{
+			logger.info(file.getAbsolutePath());
 			File fTarget = new File(dstMp4,file.getName());
 			if(fTarget.exists()){fTarget.delete();}
 			test.series(file,fTarget);

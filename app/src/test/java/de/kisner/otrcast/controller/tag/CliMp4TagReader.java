@@ -7,10 +7,10 @@ import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.factory.txt.TxtVideoFactory;
 import de.kisner.otrcast.model.xml.series.Video;
-import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class CliMp4TagReader
@@ -33,7 +33,7 @@ public class CliMp4TagReader
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastUtilTestBootstrap.init();
+		Configuration config = OtrCastBootstrap.init();
 		
 		CliMp4TagReader test = new CliMp4TagReader();
 		

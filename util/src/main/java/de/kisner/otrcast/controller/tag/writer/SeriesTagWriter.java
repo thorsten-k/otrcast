@@ -91,9 +91,10 @@ public class SeriesTagWriter extends AbstractTagWriter
 		
 		boolean coverAvailable = coverManager.isAvailable(season);
 		logger.info("Cover available: "+coverAvailable);
+		
 		if(coverAvailable)
 		{
-			logger.debug("Writing Cover "+season.getSeries().getKey());
+			logger.info("Writing Cover "+season.getSeries().getKey());
 			writeCover(apple, coverManager.getFormat(), coverManager.getImageStream());
 		}
 	}
