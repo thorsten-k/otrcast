@@ -30,7 +30,7 @@ public class TagGenerator extends AbstactBatchGenerator
 	
 	private boolean tagMp4;
 	
-	public TagGenerator(OtrConfig cfg, OtrCastInterface.Profile profile,boolean tagMp4)
+	public TagGenerator(OtrConfig cfg, OtrCastInterface.Profile profile, boolean tagMp4)
 	{
 		super(cfg, profile);
 		this.tagMp4=tagMp4;

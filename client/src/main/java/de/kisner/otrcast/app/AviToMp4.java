@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
-import de.kisner.otrcast.controller.processor.SeriesTagger;
+import de.kisner.otrcast.controller.media.SeriesTagger;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
@@ -25,7 +25,6 @@ public class AviToMp4 extends AbstractCommandLine
 	public static final String exeName = "OtrCutMp4-<version>.jar";
 	
 	private Option oAc3;
-	private Option oTagMp4,oTag;
 
 	private OtrConfig otrConfig;
 		
@@ -55,13 +54,7 @@ public class AviToMp4 extends AbstractCommandLine
         
         CoverManager coverManager = null;
         
-        if(line.hasOption(oTagMp4.getOpt()))
-        {
-	        	logger.info("Tagging MP4");
-	        	SeriesTagger tagger = new SeriesTagger(otrConfig,profile,coverManager);
-	        	tagger.tag(new Long(line.getOptionValue(oTagMp4.getOpt())));
-	        	return;
-        }
+
 
         
         
@@ -73,14 +66,12 @@ public class AviToMp4 extends AbstractCommandLine
         super.buildOptions();
 
 		oAc3 = new Option("ac3", "Use AC3 Audio for HD if available (experimental)");
-		oTag = new Option("tag","Tag processed files. Login required!");
+
 		
 		Option oCreate = new Option("createConfig", "Create a default properties file");
 		Option oDir = new Option("createDirs", "Create directories specified in configuration file");
 
-		oTagMp4  = Option.builder("tagMp4").required(false)
-					.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
-					.build();
+
 
 		options.addOption(oHelp);
 		options.addOption(oDebug);
@@ -88,8 +79,6 @@ public class AviToMp4 extends AbstractCommandLine
 		options.addOption(oCreate);
 		options.addOption(oDir);
 		options.addOption(oConfig);
-		options.addOption(oTag);
-		options.addOption(oTagMp4);
 		
 		return options;
 	}

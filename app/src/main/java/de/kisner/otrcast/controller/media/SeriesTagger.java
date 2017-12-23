@@ -1,4 +1,4 @@
-package de.kisner.otrcast.controller.processor;
+package de.kisner.otrcast.controller.media;
 
 import java.io.IOException;
 
@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
-import de.kisner.otrcast.app.AviToMp4;
 import de.kisner.otrcast.controller.batch.video.TagGenerator;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.interfaces.OtrCastInterface;

@@ -19,6 +19,7 @@ import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
 import de.kisner.otrcast.controller.cutlist.JdomCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.media.McLibraryTagger;
+import de.kisner.otrcast.controller.media.SeriesTagger;
 import de.kisner.otrcast.controller.processor.SrcDirProcessor;
 import de.kisner.otrcast.controller.web.rest.WebAviScanner;
 import de.kisner.otrcast.controller.web.rest.WebCutlistChooserController;
@@ -54,7 +55,7 @@ public class OtrCastClient
 	private UtilsCliOption uOption;
 	private OtrConfig otrConfig;
 	
-	private Option oTag,oScan,oProfile,oCover,oMp4,oWeb;
+	private Option oTagLib,oScan,oProfile,oCover,oMp4,oWeb,oTagMp4;
 	
 	public OtrCastClient(UtilsCliOption uOption)
 	{
@@ -108,7 +109,7 @@ public class OtrCastClient
 	        	}
         }
         
-        if(cmd.hasOption(oTag.getOpt()) && uOption.allowAppStart())
+        if(cmd.hasOption(oTagLib.getOpt()) && uOption.allowAppStart())
         {
         		tagMediathek(otrConfig.getDir(OtrConfig.Dir.MC));
         }
@@ -181,8 +182,16 @@ public class OtrCastClient
 		    		
 		    	JaxbUtil.info(videos);
 		    	
-		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTag.getOpt()));
+		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTagLib.getOpt()));
 		    	batch.build(videos);
+        }
+        
+        if(cmd.hasOption(oTagMp4.getOpt()))
+        {
+	        	logger.info("Tagging MP4");
+	        	SeriesTagger tagger = new SeriesTagger(otrConfig,profile,coverManager);
+	        	tagger.tag(new Long(cmd.getOptionValue(oTagMp4.getOpt())));
+	        	return;
         }
         
         if(!uOption.isAppStarted())
@@ -210,7 +219,7 @@ public class OtrCastClient
         uOption.buildDebug();
         uOption.buildConfig();
         
-        oTag = Option.builder("tag").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTag);
+        oTagLib = Option.builder("tagLib").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTagLib);
         oScan = Option.builder("scan").required(false).desc("Scans the MP4 Library").build(); uOption.getOptions().addOption(oScan);
         
 		oMp4 = new Option("mp4", "Converts AVI to MP4"); uOption.getOptions().addOption(oMp4);
@@ -228,6 +237,10 @@ public class OtrCastClient
 		oCover  = Option.builder("cover").required(false)
 				.hasArg(true).argName("TYPE").desc("CoverManager: (FS) FileSystem")
 				.build();uOption.getOptions().addOption(oCover);
+				
+		oTagMp4  = Option.builder("tagMp4").required(false)
+						.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
+						.build();
 	}
 	
 	public static void main(String args[]) throws Exception
