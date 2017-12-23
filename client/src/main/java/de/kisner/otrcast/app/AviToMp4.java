@@ -9,35 +9,14 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.batch.BatchGenerator;
-import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
-import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
-import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
-import de.kisner.otrcast.controller.cutlist.JdomCutlistLoader;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.controller.processor.SeriesTagger;
-import de.kisner.otrcast.controller.processor.SrcDirProcessor;
-import de.kisner.otrcast.controller.web.rest.WebAviScanner;
-import de.kisner.otrcast.controller.web.rest.WebCutlistChooserController;
-import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
-import de.kisner.otrcast.interfaces.controller.CutlistChooser;
-import de.kisner.otrcast.interfaces.controller.CutlistLoader;
-import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
-import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
-import de.kisner.otrcast.model.xml.cut.VideoFile;
-import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
-import de.kisner.otrcast.util.OtrConfig.Dir;
-import de.kisner.otrcast.view.cli.CliCutlistChooserView;
-import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
-import de.kisner.otrcast.view.web.WebCutlistChooserView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AviToMp4 extends AbstractCommandLine
 {
@@ -103,8 +82,6 @@ public class AviToMp4 extends AbstractCommandLine
 					.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
 					.build();
 
-
-		
 		options.addOption(oHelp);
 		options.addOption(oDebug);
 		options.addOption(oAc3);

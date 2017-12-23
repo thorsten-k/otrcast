@@ -22,6 +22,7 @@ import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.shell.cmd.ShellCmdRm;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class BatchGenerator extends AbstactBatchGenerator
 {
@@ -58,6 +59,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 	
 	public void build(Videos videos) throws OtrInternalErrorException, UtilsProcessingException
 	{
+		JaxbUtil.info(videos);
 		for(Video video : videos.getVideo())
 		{
 			build(video);

@@ -6,19 +6,11 @@ import java.io.IOException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
-import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.system.JeeslTestRest;
-import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
@@ -41,6 +33,7 @@ import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
@@ -165,7 +158,28 @@ public class OtrCastClient
 		    	JaxbUtil.debug(videos);
 		    	
 		    	CutlistLoader cutlistLoader = new JdomCutlistLoader();
-		    	cutlistLoader.loadCuts(videos);       
+		    	cutlistLoader.loadCuts(videos);
+		    	
+		    	if(videos.isSetVideo())
+		    	{
+		    		for(Video video : videos.getVideo())
+		    		{
+		    			if(video.isSetVideoFiles())
+		    			{
+		    				VideoFiles tmp = new VideoFiles();
+			    			if(video.getVideoFiles().isSetVideoFile())
+			    			{
+			    				for(VideoFile vf : video.getVideoFiles().getVideoFile())
+			    				{
+			    					if(vf.isSetCutList()) {tmp.getVideoFile().add(vf);}
+			    				}
+			    			}
+			    			video.setVideoFiles(tmp);
+		    			}
+		    		}
+		    	}
+		    		
+		    	JaxbUtil.info(videos);
 		    	
 		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTag.getOpt()));
 		    	batch.build(videos);
@@ -213,7 +227,7 @@ public class OtrCastClient
 				
 		oCover  = Option.builder("cover").required(false)
 				.hasArg(true).argName("TYPE").desc("CoverManager: (FS) FileSystem")
-				.build();uOption.getOptions().addOption(oProfile);
+				.build();uOption.getOptions().addOption(oCover);
 	}
 	
 	public static void main(String args[]) throws Exception
