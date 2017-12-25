@@ -57,7 +57,7 @@ public class OtrCastClient
 	private OtrConfig otrConfig;
 	
 	private Option oTagLib,oScan,oProfile,oCover,oMp4,oWeb;
-	private Option oTagMp4,oTagFile;
+	private Option oTagMp4,oTagFile,oTagProcessed;
 	
 	public OtrCastClient(UtilsCliOption uOption)
 	{
@@ -189,7 +189,7 @@ public class OtrCastClient
 		    		
 		    	JaxbUtil.info(videos);
 		    	
-		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTagFile.getOpt()));
+		    	BatchGenerator batch = new BatchGenerator(otrConfig,profile,cmd.hasOption(oTagFile.getOpt()),true);
 		    	batch.build(videos);
         }
         
@@ -198,6 +198,13 @@ public class OtrCastClient
 	        	logger.info("Tagging MP4");
 	        	SeriesTagger tagger = new SeriesTagger(otrConfig,profile,coverManager);
 	        	tagger.tag(new Long(cmd.getOptionValue(oTagMp4.getOpt())));
+	        	
+	        	 if(cmd.hasOption(oTagProcessed.getOpt()))
+             {
+     	        	logger.info("Processed MP4");
+     	        	tagger.processed(new Long(cmd.getOptionValue(oTagProcessed.getOpt())));
+             }
+	        	
 	        	return;
         }
         
@@ -241,13 +248,17 @@ public class OtrCastClient
 				.hasArg(true).argName("PROFILE").desc("Use (optional) experimental PROFILE: "+sb.toString())
 				.build();uOption.getOptions().addOption(oProfile);
 				
-		oCover  = Option.builder("cover").required(false)
+		oCover = Option.builder("cover").required(false)
 				.hasArg(true).argName("TYPE").desc("CoverManager: (FS) FileSystem")
 				.build();uOption.getOptions().addOption(oCover);
 				
-		oTagMp4  = Option.builder("tagMp4").required(false)
+		oTagMp4 = Option.builder("tagMp4").required(false)
 						.hasArg(true).argName("TOKEN").desc("Tag MP4 file. Login required! (TOKEN format is ID-FILE)")
 						.build(); uOption.getOptions().addOption(oTagMp4);
+						
+		oTagProcessed = Option.builder("tagProcessed").required(false)
+				.hasArg(true).argName("TOKEN").desc("Processed MP4 file. Login required! (TOKEN format is ID-FILE)")
+				.build(); uOption.getOptions().addOption(oTagProcessed);
 		
 		 oTagLib = Option.builder("tagLib").required(false).desc("Tags the MP4 Library").build(); uOption.getOptions().addOption(oTagLib);
 		 oTagFile = Option.builder("tagFile").required(false).desc("Include tagging in Batch").build(); uOption.getOptions().addOption(oTagFile);

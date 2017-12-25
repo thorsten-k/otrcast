@@ -138,7 +138,7 @@ public class CliTestRun
 		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
 		
 		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutLoaded),Videos.class);
-		BatchGenerator batch = new BatchGenerator(otrConfig,OtrCastInterface.Profile.P0,false);
+		BatchGenerator batch = new BatchGenerator(otrConfig,OtrCastInterface.Profile.P0,false,false);
     	batch.build(videos);
 	}
 	

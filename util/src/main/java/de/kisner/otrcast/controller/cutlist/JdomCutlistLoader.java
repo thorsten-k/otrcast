@@ -77,7 +77,10 @@ public class JdomCutlistLoader implements CutlistLoader
 		ll.processSingle(http);
 		
 		JaxbEvent event = (JaxbEvent)leh.getSingleResult();
-		return (CutList)event.getObject();
+		
+		CutList cutlist = (CutList)event.getObject();
+		cutlist.setId(id);
+		return cutlist;
 	}
 	
 	public VideoFiles searchCutlist(VideoFiles vFiles)

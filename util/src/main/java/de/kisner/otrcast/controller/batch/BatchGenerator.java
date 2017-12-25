@@ -39,7 +39,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 	
 	private ExlpTxtWriter txt;
 	
-	public BatchGenerator(OtrConfig cfg, OtrCastInterface.Profile profile,boolean tagMp4) throws OtrInternalErrorException
+	public BatchGenerator(OtrConfig cfg, OtrCastInterface.Profile profile,boolean tagMp4, boolean tagProcessed) throws OtrInternalErrorException
 	{
 		super(cfg,profile);
 		
@@ -49,7 +49,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		aviExtract = new AviExtract(cfg,profile);
 		videoCutter = new VideoCutter(cfg,profile);
 		mp4Merger = new Mp4Merger(cfg,profile);
-		tagGenerator = new TagGenerator(cfg,profile,tagMp4);
+		tagGenerator = new TagGenerator(cfg,profile,tagMp4,tagProcessed);
 		
 		logger.debug("");
 		logger.debug("Creating Batch in "+cfg.getDir(Dir.BAT).getAbsolutePath());
@@ -89,7 +89,7 @@ public class BatchGenerator extends AbstactBatchGenerator
 		
 		try {txt.add(ShellCmdRm.rmDir(rpf.relativate(cfg.getDir(Dir.TMP)), true));}
 		catch (ExlpUnsupportedOsException e) {logger.error("",e);}
-	
+		
 		extract(video);
 		transcode(video);
 		txt.add(videoCutter.cut(video));

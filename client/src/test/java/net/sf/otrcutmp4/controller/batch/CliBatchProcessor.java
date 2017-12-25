@@ -31,7 +31,7 @@ public class CliBatchProcessor
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		JaxbUtil.trace(vFiles);
 		
-		BatchGenerator test = new BatchGenerator(null,OtrCastInterface.Profile.P0,false);
+		BatchGenerator test = new BatchGenerator(null,OtrCastInterface.Profile.P0,false,false);
 		logger.warn("NYI "+test.getClass().getSimpleName());
 	}
 	

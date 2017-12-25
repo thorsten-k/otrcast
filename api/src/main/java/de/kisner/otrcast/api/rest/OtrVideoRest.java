@@ -18,7 +18,7 @@ public interface OtrVideoRest
 {
 	@GET @Path("/tags/{id}") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.TEXT_PLAIN)
 	Tags getTags(@PathParam("id") String fileName);
-	
+		
 	@GET @Path("/episode/{id}") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.TEXT_PLAIN)
 	Episode getEpisode(@PathParam("id") long episodeId);
 	
@@ -30,4 +30,6 @@ public interface OtrVideoRest
 	
 	@POST @Path("/series/info") @Consumes(MediaType.APPLICATION_XML) @Produces(MediaType.APPLICATION_XML)
 	Otr resolveSeries(Series series);
+	
+	
 }
