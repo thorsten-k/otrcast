@@ -11,4 +11,12 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="tag">
+		<xsd:complexType>
+        	<xsd:sequence>
+
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:long"/>
+		</xsd:complexType>
+    </xsd:element>
 </xsd:schema>

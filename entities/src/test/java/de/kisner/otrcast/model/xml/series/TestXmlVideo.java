@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.cut.TestXmlVideoFiles;
+import de.kisner.otrcast.model.xml.video.TestXmlTag;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlVideo extends AbstractXmlSeriesTest<Video>
@@ -15,16 +16,17 @@ public class TestXmlVideo extends AbstractXmlSeriesTest<Video>
     
     public Video build(boolean withChilds)
     {
-    	Video xml = new Video();
-    
-    	if(withChilds)
-    	{
-    		xml.setMovie(TestXmlMovie.create(false));
-    		xml.setEpisode(TestXmlEpisode.create(false));
-    		xml.setVideoFiles(TestXmlVideoFiles.create(false));
-    	}
-    	
-    	return xml;
+	    	Video xml = new Video();
+	    
+	    	if(withChilds)
+	    	{
+	    		xml.setMovie(TestXmlMovie.create(false));
+	    		xml.setEpisode(TestXmlEpisode.create(false));
+	    		xml.setVideoFiles(TestXmlVideoFiles.create(false));
+	    		xml.setTag(TestXmlTag.create(false));
+	    	}
+	    	
+	    	return xml;
     }
 	
 	public static void main(String[] args)

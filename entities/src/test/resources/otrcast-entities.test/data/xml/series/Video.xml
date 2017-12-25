@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<s:video xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series" xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut">
+<s:video xmlns:mc="http://otrcutmp4.sf.net/mc" xmlns:s="http://otrcutmp4.sf.net/series" xmlns:tvdb="http://otrcutmp4.sf.net/tvdb" xmlns:db="http://otrcutmp4.sf.net/db" xmlns:o="http://otrcutmp4.sf.net/otr" xmlns:c="http://otrcutmp4.sf.net/cut" xmlns:v="http://otrcutmp4.sf.net/video">
     <s:episode id="1" nr="1" name="Test Name"/>
     <s:movie id="123" name="Test Name" year="2103"/>
     <c:videoFiles/>
+    <v:tag id="123"/>
 </s:video>

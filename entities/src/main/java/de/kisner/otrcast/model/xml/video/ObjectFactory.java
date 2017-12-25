@@ -37,4 +37,12 @@ public class ObjectFactory {
         return new File();
     }
 
+    /**
+     * Create an instance of {@link Tag }
+     * 
+     */
+    public Tag createTag() {
+        return new Tag();
+    }
+
 }

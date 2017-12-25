@@ -14,6 +14,7 @@ import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Tag;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Cmd;
 import de.kisner.otrcast.util.OtrConfig.Dir;
@@ -42,13 +43,7 @@ public class TagGenerator extends AbstactBatchGenerator
 	public List<String> mvToMp4(Video video) throws UtilsProcessingException
 	{
 		JaxbUtil.info(video);
-	
-		CutList cl = null;
-		if(video.isSetVideoFiles() && video.getVideoFiles().isSetVideoFile() && video.getVideoFiles().getVideoFile().get(0).isSetCutList())
-		{
-			cl = video.getVideoFiles().getVideoFile().get(0).getCutList();
-		}
-		
+			
 		String sFrom = buildSrc();
 		String sTo = buildDst(video);
 		
@@ -56,7 +51,7 @@ public class TagGenerator extends AbstactBatchGenerator
 		{
 			if(video.isSetEpisode() && video.getEpisode().isSetId())
 			{
-				return tag(video.getEpisode(),cl);
+				return tag(video.getEpisode(),video.getTag());
 			}
 			else
 			{
@@ -84,17 +79,17 @@ public class TagGenerator extends AbstactBatchGenerator
 		else {return dstFile.getAbsolutePath();}
 	}
 	
-	public List<String> tag(Episode episode, CutList x) throws UtilsProcessingException
+	public List<String> tag(Episode episode, Tag tag) throws UtilsProcessingException
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(cfg.getCmd(Cmd.TAGGER));
 		sb.append(" -tagMp4 ");
 		sb.append(episode.getId());
 		
-		if(tagProcessed && x!=null)
+		if(tagProcessed && tag!=null)
 		{
 			sb.append(" -tagProcessed ");
-			sb.append(x.getId());
+			sb.append(tag.getId());
 		}
 		
 		List<String> result = new ArrayList<String>();
