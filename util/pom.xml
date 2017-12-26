@@ -84,6 +84,20 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- HTTP -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+			<scope>provided</scope>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+			</exclusions>
+		</dependency>
+		
 		<!-- REST -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>

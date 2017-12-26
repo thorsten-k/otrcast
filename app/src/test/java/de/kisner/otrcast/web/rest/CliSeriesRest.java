@@ -1,4 +1,4 @@
-package net.sf.otrcutmp4.web.rest;
+package de.kisner.otrcast.web.rest;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
@@ -22,7 +23,6 @@ import de.kisner.otrcast.model.xml.series.Tags;
 import freemarker.template.TemplateException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 public class CliSeriesRest
 {
@@ -91,7 +91,7 @@ public class CliSeriesRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrClientTestBootstrap.init();
+		Configuration config = OtrCastBootstrap.init();
 		CliSeriesRest rest = new CliSeriesRest(config);
 //		rest.single();
 //		rest.multi();

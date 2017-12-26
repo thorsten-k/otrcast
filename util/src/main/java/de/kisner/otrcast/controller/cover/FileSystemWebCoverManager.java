@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.model.xml.series.Season;
+import de.kisner.otrcast.web.RedirectDownloader;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class FileSystemWebCoverManager implements CoverManager
 {
@@ -54,18 +54,13 @@ public class FileSystemWebCoverManager implements CoverManager
 		File fImage = new File(dir,season.getNr()+"."+FileSystemCoverManager.toFormat(season.getImage().getUrl()).toString().toLowerCase());
 		logger.info("Downloading "+season.getImage().getUrl());
 		logger.info("Target file: "+fImage.getAbsolutePath());
-		URL url;
-		try {
-			url = new URL(season.getImage().getUrl());
-			FileUtils.copyURLToFile(url,fImage);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try
+		{
+			URL url = new URL(season.getImage().getUrl());		
+			RedirectDownloader downloader = new RedirectDownloader();
+			downloader.download(url,fImage);
+			
 		}
-		
-	}
-		
+		catch (MalformedURLException e) {e.printStackTrace();}
+	}	
 }
