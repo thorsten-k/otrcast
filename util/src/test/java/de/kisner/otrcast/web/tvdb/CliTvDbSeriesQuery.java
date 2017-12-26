@@ -7,7 +7,7 @@ import org.apache.commons.configuration.Configuration;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
-import de.kisner.otrcast.web.tvdb.TvDbSeriesQuery;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbSeriesQuery;
 
 public class CliTvDbSeriesQuery extends AbstractOtrcastTest
 {

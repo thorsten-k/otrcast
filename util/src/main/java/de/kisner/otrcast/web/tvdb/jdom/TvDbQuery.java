@@ -1,4 +1,4 @@
-package de.kisner.otrcast.web.tvdb;
+package de.kisner.otrcast.web.tvdb.jdom;
 
 import java.util.Date;
 

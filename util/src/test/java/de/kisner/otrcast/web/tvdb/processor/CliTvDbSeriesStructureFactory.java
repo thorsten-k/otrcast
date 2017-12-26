@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
-import de.kisner.otrcast.web.tvdb.TvDbQuery;
-import de.kisner.otrcast.web.tvdb.processor.TvDbSeriesStructureFactory;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbQuery;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbSeriesStructureFactory;
 
 public class CliTvDbSeriesStructureFactory extends AbstractOtrcastTest
 {

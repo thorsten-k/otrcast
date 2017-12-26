@@ -1,4 +1,4 @@
-package de.kisner.otrcast.web.tvdb;
+package de.kisner.otrcast.web.tvdb.jdom;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,8 +38,6 @@ import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
-import de.kisner.otrcast.web.tvdb.processor.TvDbBannerFactory;
-import de.kisner.otrcast.web.tvdb.processor.TvDbSeriesStructureFactory;
 
 public class TvDbSeriesQuery extends AbstractTvDbQuery
 {

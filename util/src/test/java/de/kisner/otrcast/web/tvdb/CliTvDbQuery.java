@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
-import de.kisner.otrcast.web.tvdb.TvDbQuery;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbQuery;
 
 public class CliTvDbQuery extends AbstractOtrcastTest
 {

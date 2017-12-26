@@ -4,7 +4,7 @@ import org.apache.commons.configuration.Configuration;
 
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
-import de.kisner.otrcast.web.tvdb.TvDbSyncQuery;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbSyncQuery;
 
 public class CliTvDbSyncQuery extends AbstractOtrcastTest
 {

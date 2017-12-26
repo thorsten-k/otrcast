@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
-import de.kisner.otrcast.web.tvdb.TvDbQuery;
-import de.kisner.otrcast.web.tvdb.processor.TvDbBannerFactory;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbBannerFactory;
+import de.kisner.otrcast.web.tvdb.jdom.TvDbQuery;
 
 public class CliTvDbBannerFactory extends AbstractOtrcastTest
 {

@@ -1,4 +1,4 @@
-package de.kisner.otrcast.web.tvdb;
+package de.kisner.otrcast.web;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,15 +17,15 @@ import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResultResponse;
 import com.uwetrottmann.thetvdb.entities.SeriesImagesQueryParam;
 import com.uwetrottmann.thetvdb.entities.SeriesImagesQueryParamResponse;
 
+import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
-import de.kisner.otrcast.test.AbstractOtrcastTest;
-import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
+import de.kisner.otrcast.web.tvdb.TvDbJsonQuery;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import retrofit2.Response;
 
-public class CliTvDbApi extends AbstractOtrcastTest
+public class CliTvDbApi
 {
     final static Logger logger = LoggerFactory.getLogger(CliTvDbApi.class);
 
@@ -100,7 +100,7 @@ public class CliTvDbApi extends AbstractOtrcastTest
     
     public void api() throws UtilsProcessingException
     {
-    		TvDb2Query query = new TvDb2Query(theTvdb);
+    		TvDbJsonQuery query = new TvDbJsonQuery(theTvdb);
     		Otr series = query.series(seriesId);
     		JaxbUtil.trace(series);
     		
@@ -110,12 +110,12 @@ public class CliTvDbApi extends AbstractOtrcastTest
     
     public static void main(String args[]) throws Exception
     {
-    		Configuration config = OtrCastUtilTestBootstrap.init();
+    		Configuration config = OtrCastBootstrap.init();
     		CliTvDbApi cli = new CliTvDbApi(config);
-//    		cli.episodeSummary();
+    		cli.episodeSummary();
 //        cli.episodes();
         
-       cli.api();
-        cli.images();
+//       cli.api();
+//        cli.images();
     }
  }

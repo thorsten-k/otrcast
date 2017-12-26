@@ -1,4 +1,4 @@
-package de.kisner.otrcast.web.tvdb.processor;
+package de.kisner.otrcast.web.tvdb.jdom;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;

@@ -31,32 +31,24 @@ import de.kisner.otrcast.model.xml.tvdb.Banners;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import retrofit2.Response;
 
-public class TvDb2Query
+public class TvDbJsonQuery
 {
-	final static Logger logger = LoggerFactory.getLogger(TvDb2Query.class);
+	final static Logger logger = LoggerFactory.getLogger(TvDbJsonQuery.class);
 
 	private final TheTvdb theTvdb;
 	
-	public TvDb2Query(String apiKey)
+	public TvDbJsonQuery(String apiKey)
 	{
         this(new TheTvdb(apiKey));
 	}
 	
-	public TvDb2Query(TheTvdb theTvdb)
+	public TvDbJsonQuery(TheTvdb theTvdb)
 	{
 		this.theTvdb=theTvdb;
 	}
 	
-	public Otr series(long id) throws UtilsProcessingException
-	{
-		return series(Long.valueOf(id).intValue());
-	}
-	
-	public Otr series(int id) throws UtilsProcessingException
-	{
-        return XmlOtrFactory.build(build(id));
-	}
-	
+	public Otr series(long id) throws UtilsProcessingException{return series(Long.valueOf(id).intValue());}
+	public Otr series(int id) throws UtilsProcessingException{return XmlOtrFactory.build(build(id));}
 	private Series build(int id) throws UtilsProcessingException
 	{
 		Series xml;
