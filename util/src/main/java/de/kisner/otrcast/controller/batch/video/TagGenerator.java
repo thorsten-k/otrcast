@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.batch.AbstactBatchGenerator;
 import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
-import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.series.Episode;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.video.Tag;
