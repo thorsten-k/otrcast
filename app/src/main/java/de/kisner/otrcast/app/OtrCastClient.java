@@ -28,7 +28,6 @@ import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
-import de.kisner.otrcast.interfaces.controller.CutlistLoader;
 import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
 import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
@@ -36,9 +35,9 @@ import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
-import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
+import de.kisner.otrcast.view.LanternaView;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
 import de.kisner.otrcast.view.web.WebCutlistChooserView;
@@ -84,7 +83,8 @@ public class OtrCastClient
         otrConfig.checkCutSettings();        
         
         ViewSrcDirProcessor view = new CliSrcDirProcessorView();
-        SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
+        LanternaView view2 = new LanternaView();
+        SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view2);
         
         OtrCastInterface.Profile profile = null;
         if(cmd.hasOption(oProfile.getOpt()))
@@ -128,12 +128,16 @@ public class OtrCastClient
 	    		srcDirProcessor.addValidSuffix(XmlOtrIdFactory.typeOtrkey);
 	    		was.scan(srcDirProcessor);
 	    	}
-                
-        JdomCutlistLoader clFinder = new JdomCutlistLoader();
-        VideoFiles vFiles;
+        
+
         
         if(cmd.hasOption(oMp4.getOpt()))
         {
+        	
+            JdomCutlistLoader cutlistLoader = new JdomCutlistLoader();
+            
+            VideoFiles vFiles;
+            
 	        vFiles = srcDirProcessor.scan(otrConfig.getDir(Dir.AVI));
 	        if(cmd.hasOption("ac3"))
 	        {
@@ -146,7 +150,7 @@ public class OtrCastClient
 	        		for(VideoFile vf : vFiles.getVideoFile()){vf.getOtrId().getFormat().setAc3(false);}
 	        }
 	        
-	        vFiles = clFinder.searchCutlist(vFiles);
+	        vFiles = cutlistLoader.searchCutlist(vFiles);
 	        
 	        ViewCutlistChooser viewCutlistChooser = null;
 	        CutlistChooser controllerCutlistChooser = null;
@@ -163,9 +167,10 @@ public class OtrCastClient
 	        }
 	    	
 		    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
-		    	JaxbUtil.debug(videos);
-		    	
-		    	CutlistLoader cutlistLoader = new JdomCutlistLoader();
+		    	JaxbUtil.info(vFiles);
+		    	JaxbUtil.info(videos);
+//		    	System.exit(-1);
+
 		    	cutlistLoader.loadCuts(videos);
 		    	
 		    	if(videos.isSetVideo())

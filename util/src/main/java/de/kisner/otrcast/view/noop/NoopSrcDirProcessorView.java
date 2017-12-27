@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
 
 public class NoopSrcDirProcessorView implements ViewSrcDirProcessor
 {
@@ -13,5 +14,6 @@ public class NoopSrcDirProcessorView implements ViewSrcDirProcessor
 
 	@Override public void readFilesInDir(File srcDir) {}
 	@Override public void found(int i) {}
+	@Override public void found(VideoFiles files) {}
 	
 }

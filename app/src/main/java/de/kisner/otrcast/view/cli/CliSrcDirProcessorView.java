@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.model.xml.cut.VideoFiles;
 
 public class CliSrcDirProcessorView implements ViewSrcDirProcessor
 {
@@ -26,6 +27,12 @@ public class CliSrcDirProcessorView implements ViewSrcDirProcessor
 		if(i!=1){sb.append("s");}
 		sb.append(" found.");
 		logger.info(sb.toString());
+	}
+
+	@Override
+	public void found(VideoFiles files) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

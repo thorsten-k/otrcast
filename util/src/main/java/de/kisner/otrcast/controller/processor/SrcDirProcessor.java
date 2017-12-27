@@ -38,6 +38,7 @@ public class SrcDirProcessor
 		view.readFilesInDir(srcDir);
 		VideoFiles vfs = privateScan(srcDir,false);
 		view.found(vfs.getVideoFile().size());
+		view.found(vfs);
 		return vfs;
 	}
 	
