@@ -83,8 +83,8 @@ public class OtrCastClient
         otrConfig.checkCutSettings();        
         
         ViewSrcDirProcessor view = new CliSrcDirProcessorView();
-        LanternaView view2 = new LanternaView();
-        SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view2);
+ //       LanternaView view = new LanternaView();
+        SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
         OtrCastInterface.Profile profile = null;
         if(cmd.hasOption(oProfile.getOpt()))
