@@ -1,4 +1,4 @@
-package de.kisner.otrcast.interfaces.view;
+package de.kisner.otrcast.interfaces.view.client;
 
 import java.io.File;
 

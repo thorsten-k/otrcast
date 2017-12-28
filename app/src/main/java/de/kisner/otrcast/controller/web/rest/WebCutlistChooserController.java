@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrCutRest;
 import de.kisner.otrcast.controller.AbstractCutlistChooserController;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
-import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
+import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Video;

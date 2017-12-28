@@ -1,4 +1,4 @@
-package de.kisner.otrcast.interfaces.view;
+package de.kisner.otrcast.interfaces.view.client;
 
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;

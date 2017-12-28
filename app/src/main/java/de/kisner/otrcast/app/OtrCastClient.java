@@ -28,8 +28,8 @@ import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.OtrCastInterface.Profile;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
-import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
-import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.interfaces.view.client.ViewClient;
+import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
@@ -37,9 +37,8 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
-import de.kisner.otrcast.view.LanternaView;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
-import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
+import de.kisner.otrcast.view.client.ClientViewConsole;
 import de.kisner.otrcast.view.web.WebCutlistChooserView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
@@ -82,8 +81,8 @@ public class OtrCastClient
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
         otrConfig.checkCutSettings();        
         
-        ViewSrcDirProcessor view = new CliSrcDirProcessorView();
- //       LanternaView view = new LanternaView();
+        ViewClient view = new ClientViewConsole();
+ //       ViewClient view = new ClientViewLanterna();
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
         OtrCastInterface.Profile profile = null;
@@ -129,12 +128,10 @@ public class OtrCastClient
 	    		was.scan(srcDirProcessor);
 	    	}
         
-
-        
         if(cmd.hasOption(oMp4.getOpt()))
         {
         	
-            JdomCutlistLoader cutlistLoader = new JdomCutlistLoader();
+            JdomCutlistLoader cutlistLoader = new JdomCutlistLoader(view);
             
             VideoFiles vFiles;
             

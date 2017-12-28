@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.processor.exlp.parser.CutlistParser;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;
+import de.kisner.otrcast.interfaces.view.client.ViewCutlistLoader;
 import de.kisner.otrcast.model.xml.cut.Author;
 import de.kisner.otrcast.model.xml.cut.Comment;
 import de.kisner.otrcast.model.xml.cut.CutList;
@@ -37,10 +38,59 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class JdomCutlistLoader implements CutlistLoader
 {
 	final static Logger logger = LoggerFactory.getLogger(JdomCutlistLoader.class);
-		
-	public JdomCutlistLoader()
+	
+	private final ViewCutlistLoader view;
+	
+	public JdomCutlistLoader(ViewCutlistLoader view)
 	{
-
+		this.view=view;
+	}
+	
+	public VideoFiles searchCutlist(VideoFiles vFiles)
+	{
+		JaxbUtil.trace(vFiles);
+		logger.info(" ");
+		for(VideoFile vf : vFiles.getVideoFile())
+		{
+			CutLists avlCutLists = searchCutlist(vf);
+			if(avlCutLists.getCutList().size()>0){vf.setCutLists(avlCutLists);}
+		}
+		view.cutlistsFound(vFiles);
+		return vFiles;
+	}
+	
+	public CutLists searchCutlist(VideoFile vf)
+	{
+		CutLists result = new CutLists();
+		
+		logger.info("Searching for "+vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType());
+		StringBuffer sb = new StringBuffer();
+		sb.append(vf.getOtrId().getKey()).append(".").append(vf.getOtrId().getFormat().getType());
+		
+		Map<String,CutList> mapCl = new Hashtable<String,CutList>();
+		
+		for(CutList cl : find(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()).getCutList())
+		{
+			mapCl.put(cl.getId(), cl);
+		}
+		
+		if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHq))
+		{
+			for(CutList cl : find(vf.getOtrId().getKey()+".mpg.HQ").getCutList())
+			{
+				mapCl.put(cl.getId(), cl);
+			}
+		}
+		else
+		{
+			logger.warn("Format NYI: "+vf.getOtrId().getFormat().getType());
+		}
+		
+		for(String key : mapCl.keySet()){result.getCutList().add(mapCl.get(key));}
+		
+		if(!result.isSetCutList()){logger.warn("No CL found");}
+		
+		return result;
 	}
 	
 	@Override public void loadCuts(Videos videos)
@@ -83,51 +133,7 @@ public class JdomCutlistLoader implements CutlistLoader
 		return cutlist;
 	}
 	
-	public VideoFiles searchCutlist(VideoFiles vFiles)
-	{
-		JaxbUtil.trace(vFiles);
-		logger.info(" ");
-		for(VideoFile vf : vFiles.getVideoFile())
-		{
-			CutLists avlCutLists = searchCutlist(vf);
-			if(avlCutLists.getCutList().size()>0){vf.setCutLists(avlCutLists);}
-		}
-		return vFiles;
-	}
 	
-	public CutLists searchCutlist(VideoFile vf)
-	{
-		CutLists result = new CutLists();
-		
-		logger.info("Searching for "+vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType());
-		StringBuffer sb = new StringBuffer();
-		sb.append(vf.getOtrId().getKey()).append(".").append(vf.getOtrId().getFormat().getType());
-		
-		Map<String,CutList> mapCl = new Hashtable<String,CutList>();
-		
-		for(CutList cl : find(vf.getOtrId().getKey()+"."+vf.getOtrId().getFormat().getType()).getCutList())
-		{
-			mapCl.put(cl.getId(), cl);
-		}
-		
-		if(vf.getOtrId().getFormat().getType().equals(XmlOtrIdFactory.typeAviHq))
-		{
-			for(CutList cl : find(vf.getOtrId().getKey()+".mpg.HQ").getCutList())
-			{
-				mapCl.put(cl.getId(), cl);
-			}
-		}
-		else
-		{
-			logger.warn("Format NYI: "+vf.getOtrId().getFormat().getType());
-		}
-		
-		for(String key : mapCl.keySet()){result.getCutList().add(mapCl.get(key));}
-		
-		if(!result.isSetCutList()){logger.warn("No CL found");}
-		
-		return result;
-	}
 	
 	private CutLists find(String clKey)
 	{	

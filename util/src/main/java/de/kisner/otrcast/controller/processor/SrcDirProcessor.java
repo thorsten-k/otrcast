@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
-import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.interfaces.view.client.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 

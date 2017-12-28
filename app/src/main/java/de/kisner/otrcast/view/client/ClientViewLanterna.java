@@ -1,8 +1,9 @@
-package de.kisner.otrcast.view;
+package de.kisner.otrcast.view.client;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +19,22 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
-import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.interfaces.view.client.ViewClient;
+import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class LanternaView implements ViewSrcDirProcessor
+public class ClientViewLanterna implements ViewClient
 {
-	final static Logger logger = LoggerFactory.getLogger(LanternaView.class);
+	final static Logger logger = LoggerFactory.getLogger(ClientViewLanterna.class);
 
 	Table<String> table;
 	MultiWindowTextGUI gui;
 	
 	private SimpleDateFormat sdfDate,sdfTime;
 	
-	public LanternaView() throws IOException
+	public ClientViewLanterna() throws IOException
 	{
 		sdfDate = new SimpleDateFormat("dd.MM.yyyy");
 		sdfTime  = new SimpleDateFormat("HH:mm");
@@ -41,7 +43,7 @@ public class LanternaView implements ViewSrcDirProcessor
         Screen screen = new TerminalScreen(terminal);
         screen.startScreen();
         
-        table = new Table<String>("Nr","Channel","Date","Time","Name");
+        table = new Table<String>("Nr","Channel","Date","Time","Name","Cutlists");
         
         
         // Create window to hold the panel
@@ -85,17 +87,76 @@ public class LanternaView implements ViewSrcDirProcessor
 											vf.getOtrId().getTv().getChannel(),
 											sdfDate.format(vf.getOtrId().getTv().getAirtime().toGregorianCalendar().getTime()), 
 											sdfTime.format(vf.getOtrId().getTv().getAirtime().toGregorianCalendar().getTime()), 
-											vf.getOtrId().getTv().getName());
+											vf.getOtrId().getTv().getName(),
+											0+"");
 				i++;
 			}
 		}
 		logger.warn("gui.isPendingUpdate() "+gui.isPendingUpdate());
-		try {
-			gui.updateScreen();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try {gui.updateScreen();}
+		catch (IOException e) {e.printStackTrace();}
+	}
+
+	@Override
+	public void welcome(VideoFiles vFiles) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void srcFolderProcessed(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showFileInfo(int index, VideoFile vFile) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showCutlistInfo(int i, CutList cl, boolean showAuthor, boolean showRanking, boolean showComment,
+			boolean showFile) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cutlistsSelected() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void additionalFile(VideoFiles vFiles) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cutlistsLoaded(VideoFiles vFiles) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cutlistsFound(VideoFiles vFiles)
+	{
+		logger.info("Custlists found:");
+		JaxbUtil.info(vFiles);
+		
+		for(int index=0;index<table.getTableModel().getRowCount();index++)
+		{
+			List<String> row = table.getTableModel().getRows().get(index);
+			row.set(5, Integer.valueOf(vFiles.getVideoFile().get(index).getCutLists().getCutList().size()).toString());
+			table.getTableModel().removeRow(index);
+			table.getTableModel().insertRow(index, row);
 		}
+		
+		logger.warn("gui.isPendingUpdate() "+gui.isPendingUpdate());
+		try {gui.updateScreen();}
+		catch (IOException e) {e.printStackTrace();}	
 	}
 
 }

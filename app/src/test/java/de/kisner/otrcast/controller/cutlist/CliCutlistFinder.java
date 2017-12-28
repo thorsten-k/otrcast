@@ -12,11 +12,12 @@ import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
-import de.kisner.otrcast.interfaces.view.ViewCutlistChooser;
+import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.CutLists;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
+import de.kisner.otrcast.view.noop.NoopCutlistLoaderView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -37,7 +38,7 @@ public class CliCutlistFinder
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		JdomCutlistLoader finder = new JdomCutlistLoader();
+		JdomCutlistLoader finder = new JdomCutlistLoader(new NoopCutlistLoaderView());
 		vFiles = finder.searchCutlist(vFiles);
 		JaxbUtil.debug(vFiles);
 		
@@ -71,7 +72,7 @@ public class CliCutlistFinder
 		VideoFile vf = XmlVideoFileFactory.create(clKey);
 		JaxbUtil.debug(vf);
 		
-		JdomCutlistLoader clf = new JdomCutlistLoader();
+		JdomCutlistLoader clf = new JdomCutlistLoader(new NoopCutlistLoaderView());
 		CutLists cla = clf.searchCutlist(vf);
 		JaxbUtil.debug(cla);
 	}

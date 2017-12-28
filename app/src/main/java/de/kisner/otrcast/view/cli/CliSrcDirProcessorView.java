@@ -5,7 +5,7 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.interfaces.view.client.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 
 public class CliSrcDirProcessorView implements ViewSrcDirProcessor

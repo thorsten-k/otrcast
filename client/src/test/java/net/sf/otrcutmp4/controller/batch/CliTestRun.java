@@ -27,7 +27,7 @@ import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.interfaces.controller.CutlistLoader;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
-import de.kisner.otrcast.interfaces.view.ViewSrcDirProcessor;
+import de.kisner.otrcast.interfaces.view.client.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrBootstrap;
@@ -35,6 +35,7 @@ import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
 import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
+import de.kisner.otrcast.view.noop.NoopCutlistLoaderView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
@@ -80,7 +81,7 @@ public class CliTestRun
 	{
 		VideoFiles input = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutAviXml),VideoFiles.class);
 		
-		JdomCutlistLoader finder = new JdomCutlistLoader();
+		JdomCutlistLoader finder = new JdomCutlistLoader(new NoopCutlistLoaderView());
 		VideoFiles result = finder.searchCutlist(input);
 		JaxbUtil.debug(result);
 		
@@ -123,7 +124,7 @@ public class CliTestRun
 	{
 		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutSelected),Videos.class);
 		
-		CutlistLoader cutlistLoader = new JdomCutlistLoader();
+		CutlistLoader cutlistLoader = new JdomCutlistLoader(new NoopCutlistLoaderView());
 		cutlistLoader.loadCuts(videos);
 		JaxbUtil.debug(videos);
 		
