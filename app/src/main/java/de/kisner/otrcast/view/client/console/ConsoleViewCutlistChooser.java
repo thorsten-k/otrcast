@@ -1,4 +1,4 @@
-package de.kisner.otrcast.view.cli;
+package de.kisner.otrcast.view.client.console;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,9 @@ import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 
-public class CliCutlistChooserView implements ViewCutlistChooser
+public class ConsoleViewCutlistChooser implements ViewCutlistChooser
 {
-	final static Logger logger = LoggerFactory.getLogger(CliCutlistChooserView.class);
+	final static Logger logger = LoggerFactory.getLogger(ConsoleViewCutlistChooser.class);
 
 	@Override
 	public void welcome(VideoFiles vFiles)
@@ -31,6 +31,7 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 		logger.info(TxtFileNameFactoy.build(vFile.getOtrId()));
 	}
 	
+	@Override
 	public void showCutlistInfo(int i, CutList cl, boolean showAuthor, boolean showRanking, boolean showComment, boolean showFile)
 	{
 		boolean printedNumber=false;
@@ -100,5 +101,4 @@ public class CliCutlistChooserView implements ViewCutlistChooser
 			}
 		}
 	}
-
 }

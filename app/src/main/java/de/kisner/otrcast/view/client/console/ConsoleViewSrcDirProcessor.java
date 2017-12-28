@@ -1,4 +1,4 @@
-package de.kisner.otrcast.view.cli;
+package de.kisner.otrcast.view.client.console;
 
 import java.io.File;
 
@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.interfaces.view.client.ViewSrcDirProcessor;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 
-public class CliSrcDirProcessorView implements ViewSrcDirProcessor
+public class ConsoleViewSrcDirProcessor implements ViewSrcDirProcessor
 {
-	final static Logger logger = LoggerFactory.getLogger(CliSrcDirProcessorView.class);
+	final static Logger logger = LoggerFactory.getLogger(ConsoleViewSrcDirProcessor.class);
 	
 	@Override
 	public void readFilesInDir(File srcDir)

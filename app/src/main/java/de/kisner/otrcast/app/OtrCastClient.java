@@ -37,8 +37,8 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
-import de.kisner.otrcast.view.cli.CliCutlistChooserView;
 import de.kisner.otrcast.view.client.ClientViewConsole;
+import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
 import de.kisner.otrcast.view.web.WebCutlistChooserView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.util.cli.UtilsCliOption;
@@ -159,7 +159,7 @@ public class OtrCastClient
 	        }
 	        else
 	        {
-		        	viewCutlistChooser = new CliCutlistChooserView();
+		        	viewCutlistChooser = new ConsoleViewCutlistChooser();
 		        	controllerCutlistChooser = new CliCutlistChooserController(viewCutlistChooser);
 	        }
 	    	

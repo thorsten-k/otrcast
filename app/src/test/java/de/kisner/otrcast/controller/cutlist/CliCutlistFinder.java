@@ -16,7 +16,7 @@ import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.CutLists;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.view.cli.CliCutlistChooserView;
+import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
 import de.kisner.otrcast.view.noop.NoopCutlistLoaderView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -52,7 +52,7 @@ public class CliCutlistFinder
 		logger.debug("Loading from file: "+xmlIn);
 		VideoFiles vFiles = (VideoFiles)JaxbUtil.loadJAXB(xmlIn, VideoFiles.class);
 		
-		ViewCutlistChooser viewCutlistChooser = new CliCutlistChooserView();
+		ViewCutlistChooser viewCutlistChooser = new ConsoleViewCutlistChooser();
 		CutlistChooser chooser = new CliCutlistChooserController(viewCutlistChooser);
 		chooser.chooseCutlists(vFiles);
 		

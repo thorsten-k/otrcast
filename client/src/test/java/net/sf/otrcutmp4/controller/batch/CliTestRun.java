@@ -33,8 +33,8 @@ import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
-import de.kisner.otrcast.view.cli.CliCutlistChooserView;
-import de.kisner.otrcast.view.cli.CliSrcDirProcessorView;
+import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
+import de.kisner.otrcast.view.client.console.ConsoleViewSrcDirProcessor;
 import de.kisner.otrcast.view.noop.NoopCutlistLoaderView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpConfigurationException;
@@ -53,7 +53,7 @@ public class CliTestRun
 	public CliTestRun(Configuration config) throws OtrConfigurationException, ExlpConfigurationException
 	{
 		this.config=config;
-		view = new CliSrcDirProcessorView();
+		view = new ConsoleViewSrcDirProcessor();
 		
 		otrConfig = new OtrConfig();
 		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
@@ -93,7 +93,7 @@ public class CliTestRun
 	public void cutlistChooseCli() throws FileNotFoundException, UtilsProcessingException
 	{
 		VideoFiles input = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutFinder),VideoFiles.class);
-		CutlistChooser chooser = new CliCutlistChooserController(new CliCutlistChooserView());
+		CutlistChooser chooser = new CliCutlistChooserController(new ConsoleViewCutlistChooser());
 		Videos videos = chooser.chooseCutlists(input);
 		JaxbUtil.debug(videos);
 		
