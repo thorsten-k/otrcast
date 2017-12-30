@@ -27,6 +27,10 @@
 		
 		<!-- Utils -->
 		<dependency>
+        	<groupId>org.jeesl</groupId>
+        	<artifactId>jeesl-util</artifactId>
+		</dependency>
+		<dependency>
 	  		<groupId>net.sf.exlp</groupId>
 	  		<artifactId>exlp-util</artifactId>
 	  	</dependency>
@@ -135,7 +139,7 @@
 		<dependency>
         	<groupId>org.jeesl</groupId>
         	<artifactId>jeesl-jsf</artifactId>
-        </dependency>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>

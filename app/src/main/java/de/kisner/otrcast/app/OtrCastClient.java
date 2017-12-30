@@ -37,7 +37,7 @@ import de.kisner.otrcast.model.xml.series.Video;
 import de.kisner.otrcast.model.xml.series.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
-import de.kisner.otrcast.view.client.ClientViewConsole;
+import de.kisner.otrcast.view.client.ClientViewLanterna;
 import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
 import de.kisner.otrcast.view.web.WebCutlistChooserView;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
@@ -81,8 +81,8 @@ public class OtrCastClient
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
         otrConfig.checkCutSettings();        
         
-        ViewClient view = new ClientViewConsole();
- //       ViewClient view = new ClientViewLanterna();
+ //       ViewClient view = new ClientViewConsole();
+        ViewClient view = new ClientViewLanterna();
         SrcDirProcessor srcDirProcessor = new SrcDirProcessor(view);
         
         OtrCastInterface.Profile profile = null;
