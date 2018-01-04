@@ -11,7 +11,7 @@ import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
 
 public class EjbSeasonFactory<MOVIE extends Movie<COVER,STORAGE>,
-							SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+							SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 							SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 							EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 							COVER extends Image,
@@ -26,7 +26,12 @@ public class EjbSeasonFactory<MOVIE extends Movie<COVER,STORAGE>,
 		this.cSeason=cSeason;
 	}
 	 
-	public static <MOVIE extends Movie<COVER,STORAGE>, SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Image,STORAGE extends Storage>
+	public static <MOVIE extends Movie<COVER,STORAGE>,
+					SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
+					SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+					EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+					COVER extends Image,
+					STORAGE extends Storage>
 		EjbSeasonFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE> factory(final Class<SEASON> cSeason)
 	{
 		return new EjbSeasonFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE>(cSeason);

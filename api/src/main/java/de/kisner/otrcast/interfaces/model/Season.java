@@ -8,7 +8,7 @@ import net.sf.ahtutils.interfaces.model.with.EjbWithNr;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
-public interface Season<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
+public interface Season<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 						SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 						EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 						IMAGE extends Image,STORAGE extends Storage>

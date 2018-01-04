@@ -13,7 +13,7 @@ import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.xml.rss.Enclosure;
 
 public class XmlEnclosureFactory<MOVIE extends Movie<IMAGE,STORAGE>,
-								SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
+								SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 								SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 								EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 								IMAGE extends Image,

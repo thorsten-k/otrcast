@@ -30,7 +30,7 @@ import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.model.ranking.UtilsRankedResult;
 
 public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
-									SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
+									SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 									SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 									EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 									IMAGE extends Image,

@@ -15,7 +15,7 @@ import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.xml.rss.Item;
 
 public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
-							SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
+							SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 							SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 							EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
 							IMAGE extends Image,
@@ -43,9 +43,11 @@ public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 		xml.setImage(xfImage.build(episode));
 		xml.setDescription(XmlDescriptionFactory.build(episode));
 		xml.setSummary(XmlSummaryFactory.build(episode.getNr()+""));
-		xml.setEnclosure(xfEnclosure.build(episode.getStorage()));
 		xml.setGuid(xfGuid.build(episode));
-		xml.setPubDate(XmlPubDateFactory.build(episode.getStorage()));
+		
+		logger.warn("Enclosure and PubDate not set");
+//		xml.setEnclosure(xfEnclosure.build(episode.getStorage()));
+//		xml.setPubDate(XmlPubDateFactory.build(episode.getStorage()));
 		return xml;
 	}
 	

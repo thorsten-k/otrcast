@@ -11,7 +11,10 @@ import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
 import de.kisner.otrcast.model.xml.otr.Query;
 
-public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,COVER extends Image,STORAGE extends Storage>
+public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
+							SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+							EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+							COVER extends Image,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlSeasonFactory.class);
 	

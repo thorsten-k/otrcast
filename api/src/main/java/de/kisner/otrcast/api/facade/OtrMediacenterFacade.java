@@ -13,7 +13,7 @@ import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 
 public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,
-										SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+										SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 										SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 										EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 										COVER extends Image,STORAGE extends Storage>

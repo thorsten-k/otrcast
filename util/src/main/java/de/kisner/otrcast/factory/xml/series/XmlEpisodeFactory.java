@@ -12,7 +12,7 @@ import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
 import de.kisner.otrcast.model.xml.otr.Query;
 
-public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 								SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 								EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 								COVER extends Image,STORAGE extends Storage>

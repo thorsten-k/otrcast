@@ -20,43 +20,27 @@ public class OtrEpisode implements Serializable,EjbPersistable,
 									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>
 {
 	public static final long serialVersionUID=1;
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>Fields<<<<<<<<<<<<<<<<<<<<
+
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
-	@NotNull
-	@ManyToOne
+	@NotNull @ManyToOne
 	private OtrSeason season;
+	@Override public OtrSeason getSeason() {return season;}
+	@Override public void setSeason(OtrSeason season) {this.season = season;}
 		
 	@NotNull
 	private String name;
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
 	
 	private long nr;
 	@Override public long getNr() {return nr;}
 	@Override public void setNr(long nr) {this.nr = nr;}
 				
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private OtrStorage storage;
-	
-	// >>>>>>>>>>>>>>>>>>>>Getters and Setters<<<<<<<<<<<<<<<
-		
-	@Override public long getId() {return id;}
-	@Override public void setId(long id) {this.id = id;}
-
-	@Override public OtrSeason getSeason() {return season;}
-	@Override public void setSeason(OtrSeason season) {this.season = season;}
-	
-	@Override public String getName() {return name;}
-	@Override public void setName(String name) {this.name = name;}
-	
-
-	
-	@Override public OtrStorage getStorage() {return storage;}
-	@Override public void setStorage(OtrStorage storage) {this.storage = storage;}
-	
-	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
 	public boolean equals(Object object)
 	{

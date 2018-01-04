@@ -22,11 +22,10 @@ import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
 @Entity
 public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithName,
-									Series<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>
+									Series<OtrSeries,OtrSeason,OtrEpisode,OtrImage>
 {
 	public static final long serialVersionUID=1;
-	
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>Fields<<<<<<<<<<<<<<<<<<<<
+
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -53,7 +52,6 @@ public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithN
 	@Override public OtrImage getBanner() {return banner;}
 	@Override public void setBanner(OtrImage banner) {this.banner = banner;}
 	
-	// >>>>>>>>>>>>>>>>>>>>Methods<<<<<<<<<<<<<<<
 	
 	public boolean equals(Object object)
 	{

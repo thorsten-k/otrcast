@@ -125,12 +125,13 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 	{
 		OtrEpisode episode = fMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrImage.class, xmlEpisode);
 
-        if(episode.getStorage()==null)
+		logger.warn("No Handling of Storage");
+/*        if(episode.getStorage()==null)
         {
             episode.setStorage(storage);
             em.merge(episode);
         }
-
+*/
 		if(xmlEpisode.isSetImage() && episode.getSeason().getCover()==null)
 		{
 			OtrImage cover = efCover.build(xmlEpisode.getImage());

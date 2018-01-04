@@ -23,7 +23,7 @@ public class IoFileFactory
 		this.fRoot=fRoot;
 	}
 	 
-	public <SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+	public <SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 				SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 				EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 				COVER extends Image,STORAGE extends Storage>

@@ -14,7 +14,7 @@ public class XmlDescriptionFactory
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlDescriptionFactory.class);
 
-    public static <SERIES extends Series<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+    public static <SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 					SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 					EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
 					COVER extends Image,STORAGE extends Storage>
