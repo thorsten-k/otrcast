@@ -250,18 +250,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <classpathPrefix>lib/</classpathPrefix>
-                        <useUniqueVersions>false</useUniqueVersions>
-                      	<mainClass>de.kisner.otrcast.OtrMediaCenter</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-        	</plugin>
-        	<plugin>
+	            <configuration>
+	                <archive>
+	                    <manifest>
+	                        <addClasspath>true</addClasspath>
+	                        <classpathPrefix>lib/</classpathPrefix>
+	                        <useUniqueVersions>false</useUniqueVersions>
+	                      	<mainClass>de.kisner.otrcast.OtrMediaCenter</mainClass>
+	                    </manifest>
+	                </archive>
+	            </configuration>
+	        	</plugin>
+	        	<plugin>
 				<groupId>com.github.chrisdchristo</groupId>
 				<artifactId>capsule-maven-plugin</artifactId>
 				<version>1.5.1</version>
