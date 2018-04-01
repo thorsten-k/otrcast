@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlEpisodeFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Season;
@@ -13,7 +15,7 @@ import de.kisner.otrcast.model.xml.otr.Query;
 
 public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 							SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-							EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+							EPISODE extends Episode<SEASON>,
 							COVER extends Image,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlSeasonFactory.class);

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.factory.xml.series.XmlMovieFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
-import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.rest.OtrMediacenterRest;
 import de.kisner.otrcast.model.*;
 import de.kisner.otrcast.model.ejb.OtrEpisode;

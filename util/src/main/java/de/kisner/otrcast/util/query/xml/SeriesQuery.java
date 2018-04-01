@@ -19,7 +19,7 @@ import net.sf.exlp.util.DateUtil;
 public class SeriesQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(SeriesQuery.class);
-	public static enum Key {EpisodeWithSeasonAndSeries,SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes,Movie,MovieAll}
+	public static enum Key {Episode,EpisodeWithSeasonAndSeries,SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes,Movie,MovieAll}
 	
 	private static Map<Key,Query> mQueries;
 	
@@ -31,6 +31,7 @@ public class SeriesQuery
 			Query q = new Query();
 			switch(key)
 			{
+				case Episode : q.setEpisode(episode());break;
 				case EpisodeWithSeasonAndSeries : q.setEpisode(episodeWithSeasonandSeries());break;
 				case Series: q.setSeries(series());break;
 				case SeriesWithSeason: q.setSeries(seriesWithSeason());break;

@@ -12,7 +12,7 @@ import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
 public interface Series<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 						SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,?>,
-						EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,?>,
+						EPISODE extends Episode<SEASON>,
 						IMAGE extends Image>
 		extends Serializable,EjbWithId,
 					EjbWithImage<IMAGE>,

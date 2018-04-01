@@ -1,9 +1,10 @@
-package de.kisner.otrcast.factory.xml.series;
+package de.kisner.otrcast.factory.xml.video.tv;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
+import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
@@ -14,29 +15,32 @@ import de.kisner.otrcast.model.xml.otr.Query;
 
 public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 								SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-								EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-								COVER extends Image,STORAGE extends Storage>
+								EPISODE extends Episode<SEASON>,
+								COVER extends Image,
+								STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlEpisodeFactory.class);
 	
-	private de.kisner.otrcast.model.xml.series.Episode q;
+	private final de.kisner.otrcast.model.xml.series.Episode q;
 	
+	private XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> xfSeason;
+
 	public XmlEpisodeFactory(Query query){this(query.getEpisode());}
-	public XmlEpisodeFactory(de.kisner.otrcast.model.xml.series.Episode q){this.q=q;}
+	public XmlEpisodeFactory(de.kisner.otrcast.model.xml.series.Episode q)
+	{
+		this.q=q;
+		if(q.isSetSeason()){xfSeason = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(q.getSeason());}
+		
+	}
 	
-	public de.kisner.otrcast.model.xml.series.Episode build(Episode<SERIES,SEASON,EPISODE,COVER,STORAGE> ejb)
+	public de.kisner.otrcast.model.xml.series.Episode build(Episode<SEASON> ejb)
 	{
 		logger.trace("\t\t"+ejb.toString());
 		de.kisner.otrcast.model.xml.series.Episode xml = new de.kisner.otrcast.model.xml.series.Episode();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
 		if(q.isSetName()){xml.setName(TxtEpisodeFactory.buld(ejb.getName()));}
-		
-		if(q.isSetSeason())
-		{
-			XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> f = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(q.getSeason());
-			xml.setSeason(f.build(ejb.getSeason()));
-		}
+		if(q.isSetSeason()){xml.setSeason(xfSeason.build(ejb.getSeason()));}
 		
 		return xml;
 	}

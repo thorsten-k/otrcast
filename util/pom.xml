@@ -27,7 +27,7 @@
 		
 		<dependency>
 			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-interfaces</artifactId>
+			<artifactId>jeesl-util</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

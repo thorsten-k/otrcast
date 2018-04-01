@@ -18,12 +18,12 @@ import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResultResponse;
 import com.uwetrottmann.thetvdb.entities.SeriesResponse;
 
 import de.kisner.otrcast.factory.xml.otr.XmlOtrFactory;
-import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
 import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
-import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlBannerFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlBannersFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlEpisodeFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlSeriesFactory;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Season;
 import de.kisner.otrcast.model.xml.series.Series;

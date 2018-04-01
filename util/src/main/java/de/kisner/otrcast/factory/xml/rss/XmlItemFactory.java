@@ -17,7 +17,7 @@ import de.kisner.otrcast.model.xml.rss.Item;
 public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 							SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 							SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
-							EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
+							EPISODE extends Episode<SEASON>,
 							IMAGE extends Image,
 							STORAGE extends Storage>
 {	
@@ -27,6 +27,7 @@ public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 	private XmlGuidFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfGuid;
 	private XmlEnclosureFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfEnclosure;
 	private XmlImageFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfImage;
+	private final XmlDescriptionFactory<EPISODE> xfDescription;
 	
 	public XmlItemFactory(UrlGenerator urlGenerator)
 	{
@@ -34,6 +35,7 @@ public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 		xfGuid = new XmlGuidFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>();
 		xfEnclosure = new XmlEnclosureFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>(urlGenerator);
 		xfImage = new XmlImageFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>(urlGenerator);
+		xfDescription = new XmlDescriptionFactory<EPISODE>();
 	}
 	
 	public Item build(EPISODE episode)
@@ -41,7 +43,7 @@ public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 		Item xml = new Item();
 		xml.setTitle(xfTitle.build(episode));
 		xml.setImage(xfImage.build(episode));
-		xml.setDescription(XmlDescriptionFactory.build(episode));
+		xml.setDescription(xfDescription.build(episode));
 		xml.setSummary(XmlSummaryFactory.build(episode.getNr()+""));
 		xml.setGuid(xfGuid.build(episode));
 		

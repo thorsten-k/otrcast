@@ -1,8 +1,9 @@
-package de.kisner.otrcast.factory.xml.series;
+package de.kisner.otrcast.factory.xml.video.tv;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
 import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
@@ -13,15 +14,21 @@ import de.kisner.otrcast.model.xml.otr.Query;
 
 public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 							SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-							EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+							EPISODE extends Episode<SEASON>,
 							COVER extends Image,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlSeriesFactory.class);
 	
 	private de.kisner.otrcast.model.xml.series.Series q;
 	
+	private XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> xfSeason;
+	
 	public XmlSeriesFactory(Query query){this(query.getSeries());}
-	public XmlSeriesFactory(de.kisner.otrcast.model.xml.series.Series q){this.q=q;}
+	public XmlSeriesFactory(de.kisner.otrcast.model.xml.series.Series q)
+	{
+		this.q=q;
+		if(q.isSetSeason()){xfSeason = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(q.getSeason().get(0));}
+	}
 	
 	public de.kisner.otrcast.model.xml.series.Series create2(String format)
 	{
@@ -40,10 +47,9 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		
 		if(q.isSetSeason())
 		{
-			XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> f = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(q.getSeason().get(0));
 			for(Season<SERIES,SEASON,EPISODE,COVER,STORAGE> season : ejb.getSeasons())
 			{
-				xml.getSeason().add(f.build(season));
+				xml.getSeason().add(xfSeason.build(season));
 			}
 		}
 		

@@ -1,14 +1,14 @@
 package de.kisner.otrcast.interfaces.model;
 
+import java.io.Serializable;
+
+import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 import net.sf.ahtutils.interfaces.model.with.EjbWithNr;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
-public interface Episode<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
-							SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
-							EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
-							IMAGE extends Image,STORAGE extends Storage>
-					extends EjbWithId,EjbWithNr,EjbWithName
+public interface Episode<SEASON extends Season<?,SEASON,?,?,?>>
+					extends Serializable,EjbPersistable,EjbWithId,EjbWithNr,EjbWithName
 {	
 	SEASON getSeason();
 	void setSeason(SEASON season);

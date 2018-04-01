@@ -25,7 +25,7 @@ public class IoFileFactory
 	 
 	public <SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 				SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-				EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+				EPISODE extends Episode<SEASON>,
 				COVER extends Image,STORAGE extends Storage>
 		File build(EPISODE episode)
 	{

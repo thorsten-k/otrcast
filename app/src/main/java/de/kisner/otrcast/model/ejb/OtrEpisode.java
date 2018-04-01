@@ -1,23 +1,16 @@
 package de.kisner.otrcast.model.ejb;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import de.kisner.otrcast.interfaces.model.Episode;
-import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 
 @Entity
-public class OtrEpisode implements Serializable,EjbPersistable,
-									Episode<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>
+public class OtrEpisode implements Episode<OtrSeason>
 {
 	public static final long serialVersionUID=1;
 

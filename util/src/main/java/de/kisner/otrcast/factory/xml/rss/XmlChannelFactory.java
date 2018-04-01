@@ -15,7 +15,7 @@ import de.kisner.otrcast.model.xml.rss.Channel;
 public class XmlChannelFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 								SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 								SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
-								EPISODE extends Episode<SERIES,SEASON,EPISODE,IMAGE,STORAGE>,
+								EPISODE extends Episode<SEASON>,
 								IMAGE extends Image,
 								STORAGE extends Storage>
 {

@@ -11,7 +11,7 @@ import de.kisner.otrcast.interfaces.model.Storage;
 
 public class EjbSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 								SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-								EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+								EPISODE extends Episode<SEASON>,
 								COVER extends Image,STORAGE extends Storage>
 {	
 	final static Logger logger = LoggerFactory.getLogger(EjbSeriesFactory.class);
@@ -25,7 +25,7 @@ public class EjbSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 	 
 	public static <SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 					SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
-					EPISODE extends Episode<SERIES,SEASON,EPISODE,COVER,STORAGE>,
+					EPISODE extends Episode<SEASON>,
 					COVER extends Image,STORAGE extends Storage>
 		EjbSeriesFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> factory(final Class<SERIES> clSeries)
 	{

@@ -15,7 +15,7 @@ import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.txt.TxtSeriesFactory;
-import de.kisner.otrcast.factory.xml.series.XmlSeriesFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlSeriesFactory;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;

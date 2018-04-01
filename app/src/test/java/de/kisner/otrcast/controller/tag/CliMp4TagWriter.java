@@ -12,7 +12,7 @@ import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.tag.writer.MovieTagWriter;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
-import de.kisner.otrcast.factory.xml.series.XmlEpisodeFactory;
+import de.kisner.otrcast.factory.xml.video.tv.XmlEpisodeFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.series.Episode;
