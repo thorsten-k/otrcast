@@ -18,7 +18,6 @@ public class TestXmlFile extends AbstractXmlVideoTest<File>
     	File xml = new File();
     	xml.setName("myName");
     	xml.setPath("myPath");
-        xml.setValue("myPath/myName");
         return xml;
     }
 	

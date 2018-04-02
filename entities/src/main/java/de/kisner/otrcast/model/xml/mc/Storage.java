@@ -21,6 +21,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="path" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="hash" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="size" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
@@ -42,6 +43,8 @@ public class Storage
     private final static long serialVersionUID = 1L;
     @XmlAttribute(name = "id")
     protected Long id;
+    @XmlAttribute(name = "path")
+    protected String path;
     @XmlAttribute(name = "name")
     protected String name;
     @XmlAttribute(name = "hash")
@@ -82,6 +85,34 @@ public class Storage
 
     public void unsetId() {
         this.id = null;
+    }
+
+    /**
+     * Gets the value of the path property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * Sets the value of the path property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPath(String value) {
+        this.path = value;
+    }
+
+    public boolean isSetPath() {
+        return (this.path!= null);
     }
 
     /**
