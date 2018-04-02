@@ -2,6 +2,8 @@ package de.kisner.otrcast.factory.xml.mc;
 
 import net.sf.exlp.util.DateUtil;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +27,14 @@ public class XmlStorageFactory
 		if(q.isSetHash()){xml.setHash(ejb.getHash());}
 		if(q.isSetSize()){xml.setSize(ejb.getSize());}
 		if(q.isSetLastModified()){xml.setLastModified(DateUtil.toXmlGc(ejb.getRecord()));}
+		return xml;
+	}
+	
+	public static de.kisner.otrcast.model.xml.mc.Storage buildPathName(File file)
+	{
+		de.kisner.otrcast.model.xml.mc.Storage xml = new de.kisner.otrcast.model.xml.mc.Storage();
+		xml.setPath(file.getParentFile().getAbsolutePath());
+		xml.setName(file.getName());
 		return xml;
 	}
 }
