@@ -26,7 +26,7 @@
             <xsd:attribute name="fileType" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="storage">
+    <xsd:element name="file">
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="path" type="xsd:string"/>

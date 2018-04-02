@@ -35,8 +35,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "storage")
-public class Storage
+@XmlRootElement(name = "file")
+public class File
     implements Serializable
 {
 

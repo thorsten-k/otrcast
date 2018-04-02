@@ -6,16 +6,16 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 import net.sf.exlp.util.DateUtil;
 
-public class TestXmlStorage extends AbstractXmlMcTest<Storage>
+public class TestXmlFile extends AbstractXmlMcTest<File>
 {
-	final static Logger logger = LoggerFactory.getLogger(TestXmlStorage.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlFile.class);
 	
-	public TestXmlStorage(){super(Storage.class);}
-	public static Storage create(boolean withChildren){return (new TestXmlStorage()).build(withChildren);}
+	public TestXmlFile(){super(File.class);}
+	public static File create(boolean withChildren){return (new TestXmlFile()).build(withChildren);}
     
-    public Storage build(boolean withChilds)
+    public File build(boolean withChilds)
     {
-    	Storage xml = new Storage();
+    	File xml = new File();
     	xml.setId(123);
     	xml.setHash("myHash");
     	xml.setSize(123);
@@ -29,7 +29,7 @@ public class TestXmlStorage extends AbstractXmlMcTest<Storage>
     {
 		OtrXmlTestBootstrap.init();
 		DateUtil.ignoreTimeZone=true;	
-		TestXmlStorage test = new TestXmlStorage();
+		TestXmlFile test = new TestXmlFile();
 		test.saveReferenceXml();
     }
 }

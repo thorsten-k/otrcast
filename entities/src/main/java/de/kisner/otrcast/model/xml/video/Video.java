@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.mc.Storage;
+import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 
@@ -26,7 +26,7 @@ import de.kisner.otrcast.model.xml.video.tv.Movie;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}episode"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}movie"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFiles"/&gt;
- *         &lt;element ref="{http://otrcast.kisner.de/mc}storage"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/mc}file"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/video}tag"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -41,7 +41,7 @@ import de.kisner.otrcast.model.xml.video.tv.Movie;
     "episode",
     "movie",
     "videoFiles",
-    "storage",
+    "file",
     "tag"
 })
 @XmlRootElement(name = "video")
@@ -57,7 +57,7 @@ public class Video
     @XmlElement(namespace = "http://otrcutmp4.sf.net/cut", required = true)
     protected VideoFiles videoFiles;
     @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
-    protected Storage storage;
+    protected File file;
     @XmlElement(required = true)
     protected Tag tag;
 
@@ -146,31 +146,31 @@ public class Video
     }
 
     /**
-     * Gets the value of the storage property.
+     * Gets the value of the file property.
      * 
      * @return
      *     possible object is
-     *     {@link Storage }
+     *     {@link File }
      *     
      */
-    public Storage getStorage() {
-        return storage;
+    public File getFile() {
+        return file;
     }
 
     /**
-     * Sets the value of the storage property.
+     * Sets the value of the file property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Storage }
+     *     {@link File }
      *     
      */
-    public void setStorage(Storage value) {
-        this.storage = value;
+    public void setFile(File value) {
+        this.file = value;
     }
 
-    public boolean isSetStorage() {
-        return (this.storage!= null);
+    public boolean isSetFile() {
+        return (this.file!= null);
     }
 
     /**

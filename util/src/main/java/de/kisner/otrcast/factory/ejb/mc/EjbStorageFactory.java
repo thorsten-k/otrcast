@@ -1,6 +1,5 @@
 package de.kisner.otrcast.factory.ejb.mc;
 
-import java.io.File;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -24,12 +23,12 @@ final static Logger logger = LoggerFactory.getLogger(EjbStorageFactory.class);
 		 return new EjbStorageFactory<STORAGE>(cStorage);
 	 }
 	
-	public STORAGE build(de.kisner.otrcast.model.xml.mc.Storage xml)
+	public STORAGE build(de.kisner.otrcast.model.xml.mc.File xml)
 	{
 		return build(xml.getName(),xml.getHash(),xml.getSize(),xml.getLastModified().toGregorianCalendar().getTime());
 	}
 	
-	public STORAGE build(File f)
+	public STORAGE build(java.io.File f)
 	{
 		
 		return build(f.getAbsolutePath(),null,f.length(),new Date(f.lastModified()));

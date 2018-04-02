@@ -44,10 +44,10 @@ public class EjbMovieFactory<MOVIE extends Movie<IMAGE,STORAGE>,IMAGE extends Im
 			EjbCoverFactory<IMAGE> f = EjbCoverFactory.factory(clImage);
 			ejb.setCover(f.build(xml.getImage()));
 		}
-		if(xml.isSetStorage())
+		if(xml.isSetFile())
 		{
 			EjbStorageFactory<STORAGE> f = EjbStorageFactory.factory(clStorage);
-			ejb.setStorage(f.build(xml.getStorage()));
+			ejb.setStorage(f.build(xml.getFile()));
 		}
 		
 		return ejb;

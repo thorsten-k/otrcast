@@ -2,7 +2,7 @@ package de.kisner.otrcast.util.query.xml;
 
 import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.video.tv.Tag;
-import de.kisner.otrcast.util.query.xml.SeriesQuery;
+import de.kisner.otrcast.util.query.xml.XmlTvQuery;
 
 public class TagQuery
 {
@@ -37,7 +37,7 @@ public class TagQuery
 		id.setKey("");
 		xml.setOtrId(id);
 		
-		xml.setEpisode(SeriesQuery.episodeWithSeasonandSeries());
+		xml.setEpisode(XmlTvQuery.episodeWithSeasonandSeries());
     	
     	return xml;
 	}

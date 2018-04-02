@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.mc.TestXmlImage;
-import de.kisner.otrcast.model.xml.mc.TestXmlStorage;
+import de.kisner.otrcast.model.xml.mc.TestXmlFile;
 import de.kisner.otrcast.model.xml.tvdb.TestXmlSync;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
@@ -27,7 +27,7 @@ public class TestXmlEpisode extends AbstractXmlSeriesTest<Episode>
     	{
     		xml.setSeason(TestXmlSeason.create(false));
     		xml.setImage(TestXmlImage.create(false));
-    		xml.setStorage(TestXmlStorage.create(false));
+    		xml.setFile(TestXmlFile.create(false));
     		xml.setSync(TestXmlSync.create(false));
     	}
     	

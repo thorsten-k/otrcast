@@ -1,26 +1,23 @@
 package de.kisner.otrcast.factory.xml.mc;
 
 import net.sf.exlp.util.DateUtil;
-
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.model.Storage;
 
-public class XmlStorageFactory
+public class XmlFileFactory
 {	
-	final static Logger logger = LoggerFactory.getLogger(XmlStorageFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlFileFactory.class);
 	
-	private de.kisner.otrcast.model.xml.mc.Storage q;
+	private de.kisner.otrcast.model.xml.mc.File q;
 	
 //	public XmlStorageFactory(Query query){this(query.getCover());}
-	public XmlStorageFactory(de.kisner.otrcast.model.xml.mc.Storage q){this.q=q;}
+	public XmlFileFactory(de.kisner.otrcast.model.xml.mc.File q){this.q=q;}
 	
-	public de.kisner.otrcast.model.xml.mc.Storage build(Storage ejb)
+	public de.kisner.otrcast.model.xml.mc.File build(Storage ejb)
 	{
-		de.kisner.otrcast.model.xml.mc.Storage xml = new de.kisner.otrcast.model.xml.mc.Storage();
+		de.kisner.otrcast.model.xml.mc.File xml = new de.kisner.otrcast.model.xml.mc.File();
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
@@ -30,9 +27,9 @@ public class XmlStorageFactory
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.mc.Storage buildPathName(File file)
+	public static de.kisner.otrcast.model.xml.mc.File buildPathName(java.io.File file)
 	{
-		de.kisner.otrcast.model.xml.mc.Storage xml = new de.kisner.otrcast.model.xml.mc.Storage();
+		de.kisner.otrcast.model.xml.mc.File xml = new de.kisner.otrcast.model.xml.mc.File();
 		xml.setPath(file.getParentFile().getAbsolutePath());
 		xml.setName(file.getName());
 		return xml;

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
-import de.kisner.otrcast.factory.xml.mc.XmlStorageFactory;
+import de.kisner.otrcast.factory.xml.mc.XmlFileFactory;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;
 import de.kisner.otrcast.interfaces.model.Storage;
@@ -16,8 +16,14 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 	
 	private de.kisner.otrcast.model.xml.video.tv.Movie q;
 	
+	private XmlFileFactory xfFile;
+	
 	public XmlMovieFactory(Query query){this(query.getMovie());}
-	public XmlMovieFactory(de.kisner.otrcast.model.xml.video.tv.Movie q){this.q=q;}
+	public XmlMovieFactory(de.kisner.otrcast.model.xml.video.tv.Movie q)
+	{
+		this.q=q;
+		if(q.isSetFile()) {xfFile = new XmlFileFactory(q.getFile());}
+	}
 	
 	public de.kisner.otrcast.model.xml.video.tv.Movie build(Movie<COVER,STORAGE> ejb)
 	{
@@ -32,10 +38,9 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 			xml.setImage(f.build(ejb.getCover()));
 		}
 		
-		if(q.isSetStorage() && ejb.getStorage()!=null)
+		if(q.isSetFile() && ejb.getStorage()!=null)
 		{
-			XmlStorageFactory f = new XmlStorageFactory(q.getStorage());
-			xml.setStorage(f.build(ejb.getStorage()));
+			xml.setFile(xfFile.build(ejb.getStorage()));
 		}
 		
 		return xml;

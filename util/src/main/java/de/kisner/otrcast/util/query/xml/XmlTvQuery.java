@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.mc.Image;
-import de.kisner.otrcast.model.xml.mc.Storage;
+import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.model.xml.otr.Query;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
@@ -16,9 +16,9 @@ import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.model.xml.video.tv.Series;
 import net.sf.exlp.util.DateUtil;
 
-public class SeriesQuery
+public class XmlTvQuery
 {
-	final static Logger logger = LoggerFactory.getLogger(SeriesQuery.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlTvQuery.class);
 	public static enum Key {Episode,EpisodeWithSeasonAndSeries,SeriesAll,Series,SeriesWithSeason,SeasonWithEpisodes,Movie,MovieAll}
 	
 	private static Map<Key,Query> mQueries;
@@ -80,7 +80,7 @@ public class SeriesQuery
 	{
 		Movie xml = movie();
 		xml.setImage(image());
-		xml.setStorage(storage());
+		xml.setFile(storage());
 		return xml;
 	}
 	
@@ -144,9 +144,9 @@ public class SeriesQuery
 		return xml;
 	}
 	
-	public static Storage storage()
+	public static File storage()
 	{
-		Storage xml = new Storage();
+		File xml = new File();
 		xml.setId(0);
 		xml.setName("");
 		xml.setHash("");

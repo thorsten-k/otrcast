@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.model.xml.mc.Image;
-import de.kisner.otrcast.model.xml.mc.Storage;
 import de.kisner.otrcast.model.xml.tvdb.Sync;
 
 
@@ -25,7 +25,7 @@ import de.kisner.otrcast.model.xml.tvdb.Sync;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}season"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/mc}image"/&gt;
- *         &lt;element ref="{http://otrcast.kisner.de/mc}storage"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/mc}file"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
@@ -42,7 +42,7 @@ import de.kisner.otrcast.model.xml.tvdb.Sync;
 @XmlType(name = "", propOrder = {
     "season",
     "image",
-    "storage",
+    "file",
     "sync"
 })
 @XmlRootElement(name = "episode")
@@ -56,7 +56,7 @@ public class Episode
     @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
     protected Image image;
     @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
-    protected Storage storage;
+    protected File file;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
     protected Sync sync;
     @XmlAttribute(name = "id")
@@ -123,31 +123,31 @@ public class Episode
     }
 
     /**
-     * Gets the value of the storage property.
+     * Gets the value of the file property.
      * 
      * @return
      *     possible object is
-     *     {@link Storage }
+     *     {@link File }
      *     
      */
-    public Storage getStorage() {
-        return storage;
+    public File getFile() {
+        return file;
     }
 
     /**
-     * Sets the value of the storage property.
+     * Sets the value of the file property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Storage }
+     *     {@link File }
      *     
      */
-    public void setStorage(Storage value) {
-        this.storage = value;
+    public void setFile(File value) {
+        this.file = value;
     }
 
-    public boolean isSetStorage() {
-        return (this.storage!= null);
+    public boolean isSetFile() {
+        return (this.file!= null);
     }
 
     /**
