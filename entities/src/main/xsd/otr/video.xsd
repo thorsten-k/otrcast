@@ -1,9 +1,8 @@
-<xsd:schema targetNamespace="http://otrcutmp4.sf.net/video"
-	xmlns:v="http://otrcutmp4.sf.net/video"
+<xsd:schema targetNamespace="http://otrcast.kisner.de/video"
+	xmlns:v="http://otrcast.kisner.de/video"
 	xmlns:c="http://otrcutmp4.sf.net/cut"
 	xmlns:s="http://otrcutmp4.sf.net/series"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
 	<xsd:element name="videos">

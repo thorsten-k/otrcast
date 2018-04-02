@@ -12,7 +12,7 @@
 	<xsd:import namespace="http://otrcutmp4.sf.net/mc" schemaLocation="mc.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="tvdb.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/db" schemaLocation="db.xsd"/>
-	<xsd:import namespace="http://otrcutmp4.sf.net/video" schemaLocation="video.xsd"/>
+	<xsd:import namespace="http://otrcast.kisner.de/video" schemaLocation="video.xsd"/>
 
 	<xsd:element name="movies">
 		<xsd:complexType>
