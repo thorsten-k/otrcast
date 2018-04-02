@@ -32,9 +32,7 @@ public class OtrWebDavController
 	private List<DavSeries> products = new ArrayList<DavSeries>();
 	
 	public OtrWebDavController()
-	{   
-
-		
+	{   	
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("myUser","myPwd"));
 		ResteasyWebTarget restTarget = client.target("http://192.168.202.26:8080/otrcast");

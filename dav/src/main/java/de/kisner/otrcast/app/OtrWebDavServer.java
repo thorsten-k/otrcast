@@ -1,11 +1,21 @@
 package de.kisner.otrcast.app;
 
+import java.io.File;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.api.rest.OtrDavRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.controller.tag.OtrLibraryScanner;
+import de.kisner.otrcast.model.xml.series.Videos;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrWebDavServer 
 {
@@ -30,9 +40,16 @@ public class OtrWebDavServer
 	{		
         OtrCastBootstrap.initLogger(OtrCastBootstrap.logConfig);
 		
-		logger.info("Test with:");
-		logger.info("\thttp://localhost:8080/app/index.jsf");
-		
+        OtrLibraryScanner scanner = new OtrLibraryScanner();
+        Videos videos = scanner.scan(new File("/Users/thorsten/Dropbox/tmp/mp4"));
+        JaxbUtil.info(videos);
+        
+        ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication("myUser","myPwd"));
+		ResteasyWebTarget restTarget = client.target("http://192.168.202.26:8080/otrcast");
+		OtrDavRest rest = restTarget.proxy(OtrDavRest.class);
+		rest.uploadRepository(videos);
+        
 		new OtrWebDavServer();
 	}
 }

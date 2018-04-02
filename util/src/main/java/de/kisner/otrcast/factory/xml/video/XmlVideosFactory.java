@@ -1,4 +1,4 @@
-package de.kisner.otrcast.factory.xml.series;
+package de.kisner.otrcast.factory.xml.video;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

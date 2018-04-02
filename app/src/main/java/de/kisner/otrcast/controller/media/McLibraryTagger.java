@@ -21,7 +21,7 @@ import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
-import de.kisner.otrcast.factory.xml.series.XmlVideosFactory;
+import de.kisner.otrcast.factory.xml.video.XmlVideosFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.series.Episode;

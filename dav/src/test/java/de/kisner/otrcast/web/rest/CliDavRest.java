@@ -1,4 +1,4 @@
-package de.kisner.otrcast.app;
+package de.kisner.otrcast.web.rest;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrDavRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.container.Otr;
+import de.kisner.otrcast.model.xml.series.Videos;
+import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliDavRest implements OtrDavRest
@@ -34,5 +36,11 @@ public class CliDavRest implements OtrDavRest
 		OtrCastBootstrap.initLogger(OtrCastBootstrap.logConfig);
 		CliDavRest cli = new CliDavRest(null);
 		JaxbUtil.info(cli.getContent("x"));
+	}
+
+	@Override
+	public String uploadRepository(Videos videos) throws UtilsProcessingException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
