@@ -3,6 +3,7 @@ package de.kisner.otrcast.model.xml.series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.model.xml.video.tv.Movies;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlMovies extends AbstractXmlSeriesTest<Movies>

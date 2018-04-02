@@ -28,7 +28,7 @@ public class EjbMovieFactory<MOVIE extends Movie<IMAGE,STORAGE>,IMAGE extends Im
 		return new EjbMovieFactory<MOVIE,IMAGE,STORAGE>(clMovie,clImage,clStorage);
 	}
 	
-	public MOVIE build(de.kisner.otrcast.model.xml.series.Movie xml)
+	public MOVIE build(de.kisner.otrcast.model.xml.video.tv.Movie xml)
 	{
 		MOVIE ejb = null;
 		

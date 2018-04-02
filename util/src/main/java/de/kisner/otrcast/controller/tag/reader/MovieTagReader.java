@@ -8,7 +8,7 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleRecordingYearBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 
-import de.kisner.otrcast.model.xml.series.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
 
 public class MovieTagReader extends AbstractTagReader
 {

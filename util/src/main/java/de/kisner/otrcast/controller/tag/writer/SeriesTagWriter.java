@@ -15,8 +15,8 @@ import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.factory.json.JsonOtrBoxFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Season;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Season;
 
 public class SeriesTagWriter extends AbstractTagWriter
 {

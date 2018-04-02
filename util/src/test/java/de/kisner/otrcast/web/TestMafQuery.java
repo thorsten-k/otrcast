@@ -10,7 +10,7 @@ import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.interfaces.web.WebMovieFinder;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
-import de.kisner.otrcast.model.xml.series.Movies;
+import de.kisner.otrcast.model.xml.video.tv.Movies;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.web.myapifilms.MafMovieQuery;

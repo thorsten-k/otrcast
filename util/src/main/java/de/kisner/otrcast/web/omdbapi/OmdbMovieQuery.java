@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.factory.xml.db.XmlDbFactory;
 import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
 import de.kisner.otrcast.factory.xml.series.XmlMovieFactory;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Movies;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Movies;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 public class OmdbMovieQuery extends AbstractOmdbQuery

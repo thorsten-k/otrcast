@@ -20,15 +20,15 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlSeasonFactory.class);
 	
-	private de.kisner.otrcast.model.xml.series.Season q;
+	private de.kisner.otrcast.model.xml.video.tv.Season q;
 	
 	public XmlSeasonFactory(Query query){this(query.getSeason());}
-	public XmlSeasonFactory(de.kisner.otrcast.model.xml.series.Season q){this.q=q;}
+	public XmlSeasonFactory(de.kisner.otrcast.model.xml.video.tv.Season q){this.q=q;}
 	
-	public de.kisner.otrcast.model.xml.series.Season build(Season<SERIES,SEASON,EPISODE,COVER,STORAGE> ejb)
+	public de.kisner.otrcast.model.xml.video.tv.Season build(Season<SERIES,SEASON,EPISODE,COVER,STORAGE> ejb)
 	{
 		logger.trace("\t"+ejb.toString());
-		de.kisner.otrcast.model.xml.series.Season xml = new de.kisner.otrcast.model.xml.series.Season();
+		de.kisner.otrcast.model.xml.video.tv.Season xml = new de.kisner.otrcast.model.xml.video.tv.Season();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
@@ -57,9 +57,9 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Season build(long nr)
+	public static de.kisner.otrcast.model.xml.video.tv.Season build(long nr)
 	{
-		de.kisner.otrcast.model.xml.series.Season season = new de.kisner.otrcast.model.xml.series.Season();
+		de.kisner.otrcast.model.xml.video.tv.Season season = new de.kisner.otrcast.model.xml.video.tv.Season();
 		season.setNr(nr);
 		return season;
 	}

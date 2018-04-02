@@ -32,7 +32,7 @@ public class EjbSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		return new EjbSeriesFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(clSeries);
 	}
 	
-	public SERIES build(de.kisner.otrcast.model.xml.series.Series xml)
+	public SERIES build(de.kisner.otrcast.model.xml.video.tv.Series xml)
 	{
 		SERIES ejb = null;
 		

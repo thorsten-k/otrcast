@@ -1,5 +1,5 @@
 
-package de.kisner.otrcast.model.xml.series;
+package de.kisner.otrcast.model.xml.video.tv;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import de.kisner.otrcast.model.xml.db.Db;
 import de.kisner.otrcast.model.xml.mc.Image;
 import de.kisner.otrcast.model.xml.mc.Storage;
-import de.kisner.otrcast.model.xml.tvdb.Sync;
 
 
 /**
@@ -23,14 +23,13 @@ import de.kisner.otrcast.model.xml.tvdb.Sync;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/db}db"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
- *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="year" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -40,59 +39,28 @@ import de.kisner.otrcast.model.xml.tvdb.Sync;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "season",
     "image",
     "storage",
-    "sync"
+    "db"
 })
-@XmlRootElement(name = "episode")
-public class Episode
+@XmlRootElement(name = "movie")
+public class Movie
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected Season season;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Image image;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Storage storage;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
-    protected Sync sync;
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/db", required = true)
+    protected Db db;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "nr")
-    protected Long nr;
     @XmlAttribute(name = "name")
     protected String name;
-
-    /**
-     * Gets the value of the season property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Season }
-     *     
-     */
-    public Season getSeason() {
-        return season;
-    }
-
-    /**
-     * Sets the value of the season property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Season }
-     *     
-     */
-    public void setSeason(Season value) {
-        this.season = value;
-    }
-
-    public boolean isSetSeason() {
-        return (this.season!= null);
-    }
+    @XmlAttribute(name = "year")
+    protected Integer year;
 
     /**
      * Gets the value of the image property.
@@ -151,31 +119,31 @@ public class Episode
     }
 
     /**
-     * Gets the value of the sync property.
+     * Gets the value of the db property.
      * 
      * @return
      *     possible object is
-     *     {@link Sync }
+     *     {@link Db }
      *     
      */
-    public Sync getSync() {
-        return sync;
+    public Db getDb() {
+        return db;
     }
 
     /**
-     * Sets the value of the sync property.
+     * Sets the value of the db property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Sync }
+     *     {@link Db }
      *     
      */
-    public void setSync(Sync value) {
-        this.sync = value;
+    public void setDb(Db value) {
+        this.db = value;
     }
 
-    public boolean isSetSync() {
-        return (this.sync!= null);
+    public boolean isSetDb() {
+        return (this.db!= null);
     }
 
     /**
@@ -211,38 +179,6 @@ public class Episode
     }
 
     /**
-     * Gets the value of the nr property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
-     */
-    public long getNr() {
-        return nr;
-    }
-
-    /**
-     * Sets the value of the nr property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
-     */
-    public void setNr(long value) {
-        this.nr = value;
-    }
-
-    public boolean isSetNr() {
-        return (this.nr!= null);
-    }
-
-    public void unsetNr() {
-        this.nr = null;
-    }
-
-    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -268,6 +204,38 @@ public class Episode
 
     public boolean isSetName() {
         return (this.name!= null);
+    }
+
+    /**
+     * Gets the value of the year property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * Sets the value of the year property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setYear(int value) {
+        this.year = value;
+    }
+
+    public boolean isSetYear() {
+        return (this.year!= null);
+    }
+
+    public void unsetYear() {
+        this.year = null;
     }
 
 }

@@ -13,24 +13,7 @@
 	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="tvdb.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/db" schemaLocation="db.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/video" schemaLocation="video.xsd"/>
-	<xsd:element name="videos">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="s:video" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-	<xsd:element name="video">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="s:episode" maxOccurs="1"/>
-				<xsd:element ref="s:movie" maxOccurs="1"/>
-				<xsd:element ref="c:videoFiles" maxOccurs="1"/>
-				<xsd:element ref="v:file" maxOccurs="1"/>
-				<xsd:element ref="v:tag" maxOccurs="1"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+
 	<xsd:element name="movies">
 		<xsd:complexType>
 			<xsd:sequence>

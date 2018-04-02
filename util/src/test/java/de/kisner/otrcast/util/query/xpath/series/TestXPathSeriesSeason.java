@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.util.query.xpath.SeriesXpath;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;

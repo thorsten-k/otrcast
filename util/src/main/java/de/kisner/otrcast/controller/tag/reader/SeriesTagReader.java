@@ -12,9 +12,9 @@ import com.coremedia.iso.boxes.apple.AppleTvEpisodeBox;
 import com.coremedia.iso.boxes.apple.AppleTvSeasonBox;
 
 import de.kisner.otrcast.model.json.JsonOtrIdentifier;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 
 public class SeriesTagReader extends AbstractTagReader
 {

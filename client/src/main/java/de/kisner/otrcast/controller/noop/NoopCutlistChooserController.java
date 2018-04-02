@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.interfaces.controller.CutlistChooser;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Video;
-import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.model.xml.video.Video;
+import de.kisner.otrcast.model.xml.video.Videos;
 
 public class NoopCutlistChooserController implements CutlistChooser
 {

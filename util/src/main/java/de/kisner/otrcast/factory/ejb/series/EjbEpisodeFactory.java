@@ -33,7 +33,7 @@ public class EjbEpisodeFactory<MOVIE extends Movie<COVER,STORAGE>,
 		this.cEpisode=cEpisode;
 	}
 	
-	public EPISODE build(SEASON season, de.kisner.otrcast.model.xml.series.Episode xml)
+	public EPISODE build(SEASON season, de.kisner.otrcast.model.xml.video.tv.Episode xml)
 	{
 		EPISODE ejb = null;
 		

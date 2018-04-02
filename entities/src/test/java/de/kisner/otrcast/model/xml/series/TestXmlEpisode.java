@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.mc.TestXmlImage;
 import de.kisner.otrcast.model.xml.mc.TestXmlStorage;
 import de.kisner.otrcast.model.xml.tvdb.TestXmlSync;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlEpisode extends AbstractXmlSeriesTest<Episode>

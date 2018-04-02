@@ -1,6 +1,29 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/video"
 	xmlns:v="http://otrcutmp4.sf.net/video"
+	xmlns:c="http://otrcutmp4.sf.net/cut"
+	xmlns:s="http://otrcutmp4.sf.net/series"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
+	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
+	<xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
+	<xsd:element name="videos">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="v:video" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+		<xsd:element name="video">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="s:episode" maxOccurs="1"/>
+				<xsd:element ref="s:movie" maxOccurs="1"/>
+				<xsd:element ref="c:videoFiles" maxOccurs="1"/>
+				<xsd:element ref="v:file" maxOccurs="1"/>
+				<xsd:element ref="v:tag" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
 	<xsd:element name="file">
         <xsd:complexType>
             <xsd:simpleContent>

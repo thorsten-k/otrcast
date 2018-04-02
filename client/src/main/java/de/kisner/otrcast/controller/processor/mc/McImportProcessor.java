@@ -19,8 +19,8 @@ import de.kisner.otrcast.model.ejb.OtrMovie;
 import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.util.OtrConfig;
 import net.sf.exlp.util.xml.JaxbUtil;
 

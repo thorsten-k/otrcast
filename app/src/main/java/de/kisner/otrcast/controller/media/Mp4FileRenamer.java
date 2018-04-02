@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.controller.tag.util.Mp4TestEnvironment;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;

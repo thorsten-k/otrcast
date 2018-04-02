@@ -13,7 +13,7 @@ import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;

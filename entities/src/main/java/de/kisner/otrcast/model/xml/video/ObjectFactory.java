@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Video }
+     * 
+     */
+    public Video createVideo() {
+        return new Video();
+    }
+
+    /**
      * Create an instance of {@link File }
      * 
      */
@@ -43,6 +51,14 @@ public class ObjectFactory {
      */
     public Tag createTag() {
         return new Tag();
+    }
+
+    /**
+     * Create an instance of {@link Videos }
+     * 
+     */
+    public Videos createVideos() {
+        return new Videos();
     }
 
 }

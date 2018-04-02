@@ -9,10 +9,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.mc.Image;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 
 
 /**

@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import de.kisner.otrcast.bl.OtrCutBlRest;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.model.xml.video.Videos;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 @Path("/rest/cut")

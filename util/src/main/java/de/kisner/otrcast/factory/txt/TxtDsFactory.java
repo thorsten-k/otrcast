@@ -9,8 +9,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.series.Tag;
-import de.kisner.otrcast.model.xml.series.Tags;
+import de.kisner.otrcast.model.xml.video.tv.Tag;
+import de.kisner.otrcast.model.xml.video.tv.Tags;
 
 public class TxtDsFactory
 {

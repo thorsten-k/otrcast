@@ -1,5 +1,5 @@
 
-package de.kisner.otrcast.model.xml.series;
+package de.kisner.otrcast.model.xml.video.tv;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}video" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/series}tag" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,52 +32,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "video"
+    "tag"
 })
-@XmlRootElement(name = "videos")
-public class Videos
+@XmlRootElement(name = "tags")
+public class Tags
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Video> video;
+    protected List<Tag> tag;
 
     /**
-     * Gets the value of the video property.
+     * Gets the value of the tag property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the video property.
+     * This is why there is not a <CODE>set</CODE> method for the tag property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getVideo().add(newItem);
+     *    getTag().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Video }
+     * {@link Tag }
      * 
      * 
      */
-    public List<Video> getVideo() {
-        if (video == null) {
-            video = new ArrayList<Video>();
+    public List<Tag> getTag() {
+        if (tag == null) {
+            tag = new ArrayList<Tag>();
         }
-        return this.video;
+        return this.tag;
     }
 
-    public boolean isSetVideo() {
-        return ((this.video!= null)&&(!this.video.isEmpty()));
+    public boolean isSetTag() {
+        return ((this.tag!= null)&&(!this.tag.isEmpty()));
     }
 
-    public void unsetVideo() {
-        this.video = null;
+    public void unsetTag() {
+        this.tag = null;
     }
 
 }

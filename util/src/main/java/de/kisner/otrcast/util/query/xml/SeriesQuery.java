@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.mc.Image;
 import de.kisner.otrcast.model.xml.mc.Storage;
 import de.kisner.otrcast.model.xml.otr.Query;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import net.sf.exlp.util.DateUtil;
 
 public class SeriesQuery

@@ -9,9 +9,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import de.kisner.otrcast.model.xml.container.Otr;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Series;
-import de.kisner.otrcast.model.xml.series.Tags;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Series;
+import de.kisner.otrcast.model.xml.video.tv.Tags;
 
 @Path("/rest/series")
 public interface OtrVideoRest

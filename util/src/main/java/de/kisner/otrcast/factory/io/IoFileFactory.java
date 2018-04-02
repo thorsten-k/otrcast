@@ -37,7 +37,7 @@ public class IoFileFactory
 		return new File(fRoot,sb.toString());
 	}
 	
-	public File build(de.kisner.otrcast.model.xml.series.Episode episode)
+	public File build(de.kisner.otrcast.model.xml.video.tv.Episode episode)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(episode.getSeason().getSeries().getName()).append(" - ").append(episode.getSeason().getSeries().getId());

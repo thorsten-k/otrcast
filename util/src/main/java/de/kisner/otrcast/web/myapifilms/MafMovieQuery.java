@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.factory.xml.series.XmlMovieFactory;
 import de.kisner.otrcast.interfaces.web.WebMovieFinder;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Movies;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Movies;
 
 public class MafMovieQuery extends AbstractMafQuery implements WebMovieFinder
 {

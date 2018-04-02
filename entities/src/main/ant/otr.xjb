@@ -24,7 +24,7 @@
     
     <jxb:bindings schemaLocation="../xsd/otr/series.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="de.kisner.otrcast.model.xml.series"/>
+            <jxb:package name="de.kisner.otrcast.model.xml.video.tv"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

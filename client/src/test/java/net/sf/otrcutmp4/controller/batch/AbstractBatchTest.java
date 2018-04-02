@@ -15,7 +15,7 @@ import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.OtrId;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 import net.sf.otrcutmp4.controller.batch.video.TestRawExtract;
 import net.sf.otrcutmp4.test.AbstractClientTest;
 

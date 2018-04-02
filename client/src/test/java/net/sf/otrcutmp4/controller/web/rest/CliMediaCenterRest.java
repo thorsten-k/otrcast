@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.rest.OtrMediacenterRest;
 import de.kisner.otrcast.model.xml.container.Otr;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 
 public class CliMediaCenterRest
 {

@@ -11,11 +11,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.Quality;
-import de.kisner.otrcast.model.xml.series.Category;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
+import de.kisner.otrcast.model.xml.video.tv.Category;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 
 
 /**

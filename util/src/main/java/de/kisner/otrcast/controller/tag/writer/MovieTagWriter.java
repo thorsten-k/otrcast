@@ -11,7 +11,7 @@ import com.coremedia.iso.boxes.apple.AppleItemListBox;
 import com.coremedia.iso.boxes.apple.AppleTrackTitleBox;
 
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
-import de.kisner.otrcast.model.xml.series.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
 
 public class MovieTagWriter extends AbstractTagWriter
 {

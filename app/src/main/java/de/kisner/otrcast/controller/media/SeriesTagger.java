@@ -15,7 +15,7 @@ import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.rest.OtrUserRest;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;

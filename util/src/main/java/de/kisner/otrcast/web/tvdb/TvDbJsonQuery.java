@@ -25,9 +25,9 @@ import de.kisner.otrcast.factory.xml.tvdb.XmlSyncFactory;
 import de.kisner.otrcast.factory.xml.video.tv.XmlEpisodeFactory;
 import de.kisner.otrcast.factory.xml.video.tv.XmlSeriesFactory;
 import de.kisner.otrcast.model.xml.container.Otr;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import retrofit2.Response;
 

@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.OtrWebDavServer;
 import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import io.milton.annotations.Name;
 
 public class DavSeries

@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.interfaces.controller.CoverManager.Format;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 
 public class TestFileSystemCoverManager extends AbstractOtrcastTest

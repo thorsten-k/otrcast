@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.interfaces.rest.OtrUserRest;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Tags;
+import de.kisner.otrcast.model.xml.video.tv.Tags;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliUserRest implements OtrUserRest

@@ -37,7 +37,7 @@ public class EjbSeasonFactory<MOVIE extends Movie<COVER,STORAGE>,
 		return new EjbSeasonFactory<MOVIE,SERIES,SEASON,EPISODE,COVER,STORAGE>(cSeason);
 	}
 	
-	public SEASON build(SERIES series, de.kisner.otrcast.model.xml.series.Season xml)
+	public SEASON build(SERIES series, de.kisner.otrcast.model.xml.video.tv.Season xml)
 	{
 		SEASON ejb = null;
 		

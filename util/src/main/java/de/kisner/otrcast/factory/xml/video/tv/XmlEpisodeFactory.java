@@ -21,22 +21,22 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlEpisodeFactory.class);
 	
-	private final de.kisner.otrcast.model.xml.series.Episode q;
+	private final de.kisner.otrcast.model.xml.video.tv.Episode q;
 	
 	private XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE> xfSeason;
 
 	public XmlEpisodeFactory(Query query){this(query.getEpisode());}
-	public XmlEpisodeFactory(de.kisner.otrcast.model.xml.series.Episode q)
+	public XmlEpisodeFactory(de.kisner.otrcast.model.xml.video.tv.Episode q)
 	{
 		this.q=q;
 		if(q.isSetSeason()){xfSeason = new XmlSeasonFactory<SERIES,SEASON,EPISODE,COVER,STORAGE>(q.getSeason());}
 		
 	}
 	
-	public de.kisner.otrcast.model.xml.series.Episode build(Episode<SEASON> ejb)
+	public de.kisner.otrcast.model.xml.video.tv.Episode build(Episode<SEASON> ejb)
 	{
 		logger.trace("\t\t"+ejb.toString());
-		de.kisner.otrcast.model.xml.series.Episode xml = new de.kisner.otrcast.model.xml.series.Episode();
+		de.kisner.otrcast.model.xml.video.tv.Episode xml = new de.kisner.otrcast.model.xml.video.tv.Episode();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
 		if(q.isSetName()){xml.setName(TxtEpisodeFactory.buld(ejb.getName()));}
@@ -45,16 +45,16 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Episode build(String seriesName, int seasonNr, int nr, String name)
+	public static de.kisner.otrcast.model.xml.video.tv.Episode build(String seriesName, int seasonNr, int nr, String name)
 	{
-		de.kisner.otrcast.model.xml.series.Series series = new de.kisner.otrcast.model.xml.series.Series();
+		de.kisner.otrcast.model.xml.video.tv.Series series = new de.kisner.otrcast.model.xml.video.tv.Series();
 		series.setName(seriesName);
 		
-		de.kisner.otrcast.model.xml.series.Season season = new de.kisner.otrcast.model.xml.series.Season();
+		de.kisner.otrcast.model.xml.video.tv.Season season = new de.kisner.otrcast.model.xml.video.tv.Season();
 		season.setNr(seasonNr);
 		season.setSeries(series);
 		
-		de.kisner.otrcast.model.xml.series.Episode xml = build();
+		de.kisner.otrcast.model.xml.video.tv.Episode xml = build();
 		xml.setName(name);
 		xml.setNr(nr);
 		xml.setSeason(season);
@@ -62,22 +62,22 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Episode build(long nr, String name)
+	public static de.kisner.otrcast.model.xml.video.tv.Episode build(long nr, String name)
 	{		
-		de.kisner.otrcast.model.xml.series.Episode xml = build();
+		de.kisner.otrcast.model.xml.video.tv.Episode xml = build();
 		xml.setName(TxtEpisodeFactory.buld(name));
 		xml.setNr(nr);
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Episode build()
+	public static de.kisner.otrcast.model.xml.video.tv.Episode build()
 	{		
-		return new de.kisner.otrcast.model.xml.series.Episode();
+		return new de.kisner.otrcast.model.xml.video.tv.Episode();
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Episode build(com.uwetrottmann.thetvdb.entities.Episode json)
+	public static de.kisner.otrcast.model.xml.video.tv.Episode build(com.uwetrottmann.thetvdb.entities.Episode json)
 	{
-		de.kisner.otrcast.model.xml.series.Episode xml = build();
+		de.kisner.otrcast.model.xml.video.tv.Episode xml = build();
 		xml.setSync(XmlSyncFactory.build(json.id));
 		xml.setName(json.episodeName);
 		xml.setNr(json.airedEpisodeNumber);

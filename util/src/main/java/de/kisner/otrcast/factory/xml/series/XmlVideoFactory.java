@@ -3,7 +3,7 @@ package de.kisner.otrcast.factory.xml.series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 
 public class XmlVideoFactory
 {	

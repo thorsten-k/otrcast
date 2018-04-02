@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.factory.txt.TxtVideoFactory;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class CliMp4TagReader

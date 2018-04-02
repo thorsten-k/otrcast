@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.container.Otr;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Series;
-import de.kisner.otrcast.model.xml.series.Tags;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Series;
+import de.kisner.otrcast.model.xml.video.tv.Tags;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliVideoRest implements OtrVideoRest

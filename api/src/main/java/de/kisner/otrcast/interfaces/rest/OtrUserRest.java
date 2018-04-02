@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Tags;
+import de.kisner.otrcast.model.xml.video.tv.Tags;
 
 @Path("/rest/user")
 public interface OtrUserRest

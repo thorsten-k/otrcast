@@ -30,10 +30,10 @@ public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,
 	SEASON fSeason(Class<SEASON> type, SERIES series, long nr) throws UtilsNotFoundException;
 	EPISODE fEpisode(Class<EPISODE> type, SEASON season, long nr) throws UtilsNotFoundException;
 	
-	SERIES fcSeries(Class<SERIES> clSeries, de.kisner.otrcast.model.xml.series.Series series);
-	SEASON fcSeason(Class<SEASON> clSeason, SERIES series, de.kisner.otrcast.model.xml.series.Season season);
-	EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<COVER> clCover, de.kisner.otrcast.model.xml.series.Episode episode);
-	EPISODE fcEpisode(Class<EPISODE> clEpisode, SEASON season, de.kisner.otrcast.model.xml.series.Episode episode);
+	SERIES fcSeries(Class<SERIES> clSeries, de.kisner.otrcast.model.xml.video.tv.Series series);
+	SEASON fcSeason(Class<SEASON> clSeason, SERIES series, de.kisner.otrcast.model.xml.video.tv.Season season);
+	EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<COVER> clCover, de.kisner.otrcast.model.xml.video.tv.Episode episode);
+	EPISODE fcEpisode(Class<EPISODE> clEpisode, SEASON season, de.kisner.otrcast.model.xml.video.tv.Episode episode);
 		
 	Rss rss(SEASON season);
 }

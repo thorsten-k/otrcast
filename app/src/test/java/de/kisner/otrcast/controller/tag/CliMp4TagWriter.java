@@ -15,8 +15,8 @@ import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.video.tv.XmlEpisodeFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
-import de.kisner.otrcast.model.xml.series.Episode;
-import de.kisner.otrcast.model.xml.series.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class CliMp4TagWriter

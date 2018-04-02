@@ -4,8 +4,8 @@ import java.util.List;
 
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Video;
-import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.model.xml.video.Video;
+import de.kisner.otrcast.model.xml.video.Videos;
 import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 public interface CutlistChooser

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.cut.TestXmlVideoFiles;
 import de.kisner.otrcast.model.xml.video.TestXmlTag;
+import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlVideo extends AbstractXmlSeriesTest<Video>

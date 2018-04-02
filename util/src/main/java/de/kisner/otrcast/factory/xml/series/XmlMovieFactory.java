@@ -14,14 +14,14 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlMovieFactory.class);
 	
-	private de.kisner.otrcast.model.xml.series.Movie q;
+	private de.kisner.otrcast.model.xml.video.tv.Movie q;
 	
 	public XmlMovieFactory(Query query){this(query.getMovie());}
-	public XmlMovieFactory(de.kisner.otrcast.model.xml.series.Movie q){this.q=q;}
+	public XmlMovieFactory(de.kisner.otrcast.model.xml.video.tv.Movie q){this.q=q;}
 	
-	public de.kisner.otrcast.model.xml.series.Movie build(Movie<COVER,STORAGE> ejb)
+	public de.kisner.otrcast.model.xml.video.tv.Movie build(Movie<COVER,STORAGE> ejb)
 	{
-		de.kisner.otrcast.model.xml.series.Movie xml = new de.kisner.otrcast.model.xml.series.Movie();
+		de.kisner.otrcast.model.xml.video.tv.Movie xml = new de.kisner.otrcast.model.xml.video.tv.Movie();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		if(q.isSetYear()){xml.setYear(ejb.getYear());}
@@ -41,9 +41,9 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.series.Movie build(String title, int year)
+	public static de.kisner.otrcast.model.xml.video.tv.Movie build(String title, int year)
 	{
-		de.kisner.otrcast.model.xml.series.Movie xml = new de.kisner.otrcast.model.xml.series.Movie();
+		de.kisner.otrcast.model.xml.video.tv.Movie xml = new de.kisner.otrcast.model.xml.video.tv.Movie();
 		xml.setName(title);
 		xml.setYear(year);
 		return xml;

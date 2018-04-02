@@ -9,10 +9,10 @@ import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
 import de.kisner.otrcast.model.xml.tvdb.Banner;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 
 public class TvdbXpath
 {

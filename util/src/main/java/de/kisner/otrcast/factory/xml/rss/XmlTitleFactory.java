@@ -30,7 +30,7 @@ public class XmlTitleFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 		return build(episode.getNr()+". "+episode.getName());
     }
 	
-    public static Title build(de.kisner.otrcast.model.xml.series.Episode episode)
+    public static Title build(de.kisner.otrcast.model.xml.video.tv.Episode episode)
     {
         return build(episode.getName());
     }

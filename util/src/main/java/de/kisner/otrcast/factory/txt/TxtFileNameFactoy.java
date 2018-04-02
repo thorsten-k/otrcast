@@ -15,7 +15,7 @@ import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.otr.OtrId;
-import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

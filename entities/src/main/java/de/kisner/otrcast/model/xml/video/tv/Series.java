@@ -1,5 +1,5 @@
 
-package de.kisner.otrcast.model.xml.series;
+package de.kisner.otrcast.model.xml.video.tv;
 
 import java.io.Serializable;
 import java.util.ArrayList;

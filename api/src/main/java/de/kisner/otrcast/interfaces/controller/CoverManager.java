@@ -2,7 +2,7 @@ package de.kisner.otrcast.interfaces.controller;
 
 import java.io.IOException;
 
-import de.kisner.otrcast.model.xml.series.Season;
+import de.kisner.otrcast.model.xml.video.tv.Season;
 
 public interface CoverManager
 {

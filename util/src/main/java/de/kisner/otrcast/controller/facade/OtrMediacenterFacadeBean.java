@@ -113,7 +113,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	}
 	
 	@Override
-	public SERIES fcSeries(Class<SERIES> clSeries, de.kisner.otrcast.model.xml.series.Series xmlSeries)
+	public SERIES fcSeries(Class<SERIES> clSeries, de.kisner.otrcast.model.xml.video.tv.Series xmlSeries)
 	{
 		SERIES series = null;
 		try
@@ -135,7 +135,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	}
 	
 	@Override
-	public SEASON fcSeason(Class<SEASON> clSeason, SERIES series, de.kisner.otrcast.model.xml.series.Season xmlSeason)
+	public SEASON fcSeason(Class<SEASON> clSeason, SERIES series, de.kisner.otrcast.model.xml.video.tv.Season xmlSeason)
 	{
 		SEASON season=null;
 		try
@@ -159,7 +159,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		return season;	
 	}
 
-	@Override public EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<IMAGE> clImage, de.kisner.otrcast.model.xml.series.Episode xmlEpisode)
+	@Override public EPISODE fcEpisode(Class<SERIES> clSeries, Class<SEASON> clSeason, Class<EPISODE> clEpisode, Class<IMAGE> clImage, de.kisner.otrcast.model.xml.video.tv.Episode xmlEpisode)
 	{
 		SERIES series = fcSeries(clSeries,xmlEpisode.getSeason().getSeries());
 		SEASON season = fcSeason(clSeason, series, xmlEpisode.getSeason());
@@ -179,7 +179,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		return episode;	
 	}
 	
-	@Override public EPISODE fcEpisode(Class<EPISODE> cEpisode, SEASON season, de.kisner.otrcast.model.xml.series.Episode xmlEpisode)
+	@Override public EPISODE fcEpisode(Class<EPISODE> cEpisode, SEASON season, de.kisner.otrcast.model.xml.video.tv.Episode xmlEpisode)
 	{
 		EPISODE episode=null;
 		try

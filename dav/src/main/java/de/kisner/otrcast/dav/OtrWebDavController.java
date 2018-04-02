@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.api.rest.OtrDavRest;
 import de.kisner.otrcast.app.OtrWebDavServer;
 import de.kisner.otrcast.model.xml.container.Otr;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import io.milton.annotations.ChildrenOf;
 import io.milton.annotations.Get;
 import io.milton.annotations.ResourceController;

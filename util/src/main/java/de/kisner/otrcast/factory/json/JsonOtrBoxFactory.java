@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.model.json.JsonOtrBox;
 import de.kisner.otrcast.model.json.JsonOtrIdentifier;
-import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
 
 public class JsonOtrBoxFactory
 {

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import de.kisner.otrcast.model.xml.series.Video;
+import de.kisner.otrcast.model.xml.video.Video;
 
 
 /**
@@ -28,7 +28,7 @@ import de.kisner.otrcast.model.xml.series.Video;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}author"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}cut" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}fileName"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}video" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcutmp4.sf.net/video}video" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="rating" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
@@ -65,7 +65,7 @@ public class CutList
     protected List<Cut> cut;
     @XmlElement(required = true)
     protected FileName fileName;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/video", required = true)
     protected List<Video> video;
     @XmlAttribute(name = "id")
     protected String id;

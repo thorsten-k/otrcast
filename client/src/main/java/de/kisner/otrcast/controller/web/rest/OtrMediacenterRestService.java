@@ -19,9 +19,9 @@ import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.mc.ServerStatus;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Season;
-import de.kisner.otrcast.model.xml.series.Series;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.model.xml.video.tv.Season;
+import de.kisner.otrcast.model.xml.video.tv.Series;
 import de.kisner.otrcast.util.query.xml.SeriesQuery;
 
 import javax.ws.rs.Path;

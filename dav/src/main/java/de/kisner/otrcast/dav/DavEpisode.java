@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.OtrWebDavServer;
-import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
 import io.milton.annotations.Get;
 import io.milton.annotations.Name;
 

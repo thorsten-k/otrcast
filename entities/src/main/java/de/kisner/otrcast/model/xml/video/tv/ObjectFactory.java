@@ -1,5 +1,5 @@
 
-package de.kisner.otrcast.model.xml.series;
+package de.kisner.otrcast.model.xml.video.tv;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the de.kisner.otrcast.model.xml.series package. 
+ * generated in the de.kisner.otrcast.model.xml.video.tv package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,7 +23,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.kisner.otrcast.model.xml.series
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.kisner.otrcast.model.xml.video.tv
      * 
      */
     public ObjectFactory() {
@@ -67,22 +67,6 @@ public class ObjectFactory {
      */
     public Movie createMovie() {
         return new Movie();
-    }
-
-    /**
-     * Create an instance of {@link Video }
-     * 
-     */
-    public Video createVideo() {
-        return new Video();
-    }
-
-    /**
-     * Create an instance of {@link Videos }
-     * 
-     */
-    public Videos createVideos() {
-        return new Videos();
     }
 
     /**

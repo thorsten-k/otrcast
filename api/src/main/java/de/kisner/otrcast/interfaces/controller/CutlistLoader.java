@@ -1,6 +1,6 @@
 package de.kisner.otrcast.interfaces.controller;
 
-import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.model.xml.video.Videos;
 
 public interface CutlistLoader
 {

@@ -17,9 +17,9 @@ import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.series.Movie;
-import de.kisner.otrcast.model.xml.series.Video;
-import de.kisner.otrcast.model.xml.series.Videos;
+import de.kisner.otrcast.model.xml.video.Video;
+import de.kisner.otrcast.model.xml.video.Videos;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
 
 public class CliCutlistChooserController extends AbstractCutlistChooserController implements CutlistChooser
 {

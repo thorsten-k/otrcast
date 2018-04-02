@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import de.kisner.otrcast.model.xml.mc.TestXmlImage;
 import de.kisner.otrcast.model.xml.tvdb.TestXmlBanners;
 import de.kisner.otrcast.model.xml.tvdb.TestXmlSync;
+import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlSeason extends AbstractXmlSeriesTest<Season>

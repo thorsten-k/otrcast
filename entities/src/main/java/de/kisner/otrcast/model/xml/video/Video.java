@@ -1,5 +1,5 @@
 
-package de.kisner.otrcast.model.xml.series;
+package de.kisner.otrcast.model.xml.video;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import de.kisner.otrcast.model.xml.video.File;
-import de.kisner.otrcast.model.xml.video.Tag;
+import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.model.xml.video.tv.Movie;
 
 
 /**
@@ -49,15 +49,15 @@ public class Video
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected Episode episode;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
     protected Movie movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/cut", required = true)
     protected VideoFiles videoFiles;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/video", required = true)
+    @XmlElement(required = true)
     protected File file;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/video", required = true)
+    @XmlElement(required = true)
     protected Tag tag;
 
     /**
