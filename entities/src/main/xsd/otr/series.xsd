@@ -1,5 +1,5 @@
-<xsd:schema targetNamespace="http://otrcutmp4.sf.net/series"
-	xmlns:s="http://otrcutmp4.sf.net/series"
+<xsd:schema targetNamespace="http://otrcast.kisner.de/tv"
+	xmlns:s="http://otrcast.kisner.de/tv"
 	xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
 	xmlns:db="http://otrcutmp4.sf.net/db"
 	xmlns:o="http://otrcutmp4.sf.net/otr"

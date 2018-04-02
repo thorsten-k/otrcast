@@ -22,7 +22,7 @@ import de.kisner.otrcast.model.xml.otr.OtrId;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/otr}otrId"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}episode"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="withBegin" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="withEnd" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;

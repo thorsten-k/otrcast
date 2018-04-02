@@ -1,10 +1,9 @@
 <xsd:schema targetNamespace="http://otrcutmp4.sf.net/user"
     xmlns:u="http://otrcutmp4.sf.net/user"
-    xmlns:s="http://otrcutmp4.sf.net/series"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
-    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
+    <xsd:import namespace="http://otrcast.kisner.de/tv" schemaLocation="series.xsd"/>
     <xsd:element name="user">
         <xsd:complexType>
             <xsd:attribute name="email" type="xsd:string"/>

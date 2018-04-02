@@ -1,10 +1,10 @@
 <xsd:schema targetNamespace="http://otrcast.kisner.de/video"
 	xmlns:v="http://otrcast.kisner.de/video"
 	xmlns:c="http://otrcutmp4.sf.net/cut"
-	xmlns:s="http://otrcutmp4.sf.net/series"
+	xmlns:s="http://otrcast.kisner.de/tv"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
-	<xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="series.xsd"/>
+	<xsd:import namespace="http://otrcast.kisner.de/tv" schemaLocation="series.xsd"/>
 	<xsd:element name="videos">
 		<xsd:complexType>
 			<xsd:sequence>

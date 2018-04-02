@@ -23,7 +23,7 @@ import de.kisner.otrcast.model.xml.tvdb.Sync;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}season"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}storage"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/&gt;

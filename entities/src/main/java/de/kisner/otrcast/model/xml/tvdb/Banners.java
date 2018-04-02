@@ -23,7 +23,7 @@ import de.kisner.otrcast.model.xml.video.tv.Season;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banner" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}season" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}season" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -45,7 +45,7 @@ public class Banners
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Banner> banner;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected List<Season> season;
 
     /**

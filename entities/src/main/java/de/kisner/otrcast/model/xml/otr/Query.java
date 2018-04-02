@@ -26,10 +26,10 @@ import de.kisner.otrcast.model.xml.video.tv.Series;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFile"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}series"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}season"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}series"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}season"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}episode"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}movie"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -56,13 +56,13 @@ public class Query
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/cut", required = true)
     protected VideoFile videoFile;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected Series series;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected Season season;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected Episode episode;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected Movie movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
     protected Image image;

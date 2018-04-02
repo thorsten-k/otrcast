@@ -2,7 +2,7 @@
     xmlns:otr="http://otrcutmp4.sf.net"
     xmlns:u="http://otrcutmp4.sf.net/user"
     xmlns:c="http://otrcutmp4.sf.net/cut"
-    xmlns:s="http://otrcutmp4.sf.net/series"
+    xmlns:s="http://otrcast.kisner.de/tv"
     xmlns:o="http://otrcutmp4.sf.net/otr"
     xmlns:mc="http://otrcutmp4.sf.net/mc"
     xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
@@ -15,7 +15,7 @@
     <xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="otr/cut.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/mc" schemaLocation="otr/mc.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/user" schemaLocation="otr/user.xsd"/>
-    <xsd:import namespace="http://otrcutmp4.sf.net/series" schemaLocation="otr/series.xsd"/>
+    <xsd:import namespace="http://otrcast.kisner.de/tv" schemaLocation="otr/series.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr/otr.xsd"/>
     <xsd:import namespace="http://otrcutmp4.sf.net/rss" schemaLocation="otr/rss.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="otr/tvdb.xsd"/>

@@ -28,11 +28,11 @@ import de.kisner.otrcast.model.xml.video.tv.Series;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}episode" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}series" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}episode" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}series" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}banners" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}category" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/series}movie" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}category" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/tv}movie" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/otr}format" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/otr}quality" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
@@ -59,15 +59,15 @@ public class Otr
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected List<Episode> episode;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected List<Series> series;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/tvdb", required = true)
     protected List<Banners> banners;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected List<Category> category;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/series", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected List<Movie> movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/otr", required = true)
     protected List<Format> format;
