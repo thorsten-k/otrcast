@@ -30,7 +30,7 @@ import de.kisner.otrcast.model.xml.video.tv.Series;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}season"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}episode"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}movie"/&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/mc}image"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -64,7 +64,7 @@ public class Query
     protected Episode episode;
     @XmlElement(namespace = "http://otrcast.kisner.de/tv", required = true)
     protected Movie movie;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
     protected Image image;
 
     /**

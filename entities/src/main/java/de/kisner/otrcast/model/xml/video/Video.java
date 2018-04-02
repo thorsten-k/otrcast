@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 
@@ -25,7 +26,7 @@ import de.kisner.otrcast.model.xml.video.tv.Movie;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}episode"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}movie"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/cut}videoFiles"/&gt;
- *         &lt;element ref="{http://otrcast.kisner.de/video}file"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/mc}file"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/video}tag"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -55,7 +56,7 @@ public class Video
     protected Movie movie;
     @XmlElement(namespace = "http://otrcutmp4.sf.net/cut", required = true)
     protected VideoFiles videoFiles;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
     protected File file;
     @XmlElement(required = true)
     protected Tag tag;

@@ -1,5 +1,5 @@
-<xsd:schema targetNamespace="http://otrcutmp4.sf.net/mc"
-    xmlns:mc="http://otrcutmp4.sf.net/mc"
+<xsd:schema targetNamespace="http://otrcast.kisner.de/mc"
+    xmlns:mc="http://otrcast.kisner.de/mc"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
@@ -33,6 +33,16 @@
             <xsd:attribute name="hash" type="xsd:string"/>
             <xsd:attribute name="size" type="xsd:long"/>
             <xsd:attribute name="lastModified" type="xsd:dateTime"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="file">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                	<xsd:attribute name="path" type="xsd:string"/>
+                	<xsd:attribute name="name" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

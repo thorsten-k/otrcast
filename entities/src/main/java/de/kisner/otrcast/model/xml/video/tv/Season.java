@@ -25,7 +25,7 @@ import de.kisner.otrcast.model.xml.tvdb.Sync;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://otrcutmp4.sf.net/mc}image"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/mc}image"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}series"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}episode" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://otrcutmp4.sf.net/tvdb}sync"/&gt;
@@ -57,7 +57,7 @@ public class Season
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://otrcutmp4.sf.net/mc", required = true)
+    @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
     protected Image image;
     @XmlElement(required = true)
     protected Series series;

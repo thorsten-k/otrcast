@@ -3,6 +3,7 @@ package de.kisner.otrcast.model.xml.video;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
 
 public class TestXmlFile extends AbstractXmlVideoTest<File>

@@ -1,5 +1,5 @@
 
-package de.kisner.otrcast.model.xml.video;
+package de.kisner.otrcast.model.xml.mc;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

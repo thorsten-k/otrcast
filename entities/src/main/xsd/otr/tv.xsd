@@ -4,12 +4,12 @@
 	xmlns:db="http://otrcutmp4.sf.net/db"
 	xmlns:o="http://otrcutmp4.sf.net/otr"
 	xmlns:c="http://otrcutmp4.sf.net/cut"
-	xmlns:mc="http://otrcutmp4.sf.net/mc"
+	xmlns:mc="http://otrcast.kisner.de/mc"
 	xmlns:v="http://otrcutmp4.sf.net/video"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:import namespace="http://otrcutmp4.sf.net/otr" schemaLocation="otr.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/cut" schemaLocation="cut.xsd"/>
-	<xsd:import namespace="http://otrcutmp4.sf.net/mc" schemaLocation="mc.xsd"/>
+	<xsd:import namespace="http://otrcast.kisner.de/mc" schemaLocation="mc.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/tvdb" schemaLocation="tvdb.xsd"/>
 	<xsd:import namespace="http://otrcutmp4.sf.net/db" schemaLocation="db.xsd"/>
 	<xsd:import namespace="http://otrcast.kisner.de/video" schemaLocation="video.xsd"/>

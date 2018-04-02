@@ -1,2 +1,2 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://otrcutmp4.sf.net/mc")
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://otrcast.kisner.de/mc")
 package de.kisner.otrcast.model.xml.mc;

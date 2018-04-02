@@ -2,7 +2,7 @@
         xmlns:tvdb="http://otrcutmp4.sf.net/tvdb"
         xmlns:s="http://otrcast.kisner.de/tv"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://otrcast.kisner.de/tv" schemaLocation="series.xsd"/>
+    <xsd:import namespace="http://otrcast.kisner.de/tv" schemaLocation="tv.xsd"/>
 	<xsd:element name="sync">
 		<xsd:complexType>
 			<xsd:sequence>

@@ -9,9 +9,9 @@ public class XmlFileFactory
 {	
 	final static Logger logger = LoggerFactory.getLogger(XmlFileFactory.class);
 	
-	public static de.kisner.otrcast.model.xml.video.File buildPathName(File file)
+	public static de.kisner.otrcast.model.xml.mc.File buildPathName(File file)
 	{
-		de.kisner.otrcast.model.xml.video.File xml = new de.kisner.otrcast.model.xml.video.File();
+		de.kisner.otrcast.model.xml.mc.File xml = new de.kisner.otrcast.model.xml.mc.File();
 		xml.setPath(file.getParentFile().getAbsolutePath());
 		xml.setName(file.getName());
 		return xml;
