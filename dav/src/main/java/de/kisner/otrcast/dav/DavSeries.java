@@ -7,41 +7,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.OtrWebDavServer;
+import de.kisner.otrcast.factory.xml.series.XmlSeasonFactory;
+import de.kisner.otrcast.model.xml.series.Episode;
+import de.kisner.otrcast.model.xml.series.Season;
+import de.kisner.otrcast.model.xml.series.Series;
 import io.milton.annotations.Name;
 
 public class DavSeries
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrWebDavServer.class);
 	
-	private List<DavEpisode> episodes;
-	
-	public List<DavEpisode> getEpisodes() {
-		return episodes;
-	}
+	private final Series series;
+	private final List<DavEpisode> episodes; public List<DavEpisode> getEpisodes() {return episodes;}
 
-	public void setEpisodes(List<DavEpisode> episodes) {
-		this.episodes = episodes;
-	}
-
-	public DavSeries(String code)
+	public DavSeries(Series series)
     {
-        this.code=code;
+        this.series=series;
         episodes = new ArrayList<DavEpisode>();
-        episodes.add(new DavEpisode("a"));
+        for(Season season : series.getSeason())
+        {
+        	for(Episode episode : season.getEpisode())
+        	{
+        		episode.setSeason(XmlSeasonFactory.build(season.getNr()));
+        		episodes.add(new DavEpisode(episode));
+        	}
+        }
+        
+        
     }
-	
 
-
-	private String code;
-
-	@Name
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
-	
+	@Name public String getName() {return series.getName();}	
 }

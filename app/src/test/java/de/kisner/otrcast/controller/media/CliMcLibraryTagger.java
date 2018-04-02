@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
+import de.kisner.otrcast.app.OtrCastApp;
 import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
@@ -30,14 +31,16 @@ public class CliMcLibraryTagger
 {
 	final static Logger logger = LoggerFactory.getLogger(CliMcLibraryTagger.class);
 	
+	private Configuration config;
 	private OtrVideoRest rest;
 	
 	private McLibraryTagger tagger;
 	private File fLibrary,fCovers,fMcXmlLib;
 	
 	public CliMcLibraryTagger(Configuration config)
-	{		
-		rest = OtrCastBootstrap.rest(OtrVideoRest.class);
+	{	
+		this.config=config;
+		rest = OtrCastApp.rest(config,OtrVideoRest.class);
 		
 		fLibrary = new File(config.getString(TestPropertyKeys.dirTaggerDst));
 		File fTmp = new File(config.getString(TestPropertyKeys.dirTaggerTmp));
@@ -125,7 +128,7 @@ public class CliMcLibraryTagger
 	{
 		logger.info(StringUtil.stars());
 		Videos videos = JaxbUtil.loadJAXB(fMcXmlLib, Videos.class);
-		tagger.setRest(OtrCastBootstrap.rest(OtrVideoRest.class));
+		tagger.setRest(OtrCastApp.rest(config,OtrVideoRest.class));
 		tagger.tagLibrary(videos);
 	}
 	

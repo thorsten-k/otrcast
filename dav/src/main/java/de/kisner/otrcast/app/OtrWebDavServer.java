@@ -5,6 +5,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.kisner.otrcast.controller.OtrCastBootstrap;
+
 public class OtrWebDavServer 
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrWebDavServer.class);
@@ -26,7 +28,7 @@ public class OtrWebDavServer
 	
 	public static void main(String args[]) throws Exception
 	{		
-		Bootstrap.init();
+        OtrCastBootstrap.initLogger(OtrCastBootstrap.logConfig);
 		
 		logger.info("Test with:");
 		logger.info("\thttp://localhost:8080/app/index.jsf");

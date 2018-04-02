@@ -2,17 +2,12 @@ package de.kisner.otrcast.controller;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.commons.configuration.Configuration;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +25,7 @@ public class OtrCastBootstrap
 	final static Logger logger = LoggerFactory.getLogger(OtrCastBootstrap.class);
 	
 	public static String xmlConfig = "otrcast/config/otr.xml";
+	public static String logConfig = "log4j.xml";
 	
 	private static EntityManagerFactory emf;
 	private static Configuration config;
@@ -40,7 +36,7 @@ public class OtrCastBootstrap
 		LoggerInit loggerInit = new LoggerInit(log4jConfig);
 		loggerInit.addAltPath("otrcast/config");
 		loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
+//		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 	
 	public static Configuration init(){return init(xmlConfig);}
@@ -81,21 +77,5 @@ public class OtrCastBootstrap
 		}
 
 		return emf;
-	}
-	
-	private static Map<Class<?>,Object> mapRest;
-	
-	@SuppressWarnings("unchecked")
-	public static <T extends Object> T rest(Class<T> c)
-	{
-		if(mapRest==null){mapRest = new Hashtable<Class<?>,Object>();}
-		if(!mapRest.containsKey(c))
-		{
-			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config)); 
-			mapRest.put(c,target.proxy(c));
-		}
-		
-		return (T)mapRest.get(c);
 	}
 }

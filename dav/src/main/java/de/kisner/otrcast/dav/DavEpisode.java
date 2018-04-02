@@ -1,32 +1,40 @@
 package de.kisner.otrcast.dav;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.OtrWebDavServer;
+import de.kisner.otrcast.model.xml.series.Episode;
+import io.milton.annotations.Get;
 import io.milton.annotations.Name;
 
 public class DavEpisode
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrWebDavServer.class);
 	
-	public DavEpisode(String code)
-    {
-        this.code=code;
-    }
+	private final Episode episode;
 	
-
-
-	private String code;
+	public DavEpisode(Episode episode)
+    {
+        this.episode=episode;
+    }
 
 	@Name
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
+	public String getCode()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(episode.getSeason().getNr()).append("x").append(episode.getNr()).append(" ");
+		sb.append(episode.getName());
+		sb.append(".").append("pptx");
+		return sb.toString();
 	}
 	
-	
+	@Get
+	public long read()
+	{
+		File f = new File(OtrWebDavController.test);
+		return f.length();
+	}
 }

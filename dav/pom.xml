@@ -25,8 +25,18 @@
 	</prerequisites>
 
 	<dependencies>
-	
+		<dependency>
+			<groupId>de.kisner.otrcast</groupId>
+			<artifactId>otrcast-util</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
 		<!-- Utils -->
+		<dependency>
+        	<groupId>org.jeesl</groupId>
+        	<artifactId>jeesl-util</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
@@ -69,6 +79,41 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+		
+		<!-- RestEasy -->
+		<dependency>
+		    <groupId>org.jboss.resteasy</groupId>
+		    <artifactId>resteasy-jaxrs</artifactId>
+		    <version>3.0.16.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>3.0.16.Final</version>
+		</dependency>
+		<dependency>
+        	<groupId>org.jboss.resteasy</groupId>
+        	<artifactId>resteasy-client</artifactId>
+        	<version>3.0.16.Final</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.jdom</groupId>
+		    <artifactId>jdom2</artifactId>
+		    <version>2.0.6</version>
+		</dependency>
+        
+		<!-- HTTP -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+			</exclusions>
 		</dependency>
 				
 		<!-- Logging -->

@@ -1,11 +1,10 @@
-package de.kisner.otrcast.web.rest;
+package de.kisner.otrcast.app;
 
 import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +23,7 @@ public class CliDavRest implements OtrDavRest
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("myUser","myPwd"));
-		ResteasyWebTarget restTarget = client.target(RestUrlDelay.getUrl(config));
+		ResteasyWebTarget restTarget = client.target("http://192.168.202.26:8080/otrcast");
         rest = restTarget.proxy(OtrDavRest.class);
 	}
 	
@@ -32,8 +31,8 @@ public class CliDavRest implements OtrDavRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();	
-		CliDavRest cli = new CliDavRest(config);
+		OtrCastBootstrap.initLogger(OtrCastBootstrap.logConfig);
+		CliDavRest cli = new CliDavRest(null);
 		JaxbUtil.info(cli.getContent("x"));
 	}
 }
