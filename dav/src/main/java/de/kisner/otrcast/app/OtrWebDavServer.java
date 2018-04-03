@@ -1,6 +1,7 @@
 package de.kisner.otrcast.app;
 
 import java.io.File;
+import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -23,11 +24,13 @@ public class OtrWebDavServer
 	
 	public OtrWebDavServer() throws Exception
 	{
-		Server server = new Server(8080);
+		Server server = new Server(9090);
 
 		WebAppContext context = new WebAppContext();
 		context.setDescriptor("WEB-INF/web.xml");
-		context.setResourceBase("src/main/webapp");
+		
+		URL webAppDir = Thread.currentThread().getContextClassLoader().getResource("webapp");
+		context.setResourceBase(webAppDir.toURI().toString());
 		context.setContextPath("/");
 		context.setParentLoaderPriority(true);
 		
@@ -39,9 +42,9 @@ public class OtrWebDavServer
 	public static void main(String args[]) throws Exception
 	{		
         OtrCastBootstrap.initLogger(OtrCastBootstrap.logConfig);
-		
+        
         OtrLibraryScanner scanner = new OtrLibraryScanner();
-        Videos videos = scanner.scan(new File("/Users/thorsten/Dropbox/tmp/mp4"));
+        Videos videos = scanner.scan(new File("."));
         JaxbUtil.info(videos);
         
         ResteasyClient client = new ResteasyClientBuilder().build();
