@@ -4,7 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.ejb.series.EjbEpisodeFactory;
+import de.kisner.otrcast.factory.ejb.tv.EjbEpisodeFactory;
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;

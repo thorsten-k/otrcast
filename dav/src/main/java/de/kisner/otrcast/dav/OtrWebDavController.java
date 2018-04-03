@@ -22,6 +22,7 @@ import io.milton.annotations.ChildrenOf;
 import io.milton.annotations.Get;
 import io.milton.annotations.ResourceController;
 import io.milton.annotations.Root;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @ResourceController
 public class OtrWebDavController
@@ -39,6 +40,7 @@ public class OtrWebDavController
         rest = restTarget.proxy(OtrDavRest.class);
 		
         Otr otr = rest.getContent("x");
+        JaxbUtil.info(otr);
 		for(Series series : otr.getSeries())
 		{
 			products.add(new DavSeries(series));
@@ -63,12 +65,10 @@ public class OtrWebDavController
         return series.getEpisodes();
 	}
 	
-	public static final String test = "/Users/thorsten/Dropbox/Presentation Manual.pptx";
 	
 	@Get
 	public InputStream read(DavEpisode episode) throws IOException
 	{
-		File content = new File(test);
-        return FileUtils.openInputStream(content);   
+        return FileUtils.openInputStream(episode.toFile());   
 	}
 }

@@ -221,6 +221,24 @@
 					<rulesUri>file://${project.basedir}/src/main/resources/config.jetty/maven-versions.xml</rulesUri>
 		        </configuration>
 		      </plugin>
+			<plugin>
+				<groupId>com.github.chrisdchristo</groupId>
+				<artifactId>capsule-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<appClass>de.kisner.otrcast.app.OtrWebDavServer</appClass>
+					<fileName>OtrDav</fileName>
+					<fileDesc>-${project.version}</fileDesc>
+					<type>fat</type>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	

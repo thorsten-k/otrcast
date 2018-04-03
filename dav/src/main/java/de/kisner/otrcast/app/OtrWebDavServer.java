@@ -27,7 +27,7 @@ public class OtrWebDavServer
 
 		WebAppContext context = new WebAppContext();
 		context.setDescriptor("WEB-INF/web.xml");
-		context.setResourceBase("./src/main/webapp");
+		context.setResourceBase("src/main/webapp");
 		context.setContextPath("/");
 		context.setParentLoaderPriority(true);
 		

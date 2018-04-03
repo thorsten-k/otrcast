@@ -1,10 +1,12 @@
 package de.kisner.otrcast.factory.xml.mc;
 
-import net.sf.exlp.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.model.Storage;
+import de.kisner.otrcast.model.xml.mc.File;
+import de.kisner.otrcast.model.xml.otr.Query;
+import net.sf.exlp.util.DateUtil;
 
 public class XmlFileFactory
 {	
@@ -12,12 +14,12 @@ public class XmlFileFactory
 	
 	private de.kisner.otrcast.model.xml.mc.File q;
 	
-//	public XmlStorageFactory(Query query){this(query.getCover());}
+	public XmlFileFactory(Query query){this(query.getFile());}
 	public XmlFileFactory(de.kisner.otrcast.model.xml.mc.File q){this.q=q;}
 	
-	public de.kisner.otrcast.model.xml.mc.File build(Storage ejb)
+	public File build(Storage ejb)
 	{
-		de.kisner.otrcast.model.xml.mc.File xml = new de.kisner.otrcast.model.xml.mc.File();
+		File xml = new File();
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
@@ -27,7 +29,7 @@ public class XmlFileFactory
 		return xml;
 	}
 	
-	public static de.kisner.otrcast.model.xml.mc.File buildPathName(java.io.File file)
+	public static File buildPathName(java.io.File file)
 	{
 		de.kisner.otrcast.model.xml.mc.File xml = new de.kisner.otrcast.model.xml.mc.File();
 		xml.setPath(file.getParentFile().getAbsolutePath());

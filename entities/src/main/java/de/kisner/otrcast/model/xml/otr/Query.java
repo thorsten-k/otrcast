@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
+import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.model.xml.mc.Image;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
@@ -31,6 +32,7 @@ import de.kisner.otrcast.model.xml.video.tv.Series;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}episode"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/tv}movie"/&gt;
  *         &lt;element ref="{http://otrcast.kisner.de/mc}image"/&gt;
+ *         &lt;element ref="{http://otrcast.kisner.de/mc}file"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -46,7 +48,8 @@ import de.kisner.otrcast.model.xml.video.tv.Series;
     "season",
     "episode",
     "movie",
-    "image"
+    "image",
+    "file"
 })
 @XmlRootElement(name = "query")
 public class Query
@@ -66,6 +69,8 @@ public class Query
     protected Movie movie;
     @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
     protected Image image;
+    @XmlElement(namespace = "http://otrcast.kisner.de/mc", required = true)
+    protected File file;
 
     /**
      * Gets the value of the videoFile property.
@@ -233,6 +238,34 @@ public class Query
 
     public boolean isSetImage() {
         return (this.image!= null);
+    }
+
+    /**
+     * Gets the value of the file property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link File }
+     *     
+     */
+    public File getFile() {
+        return file;
+    }
+
+    /**
+     * Sets the value of the file property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link File }
+     *     
+     */
+    public void setFile(File value) {
+        this.file = value;
+    }
+
+    public boolean isSetFile() {
+        return (this.file!= null);
     }
 
 }

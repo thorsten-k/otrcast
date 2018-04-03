@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.app.OtrWebDavServer;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
-import io.milton.annotations.Get;
+import io.milton.annotations.ContentLength;
 import io.milton.annotations.Name;
 
 public class DavEpisode
@@ -27,14 +27,20 @@ public class DavEpisode
 		StringBuilder sb = new StringBuilder();
 		sb.append(episode.getSeason().getNr()).append("x").append(episode.getNr()).append(" ");
 		sb.append(episode.getName());
-		sb.append(".").append("pptx");
+		sb.append(".").append("mp4");
 		return sb.toString();
 	}
 	
-	@Get
+	@ContentLength
 	public long read()
 	{
-		File f = new File(OtrWebDavController.test);
-		return f.length();
+		return toFile().length();
+	}
+	
+	public File toFile()
+	{
+
+		logger.info("Creating File ");
+		return new File(episode.getFile().getPath(),episode.getFile().getName());
 	}
 }
