@@ -54,11 +54,11 @@ public class TvDbJsonQuery
 		Series xml;
 		try
 		{
-			Response<SeriesResponse> response = theTvdb.series().series(83462, "de").execute();
+			Response<SeriesResponse> response = theTvdb.series().series(id, "de").execute();
 			if (response.isSuccessful())
 	        {
-	        		xml = XmlSeriesFactory.build(response.body().data);
-	        		xml.getSeason().addAll(seasons(id));
+        		xml = XmlSeriesFactory.build(response.body().data);
+        		xml.getSeason().addAll(seasons(id));
 	        }
 			else {throw new UtilsProcessingException("Failed: "+response.errorBody().toString());}	
 		}
@@ -78,8 +78,9 @@ public class TvDbJsonQuery
 				Response<EpisodesResponse> response = theTvdb.series().episodes(id, page, "de").execute();
 		        if (response.isSuccessful())
 		        {
-		        		page = response.body().links.next;
-		        		episodes.addAll(response.body().data);          
+	        		page = response.body().links.next;
+	        		logger.info("Page: "+page);
+	        		episodes.addAll(response.body().data);          
 		        }
 			}
 		}	
@@ -89,18 +90,18 @@ public class TvDbJsonQuery
 		List<Episode> episodesInSeason = new ArrayList<Episode>();
 		try
 		{
-			Response<EpisodesSummaryResponse> response = theTvdb.series().episodesSummary(83462).execute();
+			Response<EpisodesSummaryResponse> response = theTvdb.series().episodesSummary(id).execute();
 	        if (response.isSuccessful())
 	        {
-	        		EpisodesSummary summary = response.body().data;
-	        		List<Integer> seasonsNumbers = summary.airedSeasons;
-	        		Collections.sort(seasonsNumbers);
-	        		for(Integer seasonNumber : seasonsNumbers)
-	        		{
-	        			episodesInSeason.clear();
-	        			for(Episode e : episodes) {if(e.airedSeason.intValue()==seasonNumber.intValue()) {episodesInSeason.add(e);}}
-	        			list.add(season(seasonNumber,episodesInSeason));
-	        		}
+        		EpisodesSummary summary = response.body().data;
+        		List<Integer> seasonsNumbers = summary.airedSeasons;
+        		Collections.sort(seasonsNumbers);
+        		for(Integer seasonNumber : seasonsNumbers)
+        		{
+        			episodesInSeason.clear();
+        			for(Episode e : episodes) {if(e.airedSeason.intValue()==seasonNumber.intValue()) {episodesInSeason.add(e);}}
+        			list.add(season(seasonNumber,episodesInSeason));
+        		}
 	        }
 		}	
 	    catch (IOException e) {e.printStackTrace();}
@@ -116,7 +117,6 @@ public class TvDbJsonQuery
 			else {season.setSync(XmlSyncFactory.build(e.airedSeasonID));}
 			season.getEpisode().add(XmlEpisodeFactory.build(e));
 		}
-        
 		return season;
 	}
 	
@@ -129,17 +129,13 @@ public class TvDbJsonQuery
 			Response<SeriesImageQueryResultResponse> r2 = theTvdb.series().imagesQuery(seriesId, "season", null, Integer.valueOf(seasonNr).toString(), null).execute();
 			if (r2.isSuccessful())
 	        {
-	        		for(SeriesImageQueryResult i : r2.body().data)
-	        		{
-	        			xml.getBanner().add(XmlBannerFactory.build(i));
-	        		}
+        		for(SeriesImageQueryResult i : r2.body().data)
+        		{
+        			xml.getBanner().add(XmlBannerFactory.build(i));
+        		}
 	        }
-			
 		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		catch (IOException e) {e.printStackTrace();}
         return xml;
 	}
 }

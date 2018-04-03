@@ -30,7 +30,7 @@ public class CliTvDbApi
     final static Logger logger = LoggerFactory.getLogger(CliTvDbApi.class);
 
     private TheTvdb theTvdb;
-    private final int seriesId = 537;
+    private final int seriesId = 77398;
     
     private CliTvDbApi( Configuration config)
     {
@@ -39,83 +39,83 @@ public class CliTvDbApi
     
     public void episodeSummary() throws IOException
     {
-    		Response<EpisodesSummaryResponse> r2 = theTvdb.series().episodesSummary(83462).execute();
+    	Response<EpisodesSummaryResponse> r2 = theTvdb.series().episodesSummary(seriesId).execute();
         if (r2.isSuccessful())
         {
-        		EpisodesSummary summary = r2.body().data;
-        		System.out.println(summary.airedEpisodes);
-        		for(Integer i : summary.airedSeasons)
-        		{
-        			logger.info(i.toString());
-        		}
+    		EpisodesSummary summary = r2.body().data;
+    		System.out.println(summary.airedEpisodes);
+    		for(Integer i : summary.airedSeasons)
+    		{
+    			logger.info(i.toString());
+    		}
         }
     }
     
     public void episodes() throws IOException
     {
-    		Response<EpisodesResponse> r2 = theTvdb.series().episodes(seriesId, 1, "de").execute();
+    	Response<EpisodesResponse> r2 = theTvdb.series().episodes(seriesId, 1, "de").execute();
         if (r2.isSuccessful())
         {
-        		if(r2.body().links.next!=null)
-        		{
-        			logger.info("Next "+r2.body().links.next);
-        		}
-        		for(Episode e : r2.body().data)
-        		{
-        			System.out.println(e.airedSeason+"."+e.airedEpisodeNumber+" "+e.episodeName);
-        		}            
+    		if(r2.body().links.next!=null)
+    		{
+    			logger.info("Next "+r2.body().links.next);
+    		}
+    		for(Episode e : r2.body().data)
+    		{
+    			System.out.println(e.airedSeason+"."+e.airedEpisodeNumber+" "+e.episodeName);
+    		}
         }
     }
     
     public void images() throws IOException
     {
-    		Response<SeriesImagesQueryParamResponse> r1 = theTvdb.series().imagesQueryParams(seriesId).execute();
+    	Response<SeriesImagesQueryParamResponse> r1 = theTvdb.series().imagesQueryParams(seriesId).execute();
         if (r1.isSuccessful())
         {
-        		List<SeriesImagesQueryParam> list = r1.body().data;
-        		for(SeriesImagesQueryParam i : list)
-        		{
-        			System.out.println(i.keyType);
-        			for(String sub : i.subKey)
-        			{
-        				logger.info("\t"+sub);
-        			}
-        		}
+    		List<SeriesImagesQueryParam> list = r1.body().data;
+    		for(SeriesImagesQueryParam i : list)
+    		{
+    			System.out.println(i.keyType);
+    			for(String sub : i.subKey)
+    			{
+    				logger.info("\t"+sub);
+    			}
+    		}
         }
         Response<SeriesImageQueryResultResponse> r2 = theTvdb.series().imagesQuery(seriesId, "season", null, "1", null).execute();
         if (r2.isSuccessful())
         {
-        		List<SeriesImageQueryResult> list = r2.body().data;
-        		logger.info("Images: "+list.size());
-        		for(SeriesImageQueryResult i : list)
-        		{
-        			System.out.println(i.fileName+" "+i.thumbnail);
-        		}
+    		List<SeriesImageQueryResult> list = r2.body().data;
+    		logger.info("Images: "+list.size());
+    		for(SeriesImageQueryResult i : list)
+    		{
+    			System.out.println(i.fileName+" "+i.thumbnail);
+    		}
         }
         else
         {
-        		logger.info(r2.message());
+        	logger.info(r2.message());
         }
     }
     
     public void api() throws UtilsProcessingException
     {
-    		TvDbJsonQuery query = new TvDbJsonQuery(theTvdb);
-    		Otr series = query.series(seriesId);
-    		JaxbUtil.trace(series);
-    		
-    		Banners covers = query.seasonCovers(seriesId, 1);
-    		JaxbUtil.info(covers);
+		TvDbJsonQuery query = new TvDbJsonQuery(theTvdb);
+		Otr series = query.series(seriesId);
+		JaxbUtil.info(series);
+		
+		Banners covers = query.seasonCovers(seriesId, 1);
+		JaxbUtil.info(covers);
     }
     
     public static void main(String args[]) throws Exception
     {
-    		Configuration config = OtrCastBootstrap.init();
-    		CliTvDbApi cli = new CliTvDbApi(config);
-    		cli.episodeSummary();
+		Configuration config = OtrCastBootstrap.init();
+		CliTvDbApi cli = new CliTvDbApi(config);
+//		cli.episodeSummary();
 //        cli.episodes();
         
-//       cli.api();
+       cli.api();
 //        cli.images();
     }
  }
