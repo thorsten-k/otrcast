@@ -1,6 +1,5 @@
 package de.kisner.otrcast.dav;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,10 +17,13 @@ import de.kisner.otrcast.api.rest.OtrDavRest;
 import de.kisner.otrcast.app.OtrWebDavServer;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.video.tv.Series;
+import io.milton.annotations.Authenticate;
 import io.milton.annotations.ChildrenOf;
 import io.milton.annotations.Get;
 import io.milton.annotations.ResourceController;
 import io.milton.annotations.Root;
+import io.milton.annotations.Users;
+import io.milton.http.http11.auth.DigestResponse;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 @ResourceController
@@ -70,5 +72,29 @@ public class OtrWebDavController
 	public InputStream read(DavEpisode episode) throws IOException
 	{
         return FileUtils.openInputStream(episode.toFile());   
+	}
+	
+	@ChildrenOf
+	@Users
+	public List<DavUser> getUsers(OtrWebDavController root)
+	{
+		logger.info("Get Users");
+		List<DavUser> result = new ArrayList<>();
+		result.add(new DavUser("x"));
+		return result;
+	}
+	
+	@Authenticate
+    public Boolean verifyPassword(DavUser m, String requestedPassword)
+    {
+		logger.info("verify "+requestedPassword);
+		return true;
+    }
+	
+	@Authenticate
+	public Boolean verifyDigestPassword(DavUser m, DigestResponse digest)
+	{
+		logger.info("verify "+digest.toString());
+		return true;
 	}
 }
