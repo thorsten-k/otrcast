@@ -259,16 +259,14 @@
 	                    </manifest>
 	                </archive>
 	            </configuration>
-	        	</plugin>
-	        	<plugin>
+	        </plugin>
+	        <plugin>
 				<groupId>com.github.chrisdchristo</groupId>
 				<artifactId>capsule-maven-plugin</artifactId>
 				<version>1.5.1</version>
 				<executions>
 					<execution>
-						<goals>
-							<goal>build</goal>
-						</goals>
+						<goals><goal>build</goal></goals>
 					</execution>
 				</executions>
 				<configuration>
