@@ -29,7 +29,6 @@
     	<maven.ignore.versions>file://${basedir}/../doc/src/main/resources/otrcast/maven/maven-versions.xml</maven.ignore.versions>
     	
     	<version.jetty>8.1.17.v20150415</version.jetty>
-    	<version.jdk>1.6</version.jdk>
     	
     	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
 
@@ -155,9 +154,9 @@
 				<inherited>true</inherited>
 				<version>2.3.2</version>
 				<configuration>
-					<source>${version.jdk}</source>
-					<target>${version.jdk}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
