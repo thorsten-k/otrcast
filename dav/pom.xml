@@ -213,13 +213,12 @@
         		</executions>
 			</plugin>
 			<plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>versions-maven-plugin</artifactId>
-		        <version>2.2</version>
-		        <configuration>
-					<rulesUri>file://${project.basedir}/src/main/resources/config.jetty/maven-versions.xml</rulesUri>
-		        </configuration>
-		      </plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<configuration>
+					<rulesUri>${maven.ignore.versions}</rulesUri>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.github.chrisdchristo</groupId>
 				<artifactId>capsule-maven-plugin</artifactId>
