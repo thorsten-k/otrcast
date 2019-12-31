@@ -10,6 +10,7 @@
     <rule groupId="commons-lang" comparisonMethod="maven">
       <ignoreVersions>
         <ignoreVersion>20030203.000129</ignoreVersion>
+        <ignoreVersion>2.6.0.redhat-7</ignoreVersion>
       </ignoreVersions>
     </rule>
     <rule groupId="commons-collections" comparisonMethod="maven">
@@ -28,6 +29,16 @@
     <rule groupId="org.glassfish.jaxb" comparisonMethod="maven">
       <ignoreVersions>
         <ignoreVersion>2.2.11.jbossorg-1</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.slf4j" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion>2.0.0-alpha1</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.jboss.resteasy" comparisonMethod="maven">
+      <ignoreVersions>
+        <ignoreVersion>4.0.0.Beta5</ignoreVersion>
       </ignoreVersions>
     </rule>
   </rules>
