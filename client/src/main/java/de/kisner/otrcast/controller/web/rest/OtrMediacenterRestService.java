@@ -1,8 +1,8 @@
 package de.kisner.otrcast.controller.web.rest;
 
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.util.DateUtil;
 
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +57,7 @@ public class OtrMediacenterRestService extends AbstractOtrRestService implements
 	}
 	
 	@Override
-	public Movie movie(@PathParam("id") long movieId) throws UtilsNotFoundException
+	public Movie movie(@PathParam("id") long movieId) throws JeeslNotFoundException
 	{
 		init();
 		XmlMovieFactory<OtrMovie,OtrImage,OtrStorage> f = new XmlMovieFactory<OtrMovie,OtrImage,OtrStorage>(XmlTvQuery.get(XmlTvQuery.Key.MovieAll));
@@ -81,7 +81,7 @@ public class OtrMediacenterRestService extends AbstractOtrRestService implements
 	}
 	
 	@Override
-	public Series seriesAll(@PathParam("id") long seriesId) throws UtilsNotFoundException
+	public Series seriesAll(@PathParam("id") long seriesId) throws JeeslNotFoundException
 	{
 		init();
 		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(XmlTvQuery.get(XmlTvQuery.Key.SeriesAll));
@@ -91,7 +91,7 @@ public class OtrMediacenterRestService extends AbstractOtrRestService implements
 	}
 
 	@Override
-	public Series seriesWithSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException
+	public Series seriesWithSeason(@PathParam("id") long seriesId) throws JeeslNotFoundException
 	{
 		init();
 		XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> f = new XmlSeriesFactory<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(XmlTvQuery.get(XmlTvQuery.Key.SeriesWithSeason));
@@ -101,7 +101,7 @@ public class OtrMediacenterRestService extends AbstractOtrRestService implements
 	}
 	
 	@Override
-	public Season seasonWithEpisode(@PathParam("id") long seasonId) throws UtilsNotFoundException
+	public Season seasonWithEpisode(@PathParam("id") long seasonId) throws JeeslNotFoundException
 	{
 		init();
 		XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> f = new XmlSeasonFactory<OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(XmlTvQuery.get(XmlTvQuery.Key.SeasonWithEpisodes));

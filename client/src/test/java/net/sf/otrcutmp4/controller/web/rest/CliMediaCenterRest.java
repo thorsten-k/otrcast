@@ -2,7 +2,6 @@ package net.sf.otrcutmp4.controller.web.rest;
 
 import java.io.File;
 
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -12,6 +11,7 @@ import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,7 +62,7 @@ public class CliMediaCenterRest
 				File f = new File(fMcMovies,movie.getId()+".xml");
 				JaxbUtil.save(f, movie, true);
 			}
-			catch (UtilsNotFoundException e) {e.printStackTrace();}
+			catch (JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -80,7 +80,7 @@ public class CliMediaCenterRest
 				File f = new File(fMcSeries,series.getId()+".xml");
 				JaxbUtil.save(f, series, true);
 			}
-			catch (UtilsNotFoundException e) {e.printStackTrace();}
+			catch (JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
 	

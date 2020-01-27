@@ -15,6 +15,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,6 @@ import de.kisner.otrcast.interfaces.model.Season;
 import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.model.ranking.UtilsRankedResult;
 
 public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
@@ -49,7 +49,7 @@ public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	}
 	
 	@Override
-	public EPISODE fEpisode(Class<EPISODE> cEpiosode, long seriesId, long seasonNr, long episodeNr) throws UtilsNotFoundException
+	public EPISODE fEpisode(Class<EPISODE> cEpiosode, long seriesId, long seasonNr, long episodeNr) throws JeeslNotFoundException
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<EPISODE> cQ = cB.createQuery(cEpiosode);
@@ -73,8 +73,8 @@ public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		
 		TypedQuery<EPISODE> q = em.createQuery(cQ); 
 		try	{return q.getSingleResult();}
-		catch (NoResultException ex){throw new UtilsNotFoundException("Nothing found "+cEpiosode.getSimpleName()+" for series="+seriesId+" seasonNr="+seasonNr+" episodeNr="+episodeNr);}
-		catch (NonUniqueResultException ex){throw new UtilsNotFoundException("Not Unique results for "+cEpiosode.getSimpleName()+" for series="+seriesId+" seasonNr="+seasonNr+" episodeNr="+episodeNr);}
+		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+cEpiosode.getSimpleName()+" for series="+seriesId+" seasonNr="+seasonNr+" episodeNr="+episodeNr);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Not Unique results for "+cEpiosode.getSimpleName()+" for series="+seriesId+" seasonNr="+seasonNr+" episodeNr="+episodeNr);}
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 				list.add(e);
 				return list;
 			}
-			catch (UtilsNotFoundException e) {}
+			catch (JeeslNotFoundException e) {}
 		}
 		
 		CriteriaBuilder cB = em.getCriteriaBuilder();

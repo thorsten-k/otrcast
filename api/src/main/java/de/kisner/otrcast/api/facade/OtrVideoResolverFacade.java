@@ -2,13 +2,14 @@ package de.kisner.otrcast.api.facade;
 
 import java.util.List;
 
+import org.jeesl.exception.ejb.JeeslNotFoundException;
+
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;
 import de.kisner.otrcast.interfaces.model.Season;
 import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 import net.sf.ahtutils.interfaces.model.ranking.UtilsRankedResult;
 
@@ -20,7 +21,7 @@ public interface OtrVideoResolverFacade<MOVIE extends Movie<COVER,STORAGE>,
 		extends UtilsFacade
 {	
 	List<EPISODE> episodeFinder(Class<EPISODE> cEpiosode, Long otrId, String seriesName, Integer seasonNr, Integer episodeNr, String episodeName);
-	EPISODE fEpisode(Class<EPISODE> cEpiosode, long seriesId, long seasonNr, long episodeNr) throws UtilsNotFoundException;
+	EPISODE fEpisode(Class<EPISODE> cEpiosode, long seriesId, long seasonNr, long episodeNr) throws JeeslNotFoundException;
 	
 	List<UtilsRankedResult<SERIES>> rankedSeries(Class<SERIES> cSeries, String seriesName);
 	List<SERIES> seriesFinder(Class<SERIES> cSeries, String seriesName);

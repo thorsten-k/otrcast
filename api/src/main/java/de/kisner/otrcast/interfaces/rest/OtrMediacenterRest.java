@@ -7,12 +7,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.exception.ejb.JeeslNotFoundException;
+
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.mc.ServerStatus;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.model.xml.video.tv.Series;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 @Path("/rest/mediacenter")
 public interface OtrMediacenterRest
@@ -29,7 +30,7 @@ public interface OtrMediacenterRest
 	@GET @Path("/movies/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	Movie movie(@PathParam("id") long movieId) throws UtilsNotFoundException;
+	Movie movie(@PathParam("id") long movieId) throws JeeslNotFoundException;
 	
 	// ---------------------- Series ----------------------
 	@GET @Path("/series")
@@ -39,15 +40,15 @@ public interface OtrMediacenterRest
 	@GET @Path("/series/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	Series seriesAll(@PathParam("id") long seriesId) throws UtilsNotFoundException;
+	Series seriesAll(@PathParam("id") long seriesId) throws JeeslNotFoundException;
 	
 	@GET @Path("/series/{id}/season")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	Series seriesWithSeason(@PathParam("id") long seriesId) throws UtilsNotFoundException;
+	Series seriesWithSeason(@PathParam("id") long seriesId) throws JeeslNotFoundException;
 	
 	@GET @Path("/series/{id}/season/episode")
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_PLAIN)
-	Season seasonWithEpisode(@PathParam("id") long seasonId) throws UtilsNotFoundException;
+	Season seasonWithEpisode(@PathParam("id") long seasonId) throws JeeslNotFoundException;
 }

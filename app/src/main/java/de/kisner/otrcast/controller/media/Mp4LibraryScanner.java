@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 
 import org.apache.commons.io.DirectoryWalker;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,8 +30,6 @@ import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.ahtutils.exception.ejb.UtilsConstraintViolationException;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.util.io.StringUtil;
 
 public class Mp4LibraryScanner extends DirectoryWalker<File>
@@ -82,7 +82,7 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 				fMc.rm(storage);
 				em.getTransaction().commit();
 			}
-	    	catch (UtilsConstraintViolationException e)
+	    	catch (JeeslConstraintViolationException e)
 	    	{
 				e.printStackTrace();
 				em.getTransaction().rollback();
@@ -114,14 +114,14 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 			logger.warn("Cannot scan "+file.getAbsolutePath());
 			em.getTransaction().rollback();
 		}
-		catch (UtilsConstraintViolationException e)
+		catch (JeeslConstraintViolationException e)
 		{
 			logger.warn("Cannot scan "+file.getAbsolutePath());
 			e.printStackTrace();
 		}
 	}
 	
-	private void handleEpisode(OtrStorage storage, Episode xmlEpisode,File file) throws UtilsConstraintViolationException
+	private void handleEpisode(OtrStorage storage, Episode xmlEpisode,File file) throws JeeslConstraintViolationException
 	{
 		OtrEpisode episode = fMc.fcEpisode(OtrSeries.class, OtrSeason.class, OtrEpisode.class, OtrImage.class, xmlEpisode);
 
@@ -169,7 +169,7 @@ public class Mp4LibraryScanner extends DirectoryWalker<File>
 		{
 			movie = fMc.fByName(OtrMovie.class, xmlMovie.getName());
 		}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			movie = new OtrMovie();
 			movie.setName(xmlMovie.getName());

@@ -14,6 +14,7 @@ import org.apache.http.util.EntityUtils;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,6 @@ import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.rss.Rss;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -84,7 +84,7 @@ public class CliPodcastRest
 		finally {response.close();}
 	}
 	
-	public void local() throws UtilsNotFoundException
+	public void local() throws JeeslNotFoundException
 	{
 		OtrCastBootstrap.buildEmf(config);
 		UrlGenerator urlGenerator = new TxtUrlFactory();
@@ -105,7 +105,7 @@ public class CliPodcastRest
 //		JDomUtil.debug(rssProcessor.transform(rss));
 	}
 	
-	public static void main(String[] args) throws ExlpConfigurationException, MalformedURLException, IOException, UtilsNotFoundException
+	public static void main(String[] args) throws ExlpConfigurationException, MalformedURLException, IOException, JeeslNotFoundException
 	{
 		Configuration config = OtrCastBootstrap.init();		
 		CliPodcastRest rest = new CliPodcastRest(config);

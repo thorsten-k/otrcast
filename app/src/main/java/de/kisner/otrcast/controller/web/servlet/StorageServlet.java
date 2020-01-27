@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,6 @@ import de.kisner.otrcast.model.ejb.OtrMovie;
 import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class StorageServlet extends HttpServlet
 {
@@ -56,7 +56,7 @@ public class StorageServlet extends HttpServlet
 			out = response.getOutputStream();
 	        IOUtils.copy(in,out);
 		}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			e.printStackTrace();
 		}

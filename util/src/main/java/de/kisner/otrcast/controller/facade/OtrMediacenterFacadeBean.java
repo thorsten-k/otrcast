@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +26,6 @@ import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.xml.rss.Channel;
 import de.kisner.otrcast.model.xml.rss.Rss;
 import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
-import net.sf.ahtutils.exception.ejb.UtilsConstraintViolationException;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 
 public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 									SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
@@ -55,7 +55,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 	{
 		STORAGE storage = null;
 		try {storage = this.fByName(cStorage, f.getAbsolutePath());}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			try
 			{
@@ -63,7 +63,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 				storage = efStorage.build(f);
 				storage = this.persist(storage);
 			}
-			catch (UtilsConstraintViolationException e1) {e1.printStackTrace();}
+			catch (JeeslConstraintViolationException e1) {e1.printStackTrace();}
 		}
 		return storage;
 	}
@@ -89,25 +89,25 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		return season;
 	}
 	
-	@Override public MOVIE fMovie(Class<MOVIE> type, String name, int year) throws UtilsNotFoundException
+	@Override public MOVIE fMovie(Class<MOVIE> type, String name, int year) throws JeeslNotFoundException
 	{
 		return this.fByName(type, name);
 	}
 
 	@Override
-	public SEASON fSeason(Class<SEASON> type, SERIES series, long nr) throws UtilsNotFoundException
+	public SEASON fSeason(Class<SEASON> type, SERIES series, long nr) throws JeeslNotFoundException
 	{
 		return this.fByNr(type, "series", series, nr);
 	}
 
 	@Override
-	public EPISODE fEpisode(Class<EPISODE> type, SEASON season, long nr) throws UtilsNotFoundException
+	public EPISODE fEpisode(Class<EPISODE> type, SEASON season, long nr) throws JeeslNotFoundException
 	{
 		return this.fByNr(type, "season", season, nr);
 	}
 
 	@Override
-	public SERIES fSeries(Class<SERIES> type, String name) throws UtilsNotFoundException
+	public SERIES fSeries(Class<SERIES> type, String name) throws JeeslNotFoundException
 	{
 		return this.fByName(type, name);
 	}
@@ -120,7 +120,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		{
 			series = this.fByName(clSeries, xmlSeries.getName());
 		}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			try
 			{
@@ -142,7 +142,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		{
 			season = fSeason(clSeason, series, xmlSeason.getNr());
 		}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			try
 			{
@@ -186,7 +186,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 		{
 			episode = fEpisode(cEpisode, season, xmlEpisode.getNr());
 		}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			try
 			{

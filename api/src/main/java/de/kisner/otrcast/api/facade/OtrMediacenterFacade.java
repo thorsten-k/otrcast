@@ -2,6 +2,8 @@ package de.kisner.otrcast.api.facade;
 
 import java.io.File;
 
+import org.jeesl.exception.ejb.JeeslNotFoundException;
+
 import de.kisner.otrcast.interfaces.model.Episode;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;
@@ -9,7 +11,6 @@ import de.kisner.otrcast.interfaces.model.Season;
 import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
 import de.kisner.otrcast.model.xml.rss.Rss;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.ahtutils.interfaces.facade.UtilsFacade;
 
 public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,
@@ -24,11 +25,11 @@ public interface OtrMediacenterFacade<MOVIE extends Movie<COVER,STORAGE>,
 	SEASON load(Class<SEASON> type, SEASON season);
 	SERIES load(Class<SERIES> type, SERIES series, boolean withEpisodes);
 	
-	MOVIE fMovie(Class<MOVIE> type, String name, int year) throws UtilsNotFoundException;
+	MOVIE fMovie(Class<MOVIE> type, String name, int year) throws JeeslNotFoundException;
 	
-	SERIES fSeries(Class<SERIES> type, String name) throws UtilsNotFoundException;
-	SEASON fSeason(Class<SEASON> type, SERIES series, long nr) throws UtilsNotFoundException;
-	EPISODE fEpisode(Class<EPISODE> type, SEASON season, long nr) throws UtilsNotFoundException;
+	SERIES fSeries(Class<SERIES> type, String name) throws JeeslNotFoundException;
+	SEASON fSeason(Class<SEASON> type, SERIES series, long nr) throws JeeslNotFoundException;
+	EPISODE fEpisode(Class<EPISODE> type, SEASON season, long nr) throws JeeslNotFoundException;
 	
 	SERIES fcSeries(Class<SERIES> clSeries, de.kisner.otrcast.model.xml.video.tv.Series series);
 	SEASON fcSeason(Class<SEASON> clSeason, SERIES series, de.kisner.otrcast.model.xml.video.tv.Season season);

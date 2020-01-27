@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.jdom2.output.Format;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,6 @@ import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.rss.Rss;
-import net.sf.ahtutils.exception.ejb.UtilsNotFoundException;
 import net.sf.exlp.util.xml.JDomUtil;
 
 public class PodcastServlet extends HttpServlet
@@ -64,7 +64,7 @@ public class PodcastServlet extends HttpServlet
 			out = response.getOutputStream();
 	        IOUtils.copy(in,out);
 		}
-		catch (UtilsNotFoundException e)
+		catch (JeeslNotFoundException e)
 		{
 			e.printStackTrace();
 		}
