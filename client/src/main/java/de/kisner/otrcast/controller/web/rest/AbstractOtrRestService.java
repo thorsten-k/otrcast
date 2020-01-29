@@ -1,7 +1,6 @@
 package de.kisner.otrcast.controller.web.rest;
 
-import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
-
+import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +22,7 @@ public class AbstractOtrRestService
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrRestService.class);
 	
 	protected EntityManager em;
-    protected UtilsFacadeBean ufb;
+    protected JeeslFacadeBean ufb;
     protected OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> osfb;
 	
 	protected void init()
@@ -33,7 +32,7 @@ public class AbstractOtrRestService
 			EntityManagerFactory emf = OtrCastBootstrap.buildEmf();
 			em = emf.createEntityManager();
 		}
-		if(ufb==null){ufb = new UtilsFacadeBean(em);}
+		if(ufb==null){ufb = new JeeslFacadeBean(em);}
 		if(osfb==null){osfb = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(em);}
 	}
 }

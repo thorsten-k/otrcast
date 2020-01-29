@@ -15,6 +15,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,6 @@ import de.kisner.otrcast.interfaces.model.Movie;
 import de.kisner.otrcast.interfaces.model.Season;
 import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
-import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 import net.sf.ahtutils.interfaces.model.ranking.UtilsRankedResult;
 
 public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
@@ -35,7 +35,7 @@ public class OtrVideoResolverFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 									EPISODE extends Episode<SEASON>,
 									IMAGE extends Image,
 									STORAGE extends Storage>
-				extends UtilsFacadeBean
+				extends JeeslFacadeBean
 				implements Serializable,
 						OtrVideoResolverFacade<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>
 {	

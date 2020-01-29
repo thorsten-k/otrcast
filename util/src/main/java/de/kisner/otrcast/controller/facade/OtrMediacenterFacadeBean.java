@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
+import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
@@ -25,7 +26,6 @@ import de.kisner.otrcast.interfaces.model.Storage;
 import de.kisner.otrcast.interfaces.web.UrlGenerator;
 import de.kisner.otrcast.model.xml.rss.Channel;
 import de.kisner.otrcast.model.xml.rss.Rss;
-import net.sf.ahtutils.controller.facade.UtilsFacadeBean;
 
 public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 									SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
@@ -33,7 +33,7 @@ public class OtrMediacenterFacadeBean<MOVIE extends Movie<IMAGE,STORAGE>,
 									EPISODE extends Episode<SEASON>,
 									IMAGE extends Image,
 									STORAGE extends Storage>
-				extends UtilsFacadeBean
+				extends JeeslFacadeBean
 				implements Serializable,
 							OtrMediacenterFacade<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>
 {	
