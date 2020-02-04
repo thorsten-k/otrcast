@@ -1,5 +1,6 @@
 package de.kisner.otrcast.web;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,6 @@ import de.kisner.otrcast.model.xml.video.tv.Movies;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.web.myapifilms.MafMovieQuery;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 

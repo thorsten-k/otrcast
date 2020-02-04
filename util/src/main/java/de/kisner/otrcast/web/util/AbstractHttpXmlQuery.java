@@ -5,8 +5,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -18,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -8,9 +8,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
+
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.video.Videos;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 @Path("/rest/dav")
 public interface OtrDavRest

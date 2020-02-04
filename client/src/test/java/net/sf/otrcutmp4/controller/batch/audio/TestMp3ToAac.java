@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,6 @@ import de.kisner.otrcast.controller.batch.audio.Mp3ToAac;
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 

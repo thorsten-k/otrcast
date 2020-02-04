@@ -8,10 +8,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
+
 import de.kisner.otrcast.bl.OtrCutBlRest;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.video.Videos;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 @Path("/rest/cut")
 public interface OtrCutRest extends OtrCutBlRest

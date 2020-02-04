@@ -7,6 +7,7 @@ import java.net.URL;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,6 @@ import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
 import de.kisner.otrcast.factory.xml.series.XmlMovieFactory;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.model.xml.video.tv.Movies;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 public class OmdbMovieQuery extends AbstractOmdbQuery
 {

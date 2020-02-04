@@ -1,7 +1,6 @@
 package de.kisner.otrcast.factory.xml.otr;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,8 +1,7 @@
 package de.kisner.otrcast.web.imdb;
 
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
-
 import org.jdom2.Document;
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

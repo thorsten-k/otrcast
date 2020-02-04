@@ -2,6 +2,7 @@ package de.kisner.otrcast.controller.batch;
 
 import java.io.File;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,6 @@ import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.shell.cmd.ShellCmdRm;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;

@@ -1,8 +1,9 @@
 package de.kisner.otrcast.interfaces.web;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
+
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.video.tv.Movies;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 
 public interface WebMovieFinder
 {

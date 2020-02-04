@@ -8,6 +8,7 @@ import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,6 @@ import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.video.tv.Category;
 import de.kisner.otrcast.model.xml.video.tv.Series;
 import de.kisner.otrcast.util.OtrBootstrap;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.xml.JaxbUtil;
 

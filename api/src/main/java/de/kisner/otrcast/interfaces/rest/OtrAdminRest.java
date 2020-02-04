@@ -6,12 +6,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
+
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.video.tv.Category;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Series;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import net.sf.ahtutils.xml.access.Access;
 
 @Path("/rest/admin")

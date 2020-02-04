@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,6 @@ import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
 import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.model.xml.video.tv.Series;
-import net.sf.ahtutils.exception.processing.UtilsProcessingException;
 import retrofit2.Response;
 
 public class TvDbJsonQuery
