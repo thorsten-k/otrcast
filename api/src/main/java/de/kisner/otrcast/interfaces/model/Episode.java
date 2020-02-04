@@ -2,9 +2,9 @@ package de.kisner.otrcast.interfaces.model;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.with.number.EjbWithNr;
 
-import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 

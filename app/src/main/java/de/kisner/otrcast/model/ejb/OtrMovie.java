@@ -10,8 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
+
 import de.kisner.otrcast.interfaces.model.Movie;
-import net.sf.ahtutils.interfaces.model.crud.EjbPersistable;
 
 @Entity
 public class OtrMovie implements Serializable,EjbPersistable,Movie<OtrImage,OtrStorage>

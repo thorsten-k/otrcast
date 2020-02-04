@@ -9,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
+
 import de.kisner.otrcast.interfaces.model.Storage;
-import net.sf.ahtutils.interfaces.model.crud.EjbRemoveable;
 
 @Entity
 public class OtrStorage implements Serializable,Storage,
