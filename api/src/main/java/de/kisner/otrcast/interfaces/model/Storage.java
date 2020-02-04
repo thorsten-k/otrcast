@@ -1,7 +1,8 @@
 package de.kisner.otrcast.interfaces.model;
 
-import net.sf.ahtutils.interfaces.model.with.EjbWithHash;
-import net.sf.ahtutils.interfaces.model.with.EjbWithSize;
+import org.jeesl.interfaces.model.with.number.EjbWithSize;
+import org.jeesl.interfaces.model.with.text.EjbWithHash;
+
 import net.sf.ahtutils.model.interfaces.with.EjbWithId;
 import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 import net.sf.ahtutils.model.interfaces.with.EjbWithRecord;
