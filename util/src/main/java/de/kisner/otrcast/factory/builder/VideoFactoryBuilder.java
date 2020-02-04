@@ -1,6 +1,8 @@
 package de.kisner.otrcast.factory.builder;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
+import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,10 +13,8 @@ import de.kisner.otrcast.interfaces.model.Movie;
 import de.kisner.otrcast.interfaces.model.Season;
 import de.kisner.otrcast.interfaces.model.Series;
 import de.kisner.otrcast.interfaces.model.Storage;
-import net.sf.ahtutils.interfaces.model.status.UtilsDescription;
-import net.sf.ahtutils.interfaces.model.status.UtilsLang;
 
-public class VideoFactoryBuilder<L extends UtilsLang, D extends UtilsDescription,
+public class VideoFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 									MOVIE extends Movie<COVER,STORAGE>,
 									SERIES extends Series<SERIES,SEASON,EPISODE,COVER>,
 									SEASON extends Season<SERIES,SEASON,EPISODE,COVER,STORAGE>,
