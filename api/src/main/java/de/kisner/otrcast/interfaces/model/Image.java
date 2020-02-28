@@ -1,8 +1,7 @@
 package de.kisner.otrcast.interfaces.model;
 
-import org.jeesl.interfaces.model.with.text.EjbWithFileType;
-
-import net.sf.ahtutils.model.interfaces.with.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithFileType;
 
 public interface Image extends EjbWithId,EjbWithFileType
 {

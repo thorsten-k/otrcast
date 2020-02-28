@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
-import org.jeesl.interfaces.model.with.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
 import de.kisner.otrcast.interfaces.model.with.EjbWithImage;
-import net.sf.ahtutils.model.interfaces.with.EjbWithId;
-import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
 public interface Series<SERIES extends Series<SERIES,SEASON,EPISODE,IMAGE>,
 						SEASON extends Season<SERIES,SEASON,EPISODE,IMAGE,?>,

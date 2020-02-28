@@ -1,7 +1,7 @@
 package de.kisner.otrcast.interfaces.model;
 
-import net.sf.ahtutils.model.interfaces.with.EjbWithId;
-import net.sf.ahtutils.model.interfaces.with.EjbWithName;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
 public interface Movie<IMAGE extends Image,STORAGE extends Storage>
 					extends EjbWithId,EjbWithName

@@ -16,10 +16,10 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
 import de.kisner.otrcast.interfaces.model.Series;
-import net.sf.ahtutils.model.interfaces.with.EjbWithId;
-import net.sf.ahtutils.model.interfaces.with.EjbWithName;
 
 @Entity
 public class OtrSeries implements Serializable,EjbWithId,EjbPersistable,EjbWithName,
