@@ -71,10 +71,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
--->		<dependency>
+		<dependency>
 	  		<groupId>com.googlecode.mp4parser</groupId> 
-	  		<artifactId>isoparser</artifactId> 
+	  		<artifactId>isoparser</artifactId>
 		</dependency>
+		-->
 		
 		<dependency>
 			<groupId>org.jeesl</groupId>
