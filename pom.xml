@@ -29,8 +29,6 @@
     	<maven.ignore.versions>file://${basedir}/../doc/src/main/resources/otrcast/maven/ignore-versions.xml</maven.ignore.versions>
     	
     	<version.jetty>8.1.17.v20150415</version.jetty>
-    	
-    	<jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
 
     	<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
     	<maven-assembly-plugin.version>2.2.1</maven-assembly-plugin.version>
