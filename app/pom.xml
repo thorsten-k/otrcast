@@ -44,6 +44,11 @@
   	   		<type>jar</type>
   	   		<scope>compile</scope>
    	  	</dependency>
+   	  	<dependency>
+        	<groupId>com.googlecode.lanterna</groupId>
+        	<artifactId>lanterna</artifactId>
+        	<version>3.0.0</version>
+		</dependency>
 	  	
 		<!-- Commons -->
  		<dependency>
@@ -161,7 +166,7 @@
 			<version>3.1.0</version>
 		</dependency>	
 
-	<!-- Resteasy -->
+		<!-- Resteasy -->
 		<dependency>
 		    <groupId>org.jboss.resteasy</groupId>
 		    <artifactId>resteasy-jaxrs</artifactId>
@@ -195,11 +200,11 @@
         	<version>4.3.0.Beta3</version>
         	<type>jar</type>
         </dependency>
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>4.1.0.Final</version>
-</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.1.0.Final</version>
+		</dependency>
 
 		<!-- Templates -->
 		<dependency>
@@ -232,12 +237,6 @@
       		<type>jar</type>
       		<scope>test</scope>
   		</dependency>
-  		
-		<dependency>
-        <groupId>com.googlecode.lanterna</groupId>
-        <artifactId>lanterna</artifactId>
-        <version>3.0.0</version>
-		</dependency>
 	</dependencies>
   
 	<build>
