@@ -25,7 +25,7 @@ public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 		
 	private XmlTitleFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfTitle;
 	private XmlGuidFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfGuid;
-	private XmlEnclosureFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfEnclosure;
+//	private XmlEnclosureFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfEnclosure;
 	private XmlImageFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE> xfImage;
 	private final XmlDescriptionFactory<EPISODE> xfDescription;
 	
@@ -33,7 +33,7 @@ public class XmlItemFactory<MOVIE extends Movie<IMAGE,STORAGE>,
 	{
 		xfTitle = new XmlTitleFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>();
 		xfGuid = new XmlGuidFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>();
-		xfEnclosure = new XmlEnclosureFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>(urlGenerator);
+//		xfEnclosure = new XmlEnclosureFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>(urlGenerator);
 		xfImage = new XmlImageFactory<MOVIE,SERIES,SEASON,EPISODE,IMAGE,STORAGE>(urlGenerator);
 		xfDescription = new XmlDescriptionFactory<EPISODE>();
 	}
