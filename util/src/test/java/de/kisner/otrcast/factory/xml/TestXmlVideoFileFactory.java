@@ -2,6 +2,7 @@ package de.kisner.otrcast.factory.xml;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -36,7 +37,7 @@ public class TestXmlVideoFileFactory extends AbstractOtrcastTest
     @Test public void test() throws FileNotFoundException, IOException
     {
     	MultiResourceLoader mrl = new MultiResourceLoader();
-    	List<String> keys = IOUtils.readLines(mrl.searchIs("data/txt/otrkeys.txt"));
+    	List<String> keys = IOUtils.readLines(mrl.searchIs("data/txt/otrkeys.txt"),Charset.defaultCharset());
     	for(String key : keys)
     	{
     		try
