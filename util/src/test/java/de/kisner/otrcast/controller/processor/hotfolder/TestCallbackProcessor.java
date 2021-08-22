@@ -53,6 +53,7 @@ public class TestCallbackProcessor extends AbstractOtrcastTest implements Callba
 		File f = new File(fHot,"test");f.createNewFile();
 		Thread.sleep(2000);
 		Assert.assertEquals(f.getAbsolutePath(), fCallback.getAbsolutePath());
+		context.close();
 	}
 	
 	@Test @Ignore
