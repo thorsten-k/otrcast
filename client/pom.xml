@@ -140,16 +140,16 @@
 		</dependency>
      	
      	<!-- JSF -->
-		<dependency>
+<!--		<dependency>
         	<groupId>org.jeesl</groupId>
         	<artifactId>jeesl-jsf</artifactId>
         </dependency>
-		<dependency>
+  	<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.12</version>
 		</dependency>
-		<dependency>
+	<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.12</version>
@@ -164,7 +164,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>	
-
+-->	
 		<!-- Resteasy -->
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
