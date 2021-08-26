@@ -58,6 +58,7 @@ public class AbstractHttpXmlQuery
         HttpClient httpclient = new DefaultHttpClient();
         try
         {
+        	
             try
             {
                 result = httpclient.execute(get);
@@ -71,6 +72,7 @@ public class AbstractHttpXmlQuery
         }
         finally
         {
+        	httpclient = null;
         }
 
         Document doc = null;

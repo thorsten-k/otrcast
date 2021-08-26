@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
@@ -21,7 +20,8 @@ public class RedirectDownloader
 {
 	final static Logger logger = LoggerFactory.getLogger(RedirectDownloader.class);
 	
-	public File download(URL url, File dstFile) {
+	public File download(URL url, File dstFile)
+	{
 		CloseableHttpClient httpclient = HttpClients.custom()
 				.setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods 
 				.build();
@@ -31,8 +31,10 @@ public class RedirectDownloader
 			return downloaded;
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
-		} finally {
-			IOUtils.closeQuietly(httpclient);
+		}
+		finally
+		{
+			httpclient = null;
 		}
 	}
 	

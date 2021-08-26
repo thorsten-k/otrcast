@@ -1,19 +1,25 @@
 package de.kisner.otrcast.controller.tag.util;
 
-import com.coremedia.iso.IsoFile;
-import com.coremedia.iso.boxes.*;
-import com.googlecode.mp4parser.util.Path;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.Box;
+import com.coremedia.iso.boxes.ChunkOffsetBox;
+import com.coremedia.iso.boxes.MetaBox;
+import com.coremedia.iso.boxes.MovieBox;
+import com.coremedia.iso.boxes.StaticChunkOffsetBox;
+import com.coremedia.iso.boxes.UserDataBox;
+import com.coremedia.iso.boxes.XmlBox;
+import com.googlecode.mp4parser.util.Path;
 
 /**
  * taken from https://mp4parser.googlecode.com/svn/trunk/examples/src/main/java/com/googlecode/mp4parser/stuff/ChangeMetaData.java
@@ -157,8 +163,8 @@ public class Mp4MetadataBalancer
         }
         finally
         {
-            IOUtils.closeQuietly(tempIsoFile);
-            IOUtils.closeQuietly(videoFileOutputStream);
+        	tempIsoFile.close();
+        	videoFileOutputStream.close();
             FileUtils.deleteQuietly(tempFile);
         }
     }
