@@ -156,7 +156,7 @@ public class OtrConfig
 	private void initUrlList()
 	{
 		mapUrl = new Hashtable<Url,String>();
-		mapUrl.put(Url.OTR, ConfigKey.netRestUrl);
+		mapUrl.put(Url.OTR, ConfigKey.netRestUrlLocal);
 	}
 	
 	private void initCmdList()
