@@ -20,7 +20,7 @@ public class CliSimpleRest
 
 	public CliSimpleRest(Configuration config)
 	{		
-		String restUrl = config.getString(ConfigKey.netRestUrl);
+		String restUrl = config.getString(ConfigKey.netRestUrlProduction);
 		logger.info("Connection to "+restUrl);
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();

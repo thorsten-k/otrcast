@@ -8,6 +8,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
+import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,6 @@ import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.view.client.ClientViewConsole;
 import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
 import de.kisner.otrcast.view.web.WebCutlistChooserView;
-import net.sf.ahtutils.util.cli.UtilsCliOption;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrCastClient
@@ -50,14 +50,13 @@ public class OtrCastClient
 	
 	public static final String exeName = "OtrCastClient-<version>.jar";
 
-	
-	private UtilsCliOption uOption;
+	private JeeslCliOptionHandler uOption;
 	private OtrConfig otrConfig;
 	
 	private Option oTagLib,oScan,oProfile,oCover,oMp4,oWeb;
 	private Option oTagMp4,oTagFile,oTagProcessed;
 	
-	public OtrCastClient(UtilsCliOption uOption)
+	public OtrCastClient(JeeslCliOptionHandler uOption)
 	{
 		this.uOption=uOption;
 		otrConfig = new OtrConfig();
@@ -270,7 +269,7 @@ public class OtrCastClient
 	{
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
-		UtilsCliOption uOption = new UtilsCliOption(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
+		JeeslCliOptionHandler uOption = new JeeslCliOptionHandler(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
 		uOption.setLog4jPaths("otrcast-app/config");
 		
 		OtrCastClient otrMc = new OtrCastClient(uOption);

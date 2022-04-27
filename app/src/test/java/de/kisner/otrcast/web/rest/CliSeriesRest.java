@@ -39,7 +39,7 @@ public class CliSeriesRest
 	public CliSeriesRest(Configuration config)
 	{	
 		this.config=config;
-		String url = config.getString(ConfigKey.netRestUrl);
+		String url = config.getString(ConfigKey.netRestUrlProduction);
 		logger.info("Connection to "+url);
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();

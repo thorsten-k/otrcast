@@ -131,12 +131,12 @@
 				<plugin>
 					<groupId>net.sf.exlp</groupId>
 					<artifactId>exlp-maven</artifactId>
-					<version>0.1.11</version>
+					<version>0.1.15-SNAPSHOT</version>
 				</plugin>
 				<plugin>
 			        <groupId>org.jeesl</groupId>
 			        <artifactId>jeesl-maven</artifactId>
-			        <version>0.2.6-SNAPSHOT</version>
+			        <version>0.3.0-SNAPSHOT</version>
 			    </plugin>
 				<plugin>
 			        <groupId>org.codehaus.mojo</groupId>

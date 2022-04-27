@@ -45,7 +45,7 @@ public class CliPodcastRest
     public CliPodcastRest(Configuration config)
 	{		
     	this.config=config;
-		String restUrl = config.getString(ConfigKey.netRestUrl);
+		String restUrl = config.getString(ConfigKey.netRestUrlProduction);
 		logger.info("Connection to "+restUrl);
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();

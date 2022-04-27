@@ -73,6 +73,18 @@
       		<type>jar</type>
       		<scope>compile</scope>
 		</dependency>
+		<dependency>
+	 		<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
 		
 		<!-- HTTP -->
 		<dependency>
