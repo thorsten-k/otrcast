@@ -84,7 +84,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		rpf = new RelativePathFactory(baseDirectory);
 		logger.info("Scanning "+baseDirectory);
 		
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
 		
 		logger.info(StringUtil.stars());
 		results = new ArrayList<File>();
