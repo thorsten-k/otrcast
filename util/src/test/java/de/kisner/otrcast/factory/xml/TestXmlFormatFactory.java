@@ -1,17 +1,14 @@
 package de.kisner.otrcast.factory.xml;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.xml.XmlFormatFactory;
-import de.kisner.otrcast.factory.xml.XmlQualityFactory;
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
+import net.sf.exlp.exception.ExlpConfigurationException;
 
 public class TestXmlFormatFactory extends AbstractOtrcastTest
 {

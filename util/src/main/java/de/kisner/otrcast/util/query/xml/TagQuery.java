@@ -2,7 +2,6 @@ package de.kisner.otrcast.util.query.xml;
 
 import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.video.tv.Tag;
-import de.kisner.otrcast.util.query.xml.XmlTvQuery;
 
 public class TagQuery
 {

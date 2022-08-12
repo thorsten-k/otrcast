@@ -5,7 +5,6 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.interfaces.view.client.ViewClient;
 import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.interfaces.view.client.ViewSrcDirProcessor;
@@ -22,9 +21,6 @@ public class ClientViewConsole implements ViewClient
 	private final ViewSrcDirProcessor viewSrsDir;
 	private final ViewCutlistChooser viewCutlistChooser;
 	
-
-
-
 	public ClientViewConsole()
 	{
 		viewSrsDir = new ConsoleViewSrcDirProcessor();

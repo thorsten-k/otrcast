@@ -1,18 +1,16 @@
 package de.kisner.otrcast.factory.xml.otr;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
-import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestXmlOtrIdFactory extends AbstractOtrcastTest
 {

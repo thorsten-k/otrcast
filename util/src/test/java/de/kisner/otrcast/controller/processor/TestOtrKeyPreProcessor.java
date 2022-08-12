@@ -1,7 +1,5 @@
 package de.kisner.otrcast.controller.processor;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
-import de.kisner.otrcast.controller.processor.OtrKeyPreProcessor;
 import de.kisner.otrcast.factory.xml.TestXmlVideoFileFactory;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
+import net.sf.exlp.exception.ExlpConfigurationException;
 
 public class TestOtrKeyPreProcessor extends AbstractOtrcastTest
 {

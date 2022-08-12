@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.processor.hotfolder.CallbackProcessor;
 import de.kisner.otrcast.interfaces.processor.CallbackInterface;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;

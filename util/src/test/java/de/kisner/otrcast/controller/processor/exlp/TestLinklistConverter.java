@@ -3,10 +3,6 @@ package de.kisner.otrcast.controller.processor.exlp;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.configuration.Configuration;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -14,11 +10,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.processor.exlp.LinklistConverter;
 import de.kisner.otrcast.controller.processor.exlp.parser.LinkListParser;
 import de.kisner.otrcast.model.xml.otr.Linklist;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestLinklistConverter extends AbstractOtrcastTest
 {

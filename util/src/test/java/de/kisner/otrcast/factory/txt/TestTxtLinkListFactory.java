@@ -3,8 +3,6 @@ package de.kisner.otrcast.factory.txt;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
-import de.kisner.otrcast.factory.txt.TxtLinkListFactory;
 import de.kisner.otrcast.factory.xml.XmlQualityFactory;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.otr.Format;
@@ -22,6 +19,7 @@ import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.otr.Recording;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestTxtLinkListFactory extends AbstractOtrcastTest
 {

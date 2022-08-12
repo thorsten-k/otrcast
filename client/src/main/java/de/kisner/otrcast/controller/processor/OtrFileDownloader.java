@@ -11,15 +11,13 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
-import de.kisner.otrcast.controller.processor.OtrKeyPreProcessor;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrFileDownloader
 {
