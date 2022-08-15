@@ -36,7 +36,7 @@ public class TxtFileNameFactoy
 		try
 		{
 			logger.debug("initializing template with: "+templateStr);
-			t = new Template("otr", new StringReader(templateStr), new Configuration());
+			t = new Template("otr", new StringReader(templateStr), new Configuration(Configuration.getVersion()));
 		}
 		catch (IOException e) {e.printStackTrace();}
 	}
