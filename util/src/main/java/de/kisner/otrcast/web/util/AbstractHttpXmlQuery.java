@@ -38,13 +38,7 @@ public class AbstractHttpXmlQuery
 		this.httpContext=httpContext;
         debugPlainResponses=false;
 	}
-    
-    @Deprecated
-	public AbstractHttpXmlQuery(final String url)
-	{
-		this.url=url;
-        debugPlainResponses=false;
-	}
+  
 
 	protected Document fetch(URL queryUrl) throws UtilsProcessingException{return fetch(queryUrl.toExternalForm());}
     protected Document fetch(String queryUrl) throws UtilsProcessingException

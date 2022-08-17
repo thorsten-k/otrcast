@@ -12,9 +12,12 @@ public class CutlistChooserProcessing
 {
 	final static Logger logger = LoggerFactory.getLogger(CutlistChooserProcessing.class);
 	
+	@SuppressWarnings("unused")
 	private boolean showAuthor, showRanking, showComment, showFile;
 
+	@SuppressWarnings("unused")
 	private ViewCutlistChooser view;
+	@SuppressWarnings("unused")
 	private CutlistChooser controller;
 	
 	public CutlistChooserProcessing(ViewCutlistChooser view,CutlistChooser controller)

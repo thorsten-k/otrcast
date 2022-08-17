@@ -7,8 +7,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JDomUtil;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jeesl.exception.processing.UtilsProcessingException;
@@ -43,7 +41,7 @@ public class ImdbMovieQuery extends AbstractImdbQuery implements WebMovieFinder
 		try
 		{
 			Document doc = this.fetch(buildQuery(title));
-			JDomUtil.debug(doc);
+//			JDomUtil.debug(doc);
 			System.exit(-1);
 			movies.getMovie().addAll(parseResponse(doc));
 		}
