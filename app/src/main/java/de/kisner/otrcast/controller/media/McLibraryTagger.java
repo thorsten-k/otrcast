@@ -19,7 +19,6 @@ import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.controller.tag.util.Mp4BoxManager;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
-import de.kisner.otrcast.factory.io.IoFileFactory;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.xml.video.XmlVideosFactory;
 import de.kisner.otrcast.interfaces.controller.CoverManager;
@@ -49,7 +48,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	
 	private Mp4TagReader tagReader;
 	private SeriesTagWriter tagWriter;
-	private IoFileFactory iofTmp,iofBackup;
+//	private IoFileFactory iofTmp,iofBackup;
 	
 	private List<File> results;
 	
@@ -62,12 +61,12 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		tagWriter = new SeriesTagWriter();
 		
 		logger.info("Tmp Directory: "+fTmp.getAbsolutePath());
-		iofTmp = new IoFileFactory(fTmp);
+//		iofTmp = new IoFileFactory(fTmp);
 		
 		if(fBackup!=null)
 		{
 			logger.info("Backup Directory: "+fBackup.getAbsolutePath());
-			iofBackup = new IoFileFactory(fBackup);
+//			iofBackup = new IoFileFactory(fBackup);
 		}
 		else
 		{
