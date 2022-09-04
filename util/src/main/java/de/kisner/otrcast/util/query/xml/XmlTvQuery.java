@@ -151,7 +151,7 @@ public class XmlTvQuery
 		xml.setName("");
 		xml.setHash("");
 		xml.setSize(0);
-		xml.setLastModified(DateUtil.getXmlGc4D(new Date()));
+		xml.setLastModified(DateUtil.toXmlGc(new Date()));
 		return xml;
 	}
 	

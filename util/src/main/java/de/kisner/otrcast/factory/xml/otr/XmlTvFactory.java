@@ -63,7 +63,7 @@ public class XmlTvFactory
 		dt.setSecondOfMinute(0);
 		dt.setMillisOfSecond(0);
 		
-		return DateUtil.getXmlGc4D(dt.toDate());
+		return DateUtil.toXmlGc(dt.toDate());
 	}
 	
 	private static String buildName(String name)

@@ -52,7 +52,7 @@ public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAht
 	
 	protected static XMLGregorianCalendar getDefaultXmlDate()
 	{
-		return DateUtil.getXmlGc4D(getDefaultDate());
+		return DateUtil.toXmlGc(getDefaultDate());
 	}
 	
 	protected static Date getDefaultDate()
