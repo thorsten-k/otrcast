@@ -60,22 +60,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<!--	Moved to util
-		<dependency>
-			<groupId>net.sf.plist</groupId>
-			<artifactId>propertylist</artifactId>
-			<type>jar</type>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-		<dependency>
-	  		<groupId>com.googlecode.mp4parser</groupId> 
-	  		<artifactId>isoparser</artifactId>
-		</dependency>
-		-->
 		
 		<dependency>
 			<groupId>org.jeesl</groupId>

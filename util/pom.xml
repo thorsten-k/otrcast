@@ -115,10 +115,12 @@
 			<type>jar</type>
 			<version>1.0.1</version>
 		</dependency>
+		
+		<!--2022-09-04 tk Preparing removal
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
+			<groupId>jola-time</groupId>
+			<artifactId>jola-time</artifactId>
+		</dependency> -->
 		
 		<!-- MP4 -->
 		<dependency>
