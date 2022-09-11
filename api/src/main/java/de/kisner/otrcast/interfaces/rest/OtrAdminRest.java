@@ -7,13 +7,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jeesl.exception.processing.UtilsProcessingException;
+import org.jeesl.model.xml.system.security.Security;
 
 import de.kisner.otrcast.model.xml.otr.Format;
 import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.video.tv.Category;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Series;
-import net.sf.ahtutils.xml.access.Access;
 
 @Path("/rest/admin")
 public interface OtrAdminRest
@@ -46,5 +46,5 @@ public interface OtrAdminRest
 	@POST @Path("security")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
-	String applySecurity(Access views, Access roles);
+	String applySecurity(Security views, Security roles);
 }
