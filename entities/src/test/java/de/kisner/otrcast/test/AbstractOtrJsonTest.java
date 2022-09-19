@@ -1,5 +1,6 @@
 package de.kisner.otrcast.test;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -42,7 +43,6 @@ public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAht
 	public static void initXml()
 	{
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
-		DateUtil.ignoreTimeZone=true;
 	}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
@@ -57,6 +57,7 @@ public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAht
 	
 	protected static Date getDefaultDate()
 	{
-		return DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11);
+		LocalDateTime ldt = LocalDateTime.of(2011,11,11,11,11,11);
+		return DateUtil.toDate(ldt);
 	}
 }

@@ -2,6 +2,7 @@ package net.sf.otrcutmp4.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import net.sf.exlp.util.DateUtil;
@@ -69,6 +70,7 @@ public abstract class AbstractClientTest
 	
 	protected static Date getDefaultDate()
 	{
-		return DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11);
+		LocalDateTime ldt = LocalDateTime.of(2011,11,11,11,11,11);
+		return DateUtil.toDate(ldt);
 	}
 }

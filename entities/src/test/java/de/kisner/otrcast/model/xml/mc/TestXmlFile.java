@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.test.OtrXmlTestBootstrap;
-import net.sf.exlp.util.DateUtil;
 
 public class TestXmlFile extends AbstractXmlMcTest<File>
 {
@@ -27,8 +26,7 @@ public class TestXmlFile extends AbstractXmlMcTest<File>
 	
 	public static void main(String[] args)
     {
-		OtrXmlTestBootstrap.init();
-		DateUtil.ignoreTimeZone=true;	
+		OtrXmlTestBootstrap.init();	
 		TestXmlFile test = new TestXmlFile();
 		test.saveReferenceXml();
     }

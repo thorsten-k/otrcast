@@ -1,18 +1,17 @@
 package de.kisner.otrcast.factory.xml.otr;
 
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import net.sf.exlp.util.DateUtil;
-
-import org.joda.time.MutableDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.model.xml.otr.Tv;
+import net.sf.exlp.util.DateUtil;
 
 public class XmlTvFactory
 {	
@@ -52,18 +51,8 @@ public class XmlTvFactory
 	
 	private static XMLGregorianCalendar buildAirTime(Matcher m)
 	{
-		MutableDateTime dt = new MutableDateTime();
-		
-		dt.setYear(2000+new Integer(m.group(2)));
-		dt.setMonthOfYear(new Integer(m.group(3)));
-		dt.setDayOfMonth(new Integer(m.group(4)));
-				
-		dt.setHourOfDay(new Integer(m.group(5)));
-		dt.setMinuteOfHour(new Integer(m.group(6)));
-		dt.setSecondOfMinute(0);
-		dt.setMillisOfSecond(0);
-		
-		return DateUtil.toXmlGc(dt.toDate());
+		LocalDateTime ldt = DateUtil.ldtOf(""+(2000+new Integer(m.group(2))), m.group(3), m.group(4), m.group(5), m.group(6), "0");
+		return DateUtil.toXmlGc(ldt);
 	}
 	
 	private static String buildName(String name)

@@ -3,11 +3,11 @@ package de.kisner.otrcast.factory.txt;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +19,7 @@ import de.kisner.otrcast.model.xml.video.tv.Episode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import net.sf.exlp.util.DateUtil;
 
 public class TxtFileNameFactoy
 {
@@ -66,15 +67,16 @@ public class TxtFileNameFactoy
 	
 	public static String build(String name, String channel, int duration, Date airTime)
 	{
-		DateTime dt = new DateTime(airTime);
+		LocalDateTime ldt = DateUtil.toLocalDateTime(airTime);
+//		DateTime dt = new DateTime(airTime);
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(name).append("_");
-		sb.append(dt.getYearOfCentury()).append(".");
-		sb.append(tZ(dt.getMonthOfYear())).append(".");
-		sb.append(tZ(dt.getDayOfMonth()));
+		sb.append(ldt.getYear()).append(".");
+		sb.append(tZ(ldt.getMonthValue())).append(".");
+		sb.append(tZ(ldt.getDayOfMonth()));
 		sb.append("_");
-		sb.append(tZ(dt.getHourOfDay())).append("-").append(tZ(dt.getMinuteOfHour()));
+		sb.append(tZ(ldt.getHour())).append("-").append(tZ(ldt.getMinute()));
 		sb.append("_");
 		sb.append(channel).append("_").append(duration).append("_");
 		sb.append("TVOON_DE.mpg.HQ.avi");

@@ -116,10 +116,10 @@
 			<version>1.0.1</version>
 		</dependency>
 		
-		<!--2022-09-04 tk Preparing removal
+		<!--2022-09-04 tk Preparing removal 
 		<dependency>
-			<groupId>jola-time</groupId>
-			<artifactId>jola-time</artifactId>
+			<groupId>jda-time</groupId>
+			<artifactId>jda-time</artifactId>
 		</dependency> -->
 		
 		<!-- MP4 -->
