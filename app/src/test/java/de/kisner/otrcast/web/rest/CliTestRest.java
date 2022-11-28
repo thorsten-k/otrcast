@@ -5,7 +5,7 @@ import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.system.JeeslTestRest;
+import org.jeesl.api.rest.rs.system.JeeslTestRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
