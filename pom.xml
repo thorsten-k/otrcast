@@ -15,7 +15,7 @@
 	<modules>
 		<module>api</module>
 		<module>app</module>
-		<module>dav</module>
+<!--		<module>dav</module> -->
 		<module>doc</module>
 		<module>client</module>
 		<module>entities</module>
