@@ -27,7 +27,7 @@ public class CliOtrTestRest
 	
 	public void test()
 	{
-		logger.debug(rest.getTime());
+		logger.debug(rest.dateTimePublic());
 	}
 	
 	public static void main(String[] args) throws ExlpConfigurationException

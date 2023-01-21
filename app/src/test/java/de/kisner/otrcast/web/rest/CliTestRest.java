@@ -25,14 +25,14 @@ public class CliTestRest implements JeeslTestRest
         rest = restTarget.proxy(JeeslTestRest.class);
 	}
 	
-	@Override public String getTime() {return rest.getTime();}
-	@Override public String getSecure() {return rest.getSecure();}
+	@Override public String dateTimePublic() {return rest.dateTimePublic();}
+	@Override public String dateTimeRestricted() {return rest.dateTimeRestricted();}
 	
 	public static void main(String[] args) throws Exception
 	{
 		Configuration config = OtrCastBootstrap.init();	
 		CliTestRest rest = new CliTestRest(config);
-		logger.info(rest.getTime());
-		logger.info(rest.getSecure());
+		logger.info(rest.dateTimePublic());
+		logger.info(rest.dateTimeRestricted());
 	}
 }
