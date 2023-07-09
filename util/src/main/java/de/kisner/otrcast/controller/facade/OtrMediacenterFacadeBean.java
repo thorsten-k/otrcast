@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
