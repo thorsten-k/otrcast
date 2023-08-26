@@ -17,6 +17,7 @@ import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OtrCastBootstrap
 {
@@ -43,9 +44,8 @@ public class OtrCastBootstrap
 		initLogger();
 		try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath();
-			ConfigLoader.add(cfn);
-			logger.info("Using additional config in: "+cfn);
+			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.appCode).jaxb(JaxbUtil.instance());
+			ConfigLoader.add(ccp.toFile(OtrBootstrap.confCode));
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
 		ConfigLoader.add(configFile);

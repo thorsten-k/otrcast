@@ -26,7 +26,8 @@ public class OtrClientTestBootstrap
 			loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
-		ConfigLoader.add(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
+		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.appCode).jaxb(JaxbUtil.instance());
+		ConfigLoader.add(ccp.toFile(OtrBootstrap.confCode));
 		ConfigLoader.add(OtrCastBootstrap.xmlConfig);
 		Configuration config = ConfigLoader.init();
 		return config;

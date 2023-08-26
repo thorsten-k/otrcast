@@ -55,8 +55,9 @@ public class CliTestRun
 		this.config=config;
 		view = new ConsoleViewSrcDirProcessor();
 		
+		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.AppCode.otr).jaxb(JaxbUtil.instance());
 		otrConfig = new OtrConfig();
-		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
+		otrConfig.readConfig(ccp.toFile(OtrBootstrap.confCode).getAbsolutePath());
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication(otrConfig.getCredential(Credential.EMAIL,""),"test"));
@@ -135,8 +136,9 @@ public class CliTestRun
 	
 	public void batch() throws OtrConfigurationException, ExlpConfigurationException, FileNotFoundException, OtrInternalErrorException, UtilsProcessingException
 	{
+		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.AppCode.otr).jaxb(JaxbUtil.instance());
 		OtrConfig otrConfig = new OtrConfig();
-		otrConfig.readConfig(ExlpCentralConfigPointer.getFile(OtrBootstrap.appCode,OtrBootstrap.confCode).getAbsolutePath());
+		otrConfig.readConfig(ccp.toFile(OtrBootstrap.confCode).getAbsolutePath());
 		
 		Videos videos = JaxbUtil.loadJAXB(config.getString(TestPropertyKeys.testCutXmlCutLoaded),Videos.class);
 		BatchGenerator batch = new BatchGenerator(otrConfig,OtrCastInterface.Profile.P0,false,false);
