@@ -31,6 +31,7 @@ public class CliTestRest implements JeeslTestRest
 	@Override public String dateTimeRestricted() {return rest.dateTimeRestricted();}
 	@Override public JsonSsiUpdate jsonUpdate() {return rest.jsonUpdate();}
 	@Override public JsonSystemJob jsonJob() {return rest.jsonJob();}
+	@Override public String jsonMirror(String content) {return rest.jsonMirror(content);}
 	
 	public static void main(String[] args) throws Exception
 	{
