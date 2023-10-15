@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.exception.processing.UtilsProcessingException;
-import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public class OtrRestSeedData
 				
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("user","pwd"));
-		ResteasyWebTarget restTarget = client.target(RestUrlDelay.getUrl(config));
+		ResteasyWebTarget restTarget = client.target(DelayedUrlConfig.resolve(config));
 		rest = restTarget.proxy(OtrAdminRest.class);
 	}
 	

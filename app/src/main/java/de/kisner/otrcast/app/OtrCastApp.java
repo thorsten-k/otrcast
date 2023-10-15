@@ -4,10 +4,10 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.util.web.RestUrlDelay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class OtrCastApp
 		if(!mapRest.containsKey(c))
 		{
 			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget target = client.target(RestUrlDelay.getUrl(config)); 
+			ResteasyWebTarget target = client.target(DelayedUrlConfig.resolve(config)); 
 			mapRest.put(c,target.proxy(c));
 		}
 		
