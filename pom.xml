@@ -89,7 +89,7 @@
 			<dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>
-				<version>0.3.0-SNAPSHOT</version>
+				<version>0.3.2-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -136,7 +136,7 @@
 				<plugin>
 			        <groupId>org.jeesl</groupId>
 			        <artifactId>jeesl-maven</artifactId>
-			        <version>0.3.0-SNAPSHOT</version>
+			        <version>0.3.2-SNAPSHOT</version>
 			    </plugin>
 				<plugin>
 			        <groupId>org.codehaus.mojo</groupId>

@@ -1,21 +1,21 @@
 package de.kisner.otrcast.util;
 
+import org.apache.commons.configuration.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.configuration.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
-
 public class OtrBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrBootstrap.class);
 	
+	public enum AppCode {otr};
 	public static final String appCode="otr";
 	public static final String confCode="cast.client";
 	
@@ -33,7 +33,9 @@ public class OtrBootstrap
 			
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
-		ConfigLoader.add(ExlpCentralConfigPointer.getFile(appCode,confCode).getAbsolutePath());
+		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.AppCode.otr).jaxb(JaxbUtil.instance());
+		
+		ConfigLoader.add(ccp.toFile(confCode));
 		Configuration config = ConfigLoader.init();
 		return config;
 	}
