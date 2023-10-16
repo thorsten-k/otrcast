@@ -75,8 +75,8 @@ public class Mp4FileRenamer extends DirectoryWalker<File>
 		}
 		finally
 		{
-			IOUtils.closeQuietly(in);
-			IOUtils.closeQuietly(out);
+			in.close();
+			out.close();
 		}
 	}
 	

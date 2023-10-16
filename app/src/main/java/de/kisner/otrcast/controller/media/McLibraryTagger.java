@@ -142,6 +142,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void handle(File file)
 	{
 		logger.trace("File :"+file);

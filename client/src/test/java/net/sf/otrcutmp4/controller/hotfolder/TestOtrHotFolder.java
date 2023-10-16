@@ -12,21 +12,26 @@ public class TestOtrHotFolder
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestOtrHotFolder.class);
 	
-	
 	public static void main(String[] args) throws Exception
 	{
 		CamelContext context = new DefaultCamelContext();
-		context.addRoutes(new RouteBuilder() {
-		    public void configure() {
-		        from("file://src/test/resources/hotfolder").process(new TagFromFilenameProcessor()).to("file://target");
-		    }
-		});
-		context.start();
-		while(true)
+		try
 		{
-			
-		}
+			context.addRoutes(new RouteBuilder()
+			{
+			    public void configure() {
+			        from("file://src/test/resources/hotfolder").process(new TagFromFilenameProcessor()).to("file://target");
+			    }
+			});
+			context.start();
+			while(true)
+			{
+				
+			}
+	    }
+		finally
+		{
+			context.close();
+	    }
 	}
-	
-	
 }
