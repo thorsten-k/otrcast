@@ -75,7 +75,7 @@ public class OtrCastClient
 		
 		uOption.handleHelp(cmd);
 		uOption.setLog4jPaths("otrcast/config");
-		uOption.handleLogger(cmd);
+		uOption.handleLog4j(cmd);
 
         otrConfig.readConfig(uOption.initConfig(cmd, OtrCastBootstrap.xmlConfig));
         otrConfig.checkCutSettings();        
