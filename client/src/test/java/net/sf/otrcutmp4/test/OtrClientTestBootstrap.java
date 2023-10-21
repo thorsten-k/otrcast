@@ -1,12 +1,12 @@
 package net.sf.otrcutmp4.test;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +27,8 @@ public class OtrClientTestBootstrap
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
 		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.appCode).jaxb(JaxbUtil.instance());
-		ConfigLoader.add(ccp.toFile(OtrBootstrap.confCode));
-		ConfigLoader.add(OtrCastBootstrap.xmlConfig);
+		ConfigLoader.addFile(ccp.toFile(OtrBootstrap.confCode));
+		ConfigLoader.addString(OtrCastBootstrap.xmlConfig);
 		Configuration config = ConfigLoader.init();
 		return config;
 	}

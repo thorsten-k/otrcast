@@ -8,13 +8,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -45,10 +45,10 @@ public class OtrCastBootstrap
 		try
 		{
 			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.appCode).jaxb(JaxbUtil.instance());
-			ConfigLoader.add(ccp.toFile(OtrBootstrap.confCode));
+			ConfigLoader.addFile(ccp.toFile(OtrBootstrap.confCode));
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
-		ConfigLoader.add(configFile);
+		ConfigLoader.addString(configFile);
 		
 		OtrCastBootstrap.config = ConfigLoader.init();			
 
