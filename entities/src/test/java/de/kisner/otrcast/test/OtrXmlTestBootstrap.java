@@ -15,7 +15,7 @@ public class OtrXmlTestBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("otrcast-entities.test/config");
+		loggerInit.path("otrcast-entities.test/config");
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}

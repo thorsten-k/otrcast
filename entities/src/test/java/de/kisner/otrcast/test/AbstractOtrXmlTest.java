@@ -29,7 +29,7 @@ public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractJees
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("otrcast-entities.test/config");
+		loggerInit.path("otrcast-entities.test/config");
 		loggerInit.init();
     }
 	

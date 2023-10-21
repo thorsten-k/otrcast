@@ -23,7 +23,7 @@ public abstract class AbstractOtrcastTest extends AbstractJeeslTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("otrcast-util.test/config");
+		loggerInit.path("otrcast-util.test/config");
 		loggerInit.init();
     }
 }

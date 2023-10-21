@@ -28,7 +28,7 @@ public class OtrBootstrap
 	public static Configuration init() throws ExlpConfigurationException
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("otrcast/config");
+		loggerInit.path("otrcast/config");
 		loggerInit.init();
 			
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());

@@ -29,7 +29,7 @@ public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAht
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("config.otrcutmp4-xml.test");
+		loggerInit.path("config.otrcutmp4-xml.test");
 		loggerInit.init();
     }
 	

@@ -59,7 +59,7 @@ public abstract class AbstractClientTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("otrcutmp4-client.test");
+		loggerInit.path("otrcutmp4-client.test");
 		loggerInit.init();
     }
 	

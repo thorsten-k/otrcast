@@ -167,7 +167,7 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 	public static void main(String args[])
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("resources/config");
+		loggerInit.path("resources/config");
 		loggerInit.init();
 	}
 }

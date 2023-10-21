@@ -22,7 +22,7 @@ public class OtrClientTestBootstrap
 	public static Configuration init() throws ExlpConfigurationException
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("otrcutmp4-client.test");
+			loggerInit.path("otrcutmp4-client.test");
 			loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
