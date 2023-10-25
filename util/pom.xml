@@ -98,16 +98,11 @@
 		
 		<!-- REST -->
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-client</artifactId>
+				<version>3.11.2.Final-redhat-00002</version>
+				
+			</dependency>
 		
 		<dependency>
 			<groupId>net.sf.plist</groupId>

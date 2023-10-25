@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
-import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,6 @@ import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.util.OtrConfig.Template;
 import de.kisner.otrcast.util.OtrConfig.Url;
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.web.rest.auth.RestEasyPreemptiveClientExecutor;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.shell.cmd.ShellCmdMove;
 import net.sf.exlp.util.io.RelativePathFactory;
@@ -50,9 +49,15 @@ public class RenameGenerator extends AbstactBatchGenerator
 		fnfSeries = new TxtFileNameFactoy();
 		fnfSeries.initTemplate(cfg.getTemplate(Template.fnSeries));
 		
-		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.factory("user","pwd");
-		rest = ProxyFactory.create(OtrVideoRest.class, cfg.getUrl(Url.OTR),clientExecutor);
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new BasicAuthentication("user", "pwd"));
+		
+		ResteasyWebTarget target = client.target(cfg.getUrl(Url.OTR)); 
+		rest = target.proxy(OtrVideoRest.class);
+		
+//		RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
+//		ClientExecutor clientExecutor = RestEasyPreemptiveClientExecutor.instance("user","pwd");
+//		rest = ProxyFactory.create(OtrVideoRest.class, cfg.getUrl(Url.OTR),clientExecutor);
 		
 		dirHqMp4 = cfg.getDir(Dir.MP4);
 		logger.warn("NYI: You need to set dirMp4Rename from somewhere!!");
