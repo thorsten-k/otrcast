@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import org.exlp.cmd.file.ShellCmdMove;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -24,7 +25,6 @@ import de.kisner.otrcast.util.OtrConfig.Template;
 import de.kisner.otrcast.util.OtrConfig.Url;
 import freemarker.template.TemplateException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.shell.cmd.ShellCmdMove;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
