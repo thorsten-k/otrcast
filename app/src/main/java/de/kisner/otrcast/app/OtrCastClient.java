@@ -165,7 +165,6 @@ public class OtrCastClient
 		    	Videos videos = controllerCutlistChooser.chooseCutlists(vFiles);
 		    	JaxbUtil.info(vFiles);
 		    	JaxbUtil.info(videos);
-//		    	System.exit(-1);
 
 		    	cutlistLoader.loadCuts(videos);
 		    	

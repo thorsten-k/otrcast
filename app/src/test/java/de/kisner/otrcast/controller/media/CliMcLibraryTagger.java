@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +60,7 @@ public class CliMcLibraryTagger
 		{
 			logger.warn("No Files in directory "+fLibrary.getAbsolutePath());
 			logger.info("Probably you need to create some test files with CliMp4TagWriter");
-			System.exit(-1);
+			LoggedExit.silent(true);
 		}
 		
 		tagger.scan(fLibrary);
