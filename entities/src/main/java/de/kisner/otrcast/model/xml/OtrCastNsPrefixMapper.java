@@ -1,10 +1,9 @@
 package de.kisner.otrcast.model.xml;
 
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class OtrCastNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
