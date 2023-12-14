@@ -11,6 +11,7 @@ import org.jeesl.api.rest.rs.jx.system.JeeslTestRest;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.json.util.JsonTime;
+import org.jeesl.model.xml.test.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public class CliTestRest implements JeeslTestRestInterface
 	@Override public JsonSystemJob jsonJob() {return rest.jsonJob();}
 	@Override public JsonTime jsonTimeDownload() {return rest.jsonTimeDownload();}
 	@Override public JsonTime jsonTimeUpload(JsonTime time) {return rest.jsonTimeUpload(time);}
-	@Override public File jaxbFile() {return rest.jaxbFile();}
+	@Override public Test jaxb() {return rest.jaxb();}
 	
 	public static void main(String[] args) throws Exception
 	{
