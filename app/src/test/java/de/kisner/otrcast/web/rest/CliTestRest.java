@@ -1,6 +1,7 @@
 package de.kisner.otrcast.web.rest;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.model.xml.io.File;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -35,6 +36,7 @@ public class CliTestRest implements JeeslTestRestInterface
 	@Override public JsonSystemJob jsonJob() {return rest.jsonJob();}
 	@Override public JsonTime jsonTimeDownload() {return rest.jsonTimeDownload();}
 	@Override public JsonTime jsonTimeUpload(JsonTime time) {return rest.jsonTimeUpload(time);}
+	@Override public File jaxbFile() {return rest.jaxbFile();}
 	
 	public static void main(String[] args) throws Exception
 	{
