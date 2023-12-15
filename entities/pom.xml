@@ -32,6 +32,7 @@
    	   		<groupId>net.sf.exlp</groupId>
    	   		<artifactId>exlp-xml</artifactId>
    	   		<type>jar</type>
+   	   		<classifier>javax</classifier>
    	   		<scope>compile</scope>
    	   	</dependency>
 		<dependency>
