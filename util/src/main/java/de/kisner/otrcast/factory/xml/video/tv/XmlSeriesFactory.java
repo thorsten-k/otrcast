@@ -44,7 +44,7 @@ public class XmlSeriesFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		logger.trace(ejb.toString());
 		de.kisner.otrcast.model.xml.video.tv.Series xml = new de.kisner.otrcast.model.xml.video.tv.Series();
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
-		if(q.isSetName()){xml.setName(ejb.getName());}
+		if(Objects.nonNull(q.getName())) {xml.setName(ejb.getName());}
 		if(q.isSetKey()){xml.setKey(ejb.getCode());}
 		
 		if(q.isSetSeason())

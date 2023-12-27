@@ -31,7 +31,7 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 	{
 		de.kisner.otrcast.model.xml.video.tv.Movie xml = new de.kisner.otrcast.model.xml.video.tv.Movie();
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
-		if(q.isSetName()){xml.setName(ejb.getName());}
+		if(Objects.nonNull(q.getName())) {xml.setName(ejb.getName());}
 		if(q.isSetYear()){xml.setYear(ejb.getYear());}
 		
 		if(q.isSetImage() && ejb.getCover()!=null)

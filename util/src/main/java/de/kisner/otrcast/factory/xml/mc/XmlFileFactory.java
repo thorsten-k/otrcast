@@ -24,7 +24,7 @@ public class XmlFileFactory
 		File xml = new File();
 		
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
-		if(q.isSetName()){xml.setName(ejb.getName());}
+		if(Objects.nonNull(q.getName())) {xml.setName(ejb.getName());}
 		if(q.isSetHash()){xml.setHash(ejb.getHash());}
 		if(q.isSetSize()){xml.setSize(ejb.getSize());}
 		if(q.isSetLastModified()){xml.setLastModified(DateUtil.toXmlGc(ejb.getRecord()));}

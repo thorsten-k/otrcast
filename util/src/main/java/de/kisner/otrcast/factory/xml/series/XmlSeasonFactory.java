@@ -33,7 +33,7 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 		de.kisner.otrcast.model.xml.video.tv.Season xml = new de.kisner.otrcast.model.xml.video.tv.Season();
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
-		if(q.isSetName()){xml.setName(ejb.getName());}
+		if(Objects.nonNull(q.getName())) {xml.setName(ejb.getName());}
 		
 		if(q.isSetSeries())
 		{

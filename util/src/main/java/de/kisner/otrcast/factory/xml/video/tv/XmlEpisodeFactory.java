@@ -41,7 +41,7 @@ public class XmlEpisodeFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER
 		de.kisner.otrcast.model.xml.video.tv.Episode xml = new de.kisner.otrcast.model.xml.video.tv.Episode();
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
-		if(q.isSetName()){xml.setName(TxtEpisodeFactory.buld(ejb.getName()));}
+		if(Objects.nonNull(q.getName())) {xml.setName(TxtEpisodeFactory.buld(ejb.getName()));}
 		if(q.isSetSeason()){xml.setSeason(xfSeason.build(ejb.getSeason()));}
 		
 		return xml;
