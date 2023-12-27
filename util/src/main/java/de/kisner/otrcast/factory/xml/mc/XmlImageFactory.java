@@ -1,5 +1,7 @@
 package de.kisner.otrcast.factory.xml.mc;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +21,7 @@ public class XmlImageFactory
 	{
 		de.kisner.otrcast.model.xml.mc.Image xml = new de.kisner.otrcast.model.xml.mc.Image();
 		
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(q.isSetFileType()){xml.setFileType(ejb.getFileType());}
 		if(q.isSetData()){xml.setData(ejb.getData());}
 		if(q.isSetUrl()){xml.setUrl(ejb.getUrl());}

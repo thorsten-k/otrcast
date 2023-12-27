@@ -1,10 +1,12 @@
 package de.kisner.otrcast.factory.xml.series;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
 import de.kisner.otrcast.factory.xml.mc.XmlFileFactory;
+import de.kisner.otrcast.factory.xml.mc.XmlImageFactory;
 import de.kisner.otrcast.interfaces.model.Image;
 import de.kisner.otrcast.interfaces.model.Movie;
 import de.kisner.otrcast.interfaces.model.Storage;
@@ -28,7 +30,7 @@ public class XmlMovieFactory<MOVIE extends Movie<COVER,STORAGE>,COVER extends Im
 	public de.kisner.otrcast.model.xml.video.tv.Movie build(Movie<COVER,STORAGE> ejb)
 	{
 		de.kisner.otrcast.model.xml.video.tv.Movie xml = new de.kisner.otrcast.model.xml.video.tv.Movie();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		if(q.isSetYear()){xml.setYear(ejb.getYear());}
 		

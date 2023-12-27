@@ -1,5 +1,7 @@
 package de.kisner.otrcast.factory.xml.series;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +31,7 @@ public class XmlSeasonFactory<SERIES extends Series<SERIES,SEASON,EPISODE,COVER>
 	{
 		logger.trace("\t"+ejb.toString());
 		de.kisner.otrcast.model.xml.video.tv.Season xml = new de.kisner.otrcast.model.xml.video.tv.Season();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(q.isSetNr()){xml.setNr(ejb.getNr());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		

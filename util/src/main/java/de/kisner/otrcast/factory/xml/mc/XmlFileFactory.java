@@ -1,5 +1,7 @@
 package de.kisner.otrcast.factory.xml.mc;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +23,7 @@ public class XmlFileFactory
 	{
 		File xml = new File();
 		
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(q.isSetName()){xml.setName(ejb.getName());}
 		if(q.isSetHash()){xml.setHash(ejb.getHash());}
 		if(q.isSetSize()){xml.setSize(ejb.getSize());}
