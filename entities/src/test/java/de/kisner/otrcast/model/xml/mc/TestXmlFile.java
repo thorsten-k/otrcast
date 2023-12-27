@@ -15,7 +15,7 @@ public class TestXmlFile extends AbstractXmlMcTest<File>
     public File build(boolean withChilds)
     {
     	File xml = new File();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setHash("myHash");
     	xml.setSize(123);
     	xml.setName("myName");

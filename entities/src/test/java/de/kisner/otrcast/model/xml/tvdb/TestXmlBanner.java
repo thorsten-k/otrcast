@@ -15,7 +15,7 @@ public class TestXmlBanner extends AbstractXmlTvDbTest<Banner>
     public Banner build(boolean withChilds)
     {
         Banner xml = new Banner();
-        xml.setId(123);
+        xml.setId(123l);
         xml.setUrl("myUrl");
         xml.setType("myType");
     	

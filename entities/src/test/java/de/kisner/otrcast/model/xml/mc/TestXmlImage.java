@@ -15,7 +15,7 @@ public class TestXmlImage extends AbstractXmlMcTest<Image>
     public Image build(boolean withChilds)
     {
     	Image xml = new Image();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setFileType("png");
     	
     	if(withChilds)

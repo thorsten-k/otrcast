@@ -15,7 +15,7 @@ public class TestXmlSync extends AbstractXmlTvDbTest<Sync>
     public Sync build(boolean withChilds)
     {
         Sync xml = new Sync();
-        xml.setId(123);
+        xml.setId(123l);
 
         if(withChilds)
         {

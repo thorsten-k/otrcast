@@ -15,7 +15,7 @@ public class TestXmlLink extends AbstractXmlOtrTest<Link>
     public Link build(boolean withChilds)
     {
     	Link xml = new Link();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setUrl("myUrl");
     	return xml;
     }

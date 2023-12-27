@@ -15,7 +15,7 @@ public class TestXmlTag extends AbstractXmlVideoTest<Tag>
     public Tag build(boolean withChilds)
     {
     		Tag xml = new Tag();
-    		xml.setId(123);  
+    		xml.setId(123l);  
         return xml;
     }
 	

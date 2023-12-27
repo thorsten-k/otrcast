@@ -19,7 +19,7 @@ public class TestXmlMovie extends AbstractXmlSeriesTest<Movie>
     public Movie build(boolean withChilds)
     {
     	Movie xml = new Movie();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setName("Test Name");
     	xml.setYear(2103);
     	
