@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 
 import org.apache.commons.io.DirectoryWalker;
+import org.exlp.util.io.StringUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
@@ -30,7 +31,6 @@ import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.exlp.util.io.StringUtil;
 
 public class Mp4LibraryScanner extends DirectoryWalker<File>
 {

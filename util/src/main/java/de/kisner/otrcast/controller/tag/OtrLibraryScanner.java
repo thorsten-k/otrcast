@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.DirectoryWalker;
+import org.exlp.util.io.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,6 @@ import de.kisner.otrcast.factory.xml.video.XmlVideosFactory;
 import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.Videos;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.exlp.util.io.StringUtil;
 
 public class OtrLibraryScanner extends DirectoryWalker<File>
 {
