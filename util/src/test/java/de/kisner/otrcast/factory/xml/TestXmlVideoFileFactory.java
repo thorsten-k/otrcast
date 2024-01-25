@@ -36,7 +36,7 @@ public class TestXmlVideoFileFactory extends AbstractOtrcastTest
      
     @Test public void test() throws FileNotFoundException, IOException
     {
-    	MultiResourceLoader mrl = new MultiResourceLoader();
+    	MultiResourceLoader mrl = MultiResourceLoader.instance();
     	List<String> keys = IOUtils.readLines(mrl.searchIs("data/txt/otrkeys.txt"),Charset.defaultCharset());
     	for(String key : keys)
     	{
