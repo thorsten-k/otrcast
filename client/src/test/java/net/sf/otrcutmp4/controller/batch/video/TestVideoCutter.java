@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +17,6 @@ import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.controller.batch.AbstractBatchTest;
 import net.sf.otrcutmp4.util.TestOtrConfig;
 

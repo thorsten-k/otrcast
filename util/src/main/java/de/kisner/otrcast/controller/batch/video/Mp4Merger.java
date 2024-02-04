@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.exlp.cmd.file.ShellCmdCopy;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,6 @@ import de.kisner.otrcast.util.OtrConfig.Template;
 import freemarker.template.TemplateException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.util.io.FilenameIllegalCharRemover;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class Mp4Merger extends AbstactBatchGenerator
 {	

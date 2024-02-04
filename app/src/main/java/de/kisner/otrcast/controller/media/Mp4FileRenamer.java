@@ -14,6 +14,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.IOUtils;
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,6 @@ import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.controller.tag.util.Mp4TestEnvironment;
 import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class Mp4FileRenamer extends DirectoryWalker<File>
 {

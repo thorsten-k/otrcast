@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
+import org.exlp.util.io.config.ExlpCentralConfigPointer;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -38,8 +40,6 @@ import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
 import de.kisner.otrcast.view.client.console.ConsoleViewSrcDirProcessor;
 import de.kisner.otrcast.view.noop.NoopCutlistLoaderView;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.ExlpCentralConfigPointer;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliTestRun
 {

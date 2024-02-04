@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.controller.monitoring.counter.ProcessingEventCounter;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
@@ -30,7 +31,6 @@ import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.util.query.io.FileQuery;
 import net.sf.exlp.shell.io.ConsoleInputChoice;
 import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class McLibraryTagger extends DirectoryWalker<File>
 {

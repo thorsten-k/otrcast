@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;
@@ -33,7 +34,6 @@ import net.sf.exlp.core.listener.LogListenerHttp;
 import net.sf.exlp.core.parser.XmlParser;
 import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JdomCutlistLoader implements CutlistLoader
 {

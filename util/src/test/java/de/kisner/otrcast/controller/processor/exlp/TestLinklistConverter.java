@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +17,6 @@ import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestLinklistConverter extends AbstractOtrcastTest
 {

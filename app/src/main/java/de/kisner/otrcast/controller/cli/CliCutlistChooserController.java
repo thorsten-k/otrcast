@@ -6,8 +6,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

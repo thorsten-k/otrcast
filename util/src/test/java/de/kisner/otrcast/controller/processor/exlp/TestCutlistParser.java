@@ -12,8 +12,8 @@ import net.sf.exlp.core.handler.EhResultContainer;
 import net.sf.exlp.core.listener.LogListenerFile;
 import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

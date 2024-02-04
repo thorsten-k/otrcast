@@ -1,5 +1,6 @@
 package de.kisner.otrcast.web;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +17,6 @@ import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import de.kisner.otrcast.web.myapifilms.MafMovieQuery;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestMafQuery extends AbstractOtrcastTest
 {

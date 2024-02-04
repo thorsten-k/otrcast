@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.web.RedirectDownloader;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class FileSystemWebCoverManager implements CoverManager
 {

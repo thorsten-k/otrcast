@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import org.exlp.util.system.DateUtil;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,6 @@ import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.model.xml.video.tv.Series;
 import de.kisner.otrcast.util.query.xml.XmlTvQuery;
-import net.sf.exlp.util.DateUtil;
 
 @Path("/rest/mc")
 public class OtrMediacenterRestService extends AbstractOtrRestService implements OtrMediacenterRest

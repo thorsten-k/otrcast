@@ -2,13 +2,13 @@ package de.kisner.otrcast.factory.xml.mc;
 
 import java.util.Objects;
 
+import org.exlp.util.system.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.model.Storage;
 import de.kisner.otrcast.model.xml.mc.File;
 import de.kisner.otrcast.model.xml.otr.Query;
-import net.sf.exlp.util.DateUtil;
 
 public class XmlFileFactory
 {	

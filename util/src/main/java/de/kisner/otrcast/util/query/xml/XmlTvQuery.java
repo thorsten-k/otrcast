@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,6 @@ import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
 import de.kisner.otrcast.model.xml.video.tv.Season;
 import de.kisner.otrcast.model.xml.video.tv.Series;
-import net.sf.exlp.util.DateUtil;
 
 public class XmlTvQuery
 {

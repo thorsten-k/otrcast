@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -22,7 +23,6 @@ import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Tags;
 import freemarker.template.TemplateException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliSeriesRest
 {

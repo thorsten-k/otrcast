@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.exlp.util.system.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,6 @@ import de.kisner.otrcast.model.xml.video.tv.Episode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import net.sf.exlp.util.DateUtil;
 
 public class TxtFileNameFactoy
 {

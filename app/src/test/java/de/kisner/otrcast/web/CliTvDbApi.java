@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,6 @@ import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
 import de.kisner.otrcast.web.tvdb.TvDbJsonQuery;
-import net.sf.exlp.util.xml.JaxbUtil;
 import retrofit2.Response;
 
 public class CliTvDbApi

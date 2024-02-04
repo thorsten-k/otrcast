@@ -1,8 +1,8 @@
 package de.kisner.otrcast.web;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.junit.Test;
 import org.slf4j.Logger;

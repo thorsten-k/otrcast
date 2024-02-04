@@ -2,6 +2,7 @@ package de.kisner.otrcast.web.rest;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -15,7 +16,6 @@ import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Series;
 import de.kisner.otrcast.model.xml.video.tv.Tags;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliVideoRest implements OtrVideoRest
 {

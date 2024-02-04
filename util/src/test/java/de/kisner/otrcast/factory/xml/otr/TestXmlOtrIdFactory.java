@@ -1,5 +1,6 @@
 package de.kisner.otrcast.factory.xml.otr;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -10,7 +11,6 @@ import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestXmlOtrIdFactory extends AbstractOtrcastTest
 {

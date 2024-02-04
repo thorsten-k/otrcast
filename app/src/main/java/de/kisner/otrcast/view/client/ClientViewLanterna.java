@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,6 @@ import de.kisner.otrcast.interfaces.view.client.ViewClient;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class ClientViewLanterna implements ViewClient
 {

@@ -5,6 +5,9 @@ import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.exlp.util.io.log.LoggerInit;
+import org.exlp.util.jx.JaxbUtil;
+import org.exlp.util.system.DateUtil;
 import org.jeesl.test.AbstractJeeslXmlTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,9 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractJeeslXmlTest<T>
 {

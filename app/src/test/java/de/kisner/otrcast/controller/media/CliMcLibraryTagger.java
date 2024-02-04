@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,6 @@ import de.kisner.otrcast.model.xml.video.Videos;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliMcLibraryTagger
 {

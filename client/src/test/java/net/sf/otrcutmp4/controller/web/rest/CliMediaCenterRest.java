@@ -4,10 +4,10 @@ import java.io.File;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;

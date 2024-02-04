@@ -3,6 +3,7 @@ package de.kisner.otrcast.factory.txt;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,6 @@ import de.kisner.otrcast.model.xml.otr.OtrId;
 import de.kisner.otrcast.model.xml.otr.Quality;
 import de.kisner.otrcast.model.xml.otr.Recording;
 import de.kisner.otrcast.test.AbstractOtrcastTest;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestTxtLinkListFactory extends AbstractOtrcastTest
 {

@@ -1,5 +1,6 @@
 package de.kisner.otrcast.controller.processor;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
@@ -7,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.rss.Rss;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class RssXmlProcessor
 {	

@@ -3,6 +3,7 @@ package net.sf.otrcutmp4.controller.batch;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,6 @@ import de.kisner.otrcast.controller.batch.RenameGenerator;
 import de.kisner.otrcast.controller.exception.OtrInternalErrorException;
 import de.kisner.otrcast.interfaces.OtrCastInterface;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 public class CliBatchProcessor

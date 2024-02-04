@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -33,7 +34,6 @@ import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.rss.Rss;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliPodcastRest
 {

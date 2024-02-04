@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.component.file.GenericFile;
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,6 @@ import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.util.OtrConfig;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class McImportProcessor implements Processor
 {

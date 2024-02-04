@@ -2,6 +2,7 @@ package de.kisner.otrcast.controller.web.rest;
 
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -20,7 +21,6 @@ import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Credential;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class WebCutlistChooserController extends AbstractCutlistChooserController implements CutlistChooser
 {

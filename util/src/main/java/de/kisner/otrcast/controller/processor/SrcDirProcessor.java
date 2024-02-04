@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

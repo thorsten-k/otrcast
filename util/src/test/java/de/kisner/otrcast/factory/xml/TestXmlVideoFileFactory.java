@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -17,7 +18,6 @@ import de.kisner.otrcast.test.AbstractOtrcastTest;
 import de.kisner.otrcast.test.OtrCastUtilTestBootstrap;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestXmlVideoFileFactory extends AbstractOtrcastTest
 {
