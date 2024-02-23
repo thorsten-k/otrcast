@@ -3,6 +3,7 @@ package de.kisner.otrcast.controller.batch;
 import java.io.File;
 
 import org.exlp.cmd.file.ShellCmdRm;
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
@@ -22,7 +23,6 @@ import de.kisner.otrcast.model.xml.video.Videos;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 public class BatchGenerator extends AbstactBatchGenerator
 {
