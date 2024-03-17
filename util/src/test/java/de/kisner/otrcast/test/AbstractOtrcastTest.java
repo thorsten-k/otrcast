@@ -1,5 +1,6 @@
 package de.kisner.otrcast.test;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.BeforeClass;
@@ -22,8 +23,6 @@ public abstract class AbstractOtrcastTest extends AbstractJeeslTest
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.path("otrcast-util.test/config");
-		loggerInit.init();
+		LoggerBootstrap.instance("otr.log4j2.xml").path("otr/system/io/log").init();
     }
 }

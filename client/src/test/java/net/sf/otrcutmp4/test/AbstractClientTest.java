@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
@@ -57,9 +58,7 @@ public abstract class AbstractClientTest
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.path("otrcutmp4-client.test");
-		loggerInit.init();
+		LoggerBootstrap.instance("otr.log4j2.xml").path("otr/system/io/log").init();
     }
 	
 	protected void assertJaxbEquals(Object expected, Object actual)

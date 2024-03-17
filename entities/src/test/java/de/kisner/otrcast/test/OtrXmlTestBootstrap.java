@@ -1,6 +1,6 @@
 package de.kisner.otrcast.test;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +13,7 @@ public class OtrXmlTestBootstrap
 		
 	public static void init()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.path("otrcast-entities.test/config");
-		loggerInit.init();
+		LoggerBootstrap.instance("otr.log4j2.xml").path("ofx/system/io/log").init();
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 }

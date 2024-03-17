@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
 import org.jeesl.test.AbstractJeeslXmlTest;
@@ -28,9 +28,7 @@ public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractJees
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.path("otrcast-entities.test/config");
-		loggerInit.init();
+		LoggerBootstrap.instance("otr.log4j2.xml").path("ofx/system/io/log").init();
     }
 	
 	@BeforeClass

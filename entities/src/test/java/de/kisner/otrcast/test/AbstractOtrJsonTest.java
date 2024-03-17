@@ -5,9 +5,7 @@ import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
-
-import org.exlp.util.io.log.LoggerInit;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
 import org.junit.Assert;
@@ -18,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
+import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
 
 public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAhtUtilsXmlTest<T>
 {
@@ -28,9 +27,7 @@ public abstract class AbstractOtrJsonTest <T extends Object> extends AbstractAht
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.path("config.otrcutmp4-xml.test");
-		loggerInit.init();
+		LoggerBootstrap.instance("otr.log4j2.xml").path("ofx/system/io/log").init();
     }
 	
 	@BeforeClass

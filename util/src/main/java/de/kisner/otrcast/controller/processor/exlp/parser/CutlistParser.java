@@ -163,11 +163,4 @@ public class CutlistParser extends AbstractLogParser implements LogParser
 	}
 	
 	public void debugMe(){debugMe(this.getClass().getSimpleName());}
-	
-	public static void main(String args[])
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.path("resources/config");
-		loggerInit.init();
-	}
 }

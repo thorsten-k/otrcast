@@ -8,9 +8,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +32,7 @@ public class OtrCastBootstrap
 	public static void initLogger(){initLogger("log4j.debug.xml");}
 	public static void initLogger(String log4jConfig)
 	{
-		LoggerInit loggerInit = new LoggerInit(log4jConfig);
-		loggerInit.path("otrcast/config");
-		loggerInit.init();
+		LoggerBootstrap.instance("otr.log4j2.xml").path("otr/system/io/log").init();
 //		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 	}
 	
