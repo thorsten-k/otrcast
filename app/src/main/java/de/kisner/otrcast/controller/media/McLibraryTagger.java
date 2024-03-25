@@ -11,7 +11,7 @@ import java.util.Map;
 import org.apache.commons.io.DirectoryWalker;
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
+import org.jeesl.controller.monitoring.counter.JeeslEventCounter;
 import org.jeesl.controller.monitoring.counter.ProcessingEventCounter;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.slf4j.Logger;
@@ -42,7 +42,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 	private RelativePathFactory rpf;
 	
 	private ProcessingEventCounter pecMediaType,pecTotal;
-	private BucketSizeCounter bsc;
+	private JeeslEventCounter bsc;
 	
 	private OtrVideoRest rest; public void setRest(OtrVideoRest rest) {this.rest = rest;}
 	
@@ -73,7 +73,7 @@ public class McLibraryTagger extends DirectoryWalker<File>
 			logger.warn("Backups are deactivated!!");
 		}
 		
-		bsc = new BucketSizeCounter("Files");
+		bsc = new JeeslEventCounter("Files");
 		pecMediaType = new ProcessingEventCounter("MediaType");
 		pecTotal = new ProcessingEventCounter("Files");
 	}
