@@ -1,7 +1,6 @@
 package de.kisner.otrcast.test;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;

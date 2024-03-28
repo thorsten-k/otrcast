@@ -1,7 +1,6 @@
 package de.kisner.otrcast.web.rest;
 
 import org.apache.commons.configuration.Configuration;
-import org.exlp.model.xml.io.File;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;

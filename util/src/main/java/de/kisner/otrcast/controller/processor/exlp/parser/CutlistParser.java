@@ -3,13 +3,6 @@ package de.kisner.otrcast.controller.processor.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.core.event.JaxbEvent;
-import net.sf.exlp.core.parser.AbstractLogParser;
-import net.sf.exlp.interfaces.LogEvent;
-import net.sf.exlp.interfaces.LogEventHandler;
-import net.sf.exlp.interfaces.LogParser;
-
-import org.exlp.util.io.log.LoggerInit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +10,11 @@ import de.kisner.otrcast.model.xml.cut.Author;
 import de.kisner.otrcast.model.xml.cut.Cut;
 import de.kisner.otrcast.model.xml.cut.CutList;
 import de.kisner.otrcast.model.xml.cut.FileName;
+import net.sf.exlp.core.event.JaxbEvent;
+import net.sf.exlp.core.parser.AbstractLogParser;
+import net.sf.exlp.interfaces.LogEvent;
+import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogParser;
 
 public class CutlistParser extends AbstractLogParser implements LogParser  
 {
