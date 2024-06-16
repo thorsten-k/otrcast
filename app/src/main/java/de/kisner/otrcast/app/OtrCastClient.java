@@ -74,7 +74,7 @@ public class OtrCastClient
 		CommandLine cmd = parser.parse(uOption.getOptions(), args);	
 		
 		uOption.handleHelp(cmd);
-		uOption.setLog4jPaths("otrcast/config");
+		uOption.setLogPaths("otrcast/config");
 		uOption.handleLog4j2(cmd);
 
         otrConfig.readConfig(uOption.config1(cmd, OtrCastBootstrap.xmlConfig));
@@ -269,7 +269,7 @@ public class OtrCastClient
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
 		
 		JeeslCliOptionHandler uOption = new JeeslCliOptionHandler(de.kisner.otrcast.api.Version.class.getPackage().getImplementationVersion());
-		uOption.setLog4jPaths("otrcast-app/config");
+		uOption.setLogPaths("otrcast-app/config");
 		
 		OtrCastClient otrMc = new OtrCastClient(uOption);
 		try {otrMc.parseArguments(args);}
