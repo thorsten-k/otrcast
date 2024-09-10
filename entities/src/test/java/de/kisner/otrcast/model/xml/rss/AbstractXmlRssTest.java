@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.rss;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlRssTest <T extends Object> extends AbstractOtrX
 
 	public AbstractXmlRssTest(Class<T> cXml)
 	{
-		super(cXml,"rss");
+		super(cXml,Paths.get("rss"));
 	}
 }

@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.video;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlVideoTest <T extends Object> extends AbstractOt
 
 	public AbstractXmlVideoTest(Class<T> cXml)
 	{
-		super(cXml,"video");
+		super(cXml,Paths.get("video"));
 	}
 }

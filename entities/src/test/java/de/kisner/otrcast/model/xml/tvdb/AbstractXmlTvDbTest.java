@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.tvdb;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlTvDbTest <T extends Object> extends AbstractOtr
 
 	public AbstractXmlTvDbTest(Class<T> cXml)
 	{
-		super(cXml,"tvdb");
+		super(cXml,Paths.get("tvdb"));
 	}
 }

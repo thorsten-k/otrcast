@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.otr;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlOtrTest <T extends Object> extends AbstractOtrX
 	
 	public AbstractXmlOtrTest(Class<T> cXml)
 	{
-		super(cXml,"otr");
+		super(cXml,Paths.get("otr"));
 	}
 }

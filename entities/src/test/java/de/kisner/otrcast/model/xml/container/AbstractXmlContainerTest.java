@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.container;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlContainerTest <T extends Object> extends Abstra
 	
 	public AbstractXmlContainerTest(Class<T> cXml)
 	{
-		super(cXml,"container");
+		super(cXml,Paths.get("container"));
 	}
 }

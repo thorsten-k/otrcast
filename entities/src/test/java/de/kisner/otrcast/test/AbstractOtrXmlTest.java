@@ -1,14 +1,16 @@
 package de.kisner.otrcast.test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
+import org.exlp.test.AbstractXmlTest;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
-import org.jeesl.test.AbstractJeeslXmlTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -16,13 +18,13 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 
-public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractJeeslXmlTest<T>
+public abstract class AbstractOtrXmlTest <T extends Object> extends AbstractXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOtrXmlTest.class);
 	
-	public AbstractOtrXmlTest(Class<T> cXml,String xmlDirSuffix)
+	public AbstractOtrXmlTest(Class<T> cXml, Path pSuffix)
 	{
-		super(cXml,"otrcast-entities.test/data/xml",xmlDirSuffix);
+		super(cXml,Paths.get("otrcast-entities.test","data","xml"),pSuffix);
 	}
 	
 	@BeforeClass

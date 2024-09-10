@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.itunes;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlItunesTest <T extends Object> extends AbstractO
 	
 	public AbstractXmlItunesTest(Class<T> cXml)
 	{
-		super(cXml,"itunes");
+		super(cXml,Paths.get("itunes"));
 	}
 }

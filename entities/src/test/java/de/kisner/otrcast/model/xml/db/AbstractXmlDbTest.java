@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.db;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlDbTest <T extends Object> extends AbstractOtrXm
 	
 	public AbstractXmlDbTest(Class<T> cXml)
 	{
-		super(cXml,"db");
+		super(cXml,Paths.get("db"));
 	}
 }

@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.series;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlSeriesTest <T extends Object> extends AbstractO
 
 	public AbstractXmlSeriesTest(Class<T> cXml)
 	{
-		super(cXml,"series");
+		super(cXml,Paths.get("series"));
 	}
 }

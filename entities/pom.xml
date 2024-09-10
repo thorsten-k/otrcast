@@ -22,11 +22,7 @@
    	   		<type>jar</type>
    	   		<scope>compile</scope>
    	   	</dependency>
-   	   	<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+   	   
    	   	
    	   	<!-- ExLP -->
    	   	<dependency>
@@ -84,6 +80,17 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+   	   		<groupId>net.sf.exlp</groupId>
+   	   		<artifactId>exlp-test</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

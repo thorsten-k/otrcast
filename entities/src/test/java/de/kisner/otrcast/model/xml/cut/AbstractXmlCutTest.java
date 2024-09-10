@@ -1,5 +1,7 @@
 package de.kisner.otrcast.model.xml.cut;
 
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,6 @@ public abstract class AbstractXmlCutTest <T extends Object> extends AbstractOtrX
 	
 	public AbstractXmlCutTest(Class<T> cXml)
 	{
-		super(cXml,"cut");
+		super(cXml,Paths.get("cut"));
 	}
 }
