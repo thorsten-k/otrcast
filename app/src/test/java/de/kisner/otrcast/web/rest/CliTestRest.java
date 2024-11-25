@@ -32,6 +32,7 @@ public class CliTestRest implements JeeslTestRestInterface
 	
 	@Override public String dateTimePublic() {return rest.dateTimePublic();}
 	@Override public String dateTimeRestricted() {return rest.dateTimeRestricted();}
+	@Override public String timeout(int seconds) {return rest.timeout(seconds);}
 	@Override public JsonSsiUpdate jsonUpdate() {return rest.jsonUpdate();}
 	@Override public JsonSystemJob jsonJob() {return rest.jsonJob();}
 	@Override public JsonTime jsonTimeDownload() {return rest.jsonTimeDownload();}
