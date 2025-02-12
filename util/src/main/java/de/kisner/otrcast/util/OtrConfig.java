@@ -5,11 +5,11 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.SystemUtils;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
-import net.sf.exlp.interfaces.util.ConfigKey;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.interfaces.rest.OtrSimpleRest;
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.interfaces.util.ConfigKey;
 import net.sf.otrcutmp4.test.OtrClientTestBootstrap;
 
 public class CliSimpleRest
