@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
@@ -61,7 +62,7 @@ public class CliTestRun
 		
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication(otrConfig.getCredential(Credential.EMAIL,""),"test"));
-		ResteasyWebTarget restTarget = client.target(DelayedUrlConfig.resolve(config));
+		ResteasyWebTarget restTarget = client.target(DelayedUrlConfig.resolve(config,ConfigKey.netRestUrlLocal));
 		rest = restTarget.proxy(OtrCutRest.class);
 	}
 	

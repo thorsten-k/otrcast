@@ -2,6 +2,7 @@ package de.kisner.otrcast.web.rest;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -25,7 +26,7 @@ public class CliUserRest implements OtrUserRest
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		client.register(new BasicAuthentication("myUser","myPwd"));
-		ResteasyWebTarget restTarget = client.target(DelayedUrlConfig.resolve(config));
+		ResteasyWebTarget restTarget = client.target(DelayedUrlConfig.resolve(config,ConfigKey.netRestUrlLocal));
         rest = restTarget.proxy(OtrUserRest.class);
 	}
 	

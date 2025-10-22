@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
+import org.exlp.interfaces.system.property.ConfigKey;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -24,7 +25,7 @@ public class OtrCastApp
 		if(!mapRest.containsKey(c))
 		{
 			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget target = client.target(DelayedUrlConfig.resolve(config)); 
+			ResteasyWebTarget target = client.target(DelayedUrlConfig.resolve(config,ConfigKey.netRestUrlLocal)); 
 			mapRest.put(c,target.proxy(c));
 		}
 		
