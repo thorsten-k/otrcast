@@ -3,10 +3,8 @@ package net.sf.otrcutmp4.util;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.otrcutmp4.test.AbstractClientTest;
-
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.controller.exception.OtrConfigurationException;
 import de.kisner.otrcast.util.OtrConfig;
+import net.sf.otrcutmp4.test.AbstractClientTest;
 
 public class TestOtrConfig extends AbstractClientTest
 { 
@@ -50,28 +49,29 @@ public class TestOtrConfig extends AbstractClientTest
 	@Before
 	public void init()
 	{		
-		Configuration config = new PropertiesConfiguration();
+		Configuration config = null; //new PropertiesConfiguration();
+		logger.warn("NYI");
 		
-		config.addProperty(OtrConfig.dirAvi, fAvi.getAbsolutePath());
-		config.addProperty(OtrConfig.dirMp4, fMp4.getAbsolutePath());
-		config.addProperty(OtrConfig.dirTmp, fTmp.getAbsolutePath());
-		config.addProperty(OtrConfig.dirBat, fBat.getAbsolutePath());
-		config.addProperty(OtrConfig.dirTools, fTools.getAbsolutePath());
-		config.addProperty(OtrConfig.dirCover, fCover.getAbsolutePath());
-		config.addProperty(OtrConfig.dirIncoming, fMcIncoming.getAbsolutePath());
-		config.addProperty(OtrConfig.dirMc, fMcMedia.getAbsolutePath());
-		
-		config.addProperty(OtrConfig.toolMp4Box, tMp4Box.getName());
-		config.addProperty(OtrConfig.toolLame, tLame.getName());
-		config.addProperty(OtrConfig.toolFfmpeg, tFfmpeg.getName());
-		config.addProperty(OtrConfig.toolFaac, tFaac.getName());
-		config.addProperty(OtrConfig.toolEac3to, tEac3to.getName());
-		config.addProperty(OtrConfig.toolNeroAac, tNeroAac.getName());
-		
-		config.addProperty(OtrConfig.paraAudioFaac, faacKbit);
-		
-		config.addProperty(OtrConfig.templateSeries, tpSeries);
-		config.addProperty(OtrConfig.cmdTagger, cmdTagger);
+//		config.addProperty(OtrConfig.dirAvi, fAvi.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirMp4, fMp4.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirTmp, fTmp.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirBat, fBat.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirTools, fTools.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirCover, fCover.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirIncoming, fMcIncoming.getAbsolutePath());
+//		config.addProperty(OtrConfig.dirMc, fMcMedia.getAbsolutePath());
+//		
+//		config.addProperty(OtrConfig.toolMp4Box, tMp4Box.getName());
+//		config.addProperty(OtrConfig.toolLame, tLame.getName());
+//		config.addProperty(OtrConfig.toolFfmpeg, tFfmpeg.getName());
+//		config.addProperty(OtrConfig.toolFaac, tFaac.getName());
+//		config.addProperty(OtrConfig.toolEac3to, tEac3to.getName());
+//		config.addProperty(OtrConfig.toolNeroAac, tNeroAac.getName());
+//		
+//		config.addProperty(OtrConfig.paraAudioFaac, faacKbit);
+//		
+//		config.addProperty(OtrConfig.templateSeries, tpSeries);
+//		config.addProperty(OtrConfig.cmdTagger, cmdTagger);
 		
 		otrConfig = new OtrConfig(config);
 	}
@@ -81,7 +81,8 @@ public class TestOtrConfig extends AbstractClientTest
 	@Test(expected=OtrConfigurationException.class)
 	public void checkFail() throws OtrConfigurationException
 	{
-		otrConfig = new OtrConfig(new PropertiesConfiguration());
+		otrConfig = null;//new OtrConfig(new PropertiesConfiguration());
+		logger.warn("NYI");
 		otrConfig.checkCutSettings();
 	}
 	

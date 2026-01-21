@@ -1,7 +1,7 @@
 package net.sf.otrcutmp4.controller.web.rest;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.interfaces.system.property.ConfigKey;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;

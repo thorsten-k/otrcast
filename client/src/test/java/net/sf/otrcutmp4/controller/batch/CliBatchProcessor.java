@@ -2,7 +2,7 @@ package net.sf.otrcutmp4.controller.batch;
 
 import java.io.FileNotFoundException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

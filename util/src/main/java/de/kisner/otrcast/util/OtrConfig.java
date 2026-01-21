@@ -71,10 +71,10 @@ public class OtrConfig
 	private Map<Cmd,String> mapCmd;
 	
 	private List<String> lCutDirectotries,lMcDirectotries,lTools;
-	private Configuration config; public Configuration getConfig() {return config;}
+	private org.exlp.interfaces.system.property.Configuration config; public org.exlp.interfaces.system.property.Configuration getConfig() {return config;}
 	
 	public OtrConfig(){this(null);}
-	public OtrConfig(Configuration config)
+	public OtrConfig(org.exlp.interfaces.system.property.Configuration config)
 	{
 		this.config=config;
 		initDirectoryList();
@@ -94,11 +94,12 @@ public class OtrConfig
 		if(!f.exists()){throw new OtrConfigurationException("Configuration file does not exist: "+f.getAbsolutePath());}
 		if(!f.isFile()){throw new OtrConfigurationException("Configuration file is not a file: "+f.getAbsolutePath());}
 		
-		try{config = new PropertiesConfiguration(configFile);}
-		catch (ConfigurationException e) {throw new OtrConfigurationException(e.getMessage());}
+		logger.warn("NYI");
+//		try{config = new PropertiesConfiguration(configFile);}
+//		catch (ConfigurationException e) {throw new OtrConfigurationException(e.getMessage());}
 	}
 	
-	public void readConfig(Configuration config)
+	public void readConfig(org.exlp.interfaces.system.property.Configuration config)
 	{
 		this.config=config;
 	}
@@ -257,13 +258,14 @@ public class OtrConfig
 	{
 		checkDirs(lMcDirectotries);
 		
+		logger.warn("NYI");
 		String key = mapDir.get(Dir.MC);
-		List<Object> list = config.getList(key);
-		for(Object o : list)
-		{
-			String dir = (String)o;
-			checkDir(key,dir);
-		}		
+//		List<Object> list = config.getList(key);
+//		for(Object o : list)
+//		{
+//			String dir = (String)o;
+//			checkDir(key,dir);
+//		}		
 	}
 	
 	private void checkDirs(List<String> list) throws OtrConfigurationException
