@@ -35,7 +35,7 @@ public class OtrCastServer
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrCastBootstrap.init();
+		OtrCastBootstrap.wrap();
 		
 		new OtrCastServer();
 	}

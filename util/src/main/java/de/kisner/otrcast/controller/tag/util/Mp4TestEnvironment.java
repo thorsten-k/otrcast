@@ -2,7 +2,7 @@ package de.kisner.otrcast.controller.tag.util;
 
 import java.io.File;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.IOUtils;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
@@ -82,7 +82,7 @@ public class Mp4FileRenamer extends DirectoryWalker<File>
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 		
 		Mp4FileRenamer scanner = new Mp4FileRenamer();
 		scanner.rename(Mp4TestEnvironment.mp4RenameDirectorySrc(config),Mp4TestEnvironment.mp4RenameDirectoryDst(config));

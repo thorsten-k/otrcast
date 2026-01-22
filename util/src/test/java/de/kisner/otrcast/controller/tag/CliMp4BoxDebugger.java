@@ -2,7 +2,7 @@ package de.kisner.otrcast.controller.tag;
 
 import java.io.File;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ public class CliMp4BoxDebugger extends AbstractOtrcastTest
 		
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastUtilTestBootstrap.init();
+		Configuration config = OtrCastUtilTestBootstrap.wrap();
 		
 		File fMp4Library = Mp4TestEnvironment.mp4Libray(config);
 		

@@ -3,7 +3,7 @@ package de.kisner.otrcast.controller.cutlist;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
@@ -79,7 +79,7 @@ public class CliCutlistFinder
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 		
 		CliCutlistFinder cli = new CliCutlistFinder(config);
 //		cli.findCl();

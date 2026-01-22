@@ -3,7 +3,7 @@ package de.kisner.otrcast.controller.tag;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,7 +62,7 @@ public class CliMp4TagWriter
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 
 		File srcMp4 = new File(config.getString(TestPropertyKeys.dirTaggerSrc));
 		File dstMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));

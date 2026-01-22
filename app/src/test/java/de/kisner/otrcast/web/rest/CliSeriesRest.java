@@ -3,8 +3,8 @@ package de.kisner.otrcast.web.rest;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.interfaces.system.property.ConfigKey;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -91,7 +91,7 @@ public class CliSeriesRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 		CliSeriesRest rest = new CliSeriesRest(config);
 //		rest.single();
 //		rest.multi();

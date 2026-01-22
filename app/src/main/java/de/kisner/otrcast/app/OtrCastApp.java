@@ -31,5 +31,19 @@ public class OtrCastApp
 		
 		return (T)mapRest.get(c);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends Object> T rest(org.exlp.interfaces.system.property.Configuration config, Class<T> c)
+	{
+		if(mapRest==null){mapRest = new Hashtable<Class<?>,Object>();}
+		if(!mapRest.containsKey(c))
+		{
+			ResteasyClient client = new ResteasyClientBuilder().build();
+			ResteasyWebTarget target = client.target(DelayedUrlConfig.resolve(config,ConfigKey.netRestUrlLocal)); 
+			mapRest.put(c,target.proxy(c));
+		}
+		
+		return (T)mapRest.get(c);
+	}
 
 }

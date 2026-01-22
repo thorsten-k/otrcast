@@ -3,7 +3,6 @@ package net.sf.otrcutmp4.controller.web.rest;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -12,6 +11,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.exlp.interfaces.system.property.ConfigKey;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -107,7 +107,7 @@ public class CliPodcastRest
 	
 	public static void main(String[] args) throws ExlpConfigurationException, MalformedURLException, IOException, JeeslNotFoundException
 	{
-		Configuration config = OtrCastBootstrap.init();		
+		Configuration config = OtrCastBootstrap.wrap();		
 		CliPodcastRest rest = new CliPodcastRest(config);
 		rest.reference();
 //		rest.remote();

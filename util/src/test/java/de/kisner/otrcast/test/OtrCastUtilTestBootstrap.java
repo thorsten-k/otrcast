@@ -15,14 +15,20 @@ public class OtrCastUtilTestBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OtrCastUtilTestBootstrap.class);
 	
-	public static Configuration init() throws ExlpConfigurationException
+	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigLoader.wrap(OtrCastUtilTestBootstrap.init());}
+	public static Configuration init()
 	{
 		LoggerBootstrap.instance("otr.log4j2.xml").path("otr/system/io/log").init();
 		
 		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());	
 		
 		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("otr").jaxb(JaxbUtil.instance());
-		ConfigLoader.addFile(ccp.toFile("util"));
+		try {
+			ConfigLoader.addFile(ccp.toFile("util"));
+		} catch (ExlpConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Configuration config = ConfigLoader.init();
 		return config;
 	}

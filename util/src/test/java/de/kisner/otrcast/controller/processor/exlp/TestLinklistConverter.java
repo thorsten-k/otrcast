@@ -3,7 +3,7 @@ package de.kisner.otrcast.controller.processor.exlp;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -63,7 +63,7 @@ public class TestLinklistConverter extends AbstractOtrcastTest
 	
 	public static void main(String[] args) throws ExlpConfigurationException
     {
-		Configuration config = OtrCastUtilTestBootstrap.init();		
+		Configuration config = OtrCastUtilTestBootstrap.wrap();		
 			
 		TestLinklistConverter.initPrefixMapper();
 		TestLinklistConverter.initFiles();

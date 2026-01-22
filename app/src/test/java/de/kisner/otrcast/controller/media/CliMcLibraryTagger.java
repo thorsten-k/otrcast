@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.io.log.LoggedExit;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
@@ -135,7 +135,7 @@ public class CliMcLibraryTagger
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 
 		CliMcLibraryTagger cli = new CliMcLibraryTagger(config);
 //		cli.checkSeries();

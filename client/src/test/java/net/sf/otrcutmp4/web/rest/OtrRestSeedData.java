@@ -3,9 +3,9 @@ package net.sf.otrcutmp4.web.rest;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
 import org.exlp.interfaces.system.property.ConfigKey;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -99,7 +99,7 @@ public class OtrRestSeedData
 	
 	public static void main(String[] args) throws ExlpConfigurationException, FileNotFoundException, UtilsProcessingException
 	{
-		Configuration config = OtrBootstrap.init();
+		Configuration config = OtrBootstrap.wrap();
 		OtrRestSeedData rest = new OtrRestSeedData(config);
 //		rest.all();
 		

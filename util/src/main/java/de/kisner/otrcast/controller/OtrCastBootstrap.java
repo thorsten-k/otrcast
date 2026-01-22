@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.apache.commons.configuration.Configuration;
+
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
@@ -27,17 +27,18 @@ public class OtrCastBootstrap
 	public static String logConfig = "log4j.xml";
 	
 	private static EntityManagerFactory emf;
-	private static Configuration config;
+	private static org.exlp.interfaces.system.property.Configuration config;
 	
 	public static void initLogger(){initLogger("log4j.debug.xml");}
 	public static void initLogger(String log4jConfig)
 	{
 		LoggerBootstrap.instance("otr.log4j2.xml").path("otr/system/io/log").init();
 //		JaxbUtil.setNsPrefixMapper(new OtrCastNsPrefixMapper());
-	}
+	} 
 	
-	public static Configuration init(){return init(xmlConfig);}
-	public static Configuration init(String configFile)
+	public static org.exlp.interfaces.system.property.Configuration getConfiguration() {return config;}
+	
+	public static org.exlp.interfaces.system.property.Configuration wrap()
 	{
 		initLogger();
 		try
@@ -46,19 +47,17 @@ public class OtrCastBootstrap
 			ConfigLoader.addFile(ccp.toFile(OtrBootstrap.confCode));
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
-		ConfigLoader.addString(configFile);
+		ConfigLoader.addString(xmlConfig);
 		
-		OtrCastBootstrap.config = ConfigLoader.init();			
+		OtrCastBootstrap.config = ConfigLoader.wrap(ConfigLoader.init());			
 
-		logger.debug("Config and Logger initialized with "+configFile);
+		logger.debug("Config and Logger initialized with "+xmlConfig);
 		return OtrCastBootstrap.config;
 	}
 	
-	public static Configuration getConfiguration(){return config;}
-
     public static EntityManagerFactory buildEmf(){return buildEmfForFile(null);}
     public static EntityManagerFactory buildEmf(OtrConfig config){return buildEmfForFile(config.getDir(OtrConfig.Dir.DB));}
-    public static EntityManagerFactory buildEmf(Configuration config){return buildEmf(config.getString(OtrConfig.dirDb));}
+    public static EntityManagerFactory buildEmf(org.exlp.interfaces.system.property.Configuration config){return buildEmf(config.getString(OtrConfig.dirDb));}
     public static EntityManagerFactory buildEmf(String file){return buildEmfForFile(new File(file));}
 
 	private static EntityManagerFactory buildEmfForFile(File f)

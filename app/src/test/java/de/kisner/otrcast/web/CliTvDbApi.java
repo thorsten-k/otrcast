@@ -3,7 +3,7 @@ package de.kisner.otrcast.web;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.jx.JaxbUtil;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
@@ -110,7 +110,7 @@ public class CliTvDbApi
     
     public static void main(String args[]) throws Exception
     {
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 		CliTvDbApi cli = new CliTvDbApi(config);
 //		cli.episodeSummary();
 //        cli.episodes();

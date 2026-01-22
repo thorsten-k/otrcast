@@ -25,7 +25,8 @@ public class OtrBootstrap
 	public static final String cfgXmlFormats = "xml.formats";
 	public static final String cfgXmlQuality = "xml.quality";
 	
-	public static Configuration init() throws ExlpConfigurationException
+	public static org.exlp.interfaces.system.property.Configuration wrap() {return ConfigLoader.wrap(init());}
+	public static Configuration init()
 	{
 		LoggerBootstrap.instance("otr.log4j2.xml").path("otr/system/io/log").init();
 			
@@ -33,7 +34,11 @@ public class OtrBootstrap
 		
 		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.AppCode.otr).jaxb(JaxbUtil.instance());
 		
-		ConfigLoader.addFile(ccp.toFile(confCode));
+		try
+		{
+			ConfigLoader.addFile(ccp.toFile(confCode));
+		}
+		catch (ExlpConfigurationException e) {e.printStackTrace();}
 		Configuration config = ConfigLoader.init();
 		return config;
 	}

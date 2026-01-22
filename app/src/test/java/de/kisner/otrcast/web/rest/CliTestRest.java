@@ -1,6 +1,6 @@
 package de.kisner.otrcast.web.rest;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -41,7 +41,7 @@ public class CliTestRest implements JeeslTestRestInterface
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();	
+		Configuration config = OtrCastBootstrap.wrap();	
 		CliTestRest rest = new CliTestRest(config);
 		logger.info(rest.dateTimePublic());
 		logger.info(rest.dateTimeRestricted());

@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.web.rest.DelayedUrlConfig;
 import org.exlp.interfaces.system.property.ConfigKey;
+import org.exlp.interfaces.system.property.Configuration;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.jx.JaxbUtil;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
@@ -169,7 +169,7 @@ public class CliTestRun
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 				
 		CliTestRun test = new CliTestRun(config);
 //		test.srcDirProcessor();

@@ -3,7 +3,7 @@ package de.kisner.otrcast.controller.tag;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,7 @@ public class CliMp4TagReader
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.init();
+		Configuration config = OtrCastBootstrap.wrap();
 		
 		CliMp4TagReader test = new CliMp4TagReader();
 		
