@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.model.ejb.OtrEpisode;
 import de.kisner.otrcast.model.ejb.OtrImage;
@@ -24,6 +23,7 @@ import de.kisner.otrcast.model.ejb.OtrMovie;
 import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class ImageServlet extends HttpServlet
 {
@@ -34,7 +34,7 @@ public class ImageServlet extends HttpServlet
 	
 	public ImageServlet()
 	{
-		fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCastBootstrap.buildEmf().createEntityManager());
+		fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrBootstrap.buildEmf().createEntityManager());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

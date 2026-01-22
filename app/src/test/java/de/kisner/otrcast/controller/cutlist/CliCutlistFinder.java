@@ -9,7 +9,6 @@ import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.xml.XmlVideoFileFactory;
@@ -18,6 +17,7 @@ import de.kisner.otrcast.interfaces.view.client.ViewCutlistChooser;
 import de.kisner.otrcast.model.xml.cut.CutLists;
 import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.view.client.console.ConsoleViewCutlistChooser;
 import de.kisner.otrcast.view.noop.NoopCutlistLoaderView;
 
@@ -79,7 +79,7 @@ public class CliCutlistFinder
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 		
 		CliCutlistFinder cli = new CliCutlistFinder(config);
 //		cli.findCl();

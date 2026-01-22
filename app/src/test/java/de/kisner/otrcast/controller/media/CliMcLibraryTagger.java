@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
 import de.kisner.otrcast.app.OtrCastApp;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.factory.txt.TxtEpisodeFactory;
 import de.kisner.otrcast.factory.txt.TxtSeriesFactory;
@@ -25,6 +24,7 @@ import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.Videos;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
@@ -135,7 +135,7 @@ public class CliMcLibraryTagger
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 
 		CliMcLibraryTagger cli = new CliMcLibraryTagger(config);
 //		cli.checkSeries();

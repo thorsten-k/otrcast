@@ -7,7 +7,6 @@ import org.exlp.interfaces.system.property.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
 import de.kisner.otrcast.controller.tag.writer.MovieTagWriter;
 import de.kisner.otrcast.controller.tag.writer.SeriesTagWriter;
@@ -17,6 +16,7 @@ import de.kisner.otrcast.interfaces.controller.CoverManager;
 import de.kisner.otrcast.interfaces.controller.TestPropertyKeys;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Movie;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class CliMp4TagWriter
@@ -62,7 +62,7 @@ public class CliMp4TagWriter
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 
 		File srcMp4 = new File(config.getString(TestPropertyKeys.dirTaggerSrc));
 		File dstMp4 = new File(config.getString(TestPropertyKeys.dirTaggerDst));

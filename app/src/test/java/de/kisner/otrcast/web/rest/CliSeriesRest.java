@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrVideoRest;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.cover.FileSystemWebCoverManager;
 import de.kisner.otrcast.controller.exception.OtrProcessingException;
 import de.kisner.otrcast.factory.txt.TxtDsFactory;
@@ -22,6 +21,7 @@ import de.kisner.otrcast.factory.txt.TxtFileNameFactoy;
 import de.kisner.otrcast.factory.xml.otr.XmlOtrIdFactory;
 import de.kisner.otrcast.model.xml.video.tv.Episode;
 import de.kisner.otrcast.model.xml.video.tv.Tags;
+import de.kisner.otrcast.util.OtrBootstrap;
 import freemarker.template.TemplateException;
 
 public class CliSeriesRest
@@ -91,7 +91,7 @@ public class CliSeriesRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 		CliSeriesRest rest = new CliSeriesRest(config);
 //		rest.single();
 //		rest.multi();

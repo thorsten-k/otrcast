@@ -18,10 +18,10 @@ import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.tag.reader.Mp4TagReader;
 import de.kisner.otrcast.controller.tag.util.Mp4TestEnvironment;
 import de.kisner.otrcast.model.xml.video.Video;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.query.io.FileQuery;
 
 public class Mp4FileRenamer extends DirectoryWalker<File>
@@ -82,7 +82,7 @@ public class Mp4FileRenamer extends DirectoryWalker<File>
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 		
 		Mp4FileRenamer scanner = new Mp4FileRenamer();
 		scanner.rename(Mp4TestEnvironment.mp4RenameDirectorySrc(config),Mp4TestEnvironment.mp4RenameDirectoryDst(config));

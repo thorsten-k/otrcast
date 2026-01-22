@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrCutRest;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.video.Videos;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class CliCutRest implements OtrCutRest
 {
@@ -38,7 +38,7 @@ public class CliCutRest implements OtrCutRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();	
+		Configuration config = OtrBootstrap.wrap();	
 		CliCutRest rest = new CliCutRest(config);
 		JaxbUtil.info(rest.findCutPackage("mihaefe3ja"));
 	}

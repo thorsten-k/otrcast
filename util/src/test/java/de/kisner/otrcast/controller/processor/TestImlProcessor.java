@@ -2,7 +2,7 @@ package de.kisner.otrcast.controller.processor;
 
 import java.io.File;
 
-import org.apache.commons.configuration.Configuration;
+import org.exlp.interfaces.system.property.Configuration;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class TestImlProcessor extends AbstractOtrcastTest
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastUtilTestBootstrap.init();
+		Configuration config = OtrCastUtilTestBootstrap.wrap();
 		
 		String iml = config.getString("xml.itunes.lib");
 		

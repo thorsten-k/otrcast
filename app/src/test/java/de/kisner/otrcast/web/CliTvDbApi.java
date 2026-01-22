@@ -19,9 +19,9 @@ import com.uwetrottmann.thetvdb.entities.SeriesImageQueryResultResponse;
 import com.uwetrottmann.thetvdb.entities.SeriesImagesQueryParam;
 import com.uwetrottmann.thetvdb.entities.SeriesImagesQueryParamResponse;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.container.Otr;
 import de.kisner.otrcast.model.xml.tvdb.Banners;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.web.tvdb.TvDbJsonQuery;
 import retrofit2.Response;
 
@@ -110,7 +110,7 @@ public class CliTvDbApi
     
     public static void main(String args[]) throws Exception
     {
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 		CliTvDbApi cli = new CliTvDbApi(config);
 //		cli.episodeSummary();
 //        cli.episodes();

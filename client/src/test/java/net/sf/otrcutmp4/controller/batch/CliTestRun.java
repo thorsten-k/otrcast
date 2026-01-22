@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.rest.OtrCutRest;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.cutlist.JdomCutlistLoader;
@@ -169,7 +168,7 @@ public class CliTestRun
 	
 	public static void main(String args[]) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 				
 		CliTestRun test = new CliTestRun(config);
 //		test.srcDirProcessor();

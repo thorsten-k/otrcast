@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.controller.processor.RssXmlProcessor;
 import de.kisner.otrcast.factory.txt.TxtUrlFactory;
@@ -28,6 +27,7 @@ import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.rss.Rss;
+import de.kisner.otrcast.util.OtrBootstrap;
 import net.sf.exlp.util.xml.JDomUtil;
 
 public class PodcastServlet extends HttpServlet
@@ -41,7 +41,7 @@ public class PodcastServlet extends HttpServlet
 	public PodcastServlet()
 	{
 		UrlGenerator urlGenerator = new TxtUrlFactory();
-		fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCastBootstrap.buildEmf().createEntityManager(),urlGenerator);
+		fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrBootstrap.buildEmf().createEntityManager(),urlGenerator);
 		rssProcessor = new RssXmlProcessor();
 	}
 	

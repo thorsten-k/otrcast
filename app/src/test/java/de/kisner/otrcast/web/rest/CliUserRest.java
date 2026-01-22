@@ -11,10 +11,10 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.interfaces.rest.OtrUserRest;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.video.tv.Tags;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class CliUserRest implements OtrUserRest
 {
@@ -35,7 +35,7 @@ public class CliUserRest implements OtrUserRest
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();	
+		Configuration config = OtrBootstrap.wrap();	
 		CliUserRest rest = new CliUserRest(config);
 //		logger.info(rest.scan(XmlVideoFilesFactory.build()));
 		JaxbUtil.info(rest.processedCutlist(14862));

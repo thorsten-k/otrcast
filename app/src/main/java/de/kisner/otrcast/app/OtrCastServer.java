@@ -7,7 +7,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class OtrCastServer 
 {
@@ -35,7 +35,7 @@ public class OtrCastServer
 	
 	public static void main(String args[]) throws Exception
 	{
-		OtrCastBootstrap.wrap();
+		OtrBootstrap.wrap();
 		
 		new OtrCastServer();
 	}

@@ -14,7 +14,6 @@ import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.batch.BatchGenerator;
 import de.kisner.otrcast.controller.cli.CliCutlistChooserController;
 import de.kisner.otrcast.controller.cover.FileSystemCoverManager;
@@ -38,6 +37,7 @@ import de.kisner.otrcast.model.xml.cut.VideoFile;
 import de.kisner.otrcast.model.xml.cut.VideoFiles;
 import de.kisner.otrcast.model.xml.video.Video;
 import de.kisner.otrcast.model.xml.video.Videos;
+import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
 import de.kisner.otrcast.util.OtrConfig.Dir;
 import de.kisner.otrcast.view.client.ClientViewConsole;
@@ -77,7 +77,7 @@ public class OtrCastClient
 		uOption.setLogPaths("otrcast/config");
 		uOption.handleLog4j2(cmd);
 
-        otrConfig.readConfig(uOption.config2Wrapper(cmd, OtrCastBootstrap.xmlConfig));
+        otrConfig.readConfig(uOption.config2Wrapper(cmd, OtrBootstrap.xmlConfig));
         otrConfig.checkCutSettings();        
         
         ViewClient view = new ClientViewConsole();

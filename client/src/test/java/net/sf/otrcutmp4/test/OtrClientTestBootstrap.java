@@ -8,7 +8,6 @@ import org.exlp.util.jx.JaxbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.model.xml.OtrCastNsPrefixMapper;
 import de.kisner.otrcast.util.OtrBootstrap;
 import de.kisner.otrcast.util.OtrConfig;
@@ -25,7 +24,7 @@ public class OtrClientTestBootstrap
 		
 		ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(OtrBootstrap.appCode).jaxb(JaxbUtil.instance());
 		ConfigLoader.addFile(ccp.toFile(OtrBootstrap.confCode));
-		ConfigLoader.addString(OtrCastBootstrap.xmlConfig);
+		ConfigLoader.addString(OtrBootstrap.xmlConfig);
 		Configuration config = ConfigLoader.wrap(ConfigLoader.init());
 		return config;
 	}

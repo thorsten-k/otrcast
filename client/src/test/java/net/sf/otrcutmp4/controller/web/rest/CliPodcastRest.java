@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.otrcast.api.facade.OtrMediacenterFacade;
-import de.kisner.otrcast.controller.OtrCastBootstrap;
 import de.kisner.otrcast.controller.facade.OtrMediacenterFacadeBean;
 import de.kisner.otrcast.factory.txt.TxtUrlFactory;
 import de.kisner.otrcast.interfaces.rest.OtrPodcastRest;
@@ -33,6 +32,7 @@ import de.kisner.otrcast.model.ejb.OtrSeason;
 import de.kisner.otrcast.model.ejb.OtrSeries;
 import de.kisner.otrcast.model.ejb.OtrStorage;
 import de.kisner.otrcast.model.xml.rss.Rss;
+import de.kisner.otrcast.util.OtrBootstrap;
 import net.sf.exlp.exception.ExlpConfigurationException;
 
 public class CliPodcastRest
@@ -86,11 +86,11 @@ public class CliPodcastRest
 	
 	public void local() throws JeeslNotFoundException
 	{
-		OtrCastBootstrap.buildEmf(config);
+		OtrBootstrap.buildEmf(config);
 		UrlGenerator urlGenerator = new TxtUrlFactory();
 
 		
-		OtrMediacenterFacade<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrCastBootstrap.buildEmf().createEntityManager(),urlGenerator);
+		OtrMediacenterFacade<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage> fMc = new OtrMediacenterFacadeBean<OtrMovie,OtrSeries,OtrSeason,OtrEpisode,OtrImage,OtrStorage>(OtrBootstrap.buildEmf().createEntityManager(),urlGenerator);
 		for(OtrSeason s : fMc.all(OtrSeason.class))
 		{
 			logger.info(s.toString());
@@ -107,7 +107,7 @@ public class CliPodcastRest
 	
 	public static void main(String[] args) throws ExlpConfigurationException, MalformedURLException, IOException, JeeslNotFoundException
 	{
-		Configuration config = OtrCastBootstrap.wrap();		
+		Configuration config = OtrBootstrap.wrap();		
 		CliPodcastRest rest = new CliPodcastRest(config);
 		rest.reference();
 //		rest.remote();

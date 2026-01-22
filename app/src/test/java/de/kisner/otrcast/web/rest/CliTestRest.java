@@ -14,7 +14,7 @@ import org.jeesl.model.xml.system.test.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class CliTestRest implements JeeslTestRestInterface
 {
@@ -41,7 +41,7 @@ public class CliTestRest implements JeeslTestRestInterface
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();	
+		Configuration config = OtrBootstrap.wrap();	
 		CliTestRest rest = new CliTestRest(config);
 		logger.info(rest.dateTimePublic());
 		logger.info(rest.dateTimeRestricted());

@@ -3,7 +3,7 @@ package de.kisner.otrcast.app;
 
 import org.exlp.interfaces.system.property.Configuration;
 
-import de.kisner.otrcast.controller.OtrCastBootstrap;
+import de.kisner.otrcast.util.OtrBootstrap;
 
 public class CliJettyServer
 {
@@ -14,7 +14,7 @@ public class CliJettyServer
 	
 	public static void main(String[] args) throws Exception
 	{
-		Configuration config = OtrCastBootstrap.wrap();
+		Configuration config = OtrBootstrap.wrap();
 
 		new CliJettyServer(config);
 	}
